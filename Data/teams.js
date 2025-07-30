@@ -2,7 +2,7 @@ const teamsData = {
             "mclaren": {
                 "id": "modal1",
                 "namef": "McLaren F1 Team",
-				"name": "McLaren",
+		"name": "McLaren",
                 "logo": "McLaren.png",
                 "miniLogo": "McLaren-m.png",
                 "base": "Уокинг, Великобритания",
