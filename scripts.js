@@ -103,29 +103,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Основные функции
     function switchTab(tabId) {
-		// Обновляем навигацию
-		navItems.forEach(item => item.classList.remove('active'));
-		document.querySelector(`.nav-item[data-tab="${tabId}"]`).classList.add('active');
-		
-		// Показываем соответствующий контент
-		tabContents.forEach(content => content.classList.remove('active'));
-		const activeTab = document.getElementById(tabId);
-		activeTab.classList.add('active');
-		
-		// Прокрутка в начало, кроме календаря
-		if (tabId !== 'calendar') {
-			setTimeout(() => {
-				activeTab.scrollIntoView({
-					behavior: 'smooth',
-					block: 'start'
-				});
-			}, 50);
-		}
-		
-		// Специальная обработка для календаря
-		if (tabId === 'calendar') {
-			scrollToCurrentEvent();
-		}
+	    // Обновляем навигацию
+	    navItems.forEach(item => item.classList.remove('active'));
+	    document.querySelector(`.nav-item[data-tab="${tabId}"]`).classList.add('active');
+	    
+	    // Показываем соответствующий контент
+	    tabContents.forEach(content => content.classList.remove('active'));
+	    const activeTab = document.getElementById(tabId);
+	    activeTab.classList.add('active');
+	    
+	    // Прокрутка к заголовку вкладки
+	    if (tabId !== 'calendar') {
+	        setTimeout(() => {
+	            // Находим первый заголовок h1 внутри активной вкладки
+	            const tabHeader = activeTab.querySelector('h1');
+	            
+	            if (tabHeader) {
+	                // Вычисляем позицию с учетом высоты шапки
+	                const headerHeight = document.querySelector('.header').offsetHeight;
+	                const elementPosition = tabHeader.getBoundingClientRect().top;
+	                const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+	                
+	                window.scrollTo({
+	                    top: offsetPosition,
+	                    behavior: 'smooth'
+	                });
+	            } else {
+	                // Если заголовка нет, прокручиваем к началу вкладки
+	                activeTab.scrollIntoView({
+	                    behavior: 'smooth',
+	                    block: 'start'
+	                });
+	            }
+	        }, 50);
+	    }
+	    
+	    // Специальная обработка для календаря
+	    if (tabId === 'calendar') {
+	        scrollToCurrentEvent();
+	    }
 	}
 
     function openModal(modalId) {
