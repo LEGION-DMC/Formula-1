@@ -77,7 +77,15 @@ function highlightTeamDrivers(teamId) {
                 behavior: 'smooth'
             });
         }
-    }
+ 	   // Добавляем выделение в таблице спринта
+	    document.querySelectorAll('#sprint-standings .standing-row').forEach(row => {
+     	   row.classList.remove('team-highlight');
+     	   const rowTeamId = row.querySelector('.team')?.getAttribute('data-team-id');
+     		   if (rowTeamId === teamId) {
+        	    row.classList.add('team-highlight');
+     	 	  }
+ 	   });
+	}
     
     // Находим и выделяем всех пилотов команды
     const teamDrivers = standingsData.drivers.filter(driver => driver.teamId === teamId);
