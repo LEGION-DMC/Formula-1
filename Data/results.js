@@ -178,28 +178,57 @@ function renderStandings() {
     });
 	
 	// Спринт сезона
-    const sprintContainer = document.getElementById('sprint-standings');
-    sprintContainer.innerHTML = '';
+const sprintContainer = document.getElementById('sprint-standings');
+sprintContainer.innerHTML = '';
+
+// Создаем колонки
+const sprintLeftColumn = document.createElement('div');
+sprintLeftColumn.className = 'standings-column';
+const sprintRightColumn = document.createElement('div');
+sprintRightColumn.className = 'standings-column';
+
+// Фильтруем и сортируем пилотов для спринта
+const sprintDrivers = standingsData.drivers
+    .sort((a, b) => {
+        const pointsDiff = (b.sprintPoints || 0) - (a.sprintPoints || 0);
+        if (pointsDiff !== 0) return pointsDiff;
+        return a.position - b.position;
+    });
+
+// Распределяем по колонкам
+sprintDrivers.forEach((driver, index) => {
+    const row = document.createElement('div');
+    row.className = `standing-row driver-${driver.driverId}`;
     
-    standingsData.drivers
-        .sort((a, b) => (b.sprintPoints || 0) - (a.sprintPoints || 0))
-        .forEach((driver, index) => {
-            if (!driver.sprintPoints) return;
-            
-            const row = document.createElement('div');
-            row.className = `standing-row driver-${driver.driverId}`;
-            row.innerHTML = `
-                <span class="position">${index + 1}</span>
-                <img src="Images/Flags/${driver.flag || 'default.svg'}" alt="" class="driver-flag">
-                <span class="name">${driver.name}</span>
-                <span class="team" data-team-id="${driver.teamId}">
-                    ${driver.team}
-                </span>
-                <span class="points">${driver.sprintPoints || 0}</span>
-            `;
-            
-            sprintContainer.appendChild(row);
-        });
+    row.innerHTML = `
+        <span class="position">${index + 1}</span>
+        <img src="Images/Flags/${driver.flag || 'default.svg'}" alt="${driver.state}" class="driver-flag">
+        <span class="name">${driver.name}</span>
+        <span class="team" data-team-id="${driver.teamId}">
+            ${driver.team}
+        </span>
+        <span class="points">${driver.sprintPoints}</span>
+    `;
+    
+    // Распределяем по колонкам (первые 5 в левую, остальные в правую)
+    if (index < 10) {
+        sprintLeftColumn.appendChild(row);
+    } else {
+        sprintRightColumn.appendChild(row);
+    }
+});
+
+// Добавляем колонки в контейнер
+sprintContainer.appendChild(sprintLeftColumn);
+sprintContainer.appendChild(sprintRightColumn);
+
+// Добавляем обработчики для выделения команд
+document.querySelectorAll('#sprint-standings .team[data-team-id]').forEach(teamEl => {
+    teamEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        highlightTeamDrivers(teamEl.getAttribute('data-team-id'));
+    });
+});
 }
 
 // Инициализация при загрузке
