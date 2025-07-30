@@ -207,14 +207,22 @@ document.addEventListener('DOMContentLoaded', function() {
     renderStandings();
     
     // Добавляем логотипы после загрузки DOM
-    setTimeout(() => {
-        document.querySelectorAll('.team[data-team-id]').forEach(teamEl => {
-            const teamId = teamEl.getAttribute('data-team-id');
-            const logoImg = document.createElement('img');
-            logoImg.src = `Images/Teams/${logo}-m.png`;
-            logoImg.className = 'team-logo';
-            logoImg.alt = teamEl.textContent.trim();
-            teamEl.insertBefore(logoImg, teamEl.firstChild);
-        });
-    }, 100);
+    document.querySelectorAll('.team[data-team-id]').forEach(teamEl => {
+        const teamId = teamEl.getAttribute('data-team-id');
+        const logoImg = document.createElement('img');
+        
+        // Создаем правильное имя файла
+        const formattedTeamId = teamId.replace(/([A-Z])/g, ' $1').trim(); // Добавляем пробелы перед заглавными буквами
+        logoImg.src = `Images/Teams/${encodeURIComponent(formattedTeamId)}-m.png`;
+        
+        logoImg.className = 'team-logo';
+        logoImg.alt = teamEl.textContent.trim();
+        teamEl.insertBefore(logoImg, teamEl.firstChild);
+        
+        // Обработка ошибок загрузки изображений
+        logoImg.onerror = function() {
+            console.error(`Не удалось загрузить логотип для команды ${teamId}`);
+            this.style.display = 'none';
+        };
+    });
 });
