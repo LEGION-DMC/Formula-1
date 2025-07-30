@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.team[data-team-id]').forEach(teamEl => {
             const teamId = teamEl.getAttribute('data-team-id');
             const logoImg = document.createElement('img');
-            logoImg.src = `Images/Teams/${teamId}-m.png`;
+            logoImg.src = `Images/Teams/${logo}-m.png`;
             logoImg.className = 'team-logo';
             logoImg.alt = teamEl.textContent.trim();
             teamEl.insertBefore(logoImg, teamEl.firstChild);
