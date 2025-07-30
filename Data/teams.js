@@ -35,7 +35,7 @@ const teamsData = {
                 "name": "Mercedes",
                 "logo": "Mercedes.avif",
                 "miniLogo": "Mercedes-m.png",
-                "base": "Брэкли, Великобритани",
+                "base": "Брэкли, Великобритания",
                 "director": "Тото Вольфф",
                 "car": "W16 E Perfomanc",
                 "engine": "Mercedes",
@@ -131,7 +131,7 @@ const teamsData = {
                 "engine": "Ferrari",
                 "drivers": [
                     {"number": "31", "name": "Эстебан Окон", "flag": "gb.svg", "state": "Великобритания"},
-                    {"number": "87", "name": "Оливер Берман", "flag": "fr.svg", "state": "Фпанция"}
+                    {"number": "87", "name": "Оливер Берман", "flag": "fr.svg", "state": "Франция"}
                 ]
             },
             "alpine": {
