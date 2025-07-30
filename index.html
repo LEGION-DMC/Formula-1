@@ -1,13 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Мой сайт на GitHub</title>
-    <style>
-        body { font-family: Arial; text-align: center; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula 1 | Главная</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Привет, мир!</h1>
-    <p>Это мой сайт на GitHub Pages.</p>
+    <header>
+        <h1>FORMULA 1</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Главная</a></li>
+                <li><a href="#">Гонщики</a></li>
+                <li><a href="#">Команды</a></li>
+                <li><a href="#">Календарь</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Добро пожаловать в мир скорости!</h2>
+            <p>Следите за последними новостями Формулы 1.</p>
+            <button id="cta-button">Узнать больше</button>
+        </section>
+
+        <section class="news">
+            <h2>Последние новости</h2>
+            <div class="news-grid">
+                <article>
+                    <h3>Новый сезон 2024</h3>
+                    <p>Старт сезона в Бахрейне 2 марта.</p>
+                </article>
+                <article>
+                    <h3>Verstappen побеждает в квалификации</h3>
+                    <p>Макс показал лучшее время в Барселоне.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Formula 1 Fan Site</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
