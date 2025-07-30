@@ -226,7 +226,7 @@ const tracksData = {
         "name": "Гран-при Великобритании",
         "logo": "Silverstone.svg",
         "miniLogo": "Silverstone-m.svg",
-        "location": "Нортгемптошир, Великобритания",
+        "location": "Нортгемптошир, Англия",
         "trackName": "Сильверстоун",
         "length": "5 891 км",
         "laps": 52,
