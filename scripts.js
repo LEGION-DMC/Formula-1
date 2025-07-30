@@ -272,17 +272,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${hasSprint ? '<span class="sprint-badge">СПРИНТ</span>' : ''}
                 </div>
                 <div class="info-row">
-                    <img src="Images/Tracks/Icon/location.webp" alt="Location" class="info-icon">
+                    <img src="Images/Tracks/Icon/location.webp" alt="location" class="info-icon">
                     <span class="info-name">Расположение:</span>
                     <span class="info-value">${track.location}</span>
                 </div>
                 <div class="info-row">
-                    <img src="Images/Tracks/Icon/Track.webp" alt="Length" class="info-icon">
+                    <img src="Images/Tracks/Icon/track.webp" alt="track" class="info-icon">
                     <span class="info-name">Трасса:</span>
                     <span class="info-value">${track.trackName}</span>
                 </div>
                 <div class="info-row">
-                    <img src="Images/Tracks/Icon/calendar.webp" alt="Date" class="info-icon">
+                    <img src="Images/Tracks/Icon/calendar.webp" alt="calendar" class="info-icon">
                     <span class="info-name">Дата:</span>
                     <span class="info-value date-value">${formatDate(track.date)}</span>
                 </div>
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="divider"></div>
 					
                     <div class="info-row">
-                        <img src="Images/Tracks/Icon/location.webp" alt="Location" class="info-icon">
+                        <img src="Images/Tracks/Icon/location.webp" alt="location" class="info-icon">
                         <span class="info-name">Место проведения:</span>
                         <span class="info-value">${track.location}</span>
                     </div>
@@ -366,25 +366,25 @@ document.addEventListener('DOMContentLoaded', function() {
 					<div class="divider"></div>
 					
                     <div class="info-row">
-                        <img src="Images/Tracks/Icon/track.webp" alt="Length" class="info-icon">
+                        <img src="Images/Tracks/Icon/track.webp" alt="track" class="info-icon">
                         <span class="info-name">Длина трассы:</span>
                         <span class="info-value">${track.length}</span>
                     </div>
 					
                     <div class="info-row">
-                        <img src="Images/Tracks/Icon/track.webp" alt="Turns" class="info-icon">
+                        <img src="Images/Tracks/Icon/track.webp" alt="track" class="info-icon">
                         <span class="info-name">Количество поворотов:</span>
                         <span class="info-value">${track.turns}</span>
                     </div>
                     
                     <div class="info-row">
-                        <img src="Images/Tracks/Icon/track.webp" alt="Turns" class="info-icon">
+                        <img src="Images/Tracks/Icon/track.webp" alt="track" class="info-icon">
                         <span class="info-name">Количество зон DRS:</span>
                         <span class="info-value">${track.drsZones}</span>
                     </div>
                     
                     <div class="info-row">
-                        <img src="Images/Tracks/Icon/track.webp" alt="Direction" class="info-icon">
+                        <img src="Images/Tracks/Icon/track.webp" alt="track" class="info-icon">
                         <span class="info-name">Направление движения:</span>
                         <span class="info-value">${track.direction}</span>
                     </div>
@@ -392,20 +392,19 @@ document.addEventListener('DOMContentLoaded', function() {
 					<div class="divider"></div>
 					
                     <div class="info-row">
-                        <img src="Images/Tracks/Icon/track.webp" alt="Record" class="info-icon">
+                        <img src="Images/Tracks/Icon/track.webp" alt="track" class="info-icon">
                         <span class="info-name">Рекорд круга:</span>
                         <span class="info-value">${track.lapRecord}</span>
                     </div>
 					
 					<div class="divider"></div>
 					
-					<img src="Images/Tracks/Icon/Podium.webp" alt="Podium" class="info-icon">
+					<img src="Images/Tracks/Icon/podium.webp" alt="podium" class="info-icon">
 					<span class="info-name">Подиум 2025:</span>
 					<div class="podium-container">
 					
 						<div class="podium-place second-place">
 							<div class="podium-step">
-								<img src="Images/Tracks/Icon/podium2.webp" alt=" " class="trophy-img">
 								<div class="trophy-base"></div>
 							</div>
 							<div class="podium-driver">
@@ -416,7 +415,6 @@ document.addEventListener('DOMContentLoaded', function() {
 						
 						<div class="podium-place first-place">
 							<div class="podium-step">
-								<img src="Images/Tracks/Icon/podium1.png" alt=" " class="trophy-img">
 								<div class="trophy-base"></div>
 							</div>
 							<div class="podium-driver">
@@ -427,7 +425,6 @@ document.addEventListener('DOMContentLoaded', function() {
 						
 						<div class="podium-place third-place">
 							<div class="podium-step">
-								<img src="Images/Tracks/Icon/podium3.webp" alt=" " class="trophy-img">
 								<div class="trophy-base"></div>
 							</div>
 							<div class="podium-driver">
