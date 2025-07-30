@@ -1,89 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formula 1 | Официальный фан-сайт</title>
+    <title>Formula 1</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><i class="fas fa-flag-checkered"></i> FORMULA 1</h1>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Главная</a></li>
-                    <li><a href="#">Гонщики 2024</a></li>
-                    <li><a href="#">Команды</a></li>
-                    <li><a href="#">Календарь</a></li>
-                </ul>
-            </nav>
+    <header class="header">
+	
+        <div class="logo-container">
+            <img src="Images/logo.png" alt="Logo" class="logo">
         </div>
+		
+        <nav class="nav">
+            <ul class="nav-list">
+                <li class="nav-item active" data-tab="home">Главная</li>
+                <li class="nav-item" data-tab="teams">Команды</li>
+                <li class="nav-item" data-tab="calendar">Календарь</li>
+				<li class="nav-item" data-tab="results">Результаты</li>
+                <li class="nav-item" data-tab="glossary">Глосарий</li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h2>Самый быстрый спорт в мире</h2>
-                <p>Будьте в курсе последних новостей, результатов гонок и аналитики.</p>
-                <button id="cta-button">Подписаться на новости</button>
-            </div>
-        </section>
-
-        <section class="news">
-            <div class="container">
-                <h2><i class="fas fa-newspaper"></i> Последние новости</h2>
-                <div class="news-grid">
-                    <article>
-                        <img src="https://via.placeholder.com/400x225?text=Max+Verstappen" alt="Max Verstappen">
-                        <h3>Verstappen выигрывает Гран-при Испании</h3>
-                        <p>Доминирующая победа Red Bull в Барселоне.</p>
-                    </article>
-                    <article>
-                        <img src="https://via.placeholder.com/400x225?text=Ferrari+SF-24" alt="Ferrari SF-24">
-                        <h3>Ferrari представляет обновления</h3>
-                        <p>Новые аэродинамические решения для SF-24.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="schedule">
-            <div class="container">
-                <h2><i class="fas fa-calendar-alt"></i> Ближайшие гонки</h2>
-                <table>
-                    <tr>
-                        <th>Гран-при</th>
-                        <th>Трасса</th>
-                        <th>Дата</th>
-                    </tr>
-                    <tr>
-                        <td>Бахрейн</td>
-                        <td>Sakhir</td>
-                        <td>2 марта 2024</td>
-                    </tr>
-                    <tr>
-                        <td>Саудовская Аравия</td>
-                        <td>Jeddah</td>
-                        <td>9 марта 2024</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
+    <main class="main-content">
+	
+        <div class="tab-content active" id="home">
+            <h1>000</h1>
+            <p>000</p>
+        </div>
+        
+        <div class="tab-content" id="teams">
+            <h1>Команды Гран-при 2025</h1>
+            <div class="info-cards-container" id="teams-container"></div>
+        </div>
+        
+        <div class="tab-content" id="calendar">
+            <h1>Календарь Гран-при 2025</h1>
+            <div class="two-column-cards-container" id="calendar-container"></div>
+        </div>
+		
+		<div class="tab-content" id="results">
+			<h1>Чемпионат Формулы 1 2025</h1>
+			
+			<div class="standings-container">
+				<h2>Личный зачёт</h2>
+				<div class="drivers-standings" id="drivers-standings">
+				</div>
+				
+				<h2>Кубок конструкторов</h2>
+				<div class="constructors-standings" id="constructors-standings">
+				</div>
+				
+				<div class="standings-section">
+					<h2>Спринт сезона</h2>
+					<div class="sprint-standings" id="sprint-standings"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="tab-content" id="glossary">
+			<h1>Глоссарий терминов F1</h1>
+			<div class="glossary-search">
+				<input type="text" id="glossary-search" placeholder="Поиск терминов...">
+			</div>
+			<div class="glossary-filters">
+				<button class="filter-btn active" data-category="all">Все</button>
+				<button class="filter-btn" data-category="Пит-лейн">Пит-лейн</button>
+				<button class="filter-btn" data-category="Шины">Шины</button>
+				<button class="filter-btn" data-category="Механики">Механики</button>
+				<button class="filter-btn" data-category="Гонка">Гонка</button>
+				<button class="filter-btn" data-category="Болид">Болид</button>
+				<button class="filter-btn" data-category="Безопасность">Безопасность</button>
+			</div>
+			<div class="glossary-container" id="glossary-container"></div>
+		</div>
+		
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Formula 1 Fan Site | Legion-DMC</p>
-            <div class="social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-    </footer>
+    <div id="modals-container"></div>
 
-    <script src="scripts.js"></script>
+	<script src="teams.js"></script>
+	<script src="tracks.js"></script>
+	<script src="results.js"></script>
+	<script src="glossary.js"></script>
+	<script src="scripts.js"></script>
 </body>
 </html>
