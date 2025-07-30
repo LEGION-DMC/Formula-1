@@ -814,18 +814,6 @@ p {
     color: #b0b0b0;
 }
 
-/* Для мобильных устройств */
-@media (max-width: 600px) {
-    .countdown-timer {
-        font-size: 0.9em;
-        gap: 3px;
-    }
-    
-    .countdown-timer span {
-        min-width: 22px;
-    }
-}
-
 /* Стили для вкладки результатов */
 .drivers-standings {
     display: flex;
@@ -862,19 +850,13 @@ p {
 .name {
     flex: 0.6;
     font-weight: bold;
+    margin-right: 28px;
 }
 
 .points {
-    width: 60px;
+    width: 30px;
     text-align: right;
     font-weight: bold;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .drivers-standings {
-        flex-direction: column;
-    }
 }
 
 /* Дополнительные стили для новых элементов */
@@ -926,17 +908,6 @@ p {
     animation: pulseHighlight 1.5s infinite;
 }
 
-/* Адаптивность для логотипов */
-@media (max-width: 600px) {
-    .team-logo, .driver-flag {
-        display: none;
-    }
-    
-    .name, .team {
-        flex: 1;
-    }
-}
-
 .race-header {
     display: flex;
     justify-content: space-between;
@@ -958,19 +929,12 @@ p {
 
 .standings-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: 3fr 1fr;
+    gap: 10px;
 }
 
 .standings-section {
     background-color: #1a1a1a;
     border-radius: 8px;
     padding: 15px;
-    margin-bottom: 20px;
-}
-
-@media (max-width: 1200px) {
-    .standings-grid {
-        grid-template-columns: 1fr;
-    }
 }
