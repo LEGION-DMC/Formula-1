@@ -1,31 +1,58 @@
-/* Общие стили */
+/* Основные стили */
+:root {
+    --f1-red: #e10600;
+    --f1-black: #15151e;
+    --f1-white: #ffffff;
+    --f1-gray: #f4f4f4;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--f1-gray);
+    color: var(--f1-black);
+    line-height: 1.6;
 }
 
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Шапка */
 header {
-    background-color: #e10600; /* Красный F1 */
-    color: white;
-    padding: 1rem;
-    text-align: center;
+    background-color: var(--f1-red);
+    color: var(--f1-white);
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 nav a {
-    color: white;
+    color: var(--f1-white);
     text-decoration: none;
     font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.8;
 }
 
 nav a.active {
@@ -34,24 +61,32 @@ nav a.active {
 
 /* Герой-секция */
 .hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://via.placeholder.com/1920x1080?text=F1+Car') no-repeat center/cover;
+    color: var(--f1-white);
     text-align: center;
-    padding: 3rem 1rem;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1200x400') no-repeat center/cover;
-    color: white;
+    padding: 5rem 0;
 }
 
 .hero h2 {
     font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 
 .hero button {
     padding: 0.75rem 1.5rem;
-    background: #e10600;
-    color: white;
+    background: var(--f1-red);
+    color: var(--f1-white);
     border: none;
     border-radius: 5px;
-    cursor: pointer;
     font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
 .hero button:hover {
@@ -60,28 +95,111 @@ nav a.active {
 
 /* Новости */
 .news {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 3rem 0;
+}
+
+.news h2, .schedule h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .news article {
-    background: white;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: var(--f1-white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.news article:hover {
+    transform: translateY(-5px);
+}
+
+.news img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.news h3 {
+    padding: 1rem 1rem 0;
+    margin: 0;
+}
+
+.news p {
+    padding: 0 1rem 1rem;
+    color: #555;
+}
+
+/* Расписание */
+.schedule {
+    padding: 2rem 0 4rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--f1-red);
+    color: var(--f1-white);
+}
+
+tr:hover {
+    background-color: #f9f9f9;
 }
 
 /* Подвал */
 footer {
+    background: var(--f1-black);
+    color: var(--f1-white);
     text-align: center;
-    padding: 1rem;
-    background: #333;
-    color: white;
+    padding: 2rem 0;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social a {
+    color: var(--f1-white);
+    font-size: 1.5rem;
+    transition: opacity 0.3s;
+}
+
+.social a:hover {
+    opacity: 0.7;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
 }
