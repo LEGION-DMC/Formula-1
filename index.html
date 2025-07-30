@@ -3,46 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formula 1 | Главная</title>
+    <title>Formula 1 | Официальный фан-сайт</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>FORMULA 1</h1>
-        <nav>
-            <ul>
-                <li><a href="#" class="active">Главная</a></li>
-                <li><a href="#">Гонщики</a></li>
-                <li><a href="#">Команды</a></li>
-                <li><a href="#">Календарь</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1><i class="fas fa-flag-checkered"></i> FORMULA 1</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Главная</a></li>
+                    <li><a href="#">Гонщики 2024</a></li>
+                    <li><a href="#">Команды</a></li>
+                    <li><a href="#">Календарь</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
         <section class="hero">
-            <h2>Добро пожаловать в мир скорости!</h2>
-            <p>Следите за последними новостями Формулы 1.</p>
-            <button id="cta-button">Узнать больше</button>
+            <div class="container">
+                <h2>Самый быстрый спорт в мире</h2>
+                <p>Будьте в курсе последних новостей, результатов гонок и аналитики.</p>
+                <button id="cta-button">Подписаться на новости</button>
+            </div>
         </section>
 
         <section class="news">
-            <h2>Последние новости</h2>
-            <div class="news-grid">
-                <article>
-                    <h3>Новый сезон 2024</h3>
-                    <p>Старт сезона в Бахрейне 2 марта.</p>
-                </article>
-                <article>
-                    <h3>Verstappen побеждает в квалификации</h3>
-                    <p>Макс показал лучшее время в Барселоне.</p>
-                </article>
+            <div class="container">
+                <h2><i class="fas fa-newspaper"></i> Последние новости</h2>
+                <div class="news-grid">
+                    <article>
+                        <img src="https://via.placeholder.com/400x225?text=Max+Verstappen" alt="Max Verstappen">
+                        <h3>Verstappen выигрывает Гран-при Испании</h3>
+                        <p>Доминирующая победа Red Bull в Барселоне.</p>
+                    </article>
+                    <article>
+                        <img src="https://via.placeholder.com/400x225?text=Ferrari+SF-24" alt="Ferrari SF-24">
+                        <h3>Ferrari представляет обновления</h3>
+                        <p>Новые аэродинамические решения для SF-24.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule">
+            <div class="container">
+                <h2><i class="fas fa-calendar-alt"></i> Ближайшие гонки</h2>
+                <table>
+                    <tr>
+                        <th>Гран-при</th>
+                        <th>Трасса</th>
+                        <th>Дата</th>
+                    </tr>
+                    <tr>
+                        <td>Бахрейн</td>
+                        <td>Sakhir</td>
+                        <td>2 марта 2024</td>
+                    </tr>
+                    <tr>
+                        <td>Саудовская Аравия</td>
+                        <td>Jeddah</td>
+                        <td>9 марта 2024</td>
+                    </tr>
+                </table>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Formula 1 Fan Site</p>
+        <div class="container">
+            <p>&copy; 2024 Formula 1 Fan Site | Legion-DMC</p>
+            <div class="social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
     </footer>
 
     <script src="scripts.js"></script>
