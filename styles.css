@@ -73,6 +73,7 @@ h1, h2, h3, h4, h5, h6 {
     min-height: calc(100vh - 70px);
     margin-top: -15px;
 }
+
 /* -------------------------------------------------------------------------- Кнопка прокрутки вверх */
 /* Кнопка прокрутки вверх */
 .scroll-top {
@@ -100,6 +101,7 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(1.1);
     background-color: #c62828;
 }
+
 /* -------------------------------------------------------------------------- "Терминология" */
 /* Стили для вкладки "Терминология" */
 .search-bar {
@@ -230,6 +232,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
     line-height: 1;
 }
+
 /* -------------------------------------------------------------------------- "Результаты" */
 /* Стили для вкладки "Результаты" */
 .results-container {
@@ -352,6 +355,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 5px;
     padding-left: 8px;
 }
+
 /* -------------------------------------------------------------------------- "Календарь" */
 /* Календарь */
 .calendar-container {
@@ -753,6 +757,68 @@ h1, h2, h3, h4, h5, h6 {
         transform: translateY(0);
     }
 }
+
+/* Календарь следующего года */
+.next-year-calendar {
+    margin-top: 15px;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.next-year-calendar h3 {
+    color: #e53935;
+    font-family: 'Font1', sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.next-year-events {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+}
+
+.next-year-event {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: #252525;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.next-year-event:hover {
+    transform: translateX(5px);
+}
+
+.next-year-date {
+    font-family: 'Font1', sans-serif;
+    color: #e53935;
+    min-width: 80px;
+    text-align: center;
+}
+
+.next-year-name {
+    font-family: 'Font1', sans-serif;
+    font-size: 13px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.next-year-flag {
+    margin-bottom: 2px;
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+}
+
 /* -------------------------------------------------------------------------- "Команды" */
 /* Команды */
 .cmd-container {
