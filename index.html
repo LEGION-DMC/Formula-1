@@ -1,94 +1,73 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formula 1</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Подключаем стили -->
+    <link rel="stylesheet" href="Styles.css">
+    <!-- Подключаем шрифты -->
+    <style>
+        @font-face {
+            font-family: 'Font1';
+            src: url('Styles/font1.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Font2';
+            src: url('Styles/font2.otf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Font3';
+            src: url('Styles/font3.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Font4';
+            src: url('Styles/font3.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Font5';
+            src: url('Styles/font3.ttf') format('truetype');
+        }
+    </style>
 </head>
 <body>
+    <!-- Верхняя фиксированная панель -->
     <header class="header">
-	
-        <div class="logo-container">
-            <img src="Images/logo.png" alt="Logo" class="logo">
+        <!-- Логотип с анимацией -->
+        <div class="logo">
+            <a href="#" id="logoLink">
+                <img src="Images/logo.png" alt="F1">
+            </a>
         </div>
-		
-        <nav class="nav">
-            <ul class="nav-list">
-                <li class="nav-item active" data-tab="home">Главная</li>
-                <li class="nav-item" data-tab="teams">Команды</li>
-                <li class="nav-item" data-tab="calendar">Календарь</li>
-				<li class="nav-item" data-tab="results">Результаты</li>
-                <li class="nav-item" data-tab="glossary">Глоссарий</li>
+        <!-- Меню с вкладками -->
+        <nav class="menu">
+            <ul>
+                <li><a href="#" data-tab="teams">Команды</a></li>
+				<li><a href="#" data-tab="drivers">Пилоты</a></li>
+                <li><a href="#" data-tab="calendar">Календарь</a></li>
+                <li><a href="#" data-tab="results">Результаты</a></li>
+                <li><a href="#" data-tab="glossary">Терминология</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="main-content">
-	
-        <div class="tab-content active" id="home">
-            <h1>000</h1>
-            <p>000</p>
-        </div>
-        
-        <div class="tab-content" id="teams">
-            <h1>Команды Гран-при 2025</h1>
-            <div class="info-cards-container" id="teams-container"></div>
-        </div>
-        
-        <div class="tab-content" id="calendar">
-            <h1>Календарь Гран-при 2025</h1>
-            <div class="two-column-cards-container" id="calendar-container"></div>
-        </div>
-		
-		<div class="tab-content" id="results">
-			<h1>Чемпионат Формулы 1 2025</h1>
-			
-			<div class="standings-container">
-			    <div class="standings-grid">
-			        <div class="standings-section">
-			            <h2>Личный зачёт</h2>
-			            <div class="drivers-standings" id="drivers-standings"></div>
-			        </div>
-			        
-			        <div class="standings-section">
-			            <h2>Кубок конструкторов</h2>
-			            <div class="constructors-standings" id="constructors-standings"></div>
-			        </div>
-			        
-			        <div class="standings-section">
-			            <h2>Спринтерская гонка</h2>
-			            <div class="sprint-standings" id="sprint-standings"></div>
-			        </div>
-			    </div>
-			</div>
+    <!-- Основная область данных -->
+    <main class="content" id="content">
+        <div id="mainPage">
+			<h1>Formula 1</h1>
+			<p>Чемпионат Formula 1 2025</p>
 		</div>
-		
-		<div class="tab-content" id="glossary">
-			<h1>Глоссарий терминов F1</h1>
-			<div class="glossary-search">
-				<input type="text" id="glossary-search" placeholder="Поиск терминов...">
-			</div>
-			<div class="glossary-filters">
-				<button class="filter-btn active" data-category="all">Все</button>
-				<button class="filter-btn" data-category="Пит-лейн">Пит-лейн</button>
-				<button class="filter-btn" data-category="Шины">Шины</button>
-				<button class="filter-btn" data-category="Механики">Механики</button>
-				<button class="filter-btn" data-category="Гонка">Гонка</button>
-				<button class="filter-btn" data-category="Болид">Болид</button>
-				<button class="filter-btn" data-category="Безопасность">Безопасность</button>
-			</div>
-			<div class="glossary-container" id="glossary-container"></div>
-		</div>
-		
     </main>
 
-    <div id="modals-container"></div>
+    <!-- Кнопка прокрутки вверх -->
+    <button class="scroll-top" id="scrollTop">^</button>
 
-	<script src="Data/teams.js"></script>
-	<script src="Data/tracks.js"></script>
-	<script src="Data/results.js"></script>
-	<script src="Data/glossary.js"></script>
-	<script src="scripts.js"></script>
+    <!-- Подключаем скрипты -->
+    <script src="Scripts.js"></script>
+    <script src="Data/teams.js"></script>
+    <script src="Data/drivers.js"></script>
+    <script src="Data/tracks.js"></script>
+    <script src="Data/results.js"></script>
+    <script src="Data/glossary.js"></script>
 </body>
 </html>
