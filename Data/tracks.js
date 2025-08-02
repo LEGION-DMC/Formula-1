@@ -534,75 +534,86 @@ const tracksData = {
         "recordingLink": ""
     }
 };
+const nextYearCalendar = [
+    {   name: "Гран-при Мадрида",
+        date: "2026-09-13",
+        country: "es"
+    },
+];
 
 function renderCalendar() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <div class="calendar-container" id="calendarContainer">
             <div class="calendar-grid" id="calendarGrid"></div>
+            <div class="next-year-calendar">
+                <h3>Календарь 2026</h3>
+                <div class="next-year-events" id="nextYearEvents"></div>
+            </div>
         </div>
     `;
 
     const calendarGrid = document.getElementById('calendarGrid');
+    const nextYearEvents = document.getElementById('nextYearEvents');
     
     // Сортируем гран-при по дате
     const sortedTracks = Object.values(tracksData).sort((a, b) => 
         new Date(a.date) - new Date(b.date)
     );
 
-    // Создаем плашки для каждого гран-при
+    // Рендерим текущий сезон
     sortedTracks.forEach(track => {
-		const trackCard = document.createElement('div');
-		trackCard.className = 'track-card';
-		trackCard.setAttribute('data-track', track.id);
-		trackCard.setAttribute('data-date', track.date);
-		
-		const currentDate = new Date();
-		const raceDate = new Date(track.date);
-		const isFutureRace = raceDate > currentDate;
-		const isToday = raceDate.toDateString() === currentDate.toDateString();
-		
-		// Определяем статус
-		let status = '';
-		if (isToday) {
-			status = '<span class="status-badge today">Сегодня</span>';
-			trackCard.classList.add('today');
-		} else if (isFutureRace) {
-			status = '<span class="status-badge upcoming">Ожидается</span>';
-			trackCard.classList.add('upcoming');
-		} else {
-			status = '<span class="status-badge completed">Завершено</span>';
-			trackCard.classList.add('completed');
-		}
+        const trackCard = document.createElement('div');
+        trackCard.className = 'track-card';
+        trackCard.setAttribute('data-track', track.id);
+        trackCard.setAttribute('data-date', track.date);
+        
+        const currentDate = new Date();
+        const raceDate = new Date(track.date);
+        const isFutureRace = raceDate > currentDate;
+        const isToday = raceDate.toDateString() === currentDate.toDateString();
+        
+        // Определяем статус
+        let status = '';
+        if (isToday) {
+            status = '<span class="status-badge today">Сегодня</span>';
+            trackCard.classList.add('today');
+        } else if (isFutureRace) {
+            status = '<span class="status-badge upcoming">Ожидается</span>';
+            trackCard.classList.add('upcoming');
+        } else {
+            status = '<span class="status-badge completed">Завершено</span>';
+            trackCard.classList.add('completed');
+        }
 
         // Таймер или кнопка
         let timeElement = '';
-		if (isToday) {
-			timeElement = track.streamLink ? 
-				`<a href="${track.streamLink}" class="action-btn stream">Трансляция</a>` :
-				'<div class="action-btn no-stream">Нет трансляции</div>';
-		} else if (isFutureRace) {
-			timeElement = `
-				<div class="countdown">
-					<span>До гонки:</span>
-					<div class="timer" data-date="${track.date}">
-						<span class="days">00</span>д <span class="hours">00</span>ч 
-						<span class="minutes">00</span>м <span class="seconds">00</span>с
-					</div>
-				</div>
-			`;
-		} else {
-			timeElement = track.recordingLink ? 
-				`<a href="${track.recordingLink}" class="action-btn recording">Запись</a>` :
-				'<div class="action-btn no-recording">Нет записи</div>';
-		}
+        if (isToday) {
+            timeElement = track.streamLink ? 
+                `<a href="${track.streamLink}" class="action-btn stream">Трансляция</a>` :
+                '<div class="action-btn no-stream">Нет трансляции</div>';
+        } else if (isFutureRace) {
+            timeElement = `
+                <div class="countdown">
+                    <span>До гонки:</span>
+                    <div class="timer" data-date="${track.date}">
+                        <span class="days">00</span>д <span class="hours">00</span>ч 
+                        <span class="minutes">00</span>м <span class="seconds">00</span>с
+                    </div>
+                </div>
+            `;
+        } else {
+            timeElement = track.recordingLink ? 
+                `<a href="${track.recordingLink}" class="action-btn recording">Запись</a>` :
+                '<div class="action-btn no-recording">Нет записи</div>';
+        }
 
         trackCard.innerHTML = `
             <div class="track-image">
                 <img src="Images/Tracks/${track.miniLogo}" alt="${track.trackName}">
             </div>
             <div class="track-info">
-				<div class="track-header">
+                <div class="track-header">
                     <h3><img src="Images/Flags/${track.country}.svg" alt="flag" title="${track.state}" class="flag">  ${track.name}</h3>
                     ${track.hasSprint ? '<span class="sprint-badge">СПРИНТ</span>' : ''}
                 </div>
@@ -630,7 +641,6 @@ function renderCalendar() {
             </div>
         `;
 
-        // Обработчик клика для открытия модального окна
         trackCard.addEventListener('click', (e) => {
             if (!e.target.closest('.action-btn') && !e.target.closest('.sprint-badge')) {
                 openModal(track);
@@ -640,10 +650,30 @@ function renderCalendar() {
         calendarGrid.appendChild(trackCard);
     });
 
+    // Рендерим календарь на следующий год
+    nextYearCalendar.forEach(event => {
+        const eventElement = document.createElement('div');
+        eventElement.className = 'next-year-event';
+        eventElement.innerHTML = `
+            <div class="next-year-date">${formatShortDate(event.date)}</div>
+            <div class="next-year-name">
+                <img src="Images/Flags/${event.country}.svg" alt="flag" class="next-year-flag">
+                ${event.name}
+            </div>
+        `;
+        nextYearEvents.appendChild(eventElement);
+    });
+
     // Инициализация таймеров
     initCountdowns();
     // Прокрутка к текущему событию
     scrollToCurrent();
+}
+
+// Форматирование даты для следующего года (только день и месяц)
+function formatShortDate(dateStr) {
+    const options = { day: 'numeric', month: 'short' };
+    return new Date(dateStr).toLocaleDateString('ru-RU', options);
 }
 
 function formatDate(dateStr) {
@@ -812,27 +842,4 @@ if (window.location.hash === '#calendar') {
     renderCalendar();
 }
 
-/* 		Трасса 2026
-		"madrid": {
-        "id": "t24",
-        "name": "Гран-при Мадрида",
-        "logo": "Madrid.svg",
-        "miniLogo": "Madrid-m.svg",
-		"country": "es",
-		"state": "Испания",
-        "location": "Мадрид, Испания",
-        "trackName": "МадРинг",
-        "length": "5 474 км",
-        "laps": 20,
-        "turns": 22,
-        "drsZones": 2,
-        "direction": "по часовой стрелки",
-        "lapRecord": " ",
-        "date": "2026-09-13 21:00",
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
-        "streamLink": "",
-        "recordingLink": ""
-    }
-*/
+
