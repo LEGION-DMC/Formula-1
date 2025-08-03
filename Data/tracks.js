@@ -18,8 +18,8 @@ const tracksData = {
 		"podium1": "Норрис",
         "podium2": "Ферстаппен",
         "podium3": "Рассел",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239218",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239218"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/2079c4f978ab2741be70fbd26d9b09e4"
     },
     "shanghai": {
         "id": "t2",
@@ -41,8 +41,8 @@ const tracksData = {
 		"podium1": "Пиастри",
         "podium2": "Норрис",
         "podium3": "Рассел",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239232",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239232"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/fa1eb3e92d1e9ba84c1562a4ea46acbd"
     },
     "suzuka": {
         "id": "t3",
@@ -63,8 +63,8 @@ const tracksData = {
 		"podium1": "Ферстаппен",
         "podium2": "Норрис",
         "podium3": "Пиастри",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239255",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239255"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/f4c2ca887796fc22660d6490a23d3371"
     },
     "bahrain": {
         "id": "t4",
@@ -85,8 +85,8 @@ const tracksData = {
 		"podium1": "Пиастри",
         "podium2": "Рассел",
         "podium3": "Норрис",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239270",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239270"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/b3b13a59df849ce3092240d5f08d6005"
     },
     "jeddah": {
         "id": "t5",
@@ -108,7 +108,7 @@ const tracksData = {
         "podium2": "Ферстаппен",
         "podium3": "Леклер",
         "streamLink": "",
-        "recordingLink": ""
+        "recordingLink": "https://rutube.ru/video/7d862107f6a4812b3a100b4fcd8b2611"
     },
     "miami": {
         "id": "t6",
@@ -131,7 +131,7 @@ const tracksData = {
         "podium2": "Норрис",
         "podium3": "Рассел",
         "streamLink": "",
-        "recordingLink": ""
+        "recordingLink": "https://rutube.ru/video/83c2215a943345562c68bba961623188"
     },
     "ferrari": {
         "id": "t7",
@@ -152,8 +152,8 @@ const tracksData = {
 		"podium1": "Ферстаппен",
         "podium2": "Норрис",
         "podium3": "Пиастри",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239371",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239371"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/e48d594f60e400bca0014c4d552a34f9"
     },
     "monaco": {
         "id": "t8",
@@ -174,8 +174,8 @@ const tracksData = {
 		"podium1": "Норрис",
         "podium2": "Леклер",
         "podium3": "Пиастри",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239394",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239394"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/b3c7587ee0c2a33f9e89fbc3f83a13f1"
     },
     "barcelona-catalunya": {
         "id": "t9",
@@ -196,8 +196,8 @@ const tracksData = {
 		"podium1": "Пиастри",
         "podium2": "Норрис",
         "podium3": "Леклер",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239413",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239413"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/295199e9d73dfd32b700902528b7113b"
     },
     "gilles-villeneuve": {
         "id": "t10",
@@ -218,8 +218,8 @@ const tracksData = {
 		"podium1": "Рассел",
         "podium2": "Ферстаппен",
         "podium3": "Антонелли",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239453",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239453"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/28ecd1825dc64437615a9d73e2ae6304"
     },
     "red-bull-ring": {
         "id": "t11",
@@ -240,8 +240,8 @@ const tracksData = {
 		"podium1": "Норис",
         "podium2": "Пиастри",
         "podium3": "Леклер",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239489",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239489"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/7a97d545d3a53005d7103312ccba332d"
     },
     "silverstone": {
         "id": "t12",
@@ -262,8 +262,8 @@ const tracksData = {
 		"podium1": "Норис",
         "podium2": "Пиастри",
         "podium3": "Хюлькенберг",
-        "streamLink": "https://vkvideo.ru/video-225815415_456239518",
-        "recordingLink": "https://vkvideo.ru/video-225815415_456239518"
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/71d826175421b4c3acc527c817161dd0/"
     },
     "spa": {
         "id": "t13",
@@ -286,7 +286,7 @@ const tracksData = {
         "podium2": "Норрис",
         "podium3": "Леклер",
         "streamLink": "",
-        "recordingLink": ""
+        "recordingLink": "https://rutube.ru/video/ce6d886e90bbed00c61823ee57bf137a"
     },
     "hungaroring": {
         "id": "t14",
@@ -307,7 +307,7 @@ const tracksData = {
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
-        "streamLink": "",
+        "streamLink": "https://rutube.ru/video/06503abbf0e2016537de4f70412508a1",
         "recordingLink": ""
     },
     "zandvoort": {
@@ -841,5 +841,3 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
-
-
