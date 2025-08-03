@@ -6,7 +6,7 @@ const driversData = [
         country: "nl",
 		state: "Нидерланды",
         team: "Red Bull",
-        teamLogo: "redbull-m.png",
+        teamLogo: "RedBull-m.png",
         teamColor: "#313247",
         photo: "verstappen.jpg",
         birthPlace: "Хасселт, Бельгия",
@@ -645,4 +645,5 @@ function openDriverModal(driver) {
 
 if (window.location.hash === '#drivers') {
     renderDrivers();
+
 }
