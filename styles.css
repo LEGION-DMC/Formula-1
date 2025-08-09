@@ -156,12 +156,13 @@ h1, h2, h3, h4, h5, h6 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
+    margin-bottom: 25px;
 }
 
 .term-card {
     background-color: #1e1e1e;
     border-radius: 5px;
-    padding: 15px;
+    padding: 8px;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
@@ -173,16 +174,26 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0px 10px rgba(255, 255, 0, 0.3);
 }
 
+.term-tags {
+    display: flex;
+    gap: 3px;
+}
+
 .term-tag {
     font-family: 'Font1', sans-serif;
-    padding: 3px 4px 0;
-    position: absolute;
-    top: 10px;
-    right: 6px;
+    padding: 2px 3px 0;
     border-radius: 2px;
     font-size: 10px;
     color: black;
 }
+
+.glos-divider {
+    height: 1px;
+    background: #333;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 
 .term-card h3 {
     font-family: 'Font1', sans-serif;
@@ -237,13 +248,15 @@ h1, h2, h3, h4, h5, h6 {
 /* Стили для вкладки "Результаты" */
 .results-container {
     padding-left: 10px;
+    margin-top: 5px;
+    padding-bottom: 20px;
 }
 
 .standings-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: auto auto;
-    gap: 20px;
+    gap: 5px 20px;
 }
 
 .standings-grid h2 {
@@ -317,7 +330,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .team-logo {
-    width: 20px;
+    width: 25px;
     height: 20px;
     object-fit: contain;
 }
@@ -360,6 +373,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Календарь */
 .calendar-container {
     padding-left: 10px;
+    margin-top: 5px;
 }
 
 .calendar-grid {
@@ -539,8 +553,31 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
+.action-btn.stream {
+    background: transparent;
+    border: 1px solid #e53935;
+    color: #e53935;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.action-btn.stream:hover {
+    background: #e53935;
+    color: white;
+}
+
 .action-btn.recording {
-    background: #555;
+    background: transparent;
+    border: 1px solid #e53935;
+    color: #e53935;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.action-btn.recording:hover {
+    background: #e53935;
     color: white;
 }
 
@@ -823,6 +860,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Команды */
 .cmd-container {
     padding: 10px;
+    margin-top: -25px;
+    padding-bottom: 15px;
 }
 
 .cmd-grid {
@@ -1048,6 +1087,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Пилоты */
 .drv-container {
     padding: 10px;
+    margin-top: -40px;
+    padding-bottom: 15px;
 }
 
 .drv-grid {
@@ -1334,4 +1375,175 @@ h1, h2, h3, h4, h5, h6 {
 .drv-filter-btn.active {
     background: #e53935;
     color: white;
+}
+/* -------------------------------------------------------------------------- "Новости" */
+/* Новости */
+.news-container {
+    padding: 20px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+/* Карточка новости */
+.news-card {
+    background: #1e1e1e;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(229, 57, 53, 0.3);
+}
+
+.news-image {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.05);
+}
+
+.news-category {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #e53935;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'Font3', sans-serif;
+}
+
+.news-content {
+    padding: 8px;
+}
+
+.news-title {
+    font-family: 'Font1', sans-serif;
+    color: #fff;
+    font-size: 15px;
+}
+
+.news-date {
+    font-family: 'Font2', sans-serif;
+    color: #aaa;
+    font-size: 10px;
+}
+
+.news-summary {
+    font-family: 'Font3', sans-serif;
+    color: #ddd;
+    font-size: 14px;
+    margin: 10px 0 10px 0;
+}
+
+.news-read-more {
+    font-family: 'Font1', sans-serif;
+    font-size: 10px;
+    background: transparent;
+    border: 1px solid #e53935;
+    color: #e53935;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.news-read-more:hover {
+    background: #e53935;
+    color: white;
+}
+
+/* Модальное окно новости */
+.news-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.news-modal-content {
+    background: #1e1e1e;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-modal-image {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.news-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-modal-category {
+    font-family: 'Font3', sans-serif;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #e53935;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.news-modal-body {
+    padding: 10px;
+}
+
+.news-modal-title {
+    font-family: 'Font1', sans-serif;
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.news-modal-date {
+    font-family: 'Font2', sans-serif;
+    display: block;
+    color: #aaa;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.news-modal-text p {
+    font-family: 'Font3', sans-serif;
+    color: #ddd;
+    font-size: 15px;
+}
+
+.news-close-modal {
+    display: none;
 }
