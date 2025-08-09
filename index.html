@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formula 1</title>
+	
+	<!-- Favicon -->
+    <link rel="icon" href="Images/favicon.png" type="image/png" sizes="50x50">
+	
     <!-- Подключаем стили -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Styles.css">
+	
     <!-- Подключаем шрифты -->
     <style>
         @font-face {
@@ -21,6 +26,7 @@
             src: url('Styles/font3.ttf') format('truetype');
         }
     </style>
+	
 </head>
 <body>
     <!-- Верхняя фиксированная панель -->
@@ -34,6 +40,7 @@
         <!-- Меню с вкладками -->
         <nav class="menu">
             <ul>
+                <li><a href="#" data-tab="news">Новости</a></li>
                 <li><a href="#" data-tab="teams">Команды</a></li>
 				<li><a href="#" data-tab="drivers">Пилоты</a></li>
                 <li><a href="#" data-tab="calendar">Календарь</a></li>
@@ -56,6 +63,7 @@
 
     <!-- Подключаем скрипты -->
     <script src="scripts.js"></script>
+    <script src="Data/news.js"></script>
     <script src="Data/teams.js"></script>
     <script src="Data/drivers.js"></script>
     <script src="Data/tracks.js"></script>
