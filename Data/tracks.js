@@ -307,8 +307,8 @@ const tracksData = {
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
-        "streamLink": "https://rutube.ru/video/06503abbf0e2016537de4f70412508a1",
-        "recordingLink": ""
+        "streamLink": "",
+        "recordingLink": "https://rutube.ru/video/06503abbf0e2016537de4f70412508a1/"
     },
     "zandvoort": {
         "id": "t15",
@@ -841,3 +841,4 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
