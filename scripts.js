@@ -25,6 +25,9 @@ function loadTabContent(tabName) {
     
     // Здесь будет загрузка данных из .js файлов
     switch (tabName) {
+		case 'news':
+			renderNews();
+			break;
 		case 'teams':
 			renderTeams();
 			window.scrollTo({ top: 0, behavior: 'smooth' });
