@@ -1,0 +1,263 @@
+/* Mobile.css - Адаптация под мобильные устройства */
+
+@media (max-width: 750px) {
+    /* Общие стили для мобильных */
+    body {
+        padding-top: 90px; /* Уменьшаем отступ под уменьшенное меню */
+    }
+
+    /* Верхняя панель - мобильная версия */
+    .header {
+        height: 40px;
+        padding: 0 10px;
+    }
+
+    .logo img {
+        height: 15px; /* Уменьшаем логотип */
+    }
+
+    /* Кнопка "гамбургер" для меню */
+    .menu-toggle {
+        display: block;
+        width: 25px;
+        height: 30px;
+        background: none;
+        border: none;
+        position: relative;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .menu-toggle span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: #fff;
+        left: 0;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle span:nth-child(1) {
+        top: 5px;
+    }
+
+    .menu-toggle span:nth-child(2) {
+        top: 13px;
+    }
+
+    .menu-toggle span:nth-child(3) {
+        top: 21px;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg);
+        top: 13px;
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 13px;
+    }
+
+    /* Основное меню - скрыто по умолчанию */
+    .menu {
+        position: fixed;
+        top: 60px;
+        right: -100%;
+        width: 70%;
+        height: calc(100vh - 60px);
+        background: #1a1a1a;
+        flex-direction: column;
+        padding: 20px 0;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .menu.active {
+        right: 0;
+    }
+
+    .menu ul {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 20px;
+    }
+
+    .menu a {
+        padding: 10px;
+        display: block;
+    }
+
+    /* Адаптация контента */
+    .content {
+        padding: 10px;
+    }
+
+    /* Адаптация плашек (уменьшаем количество в ряду) */
+    .drv-grid,
+    .cmddrv-grid,
+    .news-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    /* Календарь - 1 колонка */
+    .standings-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .drivers-standings {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .constructors-standings {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .sprint-standings {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    /* Модальные окна - адаптация */
+    .drv-modal-content,
+    .cmddrv-modal-content,
+    .news-modal-content {
+        width: 95%;
+        max-width: none;
+    }
+
+    .drv-modal-header,
+    .news-modal-content {
+        flex-direction: column;
+    }
+
+    .drv-modal-photo,
+    .news-modal-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    /* Терминология - адаптация */
+    .terms-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Кнопка прокрутки вверх */
+    .scroll-top {
+        width: 35px;
+        height: 30px;
+        font-size: 16px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    /* Подиум в модальных окнах */
+    .podium-container {
+        height: 180px;
+        gap: 5px;
+    }
+
+    .podium-place {
+        width: 30%;
+        height: auto%;
+    }
+
+    .podium-step {
+        width: 100px;
+        border-radius: 0 5px px 0;
+    }
+    
+    .driver-podium {
+        width: 100px;
+        align-items: center;
+    }
+    
+    .name-podium {
+        font-size: 15px;
+    }
+
+    .first-place .podium-step {
+        height: 30px;
+    }
+
+    .second-place .podium-step {
+        height: 25px;
+    }
+
+    .third-place .podium-step {
+        height: 20px;
+    }
+
+    .driver-info {
+        flex: 1;
+        border-radius: 0 5px 5px 0;
+        text-align: left;
+        padding: 5px 10px;
+    }
+
+    /* Статистика пилотов - 2 колонки */
+    .drv-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Дополнительные адаптации для очень маленьких экранов */
+@media (max-width: 480px) {
+    .header {
+        padding: 0 10px;
+    }
+
+    .logo img {
+        height: 15px;
+    }
+
+    .menu {
+        width: 85%;
+    }
+
+    /* Уменьшаем отступы */
+    .content,
+    .news-content,
+    .drv-content,
+    .cmddrv-content {
+        padding: 10px;
+    }
+
+    /* Уменьшаем шрифты */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Плашки - 1 колонка */
+    .drv-grid,
+    .cmddrv-grid,
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Уменьшаем изображения */
+    .drv-photo,
+    .cmddrv-team-logo,
+    .news-image {
+        height: 120px;
+    }
+}
