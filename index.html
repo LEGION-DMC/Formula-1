@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula 1</title>
+	
+	<!-- Favicon -->
+    <link rel="icon" href="Images/favicon.png" type="image/png" sizes="50x50">
+	
+    <!-- Подключаем стили -->
+    <link rel="stylesheet" href="Styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="Data/Mobile.css">
+	
+    <!-- Подключаем шрифты -->
+    <style>
+        @font-face {
+            font-family: 'Font1';
+            src: url('Styles/font1.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Font2';
+            src: url('Styles/font2.otf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Font3';
+            src: url('Styles/font3.ttf') format('truetype');
+        }
+    </style>
+	
+</head>
+<body>
+    <!-- Верхняя фиксированная панель -->
+    <header class="header">
+        <!-- Логотип с анимацией -->
+        <div class="logo">
+            <a href="#" id="logoLink">
+                <img src="Images/logo.png" alt="F1">
+            </a>
+        </div>
+        <!-- Меню с вкладками -->
+        <nav class="menu">
+            <ul>
+                <li><a href="#" data-tab="news">Новости</a></li>
+                <li><a href="#" data-tab="teams">Команды</a></li>
+				<li><a href="#" data-tab="drivers">Пилоты</a></li>
+                <li><a href="#" data-tab="calendar">Календарь</a></li>
+                <li><a href="#" data-tab="results">Результаты</a></li>
+                <li><a href="#" data-tab="glossary">Терминология</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основная область данных -->
+    <main class="content" id="content">
+        <div id="mainPage">
+			<h1>Formula 1</h1>
+			<p>Чемпионат Formula 1 2025</p>
+		</div>
+    </main>
+
+    <!-- Кнопка прокрутки вверх -->
+    <button class="scroll-top" id="scrollTop">^</button>
+
+    <!-- Подключаем скрипты -->
+    <script src="scripts.js"></script>
+    <script src="Data/news.js"></script>
+    <script src="Data/teams.js"></script>
+    <script src="Data/drivers.js"></script>
+    <script src="Data/tracks.js"></script>
+    <script src="Data/results.js"></script>
+    <script src="Data/glossary.js"></script>
+</body>
+</html>
