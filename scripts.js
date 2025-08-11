@@ -68,21 +68,21 @@ scrollTopBtn.addEventListener('click', () => {
     });
 });
 
-// Мобильное меню
-const menuToggle = document.createElement('button');
-menuToggle.className = 'menu-toggle';
-menuToggle.innerHTML = '<span></span><span></span><span></span>';
-document.querySelector('.header').appendChild(menuToggle);
+// Бургер-меню для мобильных устройств
+const burgerBtn = document.getElementById('burgerBtn');
+const menu = document.querySelector('.menu');
 
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    document.querySelector('.menu').classList.toggle('active');
-});
+if (burgerBtn) {
+    burgerBtn.addEventListener('click', () => {
+        burgerBtn.classList.toggle('active');
+        menu.classList.toggle('active');
+    });
+}
 
 // Закрытие меню при клике на пункт
 document.querySelectorAll('.menu a').forEach(link => {
     link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        document.querySelector('.menu').classList.remove('active');
+        burgerBtn.classList.remove('active');
+        menu.classList.remove('active');
     });
 });
