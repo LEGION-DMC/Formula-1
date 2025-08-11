@@ -1,213 +1,151 @@
 /* Mobile.css - Адаптация под мобильные устройства */
 
-@media (max-width: 750px) {
-    /* Общие стили для мобильных */
+@media (max-width: 768px) {
+    /* Общие стили */
     body {
-        padding-top: 90px; /* Уменьшаем отступ под уменьшенное меню */
+        padding-top: 70px;
     }
 
-    /* Верхняя панель - мобильная версия */
+    /* -------------------------------------------------------------------------- Верхняя панель */
+    /* Верхняя панель */
     .header {
         height: 40px;
         padding: 0 10px;
     }
 
+    /* -------------------------------------------------------------------------- Логотип */
+    /* Логотип */
     .logo img {
-        height: 15px; /* Уменьшаем логотип */
+        height: 20px;
     }
 
-    /* Кнопка "гамбургер" для меню */
-    .menu-toggle {
-        display: block;
-        width: 25px;
-        height: 30px;
-        background: none;
-        border: none;
-        position: relative;
-        cursor: pointer;
-        z-index: 1001;
-    }
-
-    .menu-toggle span {
-        display: block;
-        position: absolute;
-        height: 3px;
-        width: 100%;
-        background: #fff;
-        left: 0;
-        transition: all 0.3s ease;
-    }
-
-    .menu-toggle span:nth-child(1) {
-        top: 5px;
-    }
-
-    .menu-toggle span:nth-child(2) {
-        top: 13px;
-    }
-
-    .menu-toggle span:nth-child(3) {
-        top: 21px;
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg);
-        top: 13px;
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg);
-        top: 13px;
-    }
-
-    /* Основное меню - скрыто по умолчанию */
+    /* -------------------------------------------------------------------------- Бургер-меню */
+    /* Бургер-меню */
     .menu {
-        position: fixed;
-        top: 60px;
-        right: -100%;
-        width: 70%;
-        height: calc(100vh - 60px);
-        background: #1a1a1a;
-        flex-direction: column;
-        padding: 20px 0;
-        transition: right 0.3s ease;
-        z-index: 1000;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .menu.active {
-        right: 0;
+        position: relative;
     }
 
     .menu ul {
+        position: fixed;
+        top: 42px;
+        right: -100%;
+        width: 50%;
+        height: calc(30vh - 90px);
+        background-color: #1a1a1a;
         flex-direction: column;
-        gap: 15px;
-        padding: 0 20px;
+        justify-content: flex-start;
+        padding-top: 20px;
+        transition: right 0.3s ease;
+        z-index: 999;
+    }
+
+    .menu.active ul {
+        right: 0;
     }
 
     .menu a {
-        padding: 10px;
-        display: block;
+        padding: 5px 10px;
+        font-size: 15px;
+        width: 100%;
+        text-align: center;
     }
 
-    /* Адаптация контента */
+    .burger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .burger-line {
+        width: 100%;
+        height: 3px;
+        background-color: #e0e0e0;
+        transition: all 0.3s ease;
+    }
+
+    .burger-btn.active .burger-line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .burger-btn.active .burger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger-btn.active .burger-line:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* -------------------------------------------------------------------------- Основная область контента */
+    /* Основная область контента */
     .content {
-        padding: 10px;
+        padding: 0 10px;
+        min-height: calc(100vh - 50px);
     }
 
-    /* Адаптация плашек (уменьшаем количество в ряду) */
-    .drv-grid,
-    .cmddrv-grid,
-    .news-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 10px;
-    }
-
-    /* Календарь - 1 колонка */
+    /* -------------------------------------------------------------------------- "Результаты" */
+    /* Результаты */
     .standings-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
     }
 
-    .drivers-standings {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .constructors-standings {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
+    .drivers-standings,
+    .constructors-standings,
     .sprint-standings {
         grid-column: 1;
-        grid-row: 3;
     }
 
-    /* Модальные окна - адаптация */
+    .drivers-columns,
+    .sprint-columns {
+        flex-direction: column;
+        gap: 1px;
+    }
+
+    /* -------------------------------------------------------------------------- Модальные окна */
+    /* Модальные окна */
+    .modal-content,
+    .modal-content-termin,
+    .cmd-modal-content,
     .drv-modal-content,
-    .cmddrv-modal-content,
     .news-modal-content {
-        width: 95%;
+        width: 90%;
         max-width: none;
     }
 
-    .drv-modal-header,
-    .news-modal-content {
+    .modal-content {
         flex-direction: column;
     }
 
-    .drv-modal-photo,
-    .news-modal-image {
+    .modal-image {
+        align-self: center;
+    }
+
+    .modal-info {
         width: 100%;
-        height: auto;
-        margin-bottom: 15px;
+        padding: 15px;
     }
 
-    /* Терминология - адаптация */
-    .terms-grid {
-        grid-template-columns: 1fr;
+    .drv-modal-header {
+        flex-direction: column;
     }
 
+    .drv-modal-photo {
+        height: 100%;
+        width: 250px;
+        align-self: center;
+            
+    }
+
+    /* -------------------------------------------------------------------------- Кнопка прокрутки вверх */
     /* Кнопка прокрутки вверх */
     .scroll-top {
         width: 35px;
         height: 30px;
-        font-size: 16px;
+        font-size: 20px;
         bottom: 10px;
         right: 10px;
-    }
-
-    /* Подиум в модальных окнах */
-    .podium-container {
-        height: 180px;
-        gap: 5px;
-    }
-
-    .podium-place {
-        width: 30%;
-        height: auto%;
-    }
-
-    .podium-step {
-        width: 100px;
-        border-radius: 0 5px px 0;
-    }
-    
-    .driver-podium {
-        width: 100px;
-        align-items: center;
-    }
-    
-    .name-podium {
-        font-size: 15px;
-    }
-
-    .first-place .podium-step {
-        height: 30px;
-    }
-
-    .second-place .podium-step {
-        height: 25px;
-    }
-
-    .third-place .podium-step {
-        height: 20px;
-    }
-
-    .driver-info {
-        flex: 1;
-        border-radius: 0 5px 5px 0;
-        text-align: left;
-        padding: 5px 10px;
-    }
-
-    /* Статистика пилотов - 2 колонки */
-    .drv-stats {
-        grid-template-columns: repeat(2, 1fr);
     }
 }
