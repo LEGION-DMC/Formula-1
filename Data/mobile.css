@@ -90,21 +90,86 @@
 
     /* -------------------------------------------------------------------------- "Результаты" */
     /* Результаты */
+    /* Результаты */
     .standings-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
     .drivers-standings,
     .constructors-standings,
     .sprint-standings {
-        grid-column: 1;
+        width: 100%;
+        order: 0;
     }
 
+    .drivers-standings {
+        order: 1;
+    }
+
+    .constructors-standings {
+        order: 0;
+    }
+
+    .sprint-standings {
+        order: 2;
+    }
+    
+    .race-winners {
+        order: 3;
+    }
+    
+    /* Убираем двухколоночное отображение на мобильных */
     .drivers-columns,
     .sprint-columns {
-        flex-direction: column;
-        gap: 1px;
+        display: block;
     }
+
+    /* Улучшаем отображение строк */
+    .driver-row,
+    .constructor-row,
+    .sprint-row {
+        padding: 8px;
+        margin-bottom: 6px;
+    }
+
+    /* Уменьшаем размеры элементов для мобильных */
+    .team-logo {
+        width: 20px;
+        height: 15px;
+    }
+
+    .flag {
+        width: 18px;
+        height: 13px;
+    }
+
+    /* Заголовки таблиц */
+    .standings-grid h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #333;
+    }
+}
+
+/* Дополнительные правки для очень маленьких экранов */
+@media (max-width: 480px) {
+    .standings-grid {
+        gap: 15px;
+    }
+
+    .driver-info,
+    .constructor-info {
+        gap: 5px;
+    }
+
+    .position {
+        min-width: 12px;
+        font-size: 12px;
+    }
+}
 
     /* -------------------------------------------------------------------------- Модальные окна */
     /* Модальные окна */
