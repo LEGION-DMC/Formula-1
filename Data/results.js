@@ -19,15 +19,13 @@ const driversStandings = [
     { position: 18, name: "Оливер Берман", country: "gb", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d", points: 8},
     { position: 19, name: "Пьер Гасли", country: "fr", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c", points: 20},
     { position: 20, name: "Франко Колапинто", country: "ar", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c", points: 0},
-
-	{ position: 00, name: "Лиам Лоусон", country: "nz", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: -3},
 ];
 
 const constructorsStandings = [
     { position: 1, team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
     { position: 2, team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f"},
     { position: 3, team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
-    { position: 4, team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
+    { position: 4, team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: -3},
     { position: 5, team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
     { position: 6, team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17"},
     { position: 7, team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 3},
@@ -68,6 +66,14 @@ const raceWinners = [
 
 function calculateTeamPoints() {
   const teamPoints = {};
+  const teamAdditionalPoints = {};
+
+  // Собираем дополнительные очки для команд
+  constructorsStandings.forEach(team => {
+    if (team.points) {
+      teamAdditionalPoints[team.team] = team.points;
+    }
+  });
 
   // Суммируем очки всех пилотов команды
   driversStandings.forEach(driver => {
@@ -79,7 +85,9 @@ function calculateTeamPoints() {
 
   // Обновляем массив constructorsStandings
   constructorsStandings.forEach(team => {
-    team.points = teamPoints[team.team] || 0;
+    const basePoints = teamPoints[team.team] || 0;
+    const additionalPoints = teamAdditionalPoints[team.team] || 0;
+    team.points = basePoints + additionalPoints;
   });
 
   // Сортируем команды по очкам
@@ -90,6 +98,8 @@ function calculateTeamPoints() {
     team.position = index + 1;
   });
 }
+
+// Вызываем расчёт очков при загрузке
 calculateTeamPoints();
 
 function renderResults() {
@@ -289,6 +299,7 @@ if (window.location.hash === '#results') {
     renderResults();
 
 }
+
 
 
 
