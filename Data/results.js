@@ -19,12 +19,9 @@ const driversStandings = [
     { position: 18, name: "Оливер Берман", country: "gb", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d", points: 8},
     { position: 19, name: "Пьер Гасли", country: "fr", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c", points: 20},
     { position: 20, name: "Франко Колапинто", country: "ar", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c", points: 0},
-];
 
-const dopdrvStandings = [
-	{ position: 00, name: "Юки Цунода", country: "jp", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 3},
-	{ position: 00, name: "Лиам Лоусон", country: "nz", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: 0},
-	{ position: 00, name: "Джек Дуэн", country: "gb", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#ddebdd", points: 0},
+	{ position: 00, name: "Юки Цунода", country: "jp", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: +3},
+	{ position: 00, name: "Лиам Лоусон", country: "nz", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: -0},
 ];
 
 const constructorsStandings = [
@@ -110,7 +107,6 @@ function renderResults() {
     `;
 
     renderDriversStandings();
-	renderDopDrvStanding();
     renderConstructorsStandings();
     renderSprintStandings();
 	renderRaceWinners();
@@ -294,6 +290,7 @@ if (window.location.hash === '#results') {
     renderResults();
 
 }
+
 
 
 
