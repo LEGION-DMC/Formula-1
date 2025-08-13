@@ -1,11 +1,11 @@
 const driversStandings = [
     { position: 1, name: "Оскар Пиастри", country: "au", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109", points: 284},
     { position: 2, name: "Ландо Норрис", country: "gb", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109", points: 275},
-    { position: 3, name: "Шарль Леклер", country: "mc", team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f", points: 187},
+    { position: 3, name: "Шарль Леклер", country: "mc", team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f", points: 151},
     { position: 4, name: "Льюис Хэмильтон", country: "gb", team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f", points: 109},
     { position: 5, name: "Джордж Рассел", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272", points: 172},
     { position: 6, name: "Кими Антонелли", country: "it", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272", points: 64},
-    { position: 7, name: "Макс Ферстаппен", country: "nl", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: 185},
+    { position: 7, name: "Макс Ферстаппен", country: "nl", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: 187},
     { position: 8, name: "Юки Цунода", country: "jp", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: 10},
     { position: 9, name: "Карлос Сайнс", country: "es", team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc", points: 16},
     { position: 10, name: "Александр Албон", country: "th", team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc", points: 54},
@@ -287,3 +287,4 @@ if (window.location.hash === '#results') {
     renderResults();
 
 }
+
