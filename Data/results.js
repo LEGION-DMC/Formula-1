@@ -1,20 +1,20 @@
 const driversStandings = [
-    { position: 1, name: "Оскар Пиастри", country: "au", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109", points: 266},
-    { position: 2, name: "Ландо Норрис", country: "gb", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109", points: 250},
-    { position: 3, name: "Шарль Леклер", country: "mc", team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f", points: 139},
+    { position: 1, name: "Оскар Пиастри", country: "au", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109", points: 284},
+    { position: 2, name: "Ландо Норрис", country: "gb", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109", points: 275},
+    { position: 3, name: "Шарль Леклер", country: "mc", team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f", points: 187},
     { position: 4, name: "Льюис Хэмильтон", country: "gb", team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f", points: 109},
-    { position: 5, name: "Джордж Рассел", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272", points: 157},
-    { position: 6, name: "Кими Антонелли", country: "it", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272", points: 63},
+    { position: 5, name: "Джордж Рассел", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272", points: 172},
+    { position: 6, name: "Кими Антонелли", country: "it", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272", points: 64},
     { position: 7, name: "Макс Ферстаппен", country: "nl", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: 185},
     { position: 8, name: "Юки Цунода", country: "jp", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: 10},
     { position: 9, name: "Карлос Сайнс", country: "es", team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc", points: 16},
     { position: 10, name: "Александр Албон", country: "th", team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc", points: 54},
     { position: 11, name: "Нико Хюлькенберг", country: "de", team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17", points: 37},
-    { position: 12, name: "Габриэл Бортолето", country: "br", team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17", points: 6},
-    { position: 13, name: "Лиам Лоусон", country: "nz", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 16},
+    { position: 12, name: "Габриэл Бортолето", country: "br", team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17", points: 14},
+    { position: 13, name: "Лиам Лоусон", country: "nz", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 20},
     { position: 14, name: "Исаак Хаджар", country: "fr", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 22},
-    { position: 15, name: "Лэнс Стролл", country: "ca", team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00", points: 20},
-    { position: 16, name: "Фернандо Алонсо", country: "es", team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00", points: 16},
+    { position: 15, name: "Лэнс Стролл", country: "ca", team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00", points: 26},
+    { position: 16, name: "Фернандо Алонсо", country: "es", team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00", points: 26},
     { position: 17, name: "Эстебан Окон", country: "fr", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d", points: 27},
     { position: 18, name: "Оливер Берман", country: "gb", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d", points: 8},
     { position: 19, name: "Пьер Гасли", country: "fr", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c", points: 20},
@@ -285,4 +285,5 @@ function highlightTeamDrivers(team) {
 
 if (window.location.hash === '#results') {
     renderResults();
+
 }
