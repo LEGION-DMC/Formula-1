@@ -20,8 +20,7 @@ const driversStandings = [
     { position: 19, name: "Пьер Гасли", country: "fr", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c", points: 20},
     { position: 20, name: "Франко Колапинто", country: "ar", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c", points: 0},
 
-	{ position: 00, name: "Юки Цунода", country: "jp", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: +3},
-	{ position: 00, name: "Лиам Лоусон", country: "nz", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: -0},
+	{ position: 00, name: "Лиам Лоусон", country: "nz", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: -3},
 ];
 
 const constructorsStandings = [
@@ -31,7 +30,7 @@ const constructorsStandings = [
     { position: 4, team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
     { position: 5, team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
     { position: 6, team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17"},
-    { position: 7, team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd"},
+    { position: 7, team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 3},
     { position: 8, team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
     { position: 9, team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { position: 10, team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
@@ -290,6 +289,7 @@ if (window.location.hash === '#results') {
     renderResults();
 
 }
+
 
 
 
