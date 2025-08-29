@@ -189,7 +189,7 @@ const futureTeams = [
                  engine: "Ferrari",
                  drivers: [
 					{number: "77", name: "Валттери Боттас", country: "fi", state: "Финляндия"},
-					{number: "0", name: "Неизвестно", country: "un", state: "Неизвестно"}
+					{number: "11", name: "Серхио Перес", country: "mx", state: "Мексика"}
 				],
 				color: "#1a4d8c"
 			}
@@ -303,4 +303,5 @@ function openTeamModal(team) {
 
 if (window.location.hash === '#teams') {
     renderTeams();
+
 }
