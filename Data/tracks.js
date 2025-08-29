@@ -1,3 +1,102 @@
+const nextYearCalendar = [
+    { name: "Гран-при Австралии",
+        date: "2025-03-16",
+        country: "au"
+    },
+    { name: "Гран-при Китая",
+        date: "2025-03-23",
+        country: "cn"
+    },
+    { name: "Гран-при Японии",
+        date: "2025-04-06",
+        country: "jp"
+    },
+    { name: "Гран-при Бахрейна",
+        date: "2025-04-13",
+        country: "bh"
+    },
+    { name: "Гран-при Саудовской Аравии",
+        date: "2025-04-20",
+        country: "sa"
+    },
+    { name: "Гран-при Майами",
+        date: "2025-05-04",
+        country: "us"
+    },
+    { name: "Гран-при Эмилии Романьи",
+        date: "2025-05-18",
+        country: "ca"
+    },
+    { name: "Гран-при Монако",
+        date: "2025-05-25",
+        country: "mc"
+    },
+    { name: "Гран-при Барселоны-Каталонии",
+        date: "2025-06-01",
+        country: "es"
+    },
+    { name: "Гран-при Канады",
+        date: "2025-06-15",
+        country: "at"
+    },
+	{ name: "Гран-при Австрии",
+        date: "2025-06-29",
+        country: "at"
+    },
+    { name: "Гран-при Великобритании",
+        date: "2025-07-06",
+        country: "gb"
+    },
+    { name: "Гран-при Бельгии",
+        date: "2025-07-27",
+        country: "be"
+    },
+    { name: "Гран-при Венгрии",
+        date: "2025-08-03",
+        country: "hu"
+    },
+    { name: "Гран-при Нидерландов",
+        date: "2025-08-31",
+        country: "nl"
+    },
+    { name: "Гран-при Италии",
+        date: "2025-09-07",
+        country: "it"
+    },
+    { name: "Гран-при Азербайджана",
+        date: "2025-09-21",
+        country: "az"
+    },
+    { name: "Гран-при Сингапура",
+        date: "2025-10-05",
+        country: "sg"
+    },
+    { name: "Гран-при США",
+        date: "2025-10-20",
+        country: "us"
+    },
+    { name: "Гран-при Мехико",
+        date: "2025-10-27",
+        country: "mx"
+    },
+    { name: "Гран-при Сан-Паулу",
+        date: "2025-11-10",
+        country: "br"
+    },
+    { name: "Гран-при Лас-Вегаса",
+        date: "2025-11-22",
+        country: "us"
+    },
+    { name: "Гран-при Катара",
+        date: "2025-12-01",
+        country: "qa"
+    },
+    { name: "Гран-при Абу-Даби",
+        date: "2025-12-07",
+        country: "ae"
+    }
+];
+
 const tracksData = {
     "albert-park": {
         "id": "t1",
@@ -534,138 +633,16 @@ const tracksData = {
         "recordingLink": ""
     }
 };
-const nextYearCalendar = [
-    {
-        name: "Гран-при Австралии",
-        date: "2026-03-08",
-        country: "au"
-    },
-    {
-        name: "Гран-при Китая",
-        date: "2026-03-15",
-        country: "cn"
-    },
-    {
-        name: "Гран-при Японии",
-        date: "2026-03-29",
-        country: "jp"
-    },
-    {
-        name: "Гран-при Бахрейна",
-        date: "2026-04-12",
-        country: "bh"
-    },
-    {
-        name: "Гран-при Саудовской Аравии",
-        date: "2026-04-19",
-        country: "sa"
-    },
-    {
-        name: "Гран-при Майами",
-        date: "2026-05-03",
-        country: "us"
-    },
-    {
-        name: "Гран-при Канады",
-        date: "2026-05-24",
-        country: "ca"
-    },
-    {
-        name: "Гран-при Монако",
-        date: "2026-06-07",
-        country: "mc"
-    },
-    {
-        name: "Гран-при Барселоны-Каталонии",
-        date: "2026-06-14",
-        country: "es"
-    },
-    {
-        name: "Гран-при Австрии",
-        date: "2026-06-28",
-        country: "at"
-    },
-    {
-        name: "Гран-при Великобритании",
-        date: "2026-07-05",
-        country: "gb"
-    },
-    {
-        name: "Гран-при Бельгии",
-        date: "2026-07-19",
-        country: "be"
-    },
-    {
-        name: "Гран-при Венгрии",
-        date: "2026-07-26",
-        country: "hu"
-    },
-    {
-        name: "Гран-при Нидерландов",
-        date: "2026-08-23",
-        country: "nl"
-    },
-    {
-        name: "Гран-при Италии",
-        date: "2026-09-06",
-        country: "it"
-    },
-    {
-        name: "Гран-при Испании",
-        date: "2026-09-13",
-        country: "es"
-    },
-    {
-        name: "Гран-при Азербайджана",
-        date: "2026-09-26",
-        country: "az"
-    },
-    {
-        name: "Гран-при Сингапура",
-        date: "2026-10-11",
-        country: "sg"
-    },
-    {
-        name: "Гран-при США",
-        date: "2026-10-25",
-        country: "us"
-    },
-    {
-        name: "Гран-при Мехико",
-        date: "2026-11-01",
-        country: "mx"
-    },
-    {
-        name: "Гран-при Сан-Паулу",
-        date: "2026-11-08",
-        country: "br"
-    },
-    {
-        name: "Гран-при Лас-Вегаса",
-        date: "2026-11-21",
-        country: "us"
-    },
-    {
-        name: "Гран-при Катара",
-        date: "2026-11-29",
-        country: "qa"
-    },
-    {
-        name: "Гран-при Абу-Даби",
-        date: "2026-12-06",
-        country: "ae"
-    }
-];
 
 function renderCalendar() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <div class="calendar-container" id="calendarContainer">
-            <div class="calendar-grid" id="calendarGrid"></div>
             <div class="next-year-calendar">
-                <h3>Календарь сезона 2026</h3>
+                <h3>Календарь сезона 2025</h3>
                 <div class="next-year-events" id="nextYearEvents"></div>
             </div>
+			<div class="calendar-grid" id="calendarGrid"></div>
         </div>
     `;
 
@@ -766,7 +743,7 @@ function renderCalendar() {
         calendarGrid.appendChild(trackCard);
     });
 
-    // Рендерим календарь на следующий год
+    // Рендерим календарь текущего год
     nextYearCalendar.forEach(event => {
         const eventElement = document.createElement('div');
         eventElement.className = 'next-year-event';
@@ -786,7 +763,6 @@ function renderCalendar() {
     scrollToCurrent();
 }
 
-// Форматирование даты для следующего года (только день и месяц)
 function formatShortDate(dateStr) {
     const options = { day: 'numeric', month: 'short' };
     return new Date(dateStr).toLocaleDateString('ru-RU', options);
@@ -957,28 +933,5 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
-
-/* 		Трасса 2026
-		"madrid": {
-        "id": "t24",
-        "name": "Гран-при Мадрида",
-        "logo": "Madrid.svg",
-        "miniLogo": "Madrid-m.svg",
-		"country": "es",
-		"state": "Испания",
-        "location": "Мадрид, Испания",
-        "trackName": "МадРинг",
-        "length": "5 474 км",
-        "laps": 20,
-        "turns": 22,
-        "drsZones": 2,
-        "direction": "по часовой стрелки",
-        "lapRecord": " ",
-        "date": "2026-09-13 21:00",
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
-        "streamLink": "",
-        "recordingLink": ""
+ngLink": ""
     }
-*/
