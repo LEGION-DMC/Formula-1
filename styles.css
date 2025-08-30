@@ -1400,12 +1400,20 @@ h1, h2, h3, h4, h5, h6 {
     padding: 20px;
 }
 
+#mainPage h2 {
+    color: #e53935;
+    font-family: 'Font1', sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
 /* Плашки Гран-при */
 .main-gp-container {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
@@ -1413,7 +1421,7 @@ h1, h2, h3, h4, h5, h6 {
     background: #1e1e1e;
     border-radius: 10px;
     padding: 15px;
-    width: 280px;
+    width: 400px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -1445,31 +1453,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-gp-header h3 {
+    font-family: 'Font1', sans-serif;
     color: #e53935;
     font-size: 16px;
     margin: 0;
 }
 
 .main-gp-status {
-    font-size: 12px;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-weight: bold;
+    font-family: 'Font2';
+    font-size: 8px;
+    padding: 3px 3px;
+    border-radius: 4px;
 }
 
 .main-gp-card.past .main-gp-status {
-    background: #555;
-    color: #ccc;
+    background: gray;
+    color: white;
 }
 
 .main-gp-card.today .main-gp-status {
-    background: #FFC107;
-    color: #000;
+    background: green;
+    color: white;
 }
 
 .main-gp-card.upcoming .main-gp-status {
-    background: #4CAF50;
-    color: #000;
+    background: yellow;
+    color: black;
 }
 
 .main-gp-image {
@@ -1487,18 +1496,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-gp-date {
+    font-family: 'Font2', sans-serif;
     color: #e53935;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 .main-gp-track {
+    font-family: 'Font1', sans-serif;
     color: #fff;
     font-weight: bold;
     margin-bottom: 3px;
 }
 
 .main-gp-location {
+    font-family: 'Font3', sans-serif;
     color: #aaa;
 }
 
@@ -1542,10 +1554,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-standing-position {
+    font-family: 'Font3', sans-serif;
     width: 30px;
     height: 30px;
-    background: #e53935;
-    color: white;
+    background: yellow;
+    color: black;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1555,10 +1568,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-standing-item.first .main-standing-position {
-    background: #ff6b6b;
+    background: yellow;
 }
 
 .main-standing-info {
+    font-family: 'Font3', sans-serif;
     flex: 1;
     display: flex;
     align-items: center;
@@ -1566,8 +1580,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-standing-flag {
-    width: 20px;
-    height: 15px;
+    width: 30px;
+    height: 25px;
     border-radius: 2px;
 }
 
@@ -1577,14 +1591,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-standing-team-logo {
-    width: 25px;
-    height: 20px;
+    width: 30px;
+    height: 25px;
     object-fit: contain;
 }
 
 .main-standing-points {
+    font-family: 'Font1', sans-serif;
     color: #e53935;
     font-weight: bold;
     font-size: 16px;
-    margin-left: 15px;
 }
