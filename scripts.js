@@ -173,11 +173,9 @@ function renderMainDrivers() {
                 <div class="main-standing-info">
                     <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" class="main-standing-flag">
                     <span class="main-standing-name">${driver.name}</span>
+					<img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="main-standing-team-logo">
                 </div>
-                <div class="main-standing-points">${driver.points}</div>
-                <div class="main-standing-team">
-                    <img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="main-standing-team-logo">
-                </div>
+				<div class="main-standing-points">${driver.points}</div>
             </div>
         `;
     });
@@ -275,3 +273,4 @@ document.querySelectorAll('.menu a').forEach(link => {
         menu.classList.remove('active');
     });
 });
+
