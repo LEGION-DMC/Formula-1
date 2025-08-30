@@ -1,101 +1,124 @@
 const nextYearCalendar = [
     { name: "Гран-при Австралии",
         date: "2025-03-16",
-        country: "au"
+        country: "au",
+		grandPrixId: "t1"
     },
     { name: "Гран-при Китая",
         date: "2025-03-23",
-        country: "cn"
+        country: "cn",
+		grandPrixId: "t2"
     },
     { name: "Гран-при Японии",
         date: "2025-04-06",
-        country: "jp"
+        country: "jp",
+		grandPrixId: "t3"
     },
     { name: "Гран-при Бахрейна",
         date: "2025-04-13",
-        country: "bh"
+        country: "bh",
+		grandPrixId: "t4"
     },
     { name: "Гран-при Саудовской Аравии",
         date: "2025-04-20",
-        country: "sa"
+        country: "sa",
+		grandPrixId: "t5"
     },
     { name: "Гран-при Майами",
         date: "2025-05-04",
-        country: "us"
+        country: "us",
+		grandPrixId: "t6"
     },
     { name: "Гран-при Эмилии Романьи",
         date: "2025-05-18",
-        country: "ca"
+        country: "ca",
+		grandPrixId: "t7"
     },
     { name: "Гран-при Монако",
         date: "2025-05-25",
-        country: "mc"
+        country: "mc",
+		grandPrixId: "t8"
     },
     { name: "Гран-при Барселоны-Каталонии",
         date: "2025-06-01",
-        country: "es"
+        country: "es",
+		grandPrixId: "t9"
     },
     { name: "Гран-при Канады",
         date: "2025-06-15",
-        country: "at"
+        country: "at",
+		grandPrixId: "t10"
     },
 	{ name: "Гран-при Австрии",
         date: "2025-06-29",
-        country: "at"
+        country: "at",
+		grandPrixId: "t11"
     },
     { name: "Гран-при Великобритании",
         date: "2025-07-06",
-        country: "gb"
+        country: "gb",
+		grandPrixId: "t12"
     },
     { name: "Гран-при Бельгии",
         date: "2025-07-27",
-        country: "be"
+        country: "be",
+		grandPrixId: "t13"
     },
     { name: "Гран-при Венгрии",
         date: "2025-08-03",
-        country: "hu"
+        country: "hu",
+		grandPrixId: "t14"
     },
     { name: "Гран-при Нидерландов",
         date: "2025-08-31",
-        country: "nl"
+        country: "nl",
+		grandPrixId: "t15"
     },
     { name: "Гран-при Италии",
         date: "2025-09-07",
-        country: "it"
+        country: "it",
+		grandPrixId: "t16"
     },
     { name: "Гран-при Азербайджана",
         date: "2025-09-21",
-        country: "az"
+        country: "az",
+		grandPrixId: "t17"
     },
     { name: "Гран-при Сингапура",
         date: "2025-10-05",
-        country: "sg"
+        country: "sg",
+		grandPrixId: "t18"
     },
     { name: "Гран-при США",
         date: "2025-10-20",
-        country: "us"
+        country: "us",
+		grandPrixId: "t19"
     },
     { name: "Гран-при Мехико",
         date: "2025-10-27",
-        country: "mx"
+        country: "mx",
+		grandPrixId: "t20"
     },
     { name: "Гран-при Сан-Паулу",
         date: "2025-11-10",
-        country: "br"
+        country: "br",
+		grandPrixId: "t21"
     },
     { name: "Гран-при Лас-Вегаса",
         date: "2025-11-22",
-        country: "us"
+        country: "us",
+		grandPrixId: "t22"
     },
     { name: "Гран-при Катара",
         date: "2025-12-01",
-        country: "qa"
+        country: "qa",
+		grandPrixId: "t23"
     },
     { name: "Гран-при Абу-Даби",
         date: "2025-12-07",
-        country: "ae"
-    }
-];
+        country: "ae",
+		grandPrixId: "t24"
+    }];
 
 const tracksData = {
     "albert-park": {
@@ -631,8 +654,7 @@ const tracksData = {
         "podium3": "---",
         "streamLink": "",
         "recordingLink": ""
-    }
-};
+    }};
 
 function renderCalendar() {
     const content = document.getElementById('content');
@@ -642,7 +664,7 @@ function renderCalendar() {
                 <h3>Календарь сезона 2025</h3>
                 <div class="next-year-events" id="nextYearEvents"></div>
             </div>
-			<div class="calendar-grid" id="calendarGrid"></div>
+            <div class="calendar-grid" id="calendarGrid"></div>
         </div>
     `;
 
@@ -660,7 +682,8 @@ function renderCalendar() {
         trackCard.className = 'track-card';
         trackCard.setAttribute('data-track', track.id);
         trackCard.setAttribute('data-date', track.date);
-        
+        trackCard.setAttribute('data-gp', track.id);
+		
         const currentDate = new Date();
         const raceDate = new Date(track.date);
         const isFutureRace = raceDate > currentDate;
@@ -743,24 +766,91 @@ function renderCalendar() {
         calendarGrid.appendChild(trackCard);
     });
 
-    // Рендерим календарь текущего год
-    nextYearCalendar.forEach(event => {
-        const eventElement = document.createElement('div');
-        eventElement.className = 'next-year-event';
-        eventElement.innerHTML = `
-            <div class="next-year-date">${formatShortDate(event.date)}</div>
-            <div class="next-year-name">
-                <img src="Images/Flags/${event.country}.svg" alt="flag" class="next-year-flag">
-                ${event.name}
-            </div>
-        `;
-        nextYearEvents.appendChild(eventElement);
-    });
+    // Рендерим календарь текущего года с обработчиками кликов
+    renderNextYearCalendar();
 
     // Инициализация таймеров
     initCountdowns();
     // Прокрутка к текущему событию
     scrollToCurrent();
+}
+
+function renderNextYearCalendar() {
+    const nextYearEvents = document.getElementById('nextYearEvents');
+    if (!nextYearEvents) return;
+    
+    const sortedEvents = [...nextYearCalendar].sort((a, b) => 
+        new Date(a.date) - new Date(b.date)
+    );
+    
+    const columns = 4;
+    const eventsPerColumn = Math.ceil(sortedEvents.length / columns);
+    
+    let html = '<div class="next-year-columns">';
+    
+    for (let i = 0; i < columns; i++) {
+        html += '<div class="next-year-column">';
+        
+        const columnEvents = sortedEvents.slice(i * eventsPerColumn, (i + 1) * eventsPerColumn);
+        
+        columnEvents.forEach(event => {
+            html += `
+                <div class="next-year-event" data-gp="${event.grandPrixId}">
+                    <div class="next-year-date">${formatShortDate(event.date)}</div>
+                    <div class="next-year-name">
+                        <img src="Images/Flags/${event.country}.svg" alt="flag" class="next-year-flag">
+                        ${event.name}
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+    }
+    
+    html += '</div>';
+    nextYearEvents.innerHTML = html;
+    
+    // Добавляем обработчики кликов
+    addCalendarEventListeners();
+}
+
+function addCalendarEventListeners() {
+    const calendarEvents = document.querySelectorAll('.next-year-event');
+    
+    calendarEvents.forEach(event => {
+        event.addEventListener('click', (e) => {
+            const gpId = event.getAttribute('data-gp');
+            scrollToGrandPrix(gpId);
+        });
+    });
+}
+
+function scrollToGrandPrix(grandPrixId) {
+    console.log('Scrolling to GP:', grandPrixId); // Для отладки
+    
+    // Находим плашку Гран-при
+    const gpCard = document.querySelector(`.track-card[data-gp="${grandPrixId}"]`);
+    
+    if (gpCard) {
+        console.log('Found GP card:', gpCard); // Для отладки
+        
+        // Плавный скролл к элементу
+        gpCard.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+        
+        // Добавляем подсветку
+        gpCard.classList.add('highlight');
+        
+        // Убираем подсветку через 2 секунды
+        setTimeout(() => {
+            gpCard.classList.remove('highlight');
+        }, 2000);
+    } else {
+        console.log('GP card not found for ID:', grandPrixId); // Для отладки
+    }
 }
 
 function formatShortDate(dateStr) {
