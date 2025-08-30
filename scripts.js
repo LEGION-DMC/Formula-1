@@ -37,7 +37,8 @@ if (window.location.hash === '' || window.location.hash === '#main') {
 function renderMainPage() {
     const content = document.getElementById('content');
     content.innerHTML = `
-        <div id="mainPage">
+		<div id="mainPage">
+		<h2>Гран-При зезона 2025</h2>
             <div class="main-gp-cards" id="mainGpCards"></div>
             <div class="main-standings">
                 <div class="main-drivers" id="mainDrivers"></div>
@@ -59,39 +60,27 @@ function renderMainGPCards() {
         new Date(a.date) - new Date(b.date)
     );
     
-    // Находим индексы прошедшего, текущего/ближайшего и следующего ГП
-    let pastGP = null;
+    // Находим текущий/ближайший ГП
     let currentGP = null;
-    let nextGP = null;
     
     for (let i = 0; i < allGPs.length; i++) {
         const gpDate = new Date(allGPs[i].date);
         
-        if (gpDate < now) {
-            pastGP = allGPs[i];
-        } else if (gpDate >= now) {
-            if (!currentGP) {
-                currentGP = allGPs[i];
-                if (i + 1 < allGPs.length) {
-                    nextGP = allGPs[i + 1];
-                }
-            }
+        if (gpDate >= now) {
+            currentGP = allGPs[i];
+            break;
         }
     }
     
-    // Если нет текущего ГП (сезон завершён), показываем последние три
-    if (!currentGP && allGPs.length >= 3) {
-        pastGP = allGPs[allGPs.length - 3];
-        currentGP = allGPs[allGPs.length - 2];
-        nextGP = allGPs[allGPs.length - 1];
+    // Если нет текущего ГП (сезон завершён), показываем последний
+    if (!currentGP && allGPs.length > 0) {
+        currentGP = allGPs[allGPs.length - 1];
     }
-    
-    const gpsToShow = [pastGP, currentGP, nextGP].filter(gp => gp !== null);
     
     let html = '<div class="main-gp-container">';
     
-    gpsToShow.forEach((gp, index) => {
-        const gpDate = new Date(gp.date);
+    if (currentGP) {
+        const gpDate = new Date(currentGP.date);
         const isPast = gpDate < now;
         const isToday = gpDate.toDateString() === now.toDateString();
         
@@ -105,25 +94,60 @@ function renderMainGPCards() {
         }
         
         html += `
-            <div class="main-gp-card ${isPast ? 'past' : isToday ? 'today' : 'upcoming'}">
+            <div class="main-gp-card ${isPast ? 'past' : isToday ? 'today' : 'upcoming'}" data-gp-id="${currentGP.id}">
                 <div class="main-gp-header">
-                    <h3>${gp.name}</h3>
+                    <h3>${currentGP.name}</h3>
                     <span class="main-gp-status">${status}</span>
                 </div>
                 <div class="main-gp-image">
-                    <img src="Images/Tracks/${gp.miniLogo}" alt="${gp.trackName}">
+                    <img src="Images/Tracks/${currentGP.miniLogo}" alt="${currentGP.trackName}">
                 </div>
                 <div class="main-gp-info">
-                    <div class="main-gp-date">${formatDate(gp.date)}</div>
-                    <div class="main-gp-track">${gp.trackName}</div>
-                    <div class="main-gp-location">${gp.location}</div>
+                    <div class="main-gp-date">${formatDate(currentGP.date)}</div>
+                    <div class="main-gp-track">${currentGP.trackName}</div>
+                    <div class="main-gp-location">${currentGP.location}</div>
                 </div>
             </div>
         `;
-    });
+    } else {
+        html += `
+            <div class="main-gp-card">
+                <div class="main-gp-header">
+                    <h3>Сезон завершён</h3>
+                </div>
+                <div class="main-gp-info">
+                    <p>Следующий сезон скоро!</p>
+                </div>
+            </div>
+        `;
+    }
     
     html += '</div>';
     container.innerHTML = html;
+    
+    // Добавляем обработчик клика
+    addMainGPCardListener();
+}
+
+function addMainGPCardListener() {
+    const gpCard = document.querySelector('.main-gp-card');
+    if (gpCard) {
+        gpCard.style.cursor = 'pointer';
+        gpCard.addEventListener('click', () => {
+            // Переходим на вкладку календаря
+            window.location.hash = 'calendar';
+            loadTabContent('calendar');
+            
+            // Прокручиваем к соответствующему Гран-при
+            const gpId = gpCard.getAttribute('data-gp-id');
+            if (gpId) {
+                // Небольшая задержка для загрузки календаря
+                setTimeout(() => {
+                    scrollToGrandPrix(gpId);
+                }, 300);
+            }
+        });
+    }
 }
 
 function renderMainStandings() {
@@ -135,10 +159,10 @@ function renderMainDrivers() {
     const container = document.getElementById('mainDrivers');
     const topDrivers = [...driversStandings]
         .sort((a, b) => b.points - a.points)
-        .slice(0, 3);
+        .slice(0, 1);
     
     let html = `
-        <h2>Топ пилоты</h2>
+        <h2>Лидер личного зачёта пилотов</h2>
         <div class="main-standings-list">
     `;
     
@@ -166,10 +190,10 @@ function renderMainConstructors() {
     const container = document.getElementById('mainConstructors');
     const topTeams = [...constructorsStandings]
         .sort((a, b) => b.points - a.points)
-        .slice(0, 3);
+        .slice(0, 1);
     
     let html = `
-        <h2>Топ команды</h2>
+        <h2>Лидер кубка конструктора команд</h2>
         <div class="main-standings-list">
     `;
     
