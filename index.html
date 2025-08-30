@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formula 1</title>
 	
-	<!-- Favicon -->
     <link rel="icon" href="Images/favicon.png" type="image/png" sizes="50x50">
 	
-    <!-- Подключаем стили -->
     <link rel="stylesheet" href="styles.css">
 	<link rel="stylesheet" href="Data/mobile.css" media="(max-width: 768px)">
 	
-    <!-- Подключаем шрифты -->
     <style>
         @font-face {
             font-family: 'Font1';
@@ -30,9 +27,9 @@
 	
 </head>
 <body>
-    <!-- Верхняя фиксированная панель -->
+
     <header class="header">
-        <!-- Логотип с анимацией -->
+
         <div class="logo">
             <a href="#" id="logoLink">
                 <img src="Images/logo.png" alt="F1">
@@ -43,7 +40,7 @@
 			<span class="burger-line"></span>
 			<span class="burger-line"></span>
 		</div>
-        <!-- Меню с вкладками -->
+
         <nav class="menu">
             <ul>
                 <li><a href="#" data-tab="teams">Команды</a></li>
@@ -55,18 +52,10 @@
         </nav>
     </header>
 
-    <!-- Основная область данных -->
-    <main class="content" id="content">
-        <div id="mainPage">
-			<h1>Formula 1</h1>
-			<p>Чемпионат Formula 1 2025</p>
-		</div>
-    </main>
+	<main class="content" id="content"></main>
 
-    <!-- Кнопка прокрутки вверх -->
     <button class="scroll-top" id="scrollTop">^</button>
 
-    <!-- Подключаем скрипты -->
     <script src="scripts.js"></script>
     <script src="Data/teams.js"></script>
     <script src="Data/drivers.js"></script>
@@ -76,5 +65,4 @@
 </body>
 
 </html>
-
 
