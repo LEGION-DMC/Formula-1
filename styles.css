@@ -1393,3 +1393,198 @@ h1, h2, h3, h4, h5, h6 {
 .news-close-modal {
     display: none;
 }
+
+/* -------------------------------------------------------------------------- "Главная страница" */
+/* Главная страница */
+#mainPage {
+    padding: 20px;
+}
+
+/* Плашки Гран-при */
+.main-gp-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.main-gp-card {
+    background: #1e1e1e;
+    border-radius: 10px;
+    padding: 15px;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.main-gp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(229, 57, 53, 0.3);
+}
+
+.main-gp-card.past {
+    border-left: 4px solid #555;
+    opacity: 0.8;
+}
+
+.main-gp-card.today {
+    border-left: 4px solid #FFC107;
+    animation: pulse 2s infinite;
+}
+
+.main-gp-card.upcoming {
+    border-left: 4px solid #4CAF50;
+}
+
+.main-gp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.main-gp-header h3 {
+    color: #e53935;
+    font-size: 16px;
+    margin: 0;
+}
+
+.main-gp-status {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.main-gp-card.past .main-gp-status {
+    background: #555;
+    color: #ccc;
+}
+
+.main-gp-card.today .main-gp-status {
+    background: #FFC107;
+    color: #000;
+}
+
+.main-gp-card.upcoming .main-gp-status {
+    background: #4CAF50;
+    color: #000;
+}
+
+.main-gp-image {
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+.main-gp-image img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.main-gp-info {
+    font-size: 14px;
+}
+
+.main-gp-date {
+    color: #e53935;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.main-gp-track {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.main-gp-location {
+    color: #aaa;
+}
+
+/* Таблицы лидеров */
+.main-standings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.main-standings h2 {
+    color: #e53935;
+    font-family: 'Font1', sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.main-standings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.main-standing-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #252525;
+    border-radius: 6px;
+    transition: transform 0.3s;
+}
+
+.main-standing-item:hover {
+    transform: translateX(5px);
+}
+
+.main-standing-item.first {
+    background: linear-gradient(135deg, #252525 0%, #2a1a1a 100%);
+    border-left: 4px solid #e53935;
+}
+
+.main-standing-position {
+    width: 30px;
+    height: 30px;
+    background: #e53935;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.main-standing-item.first .main-standing-position {
+    background: #ff6b6b;
+}
+
+.main-standing-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-standing-flag {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+.main-standing-name {
+    color: #fff;
+    font-weight: bold;
+}
+
+.main-standing-team-logo {
+    width: 25px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.main-standing-points {
+    color: #e53935;
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 15px;
+}
