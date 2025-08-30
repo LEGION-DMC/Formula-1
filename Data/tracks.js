@@ -933,5 +933,3 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
-ngLink": ""
-    }
