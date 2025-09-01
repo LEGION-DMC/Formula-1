@@ -446,12 +446,12 @@ const tracksData = {
         "turns": 14,
         "drsZones": 2,
         "direction": "против часовой стрелки",
-        "lapRecord": "1:08.885 (Ферстаппен, 2021)",
+        "lapRecord": "1:08.662 (Пиастри, 2025)",
         "date": "2025-08-31 21:00",
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
-        "streamLink": "https://rutube.ru/video/b31f838fed7915301665e0e45eef6100/",
+		"podium1": "Пиастри",
+        "podium2": "Ферстаппен",
+        "podium3": "Хаджар",
+        "streamLink": "",
         "recordingLink": "https://rutube.ru/video/b31f838fed7915301665e0e45eef6100/"
     },
     "monza": {
@@ -1023,3 +1023,4 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
