@@ -354,10 +354,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .winner-info {
-    display: flex;
-    align-items: center;
     gap: 10px;
-    flex: 1;
+    padding-left: 25px;
+    
 }
 
 .grand-prix {
@@ -365,7 +364,6 @@ h1, h2, h3, h4, h5, h6 {
     border-left: 2px solid;
     border-radius: 5px;
     padding-left: 8px;
-    text-align: center;
 }
 
 /* -------------------------------------------------------------------------- "Календарь" */
