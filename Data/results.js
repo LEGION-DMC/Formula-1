@@ -255,8 +255,8 @@ function renderRaceWinners() {
     raceWinners.forEach(race => {
         html += `
             <div class="winner-row" data-team="${race.team}">
-                <span class="position">${race.position}</span>
                 <div class="winner-info">
+				    <span class="position">${race.position}</span>
 					<img src="Images/Flags/${race.country}.svg" alt="${race.country}" class="flag">
                     <span class="winner-name">${race.winner}</span>
                     <img src="Images/Teams/${race.teamLogo}" alt="${race.team}" class="team-logo">
@@ -299,6 +299,7 @@ if (window.location.hash === '#results') {
     renderResults();
 
 }
+
 
 
 
