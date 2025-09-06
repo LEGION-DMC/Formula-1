@@ -1,19 +1,25 @@
+// Обработчик DOM
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, есть ли хэш в URL
+    console.log('DOM fully loaded');
+    
     const hash = window.location.hash;
     
     if (hash === '' || hash === '#main' || hash === '#') {
         renderMainPage();
     } else {
-        // Загружаем соответствующую вкладку
+        // Загрузка вкладки
         const tabName = hash.replace('#', '');
         loadTabContent(tabName);
     }
     
     // Инициализация кнопки прокрутки
     initScrollTop();
+    
+    // Инициализация мобильного меню
+    initBurgerMenu();
 });
 
+// Обработчики кликов для навигационного меню
 document.querySelectorAll('.menu a').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -23,6 +29,7 @@ document.querySelectorAll('.menu a').forEach(link => {
     });
 });
 
+// Обработчик клика на логотип для возврата на главную
 document.querySelector('.logo a').addEventListener('click', (e) => {
     e.preventDefault();
     window.location.hash = 'main';
@@ -30,15 +37,68 @@ document.querySelector('.logo a').addEventListener('click', (e) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-if (window.location.hash === '' || window.location.hash === '#main') {
-    initMainPage();
+// Мобильное меню
+function initBurgerMenu() {
+    const burgerBtn = document.getElementById('burgerBtn');
+    const menu = document.querySelector('.menu');
+    
+    if (burgerBtn && menu) {
+        console.log('Burger menu elements found');
+        
+        burgerBtn.addEventListener('click', () => {
+            console.log('Burger button clicked');
+            burgerBtn.classList.toggle('active');
+            menu.classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике на пункт
+        document.querySelectorAll('.menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) { // Только для мобильных
+                    burgerBtn.classList.remove('active');
+                    menu.classList.remove('active');
+                }
+            });
+        });
+    } else {
+        console.log('Burger menu elements NOT found:', {burgerBtn, menu}); // Отладочное сообщение
+    }
 }
 
+// Кнопка прокрутки вверх
+function initScrollTop() {
+    const scrollTopBtn = document.getElementById('scrollTop');
+    
+    if (scrollTopBtn) {
+        console.log('Scroll button found');
+        
+        // Обработчик скролла для показа/скрытия кнопки
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // Обработчик клика для прокрутки вверх
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    } else {
+        console.log('Scroll button NOT found');
+    }
+}
+
+// Рендеринг главной страницы
 function renderMainPage() {
     const content = document.getElementById('content');
     content.innerHTML = `
-		<div id="mainPage">
-		<h2>Гран-При зезона 2025</h2>
+        <div id="mainPage">
+            <h2>Гран-При сезона 2025</h2>
             <div class="main-gp-cards" id="mainGpCards"></div>
             <div class="main-standings">
                 <div class="main-drivers" id="mainDrivers"></div>
@@ -51,16 +111,17 @@ function renderMainPage() {
     renderMainStandings();
 }
 
+// Карточка Гран-При
 function renderMainGPCards() {
     const container = document.getElementById('mainGpCards');
     const now = new Date();
     
-    // Получаем все гран-при и сортируем по дате
+    // Загрузка всех гран-при
     const allGPs = Object.values(tracksData).sort((a, b) => 
         new Date(a.date) - new Date(b.date)
     );
     
-    // Находим текущий/ближайший ГП
+    // Загрузка текущиего/ближайшего Гран-При
     let currentGP = null;
     
     for (let i = 0; i < allGPs.length; i++) {
@@ -72,7 +133,6 @@ function renderMainGPCards() {
         }
     }
     
-    // Если нет текущего ГП (сезон завершён), показываем последний
     if (!currentGP && allGPs.length > 0) {
         currentGP = allGPs[allGPs.length - 1];
     }
@@ -83,6 +143,7 @@ function renderMainGPCards() {
         const gpDate = new Date(currentGP.date);
         const isPast = gpDate < now;
         const isToday = gpDate.toDateString() === now.toDateString();
+        const isFuture = gpDate > now;
         
         let status = '';
         if (isToday) {
@@ -91,6 +152,21 @@ function renderMainGPCards() {
             status = 'Завершён';
         } else {
             status = 'Предстоящий';
+        }
+        
+        // Определение таймера
+        let timerHtml = '';
+        if (isFuture || isToday) {
+            timerHtml = `
+                <div class="main-gp-timer">
+                    <div class="main-timer" data-date="${currentGP.date}">
+                        <span class="main-days">00</span>д 
+                        <span class="main-hours">00</span>ч 
+                        <span class="main-minutes">00</span>м 
+                        <span class="main-seconds">00</span>с
+                    </div>
+                </div>
+            `;
         }
         
         html += `
@@ -102,6 +178,7 @@ function renderMainGPCards() {
                 <div class="main-gp-image">
                     <img src="Images/Tracks/${currentGP.miniLogo}" alt="${currentGP.trackName}">
                 </div>
+                ${timerHtml}
                 <div class="main-gp-info">
                     <div class="main-gp-date">${formatDate(currentGP.date)}</div>
                     <div class="main-gp-track">${currentGP.trackName}</div>
@@ -125,23 +202,73 @@ function renderMainGPCards() {
     html += '</div>';
     container.innerHTML = html;
     
-    // Добавляем обработчик клика
+    // Инициализация таймера
+    initMainTimer();
     addMainGPCardListener();
 }
 
+// Инициализация таймера
+function initMainTimer() {
+    const timer = document.querySelector('.main-timer');
+    if (timer) {
+        updateMainTimer(timer);
+        // Обновляем таймер каждую секунду
+        setInterval(() => updateMainTimer(timer), 1000);
+    }
+}
+
+// Таймер
+function updateMainTimer(timer) {
+    const targetDate = new Date(timer.dataset.date);
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+        timer.innerHTML = '<span class="race-started">Гонка началась!</span>';
+        
+        // Статус
+        const card = timer.closest('.main-gp-card');
+        if (card) {
+            const status = card.querySelector('.main-gp-status');
+            if (status) {
+                status.textContent = 'Идёт сейчас';
+            }
+        }
+        return;
+    }
+
+    // Рассчёт оставшегося времени
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    // Обновление таймера
+    if (days > 0) {
+        timer.querySelector('.main-days').textContent = days.toString().padStart(2, '0');
+    } else {
+        // Скрываем дни, если их нет
+        timer.querySelector('.main-days').textContent = '';
+        const daysLabel = timer.parentElement.querySelector('span:contains("д")');
+        if (daysLabel) daysLabel.style.display = 'none';
+    }
+    
+    timer.querySelector('.main-hours').textContent = hours.toString().padStart(2, '0');
+    timer.querySelector('.main-minutes').textContent = mins.toString().padStart(2, '0');
+    timer.querySelector('.main-seconds').textContent = secs.toString().padStart(2, '0');
+}
+
+// Обработчик клика на карточку Гран-При
 function addMainGPCardListener() {
     const gpCard = document.querySelector('.main-gp-card');
     if (gpCard) {
         gpCard.style.cursor = 'pointer';
         gpCard.addEventListener('click', () => {
-            // Переходим на вкладку календаря
+            // Переход на вкладку календаря
             window.location.hash = 'calendar';
             loadTabContent('calendar');
             
-            // Прокручиваем к соответствующему Гран-при
-            const gpId = gpCard.getAttribute('data-gp-id');
             if (gpId) {
-                // Небольшая задержка для загрузки календаря
                 setTimeout(() => {
                     scrollToGrandPrix(gpId);
                 }, 300);
@@ -150,11 +277,13 @@ function addMainGPCardListener() {
     }
 }
 
+// Рендеринг таблиц лидеров
 function renderMainStandings() {
     renderMainDrivers();
     renderMainConstructors();
 }
 
+// Рендеринг лидера пилотов
 function renderMainDrivers() {
     const container = document.getElementById('mainDrivers');
     const topDrivers = [...driversStandings]
@@ -173,9 +302,9 @@ function renderMainDrivers() {
                 <div class="main-standing-info">
                     <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" class="main-standing-flag">
                     <span class="main-standing-name">${driver.name}</span>
-					<img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="main-standing-team-logo">
+                    <img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="main-standing-team-logo">
                 </div>
-				<div class="main-standing-points">${driver.points}</div>
+                <div class="main-standing-points">${driver.points}</div>
             </div>
         `;
     });
@@ -184,6 +313,7 @@ function renderMainDrivers() {
     container.innerHTML = html;
 }
 
+// Рендеринг лидера команд
 function renderMainConstructors() {
     const container = document.getElementById('mainConstructors');
     const topTeams = [...constructorsStandings]
@@ -212,64 +342,30 @@ function renderMainConstructors() {
     container.innerHTML = html;
 }
 
+// Загрузка данных вкладок
 function loadTabContent(tabName) {
     const content = document.getElementById('content');
-    
-    // Здесь будет загрузка данных из .js файлов
     switch (tabName) {
-		case 'teams':
-			renderTeams();
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-			break;
-		case 'drivers':
-			renderDrivers();
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-			break;
+        case 'teams':
+            renderTeams();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            break;
+        case 'drivers':
+            renderDrivers();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            break;
         case 'calendar':
-			renderCalendar();
-			break;
+            renderCalendar();
+            break;
         case 'results':
             renderResults();
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-			break;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            break;
         case 'glossary':
-			renderGlossary(glossaryTerms);
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-			break;
-		
+            renderGlossary(glossaryTerms);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            break;
+        default:
+            renderMainPage();
     }
 }
-
-const scrollTopBtn = document.getElementById('scrollTop');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        scrollTopBtn.classList.add('visible');
-    } else {
-        scrollTopBtn.classList.remove('visible');
-    }
-});
-
-scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-const burgerBtn = document.getElementById('burgerBtn');
-const menu = document.querySelector('.menu');
-
-if (burgerBtn) {
-    burgerBtn.addEventListener('click', () => {
-        burgerBtn.classList.toggle('active');
-        menu.classList.toggle('active');
-    });
-}
-
-document.querySelectorAll('.menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        burgerBtn.classList.remove('active');
-        menu.classList.remove('active');
-    });
-});
