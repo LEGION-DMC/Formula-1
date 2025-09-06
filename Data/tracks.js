@@ -1,3 +1,4 @@
+// Календарь 
 const nextYearCalendar = [
     { name: "Гран-при Австралии",
         date: "2025-03-16",
@@ -120,6 +121,7 @@ const nextYearCalendar = [
 		grandPrixId: "t24"
     }];
 
+// Карточки Гран-при
 const tracksData = {
     "albert-park": {
         "id": "t1",
@@ -136,7 +138,7 @@ const tracksData = {
         "drsZones": 4,
         "direction": "по часовой стрелке",
         "lapRecord": "1.15.096 (Норрис, 2025)",
-        "date": "2025-03-16",
+        "date": "2025-03-16 20:55",
 		"podium1": "Норрис",
         "podium2": "Ферстаппен",
         "podium3": "Рассел",
@@ -158,7 +160,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:30.641 (Пиастри, 2025)",
-        "date": "2025-03-23",
+        "date": "2025-03-23 20:55",
 		"hasSprint": true,
 		"podium1": "Пиастри",
         "podium2": "Норрис",
@@ -181,7 +183,7 @@ const tracksData = {
         "drsZones": 1,
         "direction": "по часовой стрелке",
         "lapRecord": "1:26.983 (Ферстаппен, 2025)",
-        "date": "2025-04-06",
+        "date": "2025-04-06 20:55",
 		"podium1": "Ферстаппен",
         "podium2": "Норрис",
         "podium3": "Пиастри",
@@ -203,7 +205,7 @@ const tracksData = {
         "drsZones": 3,
         "direction": "по часовой стрелке",
         "lapRecord": "1:27.264 (Хэмильтон, 2020)",
-        "date": "2025-04-13",
+        "date": "2025-04-13 20:55",
 		"podium1": "Пиастри",
         "podium2": "Рассел",
         "podium3": "Норрис",
@@ -225,7 +227,7 @@ const tracksData = {
         "drsZones": 3,
         "direction": "против часовой стрелки",
         "lapRecord": "1:27.294 (Ферстаппен, 2025)",
-        "date": "2025-04-20",
+        "date": "2025-04-20 20:55",
 		"podium1": "Пиастри",
         "podium2": "Ферстаппен",
         "podium3": "Леклер",
@@ -247,7 +249,7 @@ const tracksData = {
         "drsZones": 3,
         "direction": "по часовой стрелке",
         "lapRecord": "1:26.204 (Ферстаппен, 2025)",
-        "date": "2025-05-04",
+        "date": "2025-05-04 20:55",
 		"hasSprint": true,
 		"podium1": "Пиастри",
         "podium2": "Норрис",
@@ -270,7 +272,7 @@ const tracksData = {
         "drsZones": 1,
         "direction": "против часовой стрелки",
         "lapRecord": "1:15.484 (Хемильтон, 2020)",
-        "date": "2025-05-18",
+        "date": "2025-05-18 20:55",
 		"podium1": "Ферстаппен",
         "podium2": "Норрис",
         "podium3": "Пиастри",
@@ -292,7 +294,7 @@ const tracksData = {
         "drsZones": 1,
         "direction": "по часовой стрелке",
         "lapRecord": "1:09.954 (Норрис, 2025)",
-        "date": "2025-05-25",
+        "date": "2025-05-25 20:55",
 		"podium1": "Норрис",
         "podium2": "Леклер",
         "podium3": "Пиастри",
@@ -314,7 +316,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:15.743 (Пиастри, 2025)",
-        "date": "2025-06-01",
+        "date": "2025-06-01 20:55",
 		"podium1": "Пиастри",
         "podium2": "Норрис",
         "podium3": "Леклер",
@@ -336,7 +338,7 @@ const tracksData = {
         "drsZones": 3,
         "direction": "против часовой стрелки",
         "lapRecord": "1:10.240 (Феттель, 2019)",
-        "date": "2025-06-15",
+        "date": "2025-06-15 20:55",
 		"podium1": "Рассел",
         "podium2": "Ферстаппен",
         "podium3": "Антонелли",
@@ -358,7 +360,7 @@ const tracksData = {
         "drsZones": 3,
         "direction": "по часовой стрелке",
         "lapRecord": "1:02.939 (Боттас, 2020)",
-        "date": "2025-06-29",
+        "date": "2025-06-29 20:55",
 		"podium1": "Норис",
         "podium2": "Пиастри",
         "podium3": "Леклер",
@@ -380,7 +382,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1:24.303 (Хэмильтон, 2020)",
-        "date": "2025-07-06",
+        "date": "2025-07-06 20:55",
 		"podium1": "Норис",
         "podium2": "Пиастри",
         "podium3": "Хюлькенберг",
@@ -402,7 +404,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:40.510 (Пиастри, 2025)",
-        "date": "2025-07-27",
+        "date": "2025-07-27 20:55",
 		"hasSprint": true,
 		"podium1": "Пиастри",
         "podium2": "Норрис",
@@ -425,7 +427,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:13.447 (Хэмильтон, 2020)",
-        "date": "2025-08-03 21:00",
+        "date": "2025-08-03 20:55",
 		"podium1": "Пиастри",
         "podium2": "Норрис",
         "podium3": "Рассел",
@@ -447,7 +449,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1:08.662 (Пиастри, 2025)",
-        "date": "2025-08-31 21:00",
+        "date": "2025-08-31 20:55",
 		"podium1": "Пиастри",
         "podium2": "Ферстаппен",
         "podium3": "Хаджар",
@@ -469,7 +471,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:18.887 (Хемильтон, 2020)",
-        "date": "2025-09-07 21:00",
+        "date": "2025-09-07 21:55",
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
@@ -656,6 +658,7 @@ const tracksData = {
         "recordingLink": ""
     }};
 
+// Рендеринг карточек
 function renderCalendar() {
     const content = document.getElementById('content');
     content.innerHTML = `
@@ -683,7 +686,7 @@ function renderCalendar() {
         trackCard.setAttribute('data-track', track.id);
         trackCard.setAttribute('data-date', track.date);
         trackCard.setAttribute('data-gp', track.id);
-		
+        
         const currentDate = new Date();
         const raceDate = new Date(track.date);
         const isFutureRace = raceDate > currentDate;
@@ -702,28 +705,53 @@ function renderCalendar() {
             trackCard.classList.add('completed');
         }
 
-        // Таймер или кнопка
+        // Таймер или кнопка (с учетом точного времени)
         let timeElement = '';
         if (isToday) {
-            timeElement = track.streamLink ? 
-                `<a href="${track.streamLink}" class="action-btn stream">Трансляция</a>` :
-                '<div class="action-btn no-stream">Нет трансляции</div>';
+            // Проверяем, наступило ли уже время начала гонки
+            const raceTime = new Date(track.date);
+            const hasRaceStarted = currentDate >= raceTime;
+            
+            if (hasRaceStarted && track.streamLink) {
+                // Гонка началась и есть ссылка на трансляцию
+                timeElement = `<a href="${track.streamLink}" class="action-btn stream">Трансляция</a>`;
+            } else if (hasRaceStarted) {
+                // Гонка началась, но нет трансляции
+                timeElement = '<div class="action-btn no-stream">Нет трансляции</div>';
+            } else {
+                // Гонка сегодня, но еще не началась - показываем таймер
+                timeElement = `
+                    <div class="countdown">
+                        <span>До старта:</span>
+                        <div class="timer" data-date="${track.date}">
+                            <span class="hours">00</span>ч 
+                            <span class="minutes">00</span>м 
+                            <span class="seconds">00</span>с
+                        </div>
+                    </div>
+                `;
+            }
         } else if (isFutureRace) {
+            // Будущая гонка - полный таймер
             timeElement = `
                 <div class="countdown">
                     <span>До гонки:</span>
                     <div class="timer" data-date="${track.date}">
-                        <span class="days">00</span>д <span class="hours">00</span>ч 
-                        <span class="minutes">00</span>м <span class="seconds">00</span>с
+                        <span class="days">00</span>д 
+                        <span class="hours">00</span>ч 
+                        <span class="minutes">00</span>м 
+                        <span class="seconds">00</span>с
                     </div>
                 </div>
             `;
         } else {
+            // Прошедшая гонка - кнопка записи
             timeElement = track.recordingLink ? 
                 `<a href="${track.recordingLink}" class="action-btn recording">Запись</a>` :
                 '<div class="action-btn no-recording">Нет записи</div>';
         }
 
+        // HTML структура карточки гран-при
         trackCard.innerHTML = `
             <div class="track-image">
                 <img src="Images/Tracks/${track.miniLogo}" alt="${track.trackName}">
@@ -757,6 +785,7 @@ function renderCalendar() {
             </div>
         `;
 
+        // Обработчик клика для открытия модального окна
         trackCard.addEventListener('click', (e) => {
             if (!e.target.closest('.action-btn') && !e.target.closest('.sprint-badge')) {
                 openModal(track);
@@ -775,6 +804,7 @@ function renderCalendar() {
     scrollToCurrent();
 }
 
+// Рендеринг календаря
 function renderNextYearCalendar() {
     const nextYearEvents = document.getElementById('nextYearEvents');
     if (!nextYearEvents) return;
@@ -815,6 +845,7 @@ function renderNextYearCalendar() {
     addCalendarEventListeners();
 }
 
+// Обработчик выбора события календаря
 function addCalendarEventListeners() {
     const calendarEvents = document.querySelectorAll('.next-year-event');
     
@@ -826,15 +857,12 @@ function addCalendarEventListeners() {
     });
 }
 
+// Прокрутка до выбраной карточки
 function scrollToGrandPrix(grandPrixId) {
-    console.log('Scrolling to GP:', grandPrixId); // Для отладки
-    
     // Находим плашку Гран-при
     const gpCard = document.querySelector(`.track-card[data-gp="${grandPrixId}"]`);
     
     if (gpCard) {
-        console.log('Found GP card:', gpCard); // Для отладки
-        
         // Плавный скролл к элементу
         gpCard.scrollIntoView({
             behavior: 'smooth',
@@ -848,21 +876,28 @@ function scrollToGrandPrix(grandPrixId) {
         setTimeout(() => {
             gpCard.classList.remove('highlight');
         }, 2000);
-    } else {
-        console.log('GP card not found for ID:', grandPrixId); // Для отладки
     }
 }
 
+// Форматирование даты для календаря
 function formatShortDate(dateStr) {
     const options = { day: 'numeric', month: 'short' };
     return new Date(dateStr).toLocaleDateString('ru-RU', options);
 }
 
+// Форматирования даты для Карточек
 function formatDate(dateStr) {
-    const options = { day: 'numeric', month: 'long' };
-    return new Date(dateStr).toLocaleDateString('ru-RU', options);
+    const date = new Date(dateStr);
+    const options = { 
+        day: 'numeric', 
+        month: 'long',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    return date.toLocaleDateString('ru-RU', options);
 }
 
+// Рендеринг таймера
 function initCountdowns() {
     document.querySelectorAll('.timer').forEach(timer => {
         updateTimer(timer);
@@ -870,27 +905,59 @@ function initCountdowns() {
     });
 }
 
+// Таймер
 function updateTimer(timer) {
     const targetDate = new Date(timer.dataset.date);
     const now = new Date();
     const diff = targetDate - now;
 
     if (diff <= 0) {
-        timer.innerHTML = '<span class="race-started">Гонка началась!</span>';
+        // Время наступило - обновляем интерфейс
+        timer.innerHTML = '<span class="race-started">Событие началось!</span>';
+        
+        // Находим родительскую карточку и обновляем кнопку
+        const card = timer.closest('.track-card');
+        if (card) {
+            const trackId = card.getAttribute('data-track');
+            const track = tracksData[Object.keys(tracksData).find(key => tracksData[key].id === trackId)];
+            
+            if (track && track.streamLink) {
+                const footer = card.querySelector('.track-footer');
+                const timeElement = footer.querySelector('.countdown');
+                if (timeElement) {
+                    timeElement.outerHTML = `<a href="${track.streamLink}" class="action-btn stream">Трансляция</a>`;
+                }
+            }
+        }
         return;
     }
 
+    // Рассчитываем оставшееся время
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-    timer.querySelector('.days').textContent = days.toString().padStart(2, '0');
+    // Обновляем отображение таймера
+    if (days > 0) {
+        timer.querySelector('.days').textContent = days.toString().padStart(2, '0');
+        timer.querySelector('.hours').textContent = hours.toString().padStart(2, '0');
+    } else {
+        // Если дней нет, скрываем блок с днями
+        const daysElement = timer.querySelector('.days');
+        if (daysElement) {
+            daysElement.textContent = '';
+            const daysLabel = timer.querySelector('span:contains("д")');
+            if (daysLabel) daysLabel.style.display = 'none';
+        }
+    }
+    
     timer.querySelector('.hours').textContent = hours.toString().padStart(2, '0');
     timer.querySelector('.minutes').textContent = mins.toString().padStart(2, '0');
     timer.querySelector('.seconds').textContent = secs.toString().padStart(2, '0');
 }
 
+// Авто прокрутка к текущему/ближайшему событию
 function scrollToCurrent() {
     const cards = document.querySelectorAll('.track-card');
     const now = new Date();
@@ -923,9 +990,12 @@ function scrollToCurrent() {
     }
 }
 
+// Модальное окно
 function openModal(track) {
     const modal = document.createElement('div');
     modal.className = 'modal';
+    
+    // HTML структура модального окна
     modal.innerHTML = `
         <div class="modal-content">
             <div class="modal-image">
@@ -1012,7 +1082,7 @@ function openModal(track) {
     
     document.body.appendChild(modal);
     
-    // Закрытие при клике вне окна
+    // Обработчики закрытия модального окна
     modal.addEventListener('click', (e) => {
         if (e.target === modal || e.target.classList.contains('close-modal')) {
             modal.remove();
@@ -1020,7 +1090,7 @@ function openModal(track) {
     });
 }
 
+// Инициализация при загрузке вкладки
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
-
