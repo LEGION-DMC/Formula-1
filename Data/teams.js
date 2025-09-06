@@ -1,3 +1,4 @@
+// Команды 
 const currentTeams = [
 			{ 	 shortName: "McLaren",
 					 id: "modal1",
@@ -160,67 +161,31 @@ const currentTeams = [
 				color: "#a1459c"
 			},
 ];
-const futureTeams = [
-			{    shortName: "Audi",
-                 id: "modal0",
-                 fullName: "Revolut Audi F1 Team",
-                 logo: "Audi.png",
-                 miniLogo: "Audi-m.png",
-                 base: "Нойбург-ан-дер-Донау, Германия",
-                 director: "Маттиа Бинотто",
-                 debut: "2026",
-                 car: "TBD",
-                 engine: "Audi",
-                 drivers: [
-					{number: "27", name: "Нико Хюлькенберг", country: "de", state: "Германия"},
-					{number: "5", name: "Габриэл Бортолето", country: "br", state: "Бразилия"}
-                 ],
-                 color: "#c90808"
-			},
-			{    shortName: "Cadillac",
-                 id: "modal11",
-                 fullName: "Cadillac Formula 1 Team",
-                 logo: "Cadillac.png",
-                 miniLogo: "Cadillac-m.png",
-                 base: "Индиана, США",
-                 director: "Грэм Лоудон",
-                 debut: "2026",
-                 car: "TBD",
-                 engine: "Ferrari",
-                 drivers: [
-					{number: "77", name: "Валттери Боттас", country: "fi", state: "Финляндия"},
-					{number: "11", name: "Серхио Перес", country: "mx", state: "Мексика"}
-				],
-				color: "#1a4d8c"
-			}
-];
 
+// Рендеринг страницы
 function renderTeams() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <div class="cmd-container">
             <div class="cmd-grid" id="currentTeamsGrid"></div>
-            
-            <div class="cmd-divider-full"></div>
-            
-            <h2 class="cmd-section-title">Новые команды на сезон 2026</h2>
-            <div class="cmd-grid" id="futureTeamsGrid"></div>
         </div>
     `;
 
     renderTeamGrid(currentTeams, 'currentTeamsGrid');
-    renderTeamGrid(futureTeams, 'futureTeamsGrid');
 }
 
+// Карточки команд
 function renderTeamGrid(teams, gridId) {
     const grid = document.getElementById(gridId);
     
+    // Карточка команды
     teams.forEach(team => {
         const teamCard = document.createElement('div');
         teamCard.className = 'cmd-team-card';
         teamCard.style.borderLeftColor = team.color;
         teamCard.setAttribute('data-team', team.id);
 
+        // Структура карточки команды
         teamCard.innerHTML = `
             <div class="cmd-team-logo">
                 <img src="Images/Teams/${team.miniLogo}" alt="${team.shortName}">
@@ -238,14 +203,18 @@ function renderTeamGrid(teams, gridId) {
             </div>
         `;
 
+        // Обработчик клика для открытия модального окна
         teamCard.addEventListener('click', () => openTeamModal(team));
         grid.appendChild(teamCard);
     });
 }
 
+// Модальное окно
 function openTeamModal(team) {
     const modal = document.createElement('div');
     modal.className = 'cmd-modal';
+    
+    // Cтруктура модального окна
     modal.innerHTML = `
         <div class="cmd-modal-content">
             <div class="cmd-modal-logo">
@@ -292,16 +261,17 @@ function openTeamModal(team) {
         <button class="cmd-close-modal">&times;</button>
     `;
     
+    // Добавляем модальное окно в DOM
     document.body.appendChild(modal);
     
-    // Закрытие модального окна
+    // Обработчики закрытия модального окна
     modal.querySelector('.cmd-close-modal').addEventListener('click', () => modal.remove());
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
     });
 }
 
+// Инициализация при загрузке вкладки
 if (window.location.hash === '#teams') {
     renderTeams();
-
 }
