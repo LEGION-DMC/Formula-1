@@ -68,8 +68,8 @@ h1, h2, h3, h4, h5, h6 {
     position: fixed;
     bottom: 10px;
     right: 10px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background-color: #e53935;
     color: white;
     border: none;
@@ -94,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 .content {
     padding: 0 15px;
     min-height: calc(100vh - 70px);
-    margin-top: -15px;
+    margin-top: -20px;
 }
 
 /* -------------------------------------------------------------------------- "Главная страница" */
@@ -193,6 +193,43 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 100%;
 }
 
+/* Таймер */
+.main-gp-timer {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-top: 8px;
+    background: rgba(229, 229, 229, 0.1);
+    border-radius: 5px;
+}
+
+.main-gp-timer span {
+    display: block;
+    font-size: 14px;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.main-timer {
+    font-family: 'Font1', sans-serif;
+    font-size: 16px;
+    color: red;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.main-timer span {
+    display: inline-block;
+    min-width: 25px;
+    text-align: center;
+}
+
+.race-started {
+    color: yellow;
+    font-weight: bold;
+}
+
+/* Информация о Гран-При */
 .main-gp-info {
     font-size: 14px;
 }
@@ -619,7 +656,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 20px;
     object-fit: contain;
 }
-}
 
 .drv-team-name {
     color: #aaa;
@@ -1007,11 +1043,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .action-btn.stream {
-    background: #e53935;
-    color: white;
-}
-
-.action-btn.stream {
     background: transparent;
     border: 1px solid #e53935;
     color: #e53935;
@@ -1103,6 +1134,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-image {
+    border-radius: 10px 0px 0px 10px;
     width: 40%;
     display: flex;
     align-items: center;
@@ -1345,6 +1377,9 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Font1', sans-serif;
     font-size: 20px;
     padding-bottom: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #333;
 }
 
 .drivers-standings {
