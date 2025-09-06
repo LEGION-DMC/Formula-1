@@ -4,27 +4,18 @@
         padding-top: 70px;
     }
 
-    /* -------------------------------------------------------------------------- Верхняя панель */
-    /* Верхняя панель */
+/* -------------------------------------------------------------------------- Верхняя панель */
     .header {
         height: 40px;
         padding: 0 10px;
     }
-    
-    .main-standings {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    }
 
-    /* -------------------------------------------------------------------------- Логотип */
-    /* Логотип */
+/* -------------------------------------------------------------------------- Логотип */
     .logo img {
-        height: 20px;
+        height: 15px;
     }
 
-    /* -------------------------------------------------------------------------- Бургер-меню */
-    /* Бургер-меню */
+/* -------------------------------------------------------------------------- Меню */
     .menu {
         position: relative;
     }
@@ -34,7 +25,7 @@
         top: 42px;
         right: -100%;
         width: 50%;
-        height: calc(30vh - 90px);
+        height: calc(30vh - 130px);
         background-color: #1a1a1a;
         flex-direction: column;
         justify-content: flex-start;
@@ -85,26 +76,72 @@
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    /* -------------------------------------------------------------------------- Основная область контента */
-    /* Основная область контента */
+/* -------------------------------------------------------------------------- Кнопка прокрутки вверх */
+    .scroll-top {
+        width: 25px;
+        height: 25px;
+        font-size: 18px;
+        bottom: 5px;
+        right: 5px;
+    }
+    
+/* -------------------------------------------------------------------------- Область контента */
     .content {
         padding: 0 10px;
         min-height: calc(100vh - 50px);
     }
 
-    /* -------------------------------------------------------------------------- "Результаты" */
-    /* Результаты */
+/* -------------------------------------------------------------------------- Главная страница */
+    .main-standings {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .main-gp-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main-gp-card {
+        width: 100%;
+        max-width: 500px;
+    }
+
+/* -------------------------------------------------------------------------- Команды */
+    .cmd-grid {
+        grid-template-columns: 1fr;
+    }
+
+/* -------------------------------------------------------------------------- Пилоты */
+    .drv-modal-photo {
+        height: 100%;
+        width: 150px;
+    }
+    
+/* -------------------------------------------------------------------------- Календарь */
+    .next-year-columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .next-year-event {
+        padding: 8px;
+    }
+    
+    .next-year-date {
+        min-width: 60px;
+        font-size: 12px;
+    }
+    
+    .next-year-name {
+        font-size: 12px;
+    }  
+    
+/* -------------------------------------------------------------------------- Результаты */
     .standings-grid {
         display: flex;
         flex-direction: column;
         gap: 20px;
-    }
-
-    .drivers-standings,
-    .constructors-standings,
-    .sprint-standings {
-        width: 100%;
-        order: 0;
     }
 
     .drivers-standings {
@@ -123,130 +160,18 @@
         order: 3;
     }
     
-    /* Убираем двухколоночное отображение на мобильных */
     .drivers-columns,
     .sprint-columns {
         display: block;
     }
 
-    /* Улучшаем отображение строк */
-    .driver-row,
-    .constructor-row,
-    .sprint-row {
-        padding: 8px;
-        margin-bottom: 6px;
-    }
-
-    /* Уменьшаем размеры элементов для мобильных */
-    .team-logo {
-        width: 20px;
-        height: 15px;
-    }
-
-    .flag {
-        width: 18px;
-        height: 13px;
-    }
-
-    /* Заголовки таблиц */
     .standings-grid h2 {
-        font-size: 18px;
+        font-size: 16px;
         margin-bottom: 10px;
         padding-bottom: 5px;
         border-bottom: 1px solid #333;
     }
-}
 
-/* Дополнительные правки для очень маленьких экранов */
-@media (max-width: 480px) {
-    .standings-grid {
-        gap: 15px;
-    }
-
-    .driver-info,
-    .constructor-info {
-        gap: 5px;
-    }
-
-    .position {
-        min-width: 12px;
-        font-size: 12px;
-    }
-}
-
-    /* -------------------------------------------------------------------------- Модальные окна */
-    /* Модальные окна */
-    .modal-content,
-    .modal-content-termin,
-    .cmd-modal-content,
-    .drv-modal-content,
-    .news-modal-content {
-        width: 90%;
-        max-width: none;
-    }
-
-    .modal-content {
-        flex-direction: column;
-    }
-
-    .modal-image {
-        align-self: center;
-    }
-
-    .modal-info {
-        width: 100%;
-        padding: 15px;
-    }
-
-    .drv-modal-header {
-        flex-direction: column;
-    }
-
-    .drv-modal-photo {
-        height: 100%;
-        width: 250px;
-        align-self: center;
-            
-    }
-
-    /* -------------------------------------------------------------------------- Кнопка прокрутки вверх */
-    /* Кнопка прокрутки вверх */
-    .scroll-top {
-        width: 35px;
-        height: 30px;
-        font-size: 20px;
-        bottom: 10px;
-        right: 10px;
-    }
-}
-
-/* -------------------------------------------------------------------------- Календарь  */
-@media (max-width: 1024px) {
-    .next-year-columns {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .next-year-columns {
-        grid-template-columns: 1fr;
-    }
-    
-    .next-year-event {
-        padding: 10px;
-    }
-    
-    .next-year-date {
-        min-width: 60px;
-        font-size: 12px;
-    }
-    
-    .next-year-name {
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 768px) {
     .winner-row {
         flex-direction: column;
         padding: 10px;
@@ -276,4 +201,31 @@
         color: #aaa;
     }
 
+/* -------------------------------------------------------------------------- Терминология */
+    
+/* -------------------------------------------------------------------------- Модальные окна */
+    .modal-content,
+    .modal-content-termin,
+    .cmd-modal-content,
+    .drv-modal-content,
+    .news-modal-content {
+        width: 90%;
+        max-width: none;
+    }
+
+    .modal-content {
+        flex-direction: column;
+        height: 425px;
+    }
+
+    .modal-image {
+        align-self: center;
+        border-radius: 0px;    
+        background: none;
+    }
+
+    .modal-info {
+        width: 100%;
+        padding: 15px;
+    }
 }
