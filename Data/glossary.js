@@ -1,3 +1,4 @@
+// Термины
 const glossaryTerms = [
     { title: "Formula 1",
         text: "Чемпионат мира по кольцевым автогонкам.",
@@ -183,8 +184,11 @@ const glossaryTerms = [
         tag: "Флаги", tagColor: "#025257"},
 ];
 
+// Рендеринг страницы
 function renderGlossary(terms) {
     const content = document.getElementById('content');
+    
+    // Структура глоссария
     content.innerHTML = `
         <div class="glossary">
             <div class="search-bar">
@@ -199,43 +203,54 @@ function renderGlossary(terms) {
     const tagsFilter = document.getElementById('tagsFilter');
     const termsGrid = document.getElementById('termsGrid');
 
-    // Собираем все уникальные теги
-    const allTags = ["Все"];
+    // Собировка терминов по тегам
+    const allTags = ["Все"]; // Добавляем опцию "Все" по умолчанию
+    
     terms.forEach(term => {
         if (Array.isArray(term.tags)) {
+            // Обработка нового формата с массивом тегов
             term.tags.forEach(tag => {
                 if (!allTags.includes(tag.name)) allTags.push(tag.name);
             });
         } else if (term.tag && !allTags.includes(term.tag)) {
+            // Обработка старого формата с одним тегом
             allTags.push(term.tag);
         }
     });
 
-    // Отображение тегов для фильтрации
+    // Теги
     tagsFilter.innerHTML = allTags.map(tag => `
         <button class="tag" data-tag="${tag === 'Все' ? '' : tag}">${tag}</button>
     `).join('');
 
-    // Фильтр по тегам
+    // Обработчик для фильтрации по тегам
     document.querySelectorAll('.tag').forEach(tagBtn => {
         tagBtn.addEventListener('click', () => {
+            // Снимаем активность со всех кнопок
             document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+            
+            // Активация тега
             tagBtn.classList.add('active');
+            
+            // Получение тега
             const selectedTag = tagBtn.getAttribute('data-tag');
+            
+            // Фильтруем термины по выбранному тегу
             const filteredTerms = selectedTag ? 
                 terms.filter(term => 
                     (Array.isArray(term.tags) && term.tags.some(t => t.name === selectedTag)) || 
                     (!Array.isArray(term.tags) && term.tag === selectedTag)
                 ) : 
                 terms;
+            
+            // Обновляем сетку с отфильтрованными терминами
             updateTermsGrid(filteredTerms);
         });
     });
 
-    // Отображение терминов
     updateTermsGrid(terms);
 
-    // Поиск по заголовку
+    // Обработчик поиска по заголовкам терминов
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         const filteredTerms = terms.filter(term => 
@@ -244,7 +259,7 @@ function renderGlossary(terms) {
         updateTermsGrid(filteredTerms);
     });
 
-    // Функция обновления сетки терминов
+    // Карточки терминов
     function updateTermsGrid(terms) {
         termsGrid.innerHTML = terms.map(term => {
             // Обработка как старого формата (один тег), так и нового (массив тегов)
@@ -254,18 +269,19 @@ function renderGlossary(terms) {
                 ).join('') :
                 `<span class="term-tag" style="background-color: ${term.tagColor}">${term.tag}</span>`;
             
+            // Структура карточки термина
             return `
                 <div class="term-card" data-title="${term.title}">
                     <h3>${term.title}</h3>
-					<div class="glos-divider"></div>
+                    <div class="glos-divider"></div>
                     <p>${term.text}</p>
-					<div class="glos-divider"></div>
-					<div class="term-tags">${tagsHtml}</div>
+                    <div class="glos-divider"></div>
+                    <div class="term-tags">${tagsHtml}</div>
                 </div>
             `;
         }).join('');
 
-        // Открытие модального окна при клике на карточку
+        // Обработчик для открытия модальных окон
         document.querySelectorAll('.term-card').forEach(card => {
             card.addEventListener('click', () => {
                 const termTitle = card.getAttribute('data-title');
@@ -287,18 +303,21 @@ function renderGlossary(terms) {
             ).join('') :
             `<span class="term-tag" style="background-color: ${term.tagColor}">${term.tag}</span>`;
         
+        // Cтруктура модального окна
         modal.innerHTML = `
             <div class="modal-content-termin">
                 <h3>${term.title}</h3>
-				<div class="glos-divider"></div>
+                <div class="glos-divider"></div>
                 <p>${term.fullText}</p>
-				<div class="glos-divider"></div>
-				<div class="term-tags">${tagsHtml}</div>
+                <div class="glos-divider"></div>
+                <div class="term-tags">${tagsHtml}</div>
             </div>
         `;
+        
+        // Добавляем модальное окно в DOM
         document.body.appendChild(modal);
 
-        // Закрытие при клике вне окна
+        // Обработчик закрытия модального окна по клику вне его
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.remove();
@@ -307,6 +326,7 @@ function renderGlossary(terms) {
     }
 }
 
+// Инициализация при загрузке вкладки
 if (window.location.hash === '#glossary') {
     renderGlossary(glossaryTerms);
 }
