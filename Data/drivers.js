@@ -1,3 +1,4 @@
+// Пилоты 
 const driversData = [
     {   id: "verstappen", 
 		number: 1,
@@ -484,13 +485,18 @@ const driversData = [
     },
 ];
 
+// Переменная для хранения текущих фильтров
+let selectedTeams = [];
+
+// Рендеринг страницы
 function renderDrivers() {
     const content = document.getElementById('content');
     
-    // Получаем уникальные названия команд для фильтра
+    // Получаем названия команд для фильтра
     const uniqueTeams = [...new Set(driversData.map(driver => driver.team))];
     uniqueTeams.sort();
     
+    // Структура фильтров
     content.innerHTML = `
         <div class="drv-container">
             <div class="drv-filter">
@@ -506,16 +512,52 @@ function renderDrivers() {
     const driversGrid = document.getElementById('driversGrid');
     const filterButtons = document.querySelectorAll('.drv-filter-btn');
     
-    // Функция фильтрации пилотов
-    function filterDrivers(team) {
-        const filteredDrivers = team === 'all' 
-            ? driversData 
-            : driversData.filter(driver => driver.team === team);
+    // Множественная фильтрация
+    function filterDrivers(teamFilter) {
+        let filteredDrivers;
         
+        if (teamFilter === 'all') {
+            // Сброс всех фильтров
+            selectedTeams = [];
+            filteredDrivers = driversData;
+        } else {
+            // Фильтрация
+            const teamIndex = selectedTeams.indexOf(teamFilter);
+            if (teamIndex === -1) {
+                selectedTeams.push(teamFilter);
+            } else {
+                selectedTeams.splice(teamIndex, 1);
+            }
+            
+            // Фильтрация пилотов по командам
+            filteredDrivers = selectedTeams.length === 0 
+                ? driversData 
+                : driversData.filter(driver => selectedTeams.includes(driver.team));
+        }
+        
+        // Обновление фильтров
+        updateFilterButtons();
+        
+        // Обновление списка под фильтр
         renderDriversList(filteredDrivers);
     }
     
-    // Функция отрисовки списка пилотов
+    // Обновления состояния фильтров
+    function updateFilterButtons() {
+        filterButtons.forEach(button => {
+            const team = button.dataset.team;
+            
+            if (team === 'all') {
+                // Кнопка "Все" активна только когда нет выбранных фильтров
+                button.classList.toggle('active', selectedTeams.length === 0);
+            } else {
+                // Кнопки команд активны если команда выбрана
+                button.classList.toggle('active', selectedTeams.includes(team));
+            }
+        });
+    }
+    
+    // Карточки пилотов
     function renderDriversList(drivers) {
         driversGrid.innerHTML = '';
         
@@ -526,6 +568,7 @@ function renderDrivers() {
             driverCard.setAttribute('data-driver', driver.id);
             driverCard.setAttribute('data-team', driver.team);
 
+            // Структура карточки пилота
             driverCard.innerHTML = `
                 <div class="drv-photo">
                     <img src="Images/Drivers/${driver.photo}" alt="${driver.name}">
@@ -542,27 +585,28 @@ function renderDrivers() {
                 </div>
             `;
 
+            // Обработчик открытия модального окна
             driverCard.addEventListener('click', () => openDriverModal(driver));
             driversGrid.appendChild(driverCard);
         });
     }
     
-    // Обработчики для кнопок фильтра
+    // Фильтр
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
             filterDrivers(button.dataset.team);
         });
     });
     
-    // Первоначальная загрузка всех пилотов
     renderDriversList(driversData);
 }
 
+// Модальное окно
 function openDriverModal(driver) {
     const modal = document.createElement('div');
     modal.className = 'drv-modal';
+    
+    // Структура модального окна
     modal.innerHTML = `
         <div class="drv-modal-content">
             <div class="drv-modal-header">
@@ -634,15 +678,17 @@ function openDriverModal(driver) {
         <button class="drv-close-modal">&times;</button>
     `;
     
+    // Добавляем модальное окно в DOM
     document.body.appendChild(modal);
     
-    // Закрытие модального окна
+    // Обработчики закрытия модального окна
     modal.querySelector('.drv-close-modal').addEventListener('click', () => modal.remove());
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
     });
 }
 
+// Инициализация при загрузке вкладки
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
