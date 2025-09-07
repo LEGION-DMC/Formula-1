@@ -107,7 +107,31 @@
         width: 100%;
         max-width: 500px;
     }
-
+    
+    .main-gp-container {
+        flex-direction: column;
+    }
+    
+    .tires-card {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 20px;
+    }
+    
+    .dry-tires {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .tire-item {
+        flex: 1;
+        min-width: 60px;
+    }
+    
+    .tire-image {
+        width: 35px;
+        height: 35px;
+    }
 /* -------------------------------------------------------------------------- Команды */
     .cmd-grid {
         grid-template-columns: 1fr;
