@@ -221,34 +221,38 @@ function renderMainGPCards() {
                 </div>
                 <div class="dry-tires">
                     <div class="tire-item">
-                        <img src="Images/Icon/soft.png" alt="Soft" class="tire-image active">
-                        <span class="tire-name">Soft</span>
+                        <img src="Images/Wheels/Hard.png" alt="Soft" class="tire-image active">
+                        <span class="tire-name">C1</span>
                     </div>
                     <div class="tire-item">
-                        <img src="Images/Icon/medium.png" alt="Medium" class="tire-image active">
-                        <span class="tire-name">Medium</span>
+                        <img src="Images/Wheels/Hard.png" alt="Medium" class="tire-image active">
+                        <span class="tire-name">C2</span>
                     </div>
                     <div class="tire-item">
-                        <img src="Images/Icon/hard.png" alt="Hard" class="tire-image active">
-                        <span class="tire-name">Hard</span>
+                        <img src="Images/Wheels/Medium.png" alt="Hard" class="tire-image active">
+                        <span class="tire-name">C3</span>
                     </div>
                     <div class="tire-item">
-                        <img src="Images/Icon/supersoft.png" alt="SuperSoft" class="tire-image inactive">
-                        <span class="tire-name">SuperSoft</span>
+                        <img src="Images/Wheels/Medium.png" alt="SuperSoft" class="tire-image inactive">
+                        <span class="tire-name">C4</span>
                     </div>
                     <div class="tire-item">
-                        <img src="Images/Icon/ultrasoft.png" alt="UltraSoft" class="tire-image inactive">
-                        <span class="tire-name">UltraSoft</span>
+                        <img src="Images/Wheels/Soft.png" alt="UltraSoft" class="tire-image inactive">
+                        <span class="tire-name">C5</span>
+                    </div>
+                    <div class="tire-item">
+                        <img src="Images/Wheels/Soft.png" alt="UltraSoft" class="tire-image inactive">
+                        <span class="tire-name">C6</span>
                     </div>
                 </div>
                 <div class="tires-divider"></div>
                 <div class="wet-tires">
                     <div class="tire-item">
-                        <img src="Images/Icon/intermediate.png" alt="Intermediate" class="tire-image">
+                        <img src="Images/Wheels/Intermediate.png" alt="Intermediate" class="tire-image">
                         <span class="tire-name">Intermediate</span>
                     </div>
                     <div class="tire-item">
-                        <img src="Images/Icon/wet.png" alt="Wet" class="tire-image">
+                        <img src="Images/Wheels/Wet.png" alt="Wet" class="tire-image">
                         <span class="tire-name">Wet</span>
                     </div>
                 </div>
@@ -464,4 +468,5 @@ function loadTabContent(tabName) {
             renderMainPage();
     }
 }
+
 
