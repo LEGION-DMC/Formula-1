@@ -293,6 +293,80 @@ h1, h2, h3, h4, h5, h6 {
     color: #aaa;
 }
 
+/* Плашка составов шин */
+.tires-card {
+    background: #1e1e1e;
+    border-radius: 10px;
+    padding: 15px;
+    width: 400px;
+    text-align: center;
+    border-left: 4px solid #FF9800;
+}
+
+.tires-header h3 {
+    font-family: 'Font1', sans-serif;
+    color: #FF9800;
+    font-size: 16px;
+    margin: 0 0 15px 0;
+}
+
+/* Сухие шины */
+.dry-tires {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+/* Дождевые шины */
+.wet-tires {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.tire-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.tire-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.tire-image.active {
+    filter: brightness(1);
+}
+
+.tire-image.inactive {
+    filter: brightness(0.3);
+    opacity: 0.6;
+}
+
+.tire-name {
+    font-family: 'Font1', sans-serif;
+    font-size: 12px;
+    color: #fff;
+}
+
+.tires-divider {
+    height: 1px;
+    background: #333;
+    margin: 10px 0;
+}
+
+/* Анимация для активных шин */
+.tire-image.active:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(255, 152, 0, 0.5));
+}
+
 /* Таблицы лидеров */
 .main-standings {
     display: grid;
