@@ -475,8 +475,8 @@ const tracksData = {
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
-        "streamLink": "",
-        "recordingLink": ""
+        "streamLink": "https://rutube.ru/video/b1de42c4683da812229733bc90e72ce4/",
+        "recordingLink": "https://rutube.ru/video/b1de42c4683da812229733bc90e72ce4/"
     },
     "baku": {
         "id": "t17",
@@ -1094,3 +1094,4 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
