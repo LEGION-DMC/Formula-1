@@ -471,7 +471,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:18.887 (Хемильтон, 2020)",
-        "date": "2025-09-07 21:55",
+        "date": "2025-09-07 20:55",
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
@@ -1094,4 +1094,5 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
