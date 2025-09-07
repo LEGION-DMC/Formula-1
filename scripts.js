@@ -212,7 +212,6 @@ function initMainTimer() {
     const timer = document.querySelector('.main-timer');
     if (timer) {
         updateMainTimer(timer);
-        // Обновляем таймер каждую секунду
         setInterval(() => updateMainTimer(timer), 1000);
     }
 }
@@ -226,36 +225,34 @@ function updateMainTimer(timer) {
     if (diff <= 0) {
         timer.innerHTML = '<span class="race-started">Гонка началась!</span>';
         
-        // Статус
+        // Обновляем статус на "Идёт сейчас"
         const card = timer.closest('.main-gp-card');
-        if (card) {
+        if (card && card.classList.contains('today')) {
             const status = card.querySelector('.main-gp-status');
             if (status) {
                 status.textContent = 'Идёт сейчас';
+                status.classList.remove('today');
+                status.classList.add('live');
             }
         }
         return;
     }
 
-    // Рассчёт оставшегося времени
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-    // Обновление таймера
-    if (days > 0) {
-        timer.querySelector('.main-days').textContent = days.toString().padStart(2, '0');
-    } else {
-        // Скрываем дни, если их нет
-        timer.querySelector('.main-days').textContent = '';
-        const daysLabel = timer.parentElement.querySelector('span:contains("д")');
-        if (daysLabel) daysLabel.style.display = 'none';
-    }
-    
-    timer.querySelector('.main-hours').textContent = hours.toString().padStart(2, '0');
-    timer.querySelector('.main-minutes').textContent = mins.toString().padStart(2, '0');
-    timer.querySelector('.main-seconds').textContent = secs.toString().padStart(2, '0');
+    // Используем правильные классы для главной страницы
+    const daysElem = timer.querySelector('.main-days');
+    const hoursElem = timer.querySelector('.main-hours');
+    const minsElem = timer.querySelector('.main-minutes');
+    const secsElem = timer.querySelector('.main-seconds');
+
+    if (daysElem) daysElem.textContent = days.toString().padStart(2, '0');
+    if (hoursElem) hoursElem.textContent = hours.toString().padStart(2, '0');
+    if (minsElem) minsElem.textContent = mins.toString().padStart(2, '0');
+    if (secsElem) secsElem.textContent = secs.toString().padStart(2, '0');
 }
 
 // Обработчик клика на карточку Гран-При
