@@ -212,6 +212,48 @@ function renderMainGPCards() {
                 </div>
             </div>
         `;
+
+             // Плашка составов шин
+        html += `
+            <div class="tires-card">
+                <div class="tires-header">
+                    <h3>Состав шин на гонку</h3>
+                </div>
+                <div class="dry-tires">
+                    <div class="tire-item">
+                        <img src="Images/Icon/soft.png" alt="Soft" class="tire-image active">
+                        <span class="tire-name">Soft</span>
+                    </div>
+                    <div class="tire-item">
+                        <img src="Images/Icon/medium.png" alt="Medium" class="tire-image active">
+                        <span class="tire-name">Medium</span>
+                    </div>
+                    <div class="tire-item">
+                        <img src="Images/Icon/hard.png" alt="Hard" class="tire-image active">
+                        <span class="tire-name">Hard</span>
+                    </div>
+                    <div class="tire-item">
+                        <img src="Images/Icon/supersoft.png" alt="SuperSoft" class="tire-image inactive">
+                        <span class="tire-name">SuperSoft</span>
+                    </div>
+                    <div class="tire-item">
+                        <img src="Images/Icon/ultrasoft.png" alt="UltraSoft" class="tire-image inactive">
+                        <span class="tire-name">UltraSoft</span>
+                    </div>
+                </div>
+                <div class="tires-divider"></div>
+                <div class="wet-tires">
+                    <div class="tire-item">
+                        <img src="Images/Icon/intermediate.png" alt="Intermediate" class="tire-image">
+                        <span class="tire-name">Intermediate</span>
+                    </div>
+                    <div class="tire-item">
+                        <img src="Images/Icon/wet.png" alt="Wet" class="tire-image">
+                        <span class="tire-name">Wet</span>
+                    </div>
+                </div>
+            </div>
+        `;
     } else {
         html += `
             <div class="main-gp-card">
@@ -422,3 +464,4 @@ function loadTabContent(tabName) {
             renderMainPage();
     }
 }
+
