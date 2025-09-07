@@ -133,18 +133,8 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 5px 15px rgba(229, 57, 53, 0.3);
 }
 
-.main-gp-card.past {
-    border-left: 4px solid #555;
-    opacity: 0.8;
-}
-
 .main-gp-card.today {
-    border-left: 4px solid #FFC107;
     animation: pulse 2s infinite;
-}
-
-.main-gp-card.upcoming {
-    border-left: 4px solid #4CAF50;
 }
 
 .main-gp-header {
@@ -227,6 +217,56 @@ h1, h2, h3, h4, h5, h6 {
 .race-started {
     color: yellow;
     font-weight: bold;
+}
+
+/* Кнопка трансляции */
+.main-gp-action {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.main-stream-btn {
+    display: inline-block;
+    padding: 8px 10px 5px;
+    background: #e53935;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-family: 'Font1', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(229, 57, 53, 0.3);
+}
+
+.main-stream-btn:hover {
+    background: #c62828;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(229, 57, 53, 0.4);
+}
+
+.main-no-stream {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #555;
+    color: #ccc;
+    border-radius: 8px;
+    font-family: 'Font1', sans-serif;
+    font-size: 14px;
+    cursor: not-allowed;
+}
+
+/* Анимация для статуса "Идёт сейчас" */
+.main-gp-status.live {
+    background: yellow;
+    color: black;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
 }
 
 /* Информация о Гран-При */
