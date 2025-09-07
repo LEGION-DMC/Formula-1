@@ -121,18 +121,21 @@ function renderMainGPCards() {
         new Date(a.date) - new Date(b.date)
     );
     
-    // Загрузка текущиего/ближайшего Гран-При
+    // Находим текущий/ближайший Гран-При с учетом 2-часовой задержки
     let currentGP = null;
     
     for (let i = 0; i < allGPs.length; i++) {
         const gpDate = new Date(allGPs[i].date);
+        const gpEndTime = new Date(gpDate.getTime() + (2 * 60 * 60 * 1000)); // +2 часа
         
-        if (gpDate >= now) {
+        // Показываем гонку если она либо еще не началась, либо закончилась менее 2 часов назад
+        if (now <= gpEndTime) {
             currentGP = allGPs[i];
             break;
         }
     }
     
+    // Если не нашли подходящую гонку, показываем последнюю
     if (!currentGP && allGPs.length > 0) {
         currentGP = allGPs[allGPs.length - 1];
     }
@@ -141,23 +144,38 @@ function renderMainGPCards() {
     
     if (currentGP) {
         const gpDate = new Date(currentGP.date);
-        const isPast = gpDate < now;
+        const gpEndTime = new Date(gpDate.getTime() + (2 * 60 * 60 * 1000)); // +2 часа
+        const isPast = now > gpEndTime; // Учитываем 2 часа после окончания
         const isToday = gpDate.toDateString() === now.toDateString();
-        const isFuture = gpDate > now;
+        const isLive = now >= gpDate && now <= gpEndTime; // Гонка в процессе
         
         let status = '';
-        if (isToday) {
-            status = 'Сегодня';
+        if (isLive) {
+            status = 'Идёт сейчас';
         } else if (isPast) {
             status = 'Завершён';
+        } else if (isToday) {
+            status = 'Сегодня';
         } else {
             status = 'Предстоящий';
         }
         
-        // Определение таймера
-        let timerHtml = '';
-        if (isFuture || isToday) {
-            timerHtml = `
+        // Определяем, показывать ли таймер или кнопку
+        let actionHtml = '';
+        if (isLive) {
+            // Гонка идет - кнопка трансляции
+            actionHtml = currentGP.streamLink ? 
+                `<div class="main-gp-action">
+                    <a href="${currentGP.streamLink}" class="main-stream-btn" target="_blank">
+                        Трансляция
+                    </a>
+                </div>` :
+                `<div class="main-gp-action">
+                    <div class="main-no-stream">Нет Трансляции</div>
+                </div>`;
+        } else if (!isPast) {
+            // Гонка еще не началась - таймер
+            actionHtml = `
                 <div class="main-gp-timer">
                     <div class="main-timer" data-date="${currentGP.date}">
                         <span class="main-days">00</span>д 
@@ -167,18 +185,26 @@ function renderMainGPCards() {
                     </div>
                 </div>
             `;
+        } else {
+            // Гонка завершена более 2 часов назад - сообщение
+            actionHtml = `
+                <div class="main-gp-action">
+                    <div class="main-no-stream">Гонка завершена</div>
+                </div>
+            `;
         }
         
         html += `
-            <div class="main-gp-card ${isPast ? 'past' : isToday ? 'today' : 'upcoming'}" data-gp-id="${currentGP.id}">
+            <div class="main-gp-card ${isLive ? 'live' : isPast ? 'past' : isToday ? 'today' : 'upcoming'}" 
+                 data-gp-id="${currentGP.id}">
                 <div class="main-gp-header">
                     <h3>${currentGP.name}</h3>
-                    <span class="main-gp-status">${status}</span>
+                    <span class="main-gp-status ${isLive ? 'live' : ''}">${status}</span>
                 </div>
                 <div class="main-gp-image">
                     <img src="Images/Tracks/${currentGP.miniLogo}" alt="${currentGP.trackName}">
                 </div>
-                ${timerHtml}
+                ${actionHtml}
                 <div class="main-gp-info">
                     <div class="main-gp-date">${formatDate(currentGP.date)}</div>
                     <div class="main-gp-track">${currentGP.trackName}</div>
@@ -202,8 +228,10 @@ function renderMainGPCards() {
     html += '</div>';
     container.innerHTML = html;
     
-    // Инициализация таймера
+    // Инициализируем таймер, если он есть
     initMainTimer();
+    
+    // Добавляем обработчик клика
     addMainGPCardListener();
 }
 
@@ -220,30 +248,58 @@ function initMainTimer() {
 function updateMainTimer(timer) {
     const targetDate = new Date(timer.dataset.date);
     const now = new Date();
+    const gpEndTime = new Date(targetDate.getTime() + (2 * 60 * 60 * 1000)); // +2 часа
     const diff = targetDate - now;
 
-    if (diff <= 0) {
-        timer.innerHTML = '<span class="race-started">Гонка началась!</span>';
-        
-        // Обновляем статус на "Идёт сейчас"
+    // Если гонка уже началась, но еще не прошло 2 часа
+    if (now >= targetDate && now <= gpEndTime) {
         const card = timer.closest('.main-gp-card');
-        if (card && card.classList.contains('today')) {
-            const status = card.querySelector('.main-gp-status');
-            if (status) {
-                status.textContent = 'Идёт сейчас';
-                status.classList.remove('today');
-                status.classList.add('live');
-            }
+        const gpId = card.getAttribute('data-gp-id');
+        const track = tracksData[Object.keys(tracksData).find(key => tracksData[key].id === gpId)];
+        
+        // Заменяем таймер на кнопку трансляции
+        if (track && track.streamLink) {
+            timer.outerHTML = `
+                <div class="main-gp-action">
+                    <a href="${track.streamLink}" class="main-stream-btn" target="_blank">
+                        📺 Смотреть трансляцию
+                    </a>
+                </div>
+            `;
+        } else {
+            timer.outerHTML = `
+                <div class="main-gp-action">
+                    <div class="main-no-stream">Трансляция недоступна</div>
+                </div>
+            `;
+        }
+        
+        // Обновляем статус
+        const status = card.querySelector('.main-gp-status');
+        if (status) {
+            status.textContent = 'Идёт сейчас';
+            status.classList.add('live');
+            card.classList.add('live');
         }
         return;
     }
+    
+    // Если прошло более 2 часов после гонки
+    if (now > gpEndTime) {
+        timer.outerHTML = `
+            <div class="main-gp-action">
+                <div class="main-no-stream">Гонка завершена</div>
+            </div>
+        `;
+        return;
+    }
 
+    // Обновляем таймер
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-    // Используем правильные классы для главной страницы
     const daysElem = timer.querySelector('.main-days');
     const hoursElem = timer.querySelector('.main-hours');
     const minsElem = timer.querySelector('.main-minutes');
