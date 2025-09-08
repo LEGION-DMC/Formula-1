@@ -470,12 +470,12 @@ const tracksData = {
         "turns": 11,
         "drsZones": 2,
         "direction": "по часовой стрелке",
-        "lapRecord": "1:18.887 (Хемильтон, 2020)",
+        "lapRecord": "1:18.792 (Ферстаппен, 2025)",
         "date": "2025-09-07 20:55",
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
-        "streamLink": "https://rutube.ru/video/b1de42c4683da812229733bc90e72ce4/",
+		"podium1": "Ферстаппен",
+        "podium2": "Норрис",
+        "podium3": "Пиастри",
+        "streamLink": "",
         "recordingLink": "https://rutube.ru/video/b1de42c4683da812229733bc90e72ce4/"
     },
     "baku": {
@@ -1094,5 +1094,6 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
