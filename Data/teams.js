@@ -7,7 +7,7 @@ const currentTeams = [
 					 miniLogo: "McLaren-m.png",
 					 base: "Уокинг, Великобритания",
 					 director: "Андреа Стелла",
-					 foundert: "Фрэнк Уильямс",
+					 foundert: "Брюс Макларен",
 					 debut: "1966",
 					 car: "MCL39",
                  engine: "Mercedes",
@@ -24,6 +24,7 @@ const currentTeams = [
                  miniLogo: "Ferrari-m.png",
                  base: "Маранелло, Италия",
                  director: "Фредерик Вассёр",
+				 foundert: "Энцо Феррари",
 				 debut: "1950",
                  car: "SF-25",
                  engine: "Ferrari",
@@ -40,6 +41,7 @@ const currentTeams = [
                  miniLogo: "Mercedes-m.png",
                  base: "Брэкли, Великобритания",
                  director: "Тото Вольфф",
+			     foundert: "Норберт Хауг",
 				 debut: "2010",
                  car: "W16 E Perfomanc",
                  engine: "Mercedes",
@@ -56,6 +58,7 @@ const currentTeams = [
                  miniLogo: "RedBull-m.png",
                  base: "Милтон-Кинс, Великобритания",
                  director: "Лоран Мекис",
+			     foundert: "Дитрих Матешиц",
 				 debut: "2005",
                  car: "RB21",
                  engine: "Honda RBPT",
@@ -72,6 +75,7 @@ const currentTeams = [
                  miniLogo: "Williams-m.png",
                  base: "Гроу, Оксфордшир, Великобритания",
                  director: "Джеймс Ваулз",
+			     foundert: "Фрэнк Уильямс",
 				 debut: "1975",
                  car: "FW47",
                  engine: "Mercedes",
@@ -88,6 +92,7 @@ const currentTeams = [
                  miniLogo: "Sauber-m.png",
                  base: "Хинвил, Швейцария",
                  director: "Маттиа Бинотто",
+			     foundert: "Петер Заубер",
 				 debut: "1993",
                  car: "C45",
                  engine: "Ferrari",
@@ -104,6 +109,7 @@ const currentTeams = [
                  miniLogo: "RacingBulls-m.png",
                  base: "Фаэнца, Италия",
                  director: "Алан Пермейн",
+			     foundert: "Дитрих Матешиц",
 				 debut: "2006",
                  car: "VCARB02",
                  engine: "Honda RBPT",
@@ -120,6 +126,7 @@ const currentTeams = [
                  miniLogo: "AstonMartin-m.png",
                  base: "Сильверстоун, Великобритания",
                  director: "Энди Коуэлл",
+			     foundert: "Лоуренс Стролл",
 				 debut: "2021",
                  car: "AMR25",
                  engine: "Mercedes",
@@ -136,6 +143,7 @@ const currentTeams = [
                  miniLogo: "Haas-m.png",
                  base: "Каннаполис, Северная Каролина, США",
                  director: "Айо Комацу",
+			     foundert: "Джин Хаас",
 				 debut: "2016",
                  car: "VF-25",
                  engine: "Ferrari",
@@ -152,6 +160,7 @@ const currentTeams = [
                  miniLogo: "Alpine-m.png",
                  base: "Энстоун, Оксфордшир, Великобритания",
                  director: "Оливер Оукс",
+			     foundert: "Renault Group",
 				 debut: "2021",
                  car: "A525",
                  engine: "Renault",
@@ -222,6 +231,7 @@ function openTeamModal(team) {
                 <img src="Images/Teams/${team.logo}" alt="${team.fullName}">
             </div>
             <h2 class="cmd-modal-teamname">${team.fullName}</h2>
+			
             <div class="cmd-modal-divider"></div>
             
             <div class="cmd-info-row">
@@ -232,17 +242,9 @@ function openTeamModal(team) {
                 <span class="cmd-info-label">Руководитель:</span>
                 <span class="cmd-info-value">${team.director}</span>
             </div>
+			
 			<div class="cmd-modal-divider"></div>
-			<div class="cmd-info-row">
-                <span class="cmd-info-label">Основатель:</span>
-                <span class="cmd-info-value">${team.foundert}</span>
-            </div>
-            <div class="cmd-info-row">
-                <span class="cmd-info-label">Дебют:</span>
-                <span class="cmd-info-value">${team.debut}</span>
-            </div>
-            <div class="cmd-modal-divider"></div>
-            
+
             <div class="cmd-info-row">
                 <span class="cmd-info-label">Болид:</span>
                 <span class="cmd-info-value">${team.car}</span>
@@ -251,8 +253,20 @@ function openTeamModal(team) {
                 <span class="cmd-info-label">Двигатель:</span>
                 <span class="cmd-info-value">${team.engine}</span>
             </div>
+			
             <div class="cmd-modal-divider"></div>
-            
+
+			<div class="cmd-info-row">
+                <span class="cmd-info-label">Основатель:</span>
+                <span class="cmd-info-value">${team.foundert}</span>
+            </div>
+            <div class="cmd-info-row">
+                <span class="cmd-info-label">Дебют:</span>
+                <span class="cmd-info-value">${team.debut}</span>
+            </div>
+			
+            <div class="cmd-modal-divider"></div>
+			
             <h3 class="cmd-drivers-title">Пилоты</h3>
             <div class="cmd-modal-drivers">
                 ${team.drivers.map(driver => `
@@ -281,5 +295,6 @@ function openTeamModal(team) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
