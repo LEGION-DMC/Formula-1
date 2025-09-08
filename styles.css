@@ -1507,7 +1507,7 @@ h1, h2, h3, h4, h5, h6 {
 .next-year-date {
     font-family: 'Font1', sans-serif;
     color: #e53935;
-    min-width: 70px;
+    min-width: 80px;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
