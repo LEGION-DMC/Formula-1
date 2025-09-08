@@ -232,6 +232,7 @@ function openTeamModal(team) {
                 <span class="cmd-info-label">Руководитель:</span>
                 <span class="cmd-info-value">${team.director}</span>
             </div>
+			<div class="cmd-modal-divider"></div>
 			<div class="cmd-info-row">
                 <span class="cmd-info-label">Основатель:</span>
                 <span class="cmd-info-value">${team.foundert}</span>
@@ -280,4 +281,5 @@ function openTeamModal(team) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
