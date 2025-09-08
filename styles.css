@@ -778,6 +778,7 @@ h1, h2, h3, h4, h5, h6 {
     max-height: 100%;
     max-width: 100%;
     border-radius: 4px;
+    box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.3);
 }
 
 .drv-header {
@@ -1107,6 +1108,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     background: #252525;
+    box-shadow: 8px 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .track-info {
@@ -1315,6 +1317,7 @@ h1, h2, h3, h4, h5, h6 {
 .modal-image img {
     max-width: 100%;
     max-height: 500px;
+    box-shadow: 8px 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .modal-info {
@@ -1675,6 +1678,107 @@ h1, h2, h3, h4, h5, h6 {
     border-left: 2px solid;
     border-radius: 5px;
     padding-left: 8px;
+}
+
+/* Модальное окно детальной статистики */
+.detailed-modal-content {
+    max-width: 95%;
+    width: 95%;
+    max-height: 90vh;
+}
+
+.detailed-table-container {
+    font-family: 'Font3';
+    font-size: 15px;
+    overflow-x: auto;
+    margin: 20px 0;
+    margin-left: 20px;
+}
+
+.detailed-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    background: #1e1e1e;
+}
+
+.detailed-header,
+.detailed-row {
+    display: table-row;
+}
+
+.detailed-col {
+    display: table-cell;
+    padding: 2px;
+    border: 1px solid #333;
+    vertical-align: middle;
+}
+
+.detailed-header .detailed-col {
+    background: #252525;
+    font-weight: bold;
+    color: #e53935;
+    text-align: center;
+}
+
+.driver-col {
+    min-width: 200px;
+    text-align: left;
+}
+
+.gp-col {
+    min-width: 40px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.total-col {
+    min-width: 00px;
+    text-align: center;
+    background: #404040;
+    box-shadow: -8px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.detailed-row .driver-col {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 8px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.detailed-row .position {
+    color: #e53935;
+    min-width: 20px;
+}
+
+.detailed-row .flag {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+.detailed-row .name {
+    flex: 1;
+}
+
+.detailed-row .team-logo {
+    width: 25px;
+    height: 20px;
+    object-fit: contain;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+/* Заголовки таблиц с курсором-указателем */
+#driversStandings h2,
+#sprintStandings h2 {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#driversStandings h2:hover,
+#sprintStandings h2:hover {
+    color: red;
 }
 
 /* -------------------------------------------------------------------------- "Терминология" */
