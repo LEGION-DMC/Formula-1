@@ -134,7 +134,7 @@ const driversData = [
         state: "Мексика",
         team: "Cadillac",
         teamLogo: "Cadillac-m.png",
-        teamColor: "#313247",
+        teamColor: "#ffffff",
         photo: "perez.jpg",
         birthPlace: "Гвадалахара, Мексика",
         birthDate: "26.01.1990",
@@ -428,7 +428,7 @@ const driversData = [
         state: "Финляндия",
         team: "Cadillac",
         teamLogo: "Cadillac-m.png",
-        teamColor: "#21ad17",
+        teamColor: "#ffffff",
         photo: "bottas.jpg",
         birthPlace: "Настола, Пяйят-Хяме, Финляндия",
         birthDate: "28.08.1989",
@@ -692,4 +692,5 @@ function openDriverModal(driver) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
 
