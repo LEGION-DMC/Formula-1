@@ -809,6 +809,7 @@ function renderNextYearCalendar() {
     const nextYearEvents = document.getElementById('nextYearEvents');
     if (!nextYearEvents) return;
     
+    const now = new Date();
     const sortedEvents = [...nextYearCalendar].sort((a, b) => 
         new Date(a.date) - new Date(b.date)
     );
@@ -824,8 +825,11 @@ function renderNextYearCalendar() {
         const columnEvents = sortedEvents.slice(i * eventsPerColumn, (i + 1) * eventsPerColumn);
         
         columnEvents.forEach(event => {
+            const eventDate = new Date(event.date);
+            const isPast = eventDate < now;
+            
             html += `
-                <div class="next-year-event" data-gp="${event.grandPrixId}">
+                <div class="next-year-event ${isPast ? 'completed' : ''}" data-gp="${event.grandPrixId}">
                     <div class="next-year-date">${formatShortDate(event.date)}</div>
                     <div class="next-year-name">
                         <img src="Images/Flags/${event.country}.svg" alt="flag" class="next-year-flag">
@@ -1094,6 +1098,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
