@@ -199,7 +199,7 @@ function renderMainGPCards() {
                 <div class="weather-header">
                     <h3>Погода на гонку</h3>
                 </div>
-                <div class="weather-">
+                <div class="weather-block">
                     <div class="weather">
                         <img src="Images/Weather/cloud.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Погода</span>
@@ -493,6 +493,7 @@ function loadTabContent(tabName) {
             renderMainPage();
     }
 }
+
 
 
 
