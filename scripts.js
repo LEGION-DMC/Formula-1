@@ -193,6 +193,30 @@ function renderMainGPCards() {
                 </div>
             `;
         }
+
+        html += `
+            <div class="weather-card">
+                <div class="weather-header">
+                    <h3>Погода на гонку</h3>
+                </div>
+                <div class="weather-">
+                    <div class="weather">
+                        <img src="Images/Weather/sun.png" alt="weather" class="weather-image inactive">
+                        <span class="tire-name">Солнечно</span>
+                    </div>
+                    <div class="weather">
+                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image inactive">
+                        <span class="weather-name">Ветер</span>
+						<span class="weather-name" style="color: red">---</span>
+                    </div>
+                    <div class="weather">
+                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image inactive">
+                        <span class="weather-name">Температура</span>
+						<span class="weather-name" style="color: red">---</span>
+                    </div>
+                </div>
+            </div>
+        `;
         
         html += `
             <div class="main-gp-card ${isLive ? 'live' : isPast ? 'past' : isToday ? 'today' : 'upcoming'}" 
@@ -468,6 +492,7 @@ function loadTabContent(tabName) {
             renderMainPage();
     }
 }
+
 
 
 
