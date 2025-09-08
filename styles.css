@@ -1722,7 +1722,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .driver-col {
-    min-width: 200px;
+    min-width: 150px;
     text-align: left;
 }
 
