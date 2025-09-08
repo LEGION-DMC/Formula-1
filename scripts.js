@@ -201,8 +201,9 @@ function renderMainGPCards() {
                 </div>
                 <div class="weather-">
                     <div class="weather">
-                        <img src="Images/Weather/sun.png" alt="weather" class="weather-image inactive">
-                        <span class="tire-name">Солнечно</span>
+                        <img src="Images/Weather/cloud.png" alt="weather" class="weather-image inactive">
+                        <span class="weather-name">Погода</span>
+						<span class="weather-name" style="color: red">---</span>
                     </div>
                     <div class="weather">
                         <img src="Images/Weather/wind.png" alt="weather" class="weather-image inactive">
@@ -492,6 +493,7 @@ function loadTabContent(tabName) {
             renderMainPage();
     }
 }
+
 
 
 
