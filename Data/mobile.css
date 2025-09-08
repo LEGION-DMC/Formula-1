@@ -224,6 +224,82 @@
         font-size: 13px;
         color: #aaa;
     }
+    
+    /* подробные таблицы */
+    .detailed-table-container {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .detailed-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .detailed-header,
+    .detailed-row {
+        display: flex;
+    }
+    
+    /* Фиксированная колонка пилотов */
+    .driver-col {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background: #1e1e1e;
+        min-width: 250px;
+        box-shadow: 10px 0 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .detailed-header .driver-col {
+        background: #252525;
+    }
+    
+    /* Фиксированная колонка с суммой */
+    .total-col {
+        position: sticky;
+        right: 0;
+        z-index: 2;
+        background: #1e1e1e;
+        min-width: 70px;
+        box-shadow: -10px 0 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .detailed-header .total-col {
+        background: #252525;
+    }
+    
+    /* Уменьшаем отступы для мобильных */
+    .detailed-row .driver-col {
+        padding: 6px;
+        gap: 5px;
+    }
+    
+    .detailed-row .position {
+        min-width: 18px;
+        font-size: 12px;
+    }
+    
+    .detailed-row .flag {
+        width: 15px;
+        height: 12px;
+    }
+    
+    .detailed-row .name {
+        font-size: 12px;
+    }
+    
+    .detailed-row .team-logo {
+        width: 18px;
+        height: 14px;
+    }
+    
+    .gp-col {
+        min-width: 35px;
+        font-size: 12px;
+        padding: 6px;
+    } 
 
 /* -------------------------------------------------------------------------- Терминология */
     
