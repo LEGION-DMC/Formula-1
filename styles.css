@@ -1547,10 +1547,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .next-year-event.completed .next-year-date {
-    color: #888;
-}
-
-.next-year-event.completed .next-year-name {
     color: #999;
 }
 
