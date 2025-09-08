@@ -863,7 +863,7 @@ function addCalendarEventListeners() {
 
 // Прокрутка до выбраной карточки
 function scrollToGrandPrix(grandPrixId) {
-    // Находим плашку Гран-при
+    // Находим плашку Гран-при (даже если она завершённая)
     const gpCard = document.querySelector(`.track-card[data-gp="${grandPrixId}"]`);
     
     if (gpCard) {
@@ -876,9 +876,14 @@ function scrollToGrandPrix(grandPrixId) {
         // Добавляем подсветку
         gpCard.classList.add('highlight');
         
-        // Убираем подсветку через 2 секунды
+        // Временно убираем затемнение для лучшей видимости
+        const originalOpacity = gpCard.style.opacity;
+        gpCard.style.opacity = '1';
+        
+        // Убираем подсветку и восстанавливаем прозрачность через 2 секунды
         setTimeout(() => {
             gpCard.classList.remove('highlight');
+            gpCard.style.opacity = originalOpacity;
         }, 2000);
     }
 }
@@ -1098,6 +1103,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
