@@ -1529,6 +1529,35 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 2px;
 }
 
+/* Затемнение событий календаря */
+.next-year-event.completed {
+    position: relative;
+    opacity: 0.9;
+}
+
+.next-year-event.completed::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+}
+
+.next-year-event.completed .next-year-date {
+    color: #888;
+}
+
+.next-year-event.completed .next-year-name {
+    color: #999;
+}
+
+/* Сохраняем возможность клика */
+.next-year-event.completed {
+    cursor: pointer;
+}
+
+.next-year-event.completed:hover {
+    opacity: 08;
+}
+
 /* -------------------------------------------------------------------------- "Результаты" */
 .results-container {
     padding-left: 10px;
