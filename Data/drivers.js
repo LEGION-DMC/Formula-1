@@ -16,7 +16,7 @@ const driversData = [
         titles: 4,
         wins: 65,
         podiums: 117,
-        rectrack: 6,
+        fine: 9,
 		poles: 44,
 		dnf: 32,
         bio: "Нидерландский гонщик, четырёхкратный чемпион мира Формулы-1. Самый молодой гонщик в истории, дебютировавший в Формуле-1 в возрасте 17 лет."
@@ -37,7 +37,7 @@ const driversData = [
         titles: 0,
         wins: 9,
         podiums: 38,
-        rectrack: 3,
+        fine: 3,
 		poles: 13,
 		dnf: 12,
         bio: "Британский гонщик, участник чемпионатов мира по автогонкам в классе Формула-1, вице-чемпион 2018 года в классе Формула-2. С 2015 по 2017 годы он завоевал титулы в пяти разных первенствах, среди которых была Европейская Формула-3."
@@ -58,7 +58,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        rectrack: 0,
+        fine: 0,
 		poles: 0,
         dnf: 2,
         bio: "краткая биография"
@@ -79,7 +79,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        rectrack: 0,
+        fine: 0,
 		poles: 0,
         dnf: 1,
         bio: "краткая биография"
@@ -100,7 +100,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        rectrack: 0,
+        fine: 4,
 		poles: 0,
         dnf: 2,
         bio: "краткая биография"
@@ -121,7 +121,7 @@ const driversData = [
         titles: 0,
         wins: 1,
         podiums: 5,
-        rectrack: 0,
+        fine: 2,
 		poles: 0,
         dnf: 25,
         bio: "краткая биография"
@@ -142,7 +142,7 @@ const driversData = [
         titles: 0,
         wins: 6,
         podiums: 39,
-        rectrack: 1,
+        fine: 0,
 		poles: 3,
         dnf: 35,
         bio: "краткая биография"
@@ -163,7 +163,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 1,
-        rectrack: 0,
+        fine: 5,
 		poles: 0,
         dnf: 1,
         bio: "краткая биография"
@@ -184,7 +184,7 @@ const driversData = [
         titles: 2,
         wins: 32,
         podiums: 106,
-        rectrack: 0,
+        fine: 0,
 		poles: 22,
         dnf: 70,
         bio: "краткая биография"
@@ -205,7 +205,7 @@ const driversData = [
         titles: 0,
         wins: 8,
         podiums: 48,
-        rectrack: 1,
+        fine: 1,
 		poles: 27,
         dnf: 20,
         bio: "краткая биография"
@@ -226,7 +226,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 3,
-        rectrack: 0,
+        fine: 5,
 		poles: 1,
         dnf: 25,
         bio: "краткая биография"
@@ -247,7 +247,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        rectrack: 0,
+        fine: 5,
 		poles: 0,
         dnf: 10,
         bio: "краткая биография"
@@ -268,7 +268,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 2,
-        rectrack: 0,
+        fine: 2,
 		poles: 0,
         dnf: 15,
         bio: "краткая биография"
@@ -289,7 +289,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 1,
-        rectrack: 0,
+        fine: 0,
 		poles: 1,
         dnf: 40,
         bio: "краткая биография"
@@ -310,7 +310,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        rectrack: 0,
+        fine: 6,
 		poles: 0,
         dnf: 3,
         bio: "краткая биография"
@@ -331,7 +331,7 @@ const driversData = [
         titles: 0,
         wins: 1,
         podiums: 4,
-        rectrack: 0,
+        fine: 1,
 		poles: 0,
         dnf: 20,
         bio: "краткая биография"
@@ -352,7 +352,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        rectrack: 0,
+        fine: 3,
 		poles: 0,
         dnf: 1,
         bio: "краткая биография"
@@ -373,7 +373,7 @@ const driversData = [
         titles: 7,
         wins: 105,
         podiums: 202,
-        rectrack: 5,
+        fine: 2,
 		poles: 104,
         dnf: 35,
         bio: "краткая биография"
@@ -394,7 +394,7 @@ const driversData = [
         titles: 0,
         wins: 4,
         podiums: 27,
-        rectrack: 0,
+        fine: 0,
 		poles: 6,
         dnf: 30,
         bio: "краткая биография"
@@ -415,7 +415,7 @@ const driversData = [
         titles: 0,
         wins: 4,
         podiums: 21,
-        rectrack: 1,
+        fine: 0,
 		poles: 6,
         dnf: 10,
         bio: "краткая биография"
@@ -436,7 +436,7 @@ const driversData = [
         titles: 0,
         wins: 10,
         podiums: 67,
-        rectrack: 2,
+        fine: 5,
 		poles: 20,
         dnf: 27,
         bio: "Будующий пилот Cadillac"
@@ -457,7 +457,7 @@ const driversData = [
         titles: 1,
         wins: 8,
         podiums: 22,
-        reccircle: 3,
+        fine: 0,
 		poles: 4,
         dnf: 5,
         bio: "краткая биография"
@@ -478,7 +478,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        rectrack: 0,
+        fine: 10,
 		poles: 0,
         dnf: 1,
         bio: "краткая биография"
@@ -660,8 +660,8 @@ function openDriverModal(driver) {
                     <span class="drv-stat-label">Поулы</span>
                 </div>
                 <div class="drv-stat">
-                    <span class="drv-stat-value">${driver.rectrack}</span>
-                    <span class="drv-stat-label">Рекорд трассы</span>
+                    <span class="drv-stat-value">${driver.fine} / 12</span>
+                    <span class="drv-stat-label">Штрафы</span>
                 </div>
                 <div class="drv-stat">
                     <span class="drv-stat-value">${driver.dnf}</span>
@@ -692,3 +692,4 @@ function openDriverModal(driver) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
