@@ -7,6 +7,7 @@ const currentTeams = [
 					 miniLogo: "McLaren-m.png",
 					 base: "Уокинг, Великобритания",
 					 director: "Андреа Стелла",
+					 foundert: "Фрэнк Уильямс",
 					 debut: "1966",
 					 car: "MCL39",
                  engine: "Mercedes",
@@ -231,6 +232,10 @@ function openTeamModal(team) {
                 <span class="cmd-info-label">Руководитель:</span>
                 <span class="cmd-info-value">${team.director}</span>
             </div>
+			<div class="cmd-info-row">
+                <span class="cmd-info-label">Основатель:</span>
+                <span class="cmd-info-value">${team.foundert}</span>
+            </div>
             <div class="cmd-info-row">
                 <span class="cmd-info-label">Дебют:</span>
                 <span class="cmd-info-value">${team.debut}</span>
@@ -275,3 +280,4 @@ function openTeamModal(team) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
