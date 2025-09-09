@@ -65,7 +65,7 @@ const driversData = [
     },
     {   id: "hadjar", 
 		number: 6,         
-        name: "Иcак Хаджар",      
+        name: "Иcаак Хаджар",      
         namem: "И.Хаджар",    
         country: "fr",       
         state: "Франция",
@@ -212,7 +212,7 @@ const driversData = [
     },
     {   id: "stroll",
         number: 18,         
-        name: "Ланс Стролл",      
+        name: "Лэнс Стролл",      
         namem: "Л.Стролл",    
         country: "ca",       
         state: "Канада",
@@ -359,8 +359,8 @@ const driversData = [
     },
     {   id: "hamilton",
         number: 44,         
-        name: "Льюис Хэмильтон",      
-        namem: "Л.Хэмильтон",    
+        name: "Льюис Хэмилтон",      
+        namem: "Л.Хэмилтон",    
         country: "gb",       
         state: "Великобритания",
         team: "Ferrari",
@@ -620,7 +620,7 @@ function openDriverModal(driver) {
                         <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" title="${driver.state}" class="drv-modal-flag">
                     </div>
                     <div class="drv-modal-divider"></div>
-                    <div class="drv-modal-team">
+                    <div class="drv-modal-team" data-team="${driver.team}">
                         <img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="drv-modal-team-logo">
                         <span>${driver.team}</span>
                     </div>
@@ -686,11 +686,52 @@ function openDriverModal(driver) {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
     });
+    
+    // Добавляем обработчик клика на команду
+    addTeamClickHandler(modal, driver.team);
+}
+
+// Функция для обработки клика на команду
+function addTeamClickHandler(modal, teamName) {
+    const teamElement = modal.querySelector('.drv-modal-team');
+    if (teamElement) {
+        teamElement.style.cursor = 'pointer';
+        teamElement.addEventListener('click', (e) => {
+            e.stopPropagation(); // Предотвращаем закрытие модального окна
+            navigateToTeam(teamName);
+            modal.remove(); // Закрываем модальное окно пилота
+        });
+    }
+}
+
+// Навигация к команде
+function navigateToTeam(teamName) {
+    // Переходим на вкладку команд
+    window.location.hash = 'teams';
+    loadTabContent('teams');
+    
+    // После загрузки вкладки находим и открываем модальное окно команды
+    setTimeout(() => {
+        const team = currentTeams.find(t => t.shortName === teamName);
+        if (team) {
+            openTeamModal(team);
+            
+            // Прокручиваем к карточке команды
+            const teamCard = document.querySelector(`.cmd-team-card[data-team="${team.id}"]`);
+            if (teamCard) {
+                teamCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                teamCard.classList.add('highlight');
+                
+                // Убираем подсветку через 2 секунды
+                setTimeout(() => {
+                    teamCard.classList.remove('highlight');
+                }, 2000);
+            }
+        }
+    }, 300); // Задержка для загрузки вкладки
 }
 
 // Инициализация при загрузке вкладки
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
-
-
