@@ -130,7 +130,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-gp-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(229, 57, 53, 0.3);
+    box-shadow: 0 5px 15px rgba(229, 57, 53, 1.5);
 }
 
 .main-gp-card.today {
@@ -454,7 +454,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-standing-item:hover {
-    transform: translateX(5px);
+    transform: translateY(-5px);
 }
 
 .main-standing-item.first {
@@ -537,8 +537,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .cmd-team-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.04);
+    box-shadow: 0 5px 15px rgba(229, 57, 53, 1.0);
+    
 }
 
 .cmd-team-logo {
@@ -563,7 +564,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cmd-divider {
     height: 1px;
-    background: #333;
+    background: #555;
     margin: 10px 0;
 }
 
@@ -604,22 +605,6 @@ h1, h2, h3, h4, h5, h6 {
     width: 25px;
     height: 18px;
     border-radius: 2px;
-}
-
-/* Новые команды */
-.cmd-section-title {
-    font-family: 'Font1', sans-serif;
-    color: #e53935;
-    margin: 0 0 15px;
-    font-size: 20px;
-}
-
-.cmd-divider-full {
-    height: 2px;
-    background: #333;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 100%;
 }
 
 /* Модальное окно команды */
@@ -669,7 +654,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cmd-modal-divider {
     height: 1px;
-    background: #333;
+    background: #444;
 }
 
 .cmd-info-row {
@@ -762,8 +747,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .drv-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.04);
+    box-shadow: 0 5px 15px rgba(229, 57, 53, 1.0);
 }
 
 .drv-photo {
@@ -810,7 +795,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .drv-divider {
     height: 1px;
-    background: #333;
+    background: #444;
     margin: 10px 0;
 }
 
@@ -919,13 +904,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .drv-modal-divider {
     height: 1px;
-    background: #333;
+    background: #555;
     margin: 10px 0;
 }
 
 .drv-modal-divider-full {
-    height: 1px;
-    background: #333;
+    height: 2px;
+    background: #555;
     margin: 1px 0;
 }
 
@@ -1022,8 +1007,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .drv-filter-btn:hover {
-    background: #333;
     color: #fff;
+    transform: scale(1.05);
+    background-color: #e53935;
 }
 
 .drv-filter-btn.active {
@@ -1057,13 +1043,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .track-card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(229, 57, 53, 0.3);
     border-left-color: #e53935;
+    transform: scale(1.04);
 }
 
 .track-card.highlight {
     animation: pulse 1s infinite;
+    transform: scale(1.04);
 }
 
 .track-card.completed {
@@ -1504,7 +1491,7 @@ h1, h2, h3, h4, h5, h6 {
 .next-year-event:hover {
     background: #2a2a2a;
     transform: translateX(5px);
-    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.2);
+    box-shadow: 0 5px 15px rgba(229, 57, 53, 0.8);
 }
 
 .next-year-date {
@@ -1722,7 +1709,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .driver-col {
-    min-width: 130px;
+    min-width: 200px;
     text-align: left;
 }
 
@@ -1739,11 +1726,19 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: -8px 0 5px rgba(0, 0, 0, 0.3);
 }
 
+.gp-col:hover {
+    background: #404040;
+}
+
 .detailed-row .driver-col {
     display: flex;
     align-items: center;
     gap: 5px;
     box-shadow: 8px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.detailed-row .driver-col:hover {
+    transform: translateX(-5px);
 }
 
 .detailed-row .position {
@@ -1824,6 +1819,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .tag:hover {
     transform: scale(1.05);
+    background-color: #e53935;
 }
 
 .tag.active {
@@ -1848,7 +1844,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .term-card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.03);
     box-shadow: 0 0px 10px rgba(255, 255, 0, 0.3);
 }
 
