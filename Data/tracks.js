@@ -3,121 +3,145 @@ const nextYearCalendar = [
     { name: "Гран-при Австралии",
         date: "2025-03-16",
         country: "au",
+		state: "Австралия",
 		grandPrixId: "t1"
     },
     { name: "Гран-при Китая",
         date: "2025-03-23",
         country: "cn",
+		state: "Китай",
 		grandPrixId: "t2"
     },
     { name: "Гран-при Японии",
         date: "2025-04-06",
         country: "jp",
+		state: "Япония",
 		grandPrixId: "t3"
     },
     { name: "Гран-при Бахрейна",
         date: "2025-04-13",
         country: "bh",
+		state: "Бахрейн",
 		grandPrixId: "t4"
     },
     { name: "Гран-при Саудовской Аравии",
         date: "2025-04-20",
         country: "sa",
+		state: "Саудовская Аравия",
 		grandPrixId: "t5"
     },
     { name: "Гран-при Майами",
         date: "2025-05-04",
         country: "us",
+		state: "США",
 		grandPrixId: "t6"
     },
     { name: "Гран-при Эмилии Романьи",
         date: "2025-05-18",
-        country: "ca",
+        country: "it",
+		state: "Италия",
 		grandPrixId: "t7"
     },
     { name: "Гран-при Монако",
         date: "2025-05-25",
         country: "mc",
+		state: "Монако",
 		grandPrixId: "t8"
     },
     { name: "Гран-при Барселоны-Каталонии",
         date: "2025-06-01",
         country: "es",
+		state: "Испания",
 		grandPrixId: "t9"
     },
     { name: "Гран-при Канады",
         date: "2025-06-15",
-        country: "at",
+        country: "ca",
+		state: "Канада",
 		grandPrixId: "t10"
     },
 	{ name: "Гран-при Австрии",
         date: "2025-06-29",
         country: "at",
+		state: "Австрия",
 		grandPrixId: "t11"
     },
     { name: "Гран-при Великобритании",
         date: "2025-07-06",
         country: "gb",
+		state: "Великобритания",
 		grandPrixId: "t12"
     },
     { name: "Гран-при Бельгии",
         date: "2025-07-27",
         country: "be",
+		state: "Бельгия",
 		grandPrixId: "t13"
     },
     { name: "Гран-при Венгрии",
         date: "2025-08-03",
         country: "hu",
+		state: "Венгрия",
 		grandPrixId: "t14"
     },
     { name: "Гран-при Нидерландов",
         date: "2025-08-31",
         country: "nl",
+		state: "Нидерланды",
 		grandPrixId: "t15"
     },
     { name: "Гран-при Италии",
         date: "2025-09-07",
         country: "it",
+		state: "Италия",
 		grandPrixId: "t16"
     },
     { name: "Гран-при Азербайджана",
         date: "2025-09-21",
         country: "az",
+		state: "Азербайджан",
 		grandPrixId: "t17"
     },
     { name: "Гран-при Сингапура",
         date: "2025-10-05",
         country: "sg",
+		state: "Сингапур",
 		grandPrixId: "t18"
     },
     { name: "Гран-при США",
         date: "2025-10-20",
         country: "us",
+		state: "США",
 		grandPrixId: "t19"
     },
     { name: "Гран-при Мехико",
         date: "2025-10-27",
         country: "mx",
+		state: "Мексика",
 		grandPrixId: "t20"
     },
     { name: "Гран-при Сан-Паулу",
         date: "2025-11-10",
         country: "br",
+		state: "Бразилия",
 		grandPrixId: "t21"
     },
     { name: "Гран-при Лас-Вегаса",
         date: "2025-11-22",
         country: "us",
+		state: "США",
 		grandPrixId: "t22"
     },
     { name: "Гран-при Катара",
         date: "2025-12-01",
         country: "qa",
+		state: "Катар",
 		grandPrixId: "t23"
     },
     { name: "Гран-при Абу-Даби",
         date: "2025-12-07",
         country: "ae",
+		state: "Объеденённые Арабские Эмираты",
 		grandPrixId: "t24"
     }];
 
@@ -226,7 +250,7 @@ const tracksData = {
         "turns": 27,
         "drsZones": 3,
         "direction": "против часовой стрелки",
-        "lapRecord": "1:30.734 (Хэмильтон, 2021)",
+        "lapRecord": "1:30.734 (Хэмилтон, 2021)",
         "date": "2025-04-20 20:55",
 		"podium1": "Пиастри",
         "podium2": "Ферстаппен",
@@ -293,7 +317,7 @@ const tracksData = {
         "turns": 19,
         "drsZones": 1,
         "direction": "по часовой стрелке",
-        "lapRecord": "1.12.909 (Хэмильтон, 2021)",
+        "lapRecord": "1.12.909 (Хэмилтон, 2021)",
         "date": "2025-05-25 20:55",
 		"podium1": "Норрис",
         "podium2": "Леклер",
@@ -426,7 +450,7 @@ const tracksData = {
         "turns": 14,
         "drsZones": 2,
         "direction": "по часовой стрелке",
-        "lapRecord": "1:16.627 (Хэмильтон, 2020)",
+        "lapRecord": "1:16.627 (Хэмилтон, 2020)",
         "date": "2025-08-03 20:55",
 		"podium1": "Пиастри",
         "podium2": "Норрис",
@@ -448,7 +472,7 @@ const tracksData = {
         "turns": 14,
         "drsZones": 2,
         "direction": "против часовой стрелки",
-        "lapRecord": "1.11.097 (Хэмильтон, 2021)",
+        "lapRecord": "1.11.097 (Хэмилтон, 2021)",
         "date": "2025-08-31 20:55",
 		"podium1": "Пиастри",
         "podium2": "Ферстаппен",
@@ -514,7 +538,7 @@ const tracksData = {
         "turns": 23,
         "drsZones": 3,
         "direction": "против часовой стрелки",
-        "lapRecord": "1:35.867 (Хэмильтон, 2023)",
+        "lapRecord": "1:35.867 (Хэмилтон, 2023)",
         "date": "2025-10-05 20:00",
 		"podium1": "---",
         "podium2": "---",
@@ -832,7 +856,7 @@ function renderNextYearCalendar() {
                 <div class="next-year-event ${isPast ? 'completed' : ''}" data-gp="${event.grandPrixId}">
                     <div class="next-year-date">${formatShortDate(event.date)}</div>
                     <div class="next-year-name">
-                        <img src="Images/Flags/${event.country}.svg" alt="flag" class="next-year-flag">
+                        <img src="Images/Flags/${event.country}.svg" alt="flag" title="${event.state}" class="next-year-flag">
                         ${event.name}
                     </div>
                 </div>
@@ -1103,9 +1127,3 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
-
-
-
-
-
-
