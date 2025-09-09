@@ -360,3 +360,4 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
