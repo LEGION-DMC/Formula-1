@@ -13,7 +13,7 @@ const currentTeams = [
                  engine: "Mercedes",
                  drivers: [
                     {number: "81", name: "Оскар Пиастри", country: "au", state: "Австралия"},
-                    {number: "4", name: "Ландо Норис", country: "gb", state: "Великобритания"}
+                    {number: "4", name: "Ландо Норрис", country: "gb", state: "Великобритания"}
                 ],
 				color: "#e07109"
             },
@@ -30,7 +30,7 @@ const currentTeams = [
                  engine: "Ferrari",
                  drivers: [
                     {number: "16", name: "Шарль Леклер", country: "mc", state: "Манако"},
-                    {number: "44", name: "Льюис Хэмильтон", country: "gb", state: "Великобритания"}
+                    {number: "44", name: "Льюис Хэмилтон", country: "gb", state: "Великобритания"}
                 ],
 				color: "#b80f0f"
             },
@@ -47,7 +47,7 @@ const currentTeams = [
                  engine: "Mercedes",
                  drivers: [
                     {number: "63", name: "Джордж Расселл", country: "gb", state: "Великобритания"},
-                    {number: "12", name: "Кими Антонелли", country: "it", state: "Италия"}
+                    {number: "12", name: "Андреа Кими Антонелли", country: "it", state: "Италия"}
                 ],
 				color: "#7a7272"
             },
@@ -115,7 +115,7 @@ const currentTeams = [
                  engine: "Honda RBPT",
                  drivers: [
                     {number: "30", name: "Лиам Лоусон", country: "nz", state: "Новая Зеландия"},
-                    {number: "6", name: "Исаак Хаджар", country: "fr", state: "Франция"}
+                    {number: "6", name: "Иcаак Хаджар", country: "fr", state: "Франция"}
                 ],
 				color: "#ddebdd"
             },
@@ -270,7 +270,7 @@ function openTeamModal(team) {
             <h3 class="cmd-drivers-title">Пилоты</h3>
             <div class="cmd-modal-drivers">
                 ${team.drivers.map(driver => `
-                    <div class="cmd-modal-driver">
+                    <div class="cmd-modal-driver" data-driver-id="${getDriverIdByName(driver.name)}">
                         <span class="cmd-modal-number" style="background: ${team.color}">${driver.number}</span>
                         <span class="cmd-modal-name">${driver.name}</span>
                         <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" title="${driver.state}" class="cmd-modal-flag">
@@ -289,12 +289,74 @@ function openTeamModal(team) {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
     });
+    
+    // Добавляем обработчики клика на пилотов
+    addDriverClickHandlers(modal);
+}
+
+// Функция для получения ID пилота по имени
+function getDriverIdByName(driverName) {
+    const driver = driversData.find(d => d.name === driverName);
+    return driver ? driver.id : '';
+}
+
+// Добавление обработчиков клика на пилотов
+function addDriverClickHandlers(modal) {
+    const driverElements = modal.querySelectorAll('.cmd-modal-driver');
+    
+    driverElements.forEach(element => {
+        const driverId = element.getAttribute('data-driver-id');
+        if (driverId) {
+            element.style.cursor = 'pointer';
+            element.addEventListener('click', (e) => {
+                e.stopPropagation(); // Предотвращаем закрытие модального окна
+                navigateToDriver(driverId);
+                modal.remove(); // Закрываем модальное окно
+            });
+        }
+    });
+}
+
+// Навигация к пилоту
+function navigateToDriver(driverId) {
+    // Переходим на вкладку пилотов
+    window.location.hash = 'drivers';
+    loadTabContent('drivers');
+    
+    // После загрузки вкладки находим и открываем карточку пилота
+    setTimeout(() => {
+        const driver = driversData.find(d => d.id === driverId);
+        if (driver) {
+            // Применяем фильтр по команде пилота
+            applyDriverFilter(driver.team);
+            
+            // Открываем модальное окно пилота
+            openDriverModal(driver);
+            
+            // Прокручиваем к карточке пилота
+            const driverCard = document.querySelector(`.drv-card[data-driver="${driverId}"]`);
+            if (driverCard) {
+                driverCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                driverCard.classList.add('highlight');
+                
+                // Убираем подсветку через 2 секунды
+                setTimeout(() => {
+                    driverCard.classList.remove('highlight');
+                }, 2000);
+            }
+        }
+    }, 300); // Задержка для загрузки вкладки
+}
+
+// Функция применения фильтра по команде
+function applyDriverFilter(teamName) {
+    const filterButton = document.querySelector(`.drv-filter-btn[data-team="${teamName}"]`);
+    if (filterButton) {
+        filterButton.click(); // Симулируем клик по кнопке фильтра
+    }
 }
 
 // Инициализация при загрузке вкладки
 if (window.location.hash === '#teams') {
     renderTeams();
 }
-
-
-
