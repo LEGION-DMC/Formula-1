@@ -233,7 +233,7 @@ function renderMainGPCards() {
                 <div class="main-gp-info">
                     <div class="main-gp-date">${formatDate(currentGP.date)}</div>
                     <div class="main-gp-track">${currentGP.trackName}</div>
-                    <div class="main-gp-location">${currentGP.location}</div>
+					<div class="main-gp-location"><img src="Images/Flags/${currentGP.country}.svg" alt="flag" title="${currentGP.state}" class="flag">  ${currentGP.location}</div>
                 </div>
             </div>
         `;
@@ -410,25 +410,44 @@ function renderMainStandings() {
 // Рендеринг лидера пилотов
 function renderMainDrivers() {
     const container = document.getElementById('mainDrivers');
-    const topDrivers = [...driversStandings]
-        .sort((a, b) => b.points - a.points)
-        .slice(0, 1);
+    
+    // Создаем копии массивов чтобы не менять оригиналы
+    const driversWithSprint = JSON.parse(JSON.stringify(driversStandings));
+    const sprintPointsMap = {};
+    
+    // Создаем карту очков спринта для быстрого доступа
+    sprintStandings.forEach(driver => {
+        sprintPointsMap[driver.name] = driver.points;
+    });
+    
+    // Суммируем очки личного зачёта и спринта
+    driversWithSprint.forEach(driver => {
+        const sprintPoints = sprintPointsMap[driver.name] || 0;
+        driver.totalPoints = driver.points + sprintPoints;
+    });
+    
+    // Сортируем по общему количеству очков
+    const topDrivers = driversWithSprint
+        .sort((a, b) => b.totalPoints - a.totalPoints)
+        .slice(0, 3); // Топ-3 пилота
     
     let html = `
-        <h2>Лидер личного зачёта пилотов</h2>
+        <h2>Топ пилоты</h2>
         <div class="main-standings-list">
     `;
     
     topDrivers.forEach((driver, index) => {
+        const sprintPoints = sprintPointsMap[driver.name] || 0;
+        
         html += `
             <div class="main-standing-item ${index === 0 ? 'first' : ''}">
                 <div class="main-standing-position">${index + 1}</div>
                 <div class="main-standing-info">
-                    <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" class="main-standing-flag">
+                    <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" title="${driver.state}" class="main-standing-flag">
                     <span class="main-standing-name">${driver.name}</span>
                     <img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="main-standing-team-logo">
                 </div>
-                <div class="main-standing-points">${driver.points}</div>
+                <div class="main-standing-points">${driver.points+sprintPoints}</div>
             </div>
         `;
     });
@@ -442,7 +461,7 @@ function renderMainConstructors() {
     const container = document.getElementById('mainConstructors');
     const topTeams = [...constructorsStandings]
         .sort((a, b) => b.points - a.points)
-        .slice(0, 1);
+        .slice(0, 3);
     
     let html = `
         <h2>Лидер кубка конструктора команд</h2>
@@ -491,12 +510,6 @@ function loadTabContent(tabName) {
             break;
         default:
             renderMainPage();
+			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
-
-
-
-
-
-
-
