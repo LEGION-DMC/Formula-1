@@ -722,6 +722,15 @@ h1, h2, h3, h4, h5, h6 {
 .cmd-close-modal {
     display: none;
 }
+    
+.cmd-modal-driver {
+    transition: all 0.3s ease;
+}
+    
+.cmd-modal-driver:hover {
+    background: #2a2a2a;
+    transform: translateX(5px);
+}
 
 /* -------------------------------------------------------------------------- "Пилоты" */
 .drv-container {
@@ -894,6 +903,16 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     gap: 10px;
     margin-top: 10px;
+}
+
+.drv-modal-team {
+    transition: background-color 0.3s;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.drv-modal-team:hover {
+    background-color: #3a3a3a;
 }
 
 .drv-modal-team-logo {
