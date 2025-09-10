@@ -610,14 +610,14 @@ function addModalHandlers() {
 
 // Рендер детальной таблицы личного зачёта
 function renderDriversDetailedTable() {
-    let html = `
+	let html = `
         <div class="detailed-table-container">
             <div class="detailed-table">
                 <div class="detailed-header">
                     <div class="detailed-col driver-col">Пилот</div>
     `;
-    
-    // Добавляем заголовки Гран-при
+    	
+    // Добавляем флаг Гран-при
     grandPrixOrder.forEach(gpId => {
         if (detailedResults[gpId]) {
             const gpName = getGPName(gpId);
@@ -629,10 +629,10 @@ function renderDriversDetailedTable() {
     });
     
     html += `<div class="detailed-col total-col">Σ</div></div>`;
-    
+	
     // Добавляем строки пилотов
     driversStandings.forEach(driver => {
-        html += `
+            html += `
             <div class="detailed-row">
                 <div class="detailed-col driver-col">
                     <span class="position">${driver.position}</span>
@@ -656,7 +656,14 @@ function renderDriversDetailedTable() {
     });
     
     html += `</div></div>`;
-    return html;
+	
+	html += `
+	<div class="detailed-info">
+		<h3>Система начисления очков:</h3>
+		<p>Очки начисляются только первым 10 финишировавшим пилотам</p>
+		<p>Очки: 25 – 18 – 15 – 12 – 10 – 8 – 6 – 4 – 2 – 1</p>
+	</div>`;
+	return html;
 }
 
 // Рендер детальной таблицы спринтов
@@ -704,7 +711,14 @@ function renderSprintDetailedTable() {
     });
     
     html += `</div></div>`;
-    return html;
+	
+	html += `
+	<div class="detailed-info">
+		<h3>Система начисления очков:</h3>
+		<p>Очки начисляются только первым 8 финишировавшим пилотам</p>
+		<p>Очки: 8 – 7 – 6 – 5 – 4 – 3 – 2 – 1</p>
+	</div>`;
+	return html;
 }
 
 // Открытие модального окна
