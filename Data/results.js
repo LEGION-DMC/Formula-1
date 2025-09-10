@@ -192,6 +192,7 @@ const detailedResults = {
         "Кими Антонелли": 2,
         "Исаак Хаджар": 1,
     },
+	/*
     "azerbaijan": {
         "000": 25,
         "000": 18,
@@ -204,6 +205,91 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
+    "singapore": {
+        "000": 25,
+        "000": 18,
+        "000": 15,
+        "000": 12,
+        "000": 10,
+        "000": 8,
+        "000": 6,
+        "000": 4,
+        "000": 2,
+        "000": 1,
+    },
+    "usa": {
+        "000": 25,
+        "000": 18,
+        "000": 15,
+        "000": 12,
+        "000": 10,
+        "000": 8,
+        "000": 6,
+        "000": 4,
+        "000": 2,
+        "000": 1,
+    },
+    "mexico": {
+        "000": 25,
+        "000": 18,
+        "000": 15,
+        "000": 12,
+        "000": 10,
+        "000": 8,
+        "000": 6,
+        "000": 4,
+        "000": 2,
+        "000": 1,
+    },
+    "brazil": {
+        "000": 25,
+        "000": 18,
+        "000": 15,
+        "000": 12,
+        "000": 10,
+        "000": 8,
+        "000": 6,
+        "000": 4,
+        "000": 2,
+        "000": 1,
+    },
+    "las-vegas": {
+        "000": 25,
+        "000": 18,
+        "000": 15,
+        "000": 12,
+        "000": 10,
+        "000": 8,
+        "000": 6,
+        "000": 4,
+        "000": 2,
+        "000": 1,
+    },
+    "qatar": {
+        "000": 25,
+        "000": 18,
+        "000": 15,
+        "000": 12,
+        "000": 10,
+        "000": 8,
+        "000": 6,
+        "000": 4,
+        "000": 2,
+        "000": 1,
+    },
+    "abu-dhabi": {
+        "000": 25,
+        "000": 18,
+        "000": 15,
+        "000": 12,
+        "000": 10,
+        "000": 8,
+        "000": 6,
+        "000": 4,
+        "000": 2,
+        "000": 1,
+    },
+	*/
 };
 
 // Спринт
@@ -238,6 +324,38 @@ const detailedSprintResults = {
         "Оливер Берман": 2,
         "Исаак Хаджар": 1,
     },
+	/*
+	"las-vegas": {
+        "000": 8,
+        "000": 7,
+        "000": 6,
+        "000": 5,
+        "000": 4,
+        "000": 3,
+        "000": 2,
+        "000": 1,
+    },
+	"brazil": {
+        "000": 8,
+        "000": 7,
+        "000": 6,
+        "000": 5,
+        "000": 4,
+        "000": 3,
+        "000": 2,
+        "000": 1,
+    },
+	"qatar": {
+        "000": 8,
+        "000": 7,
+        "000": 6,
+        "000": 5,
+        "000": 4,
+        "000": 3,
+        "000": 2,
+        "000": 1,
+    },
+	*/
 };
 
 // Пилоты
@@ -503,7 +621,10 @@ function renderDriversDetailedTable() {
     grandPrixOrder.forEach(gpId => {
         if (detailedResults[gpId]) {
             const gpName = getGPName(gpId);
-            html += `<div class="detailed-col gp-col">${gpName}</div>`;
+            html += `
+			<div class="detailed-col gp-col">
+			<img src="Images/Flags/${gpName.country}.svg" alt="flag" title="${gpName.state}" class="next-year-flag">
+			</div>`;
         }
     });
     
@@ -527,7 +648,7 @@ function renderDriversDetailedTable() {
             if (detailedResults[gpId]) {
                 const points = detailedResults[gpId][driver.name] || 0;
                 totalPoints += points;
-                html += `<div class="detailed-col gp-col">${points > 0 ? points : '0'}</div>`;
+                html += `<div class="detailed-col gp-col">${points > 0 ? points : '-'}</div>`;
             }
         });
         
@@ -550,7 +671,11 @@ function renderSprintDetailedTable() {
     // Добавляем заголовки спринтов
     Object.keys(detailedSprintResults).forEach(sprintId => {
         const sprintName = getSprintName(sprintId);
-        html += `<div class="detailed-col gp-col">${sprintName}</div>`;
+        html += `
+		<div class="detailed-col gp-col">
+		<img src="Images/Flags/${sprintName.country}.svg" alt="flag" title="${sprintName.state}" class="next-year-flag">
+		</div>
+		`;
     });
     
     html += `<div class="detailed-col total-col">Σ</div></div>`;
@@ -605,42 +730,133 @@ function openDetailedModal(title, content) {
 // Названия Гран-при
 function getGPName(gpId) {
     const gpNames = {
-        "australia": "АВС",
-        "china": "КИТ",
-        "japan": "ЯПО",
-        "bahrain": "БХР",
-        "saudi-arabia": "САУ",
-        "miami": "МАЙ",
-        "emilia-romagna": "ЭМР",
-        "monaco": "МОН",
-        "spain": "ИСП",
-        "canada": "КАН",
-        "austria": "АВТ",
-        "great-britain": "БРИ",
-        "belgium": "БЕЛ",
-        "hungary": "ВЕН",
-        "netherlands": "НИД",
-        "italy": "ИТА",
-        "azerbaijan": "АЗЕ",
-        "singapore": "СИН",
-        "usa": "США",
-        "mexico": "МЕХ",
-        "brazil": "БРА",
-        "las-vegas": "ЛВГ",
-        "qatar": "КАТ",
-        "abu-dhabi": "АБУ"
+    "australia": {
+		"country": "au",
+		"state": "Австралия",
+    },
+    "china": {
+		"country": "cn",
+		"state": "Китай",
+    },
+    "japan": {
+		"country": "jp",
+		"state": "Япония",
+    },
+	"bahrain": {
+		"country": "bh",
+		"state": "Бахрейн",
+    },
+	"saudi-arabia": {
+		"country": "sa",
+		"state": "Саудовская Аравия",
+    },
+    "miami": {
+		"country": "us",
+		"state": "США, Майами",
+    },
+	"emilia-romagna": {
+		"country": "it",
+		"state": "Италия, Имола",
+    },
+	"monaco": {
+		"country": "mc",
+		"state": "Манако",
+    },
+	"spain": {
+		"country": "es",
+		"state": "Испания",
+    },
+	"canada": {
+		"country": "ca",
+		"state": "Канада",
+    },
+    "austria": {
+		"country": "at",
+		"state": "Австрия",
+    },
+	"great-britain": {
+		"country": "gb",
+		"state": "Великобритания",
+    },
+	"belgium": {
+		"country": "be",
+		"state": "Бельгия",
+    },
+	"hungary": {
+		"country": "hu",
+		"state": "Венгрия",
+    },
+    "netherlands": {
+		"country": "nl",
+		"state": "Нидерланды",
+    },
+	"italy": {
+		"country": "it",
+		"state": "Италия",
+    },
+	"azerbaijan": {
+		"country": "az",
+		"state": "Азербайджан",
+    },
+	"singapore": {
+		"country": "sg",
+		"state": "Сингапур",
+    },
+	"usa": {
+		"country": "us",
+		"state": "США",
+    },
+	"mexico": {
+		"country": "mx",
+		"state": "Мексика",
+    },
+	"brazil": {
+		"country": "br",
+		"state": "Бразилия",
+    },
+	"las-vegas": {
+		"country": "us",
+		"state": "США, Лас-Вегас",
+    },
+	"qatar": {
+		"country": "qa",
+		"state": "Катар",
+    },
+	"abu-dhabi": {
+		"country": "ae",
+		"state": "Объеденённые Арабские Эмираты",
+    },
     };
-    return gpNames[gpId] || gpId;
-}
+    return gpNames[gpId] || gpId;}
 
 function getSprintName(sprintId) {
 	const sprintName = {
-        "china": "КИТ",
-        "miami": "МАЙ",
-        "belgium": "БЕЛ",
+    "china": {
+		"country": "cn",
+		"state": "Китай",
+    },
+    "miami": {
+		"country": "us",
+		"state": "США, Майами",
+    },
+	"belgium": {
+		"country": "be",
+		"state": "Бельгия",
+    },
+	"brazil": {
+		"country": "br",
+		"state": "Бразилия",
+    },
+	"las-vegas": {
+		"country": "us",
+		"state": "США, Лас-Вегас",
+    },
+	"qatar": {
+		"country": "qa",
+		"state": "Катар",
+    },
     };
-    return sprintName[sprintId] || sprintId;
-}
+    return sprintName[sprintId] || sprintId;}
 
 // Таблица личного зачёта пилотов
 function renderDriversStandings() {
