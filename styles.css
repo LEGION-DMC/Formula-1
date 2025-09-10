@@ -1783,6 +1783,17 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: 10px;
 }
 
+.detailed-info {
+    font-family: 'Font3', sans-serif;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    padding: 5px;
+    border-left: 3px solid;
+    border-radius: 4px;
+    background: #111;
+}
+
 /* Заголовки таблиц с курсором-указателем */
 #driversStandings h2,
 #sprintStandings h2 {
