@@ -100,6 +100,7 @@ function renderMainPage() {
         <div id="mainPage">
             <h2>Гран-При сезона 2025</h2>
             <div class="main-gp-cards" id="mainGpCards"></div>
+			<div class="tires-divider"></div>
             <div class="main-standings">
                 <div class="main-drivers" id="mainDrivers"></div>
                 <div class="main-constructors" id="mainConstructors"></div>
@@ -199,6 +200,7 @@ function renderMainGPCards() {
                 <div class="weather-header">
                     <h3>Погода на гонку</h3>
                 </div>
+                <div class="tires-divider"></div>
                 <div class="weather-block">
                     <div class="weather">
                         <img src="Images/Weather/cloud.png" alt="weather" class="weather-image active">
@@ -231,10 +233,13 @@ function renderMainGPCards() {
                     <h3>${currentGP.name}</h3>
                     <span class="main-gp-status ${isLive ? 'live' : ''}">${status}</span>
                 </div>
+                <div class="tires-divider"></div>
                 <div class="main-gp-image">
                     <img src="Images/Tracks/${currentGP.miniLogo}" alt="${currentGP.trackName}">
                 </div>
+                <div class="tires-divider"></div>
                 ${actionHtml}
+                <div class="tires-divider"></div>
                 <div class="main-gp-info">
                     <div class="main-gp-date">${formatDate(currentGP.date)}</div>
                     <div class="main-gp-track">${currentGP.trackName}</div>
@@ -249,6 +254,7 @@ function renderMainGPCards() {
                 <div class="tires-header">
                     <h3>Состав шин на гонку</h3>
                 </div>
+                <div class="tires-divider"></div>
                 <div class="dry-tires">
                     <div class="tire-item">
 						<span class="tire-name">---</span>
