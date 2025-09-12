@@ -355,8 +355,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .tires-divider {
     height: 1px;
-    background: #333;
-    margin: 8px 0;
+    background: #555;
+    margin-top: 8px;
+    margin-bottom: 12px;
 }
 
 /* Анимация для активных шин */
@@ -1346,22 +1347,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .close-modal {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
-    z-index: 2;
-    transition: color 0.2s;
-    font-weight: bold;
-}
-
-
-.close-modal:hover {
-    color: #e53935;
+    display: none;
 }
 
 .podium-title {
@@ -1899,11 +1885,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .glos-divider {
     height: 1px;
-    background: #333;
+    background: #555;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
 
 .term-card h3 {
     font-family: 'Font1', sans-serif;
