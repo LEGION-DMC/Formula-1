@@ -722,7 +722,7 @@ function renderSprintDetailedTable() {
 }
 
 // Открытие модального окна
-function openDetailedModal(title, content) {
+function openDetailedModal(title, content, tableType) {
     const modal = document.createElement('div');
     modal.className = 'modal detailed-modal';
     modal.innerHTML = `
@@ -734,10 +734,47 @@ function openDetailedModal(title, content) {
     
     document.body.appendChild(modal);
     
+    // Добавляем обработчики для выделения строк
+    addRowSelectionHandlers(modal, tableType);
+    
     // Закрытие модального окна
     modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
+    });
+}
+
+// Добавление обработчиков для выделения строк
+function addRowSelectionHandlers(modal, tableType) {
+    const rows = modal.querySelectorAll('.detailed-row');
+    
+    rows.forEach(row => {
+        // Делаем строки кликабельными
+        row.style.cursor = 'pointer';
+        
+        row.addEventListener('click', (e) => {
+            // Снимаем выделение со всех строк
+            rows.forEach(r => r.classList.remove('selected'));
+            
+            // Выделяем текущую строку
+            row.classList.add('selected');
+            
+            // Получаем данные пилота
+            const driverId = row.getAttribute('data-driver-id');
+            const driverName = row.getAttribute('data-driver-name');
+            
+            if (driverId && driverName) {
+                // Находим пилота в данных
+                const driverData = tableType === 'drivers' 
+                    ? driversStandings.find(d => d.name === driverName)
+                    : sprintStandings.find(d => d.name === driverName);
+                
+                if (driverData) {
+                    // Показываем дополнительную информацию о пилоте
+                    showDriverTooltip(e, driverData, tableType);
+                }
+            }
+        });
     });
 }
 
