@@ -1689,13 +1689,13 @@ h1, h2, h3, h4, h5, h6 {
 /* Модальное окно детальной статистики */
 .detailed-modal-content {
     max-width: 95%;
-    width: 95%;
+    width: 60%;
     max-height: 90vh;
 }
 
 .detailed-table-container {
     font-family: 'Font3';
-    font-size: 15px;
+    font-size: 18px;
     overflow-x: auto;
     margin: 20px 0;
     margin-left: 20px;
@@ -1735,18 +1735,18 @@ h1, h2, h3, h4, h5, h6 {
 .gp-col {
     min-width: 40px;
     text-align: center;
-    font-size: 13px;
 }
 
 .total-col {
-    min-width: 00px;
+    min-width: 50px;
     text-align: center;
-    background: #404040;
+    background: rgba(225, 10, 10, 0.5);
     box-shadow: -8px 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .gp-col:hover {
-    background: #404040;
+    background: rgba(225, 255, 255, 1);
+    color: black;
 }
 
 .detailed-row .driver-col {
@@ -1804,6 +1804,12 @@ h1, h2, h3, h4, h5, h6 {
 #driversStandings h2:hover,
 #sprintStandings h2:hover {
     color: red;
+}
+
+/* Выделение строки */
+.detailed-row.selected {
+    background: linear-gradient(90deg, rgba(0, 225, 225, 0.1) 0%, rgba(0, 225, 225, 0.2) 100%);
+    border-left: 3px solid rgba(0, 225, 225);
 }
 
 /* -------------------------------------------------------------------------- "Терминология" */
