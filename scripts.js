@@ -521,6 +521,10 @@ function loadTabContent(tabName) {
             renderResults();
             window.scrollTo({ top: 0, behavior: 'smooth' });
             break;
+        case 'stats':
+            renderStats();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            break;
         case 'glossary':
             renderGlossary(glossaryTerms);
             window.scrollTo({ top: 0, behavior: 'smooth' });
