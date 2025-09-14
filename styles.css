@@ -1798,6 +1798,94 @@ h1, h2, h3, h4, h5, h6 {
     border-left: 3px solid rgba(0, 225, 225);
 }
 
+/* -------------------------------------------------------------------------- "Результаты" */
+/* Статистика */
+.stats-container h1 {
+    color: #e53935;
+    font-family: 'Font1', sans-serif;
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.stats-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-table {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.stats-table h2 {
+    color: #e53935;
+    font-family: 'Font1', sans-serif;
+    font-size: 16px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.stats-table-header {
+    font-family: 'Font3', sans-serif;
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr 90px;
+    padding: 5px;
+    background: #252525;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.stats-table-row {
+    font-family: 'Font3', sans-serif;
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 80px;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.stats-table-row:hover {
+    background: #2a2a2a;
+}
+
+.stats-col {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stats-flag {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+.stats-team-logo {
+    width: 25px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Специфические стили для таблиц */
+#lapTimesTable .stats-table-header,
+#lapTimesTable .stats-table-row {
+    grid-template-columns: 18px 310px 175px 150px 10px;
+}
+
+#pitStopsTable .stats-table-header,
+#pitStopsTable .stats-table-row {
+    grid-template-columns: 28px 310px 130px 205px 10px;
+}
+
 /* -------------------------------------------------------------------------- "Терминология" */
 .search-bar {
     width: 100%;
