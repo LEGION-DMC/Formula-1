@@ -339,7 +339,7 @@ const tracksData = {
         "turns": 14,
         "drsZones": 2,
         "direction": "по часовой стрелке",
-        "lapRecord": "1:16.330 (Ферстаппен, 2023)",
+        "lapRecord": "1:15.743 (Пиастри, 2025)",
         "date": "2025-06-01 20:55",
 		"podium1": "Пиастри",
         "podium2": "Норрис",
