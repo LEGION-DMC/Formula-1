@@ -517,7 +517,7 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1.43.009 (Леклер, 2019)",
-        "date": "2025-09-21 19:00",
+        "date": "2025-09-21 18:50",
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
@@ -1127,3 +1127,4 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
