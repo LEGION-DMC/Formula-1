@@ -267,18 +267,18 @@ function renderMainGPCards() {
                         <span class="tire-name">C2</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Hard</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C3</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Medium</span>
-                        <img src="Images/Wheels/Medium.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C4</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Soft</span>
-                        <img src="Images/Wheels/Soft.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C5</span>
                     </div>
                     <div class="tire-item">
@@ -534,4 +534,5 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
