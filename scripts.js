@@ -203,24 +203,24 @@ function renderMainGPCards() {
                 <div class="tires-divider"></div>
                 <div class="weather-block">
                     <div class="weather">
-                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/cloud.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Погода</span>
-						<span class="weather-name" style="color: red">Дождь</span>
+						<span class="weather-name" style="color: red">Облачно</span>
                     </div>
                     <div class="weather">
                         <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Осадки</span>
-						<span class="weather-name" style="color: red">~ 100%</span>
+						<span class="weather-name" style="color: red">~ 0%</span>
                     </div>
                     <div class="weather">
                         <img src="Images/Weather/wind.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Ветер</span>
-						<span class="weather-name" style="color: red">10 м/с</span>
+						<span class="weather-name" style="color: red">7-10 м/с</span>
                     </div>
                     <div class="weather">
                         <img src="Images/Weather/temperature.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Темп.°C</span>
-						<span class="weather-name" style="color: red">18 °C</span>
+						<span class="weather-name" style="color: red">27 °C</span>
                     </div>
                 </div>
             </div>
@@ -534,5 +534,6 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
