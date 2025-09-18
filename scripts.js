@@ -210,7 +210,7 @@ function renderMainGPCards() {
                     <div class="weather">
                         <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Осадки</span>
-						<span class="weather-name" style="color: red">~ 0%</span>
+						<span class="weather-name" style="color: red">~ 22%</span>
                     </div>
                     <div class="weather">
                         <img src="Images/Weather/wind.png" alt="weather" class="weather-image active">
@@ -220,7 +220,7 @@ function renderMainGPCards() {
                     <div class="weather">
                         <img src="Images/Weather/temperature.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Темп.°C</span>
-						<span class="weather-name" style="color: red">27 °C</span>
+						<span class="weather-name" style="color: red">20 °C</span>
                     </div>
                 </div>
             </div>
@@ -534,6 +534,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
