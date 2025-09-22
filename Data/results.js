@@ -192,7 +192,6 @@ const detailedResults = {
         "Кими Антонелли": 2,
         "Исаак Хаджар": 1,
     },
-	/*
     "azerbaijan": {
         "Макс Ферстаппен": 25,
         "Джордж Расселл": 18,
@@ -205,6 +204,7 @@ const detailedResults = {
         "Шарль Леклер": 2,
         "Исаак Хаджар": 1,
     },
+	/*
     "singapore": {
         "000": 25,
         "000": 18,
@@ -1092,4 +1092,5 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
