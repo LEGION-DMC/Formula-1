@@ -518,9 +518,9 @@ const tracksData = {
         "direction": "против часовой стрелки",
         "lapRecord": "1.43.009 (Леклер, 2019)",
         "date": "2025-09-21 18:50",
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
+		"podium1": "Ферстаппен",
+        "podium2": "Расселл",
+        "podium3": "Сайнс",
         "streamLink": "",
         "recordingLink": ""
     },
@@ -1127,4 +1127,5 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
