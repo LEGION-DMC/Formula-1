@@ -194,6 +194,16 @@ const fastestPitStops = [
         driverCountry: "au",
         time: "1.91s",
     },
+    {
+        id: 17,
+        track: "Гран-при Азербайджана",
+        country: "az",
+        team: "Red Bull",
+        teamLogo: "RedBull-m.png",
+        driver: "Юки Цунода",
+        driverCountry: "jp",
+        time: "2.14s",
+    },
 ];
 
 // Функция рендеринга страницы статистики
@@ -304,4 +314,5 @@ function renderPitStopsTable() {
 // Инициализация при загрузке вкладки
 if (window.location.hash === '#stats') {
     renderStats();
+
 }
