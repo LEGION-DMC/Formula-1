@@ -203,24 +203,24 @@ function renderMainGPCards() {
                 <div class="tires-divider"></div>
                 <div class="weather-block">
                     <div class="weather">
-                        <img src="Images/Weather/cloud.png" alt="weather" class="weather-image inactive">
+                        <img src="Images/Weather/sun.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Погода</span>
-						<span class="weather-name" style="color: red">--</span>
+						<span class="weather-name" style="color: red">Солнечно</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image inactive">
+                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Осадки</span>
-						<span class="weather-name" style="color: red">~ --%</span>
+						<span class="weather-name" style="color: red">~ 5%</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image inactive">
+                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Ветер</span>
-						<span class="weather-name" style="color: red">-- м/с</span>
+						<span class="weather-name" style="color: red">1-3 м/с</span>
                     </div>
                     <div class="weather">
                         <img src="Images/Weather/temperature.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Темп.°C</span>
-						<span class="weather-name" style="color: red">31 °C</span>
+						<span class="weather-name" style="color: red">28 °C</span>
                     </div>
                 </div>
             </div>
@@ -534,6 +534,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
