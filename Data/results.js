@@ -426,8 +426,8 @@ const sprintStandings = [
 const raceWinners = [
     { grandPrix: "Китай Бахрейн Саудовская Аравия Майами Испания Бельгия Нидерланды", position: "1", winner: "Оскар Пиастри", country: "au", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
     { grandPrix: "Австралия Манако Австрия Великобритания Венгрия", position: "2", winner: "Ландо Норрис", country: "gb", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
-    { grandPrix: "Япония Эмилия-Романья Италия Азербайджан", position: "3", winner: "Макс Ферстаппен", country: "nl", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
-    { grandPrix: "Канада", position: "4", winner: "Джордж Расселл", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
+    { grandPrix: "Япония Эмилия-Романья Италия Азербайджан США", position: "3", winner: "Макс Ферстаппен", country: "nl", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
+    { grandPrix: "Канада Сингапур", position: "4", winner: "Джордж Расселл", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
 ];
 
 // Список Гран-при
@@ -1092,6 +1092,7 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
 
 
