@@ -540,9 +540,9 @@ const tracksData = {
         "direction": "против часовой стрелки",
         "lapRecord": "1:35.867 (Хэмилтон, 2023)",
         "date": "2025-10-05 20:00",
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
+		"podium1": "Расселл",
+        "podium2": "Ферстаппен",
+        "podium3": "Норрис",
         "streamLink": "",
         "recordingLink": ""
     },
@@ -563,9 +563,9 @@ const tracksData = {
         "lapRecord": "1:32.029 (Боттас, 2019)",
         "date": "2025-10-20 02:00",
 		"hasSprint": true,
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
+		"podium1": "Ферстаппен",
+        "podium2": "Норрис",
+        "podium3": "Леклер",
         "streamLink": "",
         "recordingLink": ""
     },
@@ -1127,5 +1127,6 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
