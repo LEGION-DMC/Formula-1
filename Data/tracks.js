@@ -522,7 +522,7 @@ const tracksData = {
         "podium2": "Расселл",
         "podium3": "Сайнс",
         "streamLink": "",
-        "recordingLink": ""
+        "recordingLink": "https://rutube.ru/video/2c7563212e849f8cd4603cabb311a54b/"
     },
     "marina-bay": {
         "id": "t18",
@@ -544,7 +544,7 @@ const tracksData = {
         "podium2": "Ферстаппен",
         "podium3": "Норрис",
         "streamLink": "",
-        "recordingLink": ""
+        "recordingLink": "https://rutube.ru/video/c95ac2ce7c722fa997dfe573762f4eb1/"
     },
     "cota": {
         "id": "t19",
@@ -567,7 +567,7 @@ const tracksData = {
         "podium2": "Норрис",
         "podium3": "Леклер",
         "streamLink": "",
-        "recordingLink": ""
+        "recordingLink": "https://rutube.ru/video/2e90450cce43500564a96723b0101e4f/"
     },
     "Rodriguez": {
         "id": "t20",
@@ -588,8 +588,8 @@ const tracksData = {
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
-        "streamLink": "",
-        "recordingLink": ""
+        "streamLink": "https://rutube.ru/video/8bc21f5f4e8e56e799656b6d396f5e83",
+        "recordingLink": "https://rutube.ru/video/8bc21f5f4e8e56e799656b6d396f5e83"
     },
     "interlagos": {
         "id": "t21",
@@ -1127,6 +1127,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
