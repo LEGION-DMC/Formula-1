@@ -224,6 +224,16 @@ const fastestPitStops = [
         driverCountry: "nz",
         time: "2.18s",
     },
+	{
+        id: 20,
+        track: "Гран-при Мексики",
+        country: "mx",
+        team: "",
+        teamLogo: "-m.png",
+        driver: "",
+        driverCountry: "",
+        time: "0.00s",
+    },
 ];
 
 // Функция рендеринга страницы статистики
@@ -336,5 +346,6 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
 
