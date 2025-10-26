@@ -1798,7 +1798,7 @@ h1, h2, h3, h4, h5, h6 {
     border-left: 3px solid rgba(0, 225, 225);
 }
 
-/* -------------------------------------------------------------------------- "Результаты" */
+/* -------------------------------------------------------------------------- "Статистика" */
 /* Статистика */
 .stats-container h1 {
     color: #e53935;
@@ -1823,6 +1823,7 @@ h1, h2, h3, h4, h5, h6 {
     background: #1e1e1e;
     border-radius: 8px;
     padding: 10px;
+    margin-bottom: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -1884,6 +1885,63 @@ h1, h2, h3, h4, h5, h6 {
 #pitStopsTable .stats-table-header,
 #pitStopsTable .stats-table-row {
     grid-template-columns: 28px 310px 130px 205px 10px;
+}
+
+/* Стили для таблицы квалификаций */
+/* Стили для таблицы квалификаций */
+#CvalaTable .stats-table-header,
+#CvalaTable .stats-table-row {
+    grid-template-columns: 40px 1fr 100px 1fr 40px;
+    text-align: center;
+}
+
+#CvalaTable .stats-col.driver {
+    justify-content: center;
+    text-align: center;
+}
+
+#CvalaTable .stats-col.team-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#CvalaTable .stats-col.cvala {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.cvala-score {
+    color: #e53935;
+    min-width: 20px;
+    text-align: center;
+}
+
+.cvala-vs {
+    color: #ffffff;
+    font-weight: normal;
+}
+
+.stats-table-row:hover {
+    transform: translateX(-5px);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    #CvalaTable .stats-table-header,
+    #CvalaTable .stats-table-row {
+        grid-template-columns: 30px 1fr 80px 1fr 30px;
+        font-size: 0.9em;
+    }
+    
+    #CvalaTable .stats-col.cvala {
+        font-size: 1.1em;
+        gap: 5px;
+    }
 }
 
 /* -------------------------------------------------------------------------- "Терминология" */
