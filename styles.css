@@ -1888,46 +1888,38 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Стили для таблицы квалификаций */
-/* Стили для таблицы квалификаций */
-#CvalaTable .stats-table-header,
-#CvalaTable .stats-table-row {
+.stats-table-header,
+.stats-table-row {
     grid-template-columns: 40px 1fr 100px 1fr 40px;
     text-align: center;
 }
 
-#CvalaTable .stats-col.driver {
-    justify-content: center;
-    text-align: center;
-}
-
-#CvalaTable .stats-col.team-logo {
+.stats-col.team-logo {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#CvalaTable .stats-col.cvala {
+.stats-col.driver.driver1 {
+    text-align: left;
+}
+
+.stats-col.driver.driver2 {
+    text-align: right;
+    flex-direction: row-reverse;
+    margin-right: 10px;
+}
+
+.stats-col.cvala {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    font-weight: bold;
-    font-size: 1.2em;
 }
 
 .cvala-score {
     color: #e53935;
     min-width: 20px;
     text-align: center;
-}
-
-.cvala-vs {
-    color: #ffffff;
-    font-weight: normal;
-}
-
-.stats-table-row:hover {
-    transform: translateX(-5px);
 }
 
 /* Адаптивность для мобильных устройств */
