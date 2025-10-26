@@ -204,6 +204,26 @@ const fastestPitStops = [
         driverCountry: "jp",
         time: "2.14s",
     },
+	{
+        id: 18,
+        track: "Гран-при Сингапура",
+        country: "sn",
+        team: "Red Bull",
+        teamLogo: "RedBull-m.png",
+        driver: "Юки Цунода",
+        driverCountry: "jp",
+        time: "2.05s",
+    },
+	{
+        id: 19,
+        track: "Гран-при США",
+        country: "us",
+        team: "Racing Bulls",
+        teamLogo: "RacingBulls-m.png",
+        driver: "Лиам Лоусон",
+        driverCountry: "nz",
+        time: "2.18s",
+    },
 ];
 
 // Функция рендеринга страницы статистики
@@ -316,3 +336,4 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
