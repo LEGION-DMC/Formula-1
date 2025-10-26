@@ -207,7 +207,7 @@ const fastestPitStops = [
 	{
         id: 18,
         track: "Гран-при Сингапура",
-        country: "sn",
+        country: "sg",
         team: "Red Bull",
         teamLogo: "RedBull-m.png",
         driver: "Юки Цунода",
@@ -336,4 +336,5 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
