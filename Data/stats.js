@@ -468,9 +468,9 @@ function renderCvalaTable() {
     let html = `
         <div class="stats-table-header">
             <div class="stats-col team-logo"></div>
-            <div class="stats-col driver">Пилот</div>
+            <div class="stats-col driver driver1">Пилот</div>
             <div class="stats-col cvala">Счёт</div>
-            <div class="stats-col driver">Пилот</div>
+            <div class="stats-col driver driver2">Пилот</div>
             <div class="stats-col team-logo"></div>
         </div>
     `;
@@ -481,7 +481,7 @@ function renderCvalaTable() {
                 <div class="stats-col team-logo">
                     <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
                 </div>
-                <div class="stats-col driver">
+                <div class="stats-col driver driver1">
                     <img src="Images/Flags/${item.driverCountry1}.svg" alt="${item.driverCountry1}" class="stats-flag">
                     ${item.driver1}
                 </div>
@@ -490,7 +490,7 @@ function renderCvalaTable() {
                     <span class="cvala-vs">:</span>
                     <span class="cvala-score">${item.cvala2}</span>
                 </div>
-                <div class="stats-col driver">
+                <div class="stats-col driver driver2">
                     <img src="Images/Flags/${item.driverCountry2}.svg" alt="${item.driverCountry2}" class="stats-flag">
                     ${item.driver2}
                 </div>
@@ -509,3 +509,4 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
