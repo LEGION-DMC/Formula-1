@@ -236,6 +236,120 @@ const fastestPitStops = [
     },
 ];
 
+// Данные для счёта квалификаций пилотов в команде
+const Cvala = [
+    {
+        id: 1,
+        team: "McLaren",
+        teamLogo: "McLaren-m.png",
+        driver1: "Оскар Пиастри",
+        driverCountry1: "au",
+        cvala1: "10",
+        driver2: "Ландо Норрис",
+        driverCountry2: "gb",
+        cvala2: "10",
+    },
+    {
+        id: 2,
+        team: "Ferrari",
+        teamLogo: "Ferrari-m.png",
+        driver1: "Шарль Леклер",
+        driverCountry1: "mc",
+        cvala1: "15",
+        driver2: "Льюис Хэмилтон",
+        driverCountry2: "gb",
+        cvala2: "5",
+    },
+    {
+        id: 3,
+        team: "Red Bull",
+        teamLogo: "RedBull-m.png",
+        driver1: "Макс Ферстаппен",
+        driverCountry1: "nl",
+        cvala1: "18",
+        driver2: "Юки Цунода",
+        driverCountry2: "jp",
+        cvala2: "0",
+    },
+    {
+        id: 4,
+        team: "Mercedes",
+        teamLogo: "Mercedes-m.png",
+        driver1: "Джордж Расселл",
+        driverCountry1: "gb",
+        cvala1: "18",
+        driver2: "Кими Антонелли",
+        driverCountry2: "it",
+        cvala2: "2",
+    },
+    {
+        id: 5,
+        team: "Aston Martin",
+        teamLogo: "AstonMartin-m.png",
+        driver1: "Лэнс Стролл",
+        driverCountry1: "ca",
+        cvala1: "0",
+        driver2: "Фернандо Алонсо",
+        driverCountry2: "es",
+        cvala2: "20",
+    },
+    {
+        id: 6,
+        team: "Alpine",
+        teamLogo: "Alpine-m.png",
+        driver1: "Пьер Гасли",
+        driverCountry1: "fr",
+        cvala1: "9",
+        driver2: "Франко Колапинто",
+        driverCountry2: "ar",
+        cvala2: "5",
+    },
+    {
+        id: 7,
+        team: "Haas",
+        teamLogo: "Haas-m.png",
+        driver1: "Эстебан Окон",
+        driverCountry1: "fr",
+        cvala1: "8",
+        driver2: "Оливер Берман",
+        driverCountry2: "de",
+        cvala2: "12",
+    },
+    {
+        id: 8,
+        team: "Racing Bulls",
+        teamLogo: "RacingBulls-m.png",
+        driver1: "Исак Хаджар",
+        driverCountry1: "fr",
+        cvala1: "13",
+        driver2: "Лиам Лоусон",
+        driverCountry2: "nz",
+        cvala2: "5",
+    },
+    {
+        id: 9,
+        team: "Williams",
+        teamLogo: "Williams-m.png",
+        driver1: "Александр Албон",
+        driverCountry1: "th",
+        cvala1: "9",
+        driver2: "Карлос Сайнс",
+        driverCountry2: "es",
+        cvala2: "11",
+    },
+    {
+        id: 10,
+        team: "Kick-Sauber",
+        teamLogo: "Sauber-m.png",
+        driver1: "Нико Хюлкенберг",
+        driverCountry1: "de",
+        cvala1: "9",
+        driver2: "Габриэль Бортолето",
+        driverCountry2: "br",
+        cvala2: "11",
+    }
+];
+
 // Функция рендеринга страницы статистики
 function renderStats() {
     const content = document.getElementById('content');
@@ -245,8 +359,13 @@ function renderStats() {
             
             <div class="stats-grid">
                 <div class="stats-column">
+                    <div class="stats-table" id="CvalaTable">
+                        <h2>Зачёт квалификации пилотов в команде</h2>
+                        <div class="stats-table-content"></div>
+                    </div>
+
                     <div class="stats-table" id="lapTimesTable">
-                        <h2>Рекорды Лучшего времена круга</h2>
+                        <h2>Рекорды лучшего времени круга</h2>
                         <div class="stats-table-content"></div>
                     </div>
                 </div>
@@ -261,6 +380,7 @@ function renderStats() {
         </div>
     `;
 
+    renderCvalaTable();
     renderLapTimesTable();
     renderPitStopsTable();
 }
@@ -341,11 +461,51 @@ function renderPitStopsTable() {
     container.innerHTML = html;
 }
 
+// Рендеринг таблицы счёта квалификаций
+function renderCvalaTable() {
+    const container = document.querySelector('#CvalaTable .stats-table-content');
+    
+    let html = `
+        <div class="stats-table-header">
+            <div class="stats-col team-logo"></div>
+            <div class="stats-col driver">Пилот</div>
+            <div class="stats-col cvala">Счёт</div>
+            <div class="stats-col driver">Пилот</div>
+            <div class="stats-col team-logo"></div>
+        </div>
+    `;
+    
+    Cvala.forEach((item) => {
+        html += `
+            <div class="stats-table-row">
+                <div class="stats-col team-logo">
+                    <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
+                </div>
+                <div class="stats-col driver">
+                    <img src="Images/Flags/${item.driverCountry1}.svg" alt="${item.driverCountry1}" class="stats-flag">
+                    ${item.driver1}
+                </div>
+                <div class="stats-col cvala">
+                    <span class="cvala-score">${item.cvala1}</span>
+                    <span class="cvala-vs">:</span>
+                    <span class="cvala-score">${item.cvala2}</span>
+                </div>
+                <div class="stats-col driver">
+                    <img src="Images/Flags/${item.driverCountry2}.svg" alt="${item.driverCountry2}" class="stats-flag">
+                    ${item.driver2}
+                </div>
+                <div class="stats-col team-logo">
+                    <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
 // Инициализация при загрузке вкладки
 if (window.location.hash === '#stats') {
     renderStats();
 
 }
-
-
-
