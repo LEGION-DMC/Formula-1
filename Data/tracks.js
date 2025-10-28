@@ -533,12 +533,12 @@ const tracksData = {
 		"state": "Сингапур",
         "location": "Сингапур",
         "trackName": "Марина-Бэй",
-        "length": "5 065 км",
-        "laps": 61,
+        "length": "4 927 км",
+        "laps": 62,
         "turns": 23,
         "drsZones": 3,
         "direction": "против часовой стрелки",
-        "lapRecord": "1:35.867 (Хэмилтон, 2023)",
+        "lapRecord": "1:34.486 (Рикиардо, 2024)",
         "date": "2025-10-05 20:00",
 		"podium1": "Расселл",
         "podium2": "Ферстаппен",
@@ -560,7 +560,7 @@ const tracksData = {
         "turns": 20,
         "drsZones": 2,
         "direction": "против часовой стрелки",
-        "lapRecord": "1:32.029 (Боттас, 2019)",
+        "lapRecord": "1:36.169 (Леклер, 2019)",
         "date": "2025-10-20 02:00",
 		"hasSprint": true,
 		"podium1": "Ферстаппен",
@@ -571,7 +571,7 @@ const tracksData = {
     },
     "Rodriguez": {
         "id": "t20",
-        "name": "Гран-при Мексики",
+        "name": "Гран-при Мехико",
         "logo": "Rodríguez.svg",
         "miniLogo": "Rodríguez-m.svg",
 		"country": "mx",
@@ -583,7 +583,7 @@ const tracksData = {
         "turns": 17,
         "drsZones": 3,
         "direction": "против часовой стрелки",
-        "lapRecord": "1:14.759 (Риккардо, 2018)",
+        "lapRecord": "1:17.774 (Боттас, 2021)",
         "date": "2025-10-27 03:00",
 		"podium1": "---",
         "podium2": "---",
@@ -1050,6 +1050,12 @@ function openModal(track) {
                     <span class="value">${track.length}</span>
                 </div>
                 
+				<div class="info-row">
+                    <img src="Images/Icon/track.webp" alt="Кол-во кругов">
+                    <span>Кол-во кругов:</span>
+                    <span class="value">${track.laps}</span>
+                </div>
+				
                 <div class="info-row">
                     <img src="Images/Icon/track.webp" alt="Повороты">
                     <span>Повороты:</span>
