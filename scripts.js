@@ -203,24 +203,24 @@ function renderMainGPCards() {
                 <div class="tires-divider"></div>
                 <div class="weather-block">
                     <div class="weather">
-                        <img src="Images/Weather/sun.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/sun.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Погода</span>
-						<span class="weather-name" style="color: red">Солнечно</span>
+						<span class="weather-name" style="color: red">---</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Осадки</span>
-						<span class="weather-name" style="color: red">~ 5%</span>
+						<span class="weather-name" style="color: red">---</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Ветер</span>
-						<span class="weather-name" style="color: red">1-3 м/с</span>
+						<span class="weather-name" style="color: red">---/с</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Темп.°C</span>
-						<span class="weather-name" style="color: red">26 °C</span>
+						<span class="weather-name" style="color: red">---</span>
                     </div>
                 </div>
             </div>
@@ -262,27 +262,27 @@ function renderMainGPCards() {
                         <span class="tire-name">C1</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Hard</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C2</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Hard</span>
+						<span class="tire-name">---</span>
                         <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C3</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Medium</span>
-                        <img src="Images/Wheels/Medium.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C4</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Soft</span>
-                        <img src="Images/Wheels/Soft.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C5</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Hard</span>
+						<span class="tire-name">---</span>
                         <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C6</span>
                     </div>
@@ -534,6 +534,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
