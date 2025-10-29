@@ -585,10 +585,10 @@ const tracksData = {
         "direction": "против часовой стрелки",
         "lapRecord": "1:17.774 (Боттас, 2021)",
         "date": "2025-10-27 03:00",
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
-        "streamLink": "https://rutube.ru/video/8bc21f5f4e8e56e799656b6d396f5e83",
+		"podium1": "Норрис",
+        "podium2": "Леклер",
+        "podium3": "Ферстаппен",
+        "streamLink": "",
         "recordingLink": "https://rutube.ru/video/8bc21f5f4e8e56e799656b6d396f5e83"
     },
     "interlagos": {
@@ -1133,6 +1133,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
