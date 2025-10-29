@@ -478,10 +478,10 @@ function renderMainConstructors() {
     const container = document.getElementById('mainConstructors');
     const topTeams = [...constructorsStandings]
         .sort((a, b) => b.points - a.points)
-        .slice(0, 3);
+        .slice(0, 1);
     
     let html = `
-        <h2>Лидер кубка конструктора команд</h2>
+        <h2>Чемпион кубка конструкторов команд</h2>
         <div class="main-standings-list">
     `;
     
@@ -534,6 +534,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
