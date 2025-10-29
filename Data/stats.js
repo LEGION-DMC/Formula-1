@@ -228,11 +228,11 @@ const fastestPitStops = [
         id: 20,
         track: "Гран-при Мексики",
         country: "mx",
-        team: "",
-        teamLogo: "-m.png",
-        driver: "",
-        driverCountry: "",
-        time: "0.00s",
+        team: "McLaren",
+        teamLogo: "McLaren-m.png",
+        driver: "Оскар Пиастри",
+        driverCountry: "au",
+        time: "2.10s",
     },
 ];
 
@@ -509,4 +509,5 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
