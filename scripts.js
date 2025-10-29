@@ -481,7 +481,7 @@ function renderMainConstructors() {
         .slice(0, 1);
     
     let html = `
-        <h2>Чемпион кубка конструкторов команд</h2>
+        <h2>Чемпион кубка конструкторов 2025</h2>
         <div class="main-standings-list">
     `;
     
@@ -534,6 +534,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
