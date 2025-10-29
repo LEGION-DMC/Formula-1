@@ -324,6 +324,16 @@ const detailedSprintResults = {
         "Оливер Берман": 2,
         "Исаак Хаджар": 1,
     },
+	"usa": {
+        "Макс Ферстаппен": 8,
+        "Джордж Расселл": 7,
+        "Карлос Сайнс": 6,
+        "Льюис Хэмилтон": 5,
+        "Шарль Леклер": 4,
+        "Александр Албон": 3,
+        "Юки Цунода": 2,
+        "Кими Антонелли": 1,
+    },
 	/*
 	"las-vegas": {
         "000": 8,
@@ -894,6 +904,10 @@ function getSprintName(sprintId) {
 		"country": "be",
 		"state": "Бельгия",
     },
+	"usa": {
+		"country": "us",
+		"state": "США",
+    },
 	"brazil": {
 		"country": "br",
 		"state": "Бразилия",
@@ -1092,6 +1106,7 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
 
 
