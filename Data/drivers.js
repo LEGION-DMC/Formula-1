@@ -601,10 +601,31 @@ function renderDrivers() {
     renderDriversList(driversData);
 }
 
-// Модальное окно
+// Вычисления возраста
+// Добавляем функцию для вычисления возраста
+function calculateAge(birthDate) {
+    const [day, month, year] = birthDate.split('.').map(Number);
+    const birth = new Date(year, month - 1, day);
+    const today = new Date();
+    
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    
+    // Если день рождения еще не наступил в этом году, вычитаем 1 год
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age--;
+    }
+    
+    return age;
+}
+
+// Обновляем функцию openDriverModal для отображения возраста
 function openDriverModal(driver) {
     const modal = document.createElement('div');
     modal.className = 'drv-modal';
+    
+    // Вычисляем возраст
+    const age = calculateAge(driver.birthDate);
     
     // Структура модального окна
     modal.innerHTML = `
@@ -634,7 +655,7 @@ function openDriverModal(driver) {
             </div>
             <div class="drv-info-row">
                 <span class="drv-info-label">Дата рождения:</span>
-                <span class="drv-info-value">${driver.birthDate}</span>
+                <span class="drv-info-value">${driver.birthDate} (${age} лет)</span>
             </div>
             <div class="drv-info-row">
                 <span class="drv-info-label">Дебют:</span>
@@ -678,17 +699,20 @@ function openDriverModal(driver) {
         <button class="drv-close-modal">&times;</button>
     `;
     
-    // Добавляем модальное окно в DOM
+    // Остальной код функции остается без изменений
     document.body.appendChild(modal);
     
-    // Обработчики закрытия модального окна
     modal.querySelector('.drv-close-modal').addEventListener('click', () => modal.remove());
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
     });
     
-    // Добавляем обработчик клика на команду
     addTeamClickHandler(modal, driver.team);
+}
+
+// Инициализация при загрузке вкладки
+if (window.location.hash === '#drivers') {
+    renderDrivers();
 }
 
 // Функция для обработки клика на команду
