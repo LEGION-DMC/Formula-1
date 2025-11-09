@@ -593,7 +593,7 @@ const tracksData = {
     },
     "interlagos": {
         "id": "t21",
-        "name": "Гран-при Бразилии",
+        "name": "Гран-при Сан-Паулу",
         "logo": "Interlagos.svg",
         "miniLogo": "Interlagos-m.svg",
 		"country": "br",
@@ -611,8 +611,8 @@ const tracksData = {
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
-        "streamLink": "",
-        "recordingLink": ""
+        "streamLink": "https://rutube.ru/video/193f090bea7b3098917ad48f1f55985a/",
+        "recordingLink": "https://rutube.ru/video/193f090bea7b3098917ad48f1f55985a/"
     },
     "las-vegas": {
         "id": "t22",
@@ -1133,8 +1133,3 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
-
-
-
-
-
