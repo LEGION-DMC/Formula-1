@@ -247,7 +247,7 @@ const Cvala = [
         cvala1: "10",
         driver2: "Ландо Норрис",
         driverCountry2: "gb",
-        cvala2: "10",
+        cvala2: "11",
     },
     {
         id: 2,
@@ -255,7 +255,7 @@ const Cvala = [
         teamLogo: "Ferrari-m.png",
         driver1: "Шарль Леклер",
         driverCountry1: "mc",
-        cvala1: "15",
+        cvala1: "16",
         driver2: "Льюис Хэмилтон",
         driverCountry2: "gb",
         cvala2: "5",
@@ -266,7 +266,7 @@ const Cvala = [
         teamLogo: "RedBull-m.png",
         driver1: "Макс Ферстаппен",
         driverCountry1: "nl",
-        cvala1: "18",
+        cvala1: "19",
         driver2: "Юки Цунода",
         driverCountry2: "jp",
         cvala2: "0",
@@ -280,7 +280,7 @@ const Cvala = [
         cvala1: "18",
         driver2: "Кими Антонелли",
         driverCountry2: "it",
-        cvala2: "2",
+        cvala2: "3",
     },
     {
         id: 5,
@@ -291,7 +291,7 @@ const Cvala = [
         cvala1: "0",
         driver2: "Фернандо Алонсо",
         driverCountry2: "es",
-        cvala2: "20",
+        cvala2: "21",
     },
     {
         id: 6,
@@ -299,7 +299,7 @@ const Cvala = [
         teamLogo: "Alpine-m.png",
         driver1: "Пьер Гасли",
         driverCountry1: "fr",
-        cvala1: "9",
+        cvala1: "10",
         driver2: "Франко Колапинто",
         driverCountry2: "ar",
         cvala2: "5",
@@ -313,7 +313,7 @@ const Cvala = [
         cvala1: "8",
         driver2: "Оливер Берман",
         driverCountry2: "de",
-        cvala2: "12",
+        cvala2: "13",
     },
     {
         id: 8,
@@ -321,7 +321,7 @@ const Cvala = [
         teamLogo: "RacingBulls-m.png",
         driver1: "Исак Хаджар",
         driverCountry1: "fr",
-        cvala1: "13",
+        cvala1: "14",
         driver2: "Лиам Лоусон",
         driverCountry2: "nz",
         cvala2: "5",
@@ -343,7 +343,7 @@ const Cvala = [
         teamLogo: "Sauber-m.png",
         driver1: "Нико Хюлкенберг",
         driverCountry1: "de",
-        cvala1: "9",
+        cvala1: "10",
         driver2: "Габриэль Бортолето",
         driverCountry2: "br",
         cvala2: "11",
@@ -509,5 +509,3 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
-
-
