@@ -203,24 +203,24 @@ function renderMainGPCards() {
                 <div class="tires-divider"></div>
                 <div class="weather-block">
                     <div class="weather">
-                        <img src="Images/Weather/sun.png" alt="weather" class="weather-image inactive">
+                        <img src="Images/Weather/cloud.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Погода</span>
-						<span class="weather-name" style="color: red">---</span>
+						<span class="weather-name" style="color: red">Облачно</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image inactive">
+                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Осадки</span>
-						<span class="weather-name" style="color: red">---</span>
+						<span class="weather-name" style="color: red">0%</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image inactive">
+                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Ветер</span>
-						<span class="weather-name" style="color: red">---/с</span>
+						<span class="weather-name" style="color: red">5-10 м/с</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image inactive">
+                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image active">
                         <span class="weather-name">Темп.°C</span>
-						<span class="weather-name" style="color: red">---</span>
+						<span class="weather-name" style="color: red">20 °C</span>
                     </div>
                 </div>
             </div>
@@ -262,18 +262,18 @@ function renderMainGPCards() {
                         <span class="tire-name">C1</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+						<span class="tire-name">Hard</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image active">
                         <span class="tire-name">C2</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+						<span class="tire-name">Medium</span>
+                        <img src="Images/Wheels/Medium.png" alt="Wheels" class="tire-image active">
                         <span class="tire-name">C3</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+						<span class="tire-name">Soft</span>
+                        <img src="Images/Wheels/Soft.png" alt="Wheels" class="tire-image active">
                         <span class="tire-name">C4</span>
                     </div>
                     <div class="tire-item">
@@ -534,6 +534,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
