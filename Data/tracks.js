@@ -608,10 +608,10 @@ const tracksData = {
         "lapRecord": "1:10.540 (Боттас, 2018)",
         "date": "2025-11-10 01:00",
 		"hasSprint": true,
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
-        "streamLink": "https://rutube.ru/video/193f090bea7b3098917ad48f1f55985a/",
+		"podium1": "Норрис",
+        "podium2": "Антонелли",
+        "podium3": "Ферстаппен",
+        "streamLink": "",
         "recordingLink": "https://rutube.ru/video/193f090bea7b3098917ad48f1f55985a/"
     },
     "las-vegas": {
@@ -1133,3 +1133,4 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
