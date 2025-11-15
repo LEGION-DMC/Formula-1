@@ -16,6 +16,47 @@ h1, h2, h3, h4, h5, h6 {
     color: #e53935; 
 }
 
+/* -------------------------------------------------------------------------- Анимированный фон */
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url('Images/fon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-x;
+    z-index: -1;
+    animation: moveBackground 20s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    position: relative;
+    z-index: 2;
+}
+
 /* -------------------------------------------------------------------------- Верхняя панель */
 .header {
     padding: 0 10px;
