@@ -244,6 +244,16 @@ const fastestPitStops = [
         driverCountry: "jp",
         time: "1.95s",
     },
+	{
+        id: 22,
+        track: "Гран-при Лас-Вегаса",
+        country: "br",
+        team: "Red Bull",
+        teamLogo: "RedBull-m.png",
+        driver: "Юки Цунода",
+        driverCountry: "jp",
+        time: "1.99s",
+    },
 ];
 
 // Данные для счёта квалификаций пилотов в команде
@@ -519,4 +529,5 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
