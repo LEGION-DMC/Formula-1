@@ -261,17 +261,17 @@ const fastestPitStops = [
         team: "---",
         teamLogo: "F1.png",
         driver: "---",
-        driverCountry: "qa",
+        driverCountry: "un",
         time: "0.00s",
     },
 	{
         id: 24,
         track: "Гран-при Абу-Даби",
         country: "ae",
-        team: "Red Bull",
+        team: "---",
         teamLogo: "F1.png",
         driver: "---",
-        driverCountry: "ae",
+        driverCountry: "un",
         time: "0.00s",
     },
 ];
@@ -549,6 +549,7 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
 
 
