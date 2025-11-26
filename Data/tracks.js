@@ -630,11 +630,11 @@ const tracksData = {
         "direction": "против часовой стрелки",
         "lapRecord": "1:32.312 (Рассел, 2024)",
         "date": "2025-11-22 12:00",
-		"podium1": "---",
-        "podium2": "---",
-        "podium3": "---",
+		"podium1": "Ферстаппен",
+        "podium2": "Расселл",
+        "podium3": "Антонелли",
         "streamLink": "",
-        "recordingLink": ""
+        "recordingLink": "https://rutube.ru/video/66f290afea88783135fc5cdb9026fb57/"
     },
     "losail": {
         "id": "t23",
@@ -1133,4 +1133,5 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
