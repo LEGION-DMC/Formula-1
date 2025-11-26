@@ -247,12 +247,32 @@ const fastestPitStops = [
 	{
         id: 22,
         track: "Гран-при Лас-Вегаса",
-        country: "br",
+        country: "us",
         team: "Red Bull",
         teamLogo: "RedBull-m.png",
         driver: "Юки Цунода",
         driverCountry: "jp",
         time: "1.99s",
+    },
+	{
+        id: 23,
+        track: "Гран-при Катара",
+        country: "qa",
+        team: "---",
+        teamLogo: "F1.png",
+        driver: "---",
+        driverCountry: "qa",
+        time: "0.00s",
+    },
+	{
+        id: 24,
+        track: "Гран-при Абу-Даби",
+        country: "ae",
+        team: "Red Bull",
+        teamLogo: "F1.png",
+        driver: "---",
+        driverCountry: "ae",
+        time: "0.00s",
     },
 ];
 
@@ -529,5 +549,6 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
 
