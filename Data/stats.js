@@ -287,7 +287,7 @@ const Cvala = [
         cvala1: "10",
         driver2: "Ландо Норрис",
         driverCountry2: "gb",
-        cvala2: "11",
+        cvala2: "12",
     },
     {
         id: 2,
@@ -295,7 +295,7 @@ const Cvala = [
         teamLogo: "Ferrari-m.png",
         driver1: "Шарль Леклер",
         driverCountry1: "mc",
-        cvala1: "16",
+        cvala1: "17",
         driver2: "Льюис Хэмилтон",
         driverCountry2: "gb",
         cvala2: "5",
@@ -306,7 +306,7 @@ const Cvala = [
         teamLogo: "RedBull-m.png",
         driver1: "Макс Ферстаппен",
         driverCountry1: "nl",
-        cvala1: "19",
+        cvala1: "20",
         driver2: "Юки Цунода",
         driverCountry2: "jp",
         cvala2: "0",
@@ -317,7 +317,7 @@ const Cvala = [
         teamLogo: "Mercedes-m.png",
         driver1: "Джордж Расселл",
         driverCountry1: "gb",
-        cvala1: "18",
+        cvala1: "19",
         driver2: "Кими Антонелли",
         driverCountry2: "it",
         cvala2: "3",
@@ -331,7 +331,7 @@ const Cvala = [
         cvala1: "0",
         driver2: "Фернандо Алонсо",
         driverCountry2: "es",
-        cvala2: "21",
+        cvala2: "22",
     },
     {
         id: 6,
@@ -339,7 +339,7 @@ const Cvala = [
         teamLogo: "Alpine-m.png",
         driver1: "Пьер Гасли",
         driverCountry1: "fr",
-        cvala1: "10",
+        cvala1: "11",
         driver2: "Франко Колапинто",
         driverCountry2: "ar",
         cvala2: "5",
@@ -350,7 +350,7 @@ const Cvala = [
         teamLogo: "Haas-m.png",
         driver1: "Эстебан Окон",
         driverCountry1: "fr",
-        cvala1: "8",
+        cvala1: "9",
         driver2: "Оливер Берман",
         driverCountry2: "de",
         cvala2: "13",
@@ -364,7 +364,7 @@ const Cvala = [
         cvala1: "14",
         driver2: "Лиам Лоусон",
         driverCountry2: "nz",
-        cvala2: "5",
+        cvala2: "6",
     },
     {
         id: 9,
@@ -375,7 +375,7 @@ const Cvala = [
         cvala1: "9",
         driver2: "Карлос Сайнс",
         driverCountry2: "es",
-        cvala2: "11",
+        cvala2: "12",
     },
     {
         id: 10,
@@ -383,7 +383,7 @@ const Cvala = [
         teamLogo: "Sauber-m.png",
         driver1: "Нико Хюлкенберг",
         driverCountry1: "de",
-        cvala1: "10",
+        cvala1: "11",
         driver2: "Габриэль Бортолето",
         driverCountry2: "br",
         cvala2: "11",
@@ -549,6 +549,7 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
 
 
