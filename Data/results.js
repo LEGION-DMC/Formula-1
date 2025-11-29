@@ -344,28 +344,16 @@ const detailedSprintResults = {
         "Льюис Хэмилтон": 2,
         "Пьер Гасли": 1,
     },
-	/*
-	"las-vegas": {
-        "000": 8,
-        "000": 7,
-        "000": 6,
-        "000": 5,
-        "000": 4,
-        "000": 3,
-        "000": 2,
-        "000": 1,
-    },
 	"qatar": {
-        "000": 8,
-        "000": 7,
-        "000": 6,
-        "000": 5,
-        "000": 4,
-        "000": 3,
-        "000": 2,
-        "000": 1,
+        "Оскар Пиастри": 8,
+        "Джордж Расселл": 7,
+        "Ландо Норрис": 6,
+        "Макс Ферстаппен": 5,
+        "Кими Антонелли": 4,
+        "Юки Цунода": 3,
+        "Фернандо Алонсо": 2,
+        "Карлос Сайнс": 1,
     },
-	*/
 };
 
 // Пилоты
@@ -938,6 +926,16 @@ function renderDriversStandings() {
     for (let i = 0; i < 2; i++) {
         html += `<div class="drivers-column">`;
         sortedDrivers.slice(i * 10, (i + 1) * 10).forEach(driver => {
+            // Вычисляем сумму очков гран-при и спринта для title
+            const gpResults = driver.points; // Очки из личного зачёта (гран-при)
+            
+            // Находим очки спринта для этого пилота
+            const sprintDriver = sprintStandings.find(s => s.name === driver.name);
+            const sprintResults = sprintDriver ? sprintDriver.points : 0;
+            
+            // Сумма очков для title
+            const totalPoints = gpResults + sprintResults;
+            
             html += `
                 <div class="driver-row" data-team="${driver.team}" data-team-color="${driver.teamColor}" style="border-left-color: ${driver.teamColor}">
                     <div class="driver-info">
@@ -947,7 +945,7 @@ function renderDriversStandings() {
                         <img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="team-logo">
                         <span class="team">${driver.team}</span>
                     </div>
-                    <span class="points">${driver.points}</span>
+                    <span class="points" title="${totalPoints}">${driver.points}</span>
                 </div>
             `;
         });
@@ -1106,6 +1104,7 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
 
 
