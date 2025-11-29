@@ -645,19 +645,19 @@ const tracksData = {
 		"state": "Катар",
         "location": "Доха, Катар",
         "trackName": "Международный автодром Лосаил",
-        "length": "5 380 км",
+        "length": "5 419 км",
         "laps": 57,
         "turns": 16,
-        "drsZones": 2,
+        "drsZones": 1,
         "direction": "по часовой стрелке",
-        "lapRecord": "1:20.520 (Ферстапен, 2024)",
+        "lapRecord": "1:20.055 (Пиастри, 2024)",
         "date": "2025-11-30 24:00",
 		"hasSprint": true,
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
-        "streamLink": "",
-        "recordingLink": ""
+        "streamLink": "https://rutube.ru/video/7f2a7c3f03dfa227c7e665e6f23b5759",
+        "recordingLink": "https://rutube.ru/video/7f2a7c3f03dfa227c7e665e6f23b5759"
     },
     "yas-marina": {
         "id": "t24",
@@ -1133,5 +1133,6 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
