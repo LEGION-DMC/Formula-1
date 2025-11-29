@@ -16,7 +16,7 @@ const driversData = [
         titles: 4,
         wins: 66,
         podiums: 119,
-        fine: 9,
+        fine: 6,
 		poles: 45,
 		dnf: 32,
         bio: "Нидерландский гонщик, четырёхкратный чемпион мира Формулы-1. Самый молодой гонщик в истории, дебютировавший в Формуле-1 в возрасте 17 лет."
@@ -58,7 +58,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 0,
+        fine: 2,
 		poles: 0,
         dnf: 2,
         bio: "краткая биография"
@@ -121,7 +121,7 @@ const driversData = [
         titles: 0,
         wins: 1,
         podiums: 5,
-        fine: 1,
+        fine: 2,
 		poles: 0,
         dnf: 25,
         bio: "краткая биография"
@@ -205,7 +205,7 @@ const driversData = [
         titles: 0,
         wins: 8,
         podiums: 48,
-        fine: 2,
+        fine: 1,
 		poles: 27,
         dnf: 20,
         bio: "краткая биография"
@@ -226,7 +226,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 3,
-        fine: 5,
+        fine: 7,
 		poles: 1,
         dnf: 25,
         bio: "краткая биография"
@@ -247,7 +247,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 5,
+        fine: 7,
 		poles: 0,
         dnf: 10,
         bio: "краткая биография"
@@ -268,7 +268,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 2,
-        fine: 2,
+        fine: 5,
 		poles: 0,
         dnf: 15,
         bio: "краткая биография"
@@ -310,7 +310,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 6,
+        fine: 7,
 		poles: 0,
         dnf: 3,
         bio: "краткая биография"
@@ -352,7 +352,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 3,
+        fine: 1,
 		poles: 0,
         dnf: 1,
         bio: "краткая биография"
@@ -373,7 +373,7 @@ const driversData = [
         titles: 7,
         wins: 105,
         podiums: 203,
-        fine: 2,
+        fine: 3,
 		poles: 104,
         dnf: 35,
         bio: "краткая биография"
@@ -415,7 +415,7 @@ const driversData = [
         titles: 0,
         wins: 4,
         podiums: 21,
-        fine: 1,
+        fine: 0,
 		poles: 7,
         dnf: 10,
         bio: "краткая биография"
@@ -478,7 +478,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 10,
+        fine: 9,
 		poles: 0,
         dnf: 1,
         bio: "краткая биография"
@@ -759,3 +759,4 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
