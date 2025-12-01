@@ -264,19 +264,19 @@ const detailedResults = {
         "Эстебан Окон": 2,
         "Оливер Берман": 1,
     },
-	/*
     "qatar": {
-        "000": 25,
-        "000": 18,
-        "000": 15,
-        "000": 12,
-        "000": 10,
-        "000": 8,
-        "000": 6,
-        "000": 4,
-        "000": 2,
-        "000": 1,
+        "Макс Ферстаппен": 25,
+        "Оскар Пиастри": 18,
+        "Карлос Сайнс": 15,
+        "Ландо Норрис": 12,
+        "Кими Антонелли": 10,
+        "Джордж Расселл": 8,
+        "Фернандо Алонсо": 6,
+        "Шарль Леклер": 4,
+        "Лиам Лоусон": 2,
+        "Юки Цунода": 1,
     },
+/*
     "abu-dhabi": {
         "000": 25,
         "000": 18,
@@ -424,7 +424,7 @@ const sprintStandings = [
 const raceWinners = [
     { grandPrix: "Китай Бахрейн Саудовская Аравия Майами Испания Бельгия Нидерланды", position: "1", winner: "Оскар Пиастри", country: "au", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
     { grandPrix: "Австралия Манако Австрия Великобритания Венгрия Мексика Бразилия", position: "2", winner: "Ландо Норрис", country: "gb", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
-    { grandPrix: "Япония Эмилия-Романья Италия Азербайджан США Лас-Вегас", position: "3", winner: "Макс Ферстаппен", country: "nl", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
+    { grandPrix: "Япония Эмилия-Романья Италия Азербайджан США Лас-Вегас Катар", position: "3", winner: "Макс Ферстаппен", country: "nl", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
     { grandPrix: "Канада Сингапур", position: "4", winner: "Джордж Расселл", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
 ];
 
@@ -1104,6 +1104,7 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
 
 
