@@ -674,12 +674,12 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1:22.109 (Ферстаппен, 2021)",
-        "date": "2025-12-07 21:00",
+        "date": "2025-12-07 20:55",
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
-        "streamLink": "",
-        "recordingLink": ""
+        "streamLink": "https://rutube.ru/video/2922099a41cee6646a34461f3fe1d5a2/",
+        "recordingLink": "https://rutube.ru/video/2922099a41cee6646a34461f3fe1d5a2/"
     }};
 
 // Рендеринг карточек
@@ -1133,6 +1133,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
