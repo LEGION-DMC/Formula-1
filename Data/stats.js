@@ -287,7 +287,7 @@ const Cvala = [
         cvala1: "11",
         driver2: "Ландо Норрис",
         driverCountry2: "gb",
-        cvala2: "12",
+        cvala2: "13",
     },
     {
         id: 2,
@@ -317,7 +317,7 @@ const Cvala = [
         teamLogo: "Mercedes-m.png",
         driver1: "Джордж Расселл",
         driverCountry1: "gb",
-        cvala1: "20",
+        cvala1: "21",
         driver2: "Кими Антонелли",
         driverCountry2: "it",
         cvala2: "3",
@@ -331,7 +331,7 @@ const Cvala = [
         cvala1: "0",
         driver2: "Фернандо Алонсо",
         driverCountry2: "es",
-        cvala2: "23",
+        cvala2: "24",
     },
     {
         id: 6,
@@ -339,7 +339,7 @@ const Cvala = [
         teamLogo: "Alpine-m.png",
         driver1: "Пьер Гасли",
         driverCountry1: "fr",
-        cvala1: "13",
+        cvala1: "12",
         driver2: "Франко Колапинто",
         driverCountry2: "ar",
         cvala2: "5",
@@ -350,7 +350,7 @@ const Cvala = [
         teamLogo: "Haas-m.png",
         driver1: "Эстебан Окон",
         driverCountry1: "fr",
-        cvala1: "9",
+        cvala1: "10",
         driver2: "Оливер Берман",
         driverCountry2: "de",
         cvala2: "14",
@@ -361,7 +361,7 @@ const Cvala = [
         teamLogo: "RacingBulls-m.png",
         driver1: "Исак Хаджар",
         driverCountry1: "fr",
-        cvala1: "15",
+        cvala1: "16",
         driver2: "Лиам Лоусон",
         driverCountry2: "nz",
         cvala2: "6",
@@ -372,7 +372,7 @@ const Cvala = [
         teamLogo: "Williams-m.png",
         driver1: "Александр Албон",
         driverCountry1: "th",
-        cvala1: "9",
+        cvala1: "10",
         driver2: "Карлос Сайнс",
         driverCountry2: "es",
         cvala2: "14",
@@ -549,6 +549,7 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
 
 
