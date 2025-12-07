@@ -295,7 +295,7 @@ const Cvala = [
         teamLogo: "Ferrari-m.png",
         driver1: "Шарль Леклер",
         driverCountry1: "mc",
-        cvala1: "18",
+        cvala1: "19",
         driver2: "Льюис Хэмилтон",
         driverCountry2: "gb",
         cvala2: "5",
@@ -339,7 +339,7 @@ const Cvala = [
         teamLogo: "Alpine-m.png",
         driver1: "Пьер Гасли",
         driverCountry1: "fr",
-        cvala1: "12",
+        cvala1: "13",
         driver2: "Франко Колапинто",
         driverCountry2: "ar",
         cvala2: "5",
@@ -375,7 +375,7 @@ const Cvala = [
         cvala1: "9",
         driver2: "Карлос Сайнс",
         driverCountry2: "es",
-        cvala2: "13",
+        cvala2: "14",
     },
     {
         id: 10,
@@ -386,7 +386,7 @@ const Cvala = [
         cvala1: "12",
         driver2: "Габриэль Бортолето",
         driverCountry2: "br",
-        cvala2: "11",
+        cvala2: "12",
     }
 ];
 
@@ -549,6 +549,7 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
 
 
