@@ -377,8 +377,8 @@ const driversStandings = [
     { name: "Оливер Берман", country: "gb", state: "Великобритания", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { name: "Пьер Гасли", country: "fr", state: "Франция", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
     { name: "Франко Колапинто", country: "ar", state: "Аргентина", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
-    { name: "Серхио Перес", country: "mx", state: "Мексика", team: "Cadilac", teamLogo: "Cadilac-m.png", teamColor: "#fbff00"},
-    { name: "Валттери Боттас", country: "fi", state: "Финляндия", team: "Cadilac", teamLogo: "Cadilac-m.png", teamColor: "#fbff00"},
+    { name: "Серхио Перес", country: "mx", state: "Мексика", team: "Cadilac", teamLogo: "Cadillac-m.png", teamColor: "#fbff00"},
+    { name: "Валттери Боттас", country: "fi", state: "Финляндия", team: "Cadilac", teamLogo: "Cadillac-m.png", teamColor: "#fbff00"},
 ];
 
 // Команды         /*Доп. очки -    points: 3    */
@@ -393,7 +393,7 @@ const constructorsStandings = [
     { team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
     { team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
-    { team: "Cadilac", teamLogo: "Cadilac-m.png", teamColor: "#fbff00"},
+    { team: "Cadillac", teamLogo: "Cadillac-m.png", teamColor: "#fbff00"},
 ];
 
 // Пилоты
@@ -418,8 +418,8 @@ const sprintStandings = [
     { name: "Оливер Берман", country: "gb", state: "Великобритания", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { name: "Пьер Гасли", country: "fr", state: "Франция", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
     { name: "Франко Колапинто", country: "ar", state: "Аргентина", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
-    { name: "Серхио Перес", country: "mx", state: "Мексика", team: "Cadilac", teamLogo: "Cadilac-m.png", teamColor: "#fbff00"},
-    { name: "Валттери Боттас", country: "fi", state: "Финляндия", team: "Cadilac", teamLogo: "Cadilac-m.png", teamColor: "#fbff00"},
+    { name: "Серхио Перес", country: "mx", state: "Мексика", team: "Cadillac", teamLogo: "Cadillac-m.png", teamColor: "#fbff00"},
+    { name: "Валттери Боттас", country: "fi", state: "Финляндия", team: "Cadillac", teamLogo: "Cadillac-m.png", teamColor: "#fbff00"},
 ];
 
 // Победители 
@@ -1103,6 +1103,7 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
 
 
