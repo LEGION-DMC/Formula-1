@@ -170,14 +170,14 @@ const currentTeams = [
 				],
 				color: "#a1459c"
 			},
-			{    shortName: "Cadilac",
+			{    shortName: "Cadillac",
                  id: "modal11",
-                 fullName: "Cadilac F1 Team",
-                 logo: "Cadilac.png",
+                 fullName: "Cadillac F1 Team",
+                 logo: "Cadillac.png",
                  miniLogo: "Cadilac-m.png",
                  base: "Фишерс, Индиана, США",
                  director: "Грэм Лоудон",
-			     foundert: "TWG Cadilac",
+			     foundert: "TWG Cadillac",
 				 debut: "2026",
                  car: "---",
                  engine: "Ferrari",
@@ -377,5 +377,6 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
