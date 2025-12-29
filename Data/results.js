@@ -924,7 +924,7 @@ function renderDriversStandings() {
     // Разделение на 2 колонки по 10 пилотов
     for (let i = 0; i < 2; i++) {
         html += `<div class="drivers-column">`;
-        sortedDrivers.slice(i * 10, (i + 1) * 10).forEach(driver => {
+        sortedDrivers.slice(i * 11, (i + 1) * 11).forEach(driver => {
             // Вычисляем сумму очков гран-при и спринта для title
             const gpResults = driver.points; // Очки из личного зачёта (гран-при)
             
@@ -977,7 +977,7 @@ function renderConstructorsStandings() {
     let html = `<h2>Кубок конструкторов</h2><div class="constructors-list">`;
     
     // Команды
-    sortedTeams.slice(0, 10).forEach(team => {
+    sortedTeams.slice(0, 11).forEach(team => {
         html += `
             <div class="constructor-row" data-team="${team.team}" data-team-color="${team.teamColor}" style="border-left-color: ${team.teamColor}">
                 <div class="constructor-info">
@@ -1018,7 +1018,7 @@ function renderSprintStandings() {
     // Разделение на 2 колонки по 10 пилотов
     for (let i = 0; i < 2; i++) {
         html += `<div class="sprint-column">`;
-        sortedSprint.slice(i * 10, (i + 1) * 10).forEach(driver => {
+        sortedSprint.slice(i * 11, (i + 1) * 11).forEach(driver => {
             html += `
                 <div class="sprint-row" data-team="${driver.team}" data-team-color="${driver.teamColor}" style="border-left-color: ${driver.teamColor}">
                     <div class="driver-info">
@@ -1103,6 +1103,7 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
 
 
