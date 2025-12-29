@@ -690,7 +690,7 @@ function renderCalendar() {
     content.innerHTML = `
         <div class="calendar-container" id="calendarContainer">
             <div class="next-year-calendar">
-                <h3>Календарь сезона 2025</h3>
+                <h3>Календарь сезона 2026</h3>
                 <div class="next-year-events" id="nextYearEvents"></div>
             </div>
             <div class="calendar-grid" id="calendarGrid"></div>
@@ -1129,6 +1129,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
