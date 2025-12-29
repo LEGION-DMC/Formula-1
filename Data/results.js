@@ -379,15 +379,15 @@ const driversStandings = [
     { name: "Франко Колапинто", country: "ar", state: "Аргентина", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
 ];
 
-// Команды
+// Команды         /*Доп. очки -    points: 3    */
 const constructorsStandings = [
     { team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
     { team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f"},
     { team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
-    { team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: -3},
+    { team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
     { team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
     { team: "Audi", teamLogo: "Audi-m.png", teamColor: "#21ad17"},
-    { team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 3},
+    { team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd"},
     { team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
     { team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
@@ -1098,6 +1098,7 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
 
 
