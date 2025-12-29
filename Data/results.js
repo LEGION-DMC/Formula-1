@@ -1,6 +1,6 @@
 // Личный зачёт
 const detailedResults = {
-    "australia": {
+    /*"australia": {
         "Ландо Норрис": 25,
 		"Макс Ферстаппен": 18,
         "Джордж Расселл": 15,
@@ -72,7 +72,7 @@ const detailedResults = {
         "Карлос Сайнс": 2,
         "Юки Цунода": 1,
     },
-    "emilia-romagna": {
+    "madrid": {
         "Макс Ферстаппен": 25,
         "Ландо Норрис": 18,
         "Оскар Пиастри": 15,
@@ -276,7 +276,6 @@ const detailedResults = {
         "Лиам Лоусон": 2,
         "Юки Цунода": 1,
     },
-/*
     "abu-dhabi": {
         "000": 25,
         "000": 18,
@@ -294,7 +293,7 @@ const detailedResults = {
 
 // Спринт
 const detailedSprintResults = {
-    "china": {
+    /*"china": {
         "Льюис Хэмилтон": 8,
         "Оскар Пиастри": 7,
         "Макс Ферстаппен": 6,
@@ -353,7 +352,7 @@ const detailedSprintResults = {
         "Юки Цунода": 3,
         "Фернандо Алонсо": 2,
         "Карлос Сайнс": 1,
-    },
+    },*/
 };
 
 // Пилоты
@@ -365,20 +364,19 @@ const driversStandings = [
     { name: "Джордж Расселл", country: "gb", state: "Великобритания", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
     { name: "Кими Антонелли", country: "it", state: "Италия", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
     { name: "Макс Ферстаппен", country: "nl", state: "Нидерланды", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
-    { name: "Юки Цунода", country: "jp", state: "Япония", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
+    { name: "Арвид Линдблад", country: "gb", state: "Великобритания", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#313247"},
     { name: "Карлос Сайнс", country: "es", state: "Испания", team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
     { name: "Александр Албон", country: "th", state: "Тайланд", team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
-    { name: "Нико Хюлькенберг", country: "de", state: "Германия", team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17"},
-    { name: "Габриэл Бортолето", country: "br", state: "Бразилия", team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17"},
+    { name: "Нико Хюлькенберг", country: "de", state: "Германия", team: "Audi", teamLogo: "Audi-m.png", teamColor: "#21ad17"},
+    { name: "Габриэл Бортолето", country: "br", state: "Бразилия", team: "Audi", teamLogo: "Audi-m.png", teamColor: "#21ad17"},
     { name: "Лиам Лоусон", country: "nz", state: "Новая Зеландия", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd"},
-    { name: "Исаак Хаджар", country: "fr", state: "Франция", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd"},
+    { name: "Исаак Хаджар", country: "fr", state: "Франция", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#ddebdd"},
     { name: "Лэнс Стролл", country: "ca", state: "Канада", team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
     { name: "Фернандо Алонсо", country: "es", state: "Испания", team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
     { name: "Эстебан Окон", country: "fr", state: "Франция", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { name: "Оливер Берман", country: "gb", state: "Великобритания", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { name: "Пьер Гасли", country: "fr", state: "Франция", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
     { name: "Франко Колапинто", country: "ar", state: "Аргентина", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
-    { name: "Джек Дуэн", country: "au", state: "Австралия", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
 ];
 
 // Команды
@@ -388,7 +386,7 @@ const constructorsStandings = [
     { team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
     { team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: -3},
     { team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
-    { team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17"},
+    { team: "Audi", teamLogo: "Audi-m.png", teamColor: "#21ad17"},
     { team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 3},
     { team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
     { team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
@@ -404,28 +402,24 @@ const sprintStandings = [
     { name: "Джордж Расселл", country: "gb", state: "Великобритания", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
     { name: "Кими Антонелли", country: "it", state: "Италия", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
     { name: "Макс Ферстаппен", country: "nl", state: "Нидерланды", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
-    { name: "Юки Цунода", country: "jp", state: "Япония", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
+    { name: "Арвид Линдблад", country: "gb", state: "Великобритания", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#313247"},
     { name: "Карлос Сайнс", country: "es", state: "Испания", team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
     { name: "Александр Албон", country: "th", state: "Тайланд", team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
-    { name: "Нико Хюлькенберг", country: "de", state: "Германия", team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17"},
-    { name: "Габриэл Бортолето", country: "br", state: "Бразилия", team: "Sauber", teamLogo: "Sauber-m.png", teamColor: "#21ad17"},
+    { name: "Нико Хюлькенберг", country: "de", state: "Германия", team: "Audi", teamLogo: "Audi-m.png", teamColor: "#21ad17"},
+    { name: "Габриэл Бортолето", country: "br", state: "Бразилия", team: "Audi", teamLogo: "Audi-m.png", teamColor: "#21ad17"},
     { name: "Лиам Лоусон", country: "nz", state: "Новая Зеландия", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd"},
-    { name: "Исаак Хаджар", country: "fr", state: "Франция", team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd"},
+    { name: "Исаак Хаджар", country: "fr", state: "Франция", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#ddebdd"},
     { name: "Лэнс Стролл", country: "ca", state: "Канада", team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
     { name: "Фернандо Алонсо", country: "es", state: "Испания", team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
     { name: "Эстебан Окон", country: "fr", state: "Франция", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { name: "Оливер Берман", country: "gb", state: "Великобритания", team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
     { name: "Пьер Гасли", country: "fr", state: "Франция", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
     { name: "Франко Колапинто", country: "ar", state: "Аргентина", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
-    { name: "Джек Дуэн", country: "au", state: "Австралия", team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
 ];
 
 // Победители 
 const raceWinners = [
-    { grandPrix: "Китай Бахрейн Саудовская Аравия Майами Испания Бельгия Нидерланды", position: "1", winner: "Оскар Пиастри", country: "au", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
-    { grandPrix: "Австралия Манако Австрия Великобритания Венгрия Мексика Бразилия", position: "2", winner: "Ландо Норрис", country: "gb", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
-    { grandPrix: "Япония Эмилия-Романья Италия Азербайджан США Лас-Вегас Катар", position: "3", winner: "Макс Ферстаппен", country: "nl", team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
-    { grandPrix: "Канада Сингапур", position: "4", winner: "Джордж Расселл", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
+    /*{ grandPrix: "", position: "1", winner: "Оскар Пиастри", country: "au", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},*/
 ];
 
 // Список Гран-при
@@ -436,7 +430,7 @@ const grandPrixOrder = [
 	"bahrain", 
 	"saudi-arabia", 
     "miami", 
-	"emilia-romagna", 
+	"madrid", 
 	"monaco", 
 	"spain", 
 	"canada", 
@@ -1104,6 +1098,7 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
 
 
 
