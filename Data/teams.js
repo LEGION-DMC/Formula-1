@@ -2,7 +2,7 @@
 const currentTeams = [
 			{ 	 shortName: "McLaren",
 					 id: "modal1",
-					 fullName: "McLaren F1 Team",
+					 fullName: "McLaren Mastercard F1 Team",
 					 logo: "McLaren.png",
 					 miniLogo: "McLaren-m.png",
 					 base: "Уокинг, Великобритания",
@@ -13,30 +13,13 @@ const currentTeams = [
                  engine: "Mercedes",
                  drivers: [
                     {number: "81", name: "Оскар Пиастри", country: "au", state: "Австралия"},
-                    {number: "4", name: "Ландо Норрис", country: "gb", state: "Великобритания"}
+                    {number: "1", name: "Ландо Норрис", country: "gb", state: "Великобритания"}
                 ],
 				color: "#e07109"
             },
-			{    shortName: "Ferrari",
-                 id: "modal2",
-                 fullName: "Scuderia Ferrari HP",
-                 logo: "Ferrari.svg",
-                 miniLogo: "Ferrari-m.png",
-                 base: "Маранелло, Италия",
-                 director: "Фредерик Вассёр",
-				 foundert: "Энцо Феррари",
-				 debut: "1950",
-                 car: "SF-25",
-                 engine: "Ferrari",
-                 drivers: [
-                    {number: "16", name: "Шарль Леклер", country: "mc", state: "Манако"},
-                    {number: "44", name: "Льюис Хэмилтон", country: "gb", state: "Великобритания"}
-                ],
-				color: "#b80f0f"
-            },
 			{    shortName: "Mercedes",
                  id: "modal3",
-                 fullName: "Mercedes-AMG Petronas F1 Team",
+                 fullName: "Mercedes-AMG PETRONAS F1 Team",
                  logo: "Mercedes.avif",
                  miniLogo: "Mercedes-m.png",
                  base: "Брэкли, Великобритания",
@@ -61,12 +44,29 @@ const currentTeams = [
 			     foundert: "Дитрих Матешиц",
 				 debut: "2005",
                  car: "RB21",
-                 engine: "Honda RBPT",
+                 engine: "Red Bull Ford",
                  drivers: [
-                    {number: "1", name: "Макс Ферстаппен", country: "nl", state: "Нидерланды"},
-                    {number: "22", name: "Юки Цунода", country: "jp", state: "Япония"}
+                    {number: "3", name: "Макс Ферстаппен", country: "nl", state: "Нидерланды"},
+                    {number: "6", name: "Иcаак Хаджар", country: "fr", state: "Франция"}
                 ],
 				color: "#313247"
+            },
+			{    shortName: "Ferrari",
+                 id: "modal2",
+                 fullName: "Scuderia Ferrari HP",
+                 logo: "Ferrari.svg",
+                 miniLogo: "Ferrari-m.png",
+                 base: "Маранелло, Италия",
+                 director: "Фредерик Вассёр",
+				 foundert: "Энцо Феррари",
+				 debut: "1950",
+                 car: "SF-25",
+                 engine: "Ferrari",
+                 drivers: [
+                    {number: "16", name: "Шарль Леклер", country: "mc", state: "Манако"},
+                    {number: "44", name: "Льюис Хэмилтон", country: "gb", state: "Великобритания"}
+                ],
+				color: "#b80f0f"
             },
 			{    shortName: "Williams",
                  id: "modal5",
@@ -85,23 +85,6 @@ const currentTeams = [
                 ],
 				color: "#7b74fc"
             },
-			{    shortName: "Sauber",
-                 id: "modal6",
-                 fullName: "Stake F1 Team Kick Sauber",
-                 logo: "Sauber.png",
-                 miniLogo: "Sauber-m.png",
-                 base: "Хинвил, Швейцария",
-                 director: "Маттиа Бинотто",
-			     foundert: "Петер Заубер",
-				 debut: "1993",
-                 car: "C45",
-                 engine: "Ferrari",
-                 drivers: [
-                    {number: "27", name: "Нико Хюлькенберг", country: "de", state: "Германия"},
-                    {number: "5", name: "Габриэл Бортолето", country: "br", state: "Бразилия"}
-                ],
-				color: "#21ad17"
-            },
 			{    shortName: "Racing Bulls",
                  id: "modal7",
                  fullName: "Visa Cash App Racing Bulls F1 Team",
@@ -112,10 +95,10 @@ const currentTeams = [
 			     foundert: "Дитрих Матешиц",
 				 debut: "2006",
                  car: "VCARB02",
-                 engine: "Honda RBPT",
+                 engine: "Red Bull Ford",
                  drivers: [
                     {number: "30", name: "Лиам Лоусон", country: "nz", state: "Новая Зеландия"},
-                    {number: "6", name: "Иcаак Хаджар", country: "fr", state: "Франция"}
+                    {number: "41", name: "Арвид Линдблад", country: "gb", state: "Великобритания"}
                 ],
 				color: "#ddebdd"
             },
@@ -129,7 +112,7 @@ const currentTeams = [
 			     foundert: "Лоуренс Стролл",
 				 debut: "2021",
                  car: "AMR25",
-                 engine: "Mercedes",
+                 engine: "Honda",
                  drivers: [
                     {number: "18", name: "Лэнс Стролл", country: "ca", state: "Канада"},
                     {number: "14", name: "Фернандо Алонсо", country: "es", state: "Испания"}
@@ -138,7 +121,7 @@ const currentTeams = [
             },
 			{    shortName: "Haas",
                  id: "modal9",
-                 fullName: "MoneyGram Haas F1 Team",
+                 fullName: "TGR Haas F1 Team",
                  logo: "Haas.png",
                  miniLogo: "Haas-m.png",
                  base: "Каннаполис, Северная Каролина, США",
@@ -153,6 +136,23 @@ const currentTeams = [
                 ],
 				color: "#cf1d1d"
             },
+			{    shortName: "Audi",
+                 id: "modal6",
+                 fullName: "Audi Revolut F1 Team",
+                 logo: "Audi.png",
+                 miniLogo: "Audi-m.png",
+                 base: "Нойбург, Бавария, Германия",
+                 director: "Маттиа Бинотто",
+			     foundert: "Audi Formula Racing GmbH ",
+				 debut: "2026",
+                 car: "A26",
+                 engine: "Audi",
+                 drivers: [
+                    {number: "27", name: "Нико Хюлькенберг", country: "de", state: "Германия"},
+                    {number: "5", name: "Габриэл Бортолето", country: "br", state: "Бразилия"}
+                ],
+				color: "#21ad17"
+            },
 			{    shortName: "Alpine",
                  id: "modal10",
                  fullName: "BWT Alpine F1 Team",
@@ -163,12 +163,29 @@ const currentTeams = [
 			     foundert: "Renault Group",
 				 debut: "2021",
                  car: "A525",
-                 engine: "Renault",
+                 engine: "Mercedes",
                  drivers: [
                     { number: "10", name: "Пьер Гасли", country: "fr", state: "Франция"},
                     { number: "43", name: "Франко Колапинто", country: "ar", state: "Аргентина"}
 				],
 				color: "#a1459c"
+			},
+			{    shortName: "Cadilac",
+                 id: "modal11",
+                 fullName: "Cadilac F1 Team",
+                 logo: "Cadilac.png",
+                 miniLogo: "Cadilac-m.png",
+                 base: "Фишерс, Индиана, США",
+                 director: "Грэм Лоудон",
+			     foundert: "TWG Cadilac",
+				 debut: "2026",
+                 car: "---",
+                 engine: "Ferrari",
+                 drivers: [
+                    { number: "11", name: "Серхио Перес", country: "mx", state: "Мексика"},
+                    { number: "77", name: "Валттери Боттас", country: "fi", state: "Финляндия"}
+				],
+				color: "#fbff00"
 			},
 ];
 
@@ -360,4 +377,5 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
