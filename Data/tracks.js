@@ -148,7 +148,7 @@ const nextYearCalendar = [
 
 // Карточки Гран-при
 const tracksData = {
-    "albert-park": {
+    /*"albert-park": {
         "id": "t1",
         "name": "Гран-при Австралии",
         "logo": "Albert Park.svg",
@@ -681,7 +681,8 @@ const tracksData = {
         "podium3": "---",
         "streamLink": "https://rutube.ru/video/2922099a41cee6646a34461f3fe1d5a2/",
         "recordingLink": "https://rutube.ru/video/2922099a41cee6646a34461f3fe1d5a2/"
-    }};
+    }*/
+	};
 
 // Рендеринг карточек
 function renderCalendar() {
@@ -1128,6 +1129,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
