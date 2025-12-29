@@ -203,24 +203,24 @@ function renderMainGPCards() {
                 <div class="tires-divider"></div>
                 <div class="weather-block">
                     <div class="weather">
-                        <img src="Images/Weather/cloud.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/cloud.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Погода</span>
-						<span class="weather-name" style="color: red">Облачно</span>
+						<span class="weather-name" style="color: red">---</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Осадки</span>
-						<span class="weather-name" style="color: red">~40%</span>
+						<span class="weather-name" style="color: red">---</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Ветер</span>
-						<span class="weather-name" style="color: red">5-10 м/с</span>
+						<span class="weather-name" style="color: red">---/с</span>
                     </div>
                     <div class="weather">
-                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image active">
+                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image inactive">
                         <span class="weather-name">Темп.°C</span>
-						<span class="weather-name" style="color: red">20 °C</span>
+						<span class="weather-name" style="color: red">---</span>
                     </div>
                 </div>
             </div>
@@ -262,18 +262,18 @@ function renderMainGPCards() {
                         <span class="tire-name">C1</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Hard</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C2</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Medium</span>
-                        <img src="Images/Wheels/Medium.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C3</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">Soft</span>
-                        <img src="Images/Wheels/Soft.png" alt="Wheels" class="tire-image active">
+						<span class="tire-name">---</span>
+                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C4</span>
                     </div>
                     <div class="tire-item">
@@ -281,20 +281,15 @@ function renderMainGPCards() {
                         <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                         <span class="tire-name">C5</span>
                     </div>
-                    <div class="tire-item">
-						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
-                        <span class="tire-name">C6</span>
-                    </div>
                 </div>
                 <div class="tires-divider"></div>
                 <div class="wet-tires">
                     <div class="tire-item">
-                        <img src="Images/Wheels/Intermediate.png" alt="Intermediate" class="tire-image active">
+                        <img src="Images/Wheels/Intermediate.png" alt="Intermediate" class="tire-image inactive">
                         <span class="tire-name">Intermediate</span>
                     </div>
                     <div class="tire-item">
-                        <img src="Images/Wheels/Wet.png" alt="Wet" class="tire-image active">
+                        <img src="Images/Wheels/Wet.png" alt="Wet" class="tire-image inactive">
                         <span class="tire-name">Wet</span>
                     </div>
                 </div>
@@ -446,10 +441,10 @@ function renderMainDrivers() {
     // Сортируем по общему количеству очков
     const topDrivers = driversWithSprint
         .sort((a, b) => b.totalPoints - a.totalPoints)
-        .slice(0, 3); // Топ-3 пилота
+        .slice(0, 1); // Топ-3 пилота
     
     let html = `
-        <h2>Топ пилоты</h2>
+        <h2>Чемпион 2025</h2>
         <div class="main-standings-list">
     `;
     
@@ -534,6 +529,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
