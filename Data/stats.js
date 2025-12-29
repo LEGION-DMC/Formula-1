@@ -1,6 +1,6 @@
 // Данные для лучших времён круга
 const bestLapTimes = [
-    {
+    /*{
         id: 3,
         track: "Гран-при Японии",
         country: "jp",
@@ -29,12 +29,12 @@ const bestLapTimes = [
         driver: "Ландо Норрис",
         driverCountry: "gb",
         time: "1:20.901",
-    },
+    },*/
 ];
 
 // Данные для быстрейших пит-стопов
 const fastestPitStops = [
-    {
+    /*{
         id: 1,
         track: "Гран-при Австралии",
         country: "au",
@@ -96,7 +96,7 @@ const fastestPitStops = [
     },
     {
         id: 7,
-        track: "Гран-при Эмилии Романьи",
+        track: "Гран-при Мадрида",
         country: "it",
         team: "Ferrari",
         teamLogo: "Ferrari-m.png",
@@ -273,12 +273,12 @@ const fastestPitStops = [
         driver: "---",
         driverCountry: "un",
         time: "0.00s",
-    },
+    },*/
 ];
 
 // Данные для счёта квалификаций пилотов в команде
 const Cvala = [
-    {
+    /*{
         id: 1,
         team: "McLaren",
         teamLogo: "McLaren-m.png",
@@ -307,8 +307,8 @@ const Cvala = [
         driver1: "Макс Ферстаппен",
         driverCountry1: "nl",
         cvala1: "21",
-        driver2: "Юки Цунода",
-        driverCountry2: "jp",
+        driver2: "Исак Хаджар",
+        driverCountry1: "fr",
         cvala2: "0",
     },
     {
@@ -359,8 +359,8 @@ const Cvala = [
         id: 8,
         team: "Racing Bulls",
         teamLogo: "RacingBulls-m.png",
-        driver1: "Исак Хаджар",
-        driverCountry1: "fr",
+        driver1: "Арвид Линдблад",
+        driverCountry1: "gb",
         cvala1: "16",
         driver2: "Лиам Лоусон",
         driverCountry2: "nz",
@@ -379,15 +379,15 @@ const Cvala = [
     },
     {
         id: 10,
-        team: "Kick-Sauber",
-        teamLogo: "Sauber-m.png",
+        team: "Audi",
+        teamLogo: "Audi-m.png",
         driver1: "Нико Хюлкенберг",
         driverCountry1: "de",
         cvala1: "12",
         driver2: "Габриэль Бортолето",
         driverCountry2: "br",
         cvala2: "12",
-    }
+    }*/
 ];
 
 // Функция рендеринга страницы статистики
@@ -549,6 +549,7 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
 
 
