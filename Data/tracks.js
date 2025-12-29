@@ -1,6 +1,6 @@
 // Календарь 
 const nextYearCalendar = [
-    { name: "Гран-при Австралии",
+    /*{ name: "Гран-при Австралии",
         date: "2025-03-16",
         country: "au",
 		state: "Австралия",
@@ -36,10 +36,10 @@ const nextYearCalendar = [
 		state: "США",
 		grandPrixId: "t6"
     },
-    { name: "Гран-при Эмилии Романьи",
+    { name: "Гран-при Мадрида",
         date: "2025-05-18",
-        country: "it",
-		state: "Италия",
+        country: "es",
+		state: "Испания",
 		grandPrixId: "t7"
     },
     { name: "Гран-при Монако",
@@ -143,7 +143,8 @@ const nextYearCalendar = [
         country: "ae",
 		state: "Объеденённые Арабские Эмираты",
 		grandPrixId: "t24"
-    }];
+    }*/
+	];
 
 // Карточки Гран-при
 const tracksData = {
@@ -283,19 +284,19 @@ const tracksData = {
     },
     "ferrari": {
         "id": "t7",
-        "name": "Гран-при Эмилии Романьи",
-        "logo": "Imola.svg",
-        "miniLogo": "Imola-m.svg",
-		"country": "it",
-		"state": "Италия",
-        "location": "Имола, Италия",
-        "trackName": "Автодром Энцо и Дино Феррари",
-        "length": "4 909 км",
+        "name": "Гран-при Мадрида",
+        "logo": "madrid.svg",
+        "miniLogo": "madrid-m.svg",
+		"country": "es",
+		"state": "Испания",
+        "location": "Мадрид, Испания",
+        "trackName": "МадРинг",
+        "length": "5 474 км",
         "laps": 63,
-        "turns": 19,
+        "turns": 20,
         "drsZones": 1,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1:15.484 (Хемильтон, 2020)",
+        "direction": "по часовой стрелке",
+        "lapRecord": "---",
         "date": "2025-05-18 20:55",
 		"podium1": "Ферстаппен",
         "podium2": "Норрис",
@@ -1063,12 +1064,6 @@ function openModal(track) {
                 </div>
                 
                 <div class="info-row">
-                    <img src="Images/Icon/track.webp" alt="DRS">
-                    <span>Зоны DRS:</span>
-                    <span class="value">${track.drsZones}</span>
-                </div>
-                
-                <div class="info-row">
                     <img src="Images/Icon/track.webp" alt="Направление">
                     <span>Направление:</span>
                     <span class="value">${track.direction}</span>
@@ -1133,6 +1128,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
