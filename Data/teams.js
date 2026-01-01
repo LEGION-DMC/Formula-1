@@ -174,7 +174,7 @@ const currentTeams = [
                  id: "modal11",
                  fullName: "Cadillac F1 Team",
                  logo: "Cadillac.png",
-                 miniLogo: "Cadilac-m.png",
+                 miniLogo: "Cadillac-m.png",
                  base: "Фишерс, Индиана, США",
                  director: "Грэм Лоудон",
 			     foundert: "TWG Cadillac",
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
