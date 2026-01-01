@@ -288,7 +288,6 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-	*/
 };
 
 // Спринт
@@ -804,7 +803,7 @@ function getGPName(gpId) {
     },
 	"madrid": {
 		"country": "es",
-		"state": "Испания",
+		"state": "Испания, Мадрид",
     },
 	"monaco": {
 		"country": "mc",
@@ -812,7 +811,7 @@ function getGPName(gpId) {
     },
 	"spain": {
 		"country": "es",
-		"state": "Испания",
+		"state": "Испания, Барселона",
     },
 	"canada": {
 		"country": "ca",
@@ -887,25 +886,21 @@ function getSprintName(sprintId) {
 		"country": "us",
 		"state": "США, Майами",
     },
-	"belgium": {
-		"country": "be",
-		"state": "Бельгия",
-    },
-	"usa": {
+	"canada": {
 		"country": "us",
-		"state": "США",
+		"state": "Канада",
     },
-	"brazil": {
+	"great-britain": {
 		"country": "br",
-		"state": "Бразилия",
+		"state": "Великобритания",
     },
-	"las-vegas": {
+	"hungary": {
 		"country": "us",
-		"state": "США, Лас-Вегас",
+		"state": "Нидерланды",
     },
-	"qatar": {
+	"singapore": {
 		"country": "qa",
-		"state": "Катар",
+		"state": "Сингапур",
     },
     };
     return sprintName[sprintId] || sprintId;}
@@ -1103,3 +1098,4 @@ function highlightTeamDrivers(team) {
 if (window.location.hash === '#results') {
     renderResults();
 }
+
