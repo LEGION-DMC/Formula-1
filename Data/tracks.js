@@ -1,154 +1,154 @@
 // Календарь 
 const nextYearCalendar = [
-    /*{ name: "Гран-при Австралии",
-        date: "2025-03-16",
+    { name: "Гран-при Австралии",
+        date: "2026-03-08",
         country: "au",
 		state: "Австралия",
 		grandPrixId: "t1"
     },
     { name: "Гран-при Китая",
-        date: "2025-03-23",
+        date: "2026-03-15",
         country: "cn",
 		state: "Китай",
 		grandPrixId: "t2"
     },
     { name: "Гран-при Японии",
-        date: "2025-04-06",
+        date: "2026-03-29",
         country: "jp",
 		state: "Япония",
 		grandPrixId: "t3"
     },
     { name: "Гран-при Бахрейна",
-        date: "2025-04-13",
+        date: "2026-04-12",
         country: "bh",
 		state: "Бахрейн",
 		grandPrixId: "t4"
     },
     { name: "Гран-при Саудовской Аравии",
-        date: "2025-04-20",
+        date: "2026-04-19",
         country: "sa",
 		state: "Саудовская Аравия",
 		grandPrixId: "t5"
     },
     { name: "Гран-при Майами",
-        date: "2025-05-04",
+        date: "2026-05-03",
         country: "us",
 		state: "США",
 		grandPrixId: "t6"
     },
-    { name: "Гран-при Мадрида",
-        date: "2025-05-18",
-        country: "es",
-		state: "Испания",
+    { name: "Гран-при Канады",
+        date: "2026-05-24",
+        country: "ca",
+		state: "Канада",
 		grandPrixId: "t7"
     },
     { name: "Гран-при Монако",
-        date: "2025-05-25",
+        date: "2026-06-07",
         country: "mc",
 		state: "Монако",
 		grandPrixId: "t8"
     },
     { name: "Гран-при Барселоны-Каталонии",
-        date: "2025-06-01",
+        date: "2026-06-14",
         country: "es",
 		state: "Испания",
 		grandPrixId: "t9"
     },
-    { name: "Гран-при Канады",
-        date: "2025-06-15",
-        country: "ca",
-		state: "Канада",
-		grandPrixId: "t10"
-    },
 	{ name: "Гран-при Австрии",
-        date: "2025-06-29",
+        date: "2026-06-28",
         country: "at",
 		state: "Австрия",
-		grandPrixId: "t11"
+		grandPrixId: "t10"
     },
     { name: "Гран-при Великобритании",
-        date: "2025-07-06",
+        date: "2026-07-05",
         country: "gb",
 		state: "Великобритания",
-		grandPrixId: "t12"
+		grandPrixId: "t11"
     },
     { name: "Гран-при Бельгии",
-        date: "2025-07-27",
+        date: "2026-07-19",
         country: "be",
 		state: "Бельгия",
-		grandPrixId: "t13"
+		grandPrixId: "t12"
     },
     { name: "Гран-при Венгрии",
-        date: "2025-08-03",
+        date: "2026-07-26",
         country: "hu",
 		state: "Венгрия",
-		grandPrixId: "t14"
+		grandPrixId: "t13"
     },
     { name: "Гран-при Нидерландов",
-        date: "2025-08-31",
+        date: "2026-08-23",
         country: "nl",
 		state: "Нидерланды",
-		grandPrixId: "t15"
+		grandPrixId: "t14"
     },
     { name: "Гран-при Италии",
-        date: "2025-09-07",
+        date: "2026-09-06",
         country: "it",
 		state: "Италия",
+		grandPrixId: "t15"
+    },
+    { name: "Гран-при Мадрида",
+        date: "2026-09-13",
+        country: "es",
+		state: "Испания",
 		grandPrixId: "t16"
     },
     { name: "Гран-при Азербайджана",
-        date: "2025-09-21",
+        date: "2026-09-26",
         country: "az",
 		state: "Азербайджан",
 		grandPrixId: "t17"
     },
     { name: "Гран-при Сингапура",
-        date: "2025-10-05",
+        date: "2026-10-11",
         country: "sg",
 		state: "Сингапур",
 		grandPrixId: "t18"
     },
     { name: "Гран-при США",
-        date: "2025-10-20",
+        date: "2026-10-25",
         country: "us",
 		state: "США",
 		grandPrixId: "t19"
     },
     { name: "Гран-при Мехико",
-        date: "2025-10-27",
+        date: "2026-11-01",
         country: "mx",
 		state: "Мексика",
 		grandPrixId: "t20"
     },
     { name: "Гран-при Сан-Паулу",
-        date: "2025-11-10",
+        date: "2026-11-08",
         country: "br",
 		state: "Бразилия",
 		grandPrixId: "t21"
     },
     { name: "Гран-при Лас-Вегаса",
-        date: "2025-11-22",
+        date: "2026-11-21",
         country: "us",
 		state: "США",
 		grandPrixId: "t22"
     },
     { name: "Гран-при Катара",
-        date: "2025-12-01",
+        date: "2026-11-29",
         country: "qa",
 		state: "Катар",
 		grandPrixId: "t23"
     },
     { name: "Гран-при Абу-Даби",
-        date: "2025-12-07",
+        date: "2026-12-06 21:00",
         country: "ae",
 		state: "Объеденённые Арабские Эмираты",
 		grandPrixId: "t24"
-    }*/
+    }
 	];
 
 // Карточки Гран-при
 const tracksData = {
-    /*"albert-park": {
+    "albert-park": {
         "id": "t1",
         "name": "Гран-при Австралии",
         "logo": "Albert Park.svg",
@@ -163,12 +163,12 @@ const tracksData = {
         "drsZones": 4,
         "direction": "по часовой стрелке",
         "lapRecord": "1.19.813 (Леклер, 2024)",
-        "date": "2025-03-16 20:55",
-		"podium1": "Норрис",
-        "podium2": "Ферстаппен",
-        "podium3": "Рассел",
+        "date": "2026-03-08 12:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/2079c4f978ab2741be70fbd26d9b09e4"
+        "recordingLink": "
     },
     "shanghai": {
         "id": "t2",
@@ -185,13 +185,13 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:32.238 (Шумахер, 2004)",
-        "date": "2025-03-23 20:55",
+        "date": "2026-03-15 15:00",
 		"hasSprint": true,
-		"podium1": "Пиастри",
-        "podium2": "Норрис",
-        "podium3": "Рассел",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/fa1eb3e92d1e9ba84c1562a4ea46acbd"
+        "recordingLink": ""
     },
     "suzuka": {
         "id": "t3",
@@ -208,12 +208,12 @@ const tracksData = {
         "drsZones": 1,
         "direction": "по часовой стрелке",
         "lapRecord": "1:30.965 (Антонелли, 2025)",
-        "date": "2025-04-06 20:55",
-		"podium1": "Ферстаппен",
-        "podium2": "Норрис",
-        "podium3": "Пиастри",
+        "date": "2026-03-29 13:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/f4c2ca887796fc22660d6490a23d3371"
+        "recordingLink": ""
     },
     "bahrain": {
         "id": "t4",
@@ -230,12 +230,12 @@ const tracksData = {
         "drsZones": 3,
         "direction": "по часовой стрелке",
         "lapRecord": "1:31.447 (Де ла Роса, 2005)",
-        "date": "2025-04-13 20:55",
-		"podium1": "Пиастри",
-        "podium2": "Рассел",
-        "podium3": "Норрис",
+        "date": "2026-04-12 23:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/b3b13a59df849ce3092240d5f08d6005"
+        "recordingLink": ""
     },
     "jeddah": {
         "id": "t5",
@@ -252,12 +252,12 @@ const tracksData = {
         "drsZones": 3,
         "direction": "против часовой стрелки",
         "lapRecord": "1:30.734 (Хэмилтон, 2021)",
-        "date": "2025-04-20 20:55",
-		"podium1": "Пиастри",
-        "podium2": "Ферстаппен",
-        "podium3": "Леклер",
+        "date": "2026-04-19 01:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/7d862107f6a4812b3a100b4fcd8b2611"
+        "recordingLink": ""
     },
     "miami": {
         "id": "t6",
@@ -274,35 +274,36 @@ const tracksData = {
         "drsZones": 3,
         "direction": "по часовой стрелке",
         "lapRecord": "1:29.708 (Ферстаппен, 2024)",
-        "date": "2025-05-04 20:55",
+        "date": "2026-05-03 04:00",
 		"hasSprint": true,
-		"podium1": "Пиастри",
-        "podium2": "Норрис",
-        "podium3": "Рассел",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/83c2215a943345562c68bba961623188"
+        "recordingLink": ""
     },
-    "ferrari": {
+    "gilles-villeneuve": {
         "id": "t7",
-        "name": "Гран-при Мадрида",
-        "logo": "madrid.svg",
-        "miniLogo": "madrid-m.svg",
-		"country": "es",
-		"state": "Испания",
-        "location": "Мадрид, Испания",
-        "trackName": "МадРинг",
-        "length": "5 474 км",
-        "laps": 63,
-        "turns": 20,
-        "drsZones": 1,
-        "direction": "по часовой стрелке",
-        "lapRecord": "---",
-        "date": "2025-05-18 20:55",
-		"podium1": "Ферстаппен",
-        "podium2": "Норрис",
-        "podium3": "Пиастри",
+        "name": "Гран-при Канады",
+        "logo": "Gilles Villeneuve.svg",
+        "miniLogo": "Gilles Villeneuve-m.svg",
+		"country": "cn",
+		"state": "Канада",
+        "location": "Монреаль, Канада",
+        "trackName": "Автодром имени Жиля Вильнёва",
+        "length": "4 361 км",
+        "laps": 70,
+        "turns": 14,
+        "drsZones": 3,
+        "direction": "против часовой стрелки",
+        "lapRecord": "1.13.078 (Боттас, 2019)",
+        "date": "2026-05-24 04:00",
+		"hasSprint": true,
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/e48d594f60e400bca0014c4d552a34f9"
+        "recordingLink": ""
     },
     "monaco": {
         "id": "t8",
@@ -319,12 +320,12 @@ const tracksData = {
         "drsZones": 1,
         "direction": "по часовой стрелке",
         "lapRecord": "1.12.909 (Хэмилтон, 2021)",
-        "date": "2025-05-25 20:55",
-		"podium1": "Норрис",
-        "podium2": "Леклер",
-        "podium3": "Пиастри",
+        "date": "2026-06-07 21:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/b3c7587ee0c2a33f9e89fbc3f83a13f1"
+        "recordingLink": ""
     },
     "barcelona-catalunya": {
         "id": "t9",
@@ -341,37 +342,15 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:15.743 (Пиастри, 2025)",
-        "date": "2025-06-01 20:55",
-		"podium1": "Пиастри",
-        "podium2": "Норрис",
-        "podium3": "Леклер",
+        "date": "2026-06-14 21:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/295199e9d73dfd32b700902528b7113b"
-    },
-    "gilles-villeneuve": {
-        "id": "t10",
-        "name": "Гран-при Канады",
-        "logo": "Gilles Villeneuve.svg",
-        "miniLogo": "Gilles Villeneuve-m.svg",
-		"country": "cn",
-		"state": "Канада",
-        "location": "Монреаль, Канада",
-        "trackName": "Автодром имени Жиля Вильнёва",
-        "length": "4 361 км",
-        "laps": 70,
-        "turns": 14,
-        "drsZones": 3,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1.13.078 (Боттас, 2019)",
-        "date": "2025-06-15 20:55",
-		"podium1": "Рассел",
-        "podium2": "Ферстаппен",
-        "podium3": "Антонелли",
-        "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/28ecd1825dc64437615a9d73e2ae6304"
+        "recordingLink": ""
     },
     "red-bull-ring": {
-        "id": "t11",
+        "id": "t10",
         "name": "Гран-при Австрии",
         "logo": "Red Bull Ring.svg",
         "miniLogo": "Red Bull Ring-m.svg",
@@ -385,15 +364,15 @@ const tracksData = {
         "drsZones": 3,
         "direction": "по часовой стрелке",
         "lapRecord": "1:05.619 (Сайнс, 2020)",
-        "date": "2025-06-29 20:55",
-		"podium1": "Норис",
-        "podium2": "Пиастри",
-        "podium3": "Леклер",
+        "date": "2026-06-28 21:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/7a97d545d3a53005d7103312ccba332d"
+        "recordingLink": ""
     },
     "silverstone": {
-        "id": "t12",
+        "id": "t11",
         "name": "Гран-при Великобритании",
         "logo": "Silverstone.svg",
         "miniLogo": "Silverstone-m.svg",
@@ -407,15 +386,16 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1.27.097 (Ферстаппен, 2020)",
-        "date": "2025-07-06 20:55",
-		"podium1": "Норис",
-        "podium2": "Пиастри",
-        "podium3": "Хюлькенберг",
+        "date": "2026-07-05 22:00",
+		"hasSprint": true,
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/71d826175421b4c3acc527c817161dd0/"
+        "recordingLink": ""
     },
     "spa": {
-        "id": "t13",
+        "id": "t12",
         "name": "Гран-при Бельгии",
         "logo": "Spa.svg",
         "miniLogo": "Spa-m.svg",
@@ -429,16 +409,15 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:44.701 (Перес, 2024)",
-        "date": "2025-07-27 20:55",
-		"hasSprint": true,
-		"podium1": "Пиастри",
-        "podium2": "Норрис",
-        "podium3": "Леклер",
+        "date": "2026-07-19 21:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/ce6d886e90bbed00c61823ee57bf137a"
+        "recordingLink": ""
     },
     "hungaroring": {
-        "id": "t14",
+        "id": "t13",
         "name": "Гран-при Венгрии",
         "logo": "Hungaroring.svg",
         "miniLogo": "Hungaroring-m.svg",
@@ -452,15 +431,15 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:16.627 (Хэмилтон, 2020)",
-        "date": "2025-08-03 20:55",
-		"podium1": "Пиастри",
-        "podium2": "Норрис",
-        "podium3": "Рассел",
+        "date": "2026-07-26 21:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/06503abbf0e2016537de4f70412508a1"
+        "recordingLink": ""
     },
     "zandvoort": {
-        "id": "t15",
+        "id": "t14",
         "name": "Гран-при Нидерландов",
         "logo": "Zandvoort.svg",
         "miniLogo": "Zandvoort-m.svg",
@@ -474,15 +453,16 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1.11.097 (Хэмилтон, 2021)",
-        "date": "2025-08-31 20:55",
-		"podium1": "Пиастри",
-        "podium2": "Ферстаппен",
-        "podium3": "Хаджар",
+        "date": "2026-08-23 21:00",
+		"hasSprint": true,
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/b31f838fed7915301665e0e45eef6100/"
+        "recordingLink": ""
     },
     "monza": {
-        "id": "t16",
+        "id": "t15",
         "name": "Гран-при Италии",
         "logo": "Monza.svg",
         "miniLogo": "Monza-m.svg",
@@ -496,12 +476,34 @@ const tracksData = {
         "drsZones": 2,
         "direction": "по часовой стрелке",
         "lapRecord": "1:20.901 (Норрис, 2025)",
-        "date": "2025-09-07 20:55",
-		"podium1": "Ферстаппен",
-        "podium2": "Норрис",
-        "podium3": "Пиастри",
+        "date": "2026-09-06 21:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/b1de42c4683da812229733bc90e72ce4/"
+        "recordingLink": ""
+    },
+    "ferrari": {
+        "id": "t16",
+        "name": "Гран-при Мадрида",
+        "logo": "madrid.svg",
+        "miniLogo": "madrid-m.svg",
+		"country": "es",
+		"state": "Испания",
+        "location": "Мадрид, Испания",
+        "trackName": "МадРинг",
+        "length": "5 474 км",
+        "laps": 63,
+        "turns": 20,
+        "drsZones": 1,
+        "direction": "по часовой стрелке",
+        "lapRecord": "---",
+        "date": "2026-09-13 21:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
+        "streamLink": "",
+        "recordingLink": ""
     },
     "baku": {
         "id": "t17",
@@ -518,12 +520,12 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1.43.009 (Леклер, 2019)",
-        "date": "2025-09-21 18:50",
-		"podium1": "Ферстаппен",
-        "podium2": "Расселл",
-        "podium3": "Сайнс",
+        "date": "2026-09-26 19:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/2c7563212e849f8cd4603cabb311a54b/"
+        "recordingLink": ""
     },
     "marina-bay": {
         "id": "t18",
@@ -540,12 +542,13 @@ const tracksData = {
         "drsZones": 3,
         "direction": "против часовой стрелки",
         "lapRecord": "1:34.486 (Рикиардо, 2024)",
-        "date": "2025-10-05 20:00",
-		"podium1": "Расселл",
-        "podium2": "Ферстаппен",
-        "podium3": "Норрис",
+        "date": "2026-10-11 20:00",
+		"hasSprint": true,
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/c95ac2ce7c722fa997dfe573762f4eb1/"
+        "recordingLink": ""
     },
     "cota": {
         "id": "t19",
@@ -562,13 +565,12 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1:36.169 (Леклер, 2019)",
-        "date": "2025-10-20 02:00",
-		"hasSprint": true,
-		"podium1": "Ферстаппен",
-        "podium2": "Норрис",
-        "podium3": "Леклер",
+        "date": "2026-10-25 04:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/2e90450cce43500564a96723b0101e4f/"
+        "recordingLink": ""
     },
     "Rodriguez": {
         "id": "t20",
@@ -585,12 +587,12 @@ const tracksData = {
         "drsZones": 3,
         "direction": "против часовой стрелки",
         "lapRecord": "1:17.774 (Боттас, 2021)",
-        "date": "2025-10-27 03:00",
-		"podium1": "Норрис",
-        "podium2": "Леклер",
-        "podium3": "Ферстаппен",
+        "date": "2026-11-01 04:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/8bc21f5f4e8e56e799656b6d396f5e83"
+        "recordingLink": ""
     },
     "interlagos": {
         "id": "t21",
@@ -607,13 +609,12 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1:10.540 (Боттас, 2018)",
-        "date": "2025-11-10 01:00",
-		"hasSprint": true,
-		"podium1": "Норрис",
-        "podium2": "Антонелли",
-        "podium3": "Ферстаппен",
+        "date": "2026-11-08 01:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/193f090bea7b3098917ad48f1f55985a/"
+        "recordingLink": ""
     },
     "las-vegas": {
         "id": "t22",
@@ -630,12 +631,12 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1:32.312 (Рассел, 2024)",
-        "date": "2025-11-22 12:00",
-		"podium1": "Ферстаппен",
-        "podium2": "Расселл",
-        "podium3": "Антонелли",
+        "date": "2026-11-21 12:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/66f290afea88783135fc5cdb9026fb57/"
+        "recordingLink": ""
     },
     "losail": {
         "id": "t23",
@@ -652,13 +653,12 @@ const tracksData = {
         "drsZones": 1,
         "direction": "по часовой стрелке",
         "lapRecord": "1:22.384 (Норрис, 2024)",
-        "date": "2025-11-30 24:00",
-		"hasSprint": true,
-		"podium1": "Ферстаппен",
-        "podium2": "Пиастри",
-        "podium3": "Сайнс",
+        "date": "2026-11-29 24:00",
+		"podium1": "---",
+        "podium2": "---",
+        "podium3": "---",
         "streamLink": "",
-        "recordingLink": "https://rutube.ru/video/7f2a7c3f03dfa227c7e665e6f23b5759"
+        "recordingLink": ""
     },
     "yas-marina": {
         "id": "t24",
@@ -675,12 +675,12 @@ const tracksData = {
         "drsZones": 2,
         "direction": "против часовой стрелки",
         "lapRecord": "1:22.109 (Ферстаппен, 2021)",
-        "date": "2025-12-07 20:55",
+        "date": "2026-12-06 21:00",
 		"podium1": "---",
         "podium2": "---",
         "podium3": "---",
-        "streamLink": "https://rutube.ru/video/2922099a41cee6646a34461f3fe1d5a2/",
-        "recordingLink": "https://rutube.ru/video/2922099a41cee6646a34461f3fe1d5a2/"
+        "streamLink": "",
+        "recordingLink": ""
     }*/
 	};
 
@@ -1129,11 +1129,3 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
-
-
-
-
-
-
-
-
