@@ -289,7 +289,7 @@ const Cvala = [
         driverCountry1: "nl",
         cvala1: "0",
         driver2: "Исак Хаджар",
-        driverCountry1: "fr",
+        driverCountry2: "fr",
         cvala2: "0",
     },
     {
@@ -541,6 +541,7 @@ if (window.location.hash === '#stats') {
     renderStats();
 
 }
+
 
 
 
