@@ -141,7 +141,7 @@ const currentTeams = [
                  fullName: "Audi Revolut F1 Team",
                  logo: "Audi.png",
                  miniLogo: "Audi-m.png",
-                 base: "Нойбург, Бавария, Германия",
+                 base: "Хинвилл, Швейцария",
                  director: "Маттиа Бинотто",
 			     foundert: "Audi Formula Racing GmbH ",
 				 debut: "2026",
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
