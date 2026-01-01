@@ -14,10 +14,10 @@ const driversData = [
         birthDate: "13.11.1999",
         debut: "McLaren, 2019",
         titles: 0,
-        wins: 9,
-        podiums: 39,
+        wins: 11,
+        podiums: 44,
         fine: 3,
-		poles: 13,
+		poles: 16,
 		dnf: 12,
         bio: "Британский гонщик, участник чемпионатов мира по автогонкам в классе Формула-1, вице-чемпион 2018 года в классе Формула-2. С 2015 по 2017 годы он завоевал титулы в пяти разных первенствах, среди которых была Европейская Формула-3."
     },
@@ -35,10 +35,10 @@ const driversData = [
         birthDate: "30.09.1997",
         debut: "Toro Rosso, 2015",
         titles: 4,
-        wins: 66,
-        podiums: 119,
+        wins: 71,
+        podiums: 127,
         fine: 6,
-		poles: 45,
+		poles: 48,
 		dnf: 32,
         bio: "Нидерландский гонщик, четырёхкратный чемпион мира Формулы-1. Самый молодой гонщик в истории, дебютировавший в Формуле-1 в возрасте 17 лет."
     },
@@ -162,7 +162,7 @@ const driversData = [
         debut: "Mercedes, 2025",
         titles: 0,
         wins: 0,
-        podiums: 1,
+        podiums: 3,
         fine: 5,
 		poles: 0,
         dnf: 1,
@@ -204,7 +204,7 @@ const driversData = [
         debut: "Alfa Romeo, 2018",
         titles: 0,
         wins: 8,
-        podiums: 48,
+        podiums: 50,
         fine: 1,
 		poles: 27,
         dnf: 20,
@@ -393,7 +393,7 @@ const driversData = [
         debut: "McLaren, 2007",
         titles: 7,
         wins: 105,
-        podiums: 203,
+        podiums: 202,
         fine: 3,
 		poles: 104,
         dnf: 35,
@@ -414,7 +414,7 @@ const driversData = [
         debut: "Toro Rosso, 2015",
         titles: 0,
         wins: 4,
-        podiums: 27,
+        podiums: 29,
         fine: 4,
 		poles: 6,
         dnf: 30,
@@ -434,8 +434,8 @@ const driversData = [
         birthDate: "15.02.1998",
         debut: "Williams, 2019",
         titles: 0,
-        wins: 4,
-        podiums: 21,
+        wins: 5,
+        podiums: 24,
         fine: 0,
 		poles: 7,
         dnf: 10,
@@ -460,7 +460,7 @@ const driversData = [
         fine: 5,
 		poles: 20,
         dnf: 27,
-        bio: "Будующий пилот Cadillac"
+        bio: "Пилот Cadillac"
     },
     {   id: "piastri",
         number: 81,         
@@ -477,7 +477,7 @@ const driversData = [
         debut: "McLaren, 2023",
         titles: 1,
         wins: 9,
-        podiums: 24,
+        podiums: 26,
         fine: 6,
 		poles: 5,
         dnf: 5,
@@ -780,5 +780,6 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
 
 
