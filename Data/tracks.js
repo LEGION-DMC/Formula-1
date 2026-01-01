@@ -681,7 +681,7 @@ const tracksData = {
         "podium3": "---",
         "streamLink": "",
         "recordingLink": ""
-    }*/
+    }
 	};
 
 // Рендеринг карточек
@@ -1129,3 +1129,4 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
