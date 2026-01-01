@@ -483,7 +483,7 @@ const tracksData = {
         "streamLink": "",
         "recordingLink": ""
     },
-    "ferrari": {
+    "madrid": {
         "id": "t16",
         "name": "Гран-при Мадрида",
         "logo": "madrid.svg",
@@ -1129,4 +1129,5 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
