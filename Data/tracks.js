@@ -168,7 +168,7 @@ const tracksData = {
         "podium2": "---",
         "podium3": "---",
         "streamLink": "",
-        "recordingLink": "
+        "recordingLink": ""
     },
     "shanghai": {
         "id": "t2",
@@ -1129,5 +1129,6 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
