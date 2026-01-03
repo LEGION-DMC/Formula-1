@@ -345,7 +345,7 @@ const driversData = [
         team: "Racing Bulls",
         teamLogo: "RacingBulls-m.png",
         teamColor: "#ddebdd",
-        photo: "lindblad.jpg",
+        photo: "lindblad.png",
         birthPlace: "Лондон, Англия",
         birthDate: "08.08.2007",
         debut: "Racing Bulls, 2026",
@@ -780,6 +780,7 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
 
 
 
