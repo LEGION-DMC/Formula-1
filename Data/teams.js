@@ -162,7 +162,7 @@ const currentTeams = [
                  director: "Оливер Оукс",
 			     foundert: "Renault Group",
 				 debut: "2021",
-                 car: "---",
+                 car: "A526",
                  engine: "Mercedes",
                  drivers: [
                     { number: "10", name: "Пьер Гасли", country: "fr", state: "Франция"},
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
