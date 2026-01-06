@@ -61,7 +61,7 @@ const driversData = [
         fine: 2,
 		poles: 0,
         dnf: 2,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "hadjar", 
 		number: 6,         
@@ -82,7 +82,7 @@ const driversData = [
         fine: 0,
 		poles: 0,
         dnf: 1,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "doohan",
         number: 7,         
@@ -103,7 +103,7 @@ const driversData = [
         fine: 4,
 		poles: 0,
         dnf: 2,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "gasly",
 		number: 10,         
@@ -124,7 +124,7 @@ const driversData = [
         fine: 2,
 		poles: 0,
         dnf: 25,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "perez",
         number: 11,         
@@ -145,7 +145,7 @@ const driversData = [
         fine: 0,
 		poles: 3,
         dnf: 35,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "antonelli", 
 		number: 12,         
@@ -166,7 +166,7 @@ const driversData = [
         fine: 2,
 		poles: 0,
         dnf: 1,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "alonso",
         number: 14,         
@@ -187,7 +187,7 @@ const driversData = [
         fine: 0,
 		poles: 22,
         dnf: 70,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "leclerc",
         number: 16,         
@@ -208,7 +208,7 @@ const driversData = [
         fine: 1,
 		poles: 27,
         dnf: 20,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "stroll",
         number: 18,         
@@ -229,7 +229,7 @@ const driversData = [
         fine: 1,
 		poles: 1,
         dnf: 25,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "tsunoda",
         number: 22,         
@@ -238,7 +238,7 @@ const driversData = [
         country: "jp",       
         state: "Япония",
         team: "Резерв",
-        teamLogo: "F1.png",
+        teamLogo: "RedBull-m.png",
         teamColor: "#313247",
         photo: "tsunoda.jpg",
         birthPlace: "Сагинамихара, Япония",
@@ -271,7 +271,7 @@ const driversData = [
         fine: 2,
 		poles: 0,
         dnf: 15,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "zhou",
         number: 24,         
@@ -280,8 +280,8 @@ const driversData = [
         country: "cn",       
         state: "Китай",
         team: "Резерв",
-        teamLogo: "F1.png",
-        teamColor: "#313247",
+        teamLogo: "Cadillac-m.png",
+        teamColor: "#ffffff",
         photo: "zhou.jpg",
         birthPlace: "Шанхай, Китай",
         birthDate: "30.05.1999",
@@ -313,7 +313,7 @@ const driversData = [
         fine: 0,
 		poles: 1,
         dnf: 40,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "lawson",
         number: 30,         
@@ -334,7 +334,7 @@ const driversData = [
         fine: 2,
 		poles: 0,
         dnf: 3,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "ocon",
         number: 31,         
@@ -355,7 +355,7 @@ const driversData = [
         fine: 1,
 		poles: 0,
         dnf: 20,
-        bio: "краткая биография"
+        bio: "---"
     },
 	{   id: "lindblad",
         number: 41,         
@@ -376,7 +376,7 @@ const driversData = [
         fine: 0,
 		poles: 0,
         dnf: 0,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "colapinto",
         number: 43,         
@@ -397,7 +397,7 @@ const driversData = [
         fine: 1,
 		poles: 0,
         dnf: 1,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "hamilton",
         number: 44,         
@@ -418,7 +418,7 @@ const driversData = [
         fine: 2,
 		poles: 104,
         dnf: 35,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "sainz",
         number: 55,         
@@ -439,7 +439,7 @@ const driversData = [
         fine: 2,
 		poles: 6,
         dnf: 30,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "russell",
         number: 63,         
@@ -460,7 +460,7 @@ const driversData = [
         fine: 0,
 		poles: 7,
         dnf: 10,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "bottas",
         number: 77,         
@@ -481,7 +481,7 @@ const driversData = [
         fine: 0,
 		poles: 20,
         dnf: 27,
-        bio: "Пилот Cadillac"
+        bio: "---"
     },
     {   id: "piastri",
         number: 81,         
@@ -502,7 +502,7 @@ const driversData = [
         fine: 2,
 		poles: 5,
         dnf: 5,
-        bio: "краткая биография"
+        bio: "---"
     },
     {   id: "bearman",
         number: 87,         
@@ -523,7 +523,28 @@ const driversData = [
         fine: 2,
 		poles: 0,
         dnf: 1,
-        bio: "краткая биография"
+        bio: "---"
+    },
+    {   id: "giovinazzi",
+        number: 99,         
+        name: "Антонио Джовинацци",      
+        namem: "А.Джовинацци",    
+        country: "it",       
+        state: "Италия",
+        team: "Резерв",
+        teamLogo: "Ferrari-m.png",
+        teamColor: "#b80f0f",
+        photo: "giovinazzi.jpg",
+        birthPlace: "Мартина-Франка, Апулия, Италия",
+        birthDate: "14.12.1993",
+        debut: "Ferrari, 2017",
+        titles: 0,
+        wins: 0,
+        podiums: 0,
+        fine: 0,
+		poles: 0,
+        dnf: 0,
+        bio: "Резервный пилот Ferrari"
     },
 ];
 
@@ -801,6 +822,7 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
 
 
 
