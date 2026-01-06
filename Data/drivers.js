@@ -16,7 +16,7 @@ const driversData = [
         titles: 0,
         wins: 11,
         podiums: 44,
-        fine: 3,
+        fine: 0,
 		poles: 16,
 		dnf: 12,
         bio: "Британский гонщик, участник чемпионатов мира по автогонкам в классе Формула-1, вице-чемпион 2018 года в классе Формула-2. С 2015 по 2017 годы он завоевал титулы в пяти разных первенствах, среди которых была Европейская Формула-3."
@@ -37,7 +37,7 @@ const driversData = [
         titles: 4,
         wins: 71,
         podiums: 127,
-        fine: 6,
+        fine: 3,
 		poles: 48,
 		dnf: 32,
         bio: "Нидерландский гонщик, четырёхкратный чемпион мира Формулы-1. Самый молодой гонщик в истории, дебютировавший в Формуле-1 в возрасте 17 лет."
@@ -163,7 +163,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 3,
-        fine: 5,
+        fine: 2,
 		poles: 0,
         dnf: 1,
         bio: "краткая биография"
@@ -226,7 +226,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 3,
-        fine: 7,
+        fine: 1,
 		poles: 1,
         dnf: 25,
         bio: "краткая биография"
@@ -247,7 +247,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 7,
+        fine: 0,
 		poles: 0,
         dnf: 10,
         bio: "краткая биография"
@@ -268,7 +268,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 2,
-        fine: 5,
+        fine: 2,
 		poles: 0,
         dnf: 15,
         bio: "краткая биография"
@@ -310,7 +310,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 7,
+        fine: 2,
 		poles: 0,
         dnf: 3,
         bio: "краткая биография"
@@ -352,9 +352,9 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 7,
+        fine: 0,
 		poles: 0,
-        dnf: 3,
+        dnf: 0,
         bio: "краткая биография"
     },
     {   id: "colapinto",
@@ -394,7 +394,7 @@ const driversData = [
         titles: 7,
         wins: 105,
         podiums: 202,
-        fine: 3,
+        fine: 2,
 		poles: 104,
         dnf: 35,
         bio: "краткая биография"
@@ -415,7 +415,7 @@ const driversData = [
         titles: 0,
         wins: 4,
         podiums: 29,
-        fine: 4,
+        fine: 2,
 		poles: 6,
         dnf: 30,
         bio: "краткая биография"
@@ -457,7 +457,7 @@ const driversData = [
         titles: 0,
         wins: 10,
         podiums: 67,
-        fine: 5,
+        fine: 0,
 		poles: 20,
         dnf: 27,
         bio: "Пилот Cadillac"
@@ -478,7 +478,7 @@ const driversData = [
         titles: 1,
         wins: 9,
         podiums: 26,
-        fine: 6,
+        fine: 2,
 		poles: 5,
         dnf: 5,
         bio: "краткая биография"
@@ -499,7 +499,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 9,
+        fine: 2,
 		poles: 0,
         dnf: 1,
         bio: "краткая биография"
@@ -780,6 +780,7 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
 
 
 
