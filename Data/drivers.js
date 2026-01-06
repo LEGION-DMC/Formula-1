@@ -250,7 +250,7 @@ const driversData = [
         fine: 0,
 		poles: 0,
         dnf: 10,
-        bio: "краткая биография"
+        bio: "Резервный пилот Red Bull"
     },
     {   id: "albon",
         number: 23,         
@@ -272,6 +272,27 @@ const driversData = [
 		poles: 0,
         dnf: 15,
         bio: "краткая биография"
+    },
+    {   id: "zhou",
+        number: 24,         
+        name: "Гуан Ю Чжоу",      
+        namem: "Г.Чжоу",    
+        country: "cn",       
+        state: "Китай",
+        team: "Резерв",
+        teamLogo: "F1.png",
+        teamColor: "#313247",
+        photo: "zhou.jpg",
+        birthPlace: "Шанхай, Китай",
+        birthDate: "30.05.1999",
+        debut: "Alfa Romeo, 2022",
+        titles: 0,
+        wins: 0,
+        podiums: 0,
+        fine: 0,
+		poles: 0,
+        dnf: 0,
+        bio: "Резервный пилот Cadillac"
     },
     {   id: "hulkenberg",
         number: 27,         
@@ -780,6 +801,7 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
 
 
 
