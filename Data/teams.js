@@ -26,7 +26,7 @@ const currentTeams = [
                  director: "Тото Вольфф",
 			     foundert: "Норберт Хауг",
 				 debut: "2010",
-                 car: "---",
+                 car: "W17",
                  engine: "Mercedes",
                  drivers: [
                     {number: "63", name: "Джордж Расселл", country: "gb", state: "Великобритания"},
@@ -77,7 +77,7 @@ const currentTeams = [
                  director: "Джеймс Ваулз",
 			     foundert: "Фрэнк Уильямс",
 				 debut: "1975",
-                 car: "---",
+                 car: "FW48",
                  engine: "Mercedes",
                  drivers: [
                     {number: "55", name: "Карлос Сайнс", country: "es", state: "Испания"},
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
