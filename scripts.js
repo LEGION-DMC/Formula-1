@@ -98,13 +98,13 @@ function renderMainPage() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <div id="mainPage">
-            <h2>Гран-При сезона 2025</h2>
+            <h2>Гран-При сезона 2026</h2>
             <div class="main-gp-cards" id="mainGpCards"></div>
 			<div class="tires-divider"></div>
-            <div class="main-standings">
+     <!--       <div class="main-standings">
                 <div class="main-drivers" id="mainDrivers"></div>
                 <div class="main-constructors" id="mainConstructors"></div>
-            </div>
+            </div> -->
         </div>
     `;
 
@@ -444,7 +444,7 @@ function renderMainDrivers() {
         .slice(0, 1); // Топ-3 пилота
     
     let html = `
-        <h2>Чемпион 2025</h2>
+        <h2>Чемпион 2026</h2>
         <div class="main-standings-list">
     `;
     
@@ -476,7 +476,7 @@ function renderMainConstructors() {
         .slice(0, 1);
     
     let html = `
-        <h2>Чемпион кубка конструкторов 2025</h2>
+        <h2>Чемпион кубка конструкторов 2026</h2>
         <div class="main-standings-list">
     `;
     
@@ -529,6 +529,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
