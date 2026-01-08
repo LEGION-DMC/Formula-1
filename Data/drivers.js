@@ -50,7 +50,7 @@ const driversData = [
         state: "Бразилия",
         team: "Audi",
         teamLogo: "Audi-m.png",
-        teamColor: "#21ad17",
+        teamColor: "#b80f0f",
         photo: "bortoletto.jpg",
         birthPlace: "Бразилиа, Бразилия",
         birthDate: "14.12.2004",
@@ -71,7 +71,7 @@ const driversData = [
         state: "Франция",
         team: "Red Bull",
         teamLogo: "RedBull-m.png",
-        teamColor: "#ddebdd",
+        teamColor: "#313247",
         photo: "hadjar.jpg",
         birthPlace: "Париж, Франция",
         birthDate: "28.09.2004",
@@ -302,7 +302,7 @@ const driversData = [
         state: "Германия",
         team: "Audi",
         teamLogo: "Audi-m.png",
-        teamColor: "#21ad17",
+        teamColor: "#b80f0f",
         photo: "hulkenberg.jpg",
         birthPlace: "Эммерих-на-Рейне, Германия",
         birthDate: "19.08.1987",
@@ -822,6 +822,7 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
 
 
 
