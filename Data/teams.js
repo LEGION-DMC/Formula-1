@@ -60,7 +60,7 @@ const currentTeams = [
                  director: "Фредерик Вассёр",
 				 foundert: "Энцо Феррари",
 				 debut: "1950",
-                 car: "---",
+                 car: "SF-26",
                  engine: "Ferrari",
                  drivers: [
                     {number: "16", name: "Шарль Леклер", country: "mc", state: "Манако"},
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
