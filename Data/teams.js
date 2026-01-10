@@ -9,7 +9,7 @@ const currentTeams = [
 					 director: "Андреа Стелла",
 					 foundert: "Брюс Макларен",
 					 debut: "1966",
-					 car: "---",
+					 car: "MCL40",
                  engine: "Mercedes",
                  drivers: [
                     {number: "81", name: "Оскар Пиастри", country: "au", state: "Австралия"},
@@ -43,7 +43,7 @@ const currentTeams = [
                  director: "Лоран Мекис",
 			     foundert: "Дитрих Матешиц",
 				 debut: "2005",
-                 car: "---",
+                 car: "RB22",
                  engine: "Red Bull Ford",
                  drivers: [
                     {number: "3", name: "Макс Ферстаппен", country: "nl", state: "Нидерланды"},
@@ -60,7 +60,7 @@ const currentTeams = [
                  director: "Фредерик Вассёр",
 				 foundert: "Энцо Феррари",
 				 debut: "1950",
-                 car: "---",
+                 car: "SF-26",
                  engine: "Ferrari",
                  drivers: [
                     {number: "16", name: "Шарль Леклер", country: "mc", state: "Манако"},
@@ -111,7 +111,7 @@ const currentTeams = [
                  director: "Энди Коуэлл",
 			     foundert: "Лоуренс Стролл",
 				 debut: "2021",
-                 car: "---",
+                 car: "AMR26",
                  engine: "Honda",
                  drivers: [
                     {number: "18", name: "Лэнс Стролл", country: "ca", state: "Канада"},
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
