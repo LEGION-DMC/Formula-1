@@ -194,42 +194,12 @@ function renderMainGPCards() {
                 </div>
             `;
         }
-
-        html += `
-            <div class="weather-card">
-                <div class="weather-header">
-                    <h3>Погода на гонку</h3>
-                </div>
-                <div class="tires-divider"></div>
-                <div class="weather-block">
-                    <div class="weather">
-                        <img src="Images/Weather/cloud.png" alt="weather" class="weather-image inactive">
-                        <span class="weather-name">Погода</span>
-						<span class="weather-name" style="color: red">---</span>
-                    </div>
-                    <div class="weather">
-                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image inactive">
-                        <span class="weather-name">Осадки</span>
-						<span class="weather-name" style="color: red">---</span>
-                    </div>
-                    <div class="weather">
-                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image inactive">
-                        <span class="weather-name">Ветер</span>
-						<span class="weather-name" style="color: red">---/с</span>
-                    </div>
-                    <div class="weather">
-                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image inactive">
-                        <span class="weather-name">Темп.°C</span>
-						<span class="weather-name" style="color: red">---</span>
-                    </div>
-                </div>
-            </div>
-        `;
         
         html += `
             <div class="main-gp-card ${isLive ? 'live' : isPast ? 'past' : isToday ? 'today' : 'upcoming'}" 
                  data-gp-id="${currentGP.id}">
                 <div class="main-gp-header">
+					<img src="Images/Flags/${currentGP.country}.svg" alt="flag" title="${currentGP.state}" class="flag-main">
                     <h3>${currentGP.name}</h3>
                     <span class="main-gp-status ${isLive ? 'live' : ''}">${status}</span>
                 </div>
@@ -243,13 +213,14 @@ function renderMainGPCards() {
                 <div class="main-gp-info">
                     <div class="main-gp-date">${formatDate(currentGP.date)}</div>
                     <div class="main-gp-track">${currentGP.trackName}</div>
-					<div class="main-gp-location"><img src="Images/Flags/${currentGP.country}.svg" alt="flag" title="${currentGP.state}" class="flag">  ${currentGP.location}</div>
+					<div class="main-gp-location">${currentGP.location}</div>
                 </div>
             </div>
         `;
 
              // Плашка составов шин
         html += `
+            <div class="inf-race">
             <div class="tires-card">
                 <div class="tires-header">
                     <h3>Состав шин на гонку</h3>
@@ -293,6 +264,36 @@ function renderMainGPCards() {
                         <span class="tire-name">Wet</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="weather-card">
+                <div class="weather-header">
+                    <h3>Погода на гонку</h3>
+                </div>
+                <div class="tires-divider"></div>
+                <div class="weather-block">
+                    <div class="weather">
+                        <img src="Images/Weather/cloud.png" alt="weather" class="weather-image inactive">
+                        <span class="weather-name">Погода</span>
+						<span class="weather-name" style="color: red">---</span>
+                    </div>
+                    <div class="weather">
+                        <img src="Images/Weather/rain.png" alt="weather" class="weather-image inactive">
+                        <span class="weather-name">Осадки</span>
+						<span class="weather-name" style="color: red">---</span>
+                    </div>
+                    <div class="weather">
+                        <img src="Images/Weather/wind.png" alt="weather" class="weather-image inactive">
+                        <span class="weather-name">Ветер</span>
+						<span class="weather-name" style="color: red">---/с</span>
+                    </div>
+                    <div class="weather">
+                        <img src="Images/Weather/temperature.png" alt="weather" class="weather-image inactive">
+                        <span class="weather-name">Темп.°C</span>
+						<span class="weather-name" style="color: red">---</span>
+                    </div>
+                </div>
+            </div>
             </div>
         `;
     } else {
@@ -518,10 +519,6 @@ function loadTabContent(tabName) {
             break;
         case 'stats':
             renderStats();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            break;
-        case 'glossary':
-            renderGlossary(glossaryTerms);
             window.scrollTo({ top: 0, behavior: 'smooth' });
             break;
         default:
