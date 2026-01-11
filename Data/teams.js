@@ -145,7 +145,7 @@ const currentTeams = [
                  director: "Маттиа Бинотто",
 			     foundert: "Audi Formula Racing GmbH ",
 				 debut: "2026",
-                 car: "---",
+                 car: "RS-26",
                  engine: "Audi",
                  drivers: [
                     {number: "27", name: "Нико Хюлькенберг", country: "de", state: "Германия"},
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
