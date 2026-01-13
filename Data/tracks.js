@@ -486,8 +486,8 @@ const tracksData = {
     "madrid": {
         "id": "t16",
         "name": "Гран-при Мадрида",
-        "logo": "madrid.svg",
-        "miniLogo": "madrid-m.svg",
+        "logo": "Madrid.svg",
+        "miniLogo": "Madrid-m.svg",
 		"country": "es",
 		"state": "Испания",
         "location": "Мадрид, Испания",
@@ -1129,6 +1129,7 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
+
 
 
 
