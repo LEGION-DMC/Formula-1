@@ -84,7 +84,7 @@ const driversData = [
         dnf: 1,
         bio: "---"
     },
-    {   id: "doohan",
+    /*{   id: "doohan",
         number: 7,         
         name: "Джек Дуэн",      
         namem: "Д.Дуэн",    
@@ -104,7 +104,7 @@ const driversData = [
 		poles: 0,
         dnf: 2,
         bio: "---"
-    },
+    },*/
     {   id: "gasly",
 		number: 10,         
         name: "Пьер Гасли",      
@@ -822,6 +822,7 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
+
 
 
 
