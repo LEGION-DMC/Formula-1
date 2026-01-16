@@ -94,7 +94,7 @@ const currentTeams = [
                  director: "Алан Пермейн",
 			     foundert: "Дитрих Матешиц",
 				 debut: "2006",
-                 car: "---",
+                 car: "VCARB 03",
                  engine: "Red Bull Ford",
                  drivers: [
                     {number: "30", name: "Лиам Лоусон", country: "nz", state: "Новая Зеландия"},
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
