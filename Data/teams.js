@@ -94,7 +94,7 @@ const currentTeams = [
                  director: "Алан Пермейн",
 			     foundert: "Дитрих Матешиц",
 				 debut: "2006",
-                 car: "---",
+                 car: "VCARB 03",
                  engine: "Red Bull Ford",
                  drivers: [
                     {number: "30", name: "Лиам Лоусон", country: "nz", state: "Новая Зеландия"},
@@ -108,7 +108,7 @@ const currentTeams = [
                  logo: "AstonMartin.png",
                  miniLogo: "AstonMartin-m.png",
                  base: "Сильверстоун, Великобритания",
-                 director: "Энди Коуэлл",
+                 director: "Эдриан Ньюи",
 			     foundert: "Лоуренс Стролл",
 				 debut: "2021",
                  car: "AMR26",
@@ -142,7 +142,7 @@ const currentTeams = [
                  logo: "Audi.png",
                  miniLogo: "Audi-m.png",
                  base: "Хинвилл, Швейцария",
-                 director: "Маттиа Бинотто",
+                 director: "Джонатан Уитли",
 			     foundert: "Audi Formula Racing GmbH ",
 				 debut: "2026",
                  car: "RS-26",
@@ -159,7 +159,7 @@ const currentTeams = [
                  logo: "Alpine.png",
                  miniLogo: "Alpine-m.png",
                  base: "Энстоун, Оксфордшир, Великобритания",
-                 director: "Оливер Оукс",
+                 director: "Флавио Бриаторе",
 			     foundert: "Renault Group",
 				 debut: "2021",
                  car: "A526",
@@ -377,6 +377,8 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
+
 
 
 

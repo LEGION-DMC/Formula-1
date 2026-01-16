@@ -486,8 +486,8 @@ const tracksData = {
     "madrid": {
         "id": "t16",
         "name": "Гран-при Мадрида",
-        "logo": "Madrid.svg",
-        "miniLogo": "Madrid-m.svg",
+        "logo": "Madrid.png",
+        "miniLogo": "Madrid-m.png",
 		"country": "es",
 		"state": "Испания",
         "location": "Мадрид, Испания",
@@ -1026,15 +1026,19 @@ function scrollToCurrent() {
 }
 
 // Модальное окно
+// Модальное окно
 function openModal(track) {
     const modal = document.createElement('div');
     modal.className = 'modal';
+    
+    // Получаем путь к изображению трассы
+    const trackImagePath = `Images/Tracks/${track.logo}`;
     
     // HTML структура модального окна
     modal.innerHTML = `
         <div class="modal-content">
             <div class="modal-image">
-                <img src="Images/Tracks/${track.logo}" alt="${track.trackName}">
+                <img src="${trackImagePath}" alt="${track.trackName}" class="track-image-modal">
             </div>
             <div class="modal-info">
                 <h2><img src="Images/Flags/${track.country}.svg" alt="flag" title="${track.state}" class="flag">     ${track.trackName}</h2>
@@ -1116,6 +1120,16 @@ function openModal(track) {
     `;
     
     document.body.appendChild(modal);
+    
+    // Добавляем обработчик клика на изображение трассы
+    const trackImage = modal.querySelector('.track-image-modal');
+    trackImage.style.cursor = 'pointer';
+    trackImage.title = 'Нажмите для открытия в новой вкладке';
+    
+    trackImage.addEventListener('click', (e) => {
+        e.stopPropagation(); // Предотвращаем закрытие модального окна
+        window.open(trackImagePath, '_blank'); // Открываем в новой вкладке
+    });
     
     // Обработчики закрытия модального окна
     modal.addEventListener('click', (e) => {

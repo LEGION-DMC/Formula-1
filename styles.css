@@ -1142,6 +1142,10 @@ body::before {
     background: #13131391;
 }
 
+.track-image img {
+    width: 140px;
+}
+
 .track-info {
     flex: 1;
     padding: 10px;
@@ -1348,8 +1352,7 @@ body::before {
 }
 
 .modal-image img {
-    max-width: 100%;
-    max-height: 500px;
+    width: 400px;
     box-shadow: 8px 0 5px rgba(0, 0, 0, 0.3);
 }
 
