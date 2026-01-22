@@ -210,9 +210,9 @@ body::before {
 }
 
 .main-gp-image {
-    height: 390px;
-    margin-bottom: -80px;
-    margin-top: -110px;
+    height: 300px;
+    margin-top: -70px;
+    margin-bottom: -50px;
 }
 
 .main-gp-image img {
