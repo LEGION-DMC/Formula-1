@@ -229,27 +229,27 @@ function renderMainGPCards() {
                 <div class="dry-tires">
                     <div class="tire-item">
 						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+                        <img src="Images/Wheels/Hard.png" alt="C1" class="tire-image inactive">
                         <span class="tire-name">C1</span>
                     </div>
                     <div class="tire-item">
 						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+                        <img src="Images/Wheels/Hard.png" alt="C2" class="tire-image inactive">
                         <span class="tire-name">C2</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+						<span class="tire-name">Hard</span>
+                        <img src="Images/Wheels/Hard.png" alt="C3" class="tire-image active">
                         <span class="tire-name">C3</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+						<span class="tire-name">Medium</span>
+                        <img src="Images/Wheels/Hard.png" alt="C4" class="tire-image active">
                         <span class="tire-name">C4</span>
                     </div>
                     <div class="tire-item">
-						<span class="tire-name">---</span>
-                        <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+						<span class="tire-name">Soft</span>
+                        <img src="Images/Wheels/Hard.png" alt="C5" class="tire-image active">
                         <span class="tire-name">C5</span>
                     </div>
                 </div>
@@ -526,6 +526,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
