@@ -139,7 +139,7 @@ const currentTeams = [
 			{    shortName: "Audi",
                  id: "modal6",
                  fullName: "Audi Revolut F1 Team",
-                 logo: "Audi.svg",
+                 logo: "Audi.png",
                  miniLogo: "Audi-m.png",
                  base: "Хинвилл, Швейцария",
                  director: "Джонатан Уитли",
@@ -377,6 +377,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
