@@ -11,7 +11,8 @@ const currentTeams = [
 					 debut: "1966",
 					 car: "MCL40",
                  engine: "Mercedes",
-                 drivers: [
+                 carImage: "McLaren.png",
+				 drivers: [
                     {number: "81", name: "Оскар Пиастри", country: "au", state: "Австралия"},
                     {number: "1", name: "Ландо Норрис", country: "gb", state: "Великобритания"}
                 ],
@@ -28,6 +29,7 @@ const currentTeams = [
 				 debut: "2010",
                  car: "W17",
                  engine: "Mercedes",
+                 carImage: "Mercedes.png",
                  drivers: [
                     {number: "63", name: "Джордж Расселл", country: "gb", state: "Великобритания"},
                     {number: "12", name: "Андреа Кими Антонелли", country: "it", state: "Италия"}
@@ -45,6 +47,7 @@ const currentTeams = [
 				 debut: "2005",
                  car: "RB22",
                  engine: "Red Bull Ford",
+                 carImage: "RedBull.png",
                  drivers: [
                     {number: "3", name: "Макс Ферстаппен", country: "nl", state: "Нидерланды"},
                     {number: "6", name: "Иcаак Хаджар", country: "fr", state: "Франция"}
@@ -62,6 +65,7 @@ const currentTeams = [
 				 debut: "1950",
                  car: "SF-26",
                  engine: "Ferrari",
+                 carImage: "Ferrari.png",
                  drivers: [
                     {number: "16", name: "Шарль Леклер", country: "mc", state: "Манако"},
                     {number: "44", name: "Льюис Хэмилтон", country: "gb", state: "Великобритания"}
@@ -79,6 +83,7 @@ const currentTeams = [
 				 debut: "1975",
                  car: "FW48",
                  engine: "Mercedes",
+                 carImage: "Williams.png",
                  drivers: [
                     {number: "55", name: "Карлос Сайнс", country: "es", state: "Испания"},
                     {number: "23", name: "Александр Албон", country: "th", state: "Тайвань"}
@@ -96,6 +101,7 @@ const currentTeams = [
 				 debut: "2006",
                  car: "VCARB 03",
                  engine: "Red Bull Ford",
+                 carImage: "RacingBulls.png",
                  drivers: [
                     {number: "30", name: "Лиам Лоусон", country: "nz", state: "Новая Зеландия"},
                     {number: "41", name: "Арвид Линдблад", country: "gb", state: "Великобритания"}
@@ -113,6 +119,7 @@ const currentTeams = [
 				 debut: "2021",
                  car: "AMR26",
                  engine: "Honda",
+                 carImage: "AstonMartin.png",
                  drivers: [
                     {number: "18", name: "Лэнс Стролл", country: "ca", state: "Канада"},
                     {number: "14", name: "Фернандо Алонсо", country: "es", state: "Испания"}
@@ -130,6 +137,7 @@ const currentTeams = [
 				 debut: "2016",
                  car: "VF-26",
                  engine: "Ferrari",
+                 carImage: "Haas.png",
                  drivers: [
                     {number: "31", name: "Эстебан Окон", country: "gb", state: "Великобритания"},
                     {number: "87", name: "Оливер Берман", country: "fr", state: "Франция"}
@@ -147,6 +155,7 @@ const currentTeams = [
 				 debut: "2026",
                  car: "RS-26",
                  engine: "Audi",
+                 carImage: "Audi.png",
                  drivers: [
                     {number: "27", name: "Нико Хюлькенберг", country: "de", state: "Германия"},
                     {number: "5", name: "Габриэл Бортолето", country: "br", state: "Бразилия"}
@@ -164,6 +173,7 @@ const currentTeams = [
 				 debut: "2021",
                  car: "A526",
                  engine: "Mercedes",
+                 carImage: "Alpine.png",
                  drivers: [
                     { number: "10", name: "Пьер Гасли", country: "fr", state: "Франция"},
                     { number: "43", name: "Франко Колапинто", country: "ar", state: "Аргентина"}
@@ -181,6 +191,7 @@ const currentTeams = [
 				 debut: "2026",
                  car: "---",
                  engine: "Ferrari",
+                 carImage: "Cadillac.png",
                  drivers: [
                     { number: "11", name: "Серхио Перес", country: "mx", state: "Мексика"},
                     { number: "77", name: "Валттери Боттас", country: "fi", state: "Финляндия"}
@@ -270,6 +281,12 @@ function openTeamModal(team) {
                 <span class="cmd-info-label">Двигатель:</span>
                 <span class="cmd-info-value">${team.engine}</span>
             </div>
+			<div class="cmd-car-image-container">
+                <img src="Images/Car/${team.carImage}" 
+                     alt="${team.car}" 
+                     class="cmd-car-image"
+                     data-fullscreen-src="Image/Car/${team.carImage}">
+            </div>
 			
             <div class="cmd-modal-divider"></div>
 
@@ -298,17 +315,47 @@ function openTeamModal(team) {
         <button class="cmd-close-modal">&times;</button>
     `;
     
-    // Добавляем модальное окно в DOM
-    document.body.appendChild(modal);
+	document.body.appendChild(modal);
+
+	modal.querySelector('.cmd-close-modal').addEventListener('click', () => modal.remove());
+
+	modal.addEventListener('click', (e) => {
+		if (e.target.classList.contains('cmd-car-image')) {
+			openFullscreenImage(e.target.src);
+			e.stopPropagation();
+		} 
+		else if (e.target === modal) {
+			modal.remove();
+		}
+	});
+
+	addDriverClickHandlers(modal);
+}
+
+function openFullscreenImage(src) {
+    const fullscreenDiv = document.createElement('div');
+    fullscreenDiv.className = 'cmd-car-fullscreen';
     
-    // Обработчики закрытия модального окна
-    modal.querySelector('.cmd-close-modal').addEventListener('click', () => modal.remove());
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.remove();
+    const fullscreenImg = document.createElement('img');
+    fullscreenImg.src = src;
+    fullscreenImg.className = 'cmd-car-fullscreen-img';
+    
+    fullscreenDiv.appendChild(fullscreenImg);
+    document.body.appendChild(fullscreenDiv);
+    
+    // Закрытие при клике
+    fullscreenDiv.addEventListener('click', () => {
+        fullscreenDiv.remove();
     });
     
-    // Добавляем обработчики клика на пилотов
-    addDriverClickHandlers(modal);
+    // Закрытие при нажатии Escape
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            fullscreenDiv.remove();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    document.addEventListener('keydown', handleEscape);
 }
 
 // Функция для получения ID пилота по имени
@@ -377,8 +424,6 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
-
-
 
 
 
