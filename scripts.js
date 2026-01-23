@@ -244,12 +244,12 @@ function renderMainGPCards() {
                     </div>
                     <div class="tire-item">
 						<span class="tire-name">Medium</span>
-                        <img src="Images/Wheels/Hard.png" alt="C4" class="tire-image active">
+                        <img src="Images/Wheels/Medium.png" alt="C4" class="tire-image active">
                         <span class="tire-name">C4</span>
                     </div>
                     <div class="tire-item">
 						<span class="tire-name">Soft</span>
-                        <img src="Images/Wheels/Hard.png" alt="C5" class="tire-image active">
+                        <img src="Images/Wheels/Soft.png" alt="C5" class="tire-image active">
                         <span class="tire-name">C5</span>
                     </div>
                 </div>
@@ -526,6 +526,7 @@ function loadTabContent(tabName) {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
+
 
 
 
