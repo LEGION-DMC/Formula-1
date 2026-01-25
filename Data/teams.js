@@ -281,12 +281,6 @@ function openTeamModal(team) {
                 <span class="cmd-info-label">Двигатель:</span>
                 <span class="cmd-info-value">${team.engine}</span>
             </div>
-			<div class="cmd-car-image-container">
-                <img src="Images/Car/${team.carImage}" 
-                     alt="${team.car}" 
-                     class="cmd-car-image"
-                     data-fullscreen-src="Image/Car/${team.carImage}">
-            </div>
 			
             <div class="cmd-modal-divider"></div>
 
@@ -424,6 +418,7 @@ function applyDriverFilter(teamName) {
 if (window.location.hash === '#teams') {
     renderTeams();
 }
+
 
 
 
