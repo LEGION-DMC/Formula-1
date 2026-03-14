@@ -1,17 +1,15 @@
 // Данные для лучших времён круга
 const bestLapTimes = [
-    /*
 	{
         id: 3,
         track: "Гран-при Японии",
-        country: "jp",
-        team: "Mercedes",
-        teamLogo: "Mercedes-m.png",
-        driver: "Кими Антонелли",
-        driverCountry: "it",
-        time: "1:30.965",
+        country: "au",
+        team: "RedBull",
+        teamLogo: "RedBull-m.png",
+        driver: "Макс Ферстаппен",
+        driverCountry: "nl",
+        time: "1:22.091",
     },
-	*/
 ];
 
 // Данные для быстрейших пит-стопов
@@ -20,11 +18,11 @@ const fastestPitStops = [
         id: 1,
         track: "Гран-при Австралии",
         country: "au",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
+        team: "Mercedes",
+        teamLogo: "Mercedes.png",
+        driver: "Джордж Расселл",
+        driverCountry: "gb",
+        time: "2.17s",
     },
     {
         id: 2,
@@ -268,7 +266,7 @@ const Cvala = [
         cvala1: "0",
         driver2: "Оскар Пиастри",
         driverCountry2: "au",
-        cvala2: "1",
+        cvala2: "2",
     },
     {
         id: 2,
@@ -279,7 +277,7 @@ const Cvala = [
         cvala1: "1",
         driver2: "Льюис Хэмилтон",
         driverCountry2: "gb",
-        cvala2: "0",
+        cvala2: "1",
     },
     {
         id: 3,
@@ -287,7 +285,7 @@ const Cvala = [
         teamLogo: "RedBull-m.png",
         driver1: "Макс Ферстаппен",
         driverCountry1: "nl",
-        cvala1: "0",
+        cvala1: "1",
         driver2: "Исак Хаджар",
         driverCountry2: "fr",
         cvala2: "1",
@@ -301,7 +299,7 @@ const Cvala = [
         cvala1: "1",
         driver2: "Кими Антонелли",
         driverCountry2: "it",
-        cvala2: "0",
+        cvala2: "1",
     },
     {
         id: 5,
@@ -312,7 +310,7 @@ const Cvala = [
         cvala1: "0",
         driver2: "Фернандо Алонсо",
         driverCountry2: "es",
-        cvala2: "1",
+        cvala2: "2",
     },
     {
         id: 6,
@@ -320,7 +318,7 @@ const Cvala = [
         teamLogo: "Alpine-m.png",
         driver1: "Пьер Гасли",
         driverCountry1: "fr",
-        cvala1: "1",
+        cvala1: "2",
         driver2: "Франко Колапинто",
         driverCountry2: "ar",
         cvala2: "0",
@@ -334,7 +332,7 @@ const Cvala = [
         cvala1: "0",
         driver2: "Оливер Берман",
         driverCountry2: "de",
-        cvala2: "1",
+        cvala2: "2",
     },
     {
         id: 8,
@@ -342,7 +340,7 @@ const Cvala = [
         teamLogo: "RacingBulls-m.png",
         driver1: "Лиам Лоусон",
         driverCountry1: "nz",
-        cvala1: "1",
+        cvala1: "2",
         driver2: "Арвид Линдблад",
         driverCountry2: "gb",
         cvala2: "0",
@@ -353,7 +351,7 @@ const Cvala = [
         teamLogo: "Williams-m.png",
         driver1: "Карлос Сайнс",
         driverCountry1: "es",
-        cvala1: "0",
+        cvala1: "1",
         driver2: "Александр Албон",
         driverCountry2: "th",
         cvala2: "1",
@@ -364,7 +362,7 @@ const Cvala = [
         teamLogo: "Audi-m.png",
         driver1: "Нико Хюлкенберг",
         driverCountry1: "de",
-        cvala1: "0",
+        cvala1: "1",
         driver2: "Габриэль Бортолето",
         driverCountry2: "br",
         cvala2: "1",
@@ -378,7 +376,7 @@ const Cvala = [
         cvala1: "1",
         driver2: "Валттери Боттас",
         driverCountry2: "fi",
-        cvala2: "0",
+        cvala2: "1",
     },
 ];
 
