@@ -164,9 +164,9 @@ const tracksData = {
         "direction": "по часовой стрелке",
         "lapRecord": "1.19.813 (Леклер, 2024)",
         "date": "2026-03-08 12:00",
-		"podium1": "Джордж Расселл",
-        "podium2": "Кими Антонелли",
-        "podium3": "Шарль Леклер",
+		"podium1": "Д.Расселл",
+        "podium2": "К.Антонелли",
+        "podium3": "Ш.Леклер",
         "streamLink": "https://rutube.ru/video/264170a23560b1eec2e7b27978b62b3f/",
         "recordingLink": "https://rutube.ru/video/264170a23560b1eec2e7b27978b62b3f/"
     },
