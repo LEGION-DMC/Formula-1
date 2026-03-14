@@ -19,7 +19,7 @@ const fastestPitStops = [
         track: "Гран-при Австралии",
         country: "au",
         team: "Mercedes",
-        teamLogo: "Mercedes.png",
+        teamLogo: "Mercedes-m.png",
         driver: "Джордж Расселл",
         driverCountry: "gb",
         time: "2.17s",
