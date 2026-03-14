@@ -2,7 +2,7 @@
 const bestLapTimes = [
 	{
         id: 3,
-        track: "Гран-при Японии",
+        track: "Гран-при Австралии",
         country: "au",
         team: "RedBull",
         teamLogo: "RedBull-m.png",
