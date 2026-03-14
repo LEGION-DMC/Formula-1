@@ -423,7 +423,7 @@ const sprintStandings = [
 
 // Победители 
 const raceWinners = [
-    /*{ grandPrix: "", position: "1", winner: "Оскар Пиастри", country: "au", team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},*/
+    { grandPrix: "Австралия", position: "1", winner: "Джордж Расселл", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
 ];
 
 // Список Гран-при
