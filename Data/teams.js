@@ -189,7 +189,7 @@ const currentTeams = [
                  director: "Грэм Лоудон",
 			     foundert: "TWG Cadillac",
 				 debut: "2026",
-                 car: "---",
+                 car: "MAC-26",
                  engine: "Ferrari",
                  carImage: "Cadillac.png",
                  drivers: [
