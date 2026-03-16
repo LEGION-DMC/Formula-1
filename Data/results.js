@@ -13,16 +13,16 @@ const detailedResults = {
         "Пьер Гасли": 1,
     },
     "china": {
-        "000": 25,
-        "000": 18,
-        "000": 15,
-        "000": 12,
-        "000": 10,
-        "000": 8,
-        "000": 6,
-        "000": 4,
-        "000": 2,
-        "000": 1,
+        "Кими Антонелли": 25,
+        "Джордж Расселл": 18,
+        "Льюис Хэмилтон": 15,
+        "Шарль Леклер": 12,
+        "Оливер Берман": 10,
+        "Пьер Гасли": 8,
+        "Лиам Лоусон": 6,
+        "Исаак Хаджар": 4,
+        "Карлос Сайнс": 2,
+        "Франко Колапинто": 1,
     },
     "japan": {
         "000": 25,
@@ -422,9 +422,75 @@ const sprintStandings = [
 ];
 
 // Победители 
-const raceWinners = [
-    { grandPrix: "Австралия", position: "1", winner: "Джордж Расселл", country: "gb", team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
-];
+let raceWinners = [];
+
+const trackToGrandPrixMap = {
+    "t1": "australia",
+    "t2": "china",
+    "t3": "japan",
+    "t4": "bahrain",
+    "t5": "saudi-arabia",
+    "t6": "miami",
+    "t7": "canada",
+    "t8": "monaco",
+    "t9": "spain",
+    "t10": "austria",
+    "t11": "great-britain",
+    "t12": "belgium",
+    "t13": "hungary",
+    "t14": "netherlands",
+    "t15": "italy",
+    "t16": "madrid",
+    "t17": "azerbaijan",
+    "t18": "singapore",
+    "t19": "usa",
+    "t20": "mexico",
+    "t21": "brazil",
+    "t22": "las-vegas",
+    "t23": "qatar",
+    "t24": "abu-dhabi"
+};
+
+// Функция для автоматического заполнения победителей этапов
+function generateRaceWinners() {
+    const winners = [];
+    let position = 1;
+    
+    // Проходим по всем Гран-при в порядке календаря
+    grandPrixOrder.forEach(gpId => {
+        const gpResults = detailedResults[gpId];
+        if (gpResults) {
+            // Сортируем результаты по очкам, чтобы найти топ-3 для подиума
+            const sortedResults = Object.entries(gpResults)
+                .sort((a, b) => b[1] - a[1]);
+            
+            // Ищем пилота с 25 очками (победитель этапа)
+            sortedResults.forEach(([driverName, points]) => {
+                if (points === 25) {
+                    // Находим информацию о пилоте в driversStandings
+                    const driverInfo = driversStandings.find(d => d.name === driverName);
+                    
+                    if (driverInfo) {
+                        // Получаем название Гран-при для отображения
+                        const gpNameInfo = getGPName(gpId);
+                        
+                        winners.push({
+                            grandPrix: gpNameInfo.state, // Название этапа
+                            position: position.toString(),
+                            winner: driverName,
+                            country: driverInfo.country,
+                            team: driverInfo.team,
+                            teamLogo: driverInfo.teamLogo,
+                            teamColor: driverInfo.teamColor
+                        });
+                    }
+                }
+            });
+        }
+    });
+    
+    return winners;
+}
 
 // Список Гран-при
 const grandPrixOrder = [
@@ -478,6 +544,12 @@ function calculateDriverPoints() {
     driversStandings.forEach((driver, index) => {
         driver.position = index + 1;
     });
+    
+    // Автоматически генерируем победителей этапов
+    raceWinners = generateRaceWinners();
+    
+    // Автоматически обновляем данные подиума в tracksData
+    updateTracksPodiumData();
 }
 
 // Расчёт очков спринтов
@@ -1049,12 +1121,26 @@ function renderRaceWinners() {
     const container = document.getElementById('raceWinners');
     let html = `<h2>Чемпионы этапов</h2><div class="winners-list">`;
     
+    // Сортируем победителей по порядку Гран-при
+    const sortedWinners = [...raceWinners].sort((a, b) => {
+        // Находим индексы Гран-при в порядке календаря
+        const gpAIndex = grandPrixOrder.findIndex(gpId => {
+            const gpName = getGPName(gpId);
+            return gpName.state === a.grandPrix;
+        });
+        const gpBIndex = grandPrixOrder.findIndex(gpId => {
+            const gpName = getGPName(gpId);
+            return gpName.state === b.grandPrix;
+        });
+        return gpAIndex - gpBIndex;
+    });
+    
     // Победители гран-при
-    raceWinners.forEach(race => {
+    sortedWinners.forEach((race, index) => {
         html += `
             <div class="winner-row" data-team="${race.team}">
                 <div class="winner-info">
-                    <span class="position">${race.position}</span>
+                    <span class="position">${index + 1}</span>
                     <img src="Images/Flags/${race.country}.svg" alt="${race.country}" class="flag">
                     <span class="winner-name">${race.winner}</span>
                     <img src="Images/Teams/${race.teamLogo}" alt="${race.team}" class="team-logo">
@@ -1067,7 +1153,7 @@ function renderRaceWinners() {
     html += `</div>`;
     container.innerHTML = html;
 
-    // Анимацию при наведении на строки
+    // Анимация при наведении на строки
     document.querySelectorAll('.winner-row').forEach(row => {
         row.addEventListener('mouseenter', () => {
             row.style.transform = 'translateX(10px)';

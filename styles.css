@@ -447,6 +447,12 @@ body::before {
     color: #fff;
 }
 
+.weather-value {
+    font-family: 'Font1', sans-serif;
+    font-size: 10px;
+    color: #07b80d;
+}
+
 /* Анимация для активных шин */
 .weather-image.active:hover {
     transform: scale(1.1);
@@ -1733,7 +1739,7 @@ body::before {
     align-items: center;
     padding: 5px;
     margin-bottom: 5px;
-    background-color: #1e1e1e;
+    background-color: #13131391;
     border-left: 4px solid;
     border-radius: 4px;
     transition: transform 0.3s;

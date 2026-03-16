@@ -1,7 +1,7 @@
 // Данные для лучших времён круга
 const bestLapTimes = [
-	{
-        id: 3,
+	/*{
+        id: 1,
         track: "Гран-при Австралии",
         country: "au",
         team: "RedBull",
@@ -10,6 +10,16 @@ const bestLapTimes = [
         driverCountry: "nl",
         time: "1:22.091",
     },
+	{
+        id: 2,
+        track: "Гран-при Китая",
+        country: "cn",
+        team: "Mercedes",
+        teamLogo: "Mercedes-m.png",
+        driver: "Кими Антонелли",
+        driverCountry: "it",
+        time: "1:35.275",
+    },*/
 ];
 
 // Данные для быстрейших пит-стопов
@@ -28,11 +38,11 @@ const fastestPitStops = [
         id: 2,
         track: "Гран-при Китая",
         country: "cn",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
+        team: "Ferrari",
+        teamLogo: "Ferrari-m.png",
+        driver: "Льюис Хэмилтон",
+        driverCountry: "gb",
+        time: "2.29s",
     },
     {
         id: 3,
