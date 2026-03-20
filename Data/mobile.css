@@ -114,13 +114,13 @@
     
     .tires-card {
         width: 100%;
-        max-width: 270px;
+        max-width: 350px;
         height: 100%;
     }
     
     .dry-tires {
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 5px;
     }
     
     .tire-item {
@@ -339,7 +339,7 @@
     /* Сетка статистики - в колонку */
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 0px;
     }
     
     /* Заголовок страницы статистики */
@@ -358,21 +358,21 @@
     .stats-table-header,
     .stats-table-row {
         font-size: 11px;
-        padding: 6px 4px;
+        padding: 3px;   
     }
-    
+
     /* Таблица лучших времён круга */
     #lapTimesTable .stats-table-header,
     #lapTimesTable .stats-table-row {
         grid-template-columns: 22px 1fr 0.9fr 0.8fr 50px;
-        gap: 4px;
+        gap: 3px;
     }
     
     /* Таблица пит-стопов */
     #pitStopsTable .stats-table-header,
     #pitStopsTable .stats-table-row {
         grid-template-columns: 22px 1fr 0.8fr 0.9fr 55px;
-        gap: 4px;
+        gap: 3px;
     }
     
     /* Таблица квалификаций (Cvala) */
@@ -408,7 +408,7 @@
     .stats-col.driver {
         font-size: 10px;
     }
-    
+
     .stats-col.track {
         font-size: 10px;
         white-space: normal;
@@ -433,11 +433,6 @@
     /* Стили для driver1 и driver2 в таблице квалификаций */
     .stats-col.driver.driver1 {
         justify-content: flex-start;
-    }
-    
-    .stats-col.driver.driver2 {
-        justify-content: flex-end;
-        flex-direction: row-reverse;
     }
     
     /* Обрезаем длинные названия команд/пилотов */
@@ -469,7 +464,7 @@
     /* Сетка карточек - полная ширина */
     .calendar-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 10px;
     }
     
     /* Карточка Гран-при */
@@ -482,8 +477,6 @@
     .track-image {
         width: 100%;
         height: auto;
-        padding: 10px 0;
-        background: rgba(19, 19, 19, 0.7);
     }
     
     .track-image img {
@@ -493,7 +486,7 @@
     
     /* Блок информации */
     .track-info {
-        padding: 12px;
+        padding: 10px;
     }
     
     /* Заголовок карточки */
@@ -533,20 +526,19 @@
         flex-direction: column;
         gap: 8px;
         align-items: stretch;
-        margin-top: 5px;
     }
     
     /* Кнопки действий */
     .action-btn {
         display: inline-block;
         text-align: center;
-        padding: 6px 8px;
+        padding: 5px 8px;
         font-size: 11px;
     }
     
     .action-buttons {
         display: flex;
-        gap: 8px;
+        gap: 5px;
         justify-content: center;
     }
     
@@ -561,38 +553,33 @@
         font-size: 12px;
     }
     
-    .timer {
-        display: inline-flex;
-        gap: 5px;
-    }
-    
     /* Статус-бейдж */
     .status-badge {
         text-align: center;
-        padding: 4px 8px;
+        padding: 4px 5px;
         font-size: 10px;
     }
     
     /* -------------------------------------------------------------------------- Календарь на следующий год */
     .next-year-calendar {
         padding: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     
     .next-year-calendar h3 {
         font-size: 18px;
-        margin-bottom: 8px;
+        margin-bottom: 5px;
     }
     
     /* Колонки календаря */
     .next-year-columns {
         grid-template-columns: 1fr 1fr;
-        gap: 6px;
+        gap: 5px;
     }
     
     /* Элемент события */
     .next-year-event {
-        padding: 6px 4px;
+        padding: 5px 3px;
         gap: 4px;
     }
     
@@ -603,7 +590,6 @@
     
     .next-year-name {
         font-size: 10px;
-        gap: 4px;
     }
     
     .next-year-flag {
@@ -622,8 +608,6 @@
     
     .modal-image {
         width: 100%;
-        border-radius: 10px 10px 0 0;
-        padding: 15px 0;
     }
     
     .modal-image img {
@@ -633,7 +617,7 @@
     
     .modal-info {
         width: 100%;
-        padding: 12px;
+        padding: 10px;
     }
     
     .modal-info h2 {
@@ -653,9 +637,9 @@
     
     /* Подиум в модальном окне */
     .podium-container {
-        height: 160px;
+        height: 150px;
         gap: 5px;
-        margin-top: -15px;
+        margin-top: -35px;
     }
     
     .podium-place {
@@ -689,110 +673,5 @@
     
     .podium-title {
         font-size: 13px;
-    }
-}
-
-/* -------------------------------------------------------------------------- Очень маленькие экраны (до 480px) */
-@media (max-width: 480px) {
-    /* Статистика */
-    #lapTimesTable .stats-table-header,
-    #lapTimesTable .stats-table-row {
-        grid-template-columns: 20px 1fr 0.8fr 0.7fr 45px;
-        font-size: 9px;
-        gap: 3px;
-    }
-    
-    #pitStopsTable .stats-table-header,
-    #pitStopsTable .stats-table-row {
-        grid-template-columns: 20px 1fr 0.7fr 0.8fr 50px;
-        font-size: 9px;
-        gap: 3px;
-    }
-    
-    #CvalaTable .stats-table-header,
-    #CvalaTable .stats-table-row {
-        grid-template-columns: 25px 1fr 50px 1fr 25px;
-        font-size: 9px;
-    }
-    
-    .stats-col.team span,
-    .stats-col.driver span {
-        max-width: 70px;
-    }
-    
-    .stats-flag {
-        width: 16px;
-        height: 11px;
-    }
-    
-    .stats-team-logo {
-        width: 20px;
-        height: 16px;
-    }
-    
-    /* Календарь */
-    .next-year-columns {
-        grid-template-columns: 1fr;
-        gap: 4px;
-    }
-    
-    .next-year-event {
-        padding: 8px 6px;
-    }
-    
-    .next-year-date {
-        min-width: 65px;
-        font-size: 11px;
-    }
-    
-    .next-year-name {
-        font-size: 11px;
-    }
-    
-    .track-header h3 {
-        font-size: 13px;
-    }
-    
-    .info-row span:not(.value) {
-        font-size: 9px;
-    }
-    
-    .value {
-        font-size: 10px;
-    }
-    
-    .action-btn {
-        font-size: 10px;
-        padding: 5px 6px;
-    }
-    
-    /* Подиум */
-    .podium-container {
-        height: 140px;
-    }
-    
-    .podium-place {
-        width: 65px;
-    }
-    
-    .podium-place.first .podium-step {
-        height: 95px;
-    }
-    
-    .podium-place.second .podium-step {
-        height: 70px;
-    }
-    
-    .podium-place.third .podium-step {
-        height: 48px;
-    }
-    
-    .position-podium {
-        font-size: 24px;
-        top: 12px;
-    }
-    
-    .name-podium {
-        font-size: 10px;
     }
 }
