@@ -329,3 +329,470 @@
         padding: 15px;
     }
 }
+
+/* ==========================================================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ СТАТИСТИКИ И КАЛЕНДАРЯ
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------- Статистика (мобильная версия) */
+@media (max-width: 768px) {
+    /* Сетка статистики - в колонку */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* Заголовок страницы статистики */
+    .stats-container h1 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    /* Заголовки таблиц */
+    .stats-table h2 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    /* Общие стили для строк таблиц */
+    .stats-table-header,
+    .stats-table-row {
+        font-size: 11px;
+        padding: 6px 4px;
+    }
+    
+    /* Таблица лучших времён круга */
+    #lapTimesTable .stats-table-header,
+    #lapTimesTable .stats-table-row {
+        grid-template-columns: 22px 1fr 0.9fr 0.8fr 50px;
+        gap: 4px;
+    }
+    
+    /* Таблица пит-стопов */
+    #pitStopsTable .stats-table-header,
+    #pitStopsTable .stats-table-row {
+        grid-template-columns: 22px 1fr 0.8fr 0.9fr 55px;
+        gap: 4px;
+    }
+    
+    /* Таблица квалификаций (Cvala) */
+    #CvalaTable .stats-table-header,
+    #CvalaTable .stats-table-row {
+        grid-template-columns: 28px 1fr 60px 1fr 28px;
+        gap: 2px;
+        font-size: 10px;
+    }
+    
+    /* Стили для содержимого ячеек */
+    .stats-col {
+        gap: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    /* Флаги и логотипы */
+    .stats-flag {
+        width: 18px;
+        height: 12px;
+        flex-shrink: 0;
+    }
+    
+    .stats-team-logo {
+        width: 22px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+    
+    /* Уменьшаем отступы для текста в ячейках */
+    .stats-col.driver {
+        font-size: 10px;
+    }
+    
+    .stats-col.track {
+        font-size: 10px;
+        white-space: normal;
+        line-height: 1.3;
+    }
+    
+    /* Счёт квалификации */
+    .stats-col.cvala {
+        font-size: 12px;
+        gap: 3px;
+    }
+    
+    .cvala-score {
+        min-width: 18px;
+        font-size: 12px;
+    }
+    
+    .cvala-vs {
+        font-size: 10px;
+    }
+    
+    /* Стили для driver1 и driver2 в таблице квалификаций */
+    .stats-col.driver.driver1 {
+        justify-content: flex-start;
+    }
+    
+    .stats-col.driver.driver2 {
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
+    
+    /* Обрезаем длинные названия команд/пилотов */
+    .stats-col.team span,
+    .stats-col.driver span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 85px;
+    }
+    
+    /* Специально для колонки времени */
+    .stats-col.time {
+        justify-content: flex-end;
+        font-family: monospace;
+        font-size: 11px;
+    }
+    
+    /* Выравнивание позиций */
+    .stats-col.position {
+        justify-content: center;
+        font-weight: bold;
+        color: #e53935;
+    }
+}
+
+/* -------------------------------------------------------------------------- Календарь (исправление неровных блоков) */
+@media (max-width: 768px) {
+    /* Сетка карточек - полная ширина */
+    .calendar-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    /* Карточка Гран-при */
+    .track-card {
+        flex-direction: column;
+        max-width: 100%;
+    }
+    
+    /* Изображение трассы */
+    .track-image {
+        width: 100%;
+        height: auto;
+        padding: 10px 0;
+        background: rgba(19, 19, 19, 0.7);
+    }
+    
+    .track-image img {
+        width: 100px;
+        height: auto;
+    }
+    
+    /* Блок информации */
+    .track-info {
+        padding: 12px;
+    }
+    
+    /* Заголовок карточки */
+    .track-header h3 {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .track-header h3 .flag {
+        width: 20px;
+        height: 14px;
+    }
+    
+    /* Бейдж спринта */
+    .sprint-badge {
+        font-size: 8px;
+        padding: 2px 5px;
+    }
+    
+    /* Информационные строки */
+    .info-row {
+        margin: 4px 0;
+    }
+    
+    .info-row span:not(.value) {
+        font-size: 10px;
+    }
+    
+    .value {
+        font-size: 11px;
+    }
+    
+    /* Футер карточки */
+    .track-footer {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+        margin-top: 5px;
+    }
+    
+    /* Кнопки действий */
+    .action-btn {
+        display: inline-block;
+        text-align: center;
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+    }
+    
+    .action-buttons .action-btn {
+        flex: 1;
+        text-align: center;
+    }
+    
+    /* Таймер */
+    .countdown {
+        text-align: center;
+        font-size: 12px;
+    }
+    
+    .timer {
+        display: inline-flex;
+        gap: 5px;
+    }
+    
+    /* Статус-бейдж */
+    .status-badge {
+        text-align: center;
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    /* -------------------------------------------------------------------------- Календарь на следующий год */
+    .next-year-calendar {
+        padding: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .next-year-calendar h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    
+    /* Колонки календаря */
+    .next-year-columns {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+    
+    /* Элемент события */
+    .next-year-event {
+        padding: 6px 4px;
+        gap: 4px;
+    }
+    
+    .next-year-date {
+        min-width: 55px;
+        font-size: 10px;
+    }
+    
+    .next-year-name {
+        font-size: 10px;
+        gap: 4px;
+    }
+    
+    .next-year-flag {
+        width: 18px;
+        height: 12px;
+    }
+    
+    /* Модальное окно календаря */
+    .modal-content {
+        flex-direction: column;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        width: 92%;
+    }
+    
+    .modal-image {
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+        padding: 15px 0;
+    }
+    
+    .modal-image img {
+        width: 150px;
+        max-width: 80%;
+    }
+    
+    .modal-info {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    .modal-info h2 {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .modal-info .info-row span {
+        font-size: 12px;
+    }
+    
+    .modal-info .info-row .value {
+        font-size: 12px;
+    }
+    
+    /* Подиум в модальном окне */
+    .podium-container {
+        height: 160px;
+        gap: 5px;
+        margin-top: -15px;
+    }
+    
+    .podium-place {
+        width: 80px;
+    }
+    
+    .podium-place.first .podium-step {
+        height: 110px;
+    }
+    
+    .podium-place.second .podium-step {
+        height: 80px;
+    }
+    
+    .podium-place.third .podium-step {
+        height: 55px;
+    }
+    
+    .position-podium {
+        font-size: 28px;
+        top: 15px;
+    }
+    
+    .name-podium {
+        font-size: 12px;
+    }
+    
+    .driver-podium {
+        padding: 3px 0;
+    }
+    
+    .podium-title {
+        font-size: 13px;
+    }
+}
+
+/* -------------------------------------------------------------------------- Очень маленькие экраны (до 480px) */
+@media (max-width: 480px) {
+    /* Статистика */
+    #lapTimesTable .stats-table-header,
+    #lapTimesTable .stats-table-row {
+        grid-template-columns: 20px 1fr 0.8fr 0.7fr 45px;
+        font-size: 9px;
+        gap: 3px;
+    }
+    
+    #pitStopsTable .stats-table-header,
+    #pitStopsTable .stats-table-row {
+        grid-template-columns: 20px 1fr 0.7fr 0.8fr 50px;
+        font-size: 9px;
+        gap: 3px;
+    }
+    
+    #CvalaTable .stats-table-header,
+    #CvalaTable .stats-table-row {
+        grid-template-columns: 25px 1fr 50px 1fr 25px;
+        font-size: 9px;
+    }
+    
+    .stats-col.team span,
+    .stats-col.driver span {
+        max-width: 70px;
+    }
+    
+    .stats-flag {
+        width: 16px;
+        height: 11px;
+    }
+    
+    .stats-team-logo {
+        width: 20px;
+        height: 16px;
+    }
+    
+    /* Календарь */
+    .next-year-columns {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+    
+    .next-year-event {
+        padding: 8px 6px;
+    }
+    
+    .next-year-date {
+        min-width: 65px;
+        font-size: 11px;
+    }
+    
+    .next-year-name {
+        font-size: 11px;
+    }
+    
+    .track-header h3 {
+        font-size: 13px;
+    }
+    
+    .info-row span:not(.value) {
+        font-size: 9px;
+    }
+    
+    .value {
+        font-size: 10px;
+    }
+    
+    .action-btn {
+        font-size: 10px;
+        padding: 5px 6px;
+    }
+    
+    /* Подиум */
+    .podium-container {
+        height: 140px;
+    }
+    
+    .podium-place {
+        width: 65px;
+    }
+    
+    .podium-place.first .podium-step {
+        height: 95px;
+    }
+    
+    .podium-place.second .podium-step {
+        height: 70px;
+    }
+    
+    .podium-place.third .podium-step {
+        height: 48px;
+    }
+    
+    .position-podium {
+        font-size: 24px;
+        top: 12px;
+    }
+    
+    .name-podium {
+        font-size: 10px;
+    }
+}
