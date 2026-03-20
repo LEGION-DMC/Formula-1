@@ -3,7 +3,7 @@ const WEATHER_API_KEY = '92d82d196e8a4e82af4113434261603';
 const WEATHER_CACHE = {}; // Кэш для хранения данных о погоде
 const CACHE_DURATION = 30 * 60 * 1000; // 30 минут
 
-// Координаты для всех трасс (добавьте этот объект в файл)
+// Координаты для всех трасс
 const TRACK_COORDINATES = {
     "t1": { "lat": -37.8497, "lon": 144.968 }, // albert-park
     "t2": { "lat": 31.3389, "lon": 121.220 }, // shanghai
@@ -31,6 +31,9 @@ const TRACK_COORDINATES = {
     "t24": { "lat": 24.4672, "lon": 54.6031 } // yas-marina
 };
 
+// Глобальная переменная для хранения интервала таймера
+let mainTimerInterval = null;
+
 // Обработчик DOM
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded');
@@ -50,25 +53,54 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Инициализация мобильного меню
     initBurgerMenu();
+    
+    // Инициализация навигации (важно! обработчики должны быть добавлены после загрузки)
+    initNavigation();
 });
 
-// Обработчики кликов для навигационного меню
-document.querySelectorAll('.menu a').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const tabName = e.target.getAttribute('data-tab');
+// Отдельная функция для инициализации навигации
+function initNavigation() {
+    const menuLinks = document.querySelectorAll('.menu a');
+    console.log('Initializing navigation, found links:', menuLinks.length);
+    
+    menuLinks.forEach(link => {
+        // Удаляем старые обработчики, чтобы избежать дублирования
+        link.removeEventListener('click', handleMenuClick);
+        link.addEventListener('click', handleMenuClick);
+    });
+    
+    const logoLink = document.querySelector('.logo a');
+    if (logoLink) {
+        logoLink.removeEventListener('click', handleLogoClick);
+        logoLink.addEventListener('click', handleLogoClick);
+    }
+}
+
+function handleMenuClick(e) {
+    e.preventDefault();
+    const tabName = e.target.getAttribute('data-tab');
+    if (tabName) {
         window.location.hash = tabName;
         loadTabContent(tabName);
-    });
-});
+        
+        // Закрываем мобильное меню после клика
+        if (window.innerWidth <= 768) {
+            const burgerBtn = document.getElementById('burgerBtn');
+            const menu = document.querySelector('.menu');
+            if (burgerBtn && menu) {
+                burgerBtn.classList.remove('active');
+                menu.classList.remove('active');
+            }
+        }
+    }
+}
 
-// Обработчик клика на логотип для возврата на главную
-document.querySelector('.logo a').addEventListener('click', (e) => {
+function handleLogoClick(e) {
     e.preventDefault();
     window.location.hash = 'main';
     renderMainPage();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+}
 
 // Мобильное меню
 function initBurgerMenu() {
@@ -78,23 +110,21 @@ function initBurgerMenu() {
     if (burgerBtn && menu) {
         console.log('Burger menu elements found');
         
-        burgerBtn.addEventListener('click', () => {
-            console.log('Burger button clicked');
-            burgerBtn.classList.toggle('active');
-            menu.classList.toggle('active');
-        });
-        
-        // Закрытие меню при клике на пункт
-        document.querySelectorAll('.menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    burgerBtn.classList.remove('active');
-                    menu.classList.remove('active');
-                }
-            });
-        });
+        // Удаляем старый обработчик, чтобы избежать дублирования
+        burgerBtn.removeEventListener('click', handleBurgerClick);
+        burgerBtn.addEventListener('click', handleBurgerClick);
     } else {
         console.log('Burger menu elements NOT found:', {burgerBtn, menu});
+    }
+}
+
+function handleBurgerClick() {
+    console.log('Burger button clicked');
+    const burgerBtn = document.getElementById('burgerBtn');
+    const menu = document.querySelector('.menu');
+    if (burgerBtn && menu) {
+        burgerBtn.classList.toggle('active');
+        menu.classList.toggle('active');
     }
 }
 
@@ -113,15 +143,18 @@ function initScrollTop() {
             }
         });
         
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        scrollTopBtn.removeEventListener('click', handleScrollTop);
+        scrollTopBtn.addEventListener('click', handleScrollTop);
     } else {
         console.log('Scroll button NOT found');
     }
+}
+
+function handleScrollTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 
 // Функция для получения текущей погоды по ID трассы
@@ -226,7 +259,16 @@ function renderMainPage() {
 // Карточка Гран-При
 async function renderMainGPCards() {
     const container = document.getElementById('mainGpCards');
+    if (!container) return;
+    
     const now = new Date();
+    
+    // Проверяем наличие данных
+    if (typeof tracksData === 'undefined') {
+        console.error('tracksData is not defined');
+        container.innerHTML = '<div class="error">Ошибка загрузки данных календаря</div>';
+        return;
+    }
     
     // Загрузка всех гран-при
     const allGPs = Object.values(tracksData).sort((a, b) => 
@@ -384,9 +426,14 @@ async function renderMainGPCards() {
         container.innerHTML = html;
         
         // Загружаем погоду для текущего Гран-При
-        if (currentGP) {
-            await loadWeatherForGP(currentGP, isLive);
-        }
+        await loadWeatherForGP(currentGP, isLive);
+        
+        // Добавляем обработчик клика на карточку
+        addMainGPCardListener();
+        
+        // Запускаем таймер
+        initMainTimer();
+        
     } else {
         html += `
             <div class="main-gp-card">
@@ -400,9 +447,6 @@ async function renderMainGPCards() {
         </div>`;
         container.innerHTML = html;
     }
-    
-    initMainTimer();
-    addMainGPCardListener();
 }
 
 // Функция загрузки погоды для Гран-При
@@ -411,6 +455,7 @@ async function loadWeatherForGP(gp, isLive) {
     if (!weatherCard) return;
     
     const weatherBlock = weatherCard.querySelector('.weather-block');
+    if (!weatherBlock) return;
     
     try {
         let weatherData;
@@ -432,7 +477,7 @@ async function loadWeatherForGP(gp, isLive) {
     }
 }
 
-// Функция определения иконки погоды (только cloud, fog, rain, sun)
+// Функция определения иконки погоды
 function getWeatherIcon(condition) {
     const conditionLower = condition.toLowerCase();
     
@@ -472,7 +517,7 @@ function updateWeatherDisplay(container, data, isLive) {
     }
     
     const weatherIcon = getWeatherIcon(condition);
-    const precipPercent = Math.min(Math.round((precipMm / 10) * 100), 100); // Конвертация мм в проценты
+    const precipPercent = Math.min(Math.round((precipMm / 10) * 100), 100);
     
     container.innerHTML = `
         <div class="weather">
@@ -500,15 +545,34 @@ function updateWeatherDisplay(container, data, isLive) {
 
 // Инициализация таймера
 function initMainTimer() {
+    // Очищаем предыдущий интервал, если есть
+    if (mainTimerInterval) {
+        clearInterval(mainTimerInterval);
+        mainTimerInterval = null;
+    }
+    
     const timer = document.querySelector('.main-timer');
     if (timer) {
         updateMainTimer(timer);
-        setInterval(() => updateMainTimer(timer), 1000);
+        mainTimerInterval = setInterval(() => {
+            const currentTimer = document.querySelector('.main-timer');
+            if (currentTimer) {
+                updateMainTimer(currentTimer);
+            } else {
+                // Если таймер исчез, очищаем интервал
+                if (mainTimerInterval) {
+                    clearInterval(mainTimerInterval);
+                    mainTimerInterval = null;
+                }
+            }
+        }, 1000);
     }
 }
 
 // Таймер
 function updateMainTimer(timer) {
+    if (!timer || !timer.dataset || !timer.dataset.date) return;
+    
     const targetDate = new Date(timer.dataset.date);
     const now = new Date();
     const gpEndTime = new Date(targetDate.getTime() + (2 * 60 * 60 * 1000));
@@ -516,8 +580,8 @@ function updateMainTimer(timer) {
 
     if (now >= targetDate && now <= gpEndTime) {
         const card = timer.closest('.main-gp-card');
-        const gpId = card.getAttribute('data-gp-id');
-        const track = Object.values(tracksData).find(t => t.id === gpId);
+        const gpId = card ? card.getAttribute('data-gp-id') : null;
+        const track = gpId && typeof tracksData !== 'undefined' ? Object.values(tracksData).find(t => t.id === gpId) : null;
         
         if (track && track.recordingRace) {
             timer.outerHTML = `
@@ -535,11 +599,11 @@ function updateMainTimer(timer) {
             `;
         }
         
-        const status = card.querySelector('.main-gp-status');
+        const status = card ? card.querySelector('.main-gp-status') : null;
         if (status) {
             status.textContent = 'Идёт сейчас';
             status.classList.add('live');
-            card.classList.add('live');
+            if (card) card.classList.add('live');
         }
         return;
     }
@@ -575,16 +639,37 @@ function addMainGPCardListener() {
     if (gpCard) {
         const gpId = gpCard.getAttribute('data-gp-id');
         gpCard.style.cursor = 'pointer';
-        gpCard.addEventListener('click', () => {
-            window.location.hash = 'calendar';
-            loadTabContent('calendar');
-            
-            if (gpId) {
-                setTimeout(() => {
-                    scrollToGrandPrix(gpId);
-                }, 300);
-            }
-        });
+        // Удаляем старый обработчик, чтобы избежать дублирования
+        gpCard.removeEventListener('click', handleGPCardClick);
+        gpCard.addEventListener('click', handleGPCardClick);
+        
+        // Сохраняем gpId для обработчика
+        gpCard.setAttribute('data-gp-id-click', gpId);
+    }
+}
+
+function handleGPCardClick(e) {
+    // Не срабатываем при клике на ссылку внутри карточки
+    if (e.target.tagName === 'A') return;
+    
+    const card = e.currentTarget;
+    const gpId = card.getAttribute('data-gp-id-click') || card.getAttribute('data-gp-id');
+    
+    window.location.hash = 'calendar';
+    loadTabContent('calendar');
+    
+    if (gpId) {
+        setTimeout(() => {
+            scrollToGrandPrix(gpId);
+        }, 300);
+    }
+}
+
+// Функция прокрутки к конкретному Гран-При (нужно добавить)
+function scrollToGrandPrix(gpId) {
+    const gpElement = document.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
+    if (gpElement) {
+        gpElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -597,6 +682,13 @@ function renderMainStandings() {
 // Рендеринг лидера пилотов
 function renderMainDrivers() {
     const container = document.getElementById('mainDrivers');
+    if (!container) return;
+    
+    // Проверяем наличие данных
+    if (typeof driversStandings === 'undefined' || typeof sprintStandings === 'undefined') {
+        container.innerHTML = '<div class="error">Ошибка загрузки данных пилотов</div>';
+        return;
+    }
     
     const driversWithSprint = JSON.parse(JSON.stringify(driversStandings));
     const sprintPointsMap = {};
@@ -642,6 +734,14 @@ function renderMainDrivers() {
 // Рендеринг лидера команд
 function renderMainConstructors() {
     const container = document.getElementById('mainConstructors');
+    if (!container) return;
+    
+    // Проверяем наличие данных
+    if (typeof constructorsStandings === 'undefined') {
+        container.innerHTML = '<div class="error">Ошибка загрузки данных команд</div>';
+        return;
+    }
+    
     const topTeams = [...constructorsStandings]
         .sort((a, b) => b.points - a.points)
         .slice(0, 3);
@@ -671,30 +771,51 @@ function renderMainConstructors() {
 // Загрузка данных вкладок
 function loadTabContent(tabName) {
     const content = document.getElementById('content');
+    if (!content) return;
+    
+    // Очищаем интервал таймера при смене вкладки
+    if (mainTimerInterval) {
+        clearInterval(mainTimerInterval);
+        mainTimerInterval = null;
+    }
+    
     switch (tabName) {
         case 'teams':
-            renderTeams();
+            if (typeof renderTeams === 'function') {
+                renderTeams();
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
             break;
         case 'drivers':
-            renderDrivers();
+            if (typeof renderDrivers === 'function') {
+                renderDrivers();
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
             break;
         case 'calendar':
-            renderCalendar();
+            if (typeof renderCalendar === 'function') {
+                renderCalendar();
+            }
             break;
         case 'results':
-            renderResults();
+            if (typeof renderResults === 'function') {
+                renderResults();
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
             break;
         case 'stats':
-            renderStats();
+            if (typeof renderStats === 'function') {
+                renderStats();
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
             break;
         default:
             renderMainPage();
             window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    
+    // Переинициализируем навигацию после загрузки контента
+    setTimeout(initNavigation, 100);
 }
 
 // Вспомогательная функция форматирования даты
