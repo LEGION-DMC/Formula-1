@@ -150,7 +150,7 @@ const currentTeams = [
                  logo: "Audi.png",
                  miniLogo: "Audi-m.png",
                  base: "Хинвилл, Швейцария",
-                 director: "Джонатан Уитли",
+                 director: "Маттиа Бинотто",
 			     foundert: "Audi Formula Racing GmbH ",
 				 debut: "2026",
                  car: "RS-26",

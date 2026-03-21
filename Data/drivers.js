@@ -140,10 +140,10 @@ const driversData = [
         birthDate: "25.08.2006",
         debut: "Mercedes, 2025",
         titles: 0,
-        wins: 0,
-        podiums: 3,
-        fine: 2,
-		poles: 0,
+        wins: 1,
+        podiums: 5,
+        fine: 5,
+		poles: 1,
         dnf: 1,
         bio: "---"
     },
@@ -183,7 +183,7 @@ const driversData = [
         debut: "Alfa Romeo, 2018",
         titles: 0,
         wins: 8,
-        podiums: 50,
+        podiums: 51,
         fine: 1,
 		poles: 27,
         dnf: 20,
@@ -205,7 +205,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 3,
-        fine: 1,
+        fine: 6,
 		poles: 1,
         dnf: 25,
         bio: "---"
@@ -226,7 +226,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 2,
-        fine: 2,
+        fine: 3,
 		poles: 0,
         dnf: 15,
         bio: "---"
@@ -268,7 +268,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 2,
+        fine: 6,
 		poles: 0,
         dnf: 3,
         bio: "---"
@@ -351,8 +351,8 @@ const driversData = [
         debut: "McLaren, 2007",
         titles: 7,
         wins: 105,
-        podiums: 202,
-        fine: 2,
+        podiums: 204,
+        fine: 3,
 		poles: 104,
         dnf: 35,
         bio: "---"
@@ -373,7 +373,7 @@ const driversData = [
         titles: 0,
         wins: 4,
         podiums: 29,
-        fine: 2,
+        fine: 4,
 		poles: 6,
         dnf: 30,
         bio: "---"
@@ -392,10 +392,10 @@ const driversData = [
         birthDate: "15.02.1998",
         debut: "Williams, 2019",
         titles: 0,
-        wins: 5,
-        podiums: 24,
+        wins: 6,
+        podiums: 26,
         fine: 0,
-		poles: 7,
+		poles: 9,
         dnf: 10,
         bio: "---"
     },
@@ -436,8 +436,8 @@ const driversData = [
         titles: 1,
         wins: 9,
         podiums: 26,
-        fine: 2,
-		poles: 5,
+        fine: 4,
+		poles: 6,
         dnf: 5,
         bio: "---"
     },
@@ -457,7 +457,7 @@ const driversData = [
         titles: 0,
         wins: 0,
         podiums: 0,
-        fine: 2,
+        fine: 10,
 		poles: 0,
         dnf: 1,
         bio: "---"
@@ -581,7 +581,6 @@ function renderDrivers() {
 }
 
 // Вычисления возраста
-// Добавляем функцию для вычисления возраста
 function calculateAge(birthDate) {
     const [day, month, year] = birthDate.split('.').map(Number);
     const birth = new Date(year, month - 1, day);
@@ -738,12 +737,3 @@ function navigateToTeam(teamName) {
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
-
-
-
-
-
-
-
-
-

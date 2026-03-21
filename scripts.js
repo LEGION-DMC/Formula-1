@@ -517,6 +517,7 @@ function updateWeatherDisplay(container, data, isLive) {
     }
     
     const weatherIcon = getWeatherIcon(condition);
+    // Рассчитываем процент осадков
     const precipPercent = Math.min(Math.round((precipMm / 10) * 100), 100);
     
     container.innerHTML = `
@@ -541,6 +542,36 @@ function updateWeatherDisplay(container, data, isLive) {
             <span class="weather-value">${Math.round(temp)} °C</span>
         </div>
     `;
+    
+    // Обновляем дождевые шины на основе осадков
+    updateWetTires(precipPercent);
+}
+
+// Функция для обновления только дождевых шин
+function updateWetTires(precipPercent) {
+    // Находим все дождевые шины (Intermediate и Wet)
+    const wetTires = document.querySelectorAll('.wet-tires .tire-item');
+    
+    // Если осадки >= 50%, активируем дождевые шины
+    if (precipPercent >= 1) {
+        wetTires.forEach(tire => {
+            const img = tire.querySelector('.tire-image');
+            if (img) {
+                img.classList.remove('inactive');
+                img.classList.add('active');
+            }
+        });
+    } 
+    // Если осадки < 50%, деактивируем дождевые шины
+    else {
+        wetTires.forEach(tire => {
+            const img = tire.querySelector('.tire-image');
+            if (img) {
+                img.classList.remove('active');
+                img.classList.add('inactive');
+            }
+        });
+    }
 }
 
 // Инициализация таймера

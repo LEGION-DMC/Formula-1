@@ -70,6 +70,7 @@ const tracksData = {
         "direction": "по часовой стрелке",
         "lapRecord": "1:31.447 (Де ла Роса, 2005)",
         "date": "2026-04-12 23:00",
+		"canceled": true,
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -88,6 +89,7 @@ const tracksData = {
         "direction": "против часовой стрелки",
         "lapRecord": "1:30.734 (Хэмилтон, 2021)",
         "date": "2026-04-19 01:00",
+		"canceled": true,
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -523,7 +525,8 @@ function renderCalendar() {
         trackCard.className = 'track-card';
         trackCard.setAttribute('data-track', track.id);
         trackCard.setAttribute('data-date', track.date);
-        trackCard.setAttribute('data-gp', track.id);
+        
+		const trackKey = Object.keys(tracksData).find(key => tracksData[key].id === track.id); trackCard.setAttribute('data-gp', trackKey);
         
         const currentDate = new Date();
         const raceDate = new Date(track.date);
@@ -531,8 +534,13 @@ function renderCalendar() {
         const isToday = raceDate.toDateString() === currentDate.toDateString();
         
         // Определяем статус
-        let status = '';
-        if (isToday) {
+                let status = '';
+        let isCanceled = track.canceled === true;
+        
+        if (isCanceled) {
+            status = '<span class="status-badge canceled">Отменено</span>';
+            trackCard.classList.add('canceled');
+        } else if (isToday) {
             status = '<span class="status-badge today">Сегодня</span>';
             trackCard.classList.add('today');
         } else if (isFutureRace) {
@@ -546,7 +554,10 @@ function renderCalendar() {
         // Формируем кнопки в зависимости от наличия спринта и записей
         let actionButtons = '';
         
-        if (isToday) {
+        if (isCanceled) {
+            // Отменённая гонка - показываем соответствующее сообщение
+            actionButtons = '<div class="action-btn canceled">Гонка отменена</div>';
+        } else if (isToday) {
             // Проверяем, наступило ли уже время начала гонки
             const raceTime = new Date(track.date);
             const hasRaceStarted = currentDate >= raceTime;
@@ -684,12 +695,12 @@ function renderCalendar() {
 
 // Рендеринг календаря
 function getCalendarFromTracks() {
-    return Object.values(tracksData).map(track => ({
+    return Object.entries(tracksData).map(([key, track]) => ({
         name: track.name,
         date: track.date,
         country: track.country,
         state: track.state,
-        grandPrixId: track.id
+        grandPrixId: key  // Используем ключ объекта (например, "bahrain", а не track.id)
     })).sort((a, b) => new Date(a.date) - new Date(b.date));
 }
 
@@ -701,6 +712,13 @@ function renderNextYearCalendar() {
     const now = new Date();
     // Получаем данные из tracksData
     const calendarEvents = getCalendarFromTracks();
+    
+    // Отладка: выводим все события с информацией об отмене
+    console.log('=== Calendar Events ===');
+    calendarEvents.forEach(event => {
+        const track = tracksData[event.grandPrixId];
+        console.log(`${event.name}: canceled = ${track?.canceled}, grandPrixId = ${event.grandPrixId}`);
+    });
     
     const columns = 4;
     const eventsPerColumn = Math.ceil(calendarEvents.length / columns);
@@ -715,9 +733,24 @@ function renderNextYearCalendar() {
         columnEvents.forEach(event => {
             const eventDate = new Date(event.date);
             const isPast = eventDate < now;
+            // Получаем статус отмены из tracksData
+            const track = tracksData[event.grandPrixId];
+            const isCanceled = track && track.canceled === true;
+            
+            // Определяем класс для события
+            let eventClass = '';
+            if (isCanceled) {
+                eventClass = 'canceled';
+                console.log(`✅ Добавляем класс canceled для: ${event.name}`);
+            } else if (isPast) {
+                eventClass = 'completed';
+                console.log(`📅 Добавляем класс completed для: ${event.name}`);
+            } else {
+                console.log(`⏳ Будущее событие: ${event.name}`);
+            }
             
             html += `
-                <div class="next-year-event ${isPast ? 'completed' : ''}" data-gp="${event.grandPrixId}">
+                <div class="next-year-event ${eventClass}" data-gp="${event.grandPrixId}">
                     <div class="next-year-date">${formatShortDate(event.date)}</div>
                     <div class="next-year-name">
                         <img src="Images/Flags/${event.country}.svg" alt="flag" title="${event.state}" class="next-year-flag">
@@ -735,6 +768,22 @@ function renderNextYearCalendar() {
     
     // Добавляем обработчики кликов
     addCalendarEventListeners();
+    
+    // Проверяем результат после рендеринга
+    setTimeout(() => {
+        const bahrainEvent = Array.from(document.querySelectorAll('.next-year-event')).find(el => 
+            el.textContent.includes('Бахрейн')
+        );
+        if (bahrainEvent) {
+            console.log('Бахрейн после рендеринга:', {
+                classes: bahrainEvent.className,
+                hasCanceled: bahrainEvent.classList.contains('canceled'),
+                hasCompleted: bahrainEvent.classList.contains('completed')
+            });
+        } else {
+            console.log('Бахрейн не найден в DOM после рендеринга');
+        }
+    }, 100);
 }
 
 // Обработчик выбора события календаря
@@ -751,7 +800,7 @@ function addCalendarEventListeners() {
 
 // Прокрутка до выбраной карточки
 function scrollToGrandPrix(grandPrixId) {
-    // Находим плашку Гран-при по ID трассы
+    // Находим плашку Гран-при по ID трассы (теперь grandPrixId - это ключ объекта, например "bahrain")
     const gpCard = document.querySelector(`.track-card[data-gp="${grandPrixId}"]`);
     
     if (gpCard) {
@@ -768,6 +817,8 @@ function scrollToGrandPrix(grandPrixId) {
         setTimeout(() => {
             gpCard.classList.remove('highlight');
         }, 2000);
+    } else {
+        console.log(`Карточка с data-gp="${grandPrixId}" не найдена`);
     }
 }
 

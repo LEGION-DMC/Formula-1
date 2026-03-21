@@ -1165,19 +1165,36 @@ function renderRaceWinners() {
 }
 
 // Выделение пилотов определённой команды
+let lastSelectedTeam = null; // Добавляем переменную для хранения последней выбранной команды
+
 function highlightTeamDrivers(team) {
+    // Если нажали на ту же команду, снимаем выделение
+    if (lastSelectedTeam === team) {
+        // Сбрасываем выделение для всех строк
+        document.querySelectorAll('.driver-row, .sprint-row').forEach(row => {
+            row.style.opacity = '1';
+            const originalColor = row.getAttribute('data-team-color');
+            row.style.borderLeftColor = originalColor || 'transparent';
+        });
+        lastSelectedTeam = null; // Сбрасываем последнюю выбранную команду
+        return;
+    }
+    
     // Сброс предыдущего выделения
     document.querySelectorAll('.driver-row, .sprint-row').forEach(row => {
         row.style.opacity = '0.5';
         row.style.borderLeftColor = 'transparent';
     });
 
-    // Выделение команды
+    // Выделение пилотов выбранной команды
     document.querySelectorAll(`[data-team="${team}"]`).forEach(row => {
         const teamColor = row.getAttribute('data-team-color');
         row.style.opacity = '1';
         row.style.borderLeftColor = teamColor;
     });
+    
+    // Запоминаем выбранную команду
+    lastSelectedTeam = team;
 }
 
 // Инициализация при загрузке вкладки

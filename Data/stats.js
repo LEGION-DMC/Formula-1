@@ -43,7 +43,7 @@ const fastestPitStops = [
         driver: "Льюис Хэмилтон",
         driverCountry: "gb",
         time: "2.29s",
-    },
+    },/*
     {
         id: 3,
         track: "Гран-при Японии",
@@ -262,7 +262,7 @@ const fastestPitStops = [
         driver: "---",
         driverCountry: "un",
         time: "0.00s",
-    },
+    },*/
 ];
 
 // Данные для счёта квалификаций пилотов в команде

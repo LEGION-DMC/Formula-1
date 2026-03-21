@@ -866,13 +866,13 @@ body::before {
 
 .drv-number {
     font-family: 'Font1', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     color: red;
 }
 
 .drv-name {
     flex: 1;
-    font-size: 13px;
+    font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -895,7 +895,7 @@ body::before {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .drv-team-logo {
@@ -1167,6 +1167,32 @@ body::before {
     border-radius: 8px;
 }
 
+.track-card.canceled::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    border-radius: 8px;
+}
+
+.action-btn.canceled-btn {
+    background: transparent;
+    color: #777;
+    border: 1px solid #777;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.track-card.canceled {
+    position: relative;
+    opacity: 0.6;
+    border-left-color: #777;
+}
+
 .track-card.completed {
     border-left-color: #555;
 }
@@ -1275,6 +1301,10 @@ body::before {
     cursor: not-allowed;
     pointer-events: none;
     margin-bottom: -5px;
+}
+.status-badge.canceled {
+    background: #555;
+    color: #ccc;
 }
 
 .status-badge.completed {
@@ -1605,10 +1635,10 @@ body::before {
     border-radius: 2px;
 }
 
-/* Затемнение событий календаря */
+/* Затемнение для завершённых событий */
 .next-year-event.completed {
     position: relative;
-    opacity: 0.9;
+    opacity: 0.6;
 }
 
 .next-year-event.completed::before {
@@ -1620,19 +1650,44 @@ body::before {
     right: 0;
     bottom: 0;
     background: rgba(20, 20, 20, 0.3);
+    border-radius: 6px;
 }
 
 .next-year-event.completed .next-year-date {
     color: #999;
 }
 
+/* Затемнение для отменённых событий - такие же стили как у completed */
+.next-year-event.canceled {
+    position: relative;
+    opacity: 0.6;
+}
+
+.next-year-event.canceled::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(20, 20, 20, 0.3);
+    border-radius: 6px;
+}
+
+.next-year-event.canceled .next-year-date {
+    color: #999;
+}
+
 /* Сохраняем возможность клика */
-.next-year-event.completed {
+.next-year-event.completed,
+.next-year-event.canceled {
     cursor: pointer;
 }
 
-.next-year-event.completed:hover {
-    opacity: 08;
+.next-year-event.completed:hover,
+.next-year-event.canceled:hover {
+    opacity: 0.8;
 }
 
 /* -------------------------------------------------------------------------- "Результаты" */
