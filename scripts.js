@@ -697,6 +697,13 @@ function scrollToGrandPrix(gpId) {
     const gpElement = document.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
     if (gpElement) {
         gpElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Добавить подсветку карточки
+        gpElement.classList.add('highlight');
+        setTimeout(() => {
+            gpElement.classList.remove('highlight');
+        }, 2000);
+    } else {
+        console.warn('GP element not found:', gpId);
     }
 }
 
