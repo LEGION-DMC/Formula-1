@@ -1,9 +1,7 @@
-// Конфигурация погодного API
 const WEATHER_API_KEY = '92d82d196e8a4e82af4113434261603';
-const WEATHER_CACHE = {}; // Кэш для хранения данных о погоде
-const CACHE_DURATION = 30 * 60 * 1000; // 30 минут
+const WEATHER_CACHE = {}; 
+const CACHE_DURATION = 30 * 60 * 1000; 
 
-// Координаты для всех трасс
 const TRACK_COORDINATES = {
     "t1": { "lat": -37.8497, "lon": 144.968 }, // albert-park
     "t2": { "lat": 31.3389, "lon": 121.220 }, // shanghai
@@ -31,10 +29,8 @@ const TRACK_COORDINATES = {
     "t24": { "lat": 24.4672, "lon": 54.6031 } // yas-marina
 };
 
-// Глобальная переменная для хранения интервала таймера
 let mainTimerInterval = null;
 
-// Обработчик DOM
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded');
     
@@ -372,18 +368,18 @@ async function renderMainGPCards() {
                     <div class="tires-divider"></div>
                     <div class="dry-tires">
                         <div class="tire-item">
-                            <span class="tire-name">---</span>
-                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+                            <span class="tire-name">Hard</span>
+                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image active">
                             <span class="tire-name">C1</span>
                         </div>
                         <div class="tire-item">
-                            <span class="tire-name">---</span>
-                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+                            <span class="tire-name">Medium</span>
+                            <img src="Images/Wheels/Medium.png" alt="Wheels" class="tire-image active">
                             <span class="tire-name">C2</span>
                         </div>
                         <div class="tire-item">
-                            <span class="tire-name">---</span>
-                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
+                            <span class="tire-name">Soft</span>
+                            <img src="Images/Wheels/Soft.png" alt="Wheels" class="tire-image active">
                             <span class="tire-name">C3</span>
                         </div>
                         <div class="tire-item">
