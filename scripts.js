@@ -549,7 +549,7 @@ function updateWetTires(precipPercent) {
     const wetTires = document.querySelectorAll('.wet-tires .tire-item');
     
     // Если осадки >= 50%, активируем дождевые шины
-    if (precipPercent >= 1) {
+    if (precipPercent >= 50) {
         wetTires.forEach(tire => {
             const img = tire.querySelector('.tire-image');
             if (img) {
