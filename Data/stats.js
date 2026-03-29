@@ -48,11 +48,11 @@ const fastestPitStops = [
         id: 3,
         track: "Гран-при Японии",
         country: "jp",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
+        team: "Ferrari",
+        teamLogo: "Ferrari-m.png",
+        driver: "Льюис Хэмилтон",
         driverCountry: "un",
-        time: "0.00s",
+        time: "2.00s",
     },/*
     {
         id: 4,
