@@ -3,64 +3,59 @@ const WEATHER_CACHE = {};
 const CACHE_DURATION = 30 * 60 * 1000; 
 
 const TRACK_COORDINATES = {
-    "t1": { "lat": -37.8497, "lon": 144.968 }, // albert-park
-    "t2": { "lat": 31.3389, "lon": 121.220 }, // shanghai
-    "t3": { "lat": 34.8431, "lon": 136.541 }, // suzuka
-    "t4": { "lat": 26.0325, "lon": 50.5106 }, // bahrain
-    "t5": { "lat": 21.6319, "lon": 39.1044 }, // jeddah
-    "t6": { "lat": 25.9581, "lon": -80.2389 }, // miami
-    "t7": { "lat": 45.5, "lon": -73.5228 }, // gilles-villeneuve
-    "t8": { "lat": 43.7347, "lon": 7.42056 }, // monaco
-    "t9": { "lat": 41.57, "lon": 2.26111 }, // barcelona-catalunya
-    "t10": { "lat": 47.2197, "lon": 14.7647 }, // red-bull-ring
-    "t11": { "lat": 52.0786, "lon": -1.01694 }, // silverstone
-    "t12": { "lat": 50.4372, "lon": 5.97139 }, // spa
-    "t13": { "lat": 47.5789, "lon": 19.2486 }, // hungaroring
-    "t14": { "lat": 52.3888, "lon": 4.54092 }, // zandvoort
-    "t15": { "lat": 45.6156, "lon": 9.28111 }, // monza
-    "t16": { "lat": 40.4167, "lon": -3.70333 }, // madrid
-    "t17": { "lat": 40.3725, "lon": 49.8533 }, // baku
-    "t18": { "lat": 1.2914, "lon": 103.864 }, // marina-bay
-    "t19": { "lat": 30.1328, "lon": -97.6411 }, // cota
-    "t20": { "lat": 19.4042, "lon": -99.0907 }, // Rodriguez
-    "t21": { "lat": -23.7036, "lon": -46.6997 }, // interlagos
-    "t22": { "lat": 36.1147, "lon": -115.173 }, // las-vegas
-    "t23": { "lat": 25.49, "lon": 51.4542 }, // losail
-    "t24": { "lat": 24.4672, "lon": 54.6031 } // yas-marina
+    "t1": { "lat": -37.8497, "lon": 144.968 },
+    "t2": { "lat": 31.3389, "lon": 121.220 },
+    "t3": { "lat": 34.8431, "lon": 136.541 },
+    "t4": { "lat": 26.0325, "lon": 50.5106 },
+    "t5": { "lat": 21.6319, "lon": 39.1044 },
+    "t6": { "lat": 25.9581, "lon": -80.2389 },
+    "t7": { "lat": 45.5, "lon": -73.5228 },
+    "t8": { "lat": 43.7347, "lon": 7.42056 },
+    "t9": { "lat": 41.57, "lon": 2.26111 },
+    "t10": { "lat": 47.2197, "lon": 14.7647 },
+    "t11": { "lat": 52.0786, "lon": -1.01694 },
+    "t12": { "lat": 50.4372, "lon": 5.97139 },
+    "t13": { "lat": 47.5789, "lon": 19.2486 },
+    "t14": { "lat": 52.3888, "lon": 4.54092 },
+    "t15": { "lat": 45.6156, "lon": 9.28111 },
+    "t16": { "lat": 40.4167, "lon": -3.70333 },
+    "t17": { "lat": 40.3725, "lon": 49.8533 },
+    "t18": { "lat": 1.2914, "lon": 103.864 },
+    "t19": { "lat": 30.1328, "lon": -97.6411 },
+    "t20": { "lat": 19.4042, "lon": -99.0907 },
+    "t21": { "lat": -23.7036, "lon": -46.6997 },
+    "t22": { "lat": 36.1147, "lon": -115.173 },
+    "t23": { "lat": 25.49, "lon": 51.4542 },
+    "t24": { "lat": 24.4672, "lon": 54.6031 }
 };
 
 let mainTimerInterval = null;
 
+let currentTireConfig = { // C1 C2 C3 C4 C5
+    hard: " ",
+    medium: " ",
+    soft: " "
+};
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM fully loaded');
-    
     const hash = window.location.hash;
     
     if (hash === '' || hash === '#main' || hash === '#') {
         renderMainPage();
     } else {
-        // Загрузка вкладки
         const tabName = hash.replace('#', '');
         loadTabContent(tabName);
     }
     
-    // Инициализация кнопки прокрутки
     initScrollTop();
-    
-    // Инициализация мобильного меню
     initBurgerMenu();
-    
-    // Инициализация навигации (важно! обработчики должны быть добавлены после загрузки)
     initNavigation();
 });
 
-// Отдельная функция для инициализации навигации
 function initNavigation() {
     const menuLinks = document.querySelectorAll('.menu a');
-    console.log('Initializing navigation, found links:', menuLinks.length);
     
     menuLinks.forEach(link => {
-        // Удаляем старые обработчики, чтобы избежать дублирования
         link.removeEventListener('click', handleMenuClick);
         link.addEventListener('click', handleMenuClick);
     });
@@ -79,7 +74,6 @@ function handleMenuClick(e) {
         window.location.hash = tabName;
         loadTabContent(tabName);
         
-        // Закрываем мобильное меню после клика
         if (window.innerWidth <= 768) {
             const burgerBtn = document.getElementById('burgerBtn');
             const menu = document.querySelector('.menu');
@@ -98,24 +92,17 @@ function handleLogoClick(e) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Мобильное меню
 function initBurgerMenu() {
     const burgerBtn = document.getElementById('burgerBtn');
     const menu = document.querySelector('.menu');
     
     if (burgerBtn && menu) {
-        console.log('Burger menu elements found');
-        
-        // Удаляем старый обработчик, чтобы избежать дублирования
         burgerBtn.removeEventListener('click', handleBurgerClick);
         burgerBtn.addEventListener('click', handleBurgerClick);
-    } else {
-        console.log('Burger menu elements NOT found:', {burgerBtn, menu});
     }
 }
 
 function handleBurgerClick() {
-    console.log('Burger button clicked');
     const burgerBtn = document.getElementById('burgerBtn');
     const menu = document.querySelector('.menu');
     if (burgerBtn && menu) {
@@ -124,13 +111,10 @@ function handleBurgerClick() {
     }
 }
 
-// Кнопка прокрутки вверх
 function initScrollTop() {
     const scrollTopBtn = document.getElementById('scrollTop');
     
     if (scrollTopBtn) {
-        console.log('Scroll button found');
-        
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 scrollTopBtn.classList.add('visible');
@@ -141,8 +125,6 @@ function initScrollTop() {
         
         scrollTopBtn.removeEventListener('click', handleScrollTop);
         scrollTopBtn.addEventListener('click', handleScrollTop);
-    } else {
-        console.log('Scroll button NOT found');
     }
 }
 
@@ -153,11 +135,9 @@ function handleScrollTop() {
     });
 }
 
-// Функция для получения текущей погоды по ID трассы
 async function fetchWeatherData(trackId) {
     const coords = TRACK_COORDINATES[trackId];
     if (!coords) {
-        console.error('No coordinates for track:', trackId);
         return null;
     }
     
@@ -165,12 +145,10 @@ async function fetchWeatherData(trackId) {
     const cached = WEATHER_CACHE[cacheKey];
     
     if (cached && (Date.now() - cached.timestamp) < CACHE_DURATION) {
-        console.log('Using cached weather data for', trackId);
         return cached.data;
     }
     
     try {
-        console.log('Fetching weather data for track:', trackId);
         const response = await fetch(
             `https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${coords.lat},${coords.lon}&lang=ru`
         );
@@ -184,19 +162,15 @@ async function fetchWeatherData(trackId) {
             data: data
         };
         
-        console.log('Weather data received:', data);
         return data;
     } catch (error) {
-        console.error('Error fetching weather:', error);
         return null;
     }
 }
 
-// Функция для получения прогноза погоды по ID трассы
 async function fetchWeatherForecast(trackId, date) {
     const coords = TRACK_COORDINATES[trackId];
     if (!coords) {
-        console.error('No coordinates for track:', trackId);
         return null;
     }
     
@@ -204,36 +178,44 @@ async function fetchWeatherForecast(trackId, date) {
     const cached = WEATHER_CACHE[cacheKey];
     
     if (cached && (Date.now() - cached.timestamp) < CACHE_DURATION) {
-        console.log('Using cached forecast for', trackId);
         return cached.data;
     }
     
     try {
         const forecastDate = new Date(date).toISOString().split('T')[0];
-        console.log('Fetching forecast for:', forecastDate);
         
         const response = await fetch(
-            `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${coords.lat},${coords.lon}&dt=${forecastDate}&lang=ru`
+            `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${coords.lat},${coords.lon}&dt=${forecastDate}&lang=ru&days=1`
         );
         
         if (!response.ok) throw new Error('Weather API error');
         
         const data = await response.json();
         
-        WEATHER_CACHE[cacheKey] = {
-            timestamp: Date.now(),
-            data: data
-        };
+        if (data.forecast && data.forecast.forecastday && data.forecast.forecastday.length > 0) {
+            WEATHER_CACHE[cacheKey] = {
+                timestamp: Date.now(),
+                data: data
+            };
+            return data;
+        } else {
+            const currentResponse = await fetch(
+                `https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${coords.lat},${coords.lon}&lang=ru`
+            );
+            const currentData = await currentResponse.json();
+            
+            WEATHER_CACHE[cacheKey] = {
+                timestamp: Date.now(),
+                data: currentData
+            };
+            return currentData;
+        }
         
-        console.log('Forecast data received:', data);
-        return data;
     } catch (error) {
-        console.error('Error fetching forecast:', error);
         return null;
     }
 }
 
-// Рендеринг главной страницы
 function renderMainPage() {
     const content = document.getElementById('content');
     content.innerHTML = `
@@ -252,26 +234,79 @@ function renderMainPage() {
     renderMainStandings();
 }
 
-// Карточка Гран-При
+const COMPOUND_TO_IMAGE = {
+    "Hard": "Hard.png",
+    "Medium": "Medium.png", 
+    "Soft": "Soft.png"
+};
+
+const COMPOUND_DISPLAY = {
+    "Hard": "Hard",
+    "Medium": "Medium", 
+    "Soft": "Soft"
+};
+
+const ALL_COMPOUNDS = ["C1", "C2", "C3", "C4", "C5"];
+
+function updateTiresDisplay() {
+    const dryTiresContainer = document.querySelector('.dry-tires');
+    if (!dryTiresContainer) return;
+    
+    const tireItems = dryTiresContainer.querySelectorAll('.tire-item');
+    
+    const activeTires = {
+        [currentTireConfig.hard]: "Hard",
+        [currentTireConfig.medium]: "Medium",
+        [currentTireConfig.soft]: "Soft"
+    };
+    
+    tireItems.forEach((item, index) => {
+        const compoundSpan = item.querySelector('.tire-name:last-child');
+        const nameSpan = item.querySelector('.tire-name:first-child');
+        const tireImage = item.querySelector('.tire-image');
+        
+        if (!compoundSpan || !tireImage) return;
+        
+        const compound = ALL_COMPOUNDS[index];
+        compoundSpan.textContent = compound;
+        
+        if (activeTires[compound]) {
+            const tireType = activeTires[compound];
+            const imageName = COMPOUND_TO_IMAGE[tireType];
+            const displayName = COMPOUND_DISPLAY[tireType];
+            
+            if (nameSpan) {
+                nameSpan.textContent = displayName;
+            }
+            
+            tireImage.src = `Images/Wheels/${imageName}`;
+            tireImage.classList.remove('inactive');
+            tireImage.classList.add('active');
+        } else {
+            if (nameSpan) {
+                nameSpan.textContent = "---";
+            }
+            tireImage.classList.remove('active');
+            tireImage.classList.add('inactive');
+        }
+    });
+}
+
 async function renderMainGPCards() {
     const container = document.getElementById('mainGpCards');
     if (!container) return;
     
     const now = new Date();
     
-    // Проверяем наличие данных
     if (typeof tracksData === 'undefined') {
-        console.error('tracksData is not defined');
         container.innerHTML = '<div class="error">Ошибка загрузки данных календаря</div>';
         return;
     }
     
-    // Загрузка всех гран-при
     const allGPs = Object.values(tracksData).sort((a, b) => 
         new Date(a.date) - new Date(b.date)
-    );
+    ).filter(gp => !gp.canceled);
     
-    // Находим текущий/ближайший Гран-При
     let currentGP = null;
     
     for (let i = 0; i < allGPs.length; i++) {
@@ -368,28 +403,28 @@ async function renderMainGPCards() {
                     <div class="tires-divider"></div>
                     <div class="dry-tires">
                         <div class="tire-item">
-                            <span class="tire-name">Hard</span>
-                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image active">
+                            <span class="tire-name">---</span>
+                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                             <span class="tire-name">C1</span>
                         </div>
                         <div class="tire-item">
-                            <span class="tire-name">Medium</span>
-                            <img src="Images/Wheels/Medium.png" alt="Wheels" class="tire-image active">
+                            <span class="tire-name">---</span>
+                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                             <span class="tire-name">C2</span>
                         </div>
                         <div class="tire-item">
-                            <span class="tire-name">Soft</span>
-                            <img src="Images/Wheels/Soft.png" alt="Wheels" class="tire-image active">
+                            <span class="tire-name">---</span>
+                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                             <span class="tire-name">C3</span>
                         </div>
                         <div class="tire-item">
                             <span class="tire-name">---</span>
-                            <img src="Images/Wheels/Medium.png" alt="Wheels" class="tire-image inactive">
+                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                             <span class="tire-name">C4</span>
                         </div>
                         <div class="tire-item">
                             <span class="tire-name">---</span>
-                            <img src="Images/Wheels/Soft.png" alt="Wheels" class="tire-image inactive">
+                            <img src="Images/Wheels/Hard.png" alt="Wheels" class="tire-image inactive">
                             <span class="tire-name">C5</span>
                         </div>
                     </div>
@@ -421,13 +456,12 @@ async function renderMainGPCards() {
         html += '</div>';
         container.innerHTML = html;
         
-        // Загружаем погоду для текущего Гран-При
+        updateTiresDisplay();
+        
         await loadWeatherForGP(currentGP, isLive);
         
-        // Добавляем обработчик клика на карточку
         addMainGPCardListener();
         
-        // Запускаем таймер
         initMainTimer();
         
     } else {
@@ -445,7 +479,6 @@ async function renderMainGPCards() {
     }
 }
 
-// Функция загрузки погоды для Гран-При
 async function loadWeatherForGP(gp, isLive) {
     const weatherCard = document.getElementById('weatherCard');
     if (!weatherCard) return;
@@ -468,12 +501,10 @@ async function loadWeatherForGP(gp, isLive) {
             weatherBlock.innerHTML = '<div class="weather-error">Не удалось загрузить погоду</div>';
         }
     } catch (error) {
-        console.error('Weather loading error:', error);
         weatherBlock.innerHTML = '<div class="weather-error">Ошибка загрузки погоды</div>';
     }
 }
 
-// Функция определения иконки погоды
 function getWeatherIcon(condition) {
     const conditionLower = condition.toLowerCase();
     
@@ -489,66 +520,75 @@ function getWeatherIcon(condition) {
         conditionLower.includes('mist') || conditionLower.includes('дым')) {
         return 'fog';
     }
-    // По умолчанию - облачно
     return 'cloud';
 }
 
-// Функция обновления отображения погоды
 function updateWeatherDisplay(container, data, isLive) {
     let condition, temp, windKph, precipMm, humidity;
     
-    if (isLive) {
-        condition = data.current.condition.text;
-        temp = data.current.temp_c;
-        windKph = data.current.wind_kph;
-        precipMm = data.current.precip_mm;
-        humidity = data.current.humidity;
-    } else {
-        const forecast = data.forecast.forecastday[0].day;
-        condition = forecast.condition.text;
-        temp = forecast.avgtemp_c;
-        windKph = forecast.maxwind_kph;
-        precipMm = forecast.totalprecip_mm;
-        humidity = forecast.avghumidity;
+    try {
+        if (isLive) {
+            condition = data.current.condition.text;
+            temp = data.current.temp_c;
+            windKph = data.current.wind_kph;
+            precipMm = data.current.precip_mm;
+            humidity = data.current.humidity;
+        } else {
+            if (data.forecast && data.forecast.forecastday && data.forecast.forecastday[0]) {
+                const forecast = data.forecast.forecastday[0].day;
+                condition = forecast.condition.text;
+                temp = forecast.avgtemp_c;
+                windKph = forecast.maxwind_kph;
+                precipMm = forecast.totalprecip_mm;
+                humidity = forecast.avghumidity;
+            } else if (data.current) {
+                condition = data.current.condition.text;
+                temp = data.current.temp_c;
+                windKph = data.current.wind_kph;
+                precipMm = data.current.precip_mm;
+                humidity = data.current.humidity;
+            } else {
+                throw new Error('Invalid weather data structure');
+            }
+        }
+        
+        const weatherIcon = getWeatherIcon(condition);
+        let precipPercent = Math.min(Math.round((precipMm / 10) * 100), 100);
+        if (precipMm === 0) precipPercent = 0;
+        
+        container.innerHTML = `
+            <div class="weather">
+                <img src="Images/Weather/${weatherIcon}.png" alt="weather" class="weather-image active">
+                <span class="weather-name">Погода</span>
+                <span class="weather-value">${condition}</span>
+            </div>
+            <div class="weather">
+                <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
+                <span class="weather-name">Осадки</span>
+                <span class="weather-value">${precipPercent}%</span>
+            </div>
+            <div class="weather">
+                <img src="Images/Weather/cloud.png" alt="weather" class="weather-image active">
+                <span class="weather-name">Ветер</span>
+                <span class="weather-value">${Math.round(windKph / 3.6)} м/с</span>
+            </div>
+            <div class="weather">
+                <img src="Images/Weather/sun.png" alt="weather" class="weather-image active">
+                <span class="weather-name">Темп.°C</span>
+                <span class="weather-value">${Math.round(temp)} °C</span>
+            </div>
+        `;
+        
+        updateWetTires(precipPercent);
+        
+    } catch (error) {
+        container.innerHTML = '<div class="weather-error">Ошибка отображения погоды</div>';
     }
-    
-    const weatherIcon = getWeatherIcon(condition);
-    // Рассчитываем процент осадков
-    const precipPercent = Math.min(Math.round((precipMm / 10) * 100), 100);
-    
-    container.innerHTML = `
-        <div class="weather">
-            <img src="Images/Weather/${weatherIcon}.png" alt="weather" class="weather-image active">
-            <span class="weather-name">Погода</span>
-            <span class="weather-value">${condition}</span>
-        </div>
-        <div class="weather">
-            <img src="Images/Weather/rain.png" alt="weather" class="weather-image active">
-            <span class="weather-name">Осадки</span>
-            <span class="weather-value">${precipPercent}%</span>
-        </div>
-        <div class="weather">
-            <img src="Images/Weather/cloud.png" alt="weather" class="weather-image active">
-            <span class="weather-name">Ветер</span>
-            <span class="weather-value">${Math.round(windKph / 3.6)} м/с</span>
-        </div>
-        <div class="weather">
-            <img src="Images/Weather/sun.png" alt="weather" class="weather-image active">
-            <span class="weather-name">Темп.°C</span>
-            <span class="weather-value">${Math.round(temp)} °C</span>
-        </div>
-    `;
-    
-    // Обновляем дождевые шины на основе осадков
-    updateWetTires(precipPercent);
 }
 
-// Функция для обновления только дождевых шин
 function updateWetTires(precipPercent) {
-    // Находим все дождевые шины (Intermediate и Wet)
     const wetTires = document.querySelectorAll('.wet-tires .tire-item');
     
-    // Если осадки >= 50%, активируем дождевые шины
     if (precipPercent >= 50) {
         wetTires.forEach(tire => {
             const img = tire.querySelector('.tire-image');
@@ -558,7 +598,6 @@ function updateWetTires(precipPercent) {
             }
         });
     } 
-    // Если осадки < 50%, деактивируем дождевые шины
     else {
         wetTires.forEach(tire => {
             const img = tire.querySelector('.tire-image');
@@ -570,9 +609,7 @@ function updateWetTires(precipPercent) {
     }
 }
 
-// Инициализация таймера
 function initMainTimer() {
-    // Очищаем предыдущий интервал, если есть
     if (mainTimerInterval) {
         clearInterval(mainTimerInterval);
         mainTimerInterval = null;
@@ -586,7 +623,6 @@ function initMainTimer() {
             if (currentTimer) {
                 updateMainTimer(currentTimer);
             } else {
-                // Если таймер исчез, очищаем интервал
                 if (mainTimerInterval) {
                     clearInterval(mainTimerInterval);
                     mainTimerInterval = null;
@@ -596,7 +632,6 @@ function initMainTimer() {
     }
 }
 
-// Таймер
 function updateMainTimer(timer) {
     if (!timer || !timer.dataset || !timer.dataset.date) return;
     
@@ -660,23 +695,19 @@ function updateMainTimer(timer) {
     if (secsElem) secsElem.textContent = secs.toString().padStart(2, '0');
 }
 
-// Обработчик клика на карточку Гран-При
 function addMainGPCardListener() {
     const gpCard = document.querySelector('.main-gp-card');
     if (gpCard) {
         const gpId = gpCard.getAttribute('data-gp-id');
         gpCard.style.cursor = 'pointer';
-        // Удаляем старый обработчик, чтобы избежать дублирования
         gpCard.removeEventListener('click', handleGPCardClick);
         gpCard.addEventListener('click', handleGPCardClick);
         
-        // Сохраняем gpId для обработчика
         gpCard.setAttribute('data-gp-id-click', gpId);
     }
 }
 
 function handleGPCardClick(e) {
-    // Не срабатываем при клике на ссылку внутри карточки
     if (e.target.tagName === 'A') return;
     
     const card = e.currentTarget;
@@ -692,33 +723,26 @@ function handleGPCardClick(e) {
     }
 }
 
-// Функция прокрутки к конкретному Гран-При (нужно добавить)
 function scrollToGrandPrix(gpId) {
     const gpElement = document.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
     if (gpElement) {
         gpElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Добавить подсветку карточки
         gpElement.classList.add('highlight');
         setTimeout(() => {
             gpElement.classList.remove('highlight');
         }, 2000);
-    } else {
-        console.warn('GP element not found:', gpId);
     }
 }
 
-// Рендеринг таблиц лидеров
 function renderMainStandings() {
     renderMainDrivers();
     renderMainConstructors();
 }
 
-// Рендеринг лидера пилотов
 function renderMainDrivers() {
     const container = document.getElementById('mainDrivers');
     if (!container) return;
     
-    // Проверяем наличие данных
     if (typeof driversStandings === 'undefined' || typeof sprintStandings === 'undefined') {
         container.innerHTML = '<div class="error">Ошибка загрузки данных пилотов</div>';
         return;
@@ -765,12 +789,10 @@ function renderMainDrivers() {
     container.innerHTML = html;
 }
 
-// Рендеринг лидера команд
 function renderMainConstructors() {
     const container = document.getElementById('mainConstructors');
     if (!container) return;
     
-    // Проверяем наличие данных
     if (typeof constructorsStandings === 'undefined') {
         container.innerHTML = '<div class="error">Ошибка загрузки данных команд</div>';
         return;
@@ -802,12 +824,10 @@ function renderMainConstructors() {
     container.innerHTML = html;
 }
 
-// Загрузка данных вкладок
 function loadTabContent(tabName) {
     const content = document.getElementById('content');
     if (!content) return;
     
-    // Очищаем интервал таймера при смене вкладки
     if (mainTimerInterval) {
         clearInterval(mainTimerInterval);
         mainTimerInterval = null;
@@ -848,11 +868,9 @@ function loadTabContent(tabName) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    // Переинициализируем навигацию после загрузки контента
     setTimeout(initNavigation, 100);
 }
 
-// Вспомогательная функция форматирования даты
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('ru-RU', {

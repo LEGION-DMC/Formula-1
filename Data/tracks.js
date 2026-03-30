@@ -798,9 +798,9 @@ function addCalendarEventListeners() {
     });
 }
 
-// Прокрутка до выбраной карточки
+// Прокрутка до выбраной карточки (включая отменённые - пользователь сам выбрал)
 function scrollToGrandPrix(grandPrixId) {
-    // Находим плашку Гран-при по ID трассы (теперь grandPrixId - это ключ объекта, например "bahrain")
+    // Находим плашку Гран-при по ID трассы
     const gpCard = document.querySelector(`.track-card[data-gp="${grandPrixId}"]`);
     
     if (gpCard) {
@@ -900,28 +900,35 @@ function updateTimer(timer) {
     timer.querySelector('.seconds').textContent = secs.toString().padStart(2, '0');
 }
 
-// Авто прокрутка к текущему/ближайшему событию
+// Авто прокрутка к текущему/ближайшему событию (пропуская отменённые)
 function scrollToCurrent() {
     const cards = document.querySelectorAll('.track-card');
     const now = new Date();
     
+    // Фильтруем отменённые гонки
+    const activeCards = Array.from(cards).filter(card => {
+        const trackId = card.getAttribute('data-track');
+        const track = Object.values(tracksData).find(t => t.id === trackId);
+        return track && !track.canceled; // Исключаем отменённые
+    });
+    
     // Сначала ищем сегодняшнюю гонку
-    let targetCard = Array.from(cards).find(card => {
+    let targetCard = activeCards.find(card => {
         const cardDate = new Date(card.dataset.date);
         return cardDate.toDateString() === now.toDateString();
     });
     
     // Если нет сегодняшней, ищем ближайшую будущую
     if (!targetCard) {
-        targetCard = Array.from(cards).find(card => {
+        targetCard = activeCards.find(card => {
             const cardDate = new Date(card.dataset.date);
             return cardDate > now;
         });
     }
     
     // Если не нашли, берем последнюю завершенную
-    if (!targetCard && cards.length > 0) {
-        targetCard = cards[cards.length - 1];
+    if (!targetCard && activeCards.length > 0) {
+        targetCard = activeCards[activeCards.length - 1];
     }
     
     if (targetCard) {
@@ -933,7 +940,6 @@ function scrollToCurrent() {
     }
 }
 
-// Модальное окно
 // Модальное окно
 function openModal(track) {
     const modal = document.createElement('div');

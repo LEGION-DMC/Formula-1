@@ -332,7 +332,7 @@ const detailedSprintResults = {
         "000": 2,
         "000": 1,
     },
-	"hungary": {
+	"netherlands": {
         "000": 8,
         "000": 7,
         "000": 6,
@@ -382,17 +382,17 @@ const driversStandings = [
 
 // Команды         /*Доп. очки -    points: 3    */
 const constructorsStandings = [
-    { team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109"},
-    { team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f"},
-    { team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272"},
-    { team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247"},
-    { team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc"},
-    { team: "Audi", teamLogo: "Audi-m.png", teamColor: "#21ad17"},
-    { team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd"},
-    { team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00"},
-    { team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d"},
-    { team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c"},
-    { team: "Cadillac", teamLogo: "Cadillac-m.png", teamColor: "#fbff00"},
+    { team: "McLaren", teamLogo: "McLaren-m.png", teamColor: "#e07109", points: 0},
+    { team: "Ferrari", teamLogo: "Ferrari-m.png", teamColor: "#b80f0f", points: 0},
+    { team: "Mercedes", teamLogo: "Mercedes-m.png", teamColor: "#7a7272", points: 0},
+    { team: "Red Bull", teamLogo: "RedBull-m.png", teamColor: "#313247", points: 0},
+    { team: "Williams", teamLogo: "Williams-m.png", teamColor: "#7b74fc", points: 0},
+    { team: "Audi", teamLogo: "Audi-m.png", teamColor: "#21ad17", points: 0},
+    { team: "Racing Bulls", teamLogo: "RacingBulls-m.png", teamColor: "#ddebdd", points: 0},
+    { team: "Aston Martin", teamLogo: "AstonMartin-m.png", teamColor: "#fbff00", points: 0},
+    { team: "Haas", teamLogo: "Haas-m.png", teamColor: "#cf1d1d", points: 0},
+    { team: "Alpine", teamLogo: "Alpine-m.png", teamColor: "#a1459c", points: 0},
+    { team: "Cadillac", teamLogo: "Cadillac-m.png", teamColor: "#fbff00", points: 0},
 ];
 
 // Пилоты
@@ -453,8 +453,7 @@ const trackToGrandPrixMap = {
 
 // Функция для автоматического заполнения победителей этапов
 function generateRaceWinners() {
-    const winners = [];
-    let position = 1;
+    const winnersMap = new Map(); // Используем Map для группировки по пилотам
     
     // Проходим по всем Гран-при в порядке календаря
     grandPrixOrder.forEach(gpId => {
@@ -474,22 +473,52 @@ function generateRaceWinners() {
                         // Получаем название Гран-при для отображения
                         const gpNameInfo = getGPName(gpId);
                         
-                        winners.push({
-                            grandPrix: gpNameInfo.state, // Название этапа
-                            position: position.toString(),
-                            winner: driverName,
-                            country: driverInfo.country,
-                            team: driverInfo.team,
-                            teamLogo: driverInfo.teamLogo,
-                            teamColor: driverInfo.teamColor
-                        });
+                        if (!winnersMap.has(driverName)) {
+                            // Если пилота ещё нет в Map, добавляем его с информацией
+                            winnersMap.set(driverName, {
+                                winner: driverName,
+                                country: driverInfo.country,
+                                team: driverInfo.team,
+                                teamLogo: driverInfo.teamLogo,
+                                teamColor: driverInfo.teamColor,
+                                grandPrixList: [gpNameInfo.state]
+                            });
+                        } else {
+                            // Если пилот уже есть, добавляем этап в его список
+                            const existing = winnersMap.get(driverName);
+                            existing.grandPrixList.push(gpNameInfo.state);
+                        }
                     }
                 }
             });
         }
     });
     
-    return winners;
+    // Преобразуем Map в массив и сортируем по первому этапу в календаре
+    const winnersArray = Array.from(winnersMap.values());
+    
+    // Сортируем победителей по порядку первого выигранного этапа
+    winnersArray.sort((a, b) => {
+        const aFirstGp = a.grandPrixList[0];
+        const bFirstGp = b.grandPrixList[0];
+        
+        const aIndex = grandPrixOrder.findIndex(gpId => {
+            const gpName = getGPName(gpId);
+            return gpName.state === aFirstGp;
+        });
+        const bIndex = grandPrixOrder.findIndex(gpId => {
+            const gpName = getGPName(gpId);
+            return gpName.state === bFirstGp;
+        });
+        return aIndex - bIndex;
+    });
+    
+    // Добавляем позиции
+    winnersArray.forEach((winner, index) => {
+        winner.position = index + 1;
+    });
+    
+    return winnersArray;
 }
 
 // Список Гран-при
@@ -676,31 +705,96 @@ function addModalHandlers() {
     });
 }
 
+// Функция для получения списка Гран-при с информацией из tracksData
+function getGrandPrixList() {
+    const grandPrixList = [];
+    
+    // Проходим по всем трассам в порядке календаря
+    grandPrixOrder.forEach(gpId => {
+        // Находим соответствующий трек в tracksData
+        const track = Object.values(tracksData).find(t => {
+            // Сопоставляем ID Гран-при с ID трека
+            return trackToGrandPrixMap[t.id] === gpId;
+        });
+        
+        if (track) {
+            grandPrixList.push({
+                id: gpId,
+                country: track.country,
+                state: track.state,
+                name: track.name,
+                hasSprint: track.hasSprint || false
+            });
+        }
+    });
+    
+    return grandPrixList;
+}
+
+// Функция для получения списка спринтов с информацией из tracksData
+function getSprintList() {
+    const sprintList = [];
+    
+    // Проходим по всем трассам в tracksData
+    Object.values(tracksData).forEach(track => {
+        const gpId = trackToGrandPrixMap[track.id];
+        
+        // Если у трассы есть спринт
+        if (track.hasSprint === true && gpId) {
+            // Проверяем, есть ли данные в detailedSprintResults
+            const sprintResults = detailedSprintResults[gpId];
+            const hasResults = sprintResults && Object.keys(sprintResults).length > 0;
+            
+            sprintList.push({
+                id: gpId,
+                country: track.country,
+                state: track.state,
+                name: track.name,
+                hasRealResults: hasResults && Object.keys(sprintResults).some(key => 
+                    key !== "000" && sprintResults[key] > 0
+                )
+            });
+        }
+    });
+    
+    // Сортируем по дате (используем данные из tracksData)
+    sprintList.sort((a, b) => {
+        const trackA = Object.values(tracksData).find(t => 
+            trackToGrandPrixMap[t.id] === a.id
+        );
+        const trackB = Object.values(tracksData).find(t => 
+            trackToGrandPrixMap[t.id] === b.id
+        );
+        return new Date(trackA?.date) - new Date(trackB?.date);
+    });
+    
+    return sprintList;
+}
+
 // Рендер детальной таблицы личного зачёта
 function renderDriversDetailedTable() {
-	let html = `
+    const grandPrixList = getGrandPrixList();
+    
+    let html = `
         <div class="detailed-table-container">
             <div class="detailed-table">
                 <div class="detailed-header">
                     <div class="detailed-col driver-col">Пилот</div>
     `;
-    	
-    // Добавляем флаг Гран-при
-    grandPrixOrder.forEach(gpId => {
-        if (detailedResults[gpId]) {
-            const gpName = getGPName(gpId);
-            html += `
-			<div class="detailed-col gp-col">
-			<img src="Images/Flags/${gpName.country}.svg" alt="flag" title="${gpName.state}" class="next-year-flag">
-			</div>`;
-        }
+    
+    // Добавляем флаг Гран-при из tracksData
+    grandPrixList.forEach(gp => {
+        html += `
+            <div class="detailed-col gp-col">
+                <img src="Images/Flags/${gp.country}.svg" alt="flag" title="${gp.state}" class="next-year-flag">
+            </div>`;
     });
     
     html += `<div class="detailed-col total-col">Σ</div></div>`;
-	
+    
     // Добавляем строки пилотов
     driversStandings.forEach(driver => {
-            html += `
+        html += `
             <div class="detailed-row">
                 <div class="detailed-col driver-col">
                     <span class="position">${driver.position}</span>
@@ -712,30 +806,58 @@ function renderDriversDetailedTable() {
         
         // Добавляем очки по Гран-при
         let totalPoints = 0;
-        grandPrixOrder.forEach(gpId => {
-            if (detailedResults[gpId]) {
-                const points = detailedResults[gpId][driver.name] || 0;
-                totalPoints += points;
-                html += `<div class="detailed-col gp-col">${points > 0 ? points : '-'}</div>`;
-            }
+        grandPrixList.forEach(gp => {
+            const points = detailedResults[gp.id]?.[driver.name] || 0;
+            totalPoints += points;
+            html += `<div class="detailed-col gp-col">${points > 0 ? points : '-'}</div>`;
         });
         
         html += `<div class="detailed-col total-col">${totalPoints}</div></div>`;
     });
     
     html += `</div></div>`;
-	
-	html += `
-	<div class="detailed-info">
-		<h3>Система начисления очков:</h3>
-		<p>Очки начисляются только первым 10 финишировавшим пилотам</p>
-		<p>Очки: 25 – 18 – 15 – 12 – 10 – 8 – 6 – 4 – 2 – 1</p>
-	</div>`;
-	return html;
+    
+    html += `
+    <div class="detailed-info">
+        <h3>Система начисления очков:</h3>
+        <p>Очки начисляются только первым 10 финишировавшим пилотам</p>
+        <p>Очки: 25 – 18 – 15 – 12 – 10 – 8 – 6 – 4 – 2 – 1</p>
+    </div>`;
+    return html;
+}
+
+// Функция для автоматического создания структуры спринтов на основе конфигурации
+function initSprintResults() {
+    const sprintResults = {};
+    
+    // Проходим по всем трассам в tracksData
+    Object.values(tracksData).forEach(track => {
+        const gpId = trackToGrandPrixMap[track.id];
+        
+        // Используем hasSprint из конфигурации
+        if (track.hasSprint === true && gpId) {
+            if (!sprintResults[gpId]) {
+                sprintResults[gpId] = {
+                    "000": 8,
+                    "000": 7,
+                    "000": 6,
+                    "000": 5,
+                    "000": 4,
+                    "000": 3,
+                    "000": 2,
+                    "000": 1,
+                };
+            }
+        }
+    });
+    
+    return sprintResults;
 }
 
 // Рендер детальной таблицы спринтов
 function renderSprintDetailedTable() {
+    const sprintList = getSprintList();
+    
     let html = `
         <div class="detailed-table-container">
             <div class="detailed-table">
@@ -743,14 +865,13 @@ function renderSprintDetailedTable() {
                     <div class="detailed-col driver-col">Пилот</div>
     `;
     
-    // Добавляем заголовки спринтов
-    Object.keys(detailedSprintResults).forEach(sprintId => {
-        const sprintName = getSprintName(sprintId);
+    // Добавляем заголовки спринтов из tracksData
+    sprintList.forEach(sprint => {
         html += `
-		<div class="detailed-col gp-col">
-		<img src="Images/Flags/${sprintName.country}.svg" alt="flag" title="${sprintName.state}" class="next-year-flag">
-		</div>
-		`;
+            <div class="detailed-col gp-col">
+                <img src="Images/Flags/${sprint.country}.svg" alt="flag" title="${sprint.state}" class="next-year-flag">
+            </div>
+        `;
     });
     
     html += `<div class="detailed-col total-col">Σ</div></div>`;
@@ -769,8 +890,8 @@ function renderSprintDetailedTable() {
         
         // Добавляем очки по спринтам
         let totalPoints = 0;
-        Object.values(detailedSprintResults).forEach(sprintResults => {
-            const points = sprintResults[driver.name] || 0;
+        sprintList.forEach(sprint => {
+            const points = detailedSprintResults[sprint.id]?.[driver.name] || 0;
             totalPoints += points;
             html += `<div class="detailed-col gp-col">${points > 0 ? points : '-'}</div>`;
         });
@@ -779,14 +900,14 @@ function renderSprintDetailedTable() {
     });
     
     html += `</div></div>`;
-	
-	html += `
-	<div class="detailed-info">
-		<h3>Система начисления очков:</h3>
-		<p>Очки начисляются только первым 8 финишировавшим пилотам</p>
-		<p>Очки: 8 – 7 – 6 – 5 – 4 – 3 – 2 – 1</p>
-	</div>`;
-	return html;
+    
+    html += `
+    <div class="detailed-info">
+        <h3>Система начисления очков:</h3>
+        <p>Очки начисляются только первым 8 финишировавшим пилотам</p>
+        <p>Очки: 8 – 7 – 6 – 5 – 4 – 3 – 2 – 1</p>
+    </div>`;
+    return html;
 }
 
 // Открытие модального окна
@@ -846,136 +967,13 @@ function addRowSelectionHandlers(modal, tableType) {
     });
 }
 
-// Названия Гран-при
+// Названия Гран-при (теперь берутся из tracksData)
 function getGPName(gpId) {
-    const gpNames = {
-    "australia": {
-		"country": "au",
-		"state": "Австралия",
-    },
-    "china": {
-		"country": "cn",
-		"state": "Китай",
-    },
-    "japan": {
-		"country": "jp",
-		"state": "Япония",
-    },
-	"bahrain": {
-		"country": "bh",
-		"state": "Бахрейн",
-    },
-	"saudi-arabia": {
-		"country": "sa",
-		"state": "Саудовская Аравия",
-    },
-    "miami": {
-		"country": "us",
-		"state": "США, Майами",
-    },
-	"madrid": {
-		"country": "es",
-		"state": "Испания, Мадрид",
-    },
-	"monaco": {
-		"country": "mc",
-		"state": "Манако",
-    },
-	"spain": {
-		"country": "es",
-		"state": "Испания, Барселона",
-    },
-	"canada": {
-		"country": "ca",
-		"state": "Канада",
-    },
-    "austria": {
-		"country": "at",
-		"state": "Австрия",
-    },
-	"great-britain": {
-		"country": "gb",
-		"state": "Великобритания",
-    },
-	"belgium": {
-		"country": "be",
-		"state": "Бельгия",
-    },
-	"hungary": {
-		"country": "hu",
-		"state": "Венгрия",
-    },
-    "netherlands": {
-		"country": "nl",
-		"state": "Нидерланды",
-    },
-	"italy": {
-		"country": "it",
-		"state": "Италия",
-    },
-	"azerbaijan": {
-		"country": "az",
-		"state": "Азербайджан",
-    },
-	"singapore": {
-		"country": "sg",
-		"state": "Сингапур",
-    },
-	"usa": {
-		"country": "us",
-		"state": "США",
-    },
-	"mexico": {
-		"country": "mx",
-		"state": "Мексика",
-    },
-	"brazil": {
-		"country": "br",
-		"state": "Бразилия",
-    },
-	"las-vegas": {
-		"country": "us",
-		"state": "США, Лас-Вегас",
-    },
-	"qatar": {
-		"country": "qa",
-		"state": "Катар",
-    },
-	"abu-dhabi": {
-		"country": "ae",
-		"state": "Объеденённые Арабские Эмираты",
-    },
-    };
-    return gpNames[gpId] || gpId;}
+    const grandPrixList = getGrandPrixList();
+    const gp = grandPrixList.find(g => g.id === gpId);
+    return gp || { country: "unknown", state: gpId };
+}
 
-function getSprintName(sprintId) {
-	const sprintName = {
-    "china": {
-		"country": "cn",
-		"state": "Китай",
-    },
-    "miami": {
-		"country": "us",
-		"state": "США, Майами",
-    },
-	"canada": {
-		"country": "us",
-		"state": "Канада",
-    },
-	"great-britain": {
-		"country": "br",
-		"state": "Великобритания",
-    },
-	"hungary": {
-		"country": "us",
-		"state": "Нидерланды",
-    },
-	"singapore": {
-		"country": "qa",
-		"state": "Сингапур",
-    },
-    };
-    return sprintName[sprintId] || sprintId;}
 
 // Таблица личного зачёта пилотов
 function renderDriversStandings() {
@@ -1116,36 +1114,25 @@ function renderSprintStandings() {
     });
 }
 
-// Таблица победителей гран-при
+// Таблица победителей гран-при (с группировкой этапов)
 function renderRaceWinners() {
     const container = document.getElementById('raceWinners');
     let html = `<h2>Чемпионы этапов</h2><div class="winners-list">`;
     
-    // Сортируем победителей по порядку Гран-при
-    const sortedWinners = [...raceWinners].sort((a, b) => {
-        // Находим индексы Гран-при в порядке календаря
-        const gpAIndex = grandPrixOrder.findIndex(gpId => {
-            const gpName = getGPName(gpId);
-            return gpName.state === a.grandPrix;
-        });
-        const gpBIndex = grandPrixOrder.findIndex(gpId => {
-            const gpName = getGPName(gpId);
-            return gpName.state === b.grandPrix;
-        });
-        return gpAIndex - gpBIndex;
-    });
-    
-    // Победители гран-при
-    sortedWinners.forEach((race, index) => {
+    // Победители гран-при (уже сгруппированы)
+    raceWinners.forEach((race, index) => {
+        // Формируем строку с этапами через красный разделитель |
+        const grandPrixList = race.grandPrixList.join(' <span style="color: red;">|</span> ');
+        
         html += `
             <div class="winner-row" data-team="${race.team}">
                 <div class="winner-info">
-                    <span class="position">${index + 1}</span>
+                    <span class="position">${race.position}</span>
                     <img src="Images/Flags/${race.country}.svg" alt="${race.country}" class="flag">
                     <span class="winner-name">${race.winner}</span>
                     <img src="Images/Teams/${race.teamLogo}" alt="${race.team}" class="team-logo">
                 </div>
-                <span class="grand-prix">${race.grandPrix}</span>
+                <span class="grand-prix">${grandPrixList}</span>
             </div>
         `;
     });
