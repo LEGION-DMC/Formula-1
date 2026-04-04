@@ -34,8 +34,8 @@ const tracksData = {
         "lapRecord": "1:32.238 (Шумахер, 2004)",
         "date": "2026-03-15 15:00",
 		"hasSprint": true,
-        "recordingSprint": "https://vkvd572.okcdn.ru/?expires=1775389439519&srcIp=176.114.191.71&srcAg=GECKO&ms=45.136.21.220&type=1&sig=AKobWUscVJs&ct=19&urls=185.226.55.147&clientType=13&appId=512000384397&zs=111%3B120%3B15%3B69&id=12147663768268",
-        "recordingRace": "https://vkvd234.okcdn.ru/?expires=1775389439523&srcIp=176.114.191.71&srcAg=GECKO&ms=45.136.22.170&type=1&subId=12124282423818&sig=J5TivVs6sas&ct=19&urls=185.226.55.190&clientType=13&appId=512000384397&zs=111%3B120%3B15%3B69&id=12124282423818"
+        "recordingSprint": "https://rutube.ru/video/e01dc7aca552e6b3481e27a12b481e43/",
+        "recordingRace": "https://rutube.ru/video/0cb1fa5f8d0b60b7266f43f015566674/"
     },
     "suzuka": {
         "id": "t3",
@@ -53,7 +53,7 @@ const tracksData = {
         "lapRecord": "1:30.965 (Антонелли, 2025)",
         "date": "2026-03-29 13:00",
         "recordingSprint": "",
-        "recordingRace": "https://vk78-1.vkuser.net/?expires=1775389439519&srcIp=176.114.191.71&srcAg=GECKO&ms=178.185.180.146&type=1&subId=18252332206684&sig=pIlo1JAaeSw&ct=19&urls=185.226.52.229%3B45.136.22.200&clientType=13&appId=512000384397&zs=111%3B120&id=18232510843484"
+        "recordingRace": "https://rutube.ru/video/6d24c1dd05e8824e81dd3aa3cdd5b86f/"
     },
     "bahrain": {
         "id": "t4",
