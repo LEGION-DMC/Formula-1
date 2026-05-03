@@ -1381,9 +1381,11 @@ body::before {
 
 .countdown {
     font-family: 'Font1', sans-serif;
-    padding: 4px 3px 1px;
     font-size: 13px;
-    margin-top: 5px;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 7px;
+    gap: 5px;
 }
 
 .countdown span {

@@ -547,15 +547,20 @@ function renderCalendar() {
         trackCard.setAttribute('data-track', track.id);
         trackCard.setAttribute('data-date', track.date);
         
-		const trackKey = Object.keys(tracksData).find(key => tracksData[key].id === track.id); trackCard.setAttribute('data-gp', trackKey);
+        const trackKey = Object.keys(tracksData).find(key => tracksData[key].id === track.id);
+        trackCard.setAttribute('data-gp', trackKey);
         
         const currentDate = new Date();
         const raceDate = new Date(track.date);
+        const sprintDate = track.hasSprint ? new Date(new Date(track.date).getTime() - (24 * 60 * 60 * 1000)) : null; // Спринт за день до гонки
+        
         const isFutureRace = raceDate > currentDate;
         const isToday = raceDate.toDateString() === currentDate.toDateString();
+        const isSprintPassed = track.hasSprint && sprintDate && sprintDate < currentDate;
+        const isRacePassed = raceDate < currentDate;
         
         // Определяем статус
-                let status = '';
+        let status = '';
         let isCanceled = track.canceled === true;
         
         if (isCanceled) {
@@ -572,128 +577,116 @@ function renderCalendar() {
             trackCard.classList.add('completed');
         }
 
-        // Формируем кнопки в зависимости от наличия спринта и записей
-        let actionButtons = '';
-        
-        if (isCanceled) {
-            // Отменённая гонка - показываем соответствующее сообщение
-            actionButtons = '<div class="action-btn canceled">Гонка отменена</div>';
-        } else if (isToday) {
-            // Проверяем, наступило ли уже время начала гонки
-            const raceTime = new Date(track.date);
-            const hasRaceStarted = currentDate >= raceTime;
-            
-            if (hasRaceStarted && track.recordingRace) {
-                // Гонка началась и есть запись гонки
-                actionButtons = `<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>`;
-                
-                // Если есть спринт и запись спринта, добавляем вторую кнопку
-                if (track.hasSprint && track.recordingSprint) {
-                    actionButtons = `
-                        <div class="action-buttons">
-                            <a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
-                            <a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>
-                        </div>
-                    `;
-                }
-            } else if (hasRaceStarted) {
-                // Гонка началась, но нет записи
-                actionButtons = '<div class="action-btn no-recording">Нет записи</div>';
-            } else {
-                // Гонка сегодня, но еще не началась - показываем таймер
-                actionButtons = `
-                    <div class="countdown">
-                        <span>До старта:</span>
-                        <div class="timer" data-date="${track.date}">
-                            <span class="hours">00</span>ч 
-                            <span class="minutes">00</span>м 
-                            <span class="seconds">00</span>с
-                        </div>
-                    </div>
-                `;
-            }
-        } else if (isFutureRace) {
-            // Будущая гонка - полный таймер
-            actionButtons = `
-                <div class="countdown">
-                    <span>До гонки:</span>
-                    <div class="timer" data-date="${track.date}">
-                        <span class="days">00</span>д 
-                        <span class="hours">00</span>ч 
-                        <span class="minutes">00</span>м 
-                        <span class="seconds">00</span>с
-                    </div>
-                </div>
-            `;
-        } else {
-            // Прошедшая гонка - проверяем наличие записей
-            if (track.hasSprint) {
-                // Для этапов со спринтом
-                if (track.recordingSprint && track.recordingRace) {
-                    actionButtons = `
-                        <div class="action-buttons">
-                            <a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
-                            <a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>
-                        </div>
-                    `;
-                } else if (track.recordingSprint) {
-                    actionButtons = `
-                        <div class="action-buttons">
-                            <a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
-                            <div class="action-btn no-recording">Нет записи гонки</div>
-                        </div>
-                    `;
-                } else if (track.recordingRace) {
-                    actionButtons = `
-                        <div class="action-buttons">
-                            <div class="action-btn no-recording">Нет записи спринта</div>
-                            <a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>
-                        </div>
-                    `;
-                } else {
-                    actionButtons = '<div class="action-btn no-recording">Нет записей</div>';
-                }
-            } else {
-                // Для этапов без спринта
-                actionButtons = track.recordingRace ? 
-                    `<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>` :
-                    '<div class="action-btn no-recording">Нет записи</div>';
-            }
-        }
+		let actionsHtml = '';
+		let statusHtml = status;
 
-        // HTML структура карточки гран-при
-        trackCard.innerHTML = `
-            <div class="track-image">
-                <img src="Images/Tracks/${track.miniLogo}" alt="${track.trackName}">
-            </div>
-            <div class="track-info">
-                <div class="track-header">
-                    <h3><img src="Images/Flags/${track.country}.svg" alt="flag" title="${track.state}" class="flag">  ${track.name}</h3>
-                    ${track.hasSprint ? '<span class="sprint-badge">СПРИНТ</span>' : ''}
-                </div>
-                <div class="divider"></div>
-                <div class="info-row">
-                    <img src="Images/Icon/location.webp" alt="Место">
-                    <span>Место:</span>
-                    <span class="value">${track.location}</span>
-                </div>
-                <div class="info-row">
-                    <img src="Images/Icon/track.webp" alt="Трасса">
-                    <span>Трасса:</span>
-                    <span class="value">${track.trackName}</span>
-                </div>
-                <div class="info-row">
-                    <img src="Images/Icon/calendar.webp" alt="Дата">
-                    <span>Дата:</span>
-                    <span class="value">${formatDate(track.date)}</span>
-                </div>
-                <div class="divider"></div>
-                <div class="track-footer">
-                    ${actionButtons}
-                    ${status}
-                </div>
-            </div>
-        `;
+		if (isCanceled) {
+			actionsHtml = '<div class="action-btn canceled-btn">Гонка отменена</div>';
+		} else if (isRacePassed) {
+			// Прошедшая гонка
+			if (track.hasSprint) {
+				const sprintBtn = track.recordingSprint 
+					? `<a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>`
+					: '<div class="action-btn no-recording">Нет записи спринта</div>';
+				const raceBtn = track.recordingRace 
+					? `<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>`
+					: '<div class="action-btn no-recording">Нет записи гонки</div>';
+				actionsHtml = `<div class="action-buttons">${sprintBtn}${raceBtn}</div>`;
+			} else {
+				actionsHtml = track.recordingRace 
+					? `<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>`
+					: '<div class="action-btn no-recording">Нет записи</div>';
+			}
+		} else if (isToday || (!isRacePassed && !isFutureRace)) {
+			// Гонка сегодня или началась
+			const hasRaceStarted = currentDate >= raceDate;
+			
+			if (hasRaceStarted && track.recordingRace) {
+				if (track.hasSprint && track.recordingSprint) {
+					actionsHtml = `<div class="action-buttons">
+						<a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
+						<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>
+					</div>`;
+				} else {
+					actionsHtml = `<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>`;
+				}
+			} else if (hasRaceStarted) {
+				actionsHtml = '<div class="action-btn no-recording">Нет записи</div>';
+			} else {
+				// Гонка сегодня, но не началась
+				const timerHtml = `<div class="countdown">
+					<span>До гонки:</span>
+					<div class="timer" data-date="${track.date}">
+						<span class="hours">00</span>ч 
+						<span class="minutes">00</span>м 
+						<span class="seconds">00</span>с
+					</div>
+				</div>`;
+				
+				if (track.hasSprint && track.recordingSprint && isSprintPassed) {
+					actionsHtml = `<div class="track-actions">
+						<a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
+						${timerHtml}
+					</div>`;
+				} else {
+					actionsHtml = timerHtml;
+				}
+			}
+		} else if (isFutureRace) {
+			// Будущая гонка
+			const timerHtml = `<div class="countdown">
+				<span>До гонки:</span>
+				<div class="timer" data-date="${track.date}">
+					<span class="days">00</span>д 
+					<span class="hours">00</span>ч 
+					<span class="minutes">00</span>м 
+					<span class="seconds">00</span>с
+				</div>
+			</div>`;
+			
+			if (track.hasSprint && track.recordingSprint && isSprintPassed) {
+				actionsHtml = `<div class="track-actions">
+					<a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
+					${timerHtml}
+				</div>`;
+			} else {
+				actionsHtml = timerHtml;
+			}
+		}
+
+		// HTML структура футера карточки
+		trackCard.innerHTML = `
+			<div class="track-image">
+				<img src="Images/Tracks/${track.miniLogo}" alt="${track.trackName}">
+			</div>
+			<div class="track-info">
+				<div class="track-header">
+					<h3><img src="Images/Flags/${track.country}.svg" alt="flag" title="${track.state}" class="flag">  ${track.name}</h3>
+					${track.hasSprint ? '<span class="sprint-badge">СПРИНТ</span>' : ''}
+				</div>
+				<div class="divider"></div>
+				<div class="info-row">
+					<img src="Images/Icon/location.webp" alt="Место">
+					<span>Место:</span>
+					<span class="value">${track.location}</span>
+				</div>
+				<div class="info-row">
+					<img src="Images/Icon/track.webp" alt="Трасса">
+					<span>Трасса:</span>
+					<span class="value">${track.trackName}</span>
+				</div>
+				<div class="info-row">
+					<img src="Images/Icon/calendar.webp" alt="Дата">
+					<span>Дата:</span>
+					<span class="value">${formatDate(track.date)}</span>
+				</div>
+				<div class="divider"></div>
+				<div class="track-footer">
+					${actionsHtml}
+					${statusHtml}
+				</div>
+			</div>
+		`;
 
         // Обработчик клика для открытия модального окна
         trackCard.addEventListener('click', (e) => {
