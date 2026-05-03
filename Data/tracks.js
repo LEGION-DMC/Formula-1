@@ -107,10 +107,10 @@ const tracksData = {
         "turns": 19,
         "direction": "по часовой стрелке",
         "lapRecord": "1:29.708 (Ферстаппен, 2024)",
-        "date": "2026-05-03 04:00",
+        "date": "2026-05-04 01:00",
 		"hasSprint": true,
-        "recordingSprint": "",
-        "recordingRace": ""
+        "recordingSprint": "https://rutube.ru/video/105d706e84f0903bb3bc0da3dd4e2f91/",
+        "recordingRace": "https://rutube.ru/video/3628eef00d9d494b12467d1ef0bc42c1/"
     },
     "gilles-villeneuve": {
         "id": "t7",
@@ -126,7 +126,7 @@ const tracksData = {
         "turns": 14,
         "direction": "против часовой стрелки",
         "lapRecord": "1.13.078 (Боттас, 2019)",
-        "date": "2026-05-24 04:00",
+        "date": "2026-05-25 04:00",
 		"hasSprint": true,
         "recordingSprint": "",
         "recordingRace": ""
@@ -295,6 +295,27 @@ const tracksData = {
         "recordingSprint": "",
         "recordingRace": ""
     },
+	
+	/*
+	"istanbul": {
+        "id": "t16",
+        "name": "Гран-при Турции",
+        "logo": "Istanbul.png",
+        "miniLogo": "Istanbul-m.png",
+		"country": "tr",
+		"state": "Турция",
+        "location": "Стамбул, Турция",
+        "trackName": "Истанбул Парк",
+        "length": "5 338 км",
+        "laps": 58,
+        "turns": 14,
+        "direction": "против часовой стрелке",
+        "lapRecord": "1.24.770 (Монтойя, 2005)",
+        "date": "2026-09-13 21:00",
+        "recordingSprint": "",
+        "recordingRace": ""
+    },*/
+	
     "baku": {
         "id": "t17",
         "name": "Гран-при Азербайджана",
@@ -346,7 +367,7 @@ const tracksData = {
         "turns": 20,
         "direction": "против часовой стрелки",
         "lapRecord": "1:36.169 (Леклер, 2019)",
-        "date": "2026-10-25 04:00",
+        "date": "2026-10-26 04:00",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -364,7 +385,7 @@ const tracksData = {
         "turns": 17,
         "direction": "против часовой стрелки",
         "lapRecord": "1:17.774 (Боттас, 2021)",
-        "date": "2026-11-01 04:00",
+        "date": "2026-11-02 04:00",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -382,7 +403,7 @@ const tracksData = {
         "turns": 15,
         "direction": "против часовой стрелки",
         "lapRecord": "1:10.540 (Боттас, 2018)",
-        "date": "2026-11-08 01:00",
+        "date": "2026-11-09 01:00",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -400,7 +421,7 @@ const tracksData = {
         "turns": 17,
         "direction": "против часовой стрелки",
         "lapRecord": "1:32.312 (Рассел, 2024)",
-        "date": "2026-11-21 12:00",
+        "date": "2026-11-22 12:00",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -418,7 +439,7 @@ const tracksData = {
         "turns": 16,
         "direction": "по часовой стрелке",
         "lapRecord": "1:22.384 (Норрис, 2024)",
-        "date": "2026-11-29 24:00",
+        "date": "2026-11-30 00:00",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -882,22 +903,30 @@ function updateTimer(timer) {
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
     // Обновляем отображение таймера
+    const daysSpan = timer.querySelector('.days');
+    const daysElement = daysSpan?.parentElement;
+    
     if (days > 0) {
-        timer.querySelector('.days').textContent = days.toString().padStart(2, '0');
-        timer.querySelector('.hours').textContent = hours.toString().padStart(2, '0');
+        if (daysSpan) daysSpan.textContent = days.toString().padStart(2, '0');
+        if (timer.querySelector('.hours')) timer.querySelector('.hours').textContent = hours.toString().padStart(2, '0');
     } else {
         // Если дней нет, скрываем блок с днями
-        const daysElement = timer.querySelector('.days');
-        if (daysElement) {
-            daysElement.textContent = '';
-            const daysLabel = timer.querySelector('span:contains("д")');
-            if (daysLabel) daysLabel.style.display = 'none';
+        if (daysSpan && daysSpan.parentElement) {
+            daysSpan.textContent = '';
+            // Находим текстовый узел с "д" и скрываем его
+            const parent = daysSpan.parentElement;
+            for (let node of parent.childNodes) {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('д')) {
+                    node.textContent = '';
+                    break;
+                }
+            }
         }
     }
     
-    timer.querySelector('.hours').textContent = hours.toString().padStart(2, '0');
-    timer.querySelector('.minutes').textContent = mins.toString().padStart(2, '0');
-    timer.querySelector('.seconds').textContent = secs.toString().padStart(2, '0');
+    if (timer.querySelector('.hours')) timer.querySelector('.hours').textContent = hours.toString().padStart(2, '0');
+    if (timer.querySelector('.minutes')) timer.querySelector('.minutes').textContent = mins.toString().padStart(2, '0');
+    if (timer.querySelector('.seconds')) timer.querySelector('.seconds').textContent = secs.toString().padStart(2, '0');
 }
 
 // Авто прокрутка к текущему/ближайшему событию (пропуская отменённые)
@@ -1057,7 +1086,3 @@ function openModal(track) {
 if (window.location.hash === '#calendar') {
     renderCalendar();
 }
-
-
-
-

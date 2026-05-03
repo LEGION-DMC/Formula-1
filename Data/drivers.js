@@ -373,7 +373,7 @@ const driversData = [
         titles: 0,
         wins: 4,
         podiums: 29,
-        fine: 4,
+        fine: 2,
 		poles: 6,
         dnf: 30,
         bio: "---"
