@@ -70,11 +70,11 @@ const fastestPitStops = [
         id: 6,
         track: "Гран-при Майами",
         country: "us",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
+        team: "Racing Bulls",
+        teamLogo: "RacingBulls-m.png",
+        driver: "Арвид Линдблад",
+        driverCountry: "gb",
+        time: "2.08s",
     },
 	/*
     {

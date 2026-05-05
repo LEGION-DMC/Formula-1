@@ -2027,7 +2027,7 @@ body::before {
 
 #pitStopsTable .stats-table-header,
 #pitStopsTable .stats-table-row {
-    grid-template-columns: 28px 310px 130px 205px 10px;
+    grid-template-columns: 28px 310px 165px 205px 10px;
 }
 
 /* Стили для таблицы квалификаций */
