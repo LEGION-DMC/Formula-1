@@ -128,8 +128,8 @@ const tracksData = {
         "lapRecord": "1.13.078 (Боттас, 2019)",
         "date": "2026-05-25 04:00",
 		"hasSprint": true,
-        "recordingSprint": "",
-        "recordingRace": ""
+        "recordingSprint": "https://rutube.ru/video/bc877009b2b8fc79bc6f979462168e6f/",
+        "recordingRace": "https://rutube.ru/video/03fefa5dc563eeccb70fdae0547937ee/"
     },
     "monaco": {
         "id": "t8",
