@@ -32,9 +32,9 @@ const TRACK_COORDINATES = {
 let mainTimerInterval = null;
 
 let currentTireConfig = { // C5 C4 C3 C2 C1
-    soft: "C5", 
-    medium: "C4",
-    hard: "C3"
+    soft: "C", 
+    medium: "C",
+    hard: "C"
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -216,6 +216,88 @@ async function fetchWeatherForecast(trackId, date) {
     }
 }
 
+// Карта соответствия ID трассы и ID Гран-при в detailedResults
+const trackToResultsMap = {
+    "t1": "australia",
+    "t2": "china",
+    "t3": "japan",
+    "t4": "bahrain",
+    "t5": "saudi-arabia",
+    "t6": "miami",
+    "t7": "canada",
+    "t8": "monaco",
+    "t9": "spain",
+    "t10": "austria",
+    "t11": "great-britain",
+    "t12": "belgium",
+    "t13": "hungary",
+    "t14": "netherlands",
+    "t15": "italy",
+    "t16": "madrid",
+    "t17": "azerbaijan",
+    "t18": "singapore",
+    "t19": "usa",
+    "t20": "mexico",
+    "t21": "brazil",
+    "t22": "las-vegas",
+    "t23": "qatar",
+    "t24": "abu-dhabi"
+};
+
+// Функция для получения команды пилота
+function getDriverTeam(driverName) {
+    if (typeof driversStandings !== 'undefined') {
+        const driver = driversStandings.find(d => d.name === driverName);
+        if (driver) return driver.team;
+    }
+    return '';
+}
+
+// Функция для получения победителей Гран-При из detailedResults
+function getRaceWinners(gpId) {
+    // Получаем ID для detailedResults
+    const resultsId = trackToResultsMap[gpId];
+    
+    // Проверяем, есть ли результаты
+    if (typeof detailedResults !== 'undefined' && resultsId && detailedResults[resultsId]) {
+        const gpResults = detailedResults[resultsId];
+        
+        // Сортируем результаты по очкам (25, 18, 15...)
+        const sortedResults = Object.entries(gpResults)
+            .filter(([driverName]) => driverName !== "000") // Исключаем заглушки
+            .sort((a, b) => b[1] - a[1]) // Сортируем по убыванию очков
+            .slice(0, 3); // Берём топ-3
+        
+        // Формируем результат
+        const winners = {
+            first: null,
+            second: null,
+            third: null,
+            firstTeam: null,
+            secondTeam: null,
+            thirdTeam: null
+        };
+        
+        if (sortedResults.length >= 1) {
+            winners.first = sortedResults[0][0];
+            winners.firstTeam = getDriverTeam(sortedResults[0][0]);
+        }
+        if (sortedResults.length >= 2) {
+            winners.second = sortedResults[1][0];
+            winners.secondTeam = getDriverTeam(sortedResults[1][0]);
+        }
+        if (sortedResults.length >= 3) {
+            winners.third = sortedResults[2][0];
+            winners.thirdTeam = getDriverTeam(sortedResults[2][0]);
+        }
+        
+        return winners;
+    }
+    
+    // Заглушка, если данных нет
+    return { first: '—', second: '—', third: '—', firstTeam: '', secondTeam: '', thirdTeam: '' };
+}
+
 function renderMainPage() {
     const content = document.getElementById('content');
     content.innerHTML = `
@@ -308,22 +390,132 @@ async function renderMainGPCards() {
     ).filter(gp => !gp.canceled);
     
     let currentGP = null;
+    let currentGPIndex = -1;
     
+    // Находим текущий/предстоящий Гран-При
     for (let i = 0; i < allGPs.length; i++) {
         const gpDate = new Date(allGPs[i].date);
         const gpEndTime = new Date(gpDate.getTime() + (2 * 60 * 60 * 1000));
         
         if (now <= gpEndTime) {
             currentGP = allGPs[i];
+            currentGPIndex = i;
             break;
         }
     }
     
     if (!currentGP && allGPs.length > 0) {
         currentGP = allGPs[allGPs.length - 1];
+        currentGPIndex = allGPs.length - 1;
     }
     
-    let html = '<div class="main-gp-container">';
+    // Находим предыдущий и следующий Гран-При
+    let prevGP = null;
+    let nextGP = null;
+    
+    if (currentGPIndex > 0) {
+        prevGP = allGPs[currentGPIndex - 1];
+    }
+    if (currentGPIndex < allGPs.length - 1) {
+        nextGP = allGPs[currentGPIndex + 1];
+    }
+    
+    let html = '<div class="main-gp-wrapper">';
+    
+    // Левая колонка с плашками предыдущего и следующего Гран-При
+    html += '<div class="main-gp-sidebar">';
+    
+    // Плашка предыдущего Гран-При (с подиумом)
+    if (prevGP) {
+		// Получаем данные победителей для предыдущего Гран-При
+		const winners = getRaceWinners(prevGP.id);
+		
+		// Формируем HTML для подиума с логотипами команд
+		let podiumHtml = '';
+		
+		if (winners.first && winners.first !== '—') {
+			podiumHtml += `
+				<div class="podium-item first">
+					<span class="podium-number">1</span>
+					<span class="podium-name">${winners.first}</span>
+					<div class="podium-team-wrapper">
+						<img src="Images/Teams/${getTeamLogo(winners.firstTeam)}" alt="${winners.firstTeam}" class="podium-team-logo">
+						<span class="podium-team">${winners.firstTeam}</span>
+					</div>
+				</div>
+			`;
+		} else {
+			podiumHtml += `<div class="podium-item"><span class="podium-name" style="text-align:center; width:100%;">Нет данных</span></div>`;
+		}
+		
+		if (winners.second && winners.second !== '—') {
+			podiumHtml += `
+				<div class="podium-item second">
+					<span class="podium-number">2</span>
+					<span class="podium-name">${winners.second}</span>
+					<div class="podium-team-wrapper">
+						<img src="Images/Teams/${getTeamLogo(winners.secondTeam)}" alt="${winners.secondTeam}" class="podium-team-logo">
+						<span class="podium-team">${winners.secondTeam}</span>
+					</div>
+				</div>
+			`;
+		}
+		
+		if (winners.third && winners.third !== '—') {
+			podiumHtml += `
+				<div class="podium-item third">
+					<span class="podium-number">3</span>
+					<span class="podium-name">${winners.third}</span>
+					<div class="podium-team-wrapper">
+						<img src="Images/Teams/${getTeamLogo(winners.thirdTeam)}" alt="${winners.thirdTeam}" class="podium-team-logo">
+						<span class="podium-team">${winners.thirdTeam}</span>
+					</div>
+				</div>
+			`;
+		}
+		
+		html += `
+			<div class="main-gp-card small-card prev-gp" data-gp-id="${prevGP.id}">
+				<div class="main-gp-header">
+					<img src="Images/Flags/${prevGP.country}.svg" alt="flag" class="flag-main">
+					<h3>${prevGP.name}</h3>
+					<span class="main-gp-status past">Предыдущее</span>
+				</div>
+				<div class="gp-title-divider"></div>
+				<div class="prev-gp-podium">
+					<div class="podium-list">
+						${podiumHtml}
+					</div>
+				</div>
+				<div class="podium-divider"></div>
+			</div>
+		`;
+	}
+    
+    // Плашка следующего Гран-При (без изображения)
+    if (nextGP) {
+		html += `
+			<div class="main-gp-card small-card next-gp" data-gp-id="${nextGP.id}">
+				<div class="main-gp-header">
+					<img src="Images/Flags/${nextGP.country}.svg" alt="flag" class="flag-main">
+					<h3>${nextGP.name}</h3>
+					<span class="main-gp-status upcoming">Следующее</span>
+				</div>
+				<div class="gp-title-divider"></div>
+				<div class="next-gp-info">
+					<div class="next-gp-date">${formatDate(nextGP.date)}</div>
+					<div class="next-gp-track">${nextGP.trackName}</div>
+					<div class="next-gp-location">${nextGP.location}</div>
+				</div>
+				<div class="podium-divider"></div>
+			</div>
+		`;
+	}
+    
+    html += '</div>'; // Закрываем sidebar
+    
+    // Основной блок с текущим Гран-При
+    html += '<div class="main-gp-container">';
     
     if (currentGP) {
         const gpDate = new Date(currentGP.date);
@@ -340,7 +532,7 @@ async function renderMainGPCards() {
         } else if (isToday) {
             status = 'Сегодня';
         } else {
-            status = 'Предстоящий';
+            status = 'Предстоящее';
         }
         
         let actionHtml = '';
@@ -374,7 +566,7 @@ async function renderMainGPCards() {
         }
         
         html += `
-            <div class="main-gp-card ${isLive ? 'live' : isPast ? 'past' : isToday ? 'today' : 'upcoming'}" 
+            <div class="main-gp-card main-card ${isLive ? 'live' : isPast ? 'past' : isToday ? 'today' : 'upcoming'}" 
                  data-gp-id="${currentGP.id}">
                 <div class="main-gp-header">
                     <img src="Images/Flags/${currentGP.country}.svg" alt="flag" title="${currentGP.state}" class="flag-main">
@@ -453,7 +645,8 @@ async function renderMainGPCards() {
             </div>
         `;
         
-        html += '</div>';
+        html += '</div>'; // Закрываем main-gp-container
+        html += '</div>'; // Закрываем main-gp-wrapper
         container.innerHTML = html;
         
         updateTiresDisplay();
@@ -461,6 +654,7 @@ async function renderMainGPCards() {
         await loadWeatherForGP(currentGP, isLive);
         
         addMainGPCardListener();
+        addSidebarCardListeners();
         
         initMainTimer();
         
@@ -474,8 +668,57 @@ async function renderMainGPCards() {
                     <p>Следующий сезон скоро!</p>
                 </div>
             </div>
-        </div>`;
+        `;
+        html += '</div></div>';
         container.innerHTML = html;
+    }
+}
+
+// Функция для получения логотипа команды
+function getTeamLogo(teamName) {
+    if (!teamName) return '';
+    
+    const teamLogos = {
+        'Red Bull': 'RedBull-m.png',
+        'Mercedes': 'Mercedes-m.png',
+        'Ferrari': 'Ferrari-m.png',
+        'McLaren': 'McLaren-m.png',
+        'Aston Martin': 'AstonMartin-m.png',
+        'Alpine': 'Alpine-m.png',
+        'Williams': 'Williams-m.png',
+        'Racing Bulls': 'RacingBulls-m.png',
+        'Audi': 'Audi-m.png',
+        'Haas': 'Haas-m.png',
+        'Cadillac': 'Cadillac-m.png'
+    };
+    
+    return teamLogos[teamName] || '';
+}
+
+function addSidebarCardListeners() {
+    const sidebarCards = document.querySelectorAll('.small-card');
+    sidebarCards.forEach(card => {
+        const gpId = card.getAttribute('data-gp-id');
+        if (gpId) {
+            card.style.cursor = 'pointer';
+            card.removeEventListener('click', handleSidebarCardClick);
+            card.addEventListener('click', handleSidebarCardClick);
+            card.setAttribute('data-gp-id-click', gpId);
+        }
+    });
+}
+
+function handleSidebarCardClick(e) {
+    const card = e.currentTarget;
+    const gpId = card.getAttribute('data-gp-id-click') || card.getAttribute('data-gp-id');
+    
+    window.location.hash = 'calendar';
+    loadTabContent('calendar');
+    
+    if (gpId) {
+        setTimeout(() => {
+            scrollToGrandPrix(gpId);
+        }, 300);
     }
 }
 
@@ -696,14 +939,21 @@ function updateMainTimer(timer) {
 }
 
 function addMainGPCardListener() {
-    const gpCard = document.querySelector('.main-gp-card');
+    // Ищем главную карточку (текущий Гран-При)
+    const gpCard = document.querySelector('.main-gp-card.main-card');
     if (gpCard) {
         const gpId = gpCard.getAttribute('data-gp-id');
-        gpCard.style.cursor = 'pointer';
-        gpCard.removeEventListener('click', handleGPCardClick);
-        gpCard.addEventListener('click', handleGPCardClick);
-        
-        gpCard.setAttribute('data-gp-id-click', gpId);
+        if (gpId) {
+            gpCard.style.cursor = 'pointer';
+            gpCard.removeEventListener('click', handleGPCardClick);
+            gpCard.addEventListener('click', handleGPCardClick);
+            gpCard.setAttribute('data-gp-id-click', gpId);
+            console.log('Главная карточка привязана, gpId:', gpId);
+        } else {
+            console.log('У главной карточки нет data-gp-id');
+        }
+    } else {
+        console.log('Главная карточка не найдена');
     }
 }
 

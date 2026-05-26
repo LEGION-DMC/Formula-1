@@ -76,17 +76,17 @@ const fastestPitStops = [
         driverCountry: "gb",
         time: "2.08s",
     },
-	/*
     {
         id: 7,
         track: "Гран-при Канады",
         country: "ca",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
+        team: "Racing Bulls",
+        teamLogo: "RacingBulls-m.png",
+        driver: "Лиам Лоусон",
+        driverCountry: "nz",
+        time: "2.20s",
     },
+	/*
     {
         id: 8,
         track: "Гран-при Монако",
@@ -480,7 +480,7 @@ function renderPitStopsTable() {
                 </div>
                 <div class="stats-col team">
                     <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
-					${item.team}
+                    ${item.team}
                 </div>
                 <div class="stats-col driver">
                     <img src="Images/Flags/${item.driverCountry}.svg" alt="${item.driverCountry}" class="stats-flag">
@@ -490,6 +490,42 @@ function renderPitStopsTable() {
             </div>
         `;
     });
+
+    // Находим лучший пит-стоп (с минимальным временем)
+    let bestPitStop = null;
+    let bestTimeValue = Infinity;
+    
+    fastestPitStops.forEach(item => {
+        const timeNum = parseFloat(item.time.replace('s', ''));
+        if (timeNum < bestTimeValue) {
+            bestTimeValue = timeNum;
+            bestPitStop = item;
+        }
+    });
+
+    // Добавляем разделитель, заголовок и строку с лучшим пит-стопом сезона
+    if (bestPitStop) {
+        html += `
+            <div class="stats-divider-row"></div>
+            <div class="stats-best-title">Лучший пит-стоп сезона</div>
+            <div class="stats-table-row stats-best-row">
+                <div class="stats-col position"></div>
+                <div class="stats-col track">
+                    <img src="Images/Flags/${bestPitStop.country}.svg" alt="${bestPitStop.country}" class="stats-flag">
+                    ${bestPitStop.track}
+                </div>
+                <div class="stats-col team">
+                    <img src="Images/Teams/${bestPitStop.teamLogo}" alt="${bestPitStop.team}" class="stats-team-logo">
+                    ${bestPitStop.team}
+                </div>
+                <div class="stats-col driver">
+                    <img src="Images/Flags/${bestPitStop.driverCountry}.svg" alt="${bestPitStop.driverCountry}" class="stats-flag">
+                    ${bestPitStop.driver}
+                </div>
+                <div class="stats-col time best-time">${bestPitStop.time}</div>
+            </div>
+        `;
+    }
     
     container.innerHTML = html;
 }
