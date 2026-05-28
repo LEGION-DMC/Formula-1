@@ -216,7 +216,6 @@ async function fetchWeatherForecast(trackId, date) {
     }
 }
 
-// Карта соответствия ID трассы и ID Гран-при в detailedResults
 const trackToResultsMap = {
     "t1": "australia",
     "t2": "china",
@@ -244,7 +243,6 @@ const trackToResultsMap = {
     "t24": "abu-dhabi"
 };
 
-// Функция для получения команды пилота
 function getDriverTeam(driverName) {
     if (typeof driversStandings !== 'undefined') {
         const driver = driversStandings.find(d => d.name === driverName);
@@ -253,7 +251,6 @@ function getDriverTeam(driverName) {
     return '';
 }
 
-// Функция для получения победителей Гран-При из detailedResults
 function getRaceWinners(gpId) {
     // Получаем ID для detailedResults
     const resultsId = trackToResultsMap[gpId];
@@ -492,25 +489,35 @@ async function renderMainGPCards() {
 		`;
 	}
     
-    // Плашка следующего Гран-При (без изображения)
-    if (nextGP) {
-		html += `
-			<div class="main-gp-card small-card next-gp" data-gp-id="${nextGP.id}">
-				<div class="main-gp-header">
-					<img src="Images/Flags/${nextGP.country}.svg" alt="flag" class="flag-main">
-					<h3>${nextGP.name}</h3>
-					<span class="main-gp-status upcoming">Следующее</span>
-				</div>
-				<div class="gp-title-divider"></div>
-				<div class="next-gp-info">
-					<div class="next-gp-date">${formatDate(nextGP.date)}</div>
-					<div class="next-gp-track">${nextGP.trackName}</div>
-					<div class="next-gp-location">${nextGP.location}</div>
-				</div>
-				<div class="podium-divider"></div>
-			</div>
-		`;
-	}
+if (nextGP) {
+    let sprintStatusHtml = '';
+    if (nextGP.hasSprint) {
+        sprintStatusHtml = `
+            <div class="gp-title-divider"></div>
+            <div class="next-gp-sprint">
+                <span class="sprint-badge next-sprint-badge">СПРИНТ</span>
+            </div>
+        `;
+    }
+    
+    html += `
+        <div class="main-gp-card small-card next-gp" data-gp-id="${nextGP.id}">
+            <div class="main-gp-header">
+                <img src="Images/Flags/${nextGP.country}.svg" alt="flag" class="flag-main">
+                <h3>${nextGP.name}</h3>
+                <span class="main-gp-status upcoming">Следующее</span>
+            </div>
+            <div class="gp-title-divider"></div>
+            <div class="next-gp-info">
+                <div class="next-gp-date">${formatDate(nextGP.date)}</div>
+                <div class="next-gp-track">${nextGP.trackName}</div>
+                <div class="next-gp-location">${nextGP.location}</div>
+            </div>
+            ${sprintStatusHtml}
+            <div class="podium-divider"></div>
+        </div>
+    `;
+}
     
     html += '</div>'; // Закрываем sidebar
     
@@ -674,7 +681,6 @@ async function renderMainGPCards() {
     }
 }
 
-// Функция для получения логотипа команды
 function getTeamLogo(teamName) {
     if (!teamName) return '';
     

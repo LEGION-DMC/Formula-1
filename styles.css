@@ -172,8 +172,9 @@ body::before {
 /* Разделитель под названием Гран-при */
 .gp-title-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, #e53935, #e53935, transparent);
-    margin: 8px;
+    background: linear-gradient(90deg, transparent, #900 10%, #900 90%, transparent);
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Подиум в виде списка */
@@ -260,8 +261,8 @@ body::before {
 /* Разделитель под подиумом */
 .podium-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, #555, #555, transparent);
-    margin: 8px;
+    background: linear-gradient(90deg, transparent, #900 10%, #900 90%, transparent);
+    margin-top: 10px;
 }
 
 .next-gp-date {
@@ -580,9 +581,9 @@ body::before {
 
 .tires-divider {
     height: 1px;
-    background: #555;
+    background: linear-gradient(90deg, transparent, #900 10%, #900 90%, transparent);
     margin-top: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 /* Анимация для активных шин */
@@ -795,8 +796,8 @@ body::before {
 
 .cmd-divider {
     height: 1px;
-    background: #555;
-    margin: 10px 0;
+    background: linear-gradient(90deg, transparent, #900 10%, #900 90%, transparent);
+    margin-bottom: 10px;
 }
 
 /* Блок пилотов */
@@ -1081,8 +1082,9 @@ body::before {
 
 .drv-divider {
     height: 1px;
-    background: #444;
-    margin: 5px 0;
+    background: linear-gradient(90deg, transparent, #900 10%, #900 90%, transparent);
+    margin-top: 4px;
+    margin-bottom: 5px;
 }
 
 .drv-team {
@@ -1451,9 +1453,9 @@ body::before {
 
 .divider {
     height: 1px;
-    background: red;
-    margin-top: 5px;
-    margin-bottom: 7px;
+    background: linear-gradient(90deg, transparent, #900 10%, #900 90%, transparent);
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .info-row {
