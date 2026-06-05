@@ -32,9 +32,9 @@ const TRACK_COORDINATES = {
 let mainTimerInterval = null;
 
 let currentTireConfig = { // C5 C4 C3 C2 C1
-    soft: "C", 
-    medium: "C",
-    hard: "C"
+    soft: "C5", 
+    medium: "C4",
+    hard: "C3"
 };
 
 document.addEventListener('DOMContentLoaded', function() {
