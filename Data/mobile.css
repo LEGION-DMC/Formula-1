@@ -675,3 +675,22 @@
         font-size: 13px;
     }
 }
+
+
+
+/* Адаптивность для планшетов */
+@media (max-width: 1024px) {
+    .fines-driver-name {
+        font-size: 13px;
+    }
+    
+    .fine-score {
+        font-size: 13px;
+    }
+    
+    .fine-indicator {
+        width: 22px;
+        height: 22px;
+        font-size: 13px;
+    }
+}

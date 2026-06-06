@@ -830,7 +830,7 @@ body::before {
 .cmd-driver-name {
     flex: 1;
     text-align: left;
-    font-size: 16px;
+    font-size: 13.7px;
 }
 
 .cmd-driver-flag {
@@ -957,6 +957,9 @@ body::before {
     
 .cmd-modal-driver {
     transition: all 0.3s ease;
+    background: #3a2a2a;
+    padding: 3px;
+    border-radius: 4px;
 }
     
 .cmd-modal-driver:hover {
@@ -1182,13 +1185,16 @@ body::before {
 }
 
 .drv-modal-team {
-    transition: background-color 0.3s;
     padding-left: 5px;
     border-radius: 4px;
+    background: #2a2a2a;
+    border-radius: 4px;
+    padding: 3px;
 }
 
 .drv-modal-team:hover {
     background-color: #3a3a3a;
+    transform: translateX(5px);
 }
 
 .drv-modal-team-logo {
@@ -1762,7 +1768,6 @@ body::before {
     }
 }
 
-/* Календарь текущего года */
 .next-year-calendar {
     margin-top: 10px;
     padding: 10px;
@@ -1781,7 +1786,6 @@ body::before {
     padding-bottom: 5px;
 }
 
-/* Новая структура с колонками */
 .next-year-columns {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1834,7 +1838,6 @@ body::before {
     border-radius: 2px;
 }
 
-/* Затемнение для завершённых событий */
 .next-year-event.completed {
     position: relative;
     opacity: 0.6;
@@ -1856,7 +1859,6 @@ body::before {
     color: #999;
 }
 
-/* Затемнение для отменённых событий - такие же стили как у completed */
 .next-year-event.canceled {
     position: relative;
     opacity: 0.6;
@@ -1878,7 +1880,6 @@ body::before {
     color: #999;
 }
 
-/* Сохраняем возможность клика */
 .next-year-event.completed,
 .next-year-event.canceled {
     cursor: pointer;
@@ -1933,7 +1934,6 @@ body::before {
     grid-row: 2;
 }
 
-/* Общие стили для таблиц */
 .drivers-columns, .sprint-columns {
     display: flex;
     gap: 15px;
@@ -2007,7 +2007,6 @@ body::before {
     padding-left: 8px;
 }
 
-/* Модальное окно детальной статистики */
 .detailed-modal-content {
     max-width: 95%;
     width: 1334px;
@@ -2116,14 +2115,12 @@ body::before {
     background: #13131391;
 }
 
-/* Заголовки таблиц с курсором-указателем */
 #driversStandings h2:hover,
 #sprintStandings h2:hover {
     color: white;
     transform: translateX(4px);
 }
 
-/* Выделение строки */
 .detailed-row.selected {
     background: linear-gradient(90deg, rgba(0, 225, 225, 0.1) 0%, rgba(0, 225, 225, 0.2) 100%);
     border-left: 2px solid rgba(0, 225, 225);
@@ -2206,7 +2203,6 @@ body::before {
     object-fit: contain;
 }
 
-/* Специфические стили для таблиц */
 #lapTimesTable .stats-table-header,
 #lapTimesTable .stats-table-row {
     grid-template-columns: 18px 310px 175px 150px 10px;
@@ -2217,7 +2213,6 @@ body::before {
     grid-template-columns: 28px 310px 165px 205px 10px;
 }
 
-/* Стили для таблицы квалификаций */
 .stats-table-header,
 .stats-table-row {
     grid-template-columns: 40px 1fr 100px 1fr 40px;
@@ -2252,14 +2247,12 @@ body::before {
     text-align: center;
 }
 
-/* Разделитель */
 .stats-divider-row {
     height: 1px;
     background: linear-gradient(90deg, transparent, #e53935, #e53935, transparent);
     margin: 6px;
 }
 
-/* Заголовок лучшего пит-стопа */
 .stats-best-title {
     font-family: 'Font1', sans-serif;
     font-size: 13px;
@@ -2272,6 +2265,93 @@ body::before {
     background: rgba(229, 57, 53, 0.2);
 }
 
+.fines-table .stats-table-header {
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    padding: 8px 12px;
+    background: #131313;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+
+.fines-row {
+    display: grid;
+    grid-template-columns: 1fr 55px;
+    padding: 5px 12px;
+    align-items: center;
+}
+
+.fines-driver {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fine-white {
+    color: #ffffff;
+}
+
+.fine-yellow {
+    color: #ffc107;
+}
+
+.fine-red {
+    color: #e53935;
+}
+
+.fines-notes {
+    margin-top: 5px;
+    padding: 10px;
+    background: transparent;
+    border-radius: 4px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-top: 1px solid #333;
+}
+
+.fine-note {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'Font3', sans-serif;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.fine-note-color {
+    font-size: 13px;
+    line-height: 1;
+}
+
+.white-note {
+    color: #ffffff;
+}
+
+.yellow-note {
+    color: #ffc107;
+}
+
+.red-note {
+    color: #e53935;
+}
+
+.no-fines-message {
+    text-align: center;
+    padding: 10px;
+    font-family: 'Font3', sans-serif;
+    font-size: 14px;
+    color: #999;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     #CvalaTable .stats-table-header,
@@ -2283,5 +2363,39 @@ body::before {
     #CvalaTable .stats-col.cvala {
         font-size: 1.1em;
         gap: 5px;
+    }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .fines-table .stats-table-header {
+        padding: 6px 10px;
+    }
+    
+    .fines-table .stats-table-header .fines-driver,
+    .fines-table .stats-table-header .fines-points {
+        font-size: 12px;
+    }
+    
+    .fines-row {
+        padding: 6px 10px;
+    }
+    
+    .fines-team-logo {
+        width: 22px;
+        height: 18px;
+    }
+    
+    .fines-flag {
+        width: 18px;
+        height: 12px;
+    }
+    
+    .fines-driver-name {
+        font-size: 12px;
+    }
+    
+    .fine-score {
+        font-size: 12px;
     }
 }

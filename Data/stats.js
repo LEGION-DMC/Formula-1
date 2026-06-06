@@ -383,7 +383,90 @@ const Cvala = [
     },
 ];
 
-// Функция рендеринга страницы статистики
+function getDriverTeamLogo(driverId) {
+    const driver = driversData.find(d => d.id === driverId);
+    return driver ? driver.teamLogo : 'F1.png';
+}
+
+function getDriverTeamName(driverId) {
+    const driver = driversData.find(d => d.id === driverId);
+    return driver ? driver.team : '';
+}
+
+// Рендеринг таблицы штрафов
+function renderFinesTable() {
+    const driversWithFines = driversData
+        .filter(driver => driver.fine > 0)
+        .sort((a, b) => b.fine - a.fine);
+    
+    if (driversWithFines.length === 0) {
+        return `
+            <div class="stats-table fines-table">
+                <h2>Штрафы пилотов</h2>
+                <div class="stats-table-content">
+                    <div class="no-fines-message">Нет активных штрафов у пилотов</div>
+                </div>
+            </div>
+        `;
+    }
+    
+    let html = `
+        <div class="stats-table fines-table">
+            <h2>Штрафы пилотов</h2>
+            <div class="stats-table-header">
+                <div class="stats-col fines-driver">Пилот</div>
+                <div class="stats-col fines-points">Штрафы</div>
+            </div>
+    `;
+    
+    driversWithFines.forEach(driver => {
+        // Определяем класс для цвета текста штрафа
+        let fineColorClass = '';
+        if (driver.fine === 12) {
+            fineColorClass = 'fine-red';
+        } else if (driver.fine >= 8 && driver.fine <= 11) {
+            fineColorClass = 'fine-yellow';
+        } else {
+            fineColorClass = 'fine-white';
+        }
+        
+        html += `
+            <div class="stats-table-row fines-row">
+                <div class="stats-col fines-driver">
+                    <img src="Images/Teams/${getDriverTeamLogo(driver.id)}" alt="${getDriverTeamName(driver.id)}" class="stats-team-logo fines-team-logo">
+                    <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" class="stats-flag fines-flag">
+                    <span class="fines-driver-name">${driver.name}</span>
+                </div>
+                <div class="stats-col fines-points">
+                    <span class="fine-score ${fineColorClass}">${driver.fine} </span>
+                </div>
+            </div>
+        `;
+    });
+    
+    // Добавляем примечание внизу таблицы
+    html += `
+            <div class="fines-notes">
+                <div class="fine-note">
+                    <span class="fine-note-color white-note">⬤</span>
+                    <span>- 1-7 штрафов</span>
+                </div>
+                <div class="fine-note">
+                    <span class="fine-note-color yellow-note">⬤</span>
+                    <span>- 8-11 штрафов (Предупреждение)</span>
+                </div>
+                <div class="fine-note">
+                    <span class="fine-note-color red-note">⬤</span>
+                    <span>- 12 штрафов (Дисквалификация)</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
+
+// Модифицируем функцию renderStats, добавив в неё таблицу штрафов
 function renderStats() {
     const content = document.getElementById('content');
     content.innerHTML = `
@@ -408,6 +491,11 @@ function renderStats() {
                         <h2>Быстрейшие пит-стопы</h2>
                         <div class="stats-table-content"></div>
                     </div>
+                    
+                    <!-- Добавляем таблицу штрафов -->
+                    <div id="finesTableContainer">
+                        ${renderFinesTable()}
+                    </div>
                 </div>
             </div>
         </div>
@@ -421,6 +509,14 @@ function renderStats() {
 // Рендеринг таблицы лучших времён круга
 function renderLapTimesTable() {
     const container = document.querySelector('#lapTimesTable .stats-table-content');
+    
+    // Проверяем, есть ли данные
+    if (bestLapTimes.length === 0) {
+        container.innerHTML = `
+            <div class="no-fines-message">В текущем сезоне рекорд лучшего времени круга не установлен</div>
+        `;
+        return;
+    }
     
     let html = `
         <div class="stats-table-header">
@@ -446,7 +542,7 @@ function renderLapTimesTable() {
                 </div>
                 <div class="stats-col team">
                     <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
-					${item.team}
+                    ${item.team}
                 </div>
                 <div class="stats-col time">${item.time}</div>
             </div>
@@ -459,6 +555,14 @@ function renderLapTimesTable() {
 // Рендеринг таблицы пит-стопов
 function renderPitStopsTable() {
     const container = document.querySelector('#pitStopsTable .stats-table-content');
+    
+    // Проверяем, есть ли данные
+    if (fastestPitStops.length === 0) {
+        container.innerHTML = `
+            <div class="no-fines-message">В текущем сезоне время быстрейщего пит-стопа не установлено</div>
+        `;
+        return;
+    }
     
     let html = `
         <div class="stats-table-header">

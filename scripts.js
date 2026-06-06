@@ -325,7 +325,7 @@ const COMPOUND_DISPLAY = {
     "Soft": "Soft"
 };
 
-const ALL_COMPOUNDS = ["C1", "C2", "C3", "C4", "C5"];
+const ALL_COMPOUNDS = ["C5", "C4", "C3", "C2", "C1"];
 
 function updateTiresDisplay() {
     const dryTiresContainer = document.querySelector('.dry-tires');
