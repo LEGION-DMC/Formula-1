@@ -424,7 +424,7 @@ function renderFinesTable() {
         let fineColorClass = '';
         if (driver.fine === 12) {
             fineColorClass = 'fine-red';
-        } else if (driver.fine >= 8 && driver.fine <= 11) {
+        } else if (driver.fine >= 9 && driver.fine <= 11) {
             fineColorClass = 'fine-yellow';
         } else {
             fineColorClass = 'fine-white';
@@ -449,15 +449,15 @@ function renderFinesTable() {
             <div class="fines-notes">
                 <div class="fine-note">
                     <span class="fine-note-color white-note">⬤</span>
-                    <span>- 1-7 штрафов</span>
+                    <span>Предупреждение: 1-8 штрафов</span>
                 </div>
                 <div class="fine-note">
                     <span class="fine-note-color yellow-note">⬤</span>
-                    <span>- 8-11 штрафов (Предупреждение)</span>
+                    <span>Угроза дисквалификации: 9-11 штрафов</span>
                 </div>
                 <div class="fine-note">
                     <span class="fine-note-color red-note">⬤</span>
-                    <span>- 12 штрафов (Дисквалификация)</span>
+                    <span>Дисквалификация: 12 штрафов</span>
                 </div>
             </div>
         </div>
@@ -607,7 +607,6 @@ function renderPitStopsTable() {
         }
     });
 
-    // Добавляем разделитель, заголовок и строку с лучшим пит-стопом сезона
     if (bestPitStop) {
         html += `
             <div class="stats-divider-row"></div>
@@ -630,8 +629,88 @@ function renderPitStopsTable() {
             </div>
         `;
     }
+
+    // Подсчитываем количество, сумму времени и самый быстрый пит-стоп по командам
+    const teamPitStopStats = {};
+    fastestPitStops.forEach(item => {
+        const timeNum = parseFloat(item.time.replace('s', ''));
+        if (!teamPitStopStats[item.team]) {
+            teamPitStopStats[item.team] = {
+                count: 0,
+                totalTime: 0,
+                fastestTime: Infinity,
+                fastestTimeStr: null,
+                teamLogo: item.teamLogo
+            };
+        }
+        teamPitStopStats[item.team].count++;
+        teamPitStopStats[item.team].totalTime += timeNum;
+        if (timeNum < teamPitStopStats[item.team].fastestTime) {
+            teamPitStopStats[item.team].fastestTime = timeNum;
+            teamPitStopStats[item.team].fastestTimeStr = item.time;
+        }
+    });
+
+    let championTeam = null;
+    let maxCount = -1;
+    let minTotalTime = Infinity;
+    let minFastestTime = Infinity;
+    
+    for (const [team, data] of Object.entries(teamPitStopStats)) {
+        if (data.count > maxCount) {
+            maxCount = data.count;
+            minTotalTime = data.totalTime;
+            minFastestTime = data.fastestTime;
+            championTeam = { team, ...data };
+        } else if (data.count === maxCount) {
+            if (data.totalTime < minTotalTime) {
+                minTotalTime = data.totalTime;
+                minFastestTime = data.fastestTime;
+                championTeam = { team, ...data };
+            } else if (data.totalTime === minTotalTime && data.fastestTime < minFastestTime) {
+                minFastestTime = data.fastestTime;
+                championTeam = { team, ...data };
+            }
+        }
+    }
+
+    // Добавляем разделитель и чемпиона по пит-стопам
+    if (championTeam) {
+        html += `
+            <div class="stats-divider-row"></div>
+            <div class="stats-best-title">Чемпион лучших пит-стопов сезона</div>
+            <div class="stats-table-row stats-best-row" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                <div class="stats-col" style="display: flex; align-items: center; gap: 8px;">
+                    <img src="Images/Teams/${championTeam.teamLogo}" alt="${championTeam.team}" class="stats-team-logo" style="width: 25px; height: 20px;">
+                    <span>${championTeam.team}</span>
+                </div>
+                    <span style="color: #e53935;">|</span>
+                <div class="stats-col" style="display: flex; align-items: baseline; gap: 5px;">
+                    <span>${championTeam.count}</span>
+                    <span>${getDeclension(championTeam.count, 'Пит-стоп', 'Пит-стопа', 'Пит-стопов')}</span>
+                </div>
+            </div>
+        `;
+    }
     
     container.innerHTML = html;
+}
+
+// Вспомогательная функция для склонения слов
+function getDeclension(number, one, two, five) {
+    let n = Math.abs(number);
+    n %= 100;
+    if (n >= 5 && n <= 20) {
+        return five;
+    }
+    n %= 10;
+    if (n === 1) {
+        return one;
+    }
+    if (n >= 2 && n <= 4) {
+        return two;
+    }
+    return five;
 }
 
 // Рендеринг таблицы счёта квалификаций
