@@ -14,7 +14,7 @@ const tracksData = {
         "turns": 14,
         "direction": "по часовой стрелке",
         "lapRecord": "1.19.813 (Леклер, 2024)",
-        "date": "2026-03-08 12:00",
+        "date": "2026-03-08 11:55",
 		"recordingSprint": "",
         "recordingRace": "https://rutube.ru/video/264170a23560b1eec2e7b27978b62b3f/"
     },
@@ -32,7 +32,7 @@ const tracksData = {
         "turns": 16,
         "direction": "по часовой стрелке",
         "lapRecord": "1:32.238 (Шумахер, 2004)",
-        "date": "2026-03-15 15:00",
+        "date": "2026-03-15 14:55",
 		"hasSprint": true,
         "recordingSprint": "https://rutube.ru/video/e01dc7aca552e6b3481e27a12b481e43/",
         "recordingRace": "https://rutube.ru/video/0cb1fa5f8d0b60b7266f43f015566674/"
@@ -51,7 +51,7 @@ const tracksData = {
         "turns": 18,
         "direction": "по часовой стрелке",
         "lapRecord": "1:30.965 (Антонелли, 2025)",
-        "date": "2026-03-29 13:00",
+        "date": "2026-03-29 12:55",
         "recordingSprint": "",
         "recordingRace": "https://rutube.ru/video/6d24c1dd05e8824e81dd3aa3cdd5b86f/"
     },
@@ -69,7 +69,7 @@ const tracksData = {
         "turns": 15,
         "direction": "по часовой стрелке",
         "lapRecord": "1:31.447 (Де ла Роса, 2005)",
-        "date": "2026-04-12 23:00",
+        "date": "2026-04-12 22:55",
 		"canceled": true,
         "recordingSprint": "",
         "recordingRace": ""
@@ -88,7 +88,7 @@ const tracksData = {
         "turns": 27,
         "direction": "против часовой стрелки",
         "lapRecord": "1:30.734 (Хэмилтон, 2021)",
-        "date": "2026-04-19 01:00",
+        "date": "2026-04-19 00:55",
 		"canceled": true,
         "recordingSprint": "",
         "recordingRace": ""
@@ -107,7 +107,7 @@ const tracksData = {
         "turns": 19,
         "direction": "по часовой стрелке",
         "lapRecord": "1:29.708 (Ферстаппен, 2024)",
-        "date": "2026-05-04 01:00",
+        "date": "2026-05-04 00:55",
 		"hasSprint": true,
         "recordingSprint": "https://rutube.ru/video/105d706e84f0903bb3bc0da3dd4e2f91/",
         "recordingRace": "https://rutube.ru/video/3628eef00d9d494b12467d1ef0bc42c1/"
@@ -126,7 +126,7 @@ const tracksData = {
         "turns": 14,
         "direction": "против часовой стрелки",
         "lapRecord": "1.13.078 (Боттас, 2019)",
-        "date": "2026-05-25 04:00",
+        "date": "2026-05-25 03:55",
 		"hasSprint": true,
         "recordingSprint": "https://rutube.ru/video/bc877009b2b8fc79bc6f979462168e6f/",
         "recordingRace": "https://rutube.ru/video/03fefa5dc563eeccb70fdae0547937ee/"
@@ -145,7 +145,7 @@ const tracksData = {
         "turns": 19,
         "direction": "по часовой стрелке",
         "lapRecord": "1.12.909 (Хэмилтон, 2021)",
-        "date": "2026-06-07 21:00",
+        "date": "2026-06-07 20:55",
         "recordingSprint": "",
         "recordingRace": "https://rutube.ru/video/f85e53c184adb938f135e5f672dd34fb/"
     },
@@ -163,7 +163,7 @@ const tracksData = {
         "turns": 14,
         "direction": "по часовой стрелке",
         "lapRecord": "1:15.743 (Пиастри, 2025)",
-        "date": "2026-06-14 21:00",
+        "date": "2026-06-14 20:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -181,7 +181,7 @@ const tracksData = {
         "turns": 10,
         "direction": "по часовой стрелке",
         "lapRecord": "1:05.619 (Сайнс, 2020)",
-        "date": "2026-06-28 21:00",
+        "date": "2026-06-28 20:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -199,7 +199,7 @@ const tracksData = {
         "turns": 18,
         "direction": "против часовой стрелки",
         "lapRecord": "1.27.097 (Ферстаппен, 2020)",
-        "date": "2026-07-05 22:00",
+        "date": "2026-07-05 21:55",
 		"hasSprint": true,
         "recordingSprint": "",
         "recordingRace": ""
@@ -218,7 +218,7 @@ const tracksData = {
         "turns": 20,
         "direction": "по часовой стрелке",
         "lapRecord": "1:44.701 (Перес, 2024)",
-        "date": "2026-07-19 21:00",
+        "date": "2026-07-19 20:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -236,7 +236,7 @@ const tracksData = {
         "turns": 14,
         "direction": "по часовой стрелке",
         "lapRecord": "1:16.627 (Хэмилтон, 2020)",
-        "date": "2026-07-26 21:00",
+        "date": "2026-07-26 20:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -254,7 +254,7 @@ const tracksData = {
         "turns": 14,
         "direction": "против часовой стрелки",
         "lapRecord": "1.11.097 (Хэмилтон, 2021)",
-        "date": "2026-08-23 21:00",
+        "date": "2026-08-23 20:55",
 		"hasSprint": true,
         "recordingSprint": "",
         "recordingRace": ""
@@ -273,7 +273,7 @@ const tracksData = {
         "turns": 11,
         "direction": "по часовой стрелке",
         "lapRecord": "1:20.901 (Норрис, 2025)",
-        "date": "2026-09-06 21:00",
+        "date": "2026-09-06 20:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -291,7 +291,7 @@ const tracksData = {
         "turns": 20,
         "direction": "по часовой стрелке",
         "lapRecord": "---",
-        "date": "2026-09-13 21:00",
+        "date": "2026-09-13 20:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -330,7 +330,7 @@ const tracksData = {
         "turns": 20,
         "direction": "против часовой стрелки",
         "lapRecord": "1.43.009 (Леклер, 2019)",
-        "date": "2026-09-26 19:00",
+        "date": "2026-09-26 18:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -348,7 +348,7 @@ const tracksData = {
         "turns": 23,
         "direction": "против часовой стрелки",
         "lapRecord": "1:34.486 (Рикиардо, 2024)",
-        "date": "2026-10-11 20:00",
+        "date": "2026-10-11 19:55",
 		"hasSprint": true,
         "recordingSprint": "",
         "recordingRace": ""
@@ -367,7 +367,7 @@ const tracksData = {
         "turns": 20,
         "direction": "против часовой стрелки",
         "lapRecord": "1:36.169 (Леклер, 2019)",
-        "date": "2026-10-26 04:00",
+        "date": "2026-10-26 03:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -385,7 +385,7 @@ const tracksData = {
         "turns": 17,
         "direction": "против часовой стрелки",
         "lapRecord": "1:17.774 (Боттас, 2021)",
-        "date": "2026-11-02 04:00",
+        "date": "2026-11-02 03:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -403,7 +403,7 @@ const tracksData = {
         "turns": 15,
         "direction": "против часовой стрелки",
         "lapRecord": "1:10.540 (Боттас, 2018)",
-        "date": "2026-11-09 01:00",
+        "date": "2026-11-09 00:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -421,7 +421,7 @@ const tracksData = {
         "turns": 17,
         "direction": "против часовой стрелки",
         "lapRecord": "1:32.312 (Рассел, 2024)",
-        "date": "2026-11-22 12:00",
+        "date": "2026-11-22 11:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -439,7 +439,7 @@ const tracksData = {
         "turns": 16,
         "direction": "по часовой стрелке",
         "lapRecord": "1:22.384 (Норрис, 2024)",
-        "date": "2026-11-30 00:00",
+        "date": "2026-11-30 23:55",
         "recordingSprint": "",
         "recordingRace": ""
     },
@@ -457,7 +457,7 @@ const tracksData = {
         "turns": 16,
         "direction": "против часовой стрелки",
         "lapRecord": "1:22.109 (Ферстаппен, 2021)",
-        "date": "2026-12-06 21:00",
+        "date": "2026-12-06 20:55",
         "recordingSprint": "",
         "recordingRace": ""
     }

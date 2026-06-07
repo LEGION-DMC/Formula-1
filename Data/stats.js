@@ -86,17 +86,17 @@ const fastestPitStops = [
         driverCountry: "nz",
         time: "2.20s",
     },
-	/*
     {
         id: 8,
         track: "Гран-при Монако",
         country: "mc",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
+        team: "Ferrari",
+        teamLogo: "Ferrari-m.png",
+        driver: "Льюис Хэмилтон",
+        driverCountry: "gb",
+        time: "2.10s",
     },
+	/*
     {
         id: 9,
         track: "Гран-при Барселоны-Каталонии",
@@ -277,10 +277,10 @@ const Cvala = [
         teamLogo: "Ferrari-m.png",
         driver1: "Шарль Леклер",
         driverCountry1: "mc",
-        cvala1: "4",
+        cvala1: "3",
         driver2: "Льюис Хэмилтон",
         driverCountry2: "gb",
-        cvala2: "2",
+        cvala2: "3",
     },
     {
         id: 4,
