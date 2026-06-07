@@ -375,24 +375,32 @@ body::before {
 }
 
 .main-gp-card.past .main-gp-status {
-    background: gray;
     color: white;
     margin-top: -3px;
     padding-top: 5px;
+    border: 1px solid #666;
 }
 
 .main-gp-card.today .main-gp-status {
-    border: green;
     color: white;
     margin-top: -3px;
     padding-top: 5px;
+    border: 1px solid #666;
 }
 
 .main-gp-card.upcoming .main-gp-status {
-    background: yellow;
-    color: black;
+    color: white;
     margin-top: -3px;
     padding-top: 5px;
+    border: 1px solid #666;
+}
+
+.main-gp-status.live {
+    color: white;
+    margin-top: -3px;
+    padding-top: 5px;
+    border: 1px solid #666;
+    animation: pulse 1s infinite;
 }
 
 /* Изображение Гран-При */
@@ -422,7 +430,7 @@ body::before {
 
 .main-gp-timer span {
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     color: white;
 }
 
@@ -484,11 +492,7 @@ body::before {
 }
 
 /* Анимация для статуса "Идёт сейчас" */
-.main-gp-status.live {
-    background: yellow;
-    color: black;
-    animation: pulse 1s infinite;
-}
+
 
 @keyframes pulse {
     0% { opacity: 1; }
@@ -691,7 +695,7 @@ body::before {
 
 .main-standing-item.first {
     background: linear-gradient(135deg, #252525 0%, #2a1a1a 100%);
-    border-left: 4px solid #e53935;
+    border-bottom: 4px solid #e53935;
 }
 
 .main-standing-position {
@@ -721,8 +725,8 @@ body::before {
 }
 
 .main-standing-flag {
-    width: 30px;
-    height: 25px;
+    width: 20px;
+    height: 15px;
     border-radius: 2px;
 }
 

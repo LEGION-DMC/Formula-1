@@ -147,7 +147,7 @@ const tracksData = {
         "lapRecord": "1.12.909 (Хэмилтон, 2021)",
         "date": "2026-06-07 21:00",
         "recordingSprint": "",
-        "recordingRace": ""
+        "recordingRace": "https://rutube.ru/video/f85e53c184adb938f135e5f672dd34fb/"
     },
     "barcelona-catalunya": {
         "id": "t9",

@@ -31,7 +31,7 @@ const TRACK_COORDINATES = {
 
 let mainTimerInterval = null;
 
-let currentTireConfig = { // C5 C4 C3 C2 C1
+let currentTireConfig = { // C5 C4 C3 C2 C1   432барселона
     soft: "C5", 
     medium: "C4",
     hard: "C3"
@@ -389,12 +389,27 @@ async function renderMainGPCards() {
     let currentGP = null;
     let currentGPIndex = -1;
     
+    // Функция для получения "конца дня" (23:59:59)
+    const getEndOfDay = (date) => {
+        const endOfDay = new Date(date);
+        endOfDay.setHours(23, 59, 59, 999);
+        return endOfDay;
+    };
+    
     // Находим текущий/предстоящий Гран-При
     for (let i = 0; i < allGPs.length; i++) {
         const gpDate = new Date(allGPs[i].date);
-        const gpEndTime = new Date(gpDate.getTime() + (2 * 60 * 60 * 1000));
+        const gpStartTime = gpDate;
+        const gpEndOfDay = getEndOfDay(gpDate);
         
-        if (now <= gpEndTime) {
+        // Если сейчас между стартом и концом дня - показываем эту гонку
+        if (now >= gpStartTime && now <= gpEndOfDay) {
+            currentGP = allGPs[i];
+            currentGPIndex = i;
+            break;
+        }
+        // Если гонка ещё не началась
+        else if (now < gpStartTime) {
             currentGP = allGPs[i];
             currentGPIndex = i;
             break;
@@ -424,100 +439,98 @@ async function renderMainGPCards() {
     
     // Плашка предыдущего Гран-При (с подиумом)
     if (prevGP) {
-		// Получаем данные победителей для предыдущего Гран-При
-		const winners = getRaceWinners(prevGP.id);
-		
-		// Формируем HTML для подиума с логотипами команд
-		let podiumHtml = '';
-		
-		if (winners.first && winners.first !== '—') {
-			podiumHtml += `
-				<div class="podium-item first">
-					<span class="podium-number">1</span>
-					<span class="podium-name">${winners.first}</span>
-					<div class="podium-team-wrapper">
-						<img src="Images/Teams/${getTeamLogo(winners.firstTeam)}" alt="${winners.firstTeam}" class="podium-team-logo">
-						<span class="podium-team">${winners.firstTeam}</span>
-					</div>
-				</div>
-			`;
-		} else {
-			podiumHtml += `<div class="podium-item"><span class="podium-name" style="text-align:center; width:100%;">Нет данных</span></div>`;
-		}
-		
-		if (winners.second && winners.second !== '—') {
-			podiumHtml += `
-				<div class="podium-item second">
-					<span class="podium-number">2</span>
-					<span class="podium-name">${winners.second}</span>
-					<div class="podium-team-wrapper">
-						<img src="Images/Teams/${getTeamLogo(winners.secondTeam)}" alt="${winners.secondTeam}" class="podium-team-logo">
-						<span class="podium-team">${winners.secondTeam}</span>
-					</div>
-				</div>
-			`;
-		}
-		
-		if (winners.third && winners.third !== '—') {
-			podiumHtml += `
-				<div class="podium-item third">
-					<span class="podium-number">3</span>
-					<span class="podium-name">${winners.third}</span>
-					<div class="podium-team-wrapper">
-						<img src="Images/Teams/${getTeamLogo(winners.thirdTeam)}" alt="${winners.thirdTeam}" class="podium-team-logo">
-						<span class="podium-team">${winners.thirdTeam}</span>
-					</div>
-				</div>
-			`;
-		}
-		
-		html += `
-			<div class="main-gp-card small-card prev-gp" data-gp-id="${prevGP.id}">
-				<div class="main-gp-header">
-					<img src="Images/Flags/${prevGP.country}.svg" alt="flag" class="flag-main">
-					<h3>${prevGP.name}</h3>
-					<span class="main-gp-status past">Предыдущее</span>
-				</div>
-				<div class="gp-title-divider"></div>
-				<div class="prev-gp-podium">
-					<div class="podium-list">
-						${podiumHtml}
-					</div>
-				</div>
-				<div class="podium-divider"></div>
-			</div>
-		`;
-	}
-    
-if (nextGP) {
-    let sprintStatusHtml = '';
-    if (nextGP.hasSprint) {
-        sprintStatusHtml = `
-            <div class="gp-title-divider"></div>
-            <div class="next-gp-sprint">
-                <span class="sprint-badge next-sprint-badge">СПРИНТ</span>
+        const winners = getRaceWinners(prevGP.id);
+        
+        let podiumHtml = '';
+        
+        if (winners.first && winners.first !== '—') {
+            podiumHtml += `
+                <div class="podium-item first">
+                    <span class="podium-number">1</span>
+                    <span class="podium-name">${winners.first}</span>
+                    <div class="podium-team-wrapper">
+                        <span class="podium-team">${winners.firstTeam}</span>
+                        <img src="Images/Teams/${getTeamLogo(winners.firstTeam)}" alt="${winners.firstTeam}" class="podium-team-logo">
+                    </div>
+                </div>
+            `;
+        } else {
+            podiumHtml += `<div class="podium-item"><span class="podium-name" style="text-align:center; width:100%;">Нет данных</span></div>`;
+        }
+        
+        if (winners.second && winners.second !== '—') {
+            podiumHtml += `
+                <div class="podium-item second">
+                    <span class="podium-number">2</span>
+                    <span class="podium-name">${winners.second}</span>
+                    <div class="podium-team-wrapper">
+                        <span class="podium-team">${winners.secondTeam}</span>
+                        <img src="Images/Teams/${getTeamLogo(winners.secondTeam)}" alt="${winners.secondTeam}" class="podium-team-logo">
+                    </div>
+                </div>
+            `;
+        }
+        
+        if (winners.third && winners.third !== '—') {
+            podiumHtml += `
+                <div class="podium-item third">
+                    <span class="podium-number">3</span>
+                    <span class="podium-name">${winners.third}</span>
+                    <div class="podium-team-wrapper">
+                        <span class="podium-team">${winners.thirdTeam}</span>
+                        <img src="Images/Teams/${getTeamLogo(winners.thirdTeam)}" alt="${winners.thirdTeam}" class="podium-team-logo">
+                    </div>
+                </div>
+            `;
+        }
+        
+        html += `
+            <div class="main-gp-card small-card prev-gp" data-gp-id="${prevGP.id}">
+                <div class="main-gp-header">
+                    <img src="Images/Flags/${prevGP.country}.svg" alt="flag" class="flag-main">
+                    <h3>${prevGP.name}</h3>
+                    <span class="main-gp-status past">Предыдущее</span>
+                </div>
+                <div class="gp-title-divider"></div>
+                <div class="prev-gp-podium">
+                    <div class="podium-list">
+                        ${podiumHtml}
+                    </div>
+                </div>
+                <div class="podium-divider"></div>
             </div>
         `;
     }
     
-    html += `
-        <div class="main-gp-card small-card next-gp" data-gp-id="${nextGP.id}">
-            <div class="main-gp-header">
-                <img src="Images/Flags/${nextGP.country}.svg" alt="flag" class="flag-main">
-                <h3>${nextGP.name}</h3>
-                <span class="main-gp-status upcoming">Следующее</span>
+    if (nextGP) {
+        let sprintStatusHtml = '';
+        if (nextGP.hasSprint) {
+            sprintStatusHtml = `
+                <div class="gp-title-divider"></div>
+                <div class="next-gp-sprint">
+                    <span class="sprint-badge next-sprint-badge">СПРИНТ</span>
+                </div>
+            `;
+        }
+        
+        html += `
+            <div class="main-gp-card small-card next-gp" data-gp-id="${nextGP.id}">
+                <div class="main-gp-header">
+                    <img src="Images/Flags/${nextGP.country}.svg" alt="flag" class="flag-main">
+                    <h3>${nextGP.name}</h3>
+                    <span class="main-gp-status upcoming">Следующее</span>
+                </div>
+                <div class="gp-title-divider"></div>
+                <div class="next-gp-info">
+                    <div class="next-gp-date">${formatDate(nextGP.date)}</div>
+                    <div class="next-gp-track">${nextGP.trackName}</div>
+                    <div class="next-gp-location">${nextGP.location}</div>
+                </div>
+                ${sprintStatusHtml}
+                <div class="podium-divider"></div>
             </div>
-            <div class="gp-title-divider"></div>
-            <div class="next-gp-info">
-                <div class="next-gp-date">${formatDate(nextGP.date)}</div>
-                <div class="next-gp-track">${nextGP.trackName}</div>
-                <div class="next-gp-location">${nextGP.location}</div>
-            </div>
-            ${sprintStatusHtml}
-            <div class="podium-divider"></div>
-        </div>
-    `;
-}
+        `;
+    }
     
     html += '</div>'; // Закрываем sidebar
     
@@ -526,34 +539,60 @@ if (nextGP) {
     
     if (currentGP) {
         const gpDate = new Date(currentGP.date);
+        const gpStartTime = gpDate;
         const gpEndTime = new Date(gpDate.getTime() + (2 * 60 * 60 * 1000));
-        const isPast = now > gpEndTime;
-        const isToday = gpDate.toDateString() === now.toDateString();
-        const isLive = now >= gpDate && now <= gpEndTime;
+        const gpEndOfDay = getEndOfDay(gpDate);
         
-        let status = '';
+        const isLive = now >= gpStartTime && now <= gpEndTime;
+        const isFinished = now > gpEndTime && now <= gpEndOfDay;
+        const isToday = gpDate.toDateString() === now.toDateString();
+        
+        let statusText = '';
+        let statusClass = '';
+        let cardClass = '';
+        let showTimer = false;
+        let showStreamButton = false;
+        
         if (isLive) {
-            status = 'Идёт сейчас';
-        } else if (isPast) {
-            status = 'Завершён';
-        } else if (isToday) {
-            status = 'Сегодня';
-        } else {
-            status = 'Предстоящее';
+            statusText = 'Идёт сейчас';
+            statusClass = 'live';
+            cardClass = 'live';
+            showStreamButton = true;
+        } else if (isFinished) {
+            statusText = 'Завершён';
+            statusClass = 'past';
+            cardClass = 'past';
+            showStreamButton = true;
+        } else if (isToday && now < gpStartTime) {
+            statusText = 'Сегодня';
+            statusClass = 'today';
+            cardClass = 'today';
+            showTimer = true;
+        } else if (now < gpStartTime) {
+            statusText = 'Предстоящее';
+            statusClass = 'upcoming';
+            cardClass = 'upcoming';
+            showTimer = true;
         }
         
         let actionHtml = '';
-        if (isLive) {
-            actionHtml = currentGP.recordingRace ? 
-                `<div class="main-gp-action">
-                    <a href="${currentGP.recordingRace}" class="main-stream-btn" target="_blank">
-                        Трансляция
-                    </a>
-                </div>` :
-                `<div class="main-gp-action">
-                    <div class="main-no-stream">Нет Трансляции</div>
-                </div>`;
-        } else if (!isPast) {
+        if (showStreamButton) {
+            if (currentGP.recordingRace) {
+                actionHtml = `
+                    <div class="main-gp-action">
+                        <a href="${currentGP.recordingRace}" class="main-stream-btn" target="_blank">
+                            Трансляция
+                        </a>
+                    </div>
+                `;
+            } else {
+                actionHtml = `
+                    <div class="main-gp-action">
+                        <div class="main-no-stream">Нет трансляции</div>
+                    </div>
+                `;
+            }
+        } else if (showTimer) {
             actionHtml = `
                 <div class="main-gp-timer">
                     <div class="main-timer" data-date="${currentGP.date}">
@@ -564,21 +603,15 @@ if (nextGP) {
                     </div>
                 </div>
             `;
-        } else {
-            actionHtml = `
-                <div class="main-gp-action">
-                    <div class="main-no-stream">Гонка завершена</div>
-                </div>
-            `;
         }
         
         html += `
-            <div class="main-gp-card main-card ${isLive ? 'live' : isPast ? 'past' : isToday ? 'today' : 'upcoming'}" 
+            <div class="main-gp-card main-card ${cardClass}" 
                  data-gp-id="${currentGP.id}">
                 <div class="main-gp-header">
                     <img src="Images/Flags/${currentGP.country}.svg" alt="flag" title="${currentGP.state}" class="flag-main">
                     <h3>${currentGP.name}</h3>
-                    <span class="main-gp-status ${isLive ? 'live' : ''}">${status}</span>
+                    <span class="main-gp-status ${statusClass}">${statusText}</span>
                 </div>
                 <div class="tires-divider"></div>
                 <div class="main-gp-image">
@@ -1032,9 +1065,9 @@ function renderMainDrivers() {
             <div class="main-standing-item ${index === 0 ? 'first' : ''}">
                 <div class="main-standing-position">${index + 1}</div>
                 <div class="main-standing-info">
+                    <img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="main-standing-team-logo">
                     <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" title="${driver.state}" class="main-standing-flag">
                     <span class="main-standing-name">${driver.name}</span>
-                    <img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="main-standing-team-logo">
                 </div>
                 <div class="main-standing-points">${driver.points + sprintPoints}</div>
             </div>
