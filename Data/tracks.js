@@ -165,7 +165,7 @@ const tracksData = {
         "lapRecord": "1:15.743 (Пиастри, 2025)",
         "date": "2026-06-14 20:55",
         "recordingSprint": "",
-        "recordingRace": ""
+        "recordingRace": "https://rutube.ru/video/d453cd08307bbb2f0328d9dd19fd1fdd/"
     },
     "red-bull-ring": {
         "id": "t10",
