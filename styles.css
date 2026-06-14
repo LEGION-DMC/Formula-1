@@ -2297,10 +2297,12 @@ body::before {
 
 .fine-yellow {
     color: #ffc107;
+    margin-left: -6px;
 }
 
 .fine-red {
     color: #e53935;
+    margin-left: -6px;
 }
 
 .fines-notes {

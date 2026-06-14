@@ -442,48 +442,23 @@ const driversData = [
     },
 ];
 
-// ШТРАФЫ
-const driverFines = {
-    "norris": 0,
-    "verstappen": 0,
-    "bortoletto": 2,
-    "hadjar": 0,
-    "gasly": 2,
-    "perez": 0,
-    "antonelli": 5,
-    "alonso": 0,
-    "leclerc": 1,
-    "stroll": 4,
-    "albon": 3,
-    "hulkenberg": 0,
-    "lawson": 2,
-    "ocon": 1,
-    "lindblad": 0,
-    "colapinto": 1,
-    "hamilton": 3,
-    "sainz": 2,
-    "russell": 0,
-    "bottas": 0,
-    "piastri": 4,
-    "bearman": 8
-};
-
-function applyFines() {
-    driversData.forEach(driver => {
-        if (driverFines[driver.id] !== undefined) {
-            driver.fine = driverFines[driver.id];
-        }
-    });
-}
-
-applyFines();
-
-// Переменная для хранения текущих фильтров
 let selectedTeams = [];
 
-// Рендеринг страницы
+function applyFinesFromStats() {
+    if (typeof window.getDriverFine !== 'undefined') {
+        driversData.forEach(driver => {
+            driver.fine = window.getDriverFine(driver.id);
+        });
+    }
+}
+
+applyFinesFromStats();
+
 function renderDrivers() {
     const content = document.getElementById('content');
+    
+    // ПРИМЕНЯЕМ ШТРАФЫ ПЕРЕД КАЖДЫМ РЕНДЕРИНГОМ
+    applyFinesFromStats();
     
     // Получаем названия команд для фильтра
     const uniqueTeams = [...new Set(driversData.map(driver => driver.team))];
@@ -594,7 +569,6 @@ function renderDrivers() {
     renderDriversList(driversData);
 }
 
-// Вычисления возраста
 function calculateAge(birthDate) {
     const [day, month, year] = birthDate.split('.').map(Number);
     const birth = new Date(year, month - 1, day);
@@ -611,8 +585,12 @@ function calculateAge(birthDate) {
     return age;
 }
 
-// Обновляем функцию openDriverModal для отображения возраста
 function openDriverModal(driver) {
+    // При открытии модального окна также обновляем штрафы
+    if (typeof window.getDriverFine !== 'undefined') {
+        driver.fine = window.getDriverFine(driver.id);
+    }
+    
     const modal = document.createElement('div');
     modal.className = 'drv-modal';
     
@@ -691,7 +669,6 @@ function openDriverModal(driver) {
         <button class="drv-close-modal">&times;</button>
     `;
     
-    // Остальной код функции остается без изменений
     document.body.appendChild(modal);
     
     modal.querySelector('.drv-close-modal').addEventListener('click', () => modal.remove());
@@ -702,52 +679,40 @@ function openDriverModal(driver) {
     addTeamClickHandler(modal, driver.team);
 }
 
-// Инициализация при загрузке вкладки
-if (window.location.hash === '#drivers') {
-    renderDrivers();
-}
-
-// Функция для обработки клика на команду
 function addTeamClickHandler(modal, teamName) {
     const teamElement = modal.querySelector('.drv-modal-team');
     if (teamElement) {
         teamElement.style.cursor = 'pointer';
         teamElement.addEventListener('click', (e) => {
-            e.stopPropagation(); // Предотвращаем закрытие модального окна
+            e.stopPropagation();
             navigateToTeam(teamName);
-            modal.remove(); // Закрываем модальное окно пилота
+            modal.remove();
         });
     }
 }
 
-// Навигация к команде
 function navigateToTeam(teamName) {
-    // Переходим на вкладку команд
     window.location.hash = 'teams';
     loadTabContent('teams');
     
-    // После загрузки вкладки находим и открываем модальное окно команды
     setTimeout(() => {
         const team = currentTeams.find(t => t.shortName === teamName);
         if (team) {
             openTeamModal(team);
             
-            // Прокручиваем к карточке команды
             const teamCard = document.querySelector(`.cmd-team-card[data-team="${team.id}"]`);
             if (teamCard) {
                 teamCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 teamCard.classList.add('highlight');
                 
-                // Убираем подсветку через 2 секунды
                 setTimeout(() => {
                     teamCard.classList.remove('highlight');
                 }, 2000);
             }
         }
-    }, 300); // Задержка для загрузки вкладки
+    }, 300);
 }
 
-// Инициализация при загрузке вкладки
 if (window.location.hash === '#drivers') {
     renderDrivers();
 }
