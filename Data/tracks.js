@@ -151,11 +151,11 @@ const tracksData = {
     },
     "barcelona-catalunya": {
         "id": "t9",
-        "name": "Гран-при Испании",
+        "name": "Гран-при Барселоны-Каталунии",
         "logo": "Barcelona Catalunya.svg",
         "miniLogo": "Barcelona Catalunya-m.svg",
 		"country": "es",
-		"state": "Испания",
+		"state": "Барселона-Каталунья",
         "location": "Барселона, Испания",
         "trackName": "Барселона-Каталунья",
         "length": "4 657 км",
@@ -277,9 +277,9 @@ const tracksData = {
         "recordingSprint": "",
         "recordingRace": ""
     },
-    "madrid": {
+    "spain": {
         "id": "t16",
-        "name": "Гран-при Мадрида",
+        "name": "Гран-при Испании",
         "logo": "Madrid.png",
         "miniLogo": "Madrid-m.png",
 		"country": "es",

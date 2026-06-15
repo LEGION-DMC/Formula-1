@@ -31,10 +31,10 @@ const TRACK_COORDINATES = {
 
 let mainTimerInterval = null;
 
-let currentTireConfig = {
-    soft: "C4", 
-    medium: "C3",
-    hard: "C2"
+let currentTireConfig = { //321
+    soft: "C5", 
+    medium: "C4",
+    hard: "C3"
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -225,14 +225,14 @@ const trackToResultsMap = {
     "t6": "miami",
     "t7": "canada",
     "t8": "monaco",
-    "t9": "spain",
+    "t9": "barcelona-catalunya",
     "t10": "austria",
     "t11": "great-britain",
     "t12": "belgium",
     "t13": "hungary",
     "t14": "netherlands",
     "t15": "italy",
-    "t16": "madrid",
+    "t16": "spain",
     "t17": "azerbaijan",
     "t18": "singapore",
     "t19": "usa",

@@ -96,17 +96,17 @@ const fastestPitStops = [
         driverCountry: "it",
         time: "2.17s",
     },
-	/*
     {
         id: 9,
         track: "Гран-при Барселоны-Каталонии",
         country: "es",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
+        team: "McLaren",
+        teamLogo: "McLaren-m.png",
+        driver: "Оскар Пиастри",
+        driverCountry: "au",
+        time: "2.13s",
     },
+	/*
     {
         id: 10,
         track: "Гран-при Австрии",
