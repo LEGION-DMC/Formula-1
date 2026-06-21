@@ -385,28 +385,28 @@ const Cvala = [
 
 // Штрафные быллы пилотов
 const driverFines = {
+    "bearman": 8,
+    "antonelli": 5,
+    "piastri": 4,
+    "albon": 3,
+    "hamilton": 3,
+    "gasly": 2,
+    "colapinto": 2,
+    "stroll": 2,
+    "sainz": 2,
+    "lawson": 2,
+    "bortoletto": 2,
+    "leclerc": 1,
+    "ocon": 1,
     "norris": 0,
     "verstappen": 0,
-    "bortoletto": 2,
     "hadjar": 0,
-    "gasly": 2,
     "perez": 0,
-    "antonelli": 5,
     "alonso": 0,
-    "leclerc": 1,
-    "stroll": 4,
-    "albon": 3,
     "hulkenberg": 0,
-    "lawson": 2,
-    "ocon": 1,
     "lindblad": 0,
-    "colapinto": 1,
-    "hamilton": 3,
-    "sainz": 2,
     "russell": 0,
     "bottas": 0,
-    "piastri": 4,
-    "bearman": 8
 };
 
 function getDriverFine(driverId) {

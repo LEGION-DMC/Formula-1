@@ -451,7 +451,6 @@ const trackToGrandPrixMap = {
     "t24": "abu-dhabi"
 };
 
-// Функция для автоматического заполнения победителей этапов
 function generateRaceWinners() {
     const winnersMap = new Map(); // Используем Map для группировки по пилотам
     
@@ -481,12 +480,14 @@ function generateRaceWinners() {
                                 team: driverInfo.team,
                                 teamLogo: driverInfo.teamLogo,
                                 teamColor: driverInfo.teamColor,
-                                grandPrixList: [gpNameInfo.state]
+                                grandPrixList: [gpNameInfo.state],
+                                winsCount: 1 // Добавляем счетчик побед
                             });
                         } else {
                             // Если пилот уже есть, добавляем этап в его список
                             const existing = winnersMap.get(driverName);
                             existing.grandPrixList.push(gpNameInfo.state);
+                            existing.winsCount += 1; // Увеличиваем счетчик побед
                         }
                     }
                 }
@@ -494,11 +495,18 @@ function generateRaceWinners() {
         }
     });
     
-    // Преобразуем Map в массив и сортируем по первому этапу в календаре
+    // Преобразуем Map в массив
     const winnersArray = Array.from(winnersMap.values());
     
-    // Сортируем победителей по порядку первого выигранного этапа
+    // Сортируем по количеству побед (по убыванию)
+    // Если побед одинаково, сортируем по первому выигранному этапу (кто раньше выиграл)
     winnersArray.sort((a, b) => {
+        // Сначала сортируем по количеству побед
+        if (a.winsCount !== b.winsCount) {
+            return b.winsCount - a.winsCount; // По убыванию
+        }
+        
+        // Если побед одинаково, смотрим на первый выигранный этап
         const aFirstGp = a.grandPrixList[0];
         const bFirstGp = b.grandPrixList[0];
         
@@ -510,7 +518,8 @@ function generateRaceWinners() {
             const gpName = getGPName(gpId);
             return gpName.state === bFirstGp;
         });
-        return aIndex - bIndex;
+        
+        return aIndex - bIndex; // Кто раньше выиграл первый этап, тот выше
     });
     
     // Добавляем позиции
