@@ -183,7 +183,7 @@ const tracksData = {
         "lapRecord": "1:05.619 (Сайнс, 2020)",
         "date": "2026-06-28 20:55",
         "recordingSprint": "",
-        "recordingRace": ""
+        "recordingRace": "https://rutube.ru/video/d8359daa94329ff700c3064ba10551a4/"
     },
     "silverstone": {
         "id": "t11",
