@@ -106,7 +106,6 @@ const fastestPitStops = [
         driverCountry: "au",
         time: "2.13s",
     },
-	/*
     {
         id: 10,
         track: "Гран-при Австрии",
@@ -117,6 +116,7 @@ const fastestPitStops = [
         driverCountry: "un",
         time: "0.00s",
     },
+		/*
     {
         id: 11,
         track: "Гран-при Великобритании",
@@ -386,6 +386,7 @@ const Cvala = [
 // Штрафные быллы пилотов
 const driverFines = {
     "bearman": 8,
+    "tsunoda": 6,
     "antonelli": 5,
     "piastri": 4,
     "albon": 3,

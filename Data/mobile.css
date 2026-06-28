@@ -106,32 +106,72 @@
     .main-gp-card {
         width: 100%;
         max-width: 500px;
+        display: grid;
     }
     
-    .main-gp-container {
+    #mainPage {
+        padding: 5px;
+    }
+    
+    .main-gp-wrapper {
         flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
-    
-    .tires-card {
+ 
+    .main-gp-container {
         width: 100%;
-        max-width: 350px;
-        height: 100%;
+        order: 2; /* Затем основной блок */
     }
     
-    .dry-tires {
-        flex-wrap: wrap;
-        gap: 5px;
+    /* Карточка шин и погоды */
+    .inf-race {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
     }
     
+    .tires-card,
+    .weather-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px;
+    }
+ 
     .tire-item {
-        flex: 1;
-        min-width: 60px;
+        min-width: 50px;
+        flex: 0 1 auto;
     }
     
     .tire-image {
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
     }
+    
+    .tire-name {
+        font-size: 10px;
+    }
+    
+    .wet-tires {
+        gap: 20px;
+    }
+    
+    /* Погода */
+    .weather-image {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .weather-name {
+        font-size: 10px;
+    }
+    
+    .weather-value {
+        font-size: 9px;
+    }
+}
 /* -------------------------------------------------------------------------- Команды */
     .cmd-grid {
         grid-template-columns: 1fr;

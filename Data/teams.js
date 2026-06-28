@@ -160,7 +160,7 @@ const currentTeams = [
                     {number: "27", name: "Нико Хюлькенберг", country: "de", state: "Германия"},
                     {number: "5", name: "Габриэл Бортолето", country: "br", state: "Бразилия"}
                 ],
-				color: "#21ad17"
+				color: "#b80f0f"
             },
 			{    shortName: "Alpine",
                  id: "modal10",
@@ -196,7 +196,7 @@ const currentTeams = [
                     { number: "11", name: "Серхио Перес", country: "mx", state: "Мексика"},
                     { number: "77", name: "Валттери Боттас", country: "fi", state: "Финляндия"}
 				],
-				color: "#fbff00"
+				color: "#ddebdd"
 			},
 ];
 
