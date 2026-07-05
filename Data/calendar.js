@@ -1,6 +1,6 @@
 const calendarData = [
 	{   id: "australia",
-		track: "albert-park",
+		track: "albert_park",
 		date: "2026-03-08 11:55",
 		hasSprint: false,
 		canceled: false,
@@ -55,7 +55,7 @@ const calendarData = [
 		recordingRace: "https://rutube.ru/video/3628eef00d9d494b12467d1ef0bc42c1/"
 	},
 	{   id: "canada",
-		track: "gilles-villeneuve",
+		track: "villeneuve",
 		date: "2026-05-25 03:55",
 		hasSprint: true,
 		canceled: false,
@@ -73,7 +73,7 @@ const calendarData = [
 		recordingRace: "https://rutube.ru/video/f85e53c184adb938f135e5f672dd34fb/"
 	},
 	{   id: "catalunya",
-		track: "barcelona-catalunya",
+		track: "catalunya",
 		date: "2026-06-14 20:55",
 		hasSprint: false,
 		canceled: false,
@@ -82,7 +82,7 @@ const calendarData = [
 		recordingRace: "https://rutube.ru/video/d453cd08307bbb2f0328d9dd19fd1fdd/"
 	},
 	{   id: "austria",
-		track: "red-bull-ring",
+		track: "red_bull_ring",
 		date: "2026-06-28 20:55",
 		hasSprint: false,
 		canceled: false,
@@ -135,8 +135,8 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "spain-madrid",
-		track: "spain",
+	{   id: "spain",
+		track: "madring",
 		date: "2026-09-13 20:55",
 		hasSprint: false,
 		canceled: false,
@@ -154,7 +154,7 @@ const calendarData = [
 		recordingRace: ""
 	},
 	{   id: "singapore",
-		track: "marina-bay",
+		track: "marina_bay",
 		date: "2026-10-11 19:55",
 		hasSprint: true,
 		canceled: false,
@@ -163,7 +163,7 @@ const calendarData = [
 		recordingRace: ""
 	},
 	{   id: "usa",
-		track: "cota",
+		track: "americas",
 		date: "2026-10-26 03:55",
 		hasSprint: false,
 		canceled: false,
@@ -190,7 +190,7 @@ const calendarData = [
 		recordingRace: ""
 	},
 	{   id: "las-vegas",
-		track: "las-vegas",
+		track: "vegas",
 		date: "2026-11-22 11:55",
 		hasSprint: false,
 		canceled: false,
@@ -208,14 +208,14 @@ const calendarData = [
 		recordingRace: ""
 	},
 	{   id: "abu-dhabi",
-		track: "yas-marina",
+		track: "yas_marina",
 		date: "2026-12-06 20:55",
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
-	}
+	},
 ];
 
 // ==============================================
@@ -370,7 +370,7 @@ function renderCalendarCards(container) {
         // Левая часть — изображение трассы
         const imageDiv = document.createElement('div');
         imageDiv.className = 'calendar-card-image';
-        imageDiv.innerHTML = `<img src="Images/Tracks/${track.img}" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.png'">`;
+        imageDiv.innerHTML = `<img src="Images/Tracks/${track.id}.webp" alt="${track.id}." onerror="this.src='Images/Tracks/default.png'">`;
         
         // Правая часть — информация
         const infoDiv = document.createElement('div');
@@ -546,21 +546,57 @@ function openTrackModal(track, gp) {
     function close() { overlay.remove(); unlock(); document.removeEventListener('keydown', esc); }
     function esc(e) { if (e.key === 'Escape') close(); }
     
-	modal.innerHTML = `
-		<button class="track-modal-close">&times;</button>
-		<div class="tm-track-image">
-			<img src="Images/Tracks/${track.img}" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.png'">
-		</div>
-		<div class="tm-track-info">
-			<h2><img src="Images/Flags/${track.country}.svg" class="calendar-flag" title="${getCountryName(track.country)}"> ${track.trackName}</h2>
-			<hr class="tm-divider">
-			<div class="tm-row"><img src="Images/Icon/location.webp" class="calendar-icon"><span class="tm-value">${track.location}</span></div>
-			<div class="tm-row"><img src="Images/Icon/track.webp" class="calendar-icon"><span class="tm-value">${track.length} • ${track.laps} кругов • ${track.turns} поворотов</span></div>
-			<div class="tm-row"><img src="Images/Icon/calendar.webp" class="calendar-icon"><span class="tm-value">${formatDateLong(gp.date)}</span></div>
-			<hr class="tm-divider">
-			<div class="tm-row"><span class="tm-label">⏱️ Рекорд круга:</span><span class="tm-value record">${track.lapRecord}</span></div>
-		</div>
-	`;
+    modal.innerHTML = `
+        <button class="track-modal-close">&times;</button>
+        <div class="track-modal-layout">
+            <div class="tm-track-image">
+                <img src="Images/Tracks/${track.id}.webp" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
+            </div>
+            <div class="tm-track-info">
+                <div class="tm-header">
+                    <img src="Images/Flags/${track.country}.svg" class="calendar-flag" title="${getCountryName(track.country)}">
+                    <h2>${track.trackName}</h2>
+                </div>
+                <hr class="tm-divider">
+                <div class="tm-detail-row">
+                    <img src="Images/Icon/location.webp" class="calendar-icon">
+                    <span>${track.location}</span>
+                </div>
+                <div class="tm-detail-row">
+                    <img src="Images/Icon/calendar.webp" class="calendar-icon">
+                    <span>${gp ? formatDateLong(gp.date) : ''}</span>
+                </div>
+                <hr class="tm-divider">
+                <div class="tm-stats-grid">
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-value">${track.length}</span>
+                        <span class="tm-stat-label">Длина</span>
+                    </div>
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-value">${track.laps}</span>
+                        <span class="tm-stat-label">Кругов</span>
+                    </div>
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-value">${track.turns}</span>
+                        <span class="tm-stat-label">Поворотов</span> 
+                    </div>
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-value-direction">${track.direction === 'по часовой стрелке' ? '↻' : '↺'}</span>
+                        <span class="tm-stat-label">Направление</span>
+                    </div>
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-value">${track.elevation}</span>
+                        <span class="tm-stat-label">Перепад высот</span>
+                    </div>
+                </div>
+                <hr class="tm-divider">
+                <div class="tm-detail-row">
+                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon"> Рекорд круга:</span>
+                    <span class="tm-record">${track.lapRecord}</span>
+                </div>
+            </div>
+        </div>
+    `;
     
     modal.querySelector('.track-modal-close').addEventListener('click', close);
     overlay.appendChild(modal);

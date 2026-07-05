@@ -5,19 +5,9 @@ const teamsData = [
         director: "Тото Вольфф",
         founder: "Норберт Хауг",
         debut: "2010",
-        car: "W17",
+        car: "W17 E Perfomance",
         engine: "Mercedes",
         color: "#75F1D3"
-    },
-    {  shortName: "McLaren",
-        fullName: "McLaren Mastercard F1 Team",
-        base: "Уокинг, Великобритания",
-        director: "Андреа Стелла",
-        founder: "Брюс Макларен",
-        debut: "1966",
-        car: "MCL40",
-        engine: "Mercedes",
-        color: "#ef8733"
     },
     {  shortName: "Ferrari",
         fullName: "Scuderia Ferrari HP",
@@ -28,6 +18,16 @@ const teamsData = [
         car: "SF-26",
         engine: "Ferrari",
         color: "#D52E37"
+    },
+    {  shortName: "McLaren",
+        fullName: "McLaren Mastercard F1 Team",
+        base: "Уокинг, Великобритания",
+        director: "Андреа Стелла",
+        founder: "Брюс Макларен",
+        debut: "1966",
+        car: "MCL40",
+        engine: "Mercedes",
+        color: "#ef8733"
     },
     {  shortName: "Red Bull",
         fullName: "Oracle Red Bull Racing",
@@ -59,7 +59,7 @@ const teamsData = [
         engine: "Red Bull Ford",
         color: "#7091f8"
     },
-    {  shortName: "Aston Martin",
+    {  shortName: "Aston Martin", // 2027 - Aston Martin Aramco Honda
         fullName: "Aston Martin Aramco F1 Team",
         base: "Сильверстоун, Великобритания",
         director: "Эдриан Ньюи",
@@ -89,9 +89,9 @@ const teamsData = [
         engine: "Audi",
         color: "#EB4526"
     },
-    {  shortName: "Alpine",
+    {  shortName: "Alpine", // 2027 - Gucci Racing Alpine F1 Team
         fullName: "BWT Alpine F1 Team",
-        base: "Энстоун, Оксфордшир, Великобритания",
+        base: "Энстоун, Великобритания",
         director: "Флавио Бриаторе",
         founder: "Renault Group",
         debut: "2021",
