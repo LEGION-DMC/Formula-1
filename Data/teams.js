@@ -155,7 +155,7 @@ function createTeamCard(team) {
     const logo = document.createElement('img');
     logo.src = getTeamLogo(team.shortName);
     logo.alt = team.shortName;
-    logo.onerror = () => { logo.src = 'Images/Teams/default-m.png'; };
+    logo.onerror = () => { logo.style.display = 'none'; };
     logoContainer.appendChild(logo);
     
      

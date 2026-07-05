@@ -74,7 +74,6 @@ const pitstopData = [
 
 const penaltiesData = [
     { driver: "Оливер Берман", fines: 8 },
-    { driver: "Юки Цунода", fines: 4 },
     { driver: "Оскар Пиастри", fines: 4 },
     { driver: "Александр Албон", fines: 3 },
     { driver: "Андреа Кими Антонелли", fines: 3 },
@@ -92,11 +91,14 @@ const penaltiesData = [
     { driver: "Исак Хаджар", fines: 0 },
     { driver: "Серхио Перес", fines: 0 },
     { driver: "Фернандо Алонсо", fines: 0 },
-    { driver: "Гуан Ю Чжоу", fines: 0 },
     { driver: "Нико Хюлькенберг", fines: 0 },
     { driver: "Арвид Линдблад", fines: 0 },
     { driver: "Джордж Расселл", fines: 0 },
-    { driver: "Валттери Боттас", fines: 0 }
+    { driver: "Валттери Боттас", fines: 0 },
+	
+    { driver: "Юки Цунода", fines: 4 },
+    { driver: "Гуан Ю Чжоу", fines: 0 },
+    { driver: "Джек Дуэн", fines: 0 },
 ];
 
 const lapRecordData = [
