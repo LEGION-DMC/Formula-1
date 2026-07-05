@@ -1,0 +1,632 @@
+/* ============================================== */
+/* МОБИЛЬНАЯ АДАПТАЦИЯ (max-width: 768px)         */
+/* ============================================== */
+
+/* Основной контейнер */
+body {
+    flex-direction: column;
+}
+
+/* ============================================== */
+/* МОБИЛЬНОЕ МЕНЮ                                 */
+/* ============================================== */
+.main-menu {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: relative; /* Фикс для body flex */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    background-color: rgba(18, 18, 18, 0.9);
+}
+
+/* Логотип в мобильной версии */
+.menu-logo {
+    width: 80px;
+    margin-bottom: 0;
+}
+
+/* Сезон скрываем или делаем компактнее */
+.season-title {
+    font-size: 1rem;
+    margin-bottom: 0;
+    margin-right: auto;
+    margin-left: 15px;
+}
+
+/* Скрываем стандартную навигацию */
+.menu-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(15px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200;
+}
+
+/* Класс для открытия меню */
+.menu-nav.open {
+    transform: translateX(0);
+}
+
+/* Стили пунктов в мобильном меню */
+.menu-nav .menu-item {
+    font-size: 1.4rem;
+    width: auto;
+    padding: 15px 30px;
+    text-align: center;
+}
+
+/* ============================================== */
+/* КНОПКА БУРГЕР                                  */
+/* ============================================== */
+.burger-btn {
+    display: block;
+    width: 40px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    z-index: 300;
+    background: transparent;
+    border: none;
+    margin-left: 15px;
+}
+
+.burger-btn span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: var(--text-light);
+    margin: 6px 0;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Анимация бургера в крестик */
+.burger-btn.open span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+    background-color: var(--red-accent);
+}
+
+.burger-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-btn.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+    background-color: var(--red-accent);
+}
+
+/* Разделитель в мобильной версии не нужен */
+.menu-divider {
+    display: none;
+}
+
+/* ============================================== */
+/* МОБИЛЬНАЯ ОБЛАСТЬ КОНТЕНТА                     */
+/* ============================================== */
+.content-area {
+    margin-left: 0;
+    width: 100%;
+    padding: 20px;
+    min-height: calc(100vh - 70px); /* Высота минус меню */
+}
+
+/* ============================================== */
+/* МОБИЛЬНАЯ ВЕРСИЯ ВКЛАДКИ ПИЛОТОВ               */
+/* ============================================== */
+
+/* Контейнер пилотов меняет направление */
+#dataContainer {
+    flex-direction: column;
+}
+
+/* Панель фильтров */
+.drivers-filter-panel {
+    width: 100%;
+    min-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 15px;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.driver-search-input {
+    width: 100%;
+    order: 1;
+}
+
+.filter-divider {
+    display: none;
+}
+
+.filter-section-title {
+    display: none;
+}
+
+.filter-checkboxes {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    order: 2;
+}
+
+.filter-checkbox-label {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    background-color: rgba(30, 30, 30, 0.5);
+    border-radius: 20px;
+}
+
+.filter-reset-btn {
+    width: auto;
+    padding: 6px 15px;
+    order: 3;
+    font-size: 0.8rem;
+}
+
+/* Карточки */
+.drivers-cards-area {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    padding: 15px;
+}
+
+.driver-portrait-wrapper {
+    width: 100px;
+    height: 100px;
+}
+
+.driver-number-overlay {
+    font-size: 1.2rem;
+    right: 3px;
+}
+
+.driver-flag-overlay {
+    width: 24px;
+    height: 16px;
+    top: 3px;
+    left: 3px;
+}
+
+.driver-short-name {
+    font-size: 0.9rem;
+}
+
+/* Модальное окно */
+.driver-modal {
+    max-width: 95%;
+    max-height: 90vh;
+}
+
+/* Показываем кнопку закрытия */
+.modal-close-btn {
+    display: flex;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-gray);
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: var(--red-accent);
+    color: white;
+    border-color: var(--red-accent);
+}
+
+.modal-top {
+    flex-direction: column;
+}
+
+.modal-left {
+    width: 100%;
+    min-width: auto;
+    padding: 25px 20px 10px;
+}
+
+.modal-portrait {
+    width: 140px;
+    height: 140px;
+}
+
+.modal-right {
+    width: 100%;
+    padding: 10px 20px 20px;
+}
+
+.modal-right .modal-block:first-child {
+    gap: 15px;
+}
+
+.modal-number {
+    font-size: 3rem;
+    min-width: 60px;
+}
+
+.modal-fullname {
+    font-size: 1.3rem;
+}
+
+.modal-details-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.detail-cell:last-child {
+    grid-column: 1 / -1;
+}
+
+.modal-stats-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.modal-bottom {
+    padding: 0 20px 20px;
+}
+
+/* ============================================== */
+/* МОБИЛЬНАЯ ВЕРСИЯ ВКЛАДКИ КОМАНД                */
+/* ============================================== */
+
+/* Сетка */
+.teams-grid {
+    gap: 15px;
+}
+
+.team-card {
+    flex: 0 0 calc(50% - 8px); /* 2 в ряд на планшетах */
+    min-width: 150px;
+    max-width: none;
+}
+
+@media (max-width: 480px) {
+    .team-card {
+        flex: 0 0 100%; /* 1 в ряд на телефонах */
+        max-width: 100%;
+    }
+}
+
+.team-card-logo {
+    width: 60px;
+    height: 42px;
+}
+
+.team-card-name {
+    font-size: 1rem;
+}
+
+/* Модальное окно */
+.team-modal-close-btn {
+    display: flex;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-gray);
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.team-modal-close-btn:hover {
+    background-color: var(--team-color);
+    color: white;
+    border-color: var(--team-color);
+}
+
+.team-modal {
+    max-width: 95%;
+    padding: 20px;
+}
+
+.tm-full-logo {
+    max-height: 50px;
+}
+
+.tm-full-name {
+    font-size: 1.1rem;
+}
+
+.tm-info-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.tm-car-engine {
+    margin: 0;
+    width: 100%;
+}
+
+/* ============================================== */
+/* МОБИЛЬНАЯ ВЕРСИЯ СТАТИСТИКИ                    */
+/* ============================================== */
+
+.stats-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.stats-table-wrapper {
+    padding: 15px;
+}
+
+.stats-table {
+    font-size: 0.75rem;
+}
+
+.stats-table thead th {
+    font-size: 0.65rem;
+    padding: 6px 4px;
+}
+
+.stats-table tbody td {
+    padding: 4px;
+}
+
+.stats-flag {
+    width: 16px;
+    height: 11px;
+    margin-right: 3px;
+}
+
+.stats-team-logo {
+    width: 18px;
+    height: 12px;
+}
+
+.driver-cell {
+    font-size: 0.75rem;
+}
+
+/* ============================================== */
+/* МОБИЛЬНАЯ ВЕРСИЯ КАЛЕНДАРЯ                     */
+/* ============================================== */
+
+.mini-calendar-wrapper {
+    padding: 10px 12px;
+    margin-bottom: 15px;
+}
+
+.mini-calendar-title {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.mini-calendar-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.mini-calendar-event {
+    padding: 4px 6px;
+    gap: 4px;
+}
+
+.mini-event-date {
+    min-width: 40px;
+    font-size: 0.7rem;
+}
+
+.mini-event-name {
+    font-size: 0.7rem;
+    gap: 4px;
+}
+
+.mini-event-flag {
+    width: 14px;
+    height: 10px;
+}
+
+.calendar-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.calendar-card {
+    flex-direction: column;
+    border-left: none;
+    border-top: 3px solid var(--border-color);
+}
+
+.calendar-card:hover {
+    border-top-color: var(--red-accent);
+}
+
+.calendar-card.completed {
+    border-top-color: #555;
+}
+
+.calendar-card.canceled {
+    border-top-color: #666;
+}
+
+.calendar-card.today {
+    border-top-color: #FFC107;
+}
+
+.calendar-card.upcoming {
+    border-top-color: #4CAF50;
+}
+
+.calendar-card-image {
+    width: 100%;
+    min-width: auto;
+    height: 140px;
+}
+
+.calendar-card-image img {
+    width: auto;
+    height: 120px;
+}
+
+.calendar-card-info {
+    padding: 10px 12px;
+}
+
+.calendar-card-header h3 {
+    font-size: 0.9rem;
+}
+
+/* Модальное окно трассы */
+.track-modal-close-btn {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #555;
+    color: #ccc;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+}
+
+.track-modal {
+    flex-direction: column;
+    max-width: 95%;
+    max-height: 90vh;
+}
+
+.trm-track-image {
+    width: 100%;
+    min-width: auto;
+    height: 200px;
+    border-radius: 12px 12px 0 0;
+}
+
+.trm-track-image img {
+    width: auto;
+    height: 180px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.trm-track-info {
+    width: 100%;
+    padding: 15px;
+}
+
+.trm-track-info h2 {
+    font-size: 1.2rem;
+}
+
+.trm-podium {
+    height: 140px;
+    gap: 10px;
+}
+
+.trm-podium-place {
+    width: 75px;
+}
+
+.trm-podium-place.first .trm-podium-step {
+    height: 100px;
+    font-size: 2rem;
+}
+
+.trm-podium-place.second .trm-podium-step {
+    height: 70px;
+}
+
+.trm-podium-place.third .trm-podium-step {
+    height: 50px;
+}
+
+.trm-podium-step {
+    font-size: 1.5rem;
+}
+
+.trm-podium-name {
+    font-size: 0.7rem;
+    padding: 4px 0;
+}
+
+/* ============================================== */
+/* МОБИЛЬНАЯ ВЕРСИЯ РЕЗУЛЬТАТОВ                   */
+/* ============================================== */
+
+#dataContainer {
+    flex-direction: column;
+}
+
+.results-constructors-panel {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px;
+}
+
+.results-main-area {
+    width: 100%;
+    padding: 15px;
+}
+
+.results-columns {
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.results-table {
+    font-size: 0.75rem;
+}
+
+.results-table thead th {
+    font-size: 0.6rem;
+    padding: 5px 4px;
+}
+
+.results-table tbody td {
+    padding: 5px 4px;
+}
+
+.results-flag {
+    width: 16px;
+    height: 11px;
+}
+
+.results-team-logo {
+    width: 18px;
+    height: 12px;
+}

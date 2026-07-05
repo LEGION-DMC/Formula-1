@@ -4,74 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-	<!-- Название -->
 	<title>Formula 1</title>
 	
-    <!-- Favicon -->
-    <link rel="icon" href="Images/favicon.png" type="image/png" sizes="50x50">
+    <link rel="icon" href="UI/favicon.png" type="image/png" sizes="50x50">
 	
-    <!-- Стили -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="Data/mobile.css" media="(max-width: 768px)">
+    <link rel="stylesheet" href="Styles/styles.css">
+    <link rel="stylesheet" href="Styles/styles-m.css" media="(max-width: 768px)">
 	
-    <!-- Шрифты -->
-    <style>
-        @font-face {
-            font-family: 'Font1';
-            src: url('Styles/font1.ttf') format('truetype');
-        }
-        @font-face {
-            font-family: 'Font2';
-            src: url('Styles/font2.otf') format('truetype');
-        }
-        @font-face {
-            font-family: 'Font3';
-            src: url('Styles/font3.ttf') format('truetype');
-        }
-    </style>	
 </head>
 <body>
 
-    <!-- Верхняя панель навигации -->
-    <header class="header">
-        <!-- Логотип -->
-        <div class="logo">
-            <a href="#" id="logoLink">
-                <img src="Images/logo.png" alt="F1">
-            </a>
-        </div>
-        
-        <!-- Кнопка меню для мобильных -->
-        <div class="burger-btn" id="burgerBtn">
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-        </div>
-
-        <!-- Основное меню -->
-        <nav class="menu">
-            <ul>
-                <li><a href="#" data-tab="teams">Команды</a></li>
-                <li><a href="#" data-tab="drivers">Пилоты</a></li>
-                <li><a href="#" data-tab="calendar">Календарь</a></li>
-                <li><a href="#" data-tab="results">Результаты</a></li>
-                <li><a href="#" data-tab="stats">Статистика</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Область контента -->
-    <main class="content" id="content"></main>
-
-    <!-- Кнопка прокрутки вверх -->
-    <button class="scroll-top" id="scrollTop">^</button>
-
-    <!-- Скрипты -->
-    <script src="scripts.js"></script>
+    <script src="Data/menu.js"></script>
+	
+    <script src="Data/main.js"></script>
     <script src="Data/teams.js"></script>
     <script src="Data/drivers.js"></script>
     <script src="Data/tracks.js"></script>
+    <script src="Data/calendar.js"></script>
     <script src="Data/results.js"></script>
     <script src="Data/stats.js"></script>
+	
 </body>
 </html>

@@ -1,848 +1,497 @@
-// Рекорд лучших времён круга
-const bestLapTimes = [
-	/*
-	{
-        id: 1,
-        track: "Гран-при Австралии",
-        country: "au",
-        team: "RedBull",
-        teamLogo: "RedBull-m.png",
-        driver: "Макс Ферстаппен",
-        driverCountry: "nl",
-        time: "1:22.091",
-    },
-	*/
+const qualiData = [
+    { driver1: "Андреа Кими Антонелли", 
+      score1: 5, 
+      score2: 4,
+      driver2: "Джордж Расселл" },
+    { driver1: "Шарль Леклер", 
+      score1: 5, 
+      score2: 4,
+      driver2: "Льюис Хэмилтон" },
+    { driver1: "Ландо Норрис", 
+      score1: 5, 
+      score2: 4,
+      driver2: "Оскар Пиастри" },
+    { driver1: "Макс Ферстаппен", 
+      score1: 6, 
+      score2: 3,
+      driver2: "Иcаак Хаджар" },
+    { driver1: "Лиам Лоусон", 
+      score1: 6, 
+      score2: 3,
+      driver2: "Арвид Линдблад" },
+    { driver1: "Нико Хюлькенберг", 
+      score1: 5, 
+      score2: 4,
+      driver2: "Габриэл Бортолето" },
+    { driver1: "Карлос Сайнс", 
+      score1: 7, 
+      score2: 2,
+      driver2: "Александр Албон" },
+    { driver1: "Эстебан Окон", 
+      score1: 2, 
+      score2: 7,
+      driver2: "Оливер Берман" },
+    { driver1: "Пьер Гасли", 
+      score1: 6, 
+      score2: 3,
+      driver2: "Франко Колапинто" },
+    { driver1: "Фернандо Алонсо", 
+      score1: 7, 
+      score2: 2,
+      driver2: "Лэнс Стролл" },
+    { driver1: "Серхио Перес", 
+      score1: 6, 
+      score2: 3,
+      driver2: "Валттери Боттас" },
 ];
 
-// Быстрейший пит-стопы
-const fastestPitStops = [
-    {
-        id: 1,
-        track: "Гран-при Австралии",
-        country: "au",
-        team: "Mercedes",
-        teamLogo: "Mercedes-m.png",
-        driver: "Джордж Расселл",
-        driverCountry: "gb",
-        time: "2.17s",
-    },
-    {
-        id: 2,
-        track: "Гран-при Китая",
-        country: "cn",
-        team: "Ferrari",
-        teamLogo: "Ferrari-m.png",
-        driver: "Льюис Хэмилтон",
-        driverCountry: "gb",
-        time: "2.29s",
-    },
-    {
-        id: 3,
-        track: "Гран-при Японии",
-        country: "jp",
-        team: "Ferrari",
-        teamLogo: "Ferrari-m.png",
-        driver: "Льюис Хэмилтон",
-        driverCountry: "gb",
-        time: "2.00s",
-    },/*
-    {
-        id: 4,
-        track: "Гран-при Бахрейна",
-        country: "bh",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-    {
-        id: 5,
-        track: "Гран-при Саудовской Аравии",
-        country: "sa",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },*/
-    {
-        id: 6,
-        track: "Гран-при Майами",
-        country: "us",
-        team: "Racing Bulls",
-        teamLogo: "RacingBulls-m.png",
-        driver: "Арвид Линдблад",
-        driverCountry: "gb",
-        time: "2.08s",
-    },
-    {
-        id: 7,
-        track: "Гран-при Канады",
-        country: "ca",
-        team: "Racing Bulls",
-        teamLogo: "RacingBulls-m.png",
-        driver: "Лиам Лоусон",
-        driverCountry: "nz",
-        time: "2.20s",
-    },
-    {
-        id: 8,
-        track: "Гран-при Монако",
-        country: "mc",
-        team: "Mercedes",
-        teamLogo: "Mercedes-m.png",
-        driver: "Кими Антонелли",
-        driverCountry: "it",
-        time: "2.17s",
-    },
-    {
-        id: 9,
-        track: "Гран-при Барселоны-Каталонии",
-        country: "es",
-        team: "McLaren",
-        teamLogo: "McLaren-m.png",
-        driver: "Оскар Пиастри",
-        driverCountry: "au",
-        time: "2.13s",
-    },
-    {
-        id: 10,
-        track: "Гран-при Австрии",
-        country: "at",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-		/*
-    {
-        id: 11,
-        track: "Гран-при Великобритании",
-        country: "gb",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-    {
-        id: 12,
-        track: "Гран-при Бельгии",
-        country: "be",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-    {
-        id: 13,
-        track: "Гран-при Венгрии",
-        country: "hu",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-    {
-        id: 14,
-        track: "Гран-при Нидерландов",
-        country: "nl",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-    {
-        id: 15,
-        track: "Гран-при Италии",
-        country: "it",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },{
-        id: 16,
-        track: "Гран-при Мадрида",
-        country: "es",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-    {
-        id: 17,
-        track: "Гран-при Азербайджана",
-        country: "az",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-	{
-        id: 18,
-        track: "Гран-при Сингапура",
-        country: "sg",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-	{
-        id: 19,
-        track: "Гран-при США",
-        country: "us",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-	{
-        id: 20,
-        track: "Гран-при Мексики",
-        country: "mx",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-	{
-        id: 21,
-        track: "Гран-при Сан-Паулу",
-        country: "br",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-	{
-        id: 22,
-        track: "Гран-при Лас-Вегаса",
-        country: "us",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-	{
-        id: 23,
-        track: "Гран-при Катара",
-        country: "qa",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },
-	{
-        id: 24,
-        track: "Гран-при Абу-Даби",
-        country: "ae",
-        team: "---",
-        teamLogo: "F1.png",
-        driver: "---",
-        driverCountry: "un",
-        time: "0.00s",
-    },*/
+const pitstopData = [
+	{ gpId: "australia", driver: "russell", time: "2.17 " },
+	{ gpId: "china", driver: "hamilton", time: "2.29" },
+	{ gpId: "japan", driver: "hamilton", time: "2.00" },
+	{ gpId: "bahrain", driver: "none", time: "0.00" },
+	{ gpId: "saudi", driver: "none", time: "0.00" },
+	{ gpId: "miami", driver: "lindblad", time: "2.08" },
+	{ gpId: "canada", driver: "lawson", time: "2.20" },
+	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
+	{ gpId: "catalunya", driver: "piastri", time: "2.13" },
+	{ gpId: "austria", driver: "lindblad", time: "2.03" },
+	{ gpId: "uk", driver: "none", time: "0.00" },
+	{ gpId: "belgium", driver: "none", time: "0.00" },
+	{ gpId: "hungary", driver: "none", time: "0.00" },
+	{ gpId: "netherlands", driver: "none", time: "0.00" },
+	{ gpId: "italy", driver: "none", time: "0.00" },
+	{ gpId: "madrid", driver: "none", time: "0.00" },
+	{ gpId: "azerbaijan", driver: "none", time: "0.00" },
+	{ gpId: "singapore", driver: "none", time: "0.00" },
+	{ gpId: "usa", driver: "none", time: "0.00" },
+	{ gpId: "mexico", driver: "none", time: "0.00" },
+	{ gpId: "saopaulo", driver: "none", time: "0.00" },
+	{ gpId: "vegas", driver: "none", time: "0.00" },
+	{ gpId: "qatar", driver: "none", time: "0.00" },
+	{ gpId: "abudhabi", driver: "none", time: "0.00" },
 ];
 
-// Счёт квалификаций пилотов в команде
-const Cvala = [
-    {
-        id: 1,
-        team: "Mercedes",
-        teamLogo: "Mercedes-m.png",
-        driver1: "Джордж Расселл",
-        driverCountry1: "gb",
-        cvala1: "4",
-        driver2: "Андреа Кими Антонелли",
-        driverCountry2: "it",
-        cvala2: "4",
-    },
-    {
-        id: 2,
-        team: "Ferrari",
-        teamLogo: "Ferrari-m.png",
-        driver1: "Шарль Леклер",
-        driverCountry1: "mc",
-        cvala1: "4",
-        driver2: "Льюис Хэмилтон",
-        driverCountry2: "gb",
-        cvala2: "4",
-    },
-    {
-        id: 3,
-        team: "McLaren",
-        teamLogo: "McLaren-m.png",
-        driver1: "Ландо Норрис",
-        driverCountry1: "gb",
-        cvala1: "4",
-        driver2: "Оскар Пиастри",
-        driverCountry2: "au",
-        cvala2: "4",
-    },
-    {
-        id: 4,
-        team: "Red Bull",
-        teamLogo: "RedBull-m.png",
-        driver1: "Макс Ферстаппен",
-        driverCountry1: "nl",
-        cvala1: "6",
-        driver2: "Исак Хаджар",
-        driverCountry2: "fr",
-        cvala2: "2",
-    },
-    {
-        id: 5,
-        team: "Alpine",
-        teamLogo: "Alpine-m.png",
-        driver1: "Пьер Гасли",
-        driverCountry1: "fr",
-        cvala1: "5",
-        driver2: "Франко Колапинто",
-        driverCountry2: "ar",
-        cvala2: "3",
-    },
-    {
-        id: 6,
-        team: "Racing Bulls",
-        teamLogo: "RacingBulls-m.png",
-        driver1: "Лиам Лоусон",
-        driverCountry1: "nz",
-        cvala1: "6",
-        driver2: "Арвид Линдблад",
-        driverCountry2: "gb",
-        cvala2: "2",
-    },
-    {
-        id: 7,
-        team: "Haas",
-        teamLogo: "Haas-m.png",
-        driver1: "Эстебан Окон",
-        driverCountry1: "fr",
-        cvala1: "2",
-        driver2: "Оливер Берман",
-        driverCountry2: "de",
-        cvala2: "6",
-    },
-    {
-        id: 8,
-        team: "Williams",
-        teamLogo: "Williams-m.png",
-        driver1: "Карлос Сайнс",
-        driverCountry1: "es",
-        cvala1: "6",
-        driver2: "Александр Албон",
-        driverCountry2: "th",
-        cvala2: "2",
-    },
-    {
-        id: 9,
-        team: "Audi",
-        teamLogo: "Audi-m.png",
-        driver1: "Нико Хюлкенберг",
-        driverCountry1: "de",
-        cvala1: "5",
-        driver2: "Габриэль Бортолето",
-        driverCountry2: "br",
-        cvala2: "3",
-    },
-    {
-        id: 10,
-        team: "Aston Martin",
-        teamLogo: "AstonMartin-m.png",
-        driver1: "Лэнс Стролл",
-        driverCountry1: "ca",
-        cvala1: "1",
-        driver2: "Фернандо Алонсо",
-        driverCountry2: "es",
-        cvala2: "7",
-    },
-    {
-        id: 11,
-        team: "Cadillac",
-        teamLogo: "Cadillac-m.png",
-        driver1: "Серхио Перес",
-        driverCountry1: "mx",
-        cvala1: "6",
-        driver2: "Валттери Боттас",
-        driverCountry2: "fi",
-        cvala2: "2",
-    },
+const penaltiesData = [
+    { driver: "Оливер Берман", fines: 8 },
+    { driver: "Юки Цунода", fines: 4 },
+    { driver: "Оскар Пиастри", fines: 4 },
+    { driver: "Александр Албон", fines: 3 },
+    { driver: "Андреа Кими Антонелли", fines: 3 },
+    { driver: "Льюис Хэмилтон", fines: 3 },
+    { driver: "Пьер Гасли", fines: 2 },
+    { driver: "Лэнс Стролл", fines: 2 },
+    { driver: "Карлос Сайнс", fines: 2 },
+    { driver: "Лиам Лоусон", fines: 2 },
+    { driver: "Габриэл Бортолето", fines: 2 },
+    { driver: "Шарль Леклер", fines: 1 },
+    { driver: "Эстебан Окон", fines: 1 },
+    { driver: "Франко Колапинто", fines: 1 },
+    { driver: "Ландо Норрис", fines: 0 },
+    { driver: "Макс Ферстаппен", fines: 0 },
+    { driver: "Исак Хаджар", fines: 0 },
+    { driver: "Серхио Перес", fines: 0 },
+    { driver: "Фернандо Алонсо", fines: 0 },
+    { driver: "Гуан Ю Чжоу", fines: 0 },
+    { driver: "Нико Хюлькенберг", fines: 0 },
+    { driver: "Арвид Линдблад", fines: 0 },
+    { driver: "Джордж Расселл", fines: 0 },
+    { driver: "Валттери Боттас", fines: 0 }
 ];
 
-// Штрафные быллы пилотов
-const driverFines = {
-    "bearman": 8,
-    "tsunoda": 6,
-    "antonelli": 5,
-    "piastri": 4,
-    "albon": 3,
-    "hamilton": 3,
-    "gasly": 2,
-    "colapinto": 2,
-    "stroll": 2,
-    "sainz": 2,
-    "lawson": 2,
-    "bortoletto": 2,
-    "leclerc": 1,
-    "ocon": 1,
-    "norris": 0,
-    "verstappen": 0,
-    "hadjar": 0,
-    "perez": 0,
-    "alonso": 0,
-    "hulkenberg": 0,
-    "lindblad": 0,
-    "russell": 0,
-    "bottas": 0,
-};
+const lapRecordData = [
+    { gpId: "australia", driver: "russell", time: "0:00.000" },
+];
 
-function getDriverFine(driverId) {
-    return driverFines[driverId] !== undefined ? driverFines[driverId] : 0;
+function findDriverByName(fullName) {
+    return driversData.find(d => d.name === fullName);
 }
 
-function applyFinesToDrivers(driversArray) {
-    if (!driversArray) return driversArray;
-    
-    driversArray.forEach(driver => {
-        const fineValue = getDriverFine(driver.id);
-        if (fineValue !== undefined) {
-            driver.fine = fineValue;
+function findDriverById(id) {
+    return driversData.find(d => d.id === id);
+}
+
+function getGPById(id) {
+    if (typeof calendarData !== 'undefined') {
+        return calendarData.find(g => g.id === id);
+    }
+    return null;
+}
+
+function getGPName(gpId) {
+    const gp = getGPById(gpId);
+    if (gp) {
+        const track = getTrackById(gp.track);
+        return track ? track.name : gpId;
+    }
+    return gpId;
+}
+
+function getGPCountry(gpId) {
+    const gp = getGPById(gpId);
+    if (gp) {
+        const track = getTrackById(gp.track);
+        return track ? track.country : 'xx';
+    }
+    return 'xx';
+}
+
+function syncPenaltiesToDrivers() {
+    penaltiesData.forEach(penalty => {
+        const driver = findDriverByName(penalty.driver);
+        if (driver) {
+            driver.fines = penalty.fines;
         }
     });
-    return driversArray;
 }
 
-function updateDriverFine(driverId, newFineValue) {
-    if (driverFines[driverId] !== undefined) {
-        driverFines[driverId] = newFineValue;
-        
-        // Обновляем штраф в глобальном массиве driversData, если он существует
-        if (typeof driversData !== 'undefined') {
-            const driver = driversData.find(d => d.id === driverId);
-            if (driver) {
-                driver.fine = newFineValue;
-            }
-        }
-        
-        return true;
-    }
-    return false;
-}
+syncPenaltiesToDrivers();
 
-function getAllFines() {
-    return { ...driverFines };
-}
-
-window.getDriverFine = getDriverFine;
-window.applyFinesToDrivers = applyFinesToDrivers;
-window.updateDriverFine = updateDriverFine;
-window.getAllFines = getAllFines;
-
-function getDriverTeamLogo(driverId) {
-    if (typeof driversData !== 'undefined') {
-        const driver = driversData.find(d => d.id === driverId);
-        return driver ? driver.teamLogo : 'F1.png';
-    }
-    return 'F1.png';
-}
-
-function getDriverTeamName(driverId) {
-    if (typeof driversData !== 'undefined') {
-        const driver = driversData.find(d => d.id === driverId);
-        return driver ? driver.team : '';
-    }
-    return '';
-}
-
-function renderFinesTable() {
-    // Проверяем, доступны ли данные пилотов
-    if (typeof driversData === 'undefined') {
-        return `
-            <div class="stats-table fines-table">
-                <h2>Штрафы пилотов</h2>
-                <div class="stats-table-content">
-                    <div class="no-fines-message">Данные пилотов не загружены</div>
-                </div>
-            </div>
-        `;
-    }
+function initStatsPage(container) {
+    'use strict';
     
-    // Собираем пилотов со штрафами из глобального массива driversData
-    const driversWithFines = driversData
-        .filter(driver => driver.fine > 0)
-        .sort((a, b) => b.fine - a.fine);
+    container.innerHTML = '';
+    container.style.padding = '20px';
     
-    if (driversWithFines.length === 0) {
-        return `
-            <div class="stats-table fines-table">
-                <h2>Штрафы пилотов</h2>
-                <div class="stats-table-content">
-                    <div class="no-fines-message">Нет активных штрафов у пилотов</div>
-                </div>
-            </div>
-        `;
-    }
+    const grid = document.createElement('div');
+    grid.className = 'stats-grid';
     
-    let html = `
-        <div class="stats-table fines-table">
-            <h2>Штрафы пилотов</h2>
-            <div class="stats-table-header">
-                <div class="stats-col fines-driver">Пилот</div>
-                <div class="stats-col fines-points">Штрафы</div>
-            </div>
+    grid.appendChild(createQualiTable());
+    grid.appendChild(createPitstopTable());
+    grid.appendChild(createPenaltiesTable());
+    grid.appendChild(createLapRecordTable());
+    
+    container.appendChild(grid);
+}
+
+function createQualiTable() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'stats-table-wrapper';
+    
+    const tableTitle = document.createElement('h3');
+    tableTitle.className = 'stats-table-title';
+    tableTitle.textContent = 'Зачёт квалификации';
+    wrapper.appendChild(tableTitle);
+    
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'stats-table-container';
+    
+    const table = document.createElement('table');
+    table.className = 'stats-table quali-table';
+    
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th colspan="3">Пилот</th>
+            <th class="vs-col">vs</th>
+            <th colspan="3">Пилот</th>
+        </tr>
     `;
+    table.appendChild(thead);
     
-    driversWithFines.forEach(driver => {
-        // Определяем класс для цвета текста штрафа
-        let fineColorClass = '';
-        if (driver.fine === 12) {
-            fineColorClass = 'fine-red';
-        } else if (driver.fine >= 9 && driver.fine <= 11) {
-            fineColorClass = 'fine-yellow';
-        } else {
-            fineColorClass = 'fine-white';
-        }
+    const tbody = document.createElement('tbody');
+    
+    qualiData.forEach(row => {
+        const driver1 = findDriverByName(row.driver1);
+        const driver2 = findDriverByName(row.driver2);
         
-        html += `
-            <div class="stats-table-row fines-row">
-                <div class="stats-col fines-driver">
-                    <img src="Images/Teams/${driver.teamLogo}" alt="${driver.team}" class="stats-team-logo fines-team-logo">
-                    <img src="Images/Flags/${driver.country}.svg" alt="${driver.country}" class="stats-flag fines-flag">
-                    <span class="fines-driver-name">${driver.name}</span>
-                </div>
-                <div class="stats-col fines-points">
-                    <span class="fine-score ${fineColorClass}">${driver.fine} </span>
-                </div>
-            </div>
+        if (!driver1 || !driver2) return;
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="team-cell stats-clickable" data-team="${driver1.team}">
+                <img src="${getTeamLogo(driver1.team)}" alt="${driver1.team}" class="stats-team-logo" onerror="this.style.display='none'">
+            </td>
+            <td class="driver-cell stats-driver-clickable" data-driver-id="${driver1.id}">
+                <img src="Images/Flags/${driver1.country}.svg" alt="" title="${getCountryName(driver1.country)}" class="stats-flag">
+                <span>${row.driver1}</span>
+            </td>
+            <td class="score-cell ${row.score1 > row.score2 ? 'winner' : row.score1 < row.score2 ? 'loser' : 'draw'}">${row.score1}</td>
+            <td class="vs-cell">:</td>
+            <td class="score-cell ${row.score2 > row.score1 ? 'winner' : row.score2 < row.score1 ? 'loser' : 'draw'}">${row.score2}</td>
+            <td class="driver-cell stats-driver-clickable" data-driver-id="${driver2.id}">
+                <img src="Images/Flags/${driver2.country}.svg" alt=""  title="${getCountryName(driver2.country)}" class="stats-flag">
+                <span>${row.driver2}</span>
+            </td>
+            <td class="team-cell stats-clickable" data-team="${driver2.team}">
+                <img src="${getTeamLogo(driver2.team)}" alt="${driver2.team}" class="stats-team-logo" onerror="this.style.display='none'">
+            </td>
         `;
+        tbody.appendChild(tr);
     });
     
-    // Добавляем примечание внизу таблицы
-    html += `
-            <div class="fines-notes">
-                <div class="fine-note">
-                    <span class="fine-note-color white-note">⬤</span>
-                    <span>Предупреждение: 1-8 штрафов</span>
-                </div>
-                <div class="fine-note">
-                    <span class="fine-note-color yellow-note">⬤</span>
-                    <span>Угроза дисквалификации: 9-11 штрафов</span>
-                </div>
-                <div class="fine-note">
-                    <span class="fine-note-color red-note">⬤</span>
-                    <span>Дисквалификация: 12 штрафов</span>
-                </div>
-            </div>
-        </div>
-    `;
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+    wrapper.appendChild(tableContainer);
     
-    return html;
+    wrapper.addEventListener('click', (e) => {
+        // Клик по пилоту
+        const driverCell = e.target.closest('.stats-driver-clickable');
+        if (driverCell) {
+            const driver = findDriverById(driverCell.dataset.driverId);
+            if (driver) openDriverModal(driver);
+            return;
+        }
+        const teamCell = e.target.closest('.stats-clickable');
+        if (teamCell) {
+            const teamData = getTeamData(teamCell.dataset.team);
+            if (teamData) openTeamModal(teamData);
+            return;
+        }
+    });
+    
+    return wrapper;
 }
 
-function renderStats() {
-    // Применяем штрафы к пилотам перед рендерингом
-    if (typeof driversData !== 'undefined') {
-        applyFinesToDrivers(driversData);
-    }
+function createPitstopTable() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'stats-table-wrapper';
     
-    const content = document.getElementById('content');
-    content.innerHTML = `
-        <div class="stats-container">
-            <h1>Статистика текущего сезона</h1>
+    const tableTitle = document.createElement('h3');
+    tableTitle.className = 'stats-table-title';
+    tableTitle.textContent = 'Быстрейшие пит-стопы';
+    wrapper.appendChild(tableTitle);
+    
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'stats-table-container';
+    
+    const table = document.createElement('table');
+    table.className = 'stats-table pitstop-table';
+    
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>#</th>
+            <th>Гран-при</th>
+            <th>Команда</th>
+            <th>Пилот</th>
+            <th>Время (с)</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+    
+    const tbody = document.createElement('tbody');
+    
+    // Фильтруем валидные
+    const validPitstops = pitstopData.filter(row => 
+        row.driver !== 'none' && row.time !== '0.00' && row.time !== '0.00s'
+    );
+    
+    // Находим лучшее (минимальное) время
+    let bestTime = Infinity;
+    validPitstops.forEach(row => {
+        const t = parseFloat(row.time);
+        if (!isNaN(t) && t < bestTime) bestTime = t;
+    });
+    
+    validPitstops.forEach((row, index) => {
+        const driver = findDriverById(row.driver);
+        if (!driver) return;
+        
+        const gpCountry = getGPCountry(row.gpId);
+        const gpName = getGPName(row.gpId);
+        
+        // Проверяем, лучшее ли это время
+        const currentTime = parseFloat(row.time);
+        const isBest = !isNaN(currentTime) && currentTime === bestTime;
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="pos-cell">${index + 1}</td>
+            <td class="gp-cell">
+                <img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
+                <span>${gpName}</span>
+            </td>
+            <td class="team-cell stats-clickable" data-team="${driver.team}">
+                <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
+            </td>
+            <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
+                <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
+                <span>${driver.name}</span>
+            </td>
+            <td class="time-cell ${isBest ? 'best-time' : ''}">${row.time}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+    
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+    wrapper.appendChild(tableContainer);
+    
+    wrapper.addEventListener('click', (e) => {
+        const driverCell = e.target.closest('.stats-driver-clickable');
+        if (driverCell) {
+            const driver = findDriverById(driverCell.dataset.driverId);
+            if (driver) openDriverModal(driver);
+            return;
+        }
+        const teamCell = e.target.closest('.stats-clickable');
+        if (teamCell) {
+            const teamData = getTeamData(teamCell.dataset.team);
+            if (teamData) openTeamModal(teamData);
+            return;
+        }
+    });
+    
+    return wrapper;
+}
+
+function createPenaltiesTable() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'stats-table-wrapper';
+    
+    const tableTitle = document.createElement('h3');
+    tableTitle.className = 'stats-table-title';
+    tableTitle.textContent = 'Штрафы пилотов';
+    wrapper.appendChild(tableTitle);
+    
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'stats-table-container';
+    
+    const table = document.createElement('table');
+    table.className = 'stats-table penalties-table';
+    
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Команда</th>
+            <th>Пилот</th>
+            <th>Штрафы</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+    
+    const tbody = document.createElement('tbody');
+    
+    const sorted = [...penaltiesData]
+        .filter(p => p.fines > 0)
+        .sort((a, b) => b.fines - a.fines);
+    
+    sorted.forEach(row => {
+        const driver = findDriverByName(row.driver);
+        if (!driver) return;
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="team-cell stats-clickable" data-team="${driver.team}">
+                <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
+            </td>
+            <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
+                <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
+                <span>${row.driver}</span>
+            </td>
+            <td class="fines-cell">${row.fines}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+    
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+    wrapper.appendChild(tableContainer);
+    
+    wrapper.addEventListener('click', (e) => {
+        const driverCell = e.target.closest('.stats-driver-clickable');
+        if (driverCell) {
+            const driver = findDriverById(driverCell.dataset.driverId);
+            if (driver) openDriverModal(driver);
+            return;
+        }
+        const teamCell = e.target.closest('.stats-clickable');
+        if (teamCell) {
+            const teamData = getTeamData(teamCell.dataset.team);
+            if (teamData) openTeamModal(teamData);
+            return;
+        }
+    });
+    
+    return wrapper;
+}
+
+function createLapRecordTable() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'stats-table-wrapper';
+    
+    const tableTitle = document.createElement('h3');
+    tableTitle.className = 'stats-table-title';
+    tableTitle.textContent = 'Рекорды круга';
+    wrapper.appendChild(tableTitle);
+    
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'stats-table-container';
+    
+    const table = document.createElement('table');
+    table.className = 'stats-table lap-record-table';
+    
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>#</th>
+            <th>Гран-при</th>
+            <th>Команда</th>
+            <th>Пилот</th>
+            <th>Время</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+    
+    const tbody = document.createElement('tbody');
+    
+    const validRecords = lapRecordData.filter(row => 
+        row.driver !== 'none' && 
+        row.time !== '0.00s' && 
+        row.time !== '0:00.000'
+    );
+    
+    if (validRecords.length === 0) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td colspan="5" style="text-align:center;color:#666;padding:20px;">Нет данных</td>`;
+        tbody.appendChild(tr);
+    } else {
+        validRecords.forEach((row, index) => {
+            const driver = findDriverById(row.driver);
+            if (!driver) return;
             
-            <div class="stats-grid">
-                <div class="stats-column">
-                    <div class="stats-table" id="CvalaTable">
-                        <h2>Зачёт квалификации пилотов в команде</h2>
-                        <div class="stats-table-content"></div>
-                    </div>
-
-                    <div class="stats-table" id="lapTimesTable">
-                        <h2>Рекорды лучшего времени круга</h2>
-                        <div class="stats-table-content"></div>
-                    </div>
-                </div>
-                
-                <div class="stats-column">
-                    <div class="stats-table" id="pitStopsTable">
-                        <h2>Быстрейшие пит-стопы</h2>
-                        <div class="stats-table-content"></div>
-                    </div>
-                    
-                    <!-- Добавляем таблицу штрафов -->
-                    <div id="finesTableContainer">
-                        ${renderFinesTable()}
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-    renderCvalaTable();
-    renderLapTimesTable();
-    renderPitStopsTable();
-}
-
-function renderLapTimesTable() {
-    const container = document.querySelector('#lapTimesTable .stats-table-content');
-    
-    // Проверяем, есть ли данные
-    if (bestLapTimes.length === 0) {
-        container.innerHTML = `
-            <div class="no-fines-message">В текущем сезоне рекорд лучшего времени круга не установлен</div>
-        `;
-        return;
+            const gpCountry = getGPCountry(row.gpId);
+            const gpName = getGPName(row.gpId);
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="pos-cell">${index + 1}</td>
+                <td class="gp-cell">
+                    <img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
+                    <span>${gpName}</span>
+                </td>
+                <td class="team-cell stats-clickable" data-team="${driver.team}">
+                    <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
+                </td>
+                <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
+                    <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
+                    <span>${driver.name}</span>
+                </td>
+                <td class="time-cell">${row.time}</td>
+            `;
+            tbody.appendChild(tr);
+        });
     }
     
-    let html = `
-        <div class="stats-table-header">
-            <div class="stats-col position">#</div>
-            <div class="stats-col track">Гран-При</div>
-            <div class="stats-col driver">Пилот</div>
-            <div class="stats-col team">Команда</div>
-            <div class="stats-col time">Время</div>
-        </div>
-    `;
-    
-    bestLapTimes.forEach((item, index) => {
-        html += `
-            <div class="stats-table-row">
-                <div class="stats-col position">${index + 1}</div>
-                <div class="stats-col track">
-                    <img src="Images/Flags/${item.country}.svg" alt="${item.country}" class="stats-flag">
-                    ${item.track}
-                </div>
-                <div class="stats-col driver">
-                    <img src="Images/Flags/${item.driverCountry}.svg" alt="${item.driverCountry}" class="stats-flag">
-                    ${item.driver}
-                </div>
-                <div class="stats-col team">
-                    <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
-                    ${item.team}
-                </div>
-                <div class="stats-col time">${item.time}</div>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-function renderPitStopsTable() {
-    const container = document.querySelector('#pitStopsTable .stats-table-content');
-    
-    // Проверяем, есть ли данные
-    if (fastestPitStops.length === 0) {
-        container.innerHTML = `
-            <div class="no-fines-message">В текущем сезоне время быстрейщего пит-стопа не установлено</div>
-        `;
-        return;
-    }
-    
-    let html = `
-        <div class="stats-table-header">
-            <div class="stats-col position">#</div>
-            <div class="stats-col track">Гран-При</div>
-            <div class="stats-col team">Команда</div>
-            <div class="stats-col driver">Пилот</div>
-            <div class="stats-col time">Время</div>
-        </div>
-    `;
-    
-    fastestPitStops.forEach((item, index) => {
-        html += `
-            <div class="stats-table-row">
-                <div class="stats-col position">${index + 1}</div>
-                <div class="stats-col track">
-                    <img src="Images/Flags/${item.country}.svg" alt="${item.country}" class="stats-flag">
-                    ${item.track}
-                </div>
-                <div class="stats-col team">
-                    <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
-                    ${item.team}
-                </div>
-                <div class="stats-col driver">
-                    <img src="Images/Flags/${item.driverCountry}.svg" alt="${item.driverCountry}" class="stats-flag">
-                    ${item.driver}
-                </div>
-                <div class="stats-col time">${item.time}</div>
-            </div>
-        `;
-    });
-
-    // Находим лучший пит-стоп (с минимальным временем)
-    let bestPitStop = null;
-    let bestTimeValue = Infinity;
-    
-    fastestPitStops.forEach(item => {
-        const timeNum = parseFloat(item.time.replace('s', ''));
-        if (timeNum < bestTimeValue) {
-            bestTimeValue = timeNum;
-            bestPitStop = item;
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+    wrapper.appendChild(tableContainer);
+	
+    wrapper.addEventListener('click', (e) => {
+        const driverCell = e.target.closest('.stats-driver-clickable');
+        if (driverCell) {
+            const driver = findDriverById(driverCell.dataset.driverId);
+            if (driver) openDriverModal(driver);
+            return;
+        }
+        const teamCell = e.target.closest('.stats-clickable');
+        if (teamCell) {
+            const teamData = getTeamData(teamCell.dataset.team);
+            if (teamData) openTeamModal(teamData);
+            return;
         }
     });
-
-    if (bestPitStop) {
-        html += `
-            <div class="stats-divider-row"></div>
-            <div class="stats-best-title">Лучший пит-стоп сезона</div>
-            <div class="stats-table-row stats-best-row">
-                <div class="stats-col position"></div>
-                <div class="stats-col track">
-                    <img src="Images/Flags/${bestPitStop.country}.svg" alt="${bestPitStop.country}" class="stats-flag">
-                    ${bestPitStop.track}
-                </div>
-                <div class="stats-col team">
-                    <img src="Images/Teams/${bestPitStop.teamLogo}" alt="${bestPitStop.team}" class="stats-team-logo">
-                    ${bestPitStop.team}
-                </div>
-                <div class="stats-col driver">
-                    <img src="Images/Flags/${bestPitStop.driverCountry}.svg" alt="${bestPitStop.driverCountry}" class="stats-flag">
-                    ${bestPitStop.driver}
-                </div>
-                <div class="stats-col time best-time">${bestPitStop.time}</div>
-            </div>
-        `;
-    }
-
-    // Подсчитываем количество, сумму времени и самый быстрый пит-стоп по командам
-    const teamPitStopStats = {};
-    fastestPitStops.forEach(item => {
-        const timeNum = parseFloat(item.time.replace('s', ''));
-        if (!teamPitStopStats[item.team]) {
-            teamPitStopStats[item.team] = {
-                count: 0,
-                totalTime: 0,
-                fastestTime: Infinity,
-                fastestTimeStr: null,
-                teamLogo: item.teamLogo
-            };
-        }
-        teamPitStopStats[item.team].count++;
-        teamPitStopStats[item.team].totalTime += timeNum;
-        if (timeNum < teamPitStopStats[item.team].fastestTime) {
-            teamPitStopStats[item.team].fastestTime = timeNum;
-            teamPitStopStats[item.team].fastestTimeStr = item.time;
-        }
-    });
-
-    let championTeam = null;
-    let maxCount = -1;
-    let minTotalTime = Infinity;
-    let minFastestTime = Infinity;
     
-    for (const [team, data] of Object.entries(teamPitStopStats)) {
-        if (data.count > maxCount) {
-            maxCount = data.count;
-            minTotalTime = data.totalTime;
-            minFastestTime = data.fastestTime;
-            championTeam = { team, ...data };
-        } else if (data.count === maxCount) {
-            if (data.totalTime < minTotalTime) {
-                minTotalTime = data.totalTime;
-                minFastestTime = data.fastestTime;
-                championTeam = { team, ...data };
-            } else if (data.totalTime === minTotalTime && data.fastestTime < minFastestTime) {
-                minFastestTime = data.fastestTime;
-                championTeam = { team, ...data };
-            }
-        }
-    }
-
-    // Добавляем разделитель и чемпиона по пит-стопам
-    if (championTeam) {
-        html += `
-            <div class="stats-divider-row"></div>
-            <div class="stats-best-title">Чемпион лучших пит-стопов сезона</div>
-            <div class="stats-table-row stats-best-row" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-                <div class="stats-col" style="display: flex; align-items: center; gap: 8px;">
-                    <img src="Images/Teams/${championTeam.teamLogo}" alt="${championTeam.team}" class="stats-team-logo" style="width: 25px; height: 20px;">
-                    <span>${championTeam.team}</span>
-                </div>
-                    <span style="color: #e53935;">|</span>
-                <div class="stats-col" style="display: flex; align-items: baseline; gap: 5px;">
-                    <span>${championTeam.count}</span>
-                    <span>${getDeclension(championTeam.count, 'Пит-стоп', 'Пит-стопа', 'Пит-стопов')}</span>
-                </div>
-            </div>
-        `;
-    }
-    
-    container.innerHTML = html;
-}
-
-function getDeclension(number, one, two, five) {
-    let n = Math.abs(number);
-    n %= 100;
-    if (n >= 5 && n <= 20) {
-        return five;
-    }
-    n %= 10;
-    if (n === 1) {
-        return one;
-    }
-    if (n >= 2 && n <= 4) {
-        return two;
-    }
-    return five;
-}
-
-function renderCvalaTable() {
-    const container = document.querySelector('#CvalaTable .stats-table-content');
-    
-    let html = `
-        <div class="stats-table-header">
-            <div class="stats-col team-logo"></div>
-            <div class="stats-col driver driver1">Пилот</div>
-            <div class="stats-col cvala">Счёт</div>
-            <div class="stats-col driver driver2">Пилот</div>
-            <div class="stats-col team-logo"></div>
-        </div>
-    `;
-    
-    Cvala.forEach((item) => {
-        html += `
-            <div class="stats-table-row">
-                <div class="stats-col team-logo">
-                    <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
-                </div>
-                <div class="stats-col driver driver1">
-                    <img src="Images/Flags/${item.driverCountry1}.svg" alt="${item.driverCountry1}" class="stats-flag">
-                    ${item.driver1}
-                </div>
-                <div class="stats-col cvala">
-                    <span class="cvala-score">${item.cvala1}</span>
-                    <span class="cvala-vs">:</span>
-                    <span class="cvala-score">${item.cvala2}</span>
-                </div>
-                <div class="stats-col driver driver2">
-                    <img src="Images/Flags/${item.driverCountry2}.svg" alt="${item.driverCountry2}" class="stats-flag">
-                    ${item.driver2}
-                </div>
-                <div class="stats-col team-logo">
-                    <img src="Images/Teams/${item.teamLogo}" alt="${item.team}" class="stats-team-logo">
-                </div>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-if (window.location.hash === '#stats') {
-    renderStats();
+    return wrapper;
 }

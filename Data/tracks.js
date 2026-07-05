@@ -1,1081 +1,328 @@
-// Календарь 
-const tracksData = {
-    "albert-park": {
-        "id": "t1",
-        "name": "Гран-при Австралии",
-        "logo": "Albert Park.svg",
-        "miniLogo": "Albert Park-m.svg",
-		"country": "au",
-		"state": "Австралия",
-        "location": "Мельбурн, Австралия",
-        "trackName": "Альберт-Парк",
-        "length": "5 278 км",
-        "laps": 58,
-        "turns": 14,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1.19.813 (Леклер, 2024)",
-        "date": "2026-03-08 11:55",
-		"recordingSprint": "",
-        "recordingRace": "https://rutube.ru/video/264170a23560b1eec2e7b27978b62b3f/"
+const tracksData = [
+    { id: "albert-park",
+        name: "Гран-при Австралии",
+        img: "Albert Park.svg",
+        country: "au",
+        location: "Мельбурн, Австралия",
+        trackName: "Альберт-Парк",
+        length: "5 278 км",
+        laps: 58,
+        turns: 14,
+        direction: "по часовой стрелке",
+        lapRecord: "1.19.813 (Леклер, 2024)"
     },
-    "shanghai": {
-        "id": "t2",
-        "name": "Гран-при Китая",
-        "logo": "Shanghai.svg",
-        "miniLogo": "Shanghai-m.svg",
-		"country": "cn",
-		"state": "Китай",
-        "location": "Шанхай, Китай",
-        "trackName": "Международный автодром Шанхая",
-        "length": "5 451 км",
-        "laps": 56,
-        "turns": 16,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:32.238 (Шумахер, 2004)",
-        "date": "2026-03-15 14:55",
-		"hasSprint": true,
-        "recordingSprint": "https://rutube.ru/video/e01dc7aca552e6b3481e27a12b481e43/",
-        "recordingRace": "https://rutube.ru/video/0cb1fa5f8d0b60b7266f43f015566674/"
+    { id: "shanghai",
+        name: "Гран-при Китая",
+        img: "Shanghai.svg",
+        country: "cn",
+        location: "Шанхай, Китай",
+        trackName: "Международный автодром Шанхая",
+        length: "5 451 км",
+        laps: 56,
+        turns: 16,
+        direction: "по часовой стрелке",
+        lapRecord: "1:32.238 (Шумахер, 2004)"
     },
-    "suzuka": {
-        "id": "t3",
-        "name": "Гран-при Японии",
-        "logo": "Suzuka.svg",
-        "miniLogo": "Suzuka-m.svg",
-		"country": "jp",
-		"state": "Япония",
-        "location": "Судзука, Япония",
-        "trackName": "Судзука",
-        "length": "5 807 км",
-        "laps": 53,
-        "turns": 18,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:30.965 (Антонелли, 2025)",
-        "date": "2026-03-29 12:55",
-        "recordingSprint": "",
-        "recordingRace": "https://rutube.ru/video/6d24c1dd05e8824e81dd3aa3cdd5b86f/"
+    { id: "suzuka",
+        name: "Гран-при Японии",
+        img: "Suzuka.svg",
+        country: "jp",
+        location: "Судзука, Япония",
+        trackName: "Судзука",
+        length: "5 807 км",
+        laps: 53,
+        turns: 18,
+        direction: "по часовой стрелке",
+        lapRecord: "1:30.965 (Антонелли, 2025)"
     },
-    "bahrain": {
-        "id": "t4",
-        "name": "Гран-при Бахрейна",
-        "logo": "Bahrain.svg",
-        "miniLogo": "Bahrain-m.svg",
-		"country": "bh",
-		"state": "Бахрейн",
-        "location": "Сахир, Бахрейн",
-        "trackName": "Международный автодром Бахрейна",
-        "length": "5 412 км",
-        "laps": 57,
-        "turns": 15,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:31.447 (Де ла Роса, 2005)",
-        "date": "2026-04-12 22:55",
-		"canceled": true,
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "bahrain",
+        name: "Гран-при Бахрейна",
+        img: "Bahrain.svg",
+        country: "bh",
+        location: "Сахир, Бахрейн",
+        trackName: "Международный автодром Бахрейна",
+        length: "5 412 км",
+        laps: 57,
+        turns: 15,
+        direction: "по часовой стрелке",
+        lapRecord: "1:31.447 (Де ла Роса, 2005)"
     },
-    "jeddah": {
-        "id": "t5",
-        "name": "Гран-при Саудовской Аравии",
-        "logo": "Jeddah.svg",
-        "miniLogo": "Jeddah-m.svg",
-		"country": "sa",
-		"state": "Саудовская Аравия",
-        "location": "Джидда, Саудовская Аравия",
-        "trackName": "Городская трасса Джидда",
-        "length": "6 174 км",
-        "laps": 50,
-        "turns": 27,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1:30.734 (Хэмилтон, 2021)",
-        "date": "2026-04-19 00:55",
-		"canceled": true,
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "jeddah",
+        name: "Гран-при Саудовской Аравии",
+        img: "Jeddah.svg",
+        country: "sa",
+        location: "Джидда, Саудовская Аравия",
+        trackName: "Городская трасса Джидда",
+        length: "6 174 км",
+        laps: 50,
+        turns: 27,
+        direction: "против часовой стрелки",
+        lapRecord: "1:30.734 (Хэмилтон, 2021)"
     },
-    "miami": {
-        "id": "t6",
-        "name": "Гран-при Майами",
-        "logo": "Miami.svg",
-        "miniLogo": "Miami-m.svg",
-		"country": "us",
-		"state": "США",
-        "location": "Майами, США",
-        "trackName": "Международный автодром Майами",
-        "length": "5 412 км",
-        "laps": 57,
-        "turns": 19,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:29.708 (Ферстаппен, 2024)",
-        "date": "2026-05-04 00:55",
-		"hasSprint": true,
-        "recordingSprint": "https://rutube.ru/video/105d706e84f0903bb3bc0da3dd4e2f91/",
-        "recordingRace": "https://rutube.ru/video/3628eef00d9d494b12467d1ef0bc42c1/"
+    { id: "miami",
+        name: "Гран-при Майами",
+        img: "Miami.svg",
+        country: "us",
+        location: "Майами, США",
+        trackName: "Международный автодром Майами",
+        length: "5 412 км",
+        laps: 57,
+        turns: 19,
+        direction: "по часовой стрелке",
+        lapRecord: "1:29.708 (Ферстаппен, 2024)"
     },
-    "gilles-villeneuve": {
-        "id": "t7",
-        "name": "Гран-при Канады",
-        "logo": "Gilles Villeneuve.svg",
-        "miniLogo": "Gilles Villeneuve-m.svg",
-		"country": "ca",
-		"state": "Канада",
-        "location": "Монреаль, Канада",
-        "trackName": "Автодром имени Жиля Вильнёва",
-        "length": "4 361 км",
-        "laps": 70,
-        "turns": 14,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1.13.078 (Боттас, 2019)",
-        "date": "2026-05-25 03:55",
-		"hasSprint": true,
-        "recordingSprint": "https://rutube.ru/video/bc877009b2b8fc79bc6f979462168e6f/",
-        "recordingRace": "https://rutube.ru/video/03fefa5dc563eeccb70fdae0547937ee/"
+    { id: "gilles-villeneuve",
+        name: "Гран-при Канады",
+        img: "Gilles Villeneuve.svg",
+        country: "ca",
+        location: "Монреаль, Канада",
+        trackName: "Автодром имени Жиля Вильнёва",
+        length: "4 361 км",
+        laps: 70,
+        turns: 14,
+        direction: "против часовой стрелки",
+        lapRecord: "1.13.078 (Боттас, 2019)"
     },
-    "monaco": {
-        "id": "t8",
-        "name": "Гран-при Монако",
-        "logo": "Monaco.svg",
-        "miniLogo": "Monaco-m.svg",
-		"country": "mc",
-		"state": "Манако",
-        "location": "Монте-Карло, Монако",
-        "trackName": "Городская трасса Монте-Карло",
-        "length": "3 337 км",
-        "laps": 78,
-        "turns": 19,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1.12.909 (Хэмилтон, 2021)",
-        "date": "2026-06-07 20:55",
-        "recordingSprint": "",
-        "recordingRace": "https://rutube.ru/video/f85e53c184adb938f135e5f672dd34fb/"
+    { id: "monaco",
+        name: "Гран-при Монако",
+        img: "Monaco.svg",
+        country: "mc",
+        location: "Монте-Карло, Монако",
+        trackName: "Городская трасса Монте-Карло",
+        length: "3 337 км",
+        laps: 78,
+        turns: 19,
+        direction: "по часовой стрелке",
+        lapRecord: "1.12.909 (Хэмилтон, 2021)"
     },
-    "barcelona-catalunya": {
-        "id": "t9",
-        "name": "Гран-при Барселоны-Каталунии",
-        "logo": "Barcelona Catalunya.svg",
-        "miniLogo": "Barcelona Catalunya-m.svg",
-		"country": "es",
-		"state": "Барселона-Каталунья",
-        "location": "Барселона, Испания",
-        "trackName": "Барселона-Каталунья",
-        "length": "4 657 км",
-        "laps": 66,
-        "turns": 14,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:15.743 (Пиастри, 2025)",
-        "date": "2026-06-14 20:55",
-        "recordingSprint": "",
-        "recordingRace": "https://rutube.ru/video/d453cd08307bbb2f0328d9dd19fd1fdd/"
+    { id: "barcelona-catalunya",
+        name: "Гран-при Барселоны-Каталунии",
+        img: "Barcelona Catalunya.svg",
+        country: "es",
+        location: "Барселона, Испания",
+        trackName: "Барселона-Каталунья",
+        length: "4 657 км",
+        laps: 66,
+        turns: 14,
+        direction: "по часовой стрелке",
+        lapRecord: "1:15.743 (Пиастри, 2025)"
     },
-    "red-bull-ring": {
-        "id": "t10",
-        "name": "Гран-при Австрии",
-        "logo": "Red Bull Ring.svg",
-        "miniLogo": "Red Bull Ring-m.svg",
-		"country": "at",
-		"state": "Австрия",
-        "location": "Шпильберг, Австрия",
-        "trackName": "Ред Булл Ринг",
-        "length": "4 326 км",
-        "laps": 71,
-        "turns": 10,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:05.619 (Сайнс, 2020)",
-        "date": "2026-06-28 20:55",
-        "recordingSprint": "",
-        "recordingRace": "https://rutube.ru/video/d8359daa94329ff700c3064ba10551a4/"
+    { id: "red-bull-ring",
+        name: "Гран-при Австрии",
+        img: "Red Bull Ring.svg",
+        country: "at",
+        location: "Шпильберг, Австрия",
+        trackName: "Ред Булл Ринг",
+        length: "4 326 км",
+        laps: 71,
+        turns: 10,
+        direction: "по часовой стрелке",
+        lapRecord: "1:05.619 (Сайнс, 2020)"
     },
-    "silverstone": {
-        "id": "t11",
-        "name": "Гран-при Великобритании",
-        "logo": "Silverstone.svg",
-        "miniLogo": "Silverstone-m.svg",
-		"country": "gb",
-		"state": "Великобритания",
-        "location": "Нортгемптошир, Англия",
-        "trackName": "Сильверстоун",
-        "length": "5 891 км",
-        "laps": 52,
-        "turns": 18,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1.27.097 (Ферстаппен, 2020)",
-        "date": "2026-07-05 21:55",
-		"hasSprint": true,
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "silverstone",
+        name: "Гран-при Великобритании",
+        img: "Silverstone.svg",
+        country: "gb",
+        location: "Нортгемптошир, Англия",
+        trackName: "Сильверстоун",
+        length: "5 891 км",
+        laps: 52,
+        turns: 18,
+        direction: "против часовой стрелки",
+        lapRecord: "1.27.097 (Ферстаппен, 2020)"
     },
-    "spa": {
-        "id": "t12",
-        "name": "Гран-при Бельгии",
-        "logo": "Spa.svg",
-        "miniLogo": "Spa-m.svg",
-		"country": "be",
-		"state": "Бельгия",
-        "location": "Спа, Бельгия",
-        "trackName": "Спа-Франкоршам",
-        "length": "7 004 км",
-        "laps": 44,
-        "turns": 20,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:44.701 (Перес, 2024)",
-        "date": "2026-07-19 20:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "spa",
+        name: "Гран-при Бельгии",
+        img: "Spa.svg",
+        country: "be",
+        location: "Спа, Бельгия",
+        trackName: "Спа-Франкоршам",
+        length: "7 004 км",
+        laps: 44,
+        turns: 20,
+        direction: "по часовой стрелке",
+        lapRecord: "1:44.701 (Перес, 2024)"
     },
-    "hungaroring": {
-        "id": "t13",
-        "name": "Гран-при Венгрии",
-        "logo": "Hungaroring.svg",
-        "miniLogo": "Hungaroring-m.svg",
-		"country": "hu",
-		"state": "Венгрия",
-        "location": "Будапешт, Венгрия",
-        "trackName": "Хунгароринг",
-        "length": "4 381 км",
-        "laps": 70,
-        "turns": 14,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:16.627 (Хэмилтон, 2020)",
-        "date": "2026-07-26 20:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "hungaroring",
+        name: "Гран-при Венгрии",
+        img: "Hungaroring.svg",
+        country: "hu",
+        location: "Будапешт, Венгрия",
+        trackName: "Хунгароринг",
+        length: "4 381 км",
+        laps: 70,
+        turns: 14,
+        direction: "по часовой стрелке",
+        lapRecord: "1:16.627 (Хэмилтон, 2020)"
     },
-    "zandvoort": {
-        "id": "t14",
-        "name": "Гран-при Нидерландов",
-        "logo": "Zandvoort.svg",
-        "miniLogo": "Zandvoort-m.svg",
-		"country": "nl",
-		"state": "Нидерланды",
-        "location": "Зандвоорт, Нидерланды",
-        "trackName": "Зандвоорт",
-        "length": "4 259 км",
-        "laps": 72,
-        "turns": 14,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1.11.097 (Хэмилтон, 2021)",
-        "date": "2026-08-23 20:55",
-		"hasSprint": true,
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "zandvoort",
+        name: "Гран-при Нидерландов",
+        img: "Zandvoort.svg",
+        country: "nl",
+        location: "Зандвоорт, Нидерланды",
+        trackName: "Зандвоорт",
+        length: "4 259 км",
+        laps: 72,
+        turns: 14,
+        direction: "против часовой стрелки",
+        lapRecord: "1.11.097 (Хэмилтон, 2021)"
     },
-    "monza": {
-        "id": "t15",
-        "name": "Гран-при Италии",
-        "logo": "Monza.svg",
-        "miniLogo": "Monza-m.svg",
-		"country": "it",
-		"state": "Италия",
-        "location": "Монца, Италия",
-        "trackName": "Национальный автодром Монцы",
-        "length": "5 793 км",
-        "laps": 53,
-        "turns": 11,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:20.901 (Норрис, 2025)",
-        "date": "2026-09-06 20:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "monza",
+        name: "Гран-при Италии",
+        img: "Monza.svg",
+        country: "it",
+        location: "Монца, Италия",
+        trackName: "Национальный автодром Монцы",
+        length: "5 793 км",
+        laps: 53,
+        turns: 11,
+        direction: "по часовой стрелке",
+        lapRecord: "1:20.901 (Норрис, 2025)"
     },
-    "spain": {
-        "id": "t16",
-        "name": "Гран-при Испании",
-        "logo": "Madrid.png",
-        "miniLogo": "Madrid-m.png",
-		"country": "es",
-		"state": "Испания",
-        "location": "Мадрид, Испания",
-        "trackName": "МадРинг",
-        "length": "5 474 км",
-        "laps": 63,
-        "turns": 20,
-        "direction": "по часовой стрелке",
-        "lapRecord": "---",
-        "date": "2026-09-13 20:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "spain",
+        name: "Гран-при Испании",
+        img: "Madrid.png",
+        country: "es",
+        location: "Мадрид, Испания",
+        trackName: "МадРинг",
+        length: "5 474 км",
+        laps: 63,
+        turns: 20,
+        direction: "по часовой стрелке",
+        lapRecord: "---"
     },
-	
-	/*
-	"istanbul": {
-        "id": "t16",
-        "name": "Гран-при Турции",
-        "logo": "Istanbul.png",
-        "miniLogo": "Istanbul-m.png",
-		"country": "tr",
-		"state": "Турция",
-        "location": "Стамбул, Турция",
-        "trackName": "Истанбул Парк",
-        "length": "5 338 км",
-        "laps": 58,
-        "turns": 14,
-        "direction": "против часовой стрелке",
-        "lapRecord": "1.24.770 (Монтойя, 2005)",
-        "date": "2026-09-13 21:00",
-        "recordingSprint": "",
-        "recordingRace": ""
-    },*/
-	
-    "baku": {
-        "id": "t17",
-        "name": "Гран-при Азербайджана",
-        "logo": "Baku.svg",
-        "miniLogo": "Baku-m.svg",
-		"country": "az",
-		"state": "Азербайджан",
-        "location": "Баку, Азербайджан",
-        "trackName": "Городская трасса Баку",
-        "length": "6 003 км",
-        "laps": 51,
-        "turns": 20,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1.43.009 (Леклер, 2019)",
-        "date": "2026-09-26 18:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "baku",
+        name: "Гран-при Азербайджана",
+        img: "Baku.svg",
+        country: "az",
+        location: "Баку, Азербайджан",
+        trackName: "Городская трасса Баку",
+        length: "6 003 км",
+        laps: 51,
+        turns: 20,
+        direction: "против часовой стрелки",
+        lapRecord: "1.43.009 (Леклер, 2019)"
     },
-    "marina-bay": {
-        "id": "t18",
-        "name": "Гран-при Сингапура",
-        "logo": "Marina Bay.svg",
-        "miniLogo": "Marina Bay-m.svg",
-		"country": "sg",
-		"state": "Сингапур",
-        "location": "Сингапур",
-        "trackName": "Марина-Бэй",
-        "length": "4 927 км",
-        "laps": 62,
-        "turns": 23,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1:34.486 (Рикиардо, 2024)",
-        "date": "2026-10-11 19:55",
-		"hasSprint": true,
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "marina-bay",
+        name: "Гран-при Сингапура",
+        img: "Marina Bay.svg",
+        country: "sg",
+        location: "Сингапур",
+        trackName: "Марина-Бэй",
+        length: "4 927 км",
+        laps: 62,
+        turns: 23,
+        direction: "против часовой стрелки",
+        lapRecord: "1:34.486 (Рикиардо, 2024)"
     },
-    "cota": {
-        "id": "t19",
-        "name": "Гран-при США",
-        "logo": "COTA.svg",
-        "miniLogo": "COTA-m.svg",
-		"country": "us",
-		"state": "США",
-        "location": "Остин, США",
-        "trackName": "Трасса Америк",
-        "length": "5 513 км",
-        "laps": 56,
-        "turns": 20,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1:36.169 (Леклер, 2019)",
-        "date": "2026-10-26 03:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "cota",
+        name: "Гран-при США",
+        img: "COTA.svg",
+        country: "us",
+        location: "Остин, США",
+        trackName: "Трасса Америк",
+        length: "5 513 км",
+        laps: 56,
+        turns: 20,
+        direction: "против часовой стрелки",
+        lapRecord: "1:36.169 (Леклер, 2019)"
     },
-    "Rodriguez": {
-        "id": "t20",
-        "name": "Гран-при Мехико",
-        "logo": "Rodríguez.svg",
-        "miniLogo": "Rodríguez-m.svg",
-		"country": "mx",
-		"state": "Мексика",
-        "location": "Мехико, Мексика",
-        "trackName": "Автодром имени братьев Родригес",
-        "length": "4 304 км",
-        "laps": 71,
-        "turns": 17,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1:17.774 (Боттас, 2021)",
-        "date": "2026-11-02 03:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "rodriguez",
+        name: "Гран-при Мехико",
+        img: "Rodríguez.svg",
+        country: "mx",
+        location: "Мехико, Мексика",
+        trackName: "Автодром имени братьев Родригес",
+        length: "4 304 км",
+        laps: 71,
+        turns: 17,
+        direction: "против часовой стрелки",
+        lapRecord: "1:17.774 (Боттас, 2021)"
     },
-    "interlagos": {
-        "id": "t21",
-        "name": "Гран-при Сан-Паулу",
-        "logo": "Interlagos.svg",
-        "miniLogo": "Interlagos-m.svg",
-		"country": "br",
-		"state": "Бразилия",
-        "location": "Сан-Паулу, Бразилия",
-        "trackName": "Интерлагос",
-        "length": "4 309 км",
-        "laps": 71,
-        "turns": 15,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1:10.540 (Боттас, 2018)",
-        "date": "2026-11-09 00:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "interlagos",
+        name: "Гран-при Сан-Паулу",
+        img: "Interlagos.svg",
+        country: "br",
+        location: "Сан-Паулу, Бразилия",
+        trackName: "Интерлагос",
+        length: "4 309 км",
+        laps: 71,
+        turns: 15,
+        direction: "против часовой стрелки",
+        lapRecord: "1:10.540 (Боттас, 2018)"
     },
-    "las-vegas": {
-        "id": "t22",
-        "name": "Гран-при Лас-Вегаса",
-        "logo": "Las Vegas.svg",
-        "miniLogo": "Las Vegas-m.svg",
-		"country": "us",
-		"state": "США",
-        "location": "Лас-Вегас, США",
-        "trackName": "Городская трасса Лас-Вегас",
-        "length": "6 201 км",
-        "laps": 50,
-        "turns": 17,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1:32.312 (Рассел, 2024)",
-        "date": "2026-11-22 11:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "las-vegas",
+        name: "Гран-при Лас-Вегаса",
+        img: "Las Vegas.svg",
+        country: "us",
+        location: "Лас-Вегас, США",
+        trackName: "Городская трасса Лас-Вегас",
+        length: "6 201 км",
+        laps: 50,
+        turns: 17,
+        direction: "против часовой стрелки",
+        lapRecord: "1:32.312 (Рассел, 2024)"
     },
-    "losail": {
-        "id": "t23",
-        "name": "Гран-при Катара",
-        "logo": "Losail.svg",
-        "miniLogo": "Losail-m.svg",
-		"country": "qa",
-		"state": "Катар",
-        "location": "Доха, Катар",
-        "trackName": "Международный автодром Лосаил",
-        "length": "5 419 км",
-        "laps": 57,
-        "turns": 16,
-        "direction": "по часовой стрелке",
-        "lapRecord": "1:22.384 (Норрис, 2024)",
-        "date": "2026-11-30 23:55",
-        "recordingSprint": "",
-        "recordingRace": ""
+    { id: "losail",
+        name: "Гран-при Катара",
+        img: "Losail.svg",
+        country: "qa",
+        location: "Доха, Катар",
+        trackName: "Международный автодром Лосаил",
+        length: "5 419 км",
+        laps: 57,
+        turns: 16,
+        direction: "по часовой стрелке",
+        lapRecord: "1:22.384 (Норрис, 2024)"
     },
-    "yas-marina": {
-        "id": "t24",
-        "name": "Гран-при Абу-Даби",
-        "logo": "Yas Marina.svg",
-        "miniLogo": "Yas Marina-m.svg",
-		"country": "ae",
-		"state": "Объеденённые Арабские Эмираты",
-        "location": "Абу-Даби, ОАЭ",
-        "trackName": "Яс Марина",
-        "length": "5 281 км",
-        "laps": 58,
-        "turns": 16,
-        "direction": "против часовой стрелки",
-        "lapRecord": "1:22.109 (Ферстаппен, 2021)",
-        "date": "2026-12-06 20:55",
-        "recordingSprint": "",
-        "recordingRace": ""
-    }
-	};
+    { id: "yas-marina",
+        name: "Гран-при Абу-Даби",
+        img: "Yas Marina.svg",
+        country: "ae",
+        location: "Абу-Даби, ОАЭ",
+        trackName: "Яс Марина",
+        length: "5 281 км",
+        laps: 58,
+        turns: 16,
+        direction: "против часовой стрелки",
+        lapRecord: "1:22.109 (Ферстаппен, 2021)"
+    },
+    { id: "istanbul",
+        name: "Гран-при Турции",
+        img: "Istanbul.png",
+        country: "tr",
+        location: "Стамбул, Турция",
+        trackName: "Истанбул Парк",
+        length: "5 338 км",
+        laps: 58,
+        turns: 14,
+        direction: "против часовой стрелки",
+        lapRecord: "1.24.770 (Монтойя, 2005)"
+    },
+    { id: "istanbul",
+        name: "Гран При Португалии",
+        img: "portimao.png",
+        country: "pt",
+        location: "Портиман, Португалия",
+        trackName: "Автодром Алгарве (Портимао)",
+        length: "4 653 км",
+        laps: 66,
+        turns: 15,
+        direction: "по часовой стрелки",
+        lapRecord: "1.18.750 (Хэмилтон, 2020)"
+    },
+];
 
-// Функция для обновления данных подиума в tracksData
-function updateTracksPodiumData() {
-    // Проверяем, доступен ли объект tracksData (из другого файла)
-    if (typeof tracksData !== 'undefined') {
-        // Проходим по всем трассам
-        Object.keys(tracksData).forEach(trackKey => {
-            const track = tracksData[trackKey];
-            const gpId = trackToGrandPrixMap[track.id];
-            
-            // Сбрасываем подиум на "---" по умолчанию
-            track.podium1 = "---";
-            track.podium2 = "---";
-            track.podium3 = "---";
-            
-            // Проверяем, есть ли результаты для этого Гран-при
-            if (gpId && detailedResults[gpId]) {
-                const gpResults = detailedResults[gpId];
-                
-                // Проверяем, есть ли реальные результаты (не пустые и не с "000")
-                const hasRealResults = Object.keys(gpResults).some(key => 
-                    key !== "000" && gpResults[key] > 0
-                );
-                
-                if (hasRealResults) {
-                    // Находим топ-3 по очкам
-                    const sortedResults = Object.entries(gpResults)
-                        .filter(([driverName]) => driverName !== "000") // Исключаем заглушки
-                        .sort((a, b) => b[1] - a[1])
-                        .slice(0, 3);
-                    
-                    // Обновляем данные подиума
-                    if (sortedResults.length >= 1) {
-                        track.podium1 = getShortDriverName(sortedResults[0][0]);
-                    }
-                    if (sortedResults.length >= 2) {
-                        track.podium2 = getShortDriverName(sortedResults[1][0]);
-                    }
-                    if (sortedResults.length >= 3) {
-                        track.podium3 = getShortDriverName(sortedResults[2][0]);
-                    }
-                }
-            }
-        });
-    }
+function getTrackById(id) {
+    return tracksData.find(t => t.id === id);
 }
 
-// Функция для получения сокращённого имени пилота
-function getShortDriverName(fullName) {
-    const nameParts = fullName.split(' ');
-    if (nameParts.length >= 2) {
-        // Берём первую букву имени и фамилию
-        return `${nameParts[0][0]}.${nameParts[1]}`;
-    }
-    return fullName;
+function getTrackCountry(id) {
+    const track = getTrackById(id);
+    return track ? track.country : 'xx';
 }
 
-// Рендеринг карточек
-function renderCalendar() {
-    const content = document.getElementById('content');
-    content.innerHTML = `
-        <div class="calendar-container" id="calendarContainer">
-            <div class="next-year-calendar">
-                <h3>Календарь сезона 2026</h3>
-                <div class="next-year-events" id="nextYearEvents"></div>
-            </div>
-            <div class="calendar-grid" id="calendarGrid"></div>
-        </div>
-    `;
-
-    const calendarGrid = document.getElementById('calendarGrid');
-    const nextYearEvents = document.getElementById('nextYearEvents');
-    
-    // Сортируем гран-при по дате
-    const sortedTracks = Object.values(tracksData).sort((a, b) => 
-        new Date(a.date) - new Date(b.date)
-    );
-
-    // Рендерим текущий сезон
-    sortedTracks.forEach(track => {
-        const trackCard = document.createElement('div');
-        trackCard.className = 'track-card';
-        trackCard.setAttribute('data-track', track.id);
-        trackCard.setAttribute('data-date', track.date);
-        
-        const trackKey = Object.keys(tracksData).find(key => tracksData[key].id === track.id);
-        trackCard.setAttribute('data-gp', trackKey);
-        
-        const currentDate = new Date();
-        const raceDate = new Date(track.date);
-        const sprintDate = track.hasSprint ? new Date(new Date(track.date).getTime() - (24 * 60 * 60 * 1000)) : null; // Спринт за день до гонки
-        
-        const isFutureRace = raceDate > currentDate;
-        const isToday = raceDate.toDateString() === currentDate.toDateString();
-        const isSprintPassed = track.hasSprint && sprintDate && sprintDate < currentDate;
-        const isRacePassed = raceDate < currentDate;
-        
-        // Определяем статус
-        let status = '';
-        let isCanceled = track.canceled === true;
-        
-        if (isCanceled) {
-            status = '<span class="status-badge canceled">Отменено</span>';
-            trackCard.classList.add('canceled');
-        } else if (isToday) {
-            status = '<span class="status-badge today">Сегодня</span>';
-            trackCard.classList.add('today');
-        } else if (isFutureRace) {
-            status = '<span class="status-badge upcoming">Ожидается</span>';
-            trackCard.classList.add('upcoming');
-        } else {
-            status = '<span class="status-badge completed">Завершено</span>';
-            trackCard.classList.add('completed');
-        }
-
-		let actionsHtml = '';
-		let statusHtml = status;
-
-		if (isCanceled) {
-			actionsHtml = '<div class="action-btn canceled-btn">Гонка отменена</div>';
-		} else if (isRacePassed) {
-			// Прошедшая гонка
-			if (track.hasSprint) {
-				const sprintBtn = track.recordingSprint 
-					? `<a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>`
-					: '<div class="action-btn no-recording">Нет записи спринта</div>';
-				const raceBtn = track.recordingRace 
-					? `<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>`
-					: '<div class="action-btn no-recording">Нет записи гонки</div>';
-				actionsHtml = `<div class="action-buttons">${sprintBtn}${raceBtn}</div>`;
-			} else {
-				actionsHtml = track.recordingRace 
-					? `<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>`
-					: '<div class="action-btn no-recording">Нет записи</div>';
-			}
-		} else if (isToday || (!isRacePassed && !isFutureRace)) {
-			// Гонка сегодня или началась
-			const hasRaceStarted = currentDate >= raceDate;
-			
-			if (hasRaceStarted && track.recordingRace) {
-				if (track.hasSprint && track.recordingSprint) {
-					actionsHtml = `<div class="action-buttons">
-						<a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
-						<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>
-					</div>`;
-				} else {
-					actionsHtml = `<a href="${track.recordingRace}" class="action-btn recording">Запись гонки</a>`;
-				}
-			} else if (hasRaceStarted) {
-				actionsHtml = '<div class="action-btn no-recording">Нет записи</div>';
-			} else {
-				// Гонка сегодня, но не началась
-				const timerHtml = `<div class="countdown">
-					<span>До гонки:</span>
-					<div class="timer" data-date="${track.date}">
-						<span class="hours">00</span>ч 
-						<span class="minutes">00</span>м 
-						<span class="seconds">00</span>с
-					</div>
-				</div>`;
-				
-				if (track.hasSprint && track.recordingSprint && isSprintPassed) {
-					actionsHtml = `<div class="track-actions">
-						<a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
-						${timerHtml}
-					</div>`;
-				} else {
-					actionsHtml = timerHtml;
-				}
-			}
-		} else if (isFutureRace) {
-			// Будущая гонка
-			const timerHtml = `<div class="countdown">
-				<span>До гонки:</span>
-				<div class="timer" data-date="${track.date}">
-					<span class="days">00</span>д 
-					<span class="hours">00</span>ч 
-					<span class="minutes">00</span>м 
-					<span class="seconds">00</span>с
-				</div>
-			</div>`;
-			
-			if (track.hasSprint && track.recordingSprint && isSprintPassed) {
-				actionsHtml = `<div class="track-actions">
-					<a href="${track.recordingSprint}" class="action-btn recording sprint">Запись спринта</a>
-					${timerHtml}
-				</div>`;
-			} else {
-				actionsHtml = timerHtml;
-			}
-		}
-
-		// HTML структура футера карточки
-		trackCard.innerHTML = `
-			<div class="track-image">
-				<img src="Images/Tracks/${track.miniLogo}" alt="${track.trackName}">
-			</div>
-			<div class="track-info">
-				<div class="track-header">
-					<h3><img src="Images/Flags/${track.country}.svg" alt="flag" title="${track.state}" class="flag">  ${track.name}</h3>
-					${track.hasSprint ? '<span class="sprint-badge">СПРИНТ</span>' : ''}
-				</div>
-				<div class="divider"></div>
-				<div class="info-row">
-					<img src="Images/Icon/location.webp" alt="Место">
-					<span>Место:</span>
-					<span class="value">${track.location}</span>
-				</div>
-				<div class="info-row">
-					<img src="Images/Icon/track.webp" alt="Трасса">
-					<span>Трасса:</span>
-					<span class="value">${track.trackName}</span>
-				</div>
-				<div class="info-row">
-					<img src="Images/Icon/calendar.webp" alt="Дата">
-					<span>Дата:</span>
-					<span class="value">${formatDate(track.date)}</span>
-				</div>
-				<div class="divider"></div>
-				<div class="track-footer">
-					${actionsHtml}
-					${statusHtml}
-				</div>
-			</div>
-		`;
-
-        // Обработчик клика для открытия модального окна
-        trackCard.addEventListener('click', (e) => {
-            if (!e.target.closest('.action-btn') && !e.target.closest('.sprint-badge')) {
-                openModal(track);
-            }
-        });
-
-        calendarGrid.appendChild(trackCard);
-    });
-
-    // Рендерим календарь текущего года с обработчиками кликов
-    renderNextYearCalendar();
-
-    // Инициализация таймеров
-    initCountdowns();
-    // Прокрутка к текущему событию
-    scrollToCurrent();
-}
-
-// Рендеринг календаря
-function getCalendarFromTracks() {
-    return Object.entries(tracksData).map(([key, track]) => ({
-        name: track.name,
-        date: track.date,
-        country: track.country,
-        state: track.state,
-        grandPrixId: key  // Используем ключ объекта (например, "bahrain", а не track.id)
-    })).sort((a, b) => new Date(a.date) - new Date(b.date));
-}
-
-// Рендеринг календаря
-function renderNextYearCalendar() {
-    const nextYearEvents = document.getElementById('nextYearEvents');
-    if (!nextYearEvents) return;
-    
-    const now = new Date();
-    // Получаем данные из tracksData
-    const calendarEvents = getCalendarFromTracks();
-    
-    // Отладка: выводим все события с информацией об отмене
-    console.log('=== Calendar Events ===');
-    calendarEvents.forEach(event => {
-        const track = tracksData[event.grandPrixId];
-        console.log(`${event.name}: canceled = ${track?.canceled}, grandPrixId = ${event.grandPrixId}`);
-    });
-    
-    const columns = 4;
-    const eventsPerColumn = Math.ceil(calendarEvents.length / columns);
-    
-    let html = '<div class="next-year-columns">';
-    
-    for (let i = 0; i < columns; i++) {
-        html += '<div class="next-year-column">';
-        
-        const columnEvents = calendarEvents.slice(i * eventsPerColumn, (i + 1) * eventsPerColumn);
-        
-        columnEvents.forEach(event => {
-            const eventDate = new Date(event.date);
-            const isPast = eventDate < now;
-            // Получаем статус отмены из tracksData
-            const track = tracksData[event.grandPrixId];
-            const isCanceled = track && track.canceled === true;
-            
-            // Определяем класс для события
-            let eventClass = '';
-            if (isCanceled) {
-                eventClass = 'canceled';
-                console.log(`✅ Добавляем класс canceled для: ${event.name}`);
-            } else if (isPast) {
-                eventClass = 'completed';
-                console.log(`📅 Добавляем класс completed для: ${event.name}`);
-            } else {
-                console.log(`⏳ Будущее событие: ${event.name}`);
-            }
-            
-            html += `
-                <div class="next-year-event ${eventClass}" data-gp="${event.grandPrixId}">
-                    <div class="next-year-date">${formatShortDate(event.date)}</div>
-                    <div class="next-year-name">
-                        <img src="Images/Flags/${event.country}.svg" alt="flag" title="${event.state}" class="next-year-flag">
-                        ${event.name}
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += '</div>';
-    }
-    
-    html += '</div>';
-    nextYearEvents.innerHTML = html;
-    
-    // Добавляем обработчики кликов
-    addCalendarEventListeners();
-    
-    // Проверяем результат после рендеринга
-    setTimeout(() => {
-        const bahrainEvent = Array.from(document.querySelectorAll('.next-year-event')).find(el => 
-            el.textContent.includes('Бахрейн')
-        );
-        if (bahrainEvent) {
-            console.log('Бахрейн после рендеринга:', {
-                classes: bahrainEvent.className,
-                hasCanceled: bahrainEvent.classList.contains('canceled'),
-                hasCompleted: bahrainEvent.classList.contains('completed')
-            });
-        } else {
-            console.log('Бахрейн не найден в DOM после рендеринга');
-        }
-    }, 100);
-}
-
-// Обработчик выбора события календаря
-function addCalendarEventListeners() {
-    const calendarEvents = document.querySelectorAll('.next-year-event');
-    
-    calendarEvents.forEach(event => {
-        event.addEventListener('click', (e) => {
-            const gpId = event.getAttribute('data-gp');
-            scrollToGrandPrix(gpId);
-        });
-    });
-}
-
-// Прокрутка до выбраной карточки (включая отменённые - пользователь сам выбрал)
-function scrollToGrandPrix(grandPrixId) {
-    // Находим плашку Гран-при по ID трассы
-    const gpCard = document.querySelector(`.track-card[data-gp="${grandPrixId}"]`);
-    
-    if (gpCard) {
-        // Плавный скролл к элементу
-        gpCard.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-        });
-        
-        // Добавляем подсветку
-        gpCard.classList.add('highlight');
-        
-        // Убираем подсветку через 2 секунды
-        setTimeout(() => {
-            gpCard.classList.remove('highlight');
-        }, 2000);
-    } else {
-        console.log(`Карточка с data-gp="${grandPrixId}" не найдена`);
-    }
-}
-
-// Форматирование даты для календаря
-function formatShortDate(dateStr) {
-    const options = { day: 'numeric', month: 'short' };
-    return new Date(dateStr).toLocaleDateString('ru-RU', options);
-}
-
-// Форматирования даты для Карточек
-function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    const options = { 
-        day: 'numeric', 
-        month: 'long',
-        hour: '2-digit',
-        minute: '2-digit'
-    };
-    return date.toLocaleDateString('ru-RU', options);
-}
-
-// Рендеринг таймера
-function initCountdowns() {
-    document.querySelectorAll('.timer').forEach(timer => {
-        updateTimer(timer);
-        setInterval(() => updateTimer(timer), 1000);
-    });
-}
-
-// Таймер
-function updateTimer(timer) {
-    const targetDate = new Date(timer.dataset.date);
-    const now = new Date();
-    const diff = targetDate - now;
-
-    if (diff <= 0) {
-        // Время наступило - обновляем интерфейс
-        timer.innerHTML = '<span class="race-started">Событие началось!</span>';
-        
-        // Находим родительскую карточку и обновляем кнопку
-        const card = timer.closest('.track-card');
-        if (card) {
-            const trackId = card.getAttribute('data-track');
-            const track = tracksData[Object.keys(tracksData).find(key => tracksData[key].id === trackId)];
-            
-            if (track && track.recordingSprint) {
-                const footer = card.querySelector('.track-footer');
-                const timeElement = footer.querySelector('.countdown');
-                if (timeElement) {
-                    timeElement.outerHTML = `<a href="${track.recordingSprint}" class="action-btn stream">Трансляция</a>`;
-                }
-            }
-        }
-        return;
-    }
-
-    // Рассчитываем оставшееся время
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    // Обновляем отображение таймера
-    const daysSpan = timer.querySelector('.days');
-    const daysElement = daysSpan?.parentElement;
-    
-    if (days > 0) {
-        if (daysSpan) daysSpan.textContent = days.toString().padStart(2, '0');
-        if (timer.querySelector('.hours')) timer.querySelector('.hours').textContent = hours.toString().padStart(2, '0');
-    } else {
-        // Если дней нет, скрываем блок с днями
-        if (daysSpan && daysSpan.parentElement) {
-            daysSpan.textContent = '';
-            // Находим текстовый узел с "д" и скрываем его
-            const parent = daysSpan.parentElement;
-            for (let node of parent.childNodes) {
-                if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('д')) {
-                    node.textContent = '';
-                    break;
-                }
-            }
-        }
-    }
-    
-    if (timer.querySelector('.hours')) timer.querySelector('.hours').textContent = hours.toString().padStart(2, '0');
-    if (timer.querySelector('.minutes')) timer.querySelector('.minutes').textContent = mins.toString().padStart(2, '0');
-    if (timer.querySelector('.seconds')) timer.querySelector('.seconds').textContent = secs.toString().padStart(2, '0');
-}
-
-// Авто прокрутка к текущему/ближайшему событию (пропуская отменённые)
-function scrollToCurrent() {
-    const cards = document.querySelectorAll('.track-card');
-    const now = new Date();
-    
-    // Фильтруем отменённые гонки
-    const activeCards = Array.from(cards).filter(card => {
-        const trackId = card.getAttribute('data-track');
-        const track = Object.values(tracksData).find(t => t.id === trackId);
-        return track && !track.canceled; // Исключаем отменённые
-    });
-    
-    // Сначала ищем сегодняшнюю гонку
-    let targetCard = activeCards.find(card => {
-        const cardDate = new Date(card.dataset.date);
-        return cardDate.toDateString() === now.toDateString();
-    });
-    
-    // Если нет сегодняшней, ищем ближайшую будущую
-    if (!targetCard) {
-        targetCard = activeCards.find(card => {
-            const cardDate = new Date(card.dataset.date);
-            return cardDate > now;
-        });
-    }
-    
-    // Если не нашли, берем последнюю завершенную
-    if (!targetCard && activeCards.length > 0) {
-        targetCard = activeCards[activeCards.length - 1];
-    }
-    
-    if (targetCard) {
-        setTimeout(() => {
-            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            targetCard.classList.add('highlight');
-            setTimeout(() => targetCard.classList.remove('highlight'), 2000);
-        }, 500);
-    }
-}
-
-// Модальное окно
-function openModal(track) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    
-    // Получаем путь к изображению трассы
-    const trackImagePath = `Images/Tracks/${track.logo}`;
-    
-    // HTML структура модального окна
-    modal.innerHTML = `
-        <div class="modal-content">
-            <div class="modal-image">
-                <img src="${trackImagePath}" alt="${track.trackName}" class="track-image-modal">
-            </div>
-            <div class="modal-info">
-                <h2><img src="Images/Flags/${track.country}.svg" alt="flag" title="${track.state}" class="flag">     ${track.trackName}</h2>
-                <div class="divider"></div>
-                
-                <div class="info-row">
-                    <img src="Images/Icon/location.webp" alt="Место">
-                    <span>Место проведения:</span>
-                    <span class="value">${track.location}</span>
-                </div>
-                
-                <div class="info-row">
-                    <img src="Images/Icon/track.webp" alt="Длина">
-                    <span>Длина трассы:</span>
-                    <span class="value">${track.length}</span>
-                </div>
-                
-				<div class="info-row">
-                    <img src="Images/Icon/track.webp" alt="Кол-во кругов">
-                    <span>Кол-во кругов:</span>
-                    <span class="value">${track.laps}</span>
-                </div>
-				
-                <div class="info-row">
-                    <img src="Images/Icon/track.webp" alt="Повороты">
-                    <span>Повороты:</span>
-                    <span class="value">${track.turns}</span>
-                </div>
-                
-                <div class="info-row">
-                    <img src="Images/Icon/track.webp" alt="Направление">
-                    <span>Направление:</span>
-                    <span class="value">${track.direction}</span>
-                </div>
-                
-                <div class="divider"></div>
-                
-                <div class="info-row">
-                    <img src="Images/Icon/track.webp" alt="Рекорд">
-                    <span>Рекорд круга:</span>
-                    <span class="value">${track.lapRecord}</span>
-                </div>
-                
-                <div class="divider"></div>
-                
-                <div class="podium-title">
-                    <img src="Images/Icon/podium.webp" alt="Подиум">
-                    <span>Подиум:</span>
-                </div>
-                
-                <div class="podium-container">
-                    <div class="podium-place second">
-                        <div class="podium-step"></div>
-                        <div class="driver-podium">
-                            <span class="position-podium">2</span>
-                            <span class="name-podium">${track.podium2}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="podium-place first">
-                        <div class="podium-step"></div>
-                        <div class="driver-podium">
-                            <span class="position-podium">1</span>
-                            <span class="name-podium">${track.podium1}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="podium-place third">
-                        <div class="podium-step"></div>
-                        <div class="driver-podium">
-                            <span class="position-podium">3</span>
-                            <span class="name-podium">${track.podium3}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="close-modal">&times;</button>
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    
-    // Добавляем обработчик клика на изображение трассы
-    const trackImage = modal.querySelector('.track-image-modal');
-    trackImage.style.cursor = 'pointer';
-    trackImage.title = 'Нажмите для открытия в новой вкладке';
-    
-    trackImage.addEventListener('click', (e) => {
-        e.stopPropagation(); // Предотвращаем закрытие модального окна
-        window.open(trackImagePath, '_blank'); // Открываем в новой вкладке
-    });
-    
-    // Обработчики закрытия модального окна
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal || e.target.classList.contains('close-modal')) {
-            modal.remove();
-        }
-    });
-}
-
-// Инициализация при загрузке вкладки
-if (window.location.hash === '#calendar') {
-    renderCalendar();
+function getTrackName(id) {
+    const track = getTrackById(id);
+    return track ? track.name : id;
 }
