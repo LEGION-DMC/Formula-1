@@ -56,7 +56,7 @@ const pitstopData = [
 	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
 	{ gpId: "catalunya", driver: "piastri", time: "2.13" },
 	{ gpId: "austria", driver: "lindblad", time: "2.03" },
-	{ gpId: "uk", driver: "none", time: "0.00" },
+	{ gpId: "great-britain", driver: "russell", time: "2.18" },
 	{ gpId: "belgium", driver: "none", time: "0.00" },
 	{ gpId: "hungary", driver: "none", time: "0.00" },
 	{ gpId: "netherlands", driver: "none", time: "0.00" },
@@ -73,7 +73,7 @@ const pitstopData = [
 ];
 
 const penaltiesData = [
-    { driver: "Оливер Берман", fines: 8 },
+    { driver: "Оливер Берман", fines: 4 },
     { driver: "Оскар Пиастри", fines: 4 },
     { driver: "Александр Албон", fines: 3 },
     { driver: "Андреа Кими Антонелли", fines: 3 },
@@ -86,6 +86,7 @@ const penaltiesData = [
     { driver: "Шарль Леклер", fines: 1 },
     { driver: "Эстебан Окон", fines: 1 },
     { driver: "Франко Колапинто", fines: 1 },
+	
     { driver: "Ландо Норрис", fines: 0 },
     { driver: "Макс Ферстаппен", fines: 0 },
     { driver: "Исак Хаджар", fines: 0 },
