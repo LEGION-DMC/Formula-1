@@ -113,15 +113,30 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    padding: 12px 15px;
+    padding: 10px 10px;
     height: auto;
     position: relative;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
 }
 
-.driver-search-input { width: 100%; order: 1; }
+.driver-search-input { width: 80%; order: 1; margin-bottom: 5px; }
+
+.filter-reset-btn { width: auto; padding: 5px 10px; 
+    order: 1; font-size: 0.8rem; margin-bottom: 5px; }
+
 .filter-divider { display: none; }
+
+.filter-divider-champ {
+    display: block;
+    width: 100%;
+    border: none;
+    height: 1px;
+    margin-top: -4px;
+    order: 2;
+    background: radial-gradient(circle at center, var(--red-accent), transparent 130%);
+}  
+
 .filter-section-title { display: none; }
 
 .filter-checkboxes {
@@ -129,27 +144,26 @@ body {
     flex-wrap: wrap;
     gap: 5px;
     order: 2;
+    margin-top: -8px;
 }
 
 .filter-checkbox-label {
     font-size: 0.75rem;
-    padding: 4px 8px;
-    background-color: rgba(30, 30, 30, 0.5);
-    border-radius: 20px;
+    padding: 4px 5px;
 }
-
-.filter-reset-btn { width: auto; padding: 6px 15px; order: 3; font-size: 0.8rem; }
 
 .drivers-cards-area {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
-    padding: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+    padding: 8px;
 }
 
-.driver-portrait-wrapper { width: 100px; height: 100px; }
-.driver-number-overlay { font-size: 1.2rem; right: 3px; }
-.driver-flag-overlay { width: 24px; height: 16px; top: 3px; left: 3px; }
-.driver-short-name { font-size: 0.9rem; }
+.driver-portrait-wrapper { width: 125px; height: 120px; }
+.driver-number-overlay { font-size: 1.5rem; right: -3px; top: -5px; }
+.driver-flag-overlay { width: 24px; height: 16px; top: -2px; left: -2px; }
+.driver-short-name { font-size: 0.75rem; width: 140px; }
+.driver-team img { width: 30px; height: 15px; }
+.driver-team span { display: none; }
 
 .driver-modal { max-width: 95%; max-height: 90vh; }
 
@@ -173,17 +187,18 @@ body {
 .modal-close-btn:hover { background-color: var(--red-accent); color: white; border-color: var(--red-accent); }
 .modal-top { flex-direction: column; }
 .modal-left { width: 100%; min-width: auto; padding: 25px 20px 10px; }
-.modal-portrait { width: 140px; height: 140px; }
+.modal-portrait { width: 150px; height: 150px; }
 .modal-right { width: 100%; padding: 10px 20px 20px; }
 .modal-right .modal-block:first-child { gap: 15px; }
 .modal-number { font-size: 3rem; min-width: 60px; }
 .modal-fullname { font-size: 1.3rem; }
-.modal-details-row { grid-template-columns: 1fr 1fr; gap: 10px; }
-.detail-cell:last-child { grid-column: 1 / -1; }
+.modal-details-row { gap: 50px; }
 .modal-stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .modal-bottom { padding: 0 20px 20px; }
 
-.teams-grid { gap: 15px; }
+.teams-grid { gap: 10px;
+    padding-bottom: 20px;
+ }
 
 .team-card {
     flex: 0 0 calc(50% - 8px);
@@ -192,7 +207,7 @@ body {
 }
 
 @media (max-width: 480px) {
-    .team-card { flex: 0 0 100%; max-width: 100%; }
+    .team-card { flex: 0 0 47%; max-width: 47%; }
 }
 
 .team-card-logo { width: 60px; height: 42px; }
@@ -219,8 +234,12 @@ body {
 .team-modal { max-width: 95%; padding: 20px; }
 .tm-full-logo { max-height: 50px; }
 .tm-full-name { font-size: 1.1rem; }
-.tm-info-row { grid-template-columns: 1fr; gap: 12px; }
-.tm-car-engine { margin: 0; width: 100%; }
+.tm-divider { 
+    margin: 10px 0px 10px 0px;
+}
+.tm-pilots-section { 
+    margin-top: 5px;
+}
 
 .stats-grid { grid-template-columns: 1fr; gap: 10px; }
 .stats-table-wrapper { padding: 8px; }
@@ -317,6 +336,19 @@ body {
 .results-detailed-table thead th { padding: 2px 3px; }
 .results-detailed-table tbody td { padding: 3px; }
 .results-gp-points { min-width: 22px; }
+
+.results-columns {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+}
+
+.results-columns > .results-table:not(:first-child) thead {
+    display: none;
+}
+
+.results-columns > .results-table:not(:first-child) tbody tr:first-child td {
+    border-top: none;
+}
 
 .main-page-content {
     flex-direction: column;

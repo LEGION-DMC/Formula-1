@@ -72,7 +72,7 @@ const calendarData = [
 		recordingQuali: "https://rutube.ru/video/2f1325bbb1e0abd272265bae45143732/",
 		recordingRace: "https://rutube.ru/video/f85e53c184adb938f135e5f672dd34fb/"
 	},
-	{   id: "catalunya",
+	{   id: "barcelona",
 		track: "catalunya",
 		date: "2026-06-14 20:55",
 		hasSprint: false,

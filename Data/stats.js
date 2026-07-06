@@ -54,7 +54,7 @@ const pitstopData = [
 	{ gpId: "miami", driver: "lindblad", time: "2.08" },
 	{ gpId: "canada", driver: "lawson", time: "2.20" },
 	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
-	{ gpId: "catalunya", driver: "piastri", time: "2.13" },
+	{ gpId: "barcelona", driver: "piastri", time: "2.13" },
 	{ gpId: "austria", driver: "lindblad", time: "2.03" },
 	{ gpId: "great-britain", driver: "russell", time: "2.18" },
 	{ gpId: "belgium", driver: "none", time: "0.00" },
@@ -153,8 +153,13 @@ syncPenaltiesToDrivers();
 function initStatsPage(container) {
     'use strict';
     
-    container.innerHTML = '';
+    // Сбрасываем стили, которые могли остаться от других вкладок
+    container.style.display = 'block';
+    container.style.flexDirection = '';
+    container.style.gap = '';
     container.style.padding = '20px';
+    
+    container.innerHTML = '';
     
     const grid = document.createElement('div');
     grid.className = 'stats-grid';
@@ -249,7 +254,7 @@ function createPitstopTable() {
     
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
-    tableTitle.textContent = 'Быстрейшие пит-стопы';
+    tableTitle.textContent = 'Быстрейшие пит-стопы сезона';
     wrapper.appendChild(tableTitle);
     
     const tableContainer = document.createElement('div');
@@ -265,7 +270,7 @@ function createPitstopTable() {
             <th>Гран-при</th>
             <th>Команда</th>
             <th>Пилот</th>
-            <th>Время (с)</th>
+            <th>Время<span> (с)</span></th>
         </tr>
     `;
     table.appendChild(thead);
@@ -416,7 +421,7 @@ function createLapRecordTable() {
     
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
-    tableTitle.textContent = 'Рекорды круга';
+    tableTitle.textContent = 'Новые рекорды лучшего круга';
     wrapper.appendChild(tableTitle);
     
     const tableContainer = document.createElement('div');

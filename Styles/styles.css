@@ -222,7 +222,13 @@ h1, h2 {
     border: none;
     height: 1px;
     background: radial-gradient(circle at center, var(--red-accent), transparent 130%);
-    margin: 3px;
+}
+
+.filter-divider-champ {
+    border: none;
+    height: 1px;
+    background: radial-gradient(circle at center, var(--red-accent), transparent 130%);
+    margin: -5px;
 }
 
 .filter-section-title {
@@ -490,12 +496,13 @@ h1, h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 18px;
     background: linear-gradient(180deg, rgba(225, 6, 0, 0.03), transparent);
 }
 
 .modal-portrait {
     width: 250px;
-    height: 260px;
+    height: 307px;
     border-radius: 5%;
     object-fit: cover;
     object-position: top center;
@@ -902,6 +909,11 @@ h1, h2 {
     white-space: nowrap;
 }
 
+.stats-table thead th span {
+    color: #999;
+    font-size: 0.5rem;
+}
+
 .stats-table tbody td {
     padding: 5px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.03);
@@ -936,7 +948,9 @@ h1, h2 {
 .team-cell { text-align: center; width: 40px; }
 .driver-cell { color: var(--text-light); white-space: nowrap; }
 .gp-cell { color: var(--text-light); white-space: nowrap; }
-.time-cell { font-family: 'F1Numbers', 'F1Title', sans-serif; font-weight: bold; white-space: nowrap; }
+.time-cell { font-family: 'F1Numbers', 'F1Title', sans-serif; 
+    font-weight: bold; 
+    white-space: nowrap;}
 
 .fines-cell {
     font-family: 'F1Numbers', sans-serif;
@@ -1174,6 +1188,18 @@ h1, h2 {
 
 .results-points-info { padding: 5px; font-family: 'F1Text', sans-serif; font-size: 0.75rem; color: #999; }
 .results-points-info span { color: #999; }
+
+.results-gp-points.dnf {
+    color: #cc3300;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.6rem;
+}
+
+.results-gp-points.dns {
+    color: #FFC107;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.6rem;
+}
 
 /* ============================================== */
 /* ВКЛАДКА КАЛЕНДАРЬ                              */

@@ -446,7 +446,7 @@ function buildFilterPanel(panel, cardsArea) {
     
     // Разделитель перед чемпионами
     const divider2 = document.createElement('hr');
-    divider2.className = 'filter-divider';
+    divider2.className = 'filter-divider filter-divider-champ';
     
     // Чекбокс "Чемпионы мира"
     const champsContainer = document.createElement('div');

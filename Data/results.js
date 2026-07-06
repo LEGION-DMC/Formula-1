@@ -10,6 +10,11 @@ const detailedResults = {
         "lindblad": 4,
         "bortoletto": 2,
         "gasly": 1,
+        "alonso": "dnf",
+        "bottas": "dnf",
+        "hadjar": "dnf",
+        "piastri": "dns",
+        "hulkenberg": "dns",
     },
     "china": {
         "antonelli": 25,
@@ -22,6 +27,13 @@ const detailedResults = {
         "hadjar": 4,
         "sainz": 2,
         "colapinto": 1,
+        "verstappen": "dnf",
+        "alonso": "dnf",
+        "stroll": "dnf",
+        "norris": "dns",
+        "piastri": "dns",
+        "bortoletto": "dns",
+        "albon": "dns",
     },
     "japan": {
         "antonelli": 25,
@@ -34,6 +46,8 @@ const detailedResults = {
         "verstappen": 4,
         "lawson": 2,
         "ocon": 1,
+        "stroll": "dnf",
+        "bearman": "dnf",
     },
     "bahrain": {
         "000": 25,
@@ -70,6 +84,10 @@ const detailedResults = {
         "leclerc": 4,
         "sainz": 2,
         "albon": 1,
+        "hulkenberg": "dnf",
+        "lawson": "dnf",
+        "gasly": "dnf",
+        "hadjar": "dnf",
     },
     "canada": {
         "antonelli": 25,
@@ -82,6 +100,12 @@ const detailedResults = {
         "gasly": 4,
         "sainz": 2,
         "bearman": 1,
+        "perez": "dnf",
+        "norris": "dnf",
+        "russell": "dnf",
+        "alonso": "dnf",
+        "albon": "dnf",
+        "lindblad": "dns",
     },
     "monaco": {
         "antonelli": 25,
@@ -94,8 +118,15 @@ const detailedResults = {
         "albon": 4,
         "ocon": 2,
         "alonso": 1,
+        "sainz": "dnf",
+        "leclerc": "dnf",
+        "stroll": "dnf",
+        "norris": "dnf",
+        "bearman": "dnf",
+        "bottas": "dnf",
+        "verstappen": "dnf",
     },
-    "barcelona-catalunya": {
+    "barcelona": {
         "hamilton": 25,
         "russell": 18,
         "norris": 15,
@@ -106,6 +137,14 @@ const detailedResults = {
         "lawson": 4,
         "lindblad": 2,
         "colapinto": 1,
+        "leclerc": "dnf",
+        "antonelli": "dnf",
+        "bearman": "dnf",
+        "albon": "dnf",
+        "alonso": "dnf",
+        "hulkenberg": "dnf",
+        "bottas": "dnf",
+        "stroll": "dnf",
     },
     "austria": {
         "russell": 25,
@@ -118,6 +157,10 @@ const detailedResults = {
         "leclerc": 4,
         "lawson": 2,
         "lindblad": 1,
+        "stroll": "dnf",
+        "sainz": "dnf",
+        "perez": "dnf",
+        "bottas": "dnf",
     },
     "great-britain": {
         "leclerc": 25,
@@ -130,6 +173,9 @@ const detailedResults = {
         "bortoletto": 4,
         "colapinto": 2,
         "gasly": 1,
+        "hulkenberg": "dnf",
+        "albon": "dnf",
+        "verstappen": "dnf",
     },
     "belgium": {
         "000": 25,
@@ -299,6 +345,13 @@ const detailedSprintResults = {
         "piastri": 3,
         "lawson": 2,
         "bearman": 1,
+        "alonso": "dnf",
+        "verstappen": "dnf",
+        "stroll": "dnf",
+        "norris": "dns",
+        "piastri": "dns",
+        "bortoletto": "dns",
+        "albon": "dns",
     },
     "miami": {
         "norris": 8,
@@ -319,6 +372,7 @@ const detailedSprintResults = {
         "hamilton": 3,
         "verstappen": 2,
         "lindblad": 1,
+        "alonso": "dnf",
     },
     "great-britain": {
         "antonelli": 8,
@@ -353,6 +407,7 @@ const detailedSprintResults = {
 };
 
 const driverStandings = [];
+
 function calculateDriverStandings() {
     const pointsMap = {};
     
@@ -362,17 +417,20 @@ function calculateDriverStandings() {
         pointsMap[driver.id] = 0;
     });
     
-    Object.values(detailedResults).forEach(gpResults => {
-        Object.entries(gpResults).forEach(([driverId, points]) => {
-            if (driverId === "000") return;
-            if (pointsMap.hasOwnProperty(driverId)) pointsMap[driverId] += points;
-        });
-    });
+	Object.values(detailedResults).forEach(gpResults => {
+		Object.entries(gpResults).forEach(([driverId, points]) => {
+			if (driverId === "000") return;
+			if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+				pointsMap[driverId] += points;
+			}
+		});
+	});
     
     driverStandings.length = 0;
     Object.entries(pointsMap).forEach(([id, pts]) => driverStandings.push({ driver: id, points: pts }));
     driverStandings.sort((a, b) => b.points - a.points);
 }
+
 calculateDriverStandings();
 
 const sprintStandings = [];
@@ -386,12 +444,14 @@ function calculateSprintStandings() {
         pointsMap[driver.id] = 0;
     });
     
-    Object.values(detailedSprintResults).forEach(spResults => {
-        Object.entries(spResults).forEach(([driverId, points]) => {
-            if (driverId === "000") return;
-            if (pointsMap.hasOwnProperty(driverId)) pointsMap[driverId] += points;
-        });
-    });
+	Object.values(detailedSprintResults).forEach(spResults => {
+		Object.entries(spResults).forEach(([driverId, points]) => {
+			if (driverId === "000") return;
+			if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+				pointsMap[driverId] += points;
+			}
+		});
+	});
     
     sprintStandings.length = 0;
     Object.entries(pointsMap).forEach(([id, pts]) => sprintStandings.push({ driver: id, points: pts }));
@@ -431,8 +491,9 @@ function getAllSprintGPs() {
 function hasRealResults(gpId, isSprint = false) {
     const results = isSprint ? detailedSprintResults[gpId] : detailedResults[gpId];
     if (!results) return false;
-     
-    return Object.keys(results).some(key => key !== "000" && results[key] > 0);
+    return Object.keys(results).some(key => 
+        key !== "000" && results[key] !== undefined
+    );
 }
 
 function initResultsPage(container) {
@@ -612,12 +673,23 @@ function renderDriverDetailedTable(container, filterTeam) {
             </td>`;
         
         let total = 0;
-        allGPs.forEach(gpId => {
-            const pts = (detailedResults[gpId] || {})[entry.driver] || 0;
-            total += pts;
-            const noResults = !hasRealResults(gpId, false);  
-            row += `<td class="results-gp-points ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</td>`;
-        });
+		allGPs.forEach(gpId => {
+			const results = detailedResults[gpId] || {};
+			const value = results[entry.driver];
+			const isDNF = value === 'dnf';
+			const isDNS = value === 'dns';
+			const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
+			total += pts;
+			const noResults = !hasRealResults(gpId, false);
+			
+			if (isDNF) {
+				row += `<td class="results-gp-points dnf ${noResults ? 'future-gp' : ''}">DNF</td>`;
+			} else if (isDNS) {
+				row += `<td class="results-gp-points dns ${noResults ? 'future-gp' : ''}">DNS</td>`;
+			} else {
+				row += `<td class="results-gp-points ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</td>`;
+			}
+		});
         row += `<td class="results-points">${total}</td>`;
         tr.innerHTML = row;
         tbody.appendChild(tr);
@@ -671,16 +743,27 @@ function renderSprintDetailedTable(container, filterTeam) {
                 <span class="results-team-cell" data-team="${driver.team}" style="font-size:.7rem;color:#888;margin-left:4px;"></span>
             </td>`;
         
-        let total = 0;
-        allSPs.forEach(gpId => {
-            const pts = (detailedSprintResults[gpId] || {})[entry.driver] || 0;
-            total += pts;
-            const noResults = !hasRealResults(gpId, true);  
-            row += `<td class="results-gp-points ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</td>`;
-        });
-        row += `<td class="results-points">${total}</td>`;
-        tr.innerHTML = row;
-        tbody.appendChild(tr);
+	let total = 0;
+		allSPs.forEach(gpId => {
+			const results = detailedSprintResults[gpId] || {};
+			const value = results[entry.driver];
+			const isDNF = value === 'dnf';
+			const isDNS = value === 'dns';
+			const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
+			total += pts;
+			const noResults = !hasRealResults(gpId, true);
+			
+			if (isDNF) {
+				row += `<td class="results-gp-points dnf ${noResults ? 'future-gp' : ''}">DNF</td>`;
+			} else if (isDNS) {
+				row += `<td class="results-gp-points dns ${noResults ? 'future-gp' : ''}">DNS</td>`;
+			} else {
+				row += `<td class="results-gp-points ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</td>`;
+			}
+		});
+		row += `<td class="results-points">${total}</td>`;
+		tr.innerHTML = row;
+		tbody.appendChild(tr);
     });
     
     table.appendChild(tbody);
