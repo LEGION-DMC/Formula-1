@@ -29,16 +29,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const divider = document.createElement('hr');
     divider.className = 'menu-divider';
 
-    const nav = document.createElement('nav');
-    nav.className = 'menu-nav';
+	const nav = document.createElement('nav');
+	nav.className = 'menu-nav';
 
-    menuItems.filter(item => !item.isDefault).forEach(item => {
-        const btn = document.createElement('button');
-        btn.className = 'menu-item';
-        btn.dataset.tab = item.id;
-        btn.textContent = item.label;
-        nav.appendChild(btn);
-    });
+	// Логотип в выезжающем меню
+	const navLogo = document.createElement('img');
+	navLogo.src = 'Images/logo.png';
+	navLogo.alt = 'F1 Logo';
+	navLogo.className = 'menu-nav-logo';
+	navLogo.title = 'На главную';
+	navLogo.addEventListener('click', () => {
+		// Закрываем меню и переходим на главную
+		nav.classList.remove('open');
+		burgerBtn.classList.remove('open');
+		setActiveButton('main');
+		loadTabContent('main');
+	});
+	nav.appendChild(navLogo);
+
+	// Пункты меню
+	menuItems.filter(item => !item.isDefault).forEach(item => {
+		const btn = document.createElement('button');
+		btn.className = 'menu-item';
+		btn.dataset.tab = item.id;
+		btn.textContent = item.label;
+		nav.appendChild(btn);
+	});
 
     const burgerBtn = document.createElement('button');
     burgerBtn.className = 'burger-btn';
@@ -65,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
          
         dataContainer.innerHTML = '';
 
-         
         const loader = document.createElement('div');
         loader.style.textAlign = 'center';
         loader.style.padding = '40px';
@@ -73,13 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loader.textContent = 'Загрузка...';
         dataContainer.appendChild(loader);
 
-         
-         
         setTimeout(() => {
             dataContainer.innerHTML = '';  
-            
-             
-             
+
             const title = document.createElement('h2');
             
             switch (tabId) {
@@ -134,40 +145,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
   
-    allMenuButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const tabId = e.target.dataset.tab;
-            setActiveButton(tabId);
-            loadTabContent(tabId);
+	allMenuButtons.forEach(button => {
+		button.addEventListener('click', (e) => {
+			const tabId = e.target.dataset.tab;
+			setActiveButton(tabId);
+			loadTabContent(tabId);
 
-             
-            const nav = document.querySelector('.menu-nav');
-            const burger = document.querySelector('.burger-btn');
-            if (nav.classList.contains('open')) {
-                nav.classList.remove('open');
-                burger.classList.remove('open');
-            }
-        });
-    });
+			const nav = document.querySelector('.menu-nav');
+			const burger = document.querySelector('.burger-btn');
+			if (nav.classList.contains('open')) {
+				nav.classList.remove('open');
+				burger.classList.remove('open');
+				document.body.style.overflow = '';  
+			}
+		});
+	});
 
-    logo.addEventListener('click', () => {
-        setActiveButton('main');
-        loadTabContent('main');
-        
-         
-        const nav = document.querySelector('.menu-nav');
-        const burger = document.querySelector('.burger-btn');
-        if (nav.classList.contains('open')) {
-            nav.classList.remove('open');
-            burger.classList.remove('open');
-        }
-    });
+	logo.addEventListener('click', () => {
+		setActiveButton('main');
+		loadTabContent('main');
+		
+		const nav = document.querySelector('.menu-nav');
+		const burger = document.querySelector('.burger-btn');
+		if (nav.classList.contains('open')) {
+			nav.classList.remove('open');
+			burger.classList.remove('open');
+			document.body.style.overflow = '';  
+		}
+	});
 
-    burgerBtn.addEventListener('click', () => {
-        const nav = document.querySelector('.menu-nav');
-        burgerBtn.classList.toggle('open');
-        nav.classList.toggle('open');
-    });
+	navLogo.addEventListener('click', () => {
+		nav.classList.remove('open');
+		burgerBtn.classList.remove('open');
+		document.body.style.overflow = '';  
+		setActiveButton('main');
+		loadTabContent('main');
+	});
+
+	burgerBtn.addEventListener('click', () => {
+		const nav = document.querySelector('.menu-nav');
+		burgerBtn.classList.toggle('open');
+		nav.classList.toggle('open');
+		
+		if (nav.classList.contains('open')) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+	});
 
     const savedTab = localStorage.getItem('activeF1Tab') || 'main';
     const isValidTab = menuItems.some(item => item.id === savedTab);

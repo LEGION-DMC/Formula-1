@@ -218,9 +218,6 @@ const calendarData = [
 	},
 ];
 
-// ==============================================
-// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-// ==============================================
 function getGPById(id) { return calendarData.find(g => g.id === id); }
 function getTrackForGP(gpId) { const gp = getGPById(gpId); return gp ? getTrackById(gp.track) : null; }
 
@@ -234,9 +231,6 @@ function formatDateMini(dateStr) {
     return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
 }
 
-// ==============================================
-// ИНИЦИАЛИЗАЦИЯ ВКЛАДКИ
-// ==============================================
 function initCalendarPage(container) {
     'use strict';
     
@@ -270,9 +264,6 @@ function initCalendarPage(container) {
     setTimeout(() => scrollToCurrentGP(), 600);
 }
 
-// ==============================================
-// ПАНЕЛЬ НАВИГАЦИИ
-// ==============================================
 function buildCalendarNav(panel, cardsArea) {
     const title = document.createElement('h3');
     title.className = 'calendar-nav-title';
@@ -294,7 +285,10 @@ function buildCalendarNav(panel, cardsArea) {
         
         item.innerHTML = `
             <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-nav-flag" title="${getCountryName(track.country)}">
-            <span class="calendar-nav-name">${track.name}</span>
+            <span class="calendar-nav-name">
+				<span class="nav-gp-full">${track.name}</span>
+				<span class="nav-gp-short">${track.name.replace('Гран-при ', 'ГП ')}</span>
+			</span>
             <span class="calendar-nav-date">${formatDateMini(gp.date)}</span>
         `;
         
@@ -303,9 +297,6 @@ function buildCalendarNav(panel, cardsArea) {
     });
 }
 
-// ==============================================
-// ПРОКРУТКА К КАРТОЧКЕ
-// ==============================================
 function scrollToGPCard(gpId, cardsArea) {
     // Снимаем подсветку со всех карточек
     cardsArea.querySelectorAll('.calendar-card.highlight').forEach(c => c.classList.remove('highlight'));
@@ -344,9 +335,6 @@ function scrollToCurrentGP() {
     }
 }
 
-// ==============================================
-// КАРТОЧКИ ГОНОК
-// ==============================================
 function renderCalendarCards(container) {
     calendarData.forEach(gp => {
         const track = getTrackForGP(gp.id);
@@ -480,9 +468,6 @@ function renderCalendarCards(container) {
     });
 }
 
-// ==============================================
-// ТАЙМЕРЫ
-// ==============================================
 function initCalendarTimers() {
     document.querySelectorAll('.calendar-timer').forEach(timer => {
         updateCalendarTimer(timer);
@@ -516,9 +501,6 @@ function updateCalendarTimer(timer) {
     if (secondsEl) secondsEl.textContent = String(secs).padStart(2, '0');
 }
 
-// ==============================================
-// МОДАЛЬНОЕ ОКНО ТРАССЫ
-// ==============================================
 function openTrackModal(track, gp) {
     const existing = document.querySelector('.track-modal-overlay');
     if (existing) existing.remove();
@@ -550,7 +532,7 @@ function openTrackModal(track, gp) {
         <button class="track-modal-close">&times;</button>
         <div class="track-modal-layout">
             <div class="tm-track-image">
-                <img src="Images/Tracks/${track.id}.webp" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
+                <img src="Images/Tracks/${track.id}.webp" alt="${track.trackName}" class="tm-track-img-clickable" onerror="this.src='Images/Tracks/default.webp'">
             </div>
             <div class="tm-track-info">
                 <div class="tm-header">
@@ -558,13 +540,15 @@ function openTrackModal(track, gp) {
                     <h2>${track.trackName}</h2>
                 </div>
                 <hr class="tm-divider">
-                <div class="tm-detail-row">
-                    <img src="Images/Icon/location.webp" class="calendar-icon">
-                    <span>${track.location}</span>
-                </div>
-                <div class="tm-detail-row">
-                    <img src="Images/Icon/calendar.webp" class="calendar-icon">
-                    <span>${gp ? formatDateLong(gp.date) : ''}</span>
+                <div class="tm-detail-row-inline">
+                    <div class="tm-detail-row">
+                        <img src="Images/Icon/location.webp" class="calendar-icon">
+                        <span>${track.location}</span>
+                    </div>
+                    <div class="tm-detail-row">
+                        <img src="Images/Icon/calendar.webp" class="calendar-icon">
+                        <span>${gp ? formatDateLong(gp.date) : ''}</span>
+                    </div>
                 </div>
                 <hr class="tm-divider">
                 <div class="tm-stats-grid">
@@ -585,7 +569,7 @@ function openTrackModal(track, gp) {
                         <span class="tm-stat-label">Направление</span>
                     </div>
                     <div class="tm-stat-cell">
-                        <span class="tm-stat-value">${track.elevation}</span>
+                        <span class="tm-stat-value">${track.elevation || '—'}</span>
                         <span class="tm-stat-label">Перепад высот</span>
                     </div>
                 </div>
@@ -599,6 +583,16 @@ function openTrackModal(track, gp) {
     `;
     
     modal.querySelector('.track-modal-close').addEventListener('click', close);
+    
+    // Клик по картинке — открытие на весь экран
+    const trackImg = modal.querySelector('.tm-track-img-clickable');
+    if (trackImg) {
+        trackImg.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openImageFullscreen(`Images/Tracks/${track.id}.webp`, track.trackName);
+        });
+    }
+    
     overlay.appendChild(modal);
     overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
     document.addEventListener('keydown', esc);
@@ -608,4 +602,40 @@ function openTrackModal(track, gp) {
         overlay.classList.add('active');
         modal.classList.add('active');
     });
+}
+
+
+function openImageFullscreen(src, alt) {
+    const existing = document.querySelector('.image-fullscreen-overlay');
+    if (existing) existing.remove();
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'image-fullscreen-overlay';
+    
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = alt;
+    img.className = 'image-fullscreen-img';
+    img.onerror = () => { img.src = 'Images/Tracks/default.webp'; };
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'image-fullscreen-close';
+    closeBtn.innerHTML = '&times;';
+    
+    function closeFS() {
+        overlay.remove();
+        document.removeEventListener('keydown', escFS);
+    }
+    
+    closeBtn.addEventListener('click', closeFS);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeFS(); });
+    
+    function escFS(e) { if (e.key === 'Escape') closeFS(); }
+    document.addEventListener('keydown', escFS);
+    
+    overlay.appendChild(closeBtn);
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+    
+    requestAnimationFrame(() => overlay.classList.add('active'));
 }

@@ -1,12 +1,13 @@
 body {
     flex-direction: column;
+    padding-top: 50px;
 }
 
 .main-menu {
     width: 100%;
     min-width: 100%;
     height: auto;
-    position: relative;
+    position: fixed;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -14,6 +15,7 @@ body {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     background-color: rgba(18, 18, 18, 0.9);
+    overflow: visible;
 }
 
 .menu-logo {
@@ -22,10 +24,16 @@ body {
 }
 
 .season-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    margin-bottom: -5px;
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.season-title span {
+    font-size: 1.3rem;
     margin-bottom: 0;
     margin-right: auto;
-    margin-left: 15px;
 }
 
 .menu-nav {
@@ -45,14 +53,30 @@ body {
     z-index: 200;
 }
 
+.menu-nav-logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(225, 6, 0, 0.5));
+}
+
+.menu-nav-logo:hover {
+    transform: scale(1.08);
+}
+
+.menu-nav-logo:active {
+    transform: scale(0.95);
+}
 .menu-nav.open {
     transform: translateX(0);
 }
 
 .menu-nav .menu-item {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     width: auto;
-    padding: 15px 30px;
+    padding: 10px 20px;
     text-align: center;
 }
 
@@ -170,13 +194,14 @@ body {
 .modal-close-btn {
     display: flex;
     position: absolute;
-    top: 12px; right: 12px;
-    width: 34px; height: 34px;
-    border-radius: 50%;
+    top: 5px; right: 6px;
+    padding-bottom: 3px;
+    width: 35px; height: 35px;
+    border-radius: 20%;
     background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--border-color);
     color: var(--text-gray);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     cursor: pointer;
     z-index: 10;
     align-items: center;
@@ -184,7 +209,6 @@ body {
     transition: all 0.3s ease;
 }
 
-.modal-close-btn:hover { background-color: var(--red-accent); color: white; border-color: var(--red-accent); }
 .modal-top { flex-direction: column; }
 .modal-left { width: 100%; min-width: auto; padding: 25px 20px 10px; }
 .modal-portrait { width: 150px; height: 150px; }
@@ -216,13 +240,14 @@ body {
 .team-modal-close-btn {
     display: flex;
     position: absolute;
-    top: 12px; right: 12px;
-    width: 34px; height: 34px;
-    border-radius: 50%;
+    top: 5px; right: 6px;
+    padding-bottom: 3px;
+    width: 35px; height: 35px;
+    border-radius: 20%;
     background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--border-color);
     color: var(--text-gray);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     cursor: pointer;
     z-index: 10;
     align-items: center;
@@ -230,7 +255,6 @@ body {
     transition: all 0.3s ease;
 }
 
-.team-modal-close-btn:hover { background-color: var(--team-color); color: white; border-color: var(--team-color); }
 .team-modal { max-width: 95%; padding: 20px; }
 .tm-full-logo { max-height: 50px; }
 .tm-full-name { font-size: 1.1rem; }
@@ -257,62 +281,111 @@ body {
     position: relative;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
-    padding: 12px;
+    padding: 10px;
 }
 
-.calendar-nav-title { font-size: 0.9rem; margin-bottom: 8px; }
+.calendar-nav-title {
+    font-size: 0.9rem;
+    grid-column: 1 / -1;
+}
 
-.calendar-nav-item { padding: 5px 6px; gap: 6px; }
-.calendar-nav-flag { width: 16px; height: 11px; }
-.calendar-nav-name { font-size: 0.75rem; }
-.calendar-nav-date { font-size: 0.7rem; }
+.calendar-nav-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 5px;
+}
+
+.calendar-nav-item {
+    padding: 4px 3px;
+    gap: 5px;
+}
+
+.calendar-nav-flag { width: 16px; height: 12px; }
+.calendar-nav-name { font-size: 0.7rem; }
+
+.nav-gp-full { display: none; }
+.nav-gp-short { display: inline; }
+
+.calendar-nav-date { font-size: 0.65rem; }
 
 .calendar-cards-area {
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 12px;
+    gap: 10px;
+    padding: 10px;
 }
 
 .calendar-card { flex-direction: column; }
 
-.calendar-card-image {
-    width: 100%;
-    min-width: auto;
-    height: 140px;
-}
+.calendar-card-image { display: none; }
 
-.calendar-card-image img { width: auto; height: 120px; }
-.calendar-card-info { padding: 10px 12px; }
+.calendar-card-info { padding: 10px 10px; }
 .calendar-gp-name { font-size: 0.85rem; }
-.calendar-detail-row { font-size: 0.7rem; }
-.calendar-icon { width: 12px; height: 12px; }
+.calendar-detail-row { font-size: 0.75rem; }
+.calendar-icon { width: 13px; height: 13px; }
 
 .calendar-card-footer { gap: 4px; }
-.calendar-btn { font-size: 0.65rem; padding: 3px 7px; }
+.calendar-btn { font-size: 0.7rem; padding: 5px 5px 4px 5px; }
 .calendar-countdown { font-size: 0.7rem; }
-.calendar-timer { font-size: 0.8rem; }
+.calendar-timer { font-size: 0.85rem; }
 
 .track-modal-close {
     display: flex;
     position: absolute;
-    top: 10px; right: 10px;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid #555;
-    color: #ccc;
-    font-size: 1.2rem;
+    top: 5px; right: 6px;
+    padding-bottom: 3px;
+    width: 35px; height: 35px;
+    border-radius: 20%;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-gray);
+    font-size: 1.5rem;
     cursor: pointer;
     z-index: 10;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
 }
 
-.track-modal { max-width: 95%; max-height: 90vh; }
-.tm-track-image { height: 160px; }
-.tm-track-info { padding: 12px 18px 18px; }
-.tm-track-info h2 { font-size: 1.1rem; }
-.tm-row { font-size: 0.8rem; }
+.track-modal { max-width: 100%; max-height: 70vh; }
+
+.track-modal-layout {
+    flex-direction: column; 
+}
+
+.tm-track-image {
+    width: 100%;
+    min-width: auto;
+    height: 260px;
+    padding: 15px;
+}
+
+.tm-track-info {
+    width: 100%;
+    padding: 10px 15px 15px;
+}
+
+.tm-track-info h2 { font-size: 1.2rem; }
+
+.tm-detail-row-inline {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tm-detail-row-inline .tm-detail-row {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.8rem;
+}
+    
+.tm-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.tm-stat-value { font-size: 1.2rem; }
+    
 
 .results-constructors-panel {
     width: 100%;
