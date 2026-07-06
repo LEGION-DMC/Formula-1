@@ -186,7 +186,7 @@ function createQualiTable() {
     thead.innerHTML = `
         <tr>
             <th colspan="3">Пилот</th>
-            <th class="vs-col">vs</th>
+            <th></th>
             <th colspan="3">Пилот</th>
         </tr>
     `;
@@ -202,22 +202,18 @@ function createQualiTable() {
         
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td class="team-cell stats-clickable" data-team="${driver1.team}">
-                <img src="${getTeamLogo(driver1.team)}" alt="${driver1.team}" class="stats-team-logo" onerror="this.style.display='none'">
-            </td>
-            <td class="driver-cell stats-driver-clickable" data-driver-id="${driver1.id}">
+            <td class="driver-cell driver-cell-left stats-driver-clickable" data-driver-id="${driver1.id}">
                 <img src="Images/Flags/${driver1.country}.svg" alt="" title="${getCountryName(driver1.country)}" class="stats-flag">
-                <span>${row.driver1}</span>
+                <span>${driver1.name}</span>
             </td>
             <td class="score-cell ${row.score1 > row.score2 ? 'winner' : row.score1 < row.score2 ? 'loser' : 'draw'}">${row.score1}</td>
-            <td class="vs-cell">:</td>
-            <td class="score-cell ${row.score2 > row.score1 ? 'winner' : row.score2 < row.score1 ? 'loser' : 'draw'}">${row.score2}</td>
-            <td class="driver-cell stats-driver-clickable" data-driver-id="${driver2.id}">
-                <img src="Images/Flags/${driver2.country}.svg" alt=""  title="${getCountryName(driver2.country)}" class="stats-flag">
-                <span>${row.driver2}</span>
+            <td class="vs-cell stats-clickable" data-team="${driver1.team}">
+                <img src="${getTeamLogo(driver1.team)}" alt="${driver1.team}" class="stats-team-logo" onerror="this.style.display='none'">
             </td>
-            <td class="team-cell stats-clickable" data-team="${driver2.team}">
-                <img src="${getTeamLogo(driver2.team)}" alt="${driver2.team}" class="stats-team-logo" onerror="this.style.display='none'">
+            <td class="score-cell ${row.score2 > row.score1 ? 'winner' : row.score2 < row.score1 ? 'loser' : 'draw'}">${row.score2}</td>
+            <td class="driver-cell driver-cell-right stats-driver-clickable" data-driver-id="${driver2.id}">
+                <span>${driver2.name}</span>
+                <img src="Images/Flags/${driver2.country}.svg" alt="" title="${getCountryName(driver2.country)}" class="stats-flag">
             </td>
         `;
         tbody.appendChild(tr);
@@ -228,7 +224,6 @@ function createQualiTable() {
     wrapper.appendChild(tableContainer);
     
     wrapper.addEventListener('click', (e) => {
-        // Клик по пилоту
         const driverCell = e.target.closest('.stats-driver-clickable');
         if (driverCell) {
             const driver = findDriverById(driverCell.dataset.driverId);
@@ -292,7 +287,8 @@ function createPitstopTable() {
         if (!driver) return;
         
         const gpCountry = getGPCountry(row.gpId);
-        const gpName = getGPName(row.gpId);
+        const gpName = getGPName(row.gpId);           
+		const gpShort = gpName.replace('Гран-при ', '');
         
         // Проверяем, лучшее ли это время
         const currentTime = parseFloat(row.time);
@@ -301,16 +297,18 @@ function createPitstopTable() {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td class="pos-cell">${index + 1}</td>
-            <td class="gp-cell">
-                <img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
-                <span>${gpName}</span>
-            </td>
+			<td class="gp-cell">
+				<img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
+				<span class="gp-full">${gpName}</span>
+				<span class="gp-short">${gpShort}</span>
+			</td>
             <td class="team-cell stats-clickable" data-team="${driver.team}">
                 <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
             </td>
             <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
                 <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
-                <span>${driver.name}</span>
+                <span class="driver-fullname">${driver.name}</span>
+				<span class="driver-shortname">${driver.namem}</span>
             </td>
             <td class="time-cell ${isBest ? 'best-time' : ''}">${row.time}</td>
         `;
@@ -455,21 +453,24 @@ function createLapRecordTable() {
             if (!driver) return;
             
             const gpCountry = getGPCountry(row.gpId);
-            const gpName = getGPName(row.gpId);
+			const gpName = getGPName(row.gpId);           
+			const gpShort = gpName.replace('Гран-при ', '');
             
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="pos-cell">${index + 1}</td>
-                <td class="gp-cell">
-                    <img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
-                    <span>${gpName}</span>
-                </td>
+				<td class="gp-cell">
+					<img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
+					<span class="gp-full">${gpName}</span>
+					<span class="gp-short">${gpShort}</span>
+				</td>
                 <td class="team-cell stats-clickable" data-team="${driver.team}">
                     <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
                 </td>
                 <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
                     <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
-                    <span>${driver.name}</span>
+                    <span class="driver-fullname">${driver.name}</span>
+					<span class="driver-shortname">${driver.namem}</span>
                 </td>
                 <td class="time-cell">${row.time}</td>
             `;

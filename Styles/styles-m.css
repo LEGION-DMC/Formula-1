@@ -327,3 +327,9 @@ body {
 
 .main-page-content h1 { font-size: 1.5rem; }
 .main-page-content p { font-size: 0.9rem; }
+
+.driver-fullname { display: none; }
+.driver-shortname { display: inline; }
+
+.gp-cell .gp-full { display: none; }
+.gp-cell .gp-short { display: inline; }

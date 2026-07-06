@@ -7,7 +7,6 @@ const driversData = [
         team: "McLaren",
         birthPlace: "Бристоль, Великобритания",
         birthDate: "13.11.1999",
-        debut: "McLaren, 2019",
         titles: 1,
 		hattricks: 3,
         wins: 11,
@@ -23,7 +22,6 @@ const driversData = [
         team: "Red Bull",
         birthPlace: "Хасселт, Бельгия",
         birthDate: "30.09.1997",
-        debut: "Toro Rosso, 2015",
         titles: 4,
 		hattricks: 15,
         wins: 71,
@@ -39,7 +37,6 @@ const driversData = [
         team: "Audi",
         birthPlace: "Бразилиа, Бразилия",
         birthDate: "14.12.2004",
-        debut: "Sauber, 2025",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -55,7 +52,6 @@ const driversData = [
         team: "Red Bull",
         birthPlace: "Париж, Франция",
         birthDate: "28.09.2004",
-        debut: "Racing Bulls, 2025",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -71,7 +67,6 @@ const driversData = [
         team: "Резерв",
         birthPlace: "Брисбен, Австралия",
         birthDate: "20.01.2003",
-        debut: "Alpine, 2024",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -87,7 +82,6 @@ const driversData = [
         team: "Alpine",
         birthPlace: "Руан, Франция",
         birthDate: "07.02.1996",
-        debut: "Toro Rosso, 2017",
         titles: 0,
 		hattricks: 0,
         wins: 1,
@@ -103,7 +97,6 @@ const driversData = [
         team: "Cadillac",
         birthPlace: "Гвадалахара, Мексика",
         birthDate: "26.01.1990",
-        debut: "Sauber, 2011",
         titles: 0,
 		hattricks: 0,
         wins: 6,
@@ -119,7 +112,6 @@ const driversData = [
         team: "Mercedes",
         birthPlace: "Болонья, Италия",
         birthDate: "25.08.2006",
-        debut: "Mercedes, 2025",
         titles: 0,
 		hattricks: 3,
         wins: 5,
@@ -135,7 +127,6 @@ const driversData = [
         team: "Aston Martin",
         birthPlace: "Овьедо, Испания",
         birthDate: "29.07.1981",
-        debut: "Minardi, 2001",
         titles: 2,
 		hattricks: 5,
         wins: 32,
@@ -151,7 +142,6 @@ const driversData = [
         team: "Ferrari",
         birthPlace: "Монте-Карло, Монако",
         birthDate: "16.10.1997",
-        debut: "Alfa Romeo, 2018",
         titles: 0,
 		hattricks: 0,
 		hattricks: 2,
@@ -168,7 +158,6 @@ const driversData = [
         team: "Aston Martin",
         birthPlace: "Монреаль, Канада",
         birthDate: "29.10.1998",
-        debut: "Williams, 2017",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -184,7 +173,6 @@ const driversData = [
         team: "Резерв",
         birthPlace: "Канагава, Япония",
         birthDate: "11.05.2000",
-        debut: "AlphaTauri, 2021",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -200,7 +188,6 @@ const driversData = [
         team: "Williams",
         birthPlace: "Лондон, Великобритания",
         birthDate: "23.03.1996",
-        debut: "Toro Rosso, 2019",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -216,7 +203,6 @@ const driversData = [
         team: "Резерв",
         birthPlace: "Шанхай, Китай",
         birthDate: "30.05.1999",
-        debut: "Alfa Romeo, 2022",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -232,7 +218,6 @@ const driversData = [
         team: "Audi",
         birthPlace: "Эммерих-на-Рейне, Германия",
         birthDate: "19.08.1987",
-        debut: "Williams, 2010",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -248,7 +233,6 @@ const driversData = [
         team: "Racing Bulls",
         birthPlace: "Хастингс, Новая Зеландия",
         birthDate: "11.02.2002",
-        debut: "AlphaTauri, 2023",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -264,7 +248,6 @@ const driversData = [
         team: "Haas",
         birthPlace: "Эвре, Франция",
         birthDate: "17.09.1996",
-        debut: "Manor, 2016",
         titles: 0,
 		hattricks: 0,
         wins: 1,
@@ -280,7 +263,6 @@ const driversData = [
         team: "Racing Bulls",
         birthPlace: "Лондон, Англия",
         birthDate: "08.08.2007",
-        debut: "Racing Bulls, 2026",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -296,7 +278,6 @@ const driversData = [
         team: "Alpine",
         birthPlace: "Буэнос-Айрес, Аргентина",
         birthDate: "27.05.2003",
-        debut: "Williams, 2024",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -312,7 +293,6 @@ const driversData = [
         team: "Ferrari",
         birthPlace: "Стивенидж, Великобритания",
         birthDate: "07.01.1985",
-        debut: "McLaren, 2007",
         titles: 7,
 		hattricks: 19,
         wins: 106,
@@ -328,7 +308,6 @@ const driversData = [
         team: "Williams",
         birthPlace: "Мадрид, Испания",
         birthDate: "01.09.1994",
-        debut: "Toro Rosso, 2015",
         titles: 0,
 		hattricks: 0,
         wins: 4,
@@ -344,7 +323,6 @@ const driversData = [
         team: "Mercedes",
         birthPlace: "Кингс-Линн, Великобритания",
         birthDate: "15.02.1998",
-        debut: "Williams, 2019",
         titles: 0,
 		hattricks: 2,
         wins: 7,
@@ -360,7 +338,6 @@ const driversData = [
         team: "Cadillac",
         birthPlace: "Настола, Финляндия",
         birthDate: "28.08.1989",
-        debut: "Williams, 2013",
         titles: 0,
 		hattricks: 2,
         wins: 10,
@@ -376,7 +353,6 @@ const driversData = [
         team: "McLaren",
         birthPlace: "Мельбурн, Австралия",
         birthDate: "06.04.2001",
-        debut: "McLaren, 2023",
         titles: 0,
 		hattricks: 3,
         wins: 9,
@@ -392,7 +368,6 @@ const driversData = [
         team: "Haas",
         birthPlace: "Челмсфорд, Великобритания",
         birthDate: "08.05.2005",
-        debut: "Ferrari, 2024",
         titles: 0,
 		hattricks: 0,
         wins: 0,
@@ -690,6 +665,18 @@ function renderDriverCards(drivers, container) {
     });
 }
 
+function calculateAge(birthDateStr) {
+    const parts = birthDateStr.split('.');
+    const birth = new Date(parts[2], parts[1] - 1, parts[0]);
+    const now = new Date();
+    let age = now.getFullYear() - birth.getFullYear();
+    const m = now.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 function openDriverModal(driver) {
     const existingModal = document.querySelector('.driver-modal-overlay');
     if (existingModal) existingModal.remove();
@@ -803,11 +790,7 @@ function openDriverModal(driver) {
         </div>
         <div class="detail-cell">
             <span class="detail-label">Дата рождения</span>
-            <span class="detail-value">${driver.birthDate}</span>
-        </div>
-        <div class="detail-cell">
-            <span class="detail-label">Дебют</span>
-            <span class="detail-value">${driver.debut}</span>
+            <span class="detail-value">${driver.birthDate} (${calculateAge(driver.birthDate)})</span>
         </div>
     `;
     

@@ -863,7 +863,7 @@ h1, h2 {
 
 /* ВКЛАДКА СТАТИСТИКИ                             */
 /* ============================================== */
-.stats-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10px; }
+.stats-grid { display: grid; grid-template-columns: 0.7fr 1.2fr; gap: 10px; }
 
 .stats-table-wrapper {
     background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
@@ -909,7 +909,7 @@ h1, h2 {
 }
 
 .pitstop-table .stats-driver-clickable {
-    padding-left: 55px;
+    padding-left: 15px;
 }
 
 .lap-record-table .stats-driver-clickable {
@@ -930,7 +930,7 @@ h1, h2 {
     margin-right: 3px;
 }
 
-.stats-team-logo { width: 22px; height: 15px; object-fit: contain; vertical-align: middle; }
+.stats-team-logo { width: 23px; height: 16px; object-fit: contain; vertical-align: middle; }
 
 .pos-cell { font-family: 'F1Numbers', sans-serif; color: var(--text-gray); text-align: center; width: 10px; }
 .team-cell { text-align: center; width: 40px; }
@@ -951,19 +951,12 @@ h1, h2 {
 .score-cell.loser { color: #cc3300; }
 .score-cell.draw { color: var(--text-gray); }
 
-.vs-cell { text-align: center; color: #999; width: 0px; }
-.quali-table .team-cell { width: 35px; }
-.quali-table .driver-cell { font-size: 0.8rem; }
+.vs-cell { text-align: center; width: 0px; }
+.quali-table .driver-cell { font-size: 0.85rem; }
 
 .quali-table tbody td:nth-child(5),
-.quali-table tbody td:nth-child(6),
-.quali-table tbody td:nth-child(7) { text-align: right; }
-
-.quali-table td.driver-cell:nth-child(6) { text-align: right; }
-
-.quali-table td:nth-child(6) .stats-flag { order: 1; margin-right: 0; margin-left: 6px; }
-.quali-table td:nth-child(6) { direction: rtl; }
-.quali-table td:nth-child(7) { text-align: right; }
+.quali-table tbody td:nth-child(7) { 
+    text-align: right; }
 
 .pitstop-table .time-cell { text-align: left; padding-left: 25px; }
 
@@ -979,6 +972,12 @@ h1, h2 {
 
 .stats-clickable { cursor: pointer; transition: opacity 0.2s ease; }
 .stats-clickable:hover { opacity: 0.3; }
+
+.driver-fullname { display: inline; }
+.driver-shortname { display: none; }
+
+.gp-cell .gp-full { display: inline; }
+.gp-cell .gp-short { display: none; }
 
 /* ВКЛАДКА РЕЗУЛЬТАТЫ                             */
 /* ============================================== */
