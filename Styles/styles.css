@@ -863,7 +863,7 @@ h1, h2 {
 
 /* ВКЛАДКА СТАТИСТИКИ                             */
 /* ============================================== */
-.stats-grid { display: grid; grid-template-columns: 0.7fr 1.2fr; gap: 10px; }
+.stats-grid { display: grid; grid-template-columns: 0.75fr 1.2fr; gap: 10px; }
 
 .stats-table-wrapper {
     background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));

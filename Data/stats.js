@@ -204,7 +204,8 @@ function createQualiTable() {
         tr.innerHTML = `
             <td class="driver-cell driver-cell-left stats-driver-clickable" data-driver-id="${driver1.id}">
                 <img src="Images/Flags/${driver1.country}.svg" alt="" title="${getCountryName(driver1.country)}" class="stats-flag">
-                <span>${driver1.name}</span>
+                    <span class="driver-fullname">${driver1.name}</span>
+					<span class="driver-shortname">${driver1.namem}</span>
             </td>
             <td class="score-cell ${row.score1 > row.score2 ? 'winner' : row.score1 < row.score2 ? 'loser' : 'draw'}">${row.score1}</td>
             <td class="vs-cell stats-clickable" data-team="${driver1.team}">
@@ -212,7 +213,8 @@ function createQualiTable() {
             </td>
             <td class="score-cell ${row.score2 > row.score1 ? 'winner' : row.score2 < row.score1 ? 'loser' : 'draw'}">${row.score2}</td>
             <td class="driver-cell driver-cell-right stats-driver-clickable" data-driver-id="${driver2.id}">
-                <span>${driver2.name}</span>
+                    <span class="driver-fullname">${driver2.name}</span>
+					<span class="driver-shortname">${driver2.namem}</span>
                 <img src="Images/Flags/${driver2.country}.svg" alt="" title="${getCountryName(driver2.country)}" class="stats-flag">
             </td>
         `;
@@ -288,7 +290,7 @@ function createPitstopTable() {
         
         const gpCountry = getGPCountry(row.gpId);
         const gpName = getGPName(row.gpId);           
-		const gpShort = gpName.replace('Гран-при ', '');
+		const gpShort = gpName.replace('Гран-при ', '').replace('-Каталунии', '');
         
         // Проверяем, лучшее ли это время
         const currentTime = parseFloat(row.time);

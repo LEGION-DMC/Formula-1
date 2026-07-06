@@ -222,8 +222,8 @@ body {
 .tm-info-row { grid-template-columns: 1fr; gap: 12px; }
 .tm-car-engine { margin: 0; width: 100%; }
 
-.stats-grid { grid-template-columns: 1fr; gap: 15px; }
-.stats-table-wrapper { padding: 15px; }
+.stats-grid { grid-template-columns: 1fr; gap: 10px; }
+.stats-table-wrapper { padding: 8px; }
 .stats-table { font-size: 0.75rem; }
 .stats-table thead th { font-size: 0.65rem; padding: 6px 4px; }
 .stats-table tbody td { padding: 4px; }
