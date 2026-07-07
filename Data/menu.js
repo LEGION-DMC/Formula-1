@@ -194,11 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-    const savedTab = localStorage.getItem('activeF1Tab') || 'main';
-    const isValidTab = menuItems.some(item => item.id === savedTab);
-    const initialTab = isValidTab ? savedTab : 'main';
-    setActiveButton(initialTab);
-    loadTabContent(initialTab);
-	
+	const initialTab = 'main';
+	setActiveButton(initialTab);
+	loadTabContent(initialTab);
+
 	window.scrollTo({ top: 0, behavior: 'instant' });
 });

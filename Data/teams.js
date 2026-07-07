@@ -191,9 +191,12 @@ function createTeamCard(team) {
             numberSpan.textContent = driver.number;
             
              
-            const nameSpan = document.createElement('span');
-            nameSpan.className = 'team-driver-name';
-            nameSpan.textContent = driver.name;
+			const nameSpan = document.createElement('span');
+			nameSpan.className = 'team-driver-name';
+			nameSpan.innerHTML = `
+				<span class="driver-fullname">${driver.name}</span>
+				<span class="driver-shortname">${driver.namem}</span>
+			`;
             
              
             const flagImg = document.createElement('img');
