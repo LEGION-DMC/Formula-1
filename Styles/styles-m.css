@@ -54,21 +54,24 @@ body {
 }
 
 .menu-nav-logo {
-    width: 150px;
+    display: block;
+    width: 120px;
     height: auto;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
     cursor: pointer;
     transition: transform 0.3s ease;
-    filter: drop-shadow(0 0 5px rgba(225, 6, 0, 0.5));
+    filter: brightness(1.2);
 }
 
 .menu-nav-logo:hover {
     transform: scale(1.08);
+    filter: brightness(1.5);
 }
 
 .menu-nav-logo:active {
     transform: scale(0.95);
 }
+
 .menu-nav.open {
     transform: translateX(0);
 }

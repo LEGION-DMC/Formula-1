@@ -82,10 +82,6 @@ body::before {
     cursor: pointer;
 }
 
-.menu-logo:hover {
-    transform: scale(1.05);
-}
-
 .menu-logo:active {
     transform: scale(0.95);
     transition: transform 0.1s ease;

@@ -199,4 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialTab = isValidTab ? savedTab : 'main';
     setActiveButton(initialTab);
     loadTabContent(initialTab);
+	
+	window.scrollTo({ top: 0, behavior: 'instant' });
 });
