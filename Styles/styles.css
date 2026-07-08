@@ -904,7 +904,7 @@ h1, h2 {
 
 .stats-table thead th {
     text-align: center;
-    padding: 5px 3px;
+    padding: 0px 3px 5px 3px;
     color: #999;
     font-size: 0.7rem;
     text-transform: uppercase;
@@ -950,7 +950,16 @@ h1, h2 {
 
 .pos-cell { font-family: 'F1Numbers', sans-serif; color: var(--text-gray); text-align: center; width: 10px; }
 .team-cell { text-align: center; width: 40px; }
-.driver-cell { color: var(--text-light); white-space: nowrap; }
+.driver-cell { 
+    color: var(--text-light); 
+    white-space: nowrap;
+}
+
+.driver-cell-left {
+    width: 41%;
+}
+
+
 .gp-cell { color: var(--text-light); white-space: nowrap; }
 .time-cell { font-family: 'F1Numbers', 'F1Title', sans-serif; 
     font-weight: bold; 
@@ -970,7 +979,10 @@ h1, h2 {
 .score-cell.draw { color: var(--text-gray); }
 
 .vs-cell { text-align: center; width: 0px; }
-.quali-table .driver-cell { font-size: 0.85rem; }
+
+.quali-table .driver-cell { 
+    font-size: 0.85rem; 
+}
 
 .quali-table tbody td:nth-child(5),
 .quali-table tbody td:nth-child(7) { 
