@@ -553,7 +553,7 @@ function openTrackModal(track, gp) {
                 <hr class="tm-divider">
                 <div class="tm-stats-grid">
                     <div class="tm-stat-cell">
-                        <span class="tm-stat-value">${track.length}</span>
+                        <span class="tm-stat-value">${track.length} км</span>
                         <span class="tm-stat-label">Длина</span>
                     </div>
                     <div class="tm-stat-cell">
@@ -565,12 +565,16 @@ function openTrackModal(track, gp) {
                         <span class="tm-stat-label">Поворотов</span> 
                     </div>
                     <div class="tm-stat-cell">
-                        <span class="tm-stat-value-direction">${track.direction === 'по часовой стрелке' ? '↻' : '↺'}</span>
-                        <span class="tm-stat-label">Направление</span>
+                        <span class="tm-stat-value">${track.elevation} м</span>
+                        <span class="tm-stat-label">Перепад высот</span>
                     </div>
                     <div class="tm-stat-cell">
-                        <span class="tm-stat-value">${track.elevation || '—'}</span>
-                        <span class="tm-stat-label">Перепад высот</span>
+                        <span class="tm-stat-value">${track.speed} км/ч</span>
+                        <span class="tm-stat-label">Средняя скорость</span>
+                    </div>
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-value-direction">${track.direction === 'по часовой стрелке' ? '↻' : '↺'}</span>
+                        <span class="tm-stat-label">Направление</span>
                     </div>
                 </div>
                 <hr class="tm-divider">

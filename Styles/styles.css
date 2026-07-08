@@ -1544,9 +1544,9 @@ h1, h2 {
 
 .tm-stat-value-direction {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 2rem;
+    font-size: 1.83rem;
     font-weight: bold;
-    margin: -12px 0 -2px 0;
+    margin: -14px 0 -3px 0;
     color: var(--red-accent);
 }
 
@@ -1600,4 +1600,301 @@ h1, h2 {
     background: var(--red-accent); 
     color: #fff; 
     border-color: var(--red-accent); 
+}
+
+/* ============================================== */
+/* ГЛАВНАЯ СТРАНИЦА                               */
+/* ============================================== */
+
+/* Сетка плашек */
+.main-blocks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.main-block {
+    background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-block-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.main-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.3) 20%, rgba(225, 6, 0, 0.3) 80%, transparent);
+    margin: 12px 0;
+}
+
+/* ========================================== */
+/* ПЛАШКА ПОГОДЫ                              */
+/* ========================================== */
+
+.weather-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    padding: 5px 0;
+}
+
+.weather-icon-large {
+    width: 48px;
+    height: 48px;
+}
+
+.weather-type {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
+.weather-params {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.weather-param-cell {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+}
+
+.weather-param-cell:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.weather-param-cell:active {
+    transform: scale(0.95);
+}
+
+.weather-value {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.weather-label {
+    font-size: 0.65rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+/* ========================================== */
+/* ПЛАШКА ПРЕДСТОЯЩЕГО ГП                     */
+/* ========================================== */
+
+.nextgp-block.clickable {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nextgp-block.clickable:hover {
+    transform: translateY(-4px);
+    border-color: var(--red-accent);
+    box-shadow: 0 10px 25px rgba(225, 6, 0, 0.15);
+}
+
+.nextgp-block.clickable:active {
+    transform: scale(0.97);
+}
+
+.nextgp-track {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.nextgp-image {
+    width: 140px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #111;
+}
+
+.nextgp-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nextgp-flag-inline {
+    width: 22px;
+    height: 15px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-right: 6px;
+    margin-top: -2px;
+}
+
+.nextgp-name {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.nextgp-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nextgp-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.nextgp-value {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: left;
+}
+
+.nextgp-countdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.countdown-timer strong {
+    font-family: 'F1Numbers', sans-serif;
+    color: var(--red-accent);
+    font-size: 1rem;
+}
+
+.main-sprint-badge {
+    background: var(--red-accent);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.6rem;
+    animation: sprintPulse 1s ease infinite;
+}
+
+@keyframes sprintPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.nextgp-empty {
+    text-align: center;
+    padding: 30px 20px;
+    color: #666;
+}
+
+.nextgp-empty span {
+    font-size: 1.1rem;
+}
+
+.nextgp-empty p {
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* ========================================== */
+/* ПЛАШКА ШИН                                 */
+/* ========================================== */
+
+.tyres-top {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.tyres-bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.tyre-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 5px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: opacity 0.3s ease;
+}
+
+.tyre-item.dimmed {
+    opacity: 0.25;
+}
+
+.tyre-item.clickable {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.tyre-item.clickable:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.tyre-item.clickable:hover .tyre-img {
+    transform: scale(1.1);
+}
+
+.tyre-item.clickable:active {
+    transform: scale(0.95);
+}
+
+.tyre-name {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.tyre-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.tyre-type {
+    font-size: 0.65rem;
+    color: #999;
+    text-transform: uppercase;
 }

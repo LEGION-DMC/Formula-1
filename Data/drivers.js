@@ -374,7 +374,7 @@ const driversData = [
         podiums: 0,
         poles: 0,
         bio: "Дебют 2024 (Ferrari на замену Сайнсу). Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy."
-    }
+    },
 ];
 
 function initDriversPage(container) {

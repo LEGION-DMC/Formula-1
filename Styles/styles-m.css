@@ -433,6 +433,10 @@ body {
     padding: 20px;
 }
 
+.driver-cell-left {
+    width: 41.6%;
+}
+
 .main-page-content h1 { font-size: 1.5rem; }
 .main-page-content p { font-size: 0.9rem; }
 
@@ -441,3 +445,92 @@ body {
 
 .gp-cell .gp-full { display: none; }
 .gp-cell .gp-short { display: inline; }
+
+/* ГЛАВНАЯ                                        */
+/* ============================================== */
+
+.main-blocks {
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+/* Порядок плашек: ГП → Шины → Погода */
+.main-blocks .nextgp-block { order: 1; }
+.main-blocks .tyres-block  { order: 2; }
+.main-blocks .weather-block { order: 3; }
+
+.main-block {
+    padding: 15px;
+}
+
+.main-block-title {
+    font-size: 0.9rem;
+}
+
+/* Погода */
+.weather-icon-large {
+    width: 40px;
+    height: 40px;
+}
+
+.weather-type {
+    font-size: 1rem;
+}
+
+.weather-params {
+    gap: 6px;
+}
+
+.weather-param-cell {
+    padding: 8px 4px;
+}
+
+.weather-value {
+    font-size: 1.1rem;
+}
+
+/* ГП */
+.nextgp-flag-inline {
+    width: 20px;
+    height: 13px;
+}
+
+.nextgp-details {
+    gap: 6px;
+}
+
+.main-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.nextgp-value {
+    font-size: 0.8rem;
+}
+
+.nextgp-countdown {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.countdown-timer {
+    font-size: 0.85rem;
+}
+
+/* Шины */
+.tyres-top {
+    gap: 5px;
+}
+
+.tyre-img {
+    width: 32px;
+    height: 32px;
+}
+
+.tyre-name {
+    font-size: 0.7rem;
+}
+
+.tyre-type {
+    font-size: 0.6rem;
+}
