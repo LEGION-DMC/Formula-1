@@ -1,113 +1,180 @@
 const teamsData = [
     {  shortName: "Mercedes",
         fullName: "Mercedes-AMG PETRONAS F1 Team",
-        base: "Брэкли, Великобритания",
+        base: "Милтон-Кинс, Великобритания",
+		country: "gb",
+		license_country: "de",
+		license: "Германия",
         director: "Тото Вольфф",
         founder: "Норберт Хауг",
-        debut: "2010",
-        car: "W17 E Perfomance",
+        car: "W17 E",
         engine: "Mercedes",
-        color: "#75F1D3"
+		titles: 8,  
+        firstWin: "Китай, Шанхай, 2012",
+        debut: "2010",
+        color: "#75F1D3",
+		info: "В 1994 году компания Mercedes-Benz участвовала в F1, в качестве поставщика двигателей для гоночной команды Sauber. В 2009 году Mercedes-Benz приобрела 75% контрольного пакета в команде Brawn GP, выигравшей чемпионат 2009 года. Позднее Brawn GP, переименованная в Mercedes GP, дебютировала в 2010 году. За неё выступали немецкие пилоты Нико Росберг и Михаэль Шумахер."
     },
     {  shortName: "Ferrari",
         fullName: "Scuderia Ferrari HP",
         base: "Маранелло, Италия",
+		country: "it",
+		license_country: "it",
+		license: "Италия",
         director: "Фредерик Вассёр",
         founder: "Энцо Феррари",
-        debut: "1950",
         car: "SF-26",
         engine: "Ferrari",
-        color: "#D52E37"
+		titles: 16,  
+        firstWin: "Британия, Сильверстоун, 1951",
+        debut: "1950",
+        color: "#D52E37",
+		info: "Итальянская команда, представляющая собой подразделение автомобильной компании Ferrari Gestione Sportiva, занимающееся гонками. Команда принимает участие в гонках F1 с 1950 года по сей день и является самой старой и успешной командой в чемпионате."
     },
     {  shortName: "McLaren",
         fullName: "McLaren Mastercard F1 Team",
         base: "Уокинг, Великобритания",
+		country: "gb",
+		license_country: "gb",
+		license: "Великобритания",
         director: "Андреа Стелла",
         founder: "Брюс Макларен",
         debut: "1966",
         car: "MCL40",
         engine: "Mercedes",
-        color: "#ef8733"
+		titles: 10,  
+        firstWin: "Бельгия, Спа-Франкоршам, 1968",
+        debut: "1966",
+        color: "#ef8733",
+		info: "Британская команда, представляющая собой подразделение McLaren Technology Group. В разное время команда участвовала и побеждала в различных автоспортивных соревнованиях, пять раз выигрывала соревнования Can-Am, трижды выигрывала 500 миль Индианаполиса, по одному разу в гонках 24 часа Ле-Мана и 12 часов Себринга, в настоящее время команда сконцентрирована на участии в чемпионате мира F1, где 10 раз завоёвывала кубок конструкторов."
     },
     {  shortName: "Red Bull",
         fullName: "Oracle Red Bull Racing",
         base: "Милтон-Кинс, Великобритания",
+		country: "gb",
+		license_country: "at",
+		license: "Австрия",
         director: "Лоран Мекис",
         founder: "Дитрих Матешиц",
-        debut: "2005",
         car: "RB22",
         engine: "Red Bull Ford",
-        color: "#4570C0"
+		titles: 6,  
+        firstWin: "Китай, Шанхай, 2009",
+        debut: "2005",
+        color: "#4570C0",
+		info: "Австрийская команда, основана руководителем концерна по производству энергетических напитков Red Bull - Дитрихом Матешицем. Хотя база команды и расположена в Великобритания, но команда выступает под австрийской лицензией. Компания Ford Motor заявила о выходе принадлежащей ей команды Jaguar Racing из чемпионата F1 в сентябре 2004 года и уже ноябре Red Bull, подтвердил покупку Jaguar Racing в последний день подачи заявок на участие в сезоне 2005 года."
     },
     {  shortName: "Williams",
         fullName: "Atlassian Williams Racing",
-        base: "Гроу, Оксфордшир, Великобритания",
+        base: "Гроу, Великобритания",
+		country: "gb",
+		license_country: "gb",
+		license: "Великобритания",
         director: "Джеймс Ваулз",
         founder: "Фрэнк Уильямс",
-        debut: "1975",
         car: "FW48",
         engine: "Mercedes",
-        color: "#3267D4"
+		titles: 9,  
+        firstWin: "Британия, Сильверстоун, 1979",
+        debut: "1975",
+        color: "#3267D4",
+		info: "Британская команда, созданая Фрэнком Уильямсом и Патриком Хэдом под названием Williams Grand Prix Engineering. В сезоне 1980 года команда выиграла свой первый кубок конструкторов, опередив почти вдвое по очкам занявшую 2-е место Ligier. Все шасси команды содержат приставку FW - инициалы основателя команды."
     },
     {  shortName: "Racing Bulls",
         fullName: "Visa Cash App Racing Bulls F1 Team",
         base: "Фаэнца, Италия",
+		country: "it",
+		license_country: "it",
+		license: "Италия",
         director: "Алан Пермейн",
         founder: "Дитрих Матешиц",
-        debut: "2006",
         car: "VCARB 03",
         engine: "Red Bull Ford",
-        color: "#7091f8"
+		titles: 0,  
+        firstWin: "Италия, Монца, 2008",
+        debut: "2006",
+        color: "#7091f8",
+		info: "Итальянская команда, принадлежащая австрийскому конгломерату Red Bull GmbH. С сезона 2006 по 2019 года команда выступала под названием Toro Rosso. К сезону 2020 года была переименована в AlphaTauri. К сезону 2024 года команда была переименована в своё текущее название."
     },
     {  shortName: "Aston Martin", // 2027 - Aston Martin Aramco Honda
         fullName: "Aston Martin Aramco F1 Team",
         base: "Сильверстоун, Великобритания",
+		country: "gb",
+		license_country: "gb",
+		license: "Великобритания",
         director: "Эдриан Ньюи",
         founder: "Лоуренс Стролл",
-        debut: "2021",
         car: "AMR26",
         engine: "Honda",
-        color: "#4B9774"
+		titles: 0,  
+        firstWin: "",
+        debut: "2021",
+        color: "#4B9774",
+		info: "Британская команда, созданная на базе команды Racing Point, после покупки бизнесменом Лоуренсом Строллом 20% процентов в компании Aston Martin. Пилотами команды на дебютный сезон стали - Лэнс Стролл, сын Лоуренса, и четырёхкратный чемпион мира - Себастьян Феттель."
     },
     {  shortName: "Haas",
         fullName: "TGR Haas F1 Team",
-        base: "Каннаполис, Северная Каролина, США",
+        base: "Каннаполис, США",
+		country: "us",
+		license_country: "us",
+		license: "США",
         director: "Айо Комацу",
         founder: "Джин Хаас",
         debut: "2016",
         car: "VF-26",
         engine: "Ferrari",
-        color: "#DFE1E2"
+		titles: 0,  
+        firstWin: "",
+        color: "#DFE1E2",
+		info: "Американская команда, является первой американской командой, принявшей решение об участии в F1, со времён неудавшегося проекта US F1 Team, старт которого планировался в 2010 году."
     },
     {  shortName: "Audi",
         fullName: "Audi Revolut F1 Team",
-        base: "Хинвилл, Швейцария",
+        base: "Бавария, Германия",
+		country: "de",
+		license_country: "de",
+		license: "Германия",
         director: "Маттиа Бинотто",
         founder: "Audi Formula Racing GmbH",
-        debut: "2026",
         car: "RS-26",
         engine: "Audi",
-        color: "#EB4526"
+		titles: 0,  
+        firstWin: "",
+        debut: "2026",
+        color: "#EB4526",
+		info: "Немецкая команда, была сформирована путём приобретения команды Sauber, с двигателями, разработанными Audi Formula Racing GmbH. В 1930-39 годах, задолго до проведения первого чемпионата мира в 1950 году, компания Audi AG уже участвовала в гонках Гран-при под названием Auto Union. Спустя 85 лет современная компания Audi решила вернутся."
     },
     {  shortName: "Alpine", // 2027 - Gucci Racing Alpine F1 Team
         fullName: "BWT Alpine F1 Team",
-        base: "Энстоун, Великобритания",
+        base: "Эсон, Франция",
+		country: "fr",
+		license_country: "fr",
+		license: "Франция",
         director: "Флавио Бриаторе",
         founder: "Renault Group",
-        debut: "2021",
         car: "A526",
         engine: "Mercedes",
-        color: "#479FE2"
+		titles: 0,  
+        firstWin: "Венгрия, Хунгароринг, 2021",
+        debut: "2021",
+        color: "#479FE2",
+		info: "Французская команда, созданная на базе команды Renault. В дебютном сезоне за Альпин выступали, двукратный чемпион мира - Фернандо Алонсо и выступавший за команду Renault в 2020 году Эстебан Окон. Коллектив использовал силовые установки Renault. Резервным пилотом команды в сезоне 2021 года стал российский гонщик Даниил Квят."
     },
     {  shortName: "Cadillac",
         fullName: "Cadillac F1 Team",
-        base: "Фишерс, Индиана, США",
+        base: "Фишерс, США",
+		country: "us",
+		license_country: "us",
+		license: "США",
         director: "Грэм Лоудон",
         founder: "TWG Cadillac",
-        debut: "2026",
         car: "MAC-26",
         engine: "Ferrari",
-        color: "#AAAADD"
+		titles: 0,  
+        firstWin: "",
+        debut: "2026",
+        color: "#AAAADD",
+		info: "Американская команда, первый сезон которой начался в 2026 году в качестве конструктора, а с сезона 2029 года - будет ещё и в качестве поставщика двигателей."
     }
 ];
 
@@ -227,11 +294,9 @@ function createTeamCard(team) {
 function openTeamModal(team) {
     const drivers = getTeamDrivers(team.shortName);
     
-     
     const existingModal = document.querySelector('.team-modal-overlay');
     if (existingModal) existingModal.remove();
     
-     
     const scrollY = window.scrollY;
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
@@ -246,16 +311,13 @@ function openTeamModal(team) {
         window.scrollTo(0, scrollY);
     }
     
-     
     const overlay = document.createElement('div');
     overlay.className = 'team-modal-overlay';
     
-     
     const modal = document.createElement('div');
     modal.className = 'team-modal';
     modal.style.setProperty('--team-color', team.color);
     
-     
     const closeBtn = document.createElement('button');
     closeBtn.className = 'team-modal-close-btn';
     closeBtn.innerHTML = '&times;';
@@ -268,7 +330,7 @@ function openTeamModal(team) {
     
     closeBtn.addEventListener('click', closeModal);
     
-     
+    // Полный логотип
     const fullLogoContainer = document.createElement('div');
     fullLogoContainer.className = 'tm-logo-container';
     const fullLogo = document.createElement('img');
@@ -281,22 +343,22 @@ function openTeamModal(team) {
     };
     fullLogoContainer.appendChild(fullLogo);
     
-     
     const fullNameEl = document.createElement('h2');
     fullNameEl.className = 'tm-full-name';
     fullNameEl.textContent = team.fullName;
     
-     
+    // Разделитель 1
     const divider1 = document.createElement('hr');
     divider1.className = 'tm-divider';
     
-     
+    // База и Руководитель
     const infoRow1 = document.createElement('div');
     infoRow1.className = 'tm-info-row';
     infoRow1.innerHTML = `
         <div class="tm-info-cell">
             <span class="tm-label">База</span>
-            <span class="tm-value">${team.base}</span>
+            <span class="tm-value">
+            <img src="Images/Flags/${team.country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.country)}">${team.base}</span>
         </div>
         <div class="tm-info-cell">
             <span class="tm-label">Руководитель</span>
@@ -304,47 +366,43 @@ function openTeamModal(team) {
         </div>
     `;
     
-     
+    // Разделитель 2
     const divider2 = document.createElement('hr');
     divider2.className = 'tm-divider';
     
-     
+    // Основатель и Дебют
     const infoRow2 = document.createElement('div');
-    infoRow2.className = 'tm-info-row tm-car-engine';
+    infoRow2.className = 'tm-info-row';
     infoRow2.innerHTML = `
         <div class="tm-info-cell">
-            <span class="tm-label">Болид</span>
-            <span class="tm-value car-name">${team.car}</span>
+            <span class="tm-label">Лицензия FIA</span>
+            <span class="tm-value debut-year"><img src="Images/Flags/${team.license_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.license_country)}">${team.license}</span>
         </div>
-        <div class="tm-info-cell">
-            <span class="tm-label">Двигатель</span>
-            <span class="tm-value">${team.engine}</span>
-        </div>
-    `;
-    
-     
-    const divider3 = document.createElement('hr');
-    divider3.className = 'tm-divider';
-    
-     
-    const infoRow3 = document.createElement('div');
-    infoRow3.className = 'tm-info-row';
-    infoRow3.innerHTML = `
         <div class="tm-info-cell">
             <span class="tm-label">Основатель</span>
             <span class="tm-value">${team.founder}</span>
         </div>
+    `;
+    
+    // Разделитель 3
+    const divider3 = document.createElement('hr');
+    divider3.className = 'tm-divider';
+	
+    // Основатель и Дебют
+    const infoRow3 = document.createElement('div');
+    infoRow3.className = 'tm-info-row';
+    infoRow3.innerHTML = `
         <div class="tm-info-cell">
-            <span class="tm-label">Дебют</span>
-            <span class="tm-value debut-year">${team.debut}</span>
+            <span class="tm-label">О команде</span>
+            <span class="tm-value">${team.info}</span>
         </div>
     `;
     
-     
+    // Разделитель 3
     const divider4 = document.createElement('hr');
     divider4.className = 'tm-divider';
-    
-     
+	
+    // Пилоты
     const pilotsSection = document.createElement('div');
     pilotsSection.className = 'tm-pilots-section';
     
@@ -377,7 +435,7 @@ function openTeamModal(team) {
             
             const flagImg = document.createElement('img');
             flagImg.src = `Images/Flags/${driver.country}.svg`;
-			flagImg.title = getCountryName(driver.country);
+            flagImg.title = getCountryName(driver.country);
             flagImg.alt = driver.country;
             flagImg.className = 'tm-pilot-flag';
             
@@ -390,27 +448,85 @@ function openTeamModal(team) {
     
     pilotsSection.appendChild(pilotsList);
     
-     
-    modal.appendChild(closeBtn);
-    modal.appendChild(fullLogoContainer);
-    modal.appendChild(fullNameEl);
-    modal.appendChild(divider1);
-    modal.appendChild(infoRow1);
-    modal.appendChild(divider2);
-    modal.appendChild(infoRow2);
-    modal.appendChild(divider3);
-    modal.appendChild(infoRow3);
-    modal.appendChild(divider4);
-    modal.appendChild(pilotsSection);
+	modal.appendChild(closeBtn);
+	modal.appendChild(fullLogoContainer);
+	modal.appendChild(fullNameEl);
+	modal.appendChild(divider1);
+	modal.appendChild(infoRow1);     
+	modal.appendChild(divider2);
+	modal.appendChild(infoRow2);     
+	modal.appendChild(divider3);
+	modal.appendChild(infoRow3);     
+	modal.appendChild(divider4);
+	modal.appendChild(pilotsSection);
+    
+    // Правая колонка
+    const rightColumn = document.createElement('div');
+    rightColumn.className = 'tm-right-column';
+    
+    // Плашка болида
+    const bolidPanel = document.createElement('div');
+    bolidPanel.className = 'tm-bolid-panel';
+    bolidPanel.style.setProperty('--team-color', team.color);
+    
+    const bolidImg = document.createElement('img');
+    bolidImg.src = `Images/Bolid/${team.shortName.toLowerCase().replace(/\s+/g, '-')}.webp`;
+    bolidImg.alt = team.car;
+    bolidImg.className = 'tm-bolid-img';
+    bolidImg.onerror = () => { bolidPanel.style.display = 'none'; };
+    bolidPanel.appendChild(bolidImg);
+    
+    const bolidInfo = document.createElement('div');
+    bolidInfo.className = 'tm-bolid-info';
+    bolidInfo.innerHTML = `
+        <div class="tm-bolid-info-cell">
+            <span class="tm-bolid-info-label">Шасси</span>
+            <span class="tm-bolid-info-value">${team.car}</span>
+        </div>
+        <div class="tm-bolid-info-cell">
+            <span class="tm-bolid-info-label">Двигатель</span>
+            <span class="tm-bolid-info-value">${team.engine}</span>
+        </div>
+        <div class="tm-bolid-info-cell">
+            <span class="tm-bolid-info-label">Поставщик шин</span>
+            <span class="tm-bolid-info-value" style="color: #cece1a;">Pirelli</span>
+        </div>
+        <div class="tm-bolid-info-cell">
+            <span class="tm-bolid-info-label">Силовая установка</span>
+            <span class="tm-bolid-info-value">1.6 V6 Turbo</span>
+        </div>
+    `;
+    bolidPanel.appendChild(bolidInfo);
+    
+    // Плашка статистики
+    const statsPanel = document.createElement('div');
+    statsPanel.className = 'tm-bolid-stats-panel';
+    statsPanel.style.setProperty('--team-color', team.color);
+    statsPanel.innerHTML = `
+        <div class="tm-bolid-stat-cell">
+            <span class="tm-bolid-stat-label">Дебют</span>
+            <span class="tm-bolid-stat-value">${team.debut}</span>
+        </div>
+        <div class="tm-bolid-stat-cell">
+            <span class="tm-bolid-stat-label">Кубки конструкторов</span>
+            <span class="tm-bolid-stat-value">${team.titles || 0}</span>
+        </div>
+        <div class="tm-bolid-stat-cell tm-bolid-stat-full">
+            <span class="tm-bolid-stat-label">Первая победа</span>
+            <span class="tm-bolid-stat-value">${team.firstWin || '---'}</span>
+        </div>
+    `;
+    
+    rightColumn.appendChild(bolidPanel);
+    rightColumn.appendChild(statsPanel);
     
     overlay.appendChild(modal);
+    overlay.appendChild(rightColumn);
     
-     
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) closeModal();
     });
     
-     
     function escHandler(e) {
         if (e.key === 'Escape') closeModal();
     }
@@ -418,8 +534,28 @@ function openTeamModal(team) {
     
     document.body.appendChild(overlay);
     
-     
+    // Анимация
     requestAnimationFrame(() => {
+        bolidPanel.style.transition = 'none';
+        bolidPanel.style.opacity = '0';
+        bolidPanel.style.transform = 'translateX(40px)';
+        
+        statsPanel.style.transition = 'none';
+        statsPanel.style.opacity = '0';
+        statsPanel.style.transform = 'translateX(40px)';
+        
+        requestAnimationFrame(() => {
+            bolidPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            bolidPanel.style.transitionDelay = '0.2s';
+            bolidPanel.style.opacity = '1';
+            bolidPanel.style.transform = 'translateX(0)';
+            
+            statsPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            statsPanel.style.transitionDelay = '0.4s';
+            statsPanel.style.opacity = '1';
+            statsPanel.style.transform = 'translateX(0)';
+        });
+        
         overlay.classList.add('active');
         modal.classList.add('active');
     });
