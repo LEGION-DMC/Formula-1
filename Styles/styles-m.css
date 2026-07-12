@@ -297,13 +297,12 @@ body {
     display: none;
 }
 
-/* Скрыть четвёртый разделитель */
 .tm-divider:nth-of-type(4) {
     display: none;
 }
 
 .tm-info-row .tm-info-cell:only-child {
-    display: none;
+    display: none;z
 }
 
 .tm-bolid-stats-panel {

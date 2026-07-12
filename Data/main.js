@@ -3,11 +3,11 @@
 // ==============================================
 
 const weatherData = {
-    type: "sun",
-    typeName: "Солнечно",
-    temperature: 24,
-    wind: 3.2,
-    rain: 5
+    type: "cloud",
+    typeName: "Облачно",
+    temperature: 22,
+    wind: 3,
+    rain: 65
 };
 
 const tyreData = {
@@ -107,7 +107,7 @@ function createWeatherBlock() {
         <hr class="main-divider">
         <div class="weather-params">
             <div class="weather-param-cell">
-                <span class="weather-value">${weatherData.temperature}°C</span>
+                <span class="weather-value">${weatherData.temperature} °C</span>
                 <span class="weather-label">Температура</span>
             </div>
             <div class="weather-param-cell">
@@ -115,7 +115,7 @@ function createWeatherBlock() {
                 <span class="weather-label">Ветер</span>
             </div>
             <div class="weather-param-cell">
-                <span class="weather-value">${weatherData.rain}%</span>
+                <span class="weather-value">${weatherData.rain} %</span>
                 <span class="weather-label">Осадки</span>
             </div>
         </div>

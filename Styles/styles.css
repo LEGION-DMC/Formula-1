@@ -1749,7 +1749,7 @@ h1, h2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    max-width: 1100px;
+    max-width: 1050px;
     margin: 0 auto;
 }
 
@@ -1785,9 +1785,8 @@ h1, h2 {
 .weather-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
-    padding: 5px 0;
 }
 
 .weather-icon-large {
@@ -1799,6 +1798,7 @@ h1, h2 {
     font-family: 'F1Title', sans-serif;
     font-size: 1.2rem;
     color: var(--text-light);
+    margin-top: 10px;
 }
 
 .weather-params {
@@ -1831,12 +1831,11 @@ h1, h2 {
 .weather-value {
     font-family: 'F1Numbers', sans-serif;
     font-size: 1.2rem;
-    font-weight: bold;
     color: var(--text-light);
 }
 
 .weather-label {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: #888;
     text-transform: uppercase;
 }
@@ -1916,7 +1915,7 @@ h1, h2 {
 }
 
 .nextgp-value {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-light);
     text-align: left;
 }
@@ -1926,7 +1925,7 @@ h1, h2 {
     align-items: center;
     gap: 10px;
     font-family: 'F1Title', sans-serif;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #aaa;
 }
 
@@ -1934,16 +1933,6 @@ h1, h2 {
     font-family: 'F1Numbers', sans-serif;
     color: var(--red-accent);
     font-size: 1rem;
-}
-
-.main-sprint-badge {
-    background: var(--red-accent);
-    color: #fff;
-    padding: 3px 8px;
-    border-radius: 3px;
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.6rem;
-    animation: sprintPulse 1s ease infinite;
 }
 
 @keyframes sprintPulse {
@@ -2032,7 +2021,7 @@ h1, h2 {
 }
 
 .tyre-type {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: #999;
     text-transform: uppercase;
 }
