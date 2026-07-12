@@ -1534,10 +1534,24 @@ h1, h2 {
     cursor: default; }
 
 /* Таймер */
-.calendar-countdown { font-size: 0.8rem; color: #aaa; }
-.calendar-countdown > span { font-size: 0.9rem; color: #bbb; }
-.calendar-timer { display: inline-flex; gap: 5px; 
-    font-family: 'F1Numbers', sans-serif; color: red; }
+.calendar-countdown { font-size: 0.7rem; 
+    color: #aaa; 
+    
+}
+.calendar-countdown > span { font-size: 0.9rem; 
+    color: #bbb; }
+.calendar-timer { 
+    display: inline-flex; 
+    gap: 5px; 
+    font-family: 'F1Numbers', sans-serif; 
+    color: #bbb; }
+
+.calendar-timer-days, .calendar-timer-hours, 
+.calendar-timer-minutes, .calendar-timer-seconds  {
+    color: red; 
+    font-size: 0.85rem;
+}
+
 .calendar-race-started { color: var(--red-accent); 
     font-weight: bold; }
 .calendar-status-text.canceled span { 
@@ -1780,7 +1794,7 @@ h1, h2 {
     background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
 }
@@ -1789,7 +1803,7 @@ h1, h2 {
     font-family: 'F1Title', sans-serif;
     font-size: 1rem;
     color: var(--text-light);
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     padding-bottom: 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -1798,7 +1812,14 @@ h1, h2 {
     border: none;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.3) 20%, rgba(225, 6, 0, 0.3) 80%, transparent);
-    margin: 12px 0;
+    margin: 5px 0px 10px 0px;
+}
+
+.main-divider-timer {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.3) 20%, rgba(225, 6, 0, 0.3) 80%, transparent);
+    margin: 10px 0px 0px 0px;
 }
 
 /* ========================================== */
@@ -1921,6 +1942,8 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .nextgp-detail {
@@ -1978,6 +2001,59 @@ h1, h2 {
     margin-top: 5px;
 }
 
+.nextgp-links {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.nextgp-footer {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-gp-btn.race {
+    border: 1px solid var(--red-accent);
+    color: var(--red-accent);
+    font-size: 0.9rem;
+    padding: 5px 6px 3px 6px;
+}
+
+.main-gp-btn.race:hover {
+    background: var(--red-accent);
+    color: #fff;
+}
+
+.main-gp-btn {
+    display: inline-block;
+    padding: 5px 5px 3px 5px;
+    border-radius: 4px;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.7rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.main-gp-btn.sprint {
+    border: 1px solid #FFC107;
+    color: #FFC107;
+}
+.main-gp-btn.sprint:hover {
+    background: #FFC107;
+    color: #000;
+}
+
+.main-gp-btn.quali {
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+}
+.main-gp-btn.quali:hover {
+    background: #4CAF50;
+    color: #fff;
+}
+
 /* ========================================== */
 /* ПЛАШКА ШИН                                 */
 /* ========================================== */
@@ -1987,6 +2063,9 @@ h1, h2 {
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
     text-align: center;
+    padding-top: 8px;
+    padding-bottom: 4px;
+    
 }
 
 .tyres-bottom {
