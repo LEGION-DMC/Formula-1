@@ -298,7 +298,11 @@ function buildCalendarNav(panel, cardsArea) {
 }
 
 function scrollToGPCard(gpId, cardsArea) {
-    // Снимаем подсветку со всех карточек
+    // Снимаем все постоянные подсветки
+    cardsArea.querySelectorAll('.calendar-card.upcoming-highlight').forEach(c => c.classList.remove('upcoming-highlight'));
+    document.querySelectorAll('.calendar-nav-item.upcoming-highlight').forEach(c => c.classList.remove('upcoming-highlight'));
+    
+    // Снимаем highlight со всех карточек
     cardsArea.querySelectorAll('.calendar-card.highlight').forEach(c => c.classList.remove('highlight'));
     
     const card = cardsArea.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
@@ -306,6 +310,17 @@ function scrollToGPCard(gpId, cardsArea) {
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
         card.classList.add('highlight');
         setTimeout(() => card.classList.remove('highlight'), 2000);
+        
+        // После пульсации — постоянная рамка
+        setTimeout(() => {
+            card.classList.add('upcoming-highlight');
+        }, 2000);
+        
+        // Подсветка в мини-календаре
+        const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
+        if (navItem) {
+            navItem.classList.add('upcoming-highlight');
+        }
     }
 }
 
@@ -313,7 +328,9 @@ function scrollToCurrentGP() {
     const cardsArea = document.getElementById('calendarCardsArea');
     if (!cardsArea) return;
     
-    // Снимаем подсветку со всех
+    // Снимаем старые классы
+    cardsArea.querySelectorAll('.calendar-card.upcoming-highlight').forEach(c => c.classList.remove('upcoming-highlight'));
+    document.querySelectorAll('.calendar-nav-item.upcoming-highlight').forEach(c => c.classList.remove('upcoming-highlight'));
     cardsArea.querySelectorAll('.calendar-card.highlight').forEach(c => c.classList.remove('highlight'));
     
     const cards = cardsArea.querySelectorAll('.calendar-card');
@@ -330,8 +347,22 @@ function scrollToCurrentGP() {
     
     if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Сначала пульсация
         target.classList.add('highlight');
-        setTimeout(() => target.classList.remove('highlight'), 2000);
+        
+        // Через 2 секунды — постоянная рамка
+        const gpId = target.dataset.gpId;
+        setTimeout(() => {
+            target.classList.remove('highlight');
+            target.classList.add('upcoming-highlight');
+            
+            // Подсветка в мини-календаре
+            const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
+            if (navItem) {
+                navItem.classList.add('upcoming-highlight');
+            }
+        }, 2000);
     }
 }
 
