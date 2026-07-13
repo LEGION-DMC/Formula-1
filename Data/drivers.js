@@ -700,7 +700,8 @@ function openDriverModal(driver) {
     
     const modal = document.createElement('div');
     modal.className = 'driver-modal';
-    
+    modal.style.setProperty('--team-color', getTeamColor(driver.team));
+	
     const closeBtn = document.createElement('button');
     closeBtn.className = 'modal-close-btn';
     closeBtn.innerHTML = '&times;';

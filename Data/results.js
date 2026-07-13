@@ -641,63 +641,74 @@ function renderDriverDetailedTable(container, filterTeam) {
     
     const allGPs = getAllGPs();
     const sorted = [...driverStandings].sort((a, b) => b.points - a.points);
-    const scroll = document.createElement('div');
-    scroll.className = 'results-detailed-scroll';
     
-    const table = document.createElement('table');
-    table.className = 'results-detailed-table';
+    // Контейнер с двумя частями
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'detailed-table-container';
     
-     
-    let headHTML = '<tr><th>#</th><th>Пилот</th>';
-    allGPs.forEach(gpId => {
-        const country = getGPCountry(gpId);
-        const noResults = !hasRealResults(gpId, false);  
-        headHTML += `<th class="${noResults ? 'future-gp' : ''}"><img src="Images/Flags/${country}.svg"  title= "${getCountryName(country)}" class="results-flag"></th>`;
-    });
-    headHTML += '<th>Σ</th></tr>';
-    table.innerHTML = `<thead>${headHTML}</thead>`;
+    // Левая фиксированная часть
+    const fixedPart = document.createElement('div');
+    fixedPart.className = 'detailed-fixed-part';
     
-    const tbody = document.createElement('tbody');
+    let fixedHTML = '<div class="detailed-header-row"><div class="detailed-cell fixed-col-pos">#</div><div class="detailed-cell fixed-col-driver">Пилот</div></div>';
+    
     sorted.forEach((entry, i) => {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const dimmed = filterTeam && driver.team !== filterTeam;
-        const tr = document.createElement('tr');
-        if (dimmed) tr.className = 'filtered-out';
-        
-        let row = `<td class="results-pos">${i + 1}</td>
-            <td class="results-driver-cell results-driver-clickable" data-driver-id="${driver.id}">
+		fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
+			<div class="detailed-cell fixed-col-pos">${i + 1}</div>
+			<div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
 				<img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
-                <img src="Images/Flags/${driver.country}.svg" title= "${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
-                <span class="results-team-cell" data-team="${driver.team}" style="font-size:.7rem;color:#888;margin-left:4px;"></span>
-            </td>`;
+				<img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
+				<span class="driver-fullname">${driver.name}</span>
+				<span class="driver-shortname">${driver.namem}</span>
+			</div>
+		</div>`;
+    });
+    fixedPart.innerHTML = fixedHTML;
+    
+    // Правая скроллящаяся часть
+    const scrollPart = document.createElement('div');
+    scrollPart.className = 'detailed-scroll-part';
+    
+    let scrollHTML = '<div class="detailed-header-row">';
+    allGPs.forEach(gpId => {
+        const country = getGPCountry(gpId);
+        const noResults = !hasRealResults(gpId, false);
+        scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}"><img src="Images/Flags/${country}.svg" title="${getCountryName(country)}" class="results-flag"></div>`;
+    });
+    scrollHTML += '<div class="detailed-cell sum-col">Σ</div></div>';
+    
+    sorted.forEach((entry) => {
+        const driver = findDriverById(entry.driver);
+        if (!driver) return;
+        const dimmed = filterTeam && driver.team !== filterTeam;
+        
+        scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">`;
         
         let total = 0;
-		allGPs.forEach(gpId => {
-			const results = detailedResults[gpId] || {};
-			const value = results[entry.driver];
-			const isDNF = value === 'dnf';
-			const isDNS = value === 'dns';
-			const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
-			total += pts;
-			const noResults = !hasRealResults(gpId, false);
-			
-			if (isDNF) {
-				row += `<td class="results-gp-points dnf ${noResults ? 'future-gp' : ''}">DNF</td>`;
-			} else if (isDNS) {
-				row += `<td class="results-gp-points dns ${noResults ? 'future-gp' : ''}">DNS</td>`;
-			} else {
-				row += `<td class="results-gp-points ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</td>`;
-			}
-		});
-        row += `<td class="results-points">${total}</td>`;
-        tr.innerHTML = row;
-        tbody.appendChild(tr);
+        allGPs.forEach(gpId => {
+            const results = detailedResults[gpId] || {};
+            const value = results[entry.driver];
+            const isDNF = value === 'dnf';
+            const isDNS = value === 'dns';
+            const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
+            total += pts;
+            const noResults = !hasRealResults(gpId, false);
+            
+            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns">DNS</div>`;
+            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</div>`;
+        });
+        
+        scrollHTML += `<div class="detailed-cell sum-col">${total}</div></div>`;
     });
+    scrollPart.innerHTML = scrollHTML;
     
-    table.appendChild(tbody);
-    scroll.appendChild(table);
-    wrapper.appendChild(scroll);
+    tableContainer.appendChild(fixedPart);
+    tableContainer.appendChild(scrollPart);
+    wrapper.appendChild(tableContainer);
     container.appendChild(wrapper);
 }
 
@@ -712,63 +723,73 @@ function renderSprintDetailedTable(container, filterTeam) {
     
     const allSPs = getAllSprintGPs();
     const sorted = [...sprintStandings].sort((a, b) => b.points - a.points);
-    const scroll = document.createElement('div');
-    scroll.className = 'results-detailed-scroll';
     
-    const table = document.createElement('table');
-    table.className = 'results-detailed-table';
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'detailed-table-container';
     
-     
-    let headHTML = '<tr><th>#</th><th>Пилот</th>';
-    allSPs.forEach(gpId => {
-        const country = getGPCountry(gpId);
-        const noResults = !hasRealResults(gpId, true);  
-        headHTML += `<th class="${noResults ? 'future-gp' : ''}"><img src="Images/Flags/${country}.svg" title= "${getCountryName(country)}" class="results-flag"></th>`;
-    });
-    headHTML += '<th>Σ</th></tr>';
-    table.innerHTML = `<thead>${headHTML}</thead>`;
+    // Левая фиксированная часть
+    const fixedPart = document.createElement('div');
+    fixedPart.className = 'detailed-fixed-part';
     
-    const tbody = document.createElement('tbody');
+    let fixedHTML = '<div class="detailed-header-row"><div class="detailed-cell fixed-col-pos">#</div><div class="detailed-cell fixed-col-driver">Пилот</div></div>';
+    
     sorted.forEach((entry, i) => {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const dimmed = filterTeam && driver.team !== filterTeam;
-        const tr = document.createElement('tr');
-        if (dimmed) tr.className = 'filtered-out';
-        
-        let row = `<td class="results-pos">${i + 1}</td>
-            <td class="results-driver-cell results-driver-clickable" data-driver-id="${driver.id}">
+		fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
+			<div class="detailed-cell fixed-col-pos">${i + 1}</div>
+			<div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
 				<img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
-                <img src="Images/Flags/${driver.country}.svg" title= "${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
-                <span class="results-team-cell" data-team="${driver.team}" style="font-size:.7rem;color:#888;margin-left:4px;"></span>
-            </td>`;
-        
-	let total = 0;
-		allSPs.forEach(gpId => {
-			const results = detailedSprintResults[gpId] || {};
-			const value = results[entry.driver];
-			const isDNF = value === 'dnf';
-			const isDNS = value === 'dns';
-			const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
-			total += pts;
-			const noResults = !hasRealResults(gpId, true);
-			
-			if (isDNF) {
-				row += `<td class="results-gp-points dnf ${noResults ? 'future-gp' : ''}">DNF</td>`;
-			} else if (isDNS) {
-				row += `<td class="results-gp-points dns ${noResults ? 'future-gp' : ''}">DNS</td>`;
-			} else {
-				row += `<td class="results-gp-points ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</td>`;
-			}
-		});
-		row += `<td class="results-points">${total}</td>`;
-		tr.innerHTML = row;
-		tbody.appendChild(tr);
+				<img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
+				<span class="driver-fullname">${driver.name}</span>
+				<span class="driver-shortname">${driver.namem}</span>
+			</div>
+		</div>`;
     });
+    fixedPart.innerHTML = fixedHTML;
     
-    table.appendChild(tbody);
-    scroll.appendChild(table);
-    wrapper.appendChild(scroll);
+    // Правая скроллящаяся часть
+    const scrollPart = document.createElement('div');
+    scrollPart.className = 'detailed-scroll-part';
+    
+    let scrollHTML = '<div class="detailed-header-row">';
+    allSPs.forEach(gpId => {
+        const country = getGPCountry(gpId);
+        const noResults = !hasRealResults(gpId, true);
+        scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}"><img src="Images/Flags/${country}.svg" title="${getCountryName(country)}" class="results-flag"></div>`;
+    });
+    scrollHTML += '<div class="detailed-cell sum-col">Σ</div></div>';
+    
+    sorted.forEach((entry) => {
+        const driver = findDriverById(entry.driver);
+        if (!driver) return;
+        const dimmed = filterTeam && driver.team !== filterTeam;
+        
+        scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">`;
+        
+        let total = 0;
+        allSPs.forEach(gpId => {
+            const results = detailedSprintResults[gpId] || {};
+            const value = results[entry.driver];
+            const isDNF = value === 'dnf';
+            const isDNS = value === 'dns';
+            const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
+            total += pts;
+            const noResults = !hasRealResults(gpId, true);
+            
+            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns">DNS</div>`;
+            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</div>`;
+        });
+        
+        scrollHTML += `<div class="detailed-cell sum-col">${total}</div></div>`;
+    });
+    scrollPart.innerHTML = scrollHTML;
+    
+    tableContainer.appendChild(fixedPart);
+    tableContainer.appendChild(scrollPart);
+    wrapper.appendChild(tableContainer);
     container.appendChild(wrapper);
 }
 

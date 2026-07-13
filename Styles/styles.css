@@ -401,9 +401,11 @@ h1, h2 {
     top: -5px;
     right: -10px;
     font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: var(--team-color);
+    font-size: 1.75rem;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--team-color);
+    text-stroke: 1.5px var(--team-color);
+    paint-order: stroke fill;
     z-index: 2;
     line-height: 1;
 }
@@ -538,9 +540,10 @@ h1, h2 {
 .modal-number {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
     font-size: 4.3rem;
-    font-weight: bold;
-    color: var(--text-light);
-    text-shadow: 0 0 20px rgba(225, 6, 0, 0.4);
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--team-color);
+    text-stroke: 1px var(--team-color);
+    text-shadow: none;
     line-height: 1;
     min-width: 80px;
     margin-right: 10px;
@@ -621,8 +624,7 @@ h1, h2 {
 
 .stat-number {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 1.7rem;
-    font-weight: bold;
+    font-size: 1.75rem;
     color: var(--red-accent);
 }
 
@@ -852,7 +854,11 @@ h1, h2 {
     margin-bottom: 10px;
 }
 
-.tm-pilots-list { display: flex; flex-direction: column; gap: 6px; }
+.tm-pilots-list { 
+    display: flex; 
+    flex-direction: row;
+    gap: 6px; 
+}
 
 .tm-pilot-row {
     display: flex; align-items: center; gap: 12px;
@@ -861,11 +867,12 @@ h1, h2 {
     cursor: pointer;
     transition: all 0.2s ease;
     background-color: rgba(255, 255, 255, 0.03);
+    flex: 1;
 }
 
 .tm-pilot-row:hover { 
     background-color: rgba(255, 255, 255, 0.1); 
-    transform: translateX(4px); }
+    transform: translateY(-2px); }
 .tm-pilot-row:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.98); }
 .tm-pilot-row.empty { color: #666; font-style: italic; cursor: default; }
 
@@ -1094,24 +1101,24 @@ h1, h2 {
 }
 
 .driver-cell-left {
-    width: 41%;
+    width: 42%;
 }
-
 
 .gp-cell { color: var(--text-light); white-space: nowrap; }
 .time-cell { font-family: 'F1Numbers', 'F1Title', sans-serif; 
-    font-weight: bold; 
     white-space: nowrap;}
 
 .fines-cell {
     font-family: 'F1Numbers', sans-serif;
     color: var(--red-accent);
-    font-weight: bold;
     text-align: center;
     font-size: 1rem;
 }
 
-.score-cell { font-family: 'F1Numbers', sans-serif; font-weight: bold; text-align: center; font-size: 1rem; width: 10px; }
+.score-cell { font-family: 'F1Numbers', 
+    sans-serif; 
+    text-align: center; 
+    font-size: 1rem; width: 10px; }
 .score-cell.winner { color: #00cc66; }
 .score-cell.loser { color: #cc3300; }
 .score-cell.draw { color: var(--text-gray); }
@@ -1126,7 +1133,8 @@ h1, h2 {
 .quali-table tbody td:nth-child(7) { 
     text-align: right; }
 
-.pitstop-table .time-cell { text-align: left; padding-left: 25px; }
+.pitstop-table .time-cell { text-align: left; 
+    padding-left: 25px; }
 
 .time-cell.best-time {
     color: var(--red-accent);
@@ -1135,7 +1143,8 @@ h1, h2 {
 
 .lap-record-table .time-cell { text-align: left; padding-left: 35px; }
 
-.stats-driver-clickable { cursor: pointer; transition: color 0.5s ease; }
+.stats-driver-clickable { cursor: pointer; 
+    transition: color 0.5s ease; }
 .stats-driver-clickable:hover span { color: var(--red-accent); }
 
 .stats-clickable { cursor: pointer; transition: opacity 0.2s ease; }
@@ -1147,6 +1156,7 @@ h1, h2 {
 .gp-cell .gp-full { display: inline; }
 .gp-cell .gp-short { display: none; }
 
+/* ============================================== */
 /* ВКЛАДКА РЕЗУЛЬТАТЫ                             */
 /* ============================================== */
 .results-constructors-panel {
@@ -1187,14 +1197,15 @@ h1, h2 {
 .constructor-pos { font-family: 'F1Numbers', sans-serif; font-size: 0.9rem; color: #999; min-width: 20px; }
 .constructor-logo { width: 26px; height: 18px; object-fit: contain; }
 .constructor-name { font-family: 'F1Text', sans-serif; font-size: 0.85rem; color: var(--text-light); flex: 1; }
-.constructor-points { font-family: 'F1Numbers', sans-serif; font-size: 1rem; font-weight: bold; color: var(--team-color); }
+.constructor-points { font-family: 'F1Numbers', sans-serif; font-size: 1rem; color: var(--team-color); }
 
 .results-table-wrapper { margin-bottom: 5px; }
 .results-table-wrapper + .results-table-wrapper { margin-top: 20px; }
 
 .results-header-row {
     display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 10px; padding-bottom: 5px;
+    margin-bottom: 2px; 
+    padding-bottom: 5px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -1222,6 +1233,7 @@ h1, h2 {
 .results-detail-btn.active { background: rgba(255, 255, 255, 0.05); border-color: #666; color: #999; }
 .results-detail-btn.active:hover { background: rgba(255, 255, 255, 0.1); color: #ccc; }
 
+/* Обычные таблицы */
 .results-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 
 .results-table { width: 100%; border-collapse: collapse; font-family: 'F1Text', sans-serif; font-size: 0.85rem; }
@@ -1260,100 +1272,118 @@ h1, h2 {
 .results-team-cell:hover { opacity: 0.7; }
 
 .results-team-logo { width: 22px; height: 15px; object-fit: contain; margin-right: 3px; vertical-align: middle; }
-.results-team-cell span { color: #999; font-size: 0.8rem; }
 .results-points { font-family: 'F1Numbers', sans-serif; font-weight: bold; color: var(--text-light); text-align: center; width: 45px; }
 
-.results-detailed-scroll { overflow-x: auto; }
-
-.results-detailed-table {
-    width: auto;                  
-    border-collapse: collapse;
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.8rem;
-    min-width: 600px;
+.detailed-table-container {
+    display: flex;
+    overflow: hidden;
 }
 
-.results-detailed-table thead th {
-    text-align: center;
-    padding: 3px 5px;
-    color: #999;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    white-space: nowrap;
+/* Левая фиксированная часть */
+.detailed-fixed-part {
+    flex-shrink: 0;
+    z-index: 2;
 }
 
-.results-detailed-table thead th:first-child,
-.results-detailed-table thead th:nth-child(2) {
-    text-align: left;
+.detailed-fixed-part .detailed-header-row,
+.detailed-fixed-part .detailed-data-row {
+    display: flex;
+}
+
+/* Правая скроллящаяся часть */
+.detailed-scroll-part {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+}
+
+/* Фиксируем Σ в скроллящейся части */
+.detailed-scroll-part .detailed-header-row .sum-col,
+.detailed-scroll-part .detailed-data-row .sum-col {
     position: sticky;
-    left: 0;
+    right: 0;
     background: #1a1a1a;
-    z-index: 1;
+    z-index: 2;
 }
 
-.results-detailed-table thead th:first-child {
-    width: 30px;    /* # */
+.detailed-scroll-part .detailed-header-row,
+.detailed-scroll-part .detailed-data-row {
+    display: flex;
+    min-width: max-content;
 }
 
-.results-detailed-table thead th:nth-child(2) {
-    width: 160px;   /* Пилот */
-}
-
-.results-detailed-table thead th:not(:first-child):not(:nth-child(2)):not(:last-child) {
-    width: 45px;    /* Этапы */
-}
-
-.results-detailed-table thead th:last-child {
-    width: 45px;    /* Σ */
-}
-
-.results-detailed-table tbody td {
-    padding: 4px 6px;
+/* Ячейки */
+.detailed-cell {
+    padding: 5px 0;
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-}
-
-.results-detailed-table tbody td.results-pos,
-.results-detailed-table tbody td.results-driver-cell {
-    text-align: left;
-}
-
-.results-driver-cell {
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-light);
     white-space: nowrap;
 }
 
-.results-detailed-table tbody tr.filtered-out { opacity: 0.2; }
-.results-detailed-table tbody tr.filtered-out:hover { opacity: 0.35; background: rgba(255, 255, 255, 0.01); }
-
-.results-detailed-table .results-driver-clickable { 
-    cursor: pointer; }
-.results-detailed-table .results-driver-clickable:hover span:first-of-type { 
-    color: var(--red-accent); }
-.results-detailed-table .results-team-cell { cursor: pointer; transition: opacity 0.2s ease; }
-.results-detailed-table .results-team-cell:hover { opacity: 0.7; }
-
-.results-gp-points { font-family: 'F1Numbers', sans-serif; color: var(--text-light); min-width: 30px; }
-.results-detailed-table thead th.future-gp { opacity: 0.5; }
-.results-gp-points.future-gp { opacity: 0.4; color: #999; }
-
-.results-points-info { padding: 5px; font-family: 'F1Text', sans-serif; font-size: 0.75rem; color: #999; }
-.results-points-info span { color: #999; }
-
-.results-gp-points.dnf {
-    color: #cc3300;
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.6rem;
+.detailed-header-row .detailed-cell {
+    color: #bbb;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.results-gp-points.dns {
-    color: #FFC107;
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.6rem;
+.detailed-header-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 3px;
 }
+
+.detailed-data-row:hover {
+    background: rgba(255, 255, 255, 0.11);
+}
+
+.detailed-data-row.filtered-out {
+    opacity: 0.25;
+}
+
+/* Фиксированные колонки */
+.fixed-col-pos {
+    width: 30px;
+    font-family: 'F1Numbers', sans-serif;
+    color: #bbb;
+}
+
+.fixed-col-driver {
+    width: 215px;
+    justify-content: flex-start;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* Скроллящиеся колонки */
+.gp-col {
+    width: 30px;
+    min-width: 35.9px;
+    font-family: 'F1Numbers', sans-serif;
+}
+
+.sum-col {
+    width: 35px;
+    min-width: 35px;
+    font-family: 'F1Numbers', sans-serif;
+    font-weight: bold;
+}
+
+/* Будущие этапы */
+.detailed-cell.future-gp { opacity: 0.3; }
+.detailed-data-row .detailed-cell.future-gp { 
+    opacity: 0.5; color: #bbb; }
+
+/* DNF/DNS */
+.detailed-cell.dnf { color: #cc3300; 
+    font-family: 'F1Title', sans-serif; 
+    font-size: 0.6rem; }
+.detailed-cell.dns { color: #FFC107; font-family: 'F1Title', sans-serif; font-size: 0.6rem; }
 
 /* ============================================== */
 /* ВКЛАДКА КАЛЕНДАРЬ                              */

@@ -268,6 +268,12 @@ body {
     margin-top: 5px;
 }
 
+.tm-pilots-list { 
+    display: flex; 
+    flex-direction: column;
+    gap: 6px; 
+}
+
 .team-modal-overlay {
     align-items: center;
     padding-top: 5%;
@@ -470,6 +476,126 @@ body {
     border-top: none;
 }
 
+.detailed-table-container {
+    display: flex;
+    overflow: hidden;
+}
+
+.detailed-fixed-part {
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.detailed-fixed-part .detailed-header-row,
+.detailed-fixed-part .detailed-data-row {
+    display: flex;
+}
+
+.detailed-scroll-part {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+}
+
+.detailed-scroll-part .detailed-header-row,
+.detailed-scroll-part .detailed-data-row {
+    display: flex;
+    min-width: max-content;
+}
+
+/* Ячейки */
+.detailed-cell {
+    padding: 4px 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+.detailed-header-row .detailed-cell {
+    color: #bbb;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detailed-header-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.detailed-data-row:hover {
+    background: rgba(255, 255, 255, 0.11);
+}
+
+.detailed-data-row.filtered-out {
+    opacity: 0.25;
+}
+
+/* Фиксированные колонки */
+.fixed-col-pos {
+    width: 25px;
+    font-family: 'F1Numbers', sans-serif;
+    color: #bbb;
+}
+
+.fixed-col-driver {
+    width: 145px;
+    justify-content: flex-start;
+    gap: 3px;
+    cursor: pointer;
+    font-size: 0.7rem;
+}
+
+/* В мобильной версии — короткие имена */
+.fixed-col-driver .driver-fullname { display: none; }
+.fixed-col-driver .driver-shortname { display: inline; }
+
+/* На десктопе — полные имена */
+@media (min-width: 769px) {
+    .fixed-col-driver .driver-fullname { display: inline; }
+    .fixed-col-driver .driver-shortname { display: none; }
+}
+
+/* Скроллящиеся колонки */
+.gp-col {
+    width: 28px;
+    min-width: 28px;
+    font-family: 'F1Numbers', sans-serif;
+}
+
+.sum-col {
+    width: 32px;
+    min-width: 32px;
+    font-family: 'F1Numbers', sans-serif;
+}
+
+/* Будущие этапы */
+.detailed-cell.future-gp { opacity: 0.25; }
+.detailed-data-row .detailed-cell.future-gp { opacity: 0.5; color: #999; }
+
+/* DNF/DNS */
+.detailed-cell.dnf {
+    color: #cc3300;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.55rem;
+}
+
+.detailed-cell.dns {
+    color: #FFC107;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.55rem;
+}
+
+/* Кликабельный пилот */
+.fixed-col-driver.results-driver-clickable:hover {
+    color: var(--red-accent);
+}
+
 .main-page-content {
     flex-direction: column;
     align-items: center;
@@ -478,7 +604,7 @@ body {
 }
 
 .driver-cell-left {
-    width: 41.6%;
+    width: 42%;
 }
 
 .main-page-content h1 { font-size: 1.5rem; }
