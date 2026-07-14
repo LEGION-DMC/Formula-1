@@ -550,7 +550,7 @@ body {
 }
 
 .fixed-col-driver {
-    width: 145px;
+    width: 135px;
     justify-content: flex-start;
     gap: 3px;
     cursor: pointer;
