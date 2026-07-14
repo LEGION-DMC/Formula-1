@@ -489,7 +489,6 @@ body {
 .detailed-fixed-part .detailed-header-row,
 .detailed-fixed-part .detailed-data-row {
     display: flex;
-    min-width: max-content;z
 }
 
 .detailed-scroll-part {
@@ -498,20 +497,18 @@ body {
     flex: 1;
 }
 
-.detailed-fixed-part .detailed-header-row,
-.detailed-scroll-part .detailed-header-row {
-    align-items: center;
+.detailed-scroll-part .detailed-header-row,
+.detailed-scroll-part .detailed-data-row {
+    display: flex;
+    min-width: max-content;
 }
 
 .detailed-fixed-part .detailed-data-row,
 .detailed-scroll-part .detailed-data-row {
+    min-height: 22px;
     align-items: center;
 }
 
-.detailed-cell {
-    padding: 4px 0;
-    line-height: 1.2;
-}
 /* Ячейки */
 .detailed-cell {
     padding: 4px 0;
