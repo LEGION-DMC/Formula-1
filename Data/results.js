@@ -795,19 +795,53 @@ function renderSprintDetailedTable(container, filterTeam) {
 
 function renderConstructorStandingsPanel(container, filterTeam) {
     container.innerHTML = '<h3 class="constructor-panel-title">Кубок конструкторов</h3>';
+    
+    const grid = document.createElement('div');
+    grid.className = 'constructor-grid';
+    
     const standings = calculateConstructorStandings();
-    standings.forEach((team, i) => {
-        const row = document.createElement('div');
-        row.className = 'constructor-row';
-        row.dataset.team = team.team;
-        row.style.setProperty('--team-color', team.color);
-        if (filterTeam === team.team) row.classList.add('active');
-        if (filterTeam && team.team !== filterTeam) row.classList.add('filtered-out');
-        row.innerHTML = `
-            <span class="constructor-pos">${i + 1}</span>
-            <img src="${getTeamLogo(team.team)}" class="constructor-logo" onerror="this.style.display='none'">
-            <span class="constructor-name">${team.team}</span>
-            <span class="constructor-points">${team.points}</span>`;
-        container.appendChild(row);
-    });
+    
+    // 1 место — по центру вверху
+    if (standings.length >= 1) {
+        const topRow = createConstructorRow(standings[0], 1, filterTeam);
+        topRow.className += ' constructor-row-top';
+        container.appendChild(topRow);
+    }
+    
+    // Левая колонка (2-6) — индексы 1-5
+    const leftCol = document.createElement('div');
+    leftCol.className = 'constructor-col';
+    
+    for (let i = 1; i <= 5 && i < standings.length; i++) {
+        const row = createConstructorRow(standings[i], i + 1, filterTeam);
+        leftCol.appendChild(row);
+    }
+    
+    // Правая колонка (7-11) — индексы 6-10
+    const rightCol = document.createElement('div');
+    rightCol.className = 'constructor-col';
+    
+    for (let i = 6; i <= 10 && i < standings.length; i++) {
+        const row = createConstructorRow(standings[i], i + 1, filterTeam);
+        rightCol.appendChild(row);
+    }
+    
+    grid.appendChild(leftCol);
+    grid.appendChild(rightCol);
+    container.appendChild(grid);
+}
+
+function createConstructorRow(team, pos, filterTeam) {
+    const row = document.createElement('div');
+    row.className = 'constructor-row';
+    row.dataset.team = team.team;
+    row.style.setProperty('--team-color', team.color);
+    if (filterTeam === team.team) row.classList.add('active');
+    if (filterTeam && team.team !== filterTeam) row.classList.add('filtered-out');
+    row.innerHTML = `
+        <span class="constructor-pos">${pos}</span>
+        <img src="${getTeamLogo(team.team)}" class="constructor-logo" onerror="this.style.display='none'">
+        <span class="constructor-name">${team.team}</span>
+        <span class="constructor-points">${team.points}</span>`;
+    return row;
 }

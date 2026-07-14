@@ -1200,7 +1200,6 @@ h1, h2 {
 .constructor-points { font-family: 'F1Numbers', sans-serif; font-size: 1rem; color: var(--team-color); }
 
 .results-table-wrapper { margin-bottom: 5px; }
-.results-table-wrapper + .results-table-wrapper { margin-top: 20px; }
 
 .results-header-row {
     display: flex; justify-content: space-between; align-items: center;
@@ -1296,7 +1295,11 @@ h1, h2 {
     -webkit-overflow-scrolling: touch;
     flex: 1;
 }
-
+.detailed-fixed-part .detailed-data-row,
+.detailed-scroll-part .detailed-data-row {
+    min-height: 25px;
+    align-items: center;
+}
 /* Фиксируем Σ в скроллящейся части */
 .detailed-scroll-part .detailed-header-row .sum-col,
 .detailed-scroll-part .detailed-data-row .sum-col {

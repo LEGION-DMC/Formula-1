@@ -447,22 +447,39 @@ body {
     position: relative;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
-    padding: 15px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-}
-
-.constructor-panel-title {
-    grid-column: 1 / -1;
+    padding: 10px 15px;
 }
 
 .constructor-row {
-    padding: 3px 5px;
+    padding: 4px 0px;
     gap: 4px;
 }
 
-.results-main-area { width: 100%; padding: 15px; }
+.constructor-row-top {
+    width: 50%;
+    margin: 0 auto 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    justify-content: center;
+}
+
+.constructor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Разделитель между колонками */
+.constructor-col:first-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding-right: 8px;
+}
+
+.constructor-col:last-child {
+    padding-left: 8px;
+}
+
+.results-main-area { width: 100%; padding: 10px 15px; }
+.results-table-wrapper + .results-table-wrapper { margin-top: 10px; }
 .results-columns { grid-template-columns: 1fr; gap: 10px; }
 .results-table { font-size: 0.75rem; }
 .results-table thead th { font-size: 0.6rem; padding: 5px 4px; }
