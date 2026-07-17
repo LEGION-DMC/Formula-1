@@ -89,7 +89,7 @@ const penaltiesData = [
 	
     { driver: "Ландо Норрис", fines: 0 },
     { driver: "Макс Ферстаппен", fines: 0 },
-    { driver: "Исак Хаджар", fines: 0 },
+    { driver: "Иcаак Хаджар", fines: 0 },
     { driver: "Серхио Перес", fines: 0 },
     { driver: "Фернандо Алонсо", fines: 0 },
     { driver: "Нико Хюлькенберг", fines: 0 },
