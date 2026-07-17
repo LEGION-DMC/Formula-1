@@ -178,7 +178,7 @@ function createQualiTable() {
     
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
-    tableTitle.textContent = 'Зачёт квалификации';
+    tableTitle.textContent = 'Квалификационный зачёт';
     wrapper.appendChild(tableTitle);
     
     const tableContainer = document.createElement('div');
@@ -254,7 +254,7 @@ function createPitstopTable() {
     
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
-    tableTitle.textContent = 'Быстрейшие пит-стопы сезона';
+    tableTitle.textContent = 'Лучшие пит-стопы сезона';
     wrapper.appendChild(tableTitle);
     
     const tableContainer = document.createElement('div');
@@ -350,7 +350,7 @@ function createPenaltiesTable() {
     
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
-    tableTitle.textContent = 'Штрафы пилотов';
+    tableTitle.textContent = 'Штрафы суперлицензии пилотов';
     wrapper.appendChild(tableTitle);
     
     const tableContainer = document.createElement('div');
@@ -421,7 +421,7 @@ function createLapRecordTable() {
     
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
-    tableTitle.textContent = 'Новые рекорды лучшего круга';
+    tableTitle.textContent = 'Рекорды лучшего круга';
     wrapper.appendChild(tableTitle);
     
     const tableContainer = document.createElement('div');

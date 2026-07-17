@@ -276,7 +276,7 @@ body {
 
 .team-modal-overlay {
     align-items: center;
-    padding-top: 5%;
+    margin-top: -10%;
     flex-direction: column;
     overflow-y: auto;
 }
