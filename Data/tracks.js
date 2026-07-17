@@ -10,6 +10,8 @@ const tracksData = [
 		elevation: '25',
 		speed: '238',
         direction: "по часовой стрелке",
+        firstrace: "1996",
+        firstrace: "1996",
         lapRecord: "1.19.813 (Леклер, 2024)"
     },
     { id: "shanghai",
@@ -23,6 +25,7 @@ const tracksData = [
 		elevation: '8',
 		speed: '213',
         direction:  "по часовой стрелке",
+        firstrace: "2004",
         lapRecord: "1:32.238 (Шумахер, 2004)"
     },
     { id: "suzuka",
@@ -36,6 +39,7 @@ const tracksData = [
 		elevation: '40',
 		speed: '230',
         direction:  "по часовой стрелке",
+        firstrace: "1987",
         lapRecord: "1:30.965 (Антонелли, 2025)"
     },
     { id: "bahrain",
@@ -49,6 +53,7 @@ const tracksData = [
 		elevation: '17',
 		speed: '216',
         direction:  "по часовой стрелке",
+        firstrace: "2004",
         lapRecord: "1:31.447 (Де ла Роса, 2005)"
     },
     { id: "jeddah",
@@ -62,6 +67,7 @@ const tracksData = [
 		elevation: '8',
 		speed: '245',
         direction:  "против часовой стрелки",
+        firstrace: "2021",
         lapRecord: "1:30.734 (Хэмилтон, 2021)"
     },
     { id: "miami",
@@ -75,6 +81,7 @@ const tracksData = [
 		elevation: '3',
 		speed: '217',
         direction:  "по часовой стрелке",
+        firstrace: "2022",
         lapRecord: "1:29.708 (Ферстаппен, 2024)"
     },
     { id: "villeneuve",
@@ -88,6 +95,7 @@ const tracksData = [
 		elevation: '5',
 		speed: '215',
         direction:  "против часовой стрелки",
+        firstrace: "1978",
         lapRecord: "1.13.078 (Боттас, 2019)"
     },
     { id: "monaco",
@@ -101,6 +109,7 @@ const tracksData = [
 		elevation: '42',
 		speed: '165',
         direction:  "по часовой стрелке",
+        firstrace: "1950",
         lapRecord: "1.12.909 (Хэмилтон, 2021)"
     },
     { id: "catalunya",
@@ -114,6 +123,7 @@ const tracksData = [
 		elevation: '30',
 		speed: '221',
         direction:  "по часовой стрелке",
+        firstrace: "1991",
         lapRecord: "1:15.743 (Пиастри, 2025)"
     },
     { id: "red_bull_ring",
@@ -127,6 +137,7 @@ const tracksData = [
 		elevation: '65',
 		speed: '229',
         direction:  "по часовой стрелке",
+        firstrace: "1997",
         lapRecord: "1:05.619 (Сайнс, 2020)"
     },
     { id: "silverstone",
@@ -140,6 +151,7 @@ const tracksData = [
 		elevation: '25',
 		speed: '243',
         direction:  "против часовой стрелки",
+        firstrace: "1950",
         lapRecord: "1.27.097 (Ферстаппен, 2020)"
     },
     { id: "spa",
@@ -153,6 +165,7 @@ const tracksData = [
 		elevation: '102',
 		speed: '241',
         direction:  "по часовой стрелке",
+        firstrace: "1950",
         lapRecord: "1:44.701 (Перес, 2024)"
     },
     { id: "hungaroring",
@@ -166,6 +179,7 @@ const tracksData = [
 		elevation: '36',
 		speed: '207',
         direction:  "по часовой стрелке",
+        firstrace: "1986",
         lapRecord: "1:16.627 (Хэмилтон, 2020)"
     },
     { id: "zandvoort",
@@ -179,6 +193,7 @@ const tracksData = [
 		elevation: '14',
 		speed: '215',
         direction:  "против часовой стрелки",
+        firstrace: "1952",
         lapRecord: "1.11.097 (Хэмилтон, 2021)"
     },
     { id: "monza",
@@ -192,6 +207,7 @@ const tracksData = [
 		elevation: '10',
 		speed: '257',
         direction:  "по часовой стрелке",
+        firstrace: "1950",
         lapRecord: "1:20.901 (Норрис, 2025)"
     },
     { id: "madring",
@@ -205,6 +221,7 @@ const tracksData = [
 		elevation: '30',
 		speed: '~340',
         direction:  "по часовой стрелке",
+        firstrace: "2026",
         lapRecord: "---"
     },
     { id: "baku",
@@ -218,6 +235,7 @@ const tracksData = [
 		elevation: '25',
 		speed: '215',
         direction:  "против часовой стрелки",
+        firstrace: "2016",
         lapRecord: "1.43.009 (Леклер, 2019)"
     },
     { id: "marina_bay",
@@ -231,6 +249,7 @@ const tracksData = [
 		elevation: '5',
 		speed: '188',
         direction:  "против часовой стрелки",
+        firstrace: "2008",
         lapRecord: "1:34.486 (Рикиардо, 2024)"
     },
     { id: "americas",
@@ -244,6 +263,7 @@ const tracksData = [
 		elevation: '41',
 		speed: '206',
         direction:  "против часовой стрелки",
+        firstrace: "2012",
         lapRecord: "1:36.169 (Леклер, 2019)"
     },
     { id: "rodriguez",
@@ -257,6 +277,7 @@ const tracksData = [
 		elevation: '8',
 		speed: '202',
         direction:  "против часовой стрелки",
+        firstrace: "1963",
         lapRecord: "1:17.774 (Боттас, 2021)"
     },
     { id: "interlagos",
@@ -270,6 +291,7 @@ const tracksData = [
 		elevation: '43',
 		speed: '220',
         direction:  "против часовой стрелки",
+        firstrace: "1973",
         lapRecord: "1:10.540 (Боттас, 2018)"
     },
     { id: "vegas",
@@ -283,9 +305,10 @@ const tracksData = [
 		elevation: '5',
 		speed: '235',
         direction:  "против часовой стрелки",
+        firstrace: "2023",
         lapRecord: "1:32.312 (Рассел, 2024)"
     },
-    { id: "losail",
+    { id: "lusail",
         name: "Гран-при Катара",
         country: "qa",
         location: "Доха, Катар",
@@ -296,6 +319,7 @@ const tracksData = [
 		elevation: '5',
 		speed: '235',
         direction:  "по часовой стрелке",
+        firstrace: "2021",
         lapRecord: "1:22.384 (Норрис, 2024)"
     },
     { id: "yas_marina",
@@ -309,6 +333,7 @@ const tracksData = [
 		elevation: '5',
 		speed: '222',
         direction:  "против часовой стрелки",
+        firstrace: "2009",
         lapRecord: "1:22.109 (Ферстаппен, 2021)"
     },
 	// 2027
@@ -323,9 +348,10 @@ const tracksData = [
 		elevation: '40',
 		speed: '227',
         direction:  "против часовой стрелки",
+        firstrace: "2005",
         lapRecord: "1.24.770 (Монтойя, 2005)"
     },
-    { id: "algarve",
+    { id: "portimao",
         name: "Гран При Португалии",
         country: "pt",
         location: "Портиман, Португалия",
@@ -336,6 +362,7 @@ const tracksData = [
 		elevation: '30',
 		speed: '213',
         direction:  "по часовой стрелки",
+        firstrace: "2020",
         lapRecord: "1.16.466 (Боттас, 2020)"
     },
 	// Убраны из календаря
@@ -350,6 +377,7 @@ const tracksData = [
 		elevation: '30',
 		speed: '234',
         direction:  "по часовой стрелки",
+        firstrace: "1980",
         lapRecord: "1.15.484 (Хэмилтон, 2020)"
     },
 ];

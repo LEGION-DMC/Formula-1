@@ -105,8 +105,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "https://rutube.ru/video/40a90b042d58ae5cfc34ed9f1d6c24b2/",
+		recordingRace: "https://rutube.ru/video/f0ddd7af7d20cad89139a493c62e5781/"
 	},
 	{   id: "hungary",
 		track: "hungaroring",
@@ -199,7 +199,7 @@ const calendarData = [
 		recordingRace: ""
 	},
 	{   id: "qatar",
-		track: "losail",
+		track: "lusail",
 		date: "2026-11-30 23:55",
 		hasSprint: false,
 		canceled: false,
@@ -373,11 +373,17 @@ function renderCalendarCards(container) {
         
         const now = new Date();
         const raceDate = new Date(gp.date);
-        const oneHourBefore = new Date(raceDate.getTime() - 60 * 60 * 1000);
+        const oneHourBeforeRace = new Date(raceDate.getTime() - 60 * 60 * 1000);
         const isPast = raceDate < now && !gp.canceled;
         const isToday = raceDate.toDateString() === now.toDateString();
         const isFuture = raceDate > now;
-        const nearStart = isFuture && now >= oneHourBefore;
+        const nearStart = isFuture && now >= oneHourBeforeRace;
+        
+        // Расчёт времени квалификации (на сутки раньше гонки, то же время)
+        const qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
+        const oneHourBeforeQuali = new Date(qualiDate.getTime() - 60 * 60 * 1000);
+        // Кнопка появляется за час до квалификации и остаётся навсегда
+        const qualiActive = gp.recordingQuali && now >= oneHourBeforeQuali;
         
         const card = document.createElement('div');
         card.className = 'calendar-card';
@@ -445,8 +451,8 @@ function renderCalendarCards(container) {
                 btns += `<a href="${gp.recordingSprint}" target="_blank" class="calendar-btn sprint">Спринт</a>`;
             }
 
-            // Квалификация — всегда если есть ссылка
-            if (gp.recordingQuali) {
+            // Квалификация — показываем за час до квалификации и навсегда после
+            if (qualiActive) {
                 btns += `<a href="${gp.recordingQuali}" target="_blank" class="calendar-btn quali">Квалификация</a>`;
             }
 			
@@ -610,7 +616,11 @@ function openTrackModal(track, gp) {
                 </div>
                 <hr class="tm-divider">
                 <div class="tm-detail-row">
-                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon"> Рекорд круга:</span>
+                    <span class="tm-label"><img src="Images/Icon/track.webp" class="record-icon">Первая гонка:</span>
+                    <span class="tm-record">${track.firstrace} г.</span>
+                </div>
+                <div class="tm-detail-row">
+                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга:</span>
                     <span class="tm-record">${track.lapRecord}</span>
                 </div>
             </div>
@@ -638,7 +648,6 @@ function openTrackModal(track, gp) {
         modal.classList.add('active');
     });
 }
-
 
 function openImageFullscreen(src, alt) {
     const existing = document.querySelector('.image-fullscreen-overlay');

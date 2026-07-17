@@ -8,15 +8,11 @@ const weatherData = {
 };
 
 const tyreData = {
-    compounds: [
-        { id: "C1", name: "C1", type: "Hard", img: "Images/Wheels/Hard.png", active: true },
-        { id: "C2", name: "C2", type: "Medium", img: "Images/Wheels/Medium.png", active: true },
-        { id: "C3", name: "C3", type: "Soft", img: "Images/Wheels/Soft.png", active: true },
-        { id: "C4", name: "C4", type: "---", img: "Images/Wheels/Soft.png", active: false },
-        { id: "C5", name: "C5", type: "---", img: "Images/Wheels/Soft.png", active: false },
-        { id: "INT", name: "Intermediate", type: "", img: "Images/Wheels/Intermediate.png", active: false },
-        { id: "WET", name: "Wet", type: "", img: "Images/Wheels/Wet.png", active: false }
-    ]
+    compounds: {
+        Hard: "C2",    
+        Medium: "C3",  
+        Soft: "C4"    
+    }
 };
 
 function initMainPage(container) {
@@ -130,21 +126,67 @@ function createNextGPBlock() {
 function createTyreBlock() {
     const block = document.createElement('div');
     block.className = 'main-block tyres-block';
-    const topTyres = tyreData.compounds.slice(0, 5);
-    const bottomTyres = tyreData.compounds.slice(5);
+    
+    // Все возможные составы C1-C5
+    const allCompounds = ["C1", "C2", "C3", "C4", "C5"];
+    
+    // Определяем типы по составам из tyreData
+    const hardCompound = tyreData.compounds.Hard;
+    const mediumCompound = tyreData.compounds.Medium;
+    const softCompound = tyreData.compounds.Soft;
+    
+    // Функция для получения типа и изображения
+    function getTyreInfo(compound) {
+        const imgNone = "Images/Wheels/Hard.png";
+        
+        if (compound === hardCompound) {
+            return { type: "Hard", img: "Images/Wheels/Hard.png", active: true };
+        } else if (compound === mediumCompound) {
+            return { type: "Medium", img: "Images/Wheels/Medium.png", active: true };
+        } else if (compound === softCompound) {
+            return { type: "Soft", img: "Images/Wheels/Soft.png", active: true };
+        } else {
+            return { type: "---", img: imgNone, active: false };
+        }
+    }
+    
+    // Формируем C1-C5
+    let topHTML = allCompounds.map(c => {
+        const info = getTyreInfo(c);
+        return `
+            <div class="tyre-item ${info.active ? 'clickable' : 'dimmed'}">
+                <span class="tyre-name">${c}</span>
+                <img src="${info.img}" class="tyre-img">
+                <span class="tyre-type">${info.type}</span>
+            </div>
+        `;
+    }).join('');
+    
+    // Промежуточные и дождевые
     const rainActive = weatherData.rain > 50;
+    const intActive = rainActive;
+    const wetActive = rainActive;
     
-    let topHTML = topTyres.map(t => {
-        return `<div class="tyre-item ${t.active ? 'clickable' : 'dimmed'}"><span class="tyre-name">${t.name}</span><img src="${t.img}" class="tyre-img"><span class="tyre-type">${t.active ? t.type : '---'}</span></div>`;
-    }).join('');
+    let bottomHTML = `
+        <div class="tyre-item ${intActive ? 'clickable' : 'dimmed'}">
+            <span class="tyre-name">Intermediate</span>
+            <img src="${intActive ? 'Images/Wheels/Intermediate.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
+            ${intActive ? '' : '<span class="tyre-type">---</span>'}
+        </div>
+        <div class="tyre-item ${wetActive ? 'clickable' : 'dimmed'}">
+            <span class="tyre-name">Wet</span>
+            <img src="${wetActive ? 'Images/Wheels/Wet.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
+            ${wetActive ? '' : '<span class="tyre-type">---</span>'}
+        </div>
+    `;
     
-    let bottomHTML = bottomTyres.map(t => {
-        const isActive = (t.id === 'INT' || t.id === 'WET') ? rainActive : t.active;
-        const typeLabel = (t.id === 'INT' || t.id === 'WET') ? '' : (t.active ? t.type : '---');
-        return `<div class="tyre-item ${isActive ? 'clickable' : 'dimmed'}"><span class="tyre-name">${t.name}</span><img src="${t.img}" class="tyre-img">${typeLabel ? `<span class="tyre-type">${typeLabel}</span>` : ''}</div>`;
-    }).join('');
+    block.innerHTML = `
+        <div class="main-block-title">Состав шин</div>
+        <div class="tyres-top">${topHTML}</div>
+        <hr class="main-divider">
+        <div class="tyres-bottom">${bottomHTML}</div>
+    `;
     
-    block.innerHTML = `<div class="main-block-title">Состав шин</div><div class="tyres-top">${topHTML}</div><hr class="main-divider"><div class="tyres-bottom">${bottomHTML}</div>`;
     return block;
 }
 
@@ -189,7 +231,12 @@ function startMainTimer() {
         
         const raceDate = new Date(nextGP.date);
         const diff = raceDate - now;
-        const oneHourBefore = new Date(raceDate.getTime() - 60 * 60 * 1000);
+        const oneHourBeforeRace = new Date(raceDate.getTime() - 60 * 60 * 1000);
+        
+        // Расчёт времени квалификации (на сутки раньше гонки, то же время)
+        const qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
+        const oneHourBeforeQuali = new Date(qualiDate.getTime() - 60 * 60 * 1000);
+        const qualiActive = nextGP.recordingQuali && now >= oneHourBeforeQuali;
         
         // Обновляем только таймер, не трогая кнопки
         const countdownEl = block.querySelector('.countdown-timer');
@@ -204,7 +251,8 @@ function startMainTimer() {
             if (nextGP.hasSprint && nextGP.recordingSprint) {
                 linksHTML += `<a href="${nextGP.recordingSprint}" target="_blank" class="main-gp-btn sprint" onclick="event.stopPropagation()">Спринт</a>`;
             }
-            if (nextGP.recordingQuali) {
+            // Квалификация — показываем за час до квалификации и навсегда после
+            if (qualiActive) {
                 linksHTML += `<a href="${nextGP.recordingQuali}" target="_blank" class="main-gp-btn quali" onclick="event.stopPropagation()">Квалификация</a>`;
             }
             if (linksHTML) {
@@ -227,7 +275,8 @@ function startMainTimer() {
                 sprintEl.onclick = (e) => e.stopPropagation();
                 linksContainer.appendChild(sprintEl);
             }
-            if (!qualiBtn && nextGP.recordingQuali) {
+            // Квалификация — появляется за час до квалификации и остаётся
+            if (!qualiBtn && qualiActive) {
                 const qualiEl = document.createElement('a');
                 qualiEl.href = nextGP.recordingQuali;
                 qualiEl.target = '_blank';
@@ -238,7 +287,7 @@ function startMainTimer() {
             }
         }
         
-        if (now >= oneHourBefore && now < raceDate) {
+        if (now >= oneHourBeforeRace && now < raceDate) {
             // За час до гонки — кнопка
             if (countdownEl) countdownEl.style.display = 'none';
             if (!raceBtnEl) {
