@@ -134,8 +134,84 @@ function createTyreBlock() {
     const hardCompound = tyreData.compounds.Hard;
     const mediumCompound = tyreData.compounds.Medium;
     const softCompound = tyreData.compounds.Soft;
-    
-    // Функция для получения типа и изображения
+
+	// Данные о характеристиках шин по ТИПАМ
+	const tyreSpecsByType = {
+		"Hard": {
+			img: "Images/Wheels/Hard.png",
+			common: { 
+				temp: "70 °C",
+				diameter: "18\"",
+				creator: "Pirelli"
+			},
+			front: { size: "280/705", weight: "10.4 кг" },
+			rear: { size: "375/710", weight: "12.8 кг" }
+		},
+		"Medium": {
+			img: "Images/Wheels/Medium.png",
+			common: { 
+				temp: "90 °C",
+				diameter: "18\"",
+				creator: "Pirelli"
+			},
+			front: { size: "280/705", weight: "10.4 кг" },
+			rear: { size: "375/710", weight: "12.8 кг" }
+		},
+		"Soft": {
+			img: "Images/Wheels/Soft.png",
+			common: { 
+				temp: "110 °C",
+				diameter: "18\"",
+				creator: "Pirelli"
+			},
+			front: { size: "280/705", weight: "10.4 кг" },
+			rear: { size: "375/710", weight: "12.8 кг" }
+		},
+		"Intermediate": {
+			img: "Images/Wheels/Intermediate.png",
+			common: { 
+				heating: "60 °C",
+				drainage: "31 л/с",
+				diameter: "18\"",
+				creator: "Pirelli"
+			},
+			front: { size: "280/710", weight: "10.3 кг" },
+			rear: { size: "375/715", weight: "13.2 кг" }
+		},
+		"Wet": {
+			img: "Images/Wheels/Wet.png",
+			common: { 
+				heating: "---",
+				drainage: "76 л/с",
+				diameter: "18\"",
+				creator: "Pirelli"
+			},
+			front: { size: "280/715", weight: "11.3 кг" },
+			rear: { size: "375/720", weight: "13.4 кг" }
+		}
+	};
+
+    // Маппинг составов на типы
+    function getTyreTypeByCompound(compound) {
+        if (compound === hardCompound) return "Hard";
+        if (compound === mediumCompound) return "Medium";
+        if (compound === softCompound) return "Soft";
+        return null;
+    }
+
+    // Функция получения спецификаций по составу
+    function getTyreSpecs(compoundName) {
+        if (compoundName === "Intermediate" || compoundName === "Wet") {
+            return tyreSpecsByType[compoundName];
+        }
+        const type = getTyreTypeByCompound(compoundName);
+        if (type) {
+            return tyreSpecsByType[type];
+        }
+        return null;
+    }
+
+    // Функция для получения типа и изображения (была пропущена)
     function getTyreInfo(compound) {
         const imgNone = "Images/Wheels/Hard.png";
         
@@ -150,11 +226,144 @@ function createTyreBlock() {
         }
     }
     
+    // Переменная для отслеживания текущей открытой плашки (должна быть ДО showTyreInfo)
+    let currentPopup = null;
+
+    // Функция для отображения информационной плашки
+    function showTyreInfo(compoundName, tyreElement) {
+        if (currentPopup) {
+            currentPopup.remove();
+            currentPopup = null;
+        }
+        
+        const specs = getTyreSpecs(compoundName);
+        if (!specs) return;
+        
+        const popup = document.createElement('div');
+        popup.className = 'tyre-info-popup';
+        popup.dataset.compound = compoundName;
+        
+        function createSpecCard(label, value) {
+            return `
+                <div class="tyre-spec-card">
+                    <span class="tyre-spec-card-label">${label}</span>
+                    <span class="tyre-spec-card-value">${value}</span>
+                </div>`;
+        }
+        
+        let specsHTML = '';
+        
+        // Передние / задние
+        specsHTML += '<div class="tyre-info-specs-grid">';
+        specsHTML += '<div class="tyre-info-specs-col"><div class="tyre-info-specs-title">Передние</div><div class="tyre-spec-cards">';
+        specsHTML += createSpecCard('Размер', specs.front.size);
+        specsHTML += createSpecCard('Вес', specs.front.weight);
+        specsHTML += '</div></div>';
+        specsHTML += '<div class="tyre-info-specs-col"><div class="tyre-info-specs-title">Задние</div><div class="tyre-spec-cards">';
+        specsHTML += createSpecCard('Размер', specs.rear.size);
+        specsHTML += createSpecCard('Вес', specs.rear.weight);
+        specsHTML += '</div></div>';
+        specsHTML += '</div>';
+        
+		// Общие параметры  
+		if (specs.common) {
+			specsHTML += '<div class="tyre-info-specs-section"><div class="tyre-info-specs-title">Общие</div><div class="tyre-spec-cards">';
+			
+			if (specs.common.diameter !== undefined) {
+				specsHTML += createSpecCard('Диаметр', specs.common.diameter);
+			}
+			if (specs.common.temp !== undefined) {
+				specsHTML += createSpecCard('Необходимый прогрев', specs.common.temp);
+			}
+			if (specs.common.heating !== undefined) {
+				specsHTML += createSpecCard('Необходимый прогрев', specs.common.heating);
+			}
+			if (specs.common.drainage !== undefined) {
+				specsHTML += createSpecCard('Водоотведение', specs.common.drainage);
+			}
+			if (specs.common.creator !== undefined) {
+				specsHTML += createSpecCard('Производитель', specs.common.creator);
+			}
+			
+			specsHTML += '</div></div>';
+		}
+        
+        const typeName = getTyreTypeByCompound(compoundName) || compoundName;
+        
+        let typeColorClass = '';
+        switch(typeName) {
+            case 'Hard': typeColorClass = 'tyre-color-hard'; break;
+            case 'Medium': typeColorClass = 'tyre-color-medium'; break;
+            case 'Soft': typeColorClass = 'tyre-color-soft'; break;
+            case 'Intermediate': typeColorClass = 'tyre-color-intermediate'; break;
+            case 'Wet': typeColorClass = 'tyre-color-wet'; break;
+        }
+        
+        popup.innerHTML = `
+            <div class="tyre-info-header">
+                <img src="${specs.img}" class="tyre-info-img" onerror="this.src='Images/Wheels/Hard.png'">
+                <div class="tyre-info-name ${typeColorClass}">${typeName}</div>
+            </div>
+            ${specsHTML}`;
+        
+        document.body.appendChild(popup);
+        
+        requestAnimationFrame(() => {
+            const rect = tyreElement.getBoundingClientRect();
+            const popupWidth = popup.offsetWidth;
+            const popupHeight = popup.offsetHeight;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            let left = rect.right + 10;
+            let top = rect.top;
+            
+            if (left + popupWidth > windowWidth - 10) {
+                left = rect.left - popupWidth - 10;
+            }
+            if (left < 10) left = 10;
+            if (top + popupHeight > windowHeight - 10) {
+                top = windowHeight - popupHeight - 10;
+            }
+            if (top < 10) top = 10;
+            
+            popup.style.position = 'fixed';
+            popup.style.left = left + 'px';
+            popup.style.top = top + 'px';
+            
+            popup.classList.add('active');
+        });
+        
+        currentPopup = popup;
+    }
+
+    // Функция для скрытия плашки
+    function hideTyreInfo() {
+        if (currentPopup) {
+            currentPopup.classList.remove('active');
+            setTimeout(() => {
+                if (currentPopup) {
+                    currentPopup.remove();
+                    currentPopup = null;
+                }
+            }, 300);
+        }
+    }
+    
+    // Закрытие при клике вне
+    document.addEventListener('click', (e) => {
+        if (currentPopup && 
+            !e.target.closest('.tyre-info-popup') && 
+            !e.target.closest('.tyre-item.clickable')) {
+            hideTyreInfo();
+        }
+    });
+    
     // Формируем C1-C5
     let topHTML = allCompounds.map(c => {
         const info = getTyreInfo(c);
         return `
-            <div class="tyre-item ${info.active ? 'clickable' : 'dimmed'}">
+            <div class="tyre-item ${info.active ? 'clickable' : 'dimmed'}" data-compound="${c}">
                 <span class="tyre-name">${c}</span>
                 <img src="${info.img}" class="tyre-img">
                 <span class="tyre-type">${info.type}</span>
@@ -164,19 +373,17 @@ function createTyreBlock() {
     
     // Промежуточные и дождевые
     const rainActive = weatherData.rain > 50;
-    const intActive = rainActive;
-    const wetActive = rainActive;
-    
+
     let bottomHTML = `
-        <div class="tyre-item ${intActive ? 'clickable' : 'dimmed'}">
+        <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Intermediate">
             <span class="tyre-name">Intermediate</span>
-            <img src="${intActive ? 'Images/Wheels/Intermediate.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
-            ${intActive ? '' : '<span class="tyre-type">---</span>'}
+            <img src="${rainActive ? 'Images/Wheels/Intermediate.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
+            ${rainActive ? '' : '<span class="tyre-type">---</span>'}
         </div>
-        <div class="tyre-item ${wetActive ? 'clickable' : 'dimmed'}">
+        <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Wet">
             <span class="tyre-name">Wet</span>
-            <img src="${wetActive ? 'Images/Wheels/Wet.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
-            ${wetActive ? '' : '<span class="tyre-type">---</span>'}
+            <img src="${rainActive ? 'Images/Wheels/Wet.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
+            ${rainActive ? '' : '<span class="tyre-type">---</span>'}
         </div>
     `;
     
@@ -186,6 +393,21 @@ function createTyreBlock() {
         <hr class="main-divider">
         <div class="tyres-bottom">${bottomHTML}</div>
     `;
+    
+    // Обработчики клика
+    block.querySelectorAll('.tyre-item.clickable').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const compound = item.dataset.compound;
+            
+            if (currentPopup && currentPopup.dataset.compound === compound) {
+                hideTyreInfo();
+                return;
+            }
+            
+            showTyreInfo(compound, item);
+        });
+    });
     
     return block;
 }

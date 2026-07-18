@@ -189,7 +189,7 @@ h1, h2 {
 .drivers-filter-panel {
     width: 200px;
     min-width: 200px;
-    background-color: rgba(18, 18, 18, 0.5);
+    background-color: rgba(255, 255, 255, 0.04);
     border-right: 1px solid var(--border-color);
     padding: 20px 10px;
     display: flex;
@@ -1022,10 +1022,10 @@ h1, h2 {
 .stats-grid { display: grid; grid-template-columns: 0.75fr 1.2fr; gap: 10px; }
 
 .stats-table-wrapper {
-    background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
-    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
     overflow: hidden;
 }
 
@@ -1161,7 +1161,7 @@ h1, h2 {
 /* ============================================== */
 .results-constructors-panel {
     width: 270px; min-width: 270px;
-    background-color: rgba(18, 18, 18, 0.5);
+    background-color: rgba(255, 255, 255, 0.04);
     border-right: 1px solid var(--border-color);
     padding: 20px 10px;
     display: flex; flex-direction: column;
@@ -1201,6 +1201,14 @@ h1, h2 {
 
 .results-table-wrapper { margin-bottom: 5px; }
 
+.results-section-block {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
 .results-header-row {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 2px; 
@@ -1226,6 +1234,25 @@ h1, h2 {
     background: transparent;
     border: 1px solid var(--red-accent);
     color: var(--red-accent);
+}
+
+.results-points-note {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 1px 5px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    font-size: 13px;
+    color: #bbb;
+}
+
+.points-note-icon {
+    font-size: 18px;
+    margin-top: -3px;
 }
 
 .results-detail-btn:hover { background: var(--red-accent); color: #fff; }
@@ -1366,8 +1393,19 @@ h1, h2 {
 /* Скроллящиеся колонки */
 .gp-col {
     width: 30px;
-    min-width: 35.9px;
+    min-width: 35px;
     font-family: 'F1Numbers', sans-serif;
+}
+
+/* Ячейки в скроллящейся части */
+.detailed-scroll-part .detailed-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 32px;
+    max-width: 60px;
+    text-align: center;
 }
 
 .sum-col {
@@ -1395,7 +1433,6 @@ h1, h2 {
 /* Панель навигации */
 .calendar-nav-panel {
     width: 320px;
-    background: rgba(18, 18, 18, 0.7);
     backdrop-filter: blur(8px);
     border-right: 1px solid var(--border-color);
     padding: 10px 5px;
@@ -1403,6 +1440,7 @@ h1, h2 {
     height: calc(100vh);
     position: sticky; top: 0;
     animation: slideInLeft 0.3s ease;
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .calendar-nav-title {
@@ -2094,17 +2132,16 @@ h1, h2 {
 .tyres-top {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
+    gap: 5px;
     text-align: center;
-    padding-top: 8px;
-    padding-bottom: 4px;
-    
+    padding-top: 5px;
+    padding-bottom: 3px;
 }
 
 .tyres-bottom {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 5px;
     text-align: center;
 }
 
@@ -2113,19 +2150,26 @@ h1, h2 {
     flex-direction: column;
     align-items: center;
     gap: 3px;
-    padding: 5px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.02);
-    transition: opacity 0.3s ease;
+    padding: 3px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
 }
 
 .tyre-item.dimmed {
-    opacity: 0.25;
+    opacity: 0.25 !important;
+}
+
+.tyre-item.dimmed.clickable {
+    opacity: 0.35;
+}
+
+.tyre-item.dimmed.clickable:hover {
+    opacity: 0.55;
 }
 
 .tyre-item.clickable {
     cursor: pointer;
-    transition: all 0.3s ease;
     opacity: 1;
 }
 
@@ -2144,19 +2188,179 @@ h1, h2 {
 
 .tyre-name {
     font-family: 'F1Title', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-light);
 }
 
 .tyre-img {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     object-fit: contain;
     transition: transform 0.3s ease;
 }
 
 .tyre-type {
     font-size: 0.7rem;
-    color: #999;
+    color: #bbb;
     text-transform: uppercase;
+}
+
+/* ========================================== */
+/* ВСПЛЫВАЮЩАЯ ПЛАШКА ИНФОРМАЦИИ О ШИНЕ      */
+/* ========================================== */
+
+.tyre-info-popup {
+    position: fixed;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 1);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 8px;
+    width: 300px;
+    max-width: calc(100vw - 20px);
+    box-shadw: 0 12px 40px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.25s ease;
+    pointer-events: auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.tyre-info-popup.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Заголовок */
+.tyre-info-header {
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 0;
+}
+
+.tyre-info-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Цвета названия по типу шины */
+.tyre-info-name {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+    padding-top: 2px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tyre-color-hard {
+    color: #ffffff; /* Белый — Hard */
+}
+
+.tyre-color-medium {
+    color: #f5c842; /* Жёлтый — Medium */
+}
+
+.tyre-color-soft {
+    color: #e10600; /* Красный — Soft */
+}
+
+.tyre-color-intermediate {
+    color: #3cb043; /* Зелёный — Intermediate */
+}
+
+.tyre-color-wet {
+    color: #4169e1; /* Синий — Wet */
+}
+
+/* Сетка Передние / Задние */
+.tyre-info-specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 5px;
+    min-width: 0;
+}
+
+.tyre-info-specs-col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.tyre-info-specs-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.7rem;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+/* Секция Общие */
+.tyre-info-specs-section {
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: 0;
+}
+
+.tyre-info-specs-section .tyre-info-specs-title {
+    margin-bottom: 4px;
+}
+
+/* Карточки параметров */
+.tyre-spec-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.tyre-spec-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    padding: 4px 5px;
+    transition: background 0.2s ease;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.tyre-spec-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.tyre-spec-card-label {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.7rem;
+    color: #bbb;
+    text-transform: uppercase;
+    word-spacing: -5px;
+    line-height: 1.2;
+    word-break: break-word;
+    min-width: 0;
+    flex-shrink: 1;
+}
+
+.tyre-spec-card-value {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.75rem;
+    color: #fff;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: auto;
 }

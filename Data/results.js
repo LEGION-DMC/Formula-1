@@ -407,51 +407,84 @@ const detailedSprintResults = {
 };
 
 const driverStandings = [];
+const combinedStandings = [];
 
 function calculateDriverStandings() {
     const pointsMap = {};
     
-     
     driversData.forEach(driver => {
-        if (driver.team.toLowerCase() === 'резерв') return;  
+        if (driver.team.toLowerCase() === 'резерв') return;
         pointsMap[driver.id] = 0;
     });
     
-	Object.values(detailedResults).forEach(gpResults => {
-		Object.entries(gpResults).forEach(([driverId, points]) => {
-			if (driverId === "000") return;
-			if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
-				pointsMap[driverId] += points;
-			}
-		});
-	});
+    Object.values(detailedResults).forEach(gpResults => {
+        Object.entries(gpResults).forEach(([driverId, points]) => {
+            if (driverId === "000") return;
+            if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+                pointsMap[driverId] += points;
+            }
+        });
+    });
     
     driverStandings.length = 0;
     Object.entries(pointsMap).forEach(([id, pts]) => driverStandings.push({ driver: id, points: pts }));
     driverStandings.sort((a, b) => b.points - a.points);
 }
 
+function calculateCombinedStandings() {
+    const pointsMap = {};
+    
+    driversData.forEach(driver => {
+        if (driver.team.toLowerCase() === 'резерв') return;
+        pointsMap[driver.id] = 0;
+    });
+    
+    // Суммируем очки гонок
+    Object.values(detailedResults).forEach(gpResults => {
+        Object.entries(gpResults).forEach(([driverId, points]) => {
+            if (driverId === "000") return;
+            if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+                pointsMap[driverId] += points;
+            }
+        });
+    });
+    
+    // Добавляем очки спринтов
+    Object.values(detailedSprintResults).forEach(spResults => {
+        Object.entries(spResults).forEach(([driverId, points]) => {
+            if (driverId === "000") return;
+            if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+                pointsMap[driverId] += points;
+            }
+        });
+    });
+    
+    combinedStandings.length = 0;
+    Object.entries(pointsMap).forEach(([id, pts]) => combinedStandings.push({ driver: id, points: pts }));
+    combinedStandings.sort((a, b) => b.points - a.points);
+}
+
 calculateDriverStandings();
+calculateCombinedStandings();
 
 const sprintStandings = [];
 
 function calculateSprintStandings() {
     const pointsMap = {};
     
-     
     driversData.forEach(driver => {
-        if (driver.team.toLowerCase() === 'резерв') return;  
+        if (driver.team.toLowerCase() === 'резерв') return;
         pointsMap[driver.id] = 0;
     });
     
-	Object.values(detailedSprintResults).forEach(spResults => {
-		Object.entries(spResults).forEach(([driverId, points]) => {
-			if (driverId === "000") return;
-			if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
-				pointsMap[driverId] += points;
-			}
-		});
-	});
+    Object.values(detailedSprintResults).forEach(spResults => {
+        Object.entries(spResults).forEach(([driverId, points]) => {
+            if (driverId === "000") return;
+            if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+                pointsMap[driverId] += points;
+            }
+        });
+    });
     
     sprintStandings.length = 0;
     Object.entries(pointsMap).forEach(([id, pts]) => sprintStandings.push({ driver: id, points: pts }));
@@ -460,19 +493,106 @@ function calculateSprintStandings() {
 
 calculateSprintStandings();
 
+function renderDriverDetailedTable(container, filterTeam) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'results-table-wrapper';
+    wrapper.innerHTML = `
+        <div class="results-header-row">
+            <h3 class="results-table-title">Личный зачёт — по этапам</h3>
+            <button class="results-detail-btn active" data-table="drivers">Скрыть</button>
+        </div>`;
+    
+    const allGPs = getAllGPs();
+    // Используем combinedStandings для правильной сортировки
+    const sorted = [...combinedStandings].sort((a, b) => b.points - a.points);
+    
+    // Контейнер с двумя частями
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'detailed-table-container';
+    
+    // Левая фиксированная часть
+    const fixedPart = document.createElement('div');
+    fixedPart.className = 'detailed-fixed-part';
+    
+    let fixedHTML = '<div class="detailed-header-row"><div class="detailed-cell fixed-col-pos">#</div><div class="detailed-cell fixed-col-driver">Пилот</div></div>';
+    
+    sorted.forEach((entry, i) => {
+        const driver = findDriverById(entry.driver);
+        if (!driver) return;
+        const dimmed = filterTeam && driver.team !== filterTeam;
+        fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
+            <div class="detailed-cell fixed-col-pos">${i + 1}</div>
+            <div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
+                <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
+                <span class="driver-fullname">${driver.name}</span>
+                <span class="driver-shortname">${driver.namem}</span>
+            </div>
+        </div>`;
+    });
+    fixedPart.innerHTML = fixedHTML;
+    
+    // Правая скроллящаяся часть
+    const scrollPart = document.createElement('div');
+    scrollPart.className = 'detailed-scroll-part';
+    
+    let scrollHTML = '<div class="detailed-header-row">';
+    allGPs.forEach(gpId => {
+        const country = getGPCountry(gpId);
+        const noResults = !hasRealResults(gpId, false);
+        scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}"><img src="Images/Flags/${country}.svg" title="${getCountryName(country)}" class="results-flag"></div>`;
+    });
+    scrollHTML += '<div class="detailed-cell sum-col">Σ</div></div>';
+    
+    sorted.forEach((entry) => {
+        const driver = findDriverById(entry.driver);
+        if (!driver) return;
+        const dimmed = filterTeam && driver.team !== filterTeam;
+        
+        scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">`;
+        
+        let total = 0;
+        allGPs.forEach(gpId => {
+            const results = detailedResults[gpId] || {};
+            const value = results[entry.driver];
+            const isDNF = value === 'dnf';
+            const isDNS = value === 'dns';
+            const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
+            total += pts;
+            const noResults = !hasRealResults(gpId, false);
+            
+            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns">DNS</div>`;
+            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</div>`;
+        });
+        
+        // Показываем сумму гонок + спринтов
+        const sprintEntry = sprintStandings.find(s => s.driver === entry.driver);
+        const sprintPoints = sprintEntry ? sprintEntry.points : 0;
+        const combinedTotal = total + sprintPoints;
+        
+        scrollHTML += `<div class="detailed-cell sum-col" title="Гонки: ${total} + Спринты: ${sprintPoints}">${combinedTotal}</div></div>`;
+    });
+    scrollPart.innerHTML = scrollHTML;
+    
+    tableContainer.appendChild(fixedPart);
+    tableContainer.appendChild(scrollPart);
+    wrapper.appendChild(tableContainer);
+    container.appendChild(wrapper);
+}
+
 function calculateConstructorStandings() {
     const teams = {};
     if (typeof teamsData !== 'undefined') {
         teamsData.forEach(t => { teams[t.shortName] = { team: t.shortName, points: 0, color: t.color }; });
     }
-    driverStandings.forEach(e => {
+    
+    // Используем combinedStandings для правильного подсчёта очков команд
+    combinedStandings.forEach(e => {
         const d = findDriverById(e.driver);
         if (d && teams[d.team]) teams[d.team].points += e.points;
     });
-    sprintStandings.forEach(e => {
-        const d = findDriverById(e.driver);
-        if (d && teams[d.team]) teams[d.team].points += e.points;
-    });
+    
     return Object.values(teams).sort((a, b) => b.points - a.points);
 }
 
@@ -500,7 +620,8 @@ function initResultsPage(container) {
     'use strict';
     calculateDriverStandings();
     calculateSprintStandings();
-    
+    calculateCombinedStandings();
+	
     container.innerHTML = '';
     container.style.display = 'flex';
     container.style.gap = '0';
@@ -565,45 +686,7 @@ function initResultsPage(container) {
     refreshAll();
 }
 
-function renderDriverStandings(container, filterTeam) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'results-table-wrapper';
-    wrapper.innerHTML = `
-        <div class="results-header-row">
-            <h3 class="results-table-title">Личный зачёт</h3>
-            <button class="results-detail-btn" data-table="drivers">Подробнее</button>
-        </div>`;
-    
-    const sorted = [...driverStandings].sort((a, b) => b.points - a.points);
-    const half = Math.ceil(sorted.length / 2);
-    const cols = document.createElement('div');
-    cols.className = 'results-columns';
-    cols.appendChild(createSimpleTable(sorted.slice(0, half), 0, filterTeam));
-    cols.appendChild(createSimpleTable(sorted.slice(half), half, filterTeam));
-    wrapper.appendChild(cols);
-    container.appendChild(wrapper);
-}
-
-function renderSprintStandings(container, filterTeam) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'results-table-wrapper';
-    wrapper.innerHTML = `
-        <div class="results-header-row">
-            <h3 class="results-table-title">Спринтерский зачёт</h3>
-            <button class="results-detail-btn" data-table="sprint">Подробнее</button>
-        </div>`;
-    
-    const sorted = [...sprintStandings].sort((a, b) => b.points - a.points);
-    const half = Math.ceil(sorted.length / 2);
-    const cols = document.createElement('div');
-    cols.className = 'results-columns';
-    cols.appendChild(createSimpleTable(sorted.slice(0, half), 0, filterTeam));
-    cols.appendChild(createSimpleTable(sorted.slice(half), half, filterTeam));
-    wrapper.appendChild(cols);
-    container.appendChild(wrapper);
-}
-
-function createSimpleTable(data, startIndex, filterTeam) {
+function createSimpleTable(data, startIndex, filterTeam, isSprint = false) {
     const table = document.createElement('table');
     table.className = 'results-table';
     table.innerHTML = '<thead><tr><th>#</th><th>Пилот</th><th>Очки</th></tr></thead>';
@@ -614,15 +697,55 @@ function createSimpleTable(data, startIndex, filterTeam) {
         if (!driver) return;
         const pos = startIndex + i + 1;
         const dimmed = filterTeam && driver.team !== filterTeam;
+        
         const tr = document.createElement('tr');
         if (dimmed) tr.className = 'filtered-out';
-        tr.innerHTML = `
-            <td class="results-pos">${pos}</td>
-            <td class="results-driver results-driver-clickable" data-driver-id="${driver.id}">
-                <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
-				<img src="Images/Flags/${driver.country}.svg" title= "${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
-            </td>
-            <td class="results-points">${entry.points}</td>`;
+        
+        if (!isSprint) {
+            // Для основной таблицы: entry.points уже содержит сумму (гонки + спринты)
+            const totalPoints = entry.points;
+            
+            // Находим очки только за гонки для отображения при наведении
+            const raceEntry = driverStandings.find(s => s.driver === entry.driver);
+            const racePoints = raceEntry ? raceEntry.points : 0;
+            const sprintPoints = totalPoints - racePoints;
+            
+            tr.innerHTML = `
+                <td class="results-pos">${pos}</td>
+                <td class="results-driver results-driver-clickable" data-driver-id="${driver.id}">
+                    <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                    <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
+                </td>
+                <td class="results-points">${totalPoints}</td>`;
+            
+            const pointsCell = tr.querySelector('.results-points');
+            
+            if (sprintPoints > 0) {
+                tr.addEventListener('mouseenter', () => {
+                    pointsCell.textContent = racePoints;
+                    pointsCell.style.color = '#e10600';
+                    pointsCell.style.fontWeight = 'bold';
+                    pointsCell.title = `Только гонки: ${racePoints} (Спринты: ${sprintPoints})`;
+                });
+                
+                tr.addEventListener('mouseleave', () => {
+                    pointsCell.textContent = totalPoints;
+                    pointsCell.style.color = '';
+                    pointsCell.style.fontWeight = '';
+                    pointsCell.title = `Всего: ${totalPoints} (Гонки: ${racePoints} + Спринты: ${sprintPoints})`;
+                });
+            }
+        } else {
+            // Для спринта — обычное отображение
+            tr.innerHTML = `
+                <td class="results-pos">${pos}</td>
+                <td class="results-driver results-driver-clickable" data-driver-id="${driver.id}">
+                    <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                    <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
+                </td>
+                <td class="results-points">${entry.points}</td>`;
+        }
+        
         tbody.appendChild(tr);
     });
     
@@ -630,19 +753,61 @@ function createSimpleTable(data, startIndex, filterTeam) {
     return table;
 }
 
+function renderDriverStandings(container, filterTeam) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'results-section-block'; // Добавляем класс плашки
+    wrapper.innerHTML = `
+        <div class="results-header-row">
+            <h3 class="results-table-title">Личный зачёт</h3>
+            <button class="results-detail-btn" data-table="drivers">Подробнее</button>
+        </div>`;
+    
+    // Используем combinedStandings для правильной сортировки по сумме очков
+    const sorted = [...combinedStandings].sort((a, b) => b.points - a.points);
+    const half = Math.ceil(sorted.length / 2);
+    const cols = document.createElement('div');
+    cols.className = 'results-columns';
+    cols.appendChild(createSimpleTable(sorted.slice(0, half), 0, filterTeam, false));
+    cols.appendChild(createSimpleTable(sorted.slice(half), half, filterTeam, false));
+    wrapper.appendChild(cols);
+    container.appendChild(wrapper);
+}
+
+function renderSprintStandings(container, filterTeam) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'results-section-block'; // Добавляем класс плашки
+    wrapper.innerHTML = `
+        <div class="results-header-row">
+            <h3 class="results-table-title">Спринтерский зачёт</h3>
+            <button class="results-detail-btn" data-table="sprint">Подробнее</button>
+        </div>`;
+    
+    const sorted = [...sprintStandings].sort((a, b) => b.points - a.points);
+    const half = Math.ceil(sorted.length / 2);
+    const cols = document.createElement('div');
+    cols.className = 'results-columns';
+    cols.appendChild(createSimpleTable(sorted.slice(0, half), 0, filterTeam, true)); 
+    cols.appendChild(createSimpleTable(sorted.slice(half), half, filterTeam, true)); 
+    wrapper.appendChild(cols);
+    container.appendChild(wrapper);
+}
+
 function renderDriverDetailedTable(container, filterTeam) {
     const wrapper = document.createElement('div');
-    wrapper.className = 'results-table-wrapper';
+    wrapper.className = 'results-section-block'; // Добавляем класс плашки
     wrapper.innerHTML = `
         <div class="results-header-row">
             <h3 class="results-table-title">Личный зачёт — по этапам</h3>
             <button class="results-detail-btn active" data-table="drivers">Скрыть</button>
+        </div>
+        <div class="results-points-note">
+            <span class="points-note-icon">🛈</span>
+            <span class="points-note-text">Система начисления очков: 25 – 18 – 15 – 12 – 10 – 8 – 6 – 4 – 2 – 1</span>
         </div>`;
     
     const allGPs = getAllGPs();
-    const sorted = [...driverStandings].sort((a, b) => b.points - a.points);
+    const sorted = [...combinedStandings].sort((a, b) => b.points - a.points);
     
-    // Контейнер с двумя частями
     const tableContainer = document.createElement('div');
     tableContainer.className = 'detailed-table-container';
     
@@ -656,15 +821,15 @@ function renderDriverDetailedTable(container, filterTeam) {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const dimmed = filterTeam && driver.team !== filterTeam;
-		fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
-			<div class="detailed-cell fixed-col-pos">${i + 1}</div>
-			<div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
-				<img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
-				<img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
-				<span class="driver-fullname">${driver.name}</span>
-				<span class="driver-shortname">${driver.namem}</span>
-			</div>
-		</div>`;
+        fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
+            <div class="detailed-cell fixed-col-pos">${i + 1}</div>
+            <div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
+                <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
+                <span class="driver-fullname">${driver.name}</span>
+                <span class="driver-shortname">${driver.namem}</span>
+            </div>
+        </div>`;
     });
     fixedPart.innerHTML = fixedHTML;
     
@@ -702,7 +867,11 @@ function renderDriverDetailedTable(container, filterTeam) {
             else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</div>`;
         });
         
-        scrollHTML += `<div class="detailed-cell sum-col">${total}</div></div>`;
+        const sprintEntry = sprintStandings.find(s => s.driver === entry.driver);
+        const sprintPoints = sprintEntry ? sprintEntry.points : 0;
+        const combinedTotal = total + sprintPoints;
+        
+        scrollHTML += `<div class="detailed-cell sum-col" title="Гонки: ${total} + Спринты: ${sprintPoints}">${combinedTotal}</div></div>`;
     });
     scrollPart.innerHTML = scrollHTML;
     
@@ -714,11 +883,15 @@ function renderDriverDetailedTable(container, filterTeam) {
 
 function renderSprintDetailedTable(container, filterTeam) {
     const wrapper = document.createElement('div');
-    wrapper.className = 'results-table-wrapper';
+    wrapper.className = 'results-section-block'; // Добавляем класс плашки
     wrapper.innerHTML = `
         <div class="results-header-row">
             <h3 class="results-table-title">Спринтерский зачёт — по этапам</h3>
             <button class="results-detail-btn active" data-table="sprint">Скрыть</button>
+        </div>
+        <div class="results-points-note">
+            <span class="points-note-icon">🛈</span>
+            <span class="points-note-text">Система начисления очков: 8 – 7 – 6 – 5 – 4 – 3 – 2 – 1</span>
         </div>`;
     
     const allSPs = getAllSprintGPs();
@@ -737,15 +910,15 @@ function renderSprintDetailedTable(container, filterTeam) {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const dimmed = filterTeam && driver.team !== filterTeam;
-		fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
-			<div class="detailed-cell fixed-col-pos">${i + 1}</div>
-			<div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
-				<img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
-				<img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
-				<span class="driver-fullname">${driver.name}</span>
-				<span class="driver-shortname">${driver.namem}</span>
-			</div>
-		</div>`;
+        fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
+            <div class="detailed-cell fixed-col-pos">${i + 1}</div>
+            <div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
+                <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
+                <span class="driver-fullname">${driver.name}</span>
+                <span class="driver-shortname">${driver.namem}</span>
+            </div>
+        </div>`;
     });
     fixedPart.innerHTML = fixedHTML;
     
