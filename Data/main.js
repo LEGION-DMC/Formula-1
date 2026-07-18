@@ -456,9 +456,9 @@ function startMainTimer() {
         const oneHourBeforeRace = new Date(raceDate.getTime() - 60 * 60 * 1000);
         
         // Расчёт времени квалификации (на сутки раньше гонки, то же время)
-        const qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
-        const oneHourBeforeQuali = new Date(qualiDate.getTime() - 60 * 60 * 1000);
-        const qualiActive = nextGP.recordingQuali && now >= oneHourBeforeQuali;
+		const qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
+		const halfHourBeforeQuali = new Date(qualiDate.getTime() - 30 * 60 * 1000);
+		const qualiActive = nextGP.recordingQuali && now >= halfHourBeforeQuali;
         
         // Обновляем только таймер, не трогая кнопки
         const countdownEl = block.querySelector('.countdown-timer');
