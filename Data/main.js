@@ -1,10 +1,11 @@
+// В начале файла
 const weatherData = {
     type: "cloud",
-    typeName: "Облачно",
-    temperature: "22",
-    wind: "3",
-    humidity: "65",
-    rain: 25
+    typeName: "Загрузка...",
+    temperature: "--",
+    wind: "--",
+    humidity: "--",
+    rain: 0
 };
 
 const tyreData = {
@@ -15,7 +16,114 @@ const tyreData = {
     }
 };
 
-function initMainPage(container) {
+// Функция для маппинга описания погоды с wttr.in на типы
+function mapWttrWeatherType(description) {
+    const desc = description.toLowerCase();
+    if (desc.includes('sunny') || desc.includes('clear')) return { type: "sun", typeName: "Солнечно" };
+    if (desc.includes('partly cloudy')) return { type: "cloud", typeName: "Переменная облачность" };
+    if (desc.includes('cloudy') || desc.includes('overcast')) return { type: "cloud", typeName: "Облачно" };
+    if (desc.includes('mist') || desc.includes('fog')) return { type: "cloud", typeName: "Туман" };
+    if (desc.includes('drizzle') || desc.includes('light rain')) return { type: "rain", typeName: "Небольшой дождь" };
+    if (desc.includes('rain') || desc.includes('shower')) return { type: "rain", typeName: "Дождь" };
+    if (desc.includes('thunder')) return { type: "rain", typeName: "Гроза" };
+    if (desc.includes('snow')) return { type: "rain", typeName: "Снег" };
+    return { type: "cloud", typeName: description };
+}
+
+// Функция получения погоды через wttr.in
+async function fetchWeatherWttr(location) {
+    try {
+        const url = `https://wttr.in/${encodeURIComponent(location)}?format=j1`;
+        const response = await fetch(url);
+        
+        if (!response.ok) throw new Error('Ошибка запроса');
+        
+        const data = await response.json();
+        const current = data.current_condition[0];
+        
+        const description = current.weatherDesc[0].value;
+        const weatherType = mapWttrWeatherType(description);
+        const rainChance = parseInt(current.chanceofrain) || 0;
+        
+        // Если описание "дождь", но вероятность 0% — дождь идёт сейчас
+        // Устанавливаем вероятность в 100% чтобы показать, что дождь актуален
+        const isRaining = description.toLowerCase().includes('rain') || 
+                          description.toLowerCase().includes('drizzle') ||
+                          description.toLowerCase().includes('shower') ||
+                          description.toLowerCase().includes('thunder');
+        
+        return {
+            type: weatherType.type,
+            typeName: weatherType.typeName,
+            temperature: current.temp_C,
+            wind: Math.round(current.windspeedKmph * 0.277),
+            humidity: current.humidity,
+            rain: isRaining ? Math.max(rainChance, 80) : rainChance  // Если дождь — минимум 80%
+        };
+    } catch (error) {
+        console.warn('Ошибка загрузки погоды:', error);
+        return null;
+    }
+}
+
+// Функция обновления погоды на странице
+function updateWeatherDisplay(data) {
+    if (!data) return;
+    
+    Object.assign(weatherData, data);
+    
+    const icon = document.getElementById('weatherIcon');
+    const typeName = document.getElementById('weatherTypeName');
+    const temp = document.getElementById('weatherTemp');
+    const wind = document.getElementById('weatherWind');
+    const humidity = document.getElementById('weatherHumidity');
+    const rain = document.getElementById('weatherRain');
+    
+    if (icon) icon.src = `Images/Weather/${data.type}.png`;
+    if (icon) icon.alt = data.typeName;
+    if (typeName) typeName.textContent = data.typeName;
+    if (temp) temp.textContent = `${data.temperature} °C`;
+    if (wind) wind.textContent = `${data.wind} м/с`;
+    if (humidity) humidity.textContent = `${data.humidity} %`;
+    if (rain) rain.textContent = `~ ${data.rain} %`;
+}
+
+// Функция определения локации для погоды
+function getWeatherLocation(nextGP, nextTrack) {
+    if (!nextTrack) return 'Budapest';
+    
+    const locationMap = {
+        "hungaroring": "Budapest",
+        "monza": "Monza",
+        "silverstone": "Silverstone",
+        "spa": "Spa",
+        "monaco": "Monaco",
+        "albert_park": "Melbourne",
+        "shanghai": "Shanghai",
+        "suzuka": "Suzuka",
+        "bahrain": "Manama",
+        "jeddah": "Jeddah",
+        "miami": "Miami",
+        "villeneuve": "Montreal",
+        "catalunya": "Barcelona",
+        "red_bull_ring": "Spielberg",
+        "zandvoort": "Zandvoort",
+        "baku": "Baku",
+        "marina_bay": "Singapore",
+        "americas": "Austin",
+        "rodriguez": "Mexico+City",
+        "interlagos": "Sao+Paulo",
+        "vegas": "Las+Vegas",
+        "losail": "Doha",
+        "yas_marina": "Abu+Dhabi",
+        "madring": "Madrid"
+    };
+    
+    return locationMap[nextGP.track] || nextTrack.location || 'London';
+}
+
+// ЕДИНСТВЕННАЯ функция initMainPage
+async function initMainPage(container) {
     'use strict';
     
     container.style.display = 'block';
@@ -34,33 +142,86 @@ function initMainPage(container) {
     container.appendChild(blocks);
     
     startMainTimer();
+    
+    // Загружаем погоду для следующего ГП
+    await loadWeatherForNextGP();
+}
+
+async function loadWeatherForNextGP() {
+    const now = new Date();
+    let nextGP = null;
+    let nextTrack = null;
+    
+    if (typeof calendarData !== 'undefined') {
+        const activeGPs = calendarData
+            .filter(gp => !gp.canceled)
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        for (const gp of activeGPs) {
+            const raceDate = new Date(gp.date);
+            const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
+            
+            if (raceEnd > now) {
+                nextGP = gp;
+                nextTrack = getTrackById(gp.track);
+                break;
+            }
+        }
+    }
+    
+    if (nextGP && nextTrack) {
+        const location = getWeatherLocation(nextGP, nextTrack);
+        console.log('Загружаем погоду для:', location);
+        const weather = await fetchWeatherWttr(location);
+        console.log('Получена погода:', weather);
+        
+        if (weather) {
+            // Обновляем глобальную переменную
+            Object.assign(weatherData, weather);
+            
+            // Обновляем DOM погоды
+            updateWeatherDisplay(weather);
+            
+            // Обновляем блок шин
+            const blocksContainer = document.querySelector('.main-blocks');
+            if (blocksContainer) {
+                const oldTyreBlock = blocksContainer.querySelector('.tyres-block');
+                if (oldTyreBlock) {
+                    const newTyreBlock = createTyreBlock();
+                    oldTyreBlock.replaceWith(newTyreBlock);
+                    console.log('Блок шин обновлён, rain =', weatherData.rain);
+                }
+            }
+        }
+    }
 }
 
 function createWeatherBlock() {
     const block = document.createElement('div');
     block.className = 'main-block weather-block';
+    block.id = 'weatherBlock';
     block.innerHTML = `
         <div class="main-block-title">Погода</div>
         <div class="weather-header">
-            <img src="Images/Weather/${weatherData.type}.png" alt="${weatherData.typeName}" class="weather-icon-large">
-            <span class="weather-type">${weatherData.typeName}</span>
+            <img src="Images/Weather/${weatherData.type}.png" alt="${weatherData.typeName}" class="weather-icon-large" id="weatherIcon">
+            <span class="weather-type" id="weatherTypeName">${weatherData.typeName}</span>
         </div>
         <hr class="main-divider">
         <div class="weather-params">
             <div class="weather-param-cell">
-                <span class="weather-value">${weatherData.temperature} °C</span>
+                <span class="weather-value" id="weatherTemp">${weatherData.temperature} °C</span>
                 <span class="weather-label">Температура</span>
             </div>
             <div class="weather-param-cell">
-                <span class="weather-value">${weatherData.wind} м/с</span>
+                <span class="weather-value" id="weatherWind">${weatherData.wind} м/с</span>
                 <span class="weather-label">Ветер</span>
             </div>
             <div class="weather-param-cell">
-                <span class="weather-value">${weatherData.humidity} %</span>
+                <span class="weather-value" id="weatherHumidity">${weatherData.humidity} %</span>
                 <span class="weather-label">Влажность</span>
             </div>
             <div class="weather-param-cell">
-                <span class="weather-value">~ ${weatherData.rain} %</span>
+                <span class="weather-value" id="weatherRain">~ ${weatherData.rain} %</span>
                 <span class="weather-label">Вероятность осадков</span>
             </div>
         </div>
@@ -68,6 +229,7 @@ function createWeatherBlock() {
     return block;
 }
 
+// Остальные функции (createNextGPBlock, createTyreBlock, startMainTimer) без изменений...
 function createNextGPBlock() {
     const block = document.createElement('div');
     block.className = 'main-block nextgp-block clickable';
