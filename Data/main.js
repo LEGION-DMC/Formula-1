@@ -1,4 +1,11 @@
-// В начале файла
+const tyreData = {
+    compounds: {
+        Hard: "C2",    
+        Medium: "C3",  
+        Soft: "C4"    
+    }
+};
+
 const weatherData = {
     type: "cloud",
     typeName: "Загрузка...",
@@ -8,29 +15,22 @@ const weatherData = {
     rain: 0
 };
 
-const tyreData = {
-    compounds: {
-        Hard: "C2",    
-        Medium: "C3",  
-        Soft: "C4"    
-    }
-};
-
-// Функция для маппинга описания погоды с wttr.in на типы
 function mapWttrWeatherType(description) {
     const desc = description.toLowerCase();
+    
+    if (desc.includes('patchy rain nearby')) return { type: "cloud", typeName: "Облачно" };
     if (desc.includes('sunny') || desc.includes('clear')) return { type: "sun", typeName: "Солнечно" };
-    if (desc.includes('partly cloudy')) return { type: "cloud", typeName: "Переменная облачность" };
+    if (desc.includes('partly cloudy')) return { type: "cloud", typeName: "Облачно" };
     if (desc.includes('cloudy') || desc.includes('overcast')) return { type: "cloud", typeName: "Облачно" };
     if (desc.includes('mist') || desc.includes('fog')) return { type: "cloud", typeName: "Туман" };
     if (desc.includes('drizzle') || desc.includes('light rain')) return { type: "rain", typeName: "Небольшой дождь" };
     if (desc.includes('rain') || desc.includes('shower')) return { type: "rain", typeName: "Дождь" };
     if (desc.includes('thunder')) return { type: "rain", typeName: "Гроза" };
     if (desc.includes('snow')) return { type: "rain", typeName: "Снег" };
+    
     return { type: "cloud", typeName: description };
 }
 
-// Функция получения погоды через wttr.in
 async function fetchWeatherWttr(location) {
     try {
         const url = `https://wttr.in/${encodeURIComponent(location)}?format=j1`;
@@ -41,16 +41,16 @@ async function fetchWeatherWttr(location) {
         const data = await response.json();
         const current = data.current_condition[0];
         
-        const description = current.weatherDesc[0].value;
-        const weatherType = mapWttrWeatherType(description);
-        const rainChance = parseInt(current.chanceofrain) || 0;
+        // Берём прогноз на сегодня (первый день)
+        const today = data.weather[0];
+        // Берём первый доступный период дня (утро/день/вечер/ночь)
+        const todayForecast = today.hourly[4]; // Примерно полдень
         
-        // Если описание "дождь", но вероятность 0% — дождь идёт сейчас
-        // Устанавливаем вероятность в 100% чтобы показать, что дождь актуален
-        const isRaining = description.toLowerCase().includes('rain') || 
-                          description.toLowerCase().includes('drizzle') ||
-                          description.toLowerCase().includes('shower') ||
-                          description.toLowerCase().includes('thunder');
+        const weatherType = mapWttrWeatherType(current.weatherDesc[0].value);
+        
+        // chanceofrain из прогноза на сегодня (если в текущей погоде нет)
+        const rainChance = parseInt(current.chanceofrain) || 
+                          parseInt(todayForecast.chanceofrain) || 0;
         
         return {
             type: weatherType.type,
@@ -58,7 +58,7 @@ async function fetchWeatherWttr(location) {
             temperature: current.temp_C,
             wind: Math.round(current.windspeedKmph * 0.277),
             humidity: current.humidity,
-            rain: isRaining ? Math.max(rainChance, 80) : rainChance  // Если дождь — минимум 80%
+            rain: rainChance
         };
     } catch (error) {
         console.warn('Ошибка загрузки погоды:', error);
@@ -66,7 +66,6 @@ async function fetchWeatherWttr(location) {
     }
 }
 
-// Функция обновления погоды на странице
 function updateWeatherDisplay(data) {
     if (!data) return;
     
@@ -88,41 +87,44 @@ function updateWeatherDisplay(data) {
     if (rain) rain.textContent = `~ ${data.rain} %`;
 }
 
-// Функция определения локации для погоды
 function getWeatherLocation(nextGP, nextTrack) {
-    if (!nextTrack) return 'Budapest';
+    if (!nextTrack) return '51.507,-0.128'; // Лондон по умолчанию
     
     const locationMap = {
-        "hungaroring": "Budapest",
-        "monza": "Monza",
-        "silverstone": "Silverstone",
-        "spa": "Spa",
-        "monaco": "Monaco",
-        "albert_park": "Melbourne",
-        "shanghai": "Shanghai",
-        "suzuka": "Suzuka",
-        "bahrain": "Manama",
-        "jeddah": "Jeddah",
-        "miami": "Miami",
-        "villeneuve": "Montreal",
-        "catalunya": "Barcelona",
-        "red_bull_ring": "Spielberg",
-        "zandvoort": "Zandvoort",
-        "baku": "Baku",
-        "marina_bay": "Singapore",
-        "americas": "Austin",
-        "rodriguez": "Mexico+City",
-        "interlagos": "Sao+Paulo",
-        "vegas": "Las+Vegas",
-        "losail": "Doha",
-        "yas_marina": "Abu+Dhabi",
-        "madring": "Madrid"
+        "albert_park": "-37.850,144.968",       // Мельбурн, Австралия
+        "shanghai": "31.339,121.220",           // Шанхай, Китай
+        "suzuka": "34.843,136.541",             // Судзука, Япония
+        "bahrain": "26.033,50.511",             // Сахир, Бахрейн
+        "jeddah": "21.632,39.105",              // Джидда, Саудовская Аравия
+        "miami": "25.958,-80.239",              // Майами, США
+        "villeneuve": "45.506,-73.524",         // Монреаль, Канада
+        "monaco": "43.735,7.421",               // Монте-Карло, Монако
+        "catalunya": "41.570,2.261",            // Барселона, Испания
+        "red_bull_ring": "47.220,14.765",       // Шпильберг, Австрия
+        "silverstone": "52.079,-1.017",         // Сильверстоун, Англия
+        "spa": "50.437,5.971",                  // Спа, Бельгия
+        "hungaroring": "47.579,19.249",         // Будапешт, Венгрия
+        "zandvoort": "52.389,4.542",            // Зандвоорт, Нидерланды
+        "monza": "45.616,9.281",                // Монца, Италия
+        "madring": "40.417,-3.704",             // Мадрид, Испания
+        "baku": "40.373,49.853",                // Баку, Азербайджан
+        "marina_bay": "1.292,103.864",          // Сингапур
+        "americas": "30.133,-97.641",           // Остин, США
+        "rodriguez": "19.404,-99.091",          // Мехико, Мексика
+        "interlagos": "-23.704,-46.698",        // Сан-Паулу, Бразилия
+        "vegas": "36.116,-115.174",             // Лас-Вегас, США
+        "lusail": "25.490,51.454",              // Лусаил, Катар
+        "yas_marina": "24.467,54.603",          // Абу-Даби, ОАЭ
+		
+        "istanbul": "40.952,29.406",            // Стамбул, Турция
+        "portimao": "37.226,-8.630",            // Портиман, Португалия
+		
+        "imola": "44.344,11.716"                // Имола, Италия
     };
     
-    return locationMap[nextGP.track] || nextTrack.location || 'London';
+    return locationMap[nextGP.track] || '51.507,-0.128';
 }
 
-// ЕДИНСТВЕННАЯ функция initMainPage
 async function initMainPage(container) {
     'use strict';
     
@@ -220,16 +222,15 @@ function createWeatherBlock() {
                 <span class="weather-value" id="weatherHumidity">${weatherData.humidity} %</span>
                 <span class="weather-label">Влажность</span>
             </div>
-            <div class="weather-param-cell">
-                <span class="weather-value" id="weatherRain">~ ${weatherData.rain} %</span>
-                <span class="weather-label">Вероятность осадков</span>
-            </div>
+			<div class="weather-param-cell">
+				<span class="weather-value" id="weatherRain">~ ${weatherData.rain} %</span>
+				<span class="weather-label">Вероятность осадков</span>
+			</div>
         </div>
     `;
     return block;
 }
 
-// Остальные функции (createNextGPBlock, createTyreBlock, startMainTimer) без изменений...
 function createNextGPBlock() {
     const block = document.createElement('div');
     block.className = 'main-block nextgp-block clickable';
@@ -534,7 +535,7 @@ function createTyreBlock() {
     }).join('');
     
     // Промежуточные и дождевые
-    const rainActive = weatherData.rain > 50;
+    const rainActive = weatherData.humidity  > 70;
 
     let bottomHTML = `
         <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Intermediate">
