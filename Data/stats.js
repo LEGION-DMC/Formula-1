@@ -57,7 +57,7 @@ const pitstopData = [
 	{ gpId: "barcelona", driver: "piastri", time: "2.13" },
 	{ gpId: "austria", driver: "lindblad", time: "2.03" },
 	{ gpId: "great-britain", driver: "russell", time: "2.18" },
-	{ gpId: "belgium", driver: "none", time: "0.00" },
+	{ gpId: "belgium", driver: "leclerc", time: "2.30" },
 	{ gpId: "hungary", driver: "none", time: "0.00" },
 	{ gpId: "netherlands", driver: "none", time: "0.00" },
 	{ gpId: "italy", driver: "none", time: "0.00" },
