@@ -656,8 +656,13 @@ h1, h2 {
     line-height: 1.6;
 }
 
+/* ============================================== */
 /* ВКЛАДКА КОМАНДЫ                                */
 /* ============================================== */
+
+/* ---------------------------------------------- */
+/* 1. СЕТКА КАРТОЧЕК КОМАНД                        */
+/* ---------------------------------------------- */
 .teams-grid {
     display: flex;
     flex-wrap: wrap;
@@ -666,6 +671,9 @@ h1, h2 {
     align-content: start;
 }
 
+/* ---------------------------------------------- */
+/* 2. КАРТОЧКА КОМАНДЫ                             */
+/* ---------------------------------------------- */
 .team-card {
     --team-color: #FF0000;
     min-width: 275px;
@@ -729,7 +737,9 @@ h1, h2 {
     opacity: 0.6;
 }
 
-.team-card-drivers { display: flex; flex-direction: column; gap: 5px; width: 100%; }
+.team-card-drivers { 
+    display: flex; flex-direction: column; gap: 5px; width: 100%; 
+}
 
 .team-driver-row {
     display: flex; align-items: center; gap: 5px;
@@ -738,9 +748,7 @@ h1, h2 {
     transition: background 0.2s ease;
 }
 
-.team-driver-row:not(.empty):hover { 
-    background-color: rgba(255, 255, 255, 0.1);
-}
+.team-driver-row:not(.empty):hover { background-color: rgba(255, 255, 255, 0.1); }
 .team-driver-row:not(.empty):active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.98); }
 .team-driver-row.empty { color: #666; font-style: italic; justify-content: center; }
 
@@ -753,8 +761,10 @@ h1, h2 {
     text-align: center;
 }
 
-.team-driver-name { font-family: 'F1Text', sans-serif; 
-    font-size: 0.9rem; flex: 1; }
+.team-driver-name { 
+    font-family: 'F1Text', sans-serif; 
+    font-size: 0.9rem; flex: 1; 
+}
 
 .team-driver-flag {
     width: 24px; height: 16px;
@@ -763,29 +773,92 @@ h1, h2 {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* ---------------------------------------------- */
+/* 3. МОДАЛЬНОЕ ОКНО (OVERLAY)                     */
 .team-modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    display: flex; justify-content: center; align-items: center;
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; 
+    padding-top: 8%;
+    padding-left: 3%;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .team-modal-overlay.active { opacity: 1; }
 
+/* ---------------------------------------------- */
+/* 4. ЛЕВАЯ КОЛОНКА — СТАТИСТИКА                   */
+.tm-left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 0;
+}
+
+.tm-stats-panel {
+    --team-color: #fff;
+    width: 400px;
+    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    opacity: 0;
+    transform: translateX(-40px);
+    align-self: flex-start;
+    margin-right: 10px;
+}
+
+.tm-stat-cell {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    text-align: center;
+}
+
+.tm-stat-cell.tm-stat-full {
+    grid-column: 1 / -1;
+}
+
+.tm-stat-value {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--team-color);
+}
+
+.tm-stat-label {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ---------------------------------------------- */
+/* 5. ЦЕНТРАЛЬНАЯ ПЛАШКА                           */
 .team-modal {
     --team-color: #FF0000;
     background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
+    border-radius: 10px;
     width: 90%;
     max-width: 600px;
     max-height: 75vh;
     overflow-y: auto;
-    padding: 15px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -798,7 +871,10 @@ h1, h2 {
 .team-modal.active { transform: scale(1) translateY(0); }
 .team-modal-close-btn { display: none; }
 
-.tm-logo-container { width: 100%; display: flex; justify-content: center; margin-bottom: 12px; }
+.tm-logo-container { 
+    width: 100%; display: flex; justify-content: center; margin-bottom: 12px; 
+}
+
 .tm-full-logo { max-width: 100%; max-height: 100px; object-fit: contain; }
 
 .tm-full-name {
@@ -818,9 +894,19 @@ h1, h2 {
     margin: 10px 0;
 }
 
-.tm-info-row { width: 100%; display: grid; 
-    grid-template-columns: 1.1fr 1fr; gap: 20px; padding-left: 10px; }
+.tm-info-row { 
+    width: 100%; 
+    display: grid; 
+    grid-template-columns: 1.1fr 1fr; 
+    gap: 20px; 
+    padding-left: 10px; 
+}
+
 .tm-info-cell { display: flex; flex-direction: column; gap: 5px; }
+
+.tm-info-row .tm-info-cell:only-child {
+    grid-column: 1 / -1;
+}
 
 .tm-label {
     font-family: 'F1Text', sans-serif;
@@ -830,7 +916,11 @@ h1, h2 {
     letter-spacing: 1px;
 }
 
-.tm-value { font-family: 'F1Text', sans-serif; font-size: 0.95rem; color: var(--text-light); }
+.tm-value { 
+    font-family: 'F1Text', sans-serif; 
+    font-size: 0.95rem; 
+    color: var(--text-light); 
+}
 
 .tm-base-flag {
     width: 18px;
@@ -841,17 +931,16 @@ h1, h2 {
     margin-top: -2px;
 }
 
-.tm-info-row .tm-info-cell:only-child {
-    grid-column: 1 / -1;
+.tm-pilots-section { 
+    width: 100%;
 }
-
-.tm-pilots-section { width: 100%; }
 
 .tm-pilots-title {
     font-family: 'F1Title', sans-serif;
     font-size: 1rem;
     color: var(--text-gray);
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .tm-pilots-list { 
@@ -861,9 +950,11 @@ h1, h2 {
 }
 
 .tm-pilot-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: 8px 10px;
-    border-radius: 8px;
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    padding: 8px 5px;
+    border-radius: 5px;
     cursor: pointer;
     transition: all 0.2s ease;
     background-color: rgba(255, 255, 255, 0.03);
@@ -872,7 +963,9 @@ h1, h2 {
 
 .tm-pilot-row:hover { 
     background-color: rgba(255, 255, 255, 0.1); 
-    transform: translateY(-2px); }
+    transform: translateY(-2px); 
+}
+
 .tm-pilot-row:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.98); }
 .tm-pilot-row.empty { color: #666; font-style: italic; cursor: default; }
 
@@ -884,30 +977,23 @@ h1, h2 {
     text-align: center;
 }
 
-.tm-pilot-name { font-family: 'F1Text', sans-serif; font-size: 0.95rem; color: var(--text-light); flex: 1; }
+.tm-pilot-name { 
+    font-family: 'F1Text', sans-serif; 
+    font-size: 0.95rem; 
+    color: var(--text-light); 
+    flex: 1; 
+}
 
 .tm-pilot-flag {
     width: 28px; height: 19px;
-    border-radius: 3px;
+    margin-right: 3px;
+    border-radius: 2px;
     object-fit: cover;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.team-modal-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    display: flex; 
-    justify-content: center; 
-    align-items: flex-start; 
-    padding-top: 10%;      
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-/* Правая колонка */
+/* ---------------------------------------------- */
+/* 6. ПРАВАЯ КОЛОНКА — БОЛИД                       */
 .tm-right-column {
     display: flex;
     flex-direction: column;
@@ -916,14 +1002,13 @@ h1, h2 {
     padding-top: 0;        
 }
 
-/* Болид — плашка */
 .tm-bolid-panel {
     --team-color: #fff;
     width: 400px;
     background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
     border: 1px solid var(--border-color);
-    border-radius: 15px;
-    padding: 10px 15px 15px;
+    border-radius: 10px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -959,62 +1044,16 @@ h1, h2 {
 
 .tm-bolid-info-label {
     font-family: 'F1Text', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
+    word-spacing: -2px;
     color: #888;
     text-transform: uppercase;
-    letter-spacing: 0.7px;
 }
 
 .tm-bolid-info-value {
     font-family: 'F1Title', sans-serif;
     font-size: 0.95rem;
     color: var(--team-color);
-}
-
-/* Статистика — отдельная плашка */
-.tm-bolid-stats-panel {
-    --team-color: #fff;
-    width: 400px;
-    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 12px 15px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    opacity: 0;
-    transform: translateX(40px);
-    align-self: flex-start;
-}
-
-.tm-bolid-stat-cell {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 8px;
-    padding: 10px 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    text-align: center;
-}
-
-.tm-bolid-stat-cell.tm-bolid-stat-full {
-    grid-column: 1 / -1;
-}
-
-.tm-bolid-stat-value {
-    font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 0.95rem;
-    font-weight: bold;
-    color: var(--team-color);
-}
-
-.tm-bolid-stat-label {
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.7rem;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 /* ВКЛАДКА СТАТИСТИКИ                             */
@@ -1725,11 +1764,11 @@ h1, h2 {
 }
 
 .tm-label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #999;
-    font-size: 0.9rem;
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.85rem;
+    word-spacing: -2px;
+    color: #888;
+    text-transform: uppercase;
 }
 
 .record-icon {
@@ -1765,9 +1804,9 @@ h1, h2 {
 
 .tm-stat-value {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: var(--red-accent);
+    color: var(--team-color);
 }
 
 .tm-stat-value-direction {
@@ -1780,10 +1819,10 @@ h1, h2 {
 
 .tm-stat-label {
     font-family: 'F1Text', sans-serif;
-    font-size: 0.7rem;
-    color: #999;
+    font-size: 0.85rem;
+    word-spacing: -2px;
+    color: #888;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 /* Полноэкранный просмотр */
@@ -1856,7 +1895,7 @@ h1, h2 {
 .main-blocks {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 10px;
     max-width: 1050px;
     margin: 0 auto;
 }
@@ -1864,7 +1903,7 @@ h1, h2 {
 .main-block {
     background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -2123,6 +2162,30 @@ h1, h2 {
 .main-gp-btn.quali:hover {
     background: #4CAF50;
     color: #fff;
+}
+
+/* Центральная колонка */
+.main-center-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Плашка следующего ГП */
+.afternextgp-block.clickable {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding-bottom: 3px;
+}
+
+.afternextgp-block.clickable:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+}
+
+.afternextgp-block.clickable:active {
+    transform: scale(0.97);
 }
 
 /* ========================================== */

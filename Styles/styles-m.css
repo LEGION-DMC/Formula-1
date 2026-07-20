@@ -240,79 +240,98 @@ body {
 .team-card-logo { width: 60px; height: 42px; }
 .team-card-name { font-size: 1rem; }
 
-.team-modal-close-btn {
-    display: flex;
-    position: absolute;
-    top: 5px; right: 6px;
-    padding-bottom: 3px;
-    width: 35px; height: 35px;
-    border-radius: 20%;
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--border-color);
-    color: var(--text-gray);
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 10;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
 
-.team-modal { max-width: 95%; padding: 20px; }
-.tm-full-logo { max-height: 50px; }
-.tm-full-name { font-size: 1.1rem; }
-.tm-divider { 
-    margin: 10px 0px 10px 0px;
-}
-.tm-pilots-section { 
-    margin-top: 5px;
-}
+    .team-modal-close-btn {
+        display: flex;
+        position: absolute;
+        top: 5px; right: 6px;
+        padding-bottom: 3px;
+        width: 35px; height: 35px;
+        border-radius: 20%;
+        background-color: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border-color);
+        color: var(--text-gray);
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
 
-.tm-pilots-list { 
-    display: flex; 
-    flex-direction: column;
-    gap: 6px; 
-}
+    /* Оверлей */
+    .team-modal-overlay {
+        align-items: center;
+        padding-top: 5%;
+        flex-direction: column;
+        overflow-y: auto;
+    }
 
-.team-modal-overlay {
-    align-items: center;
-    margin-top: -10%;
-    flex-direction: column;
-    overflow-y: auto;
-}
+    /* 1. ОСНОВНАЯ ПЛАШКА */
+    .team-modal { 
+        max-width: 95%; 
+        padding: 10px; 
+        order: 1;
+    }
+    .tm-full-logo { max-height: 50px; }
+    .tm-full-name { font-size: 1.1rem; }
+    .tm-divider { 
+        margin: 10px 0px 10px 0px;
+    }
+    .tm-divider:nth-of-type(4) {
+        display: none;
+    }
+    .tm-info-row .tm-info-cell:only-child {
+        display: none;
+    }
+    .tm-pilots-section { 
+        margin-top: 5px;
+    }
+    .tm-pilots-list { 
+        display: flex; 
+        flex-direction: column;
+        gap: 6px; 
+    }
 
-.tm-right-column {
-    gap: 15px;
-    margin-left: 0;
-    width: 90%;
-}
+    /* 2. ПЛАШКА БОЛИДА */
+    .tm-right-column {
+        margin-left: 0;
+        width: 90%;
+        order: 2;
+    }
+    .tm-right-column img {
+        margin-top: -15px;
+        margin-bottom: 10px;
+    }
+    .tm-bolid-panel {
+        margin-top: 10px;
+        padding: 10px;
+        width: 100%;
+        opacity: 1;
+        transform: none;
+    }
+    .tm-bolid-info {
+        margin: 0;
+    }
 
-.tm-bolid-panel {
-    margin-top: 10px;
-    padding: 15px;
-    width: 100%;
-    opacity: 1;
-    transform: none;
-}
+    /* 3. ПЛАШКА ИСТОРИИ (СТАТИСТИКА) */
+    .tm-left-column {
+        margin-right: 0;
+        width: 90%;
+        order: 3;
+    }
+    .tm-stats-panel {
+        margin-top: 10px;
+        width: 100%;
+        opacity: 1;
+        transform: none;
+    }
 
-.tm-bolid-info {
-    margin: 0;
-}
+    /* Удаляем старый класс */
+    .tm-bolid-stats-panel {
+        display: none;
+    }
 
-.tm-divider:nth-of-type(4) {
-    display: none;
-}
-
-.tm-info-row .tm-info-cell:only-child {
-    display: none;
-}
-
-.tm-bolid-stats-panel {
-    margin-top: -5px;
-    width: 100%;
-    opacity: 1;
-    transform: none;
-}
 
 .stats-grid { grid-template-columns: 1fr; gap: 10px; }
 .stats-table-wrapper { padding: 8px; }

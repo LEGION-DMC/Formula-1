@@ -314,6 +314,35 @@ function openTeamModal(team) {
     const overlay = document.createElement('div');
     overlay.className = 'team-modal-overlay';
     
+    // ====================
+    // ЛЕВАЯ КОЛОНКА — Статистика
+    // ====================
+    const leftColumn = document.createElement('div');
+    leftColumn.className = 'tm-left-column';
+    
+    const statsPanel = document.createElement('div');
+    statsPanel.className = 'tm-stats-panel';
+    statsPanel.style.setProperty('--team-color', team.color);
+    statsPanel.innerHTML = `
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Дебют</span>
+            <span class="tm-stat-value">${team.debut}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Кубки конструкторов</span>
+            <span class="tm-stat-value">${team.titles || 0}</span>
+        </div>
+        <div class="tm-stat-cell tm-stat-full">
+            <span class="tm-stat-label">Первая победа</span>
+            <span class="tm-stat-value">${team.firstWin || '---'}</span>
+        </div>
+    `;
+    
+    leftColumn.appendChild(statsPanel);
+    
+    // ====================
+    // ЦЕНТР — Основная плашка
+    // ====================
     const modal = document.createElement('div');
     modal.className = 'team-modal';
     modal.style.setProperty('--team-color', team.color);
@@ -370,13 +399,13 @@ function openTeamModal(team) {
     const divider2 = document.createElement('hr');
     divider2.className = 'tm-divider';
     
-    // Основатель и Дебют
+    // Лицензия и Основатель
     const infoRow2 = document.createElement('div');
     infoRow2.className = 'tm-info-row';
     infoRow2.innerHTML = `
         <div class="tm-info-cell">
             <span class="tm-label">Лицензия FIA</span>
-            <span class="tm-value debut-year"><img src="Images/Flags/${team.license_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.license_country)}">${team.license}</span>
+            <span class="tm-value"><img src="Images/Flags/${team.license_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.license_country)}">${team.license}</span>
         </div>
         <div class="tm-info-cell">
             <span class="tm-label">Основатель</span>
@@ -387,8 +416,8 @@ function openTeamModal(team) {
     // Разделитель 3
     const divider3 = document.createElement('hr');
     divider3.className = 'tm-divider';
-	
-    // Основатель и Дебют
+    
+    // О команде
     const infoRow3 = document.createElement('div');
     infoRow3.className = 'tm-info-row';
     infoRow3.innerHTML = `
@@ -398,10 +427,10 @@ function openTeamModal(team) {
         </div>
     `;
     
-    // Разделитель 3
+    // Разделитель 4
     const divider4 = document.createElement('hr');
     divider4.className = 'tm-divider';
-	
+    
     // Пилоты
     const pilotsSection = document.createElement('div');
     pilotsSection.className = 'tm-pilots-section';
@@ -448,23 +477,24 @@ function openTeamModal(team) {
     
     pilotsSection.appendChild(pilotsList);
     
-	modal.appendChild(closeBtn);
-	modal.appendChild(fullLogoContainer);
-	modal.appendChild(fullNameEl);
-	modal.appendChild(divider1);
-	modal.appendChild(infoRow1);     
-	modal.appendChild(divider2);
-	modal.appendChild(infoRow2);     
-	modal.appendChild(divider3);
-	modal.appendChild(infoRow3);     
-	modal.appendChild(divider4);
-	modal.appendChild(pilotsSection);
+    modal.appendChild(closeBtn);
+    modal.appendChild(fullLogoContainer);
+    modal.appendChild(fullNameEl);
+    modal.appendChild(divider1);
+    modal.appendChild(infoRow1);     
+    modal.appendChild(divider2);
+    modal.appendChild(infoRow2);     
+    modal.appendChild(divider3);
+    modal.appendChild(infoRow3);     
+    modal.appendChild(divider4);
+    modal.appendChild(pilotsSection);
     
-    // Правая колонка
+    // ====================
+    // ПРАВАЯ КОЛОНКА — Болид (без изменений)
+    // ====================
     const rightColumn = document.createElement('div');
     rightColumn.className = 'tm-right-column';
     
-    // Плашка болида
     const bolidPanel = document.createElement('div');
     bolidPanel.className = 'tm-bolid-panel';
     bolidPanel.style.setProperty('--team-color', team.color);
@@ -498,28 +528,10 @@ function openTeamModal(team) {
     `;
     bolidPanel.appendChild(bolidInfo);
     
-    // Плашка статистики
-    const statsPanel = document.createElement('div');
-    statsPanel.className = 'tm-bolid-stats-panel';
-    statsPanel.style.setProperty('--team-color', team.color);
-    statsPanel.innerHTML = `
-        <div class="tm-bolid-stat-cell">
-            <span class="tm-bolid-stat-label">Дебют</span>
-            <span class="tm-bolid-stat-value">${team.debut}</span>
-        </div>
-        <div class="tm-bolid-stat-cell">
-            <span class="tm-bolid-stat-label">Кубки конструкторов</span>
-            <span class="tm-bolid-stat-value">${team.titles || 0}</span>
-        </div>
-        <div class="tm-bolid-stat-cell tm-bolid-stat-full">
-            <span class="tm-bolid-stat-label">Первая победа</span>
-            <span class="tm-bolid-stat-value">${team.firstWin || '---'}</span>
-        </div>
-    `;
-    
     rightColumn.appendChild(bolidPanel);
-    rightColumn.appendChild(statsPanel);
     
+    // Собираем всё вместе
+    overlay.appendChild(leftColumn);
     overlay.appendChild(modal);
     overlay.appendChild(rightColumn);
     
@@ -536,24 +548,28 @@ function openTeamModal(team) {
     
     // Анимация
     requestAnimationFrame(() => {
+        // Левая колонка — выезжает слева
+        statsPanel.style.transition = 'none';
+        statsPanel.style.opacity = '0';
+        statsPanel.style.transform = 'translateX(-40px)';
+        
+        // Правая колонка — выезжает справа (без изменений)
         bolidPanel.style.transition = 'none';
         bolidPanel.style.opacity = '0';
         bolidPanel.style.transform = 'translateX(40px)';
         
-        statsPanel.style.transition = 'none';
-        statsPanel.style.opacity = '0';
-        statsPanel.style.transform = 'translateX(40px)';
-        
         requestAnimationFrame(() => {
+            // Левая — выезжает слева
+            statsPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            statsPanel.style.transitionDelay = '0.2s';
+            statsPanel.style.opacity = '1';
+            statsPanel.style.transform = 'translateX(0)';
+            
+            // Правая — выезжает справа
             bolidPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             bolidPanel.style.transitionDelay = '0.2s';
             bolidPanel.style.opacity = '1';
             bolidPanel.style.transform = 'translateX(0)';
-            
-            statsPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            statsPanel.style.transitionDelay = '0.4s';
-            statsPanel.style.opacity = '1';
-            statsPanel.style.transform = 'translateX(0)';
         });
         
         overlay.classList.add('active');

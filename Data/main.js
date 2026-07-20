@@ -137,15 +137,23 @@ async function initMainPage(container) {
     const blocks = document.createElement('div');
     blocks.className = 'main-blocks';
     
+    // Левая колонка — погода
     blocks.appendChild(createWeatherBlock());
-    blocks.appendChild(createNextGPBlock());
+    
+    // Центральная колонка — предстоящий ГП + следующий ГП
+    const centerColumn = document.createElement('div');
+    centerColumn.className = 'main-center-column';
+    centerColumn.appendChild(createNextGPBlock());
+    centerColumn.appendChild(createAfterNextGPBlock());
+    blocks.appendChild(centerColumn);
+    
+    // Правая колонка — шины
     blocks.appendChild(createTyreBlock());
     
     container.appendChild(blocks);
     
     startMainTimer();
     
-    // Загружаем погоду для следующего ГП
     await loadWeatherForNextGP();
 }
 
@@ -275,6 +283,61 @@ function createNextGPBlock() {
         block.innerHTML = `
             <div class="main-block-title">Сезон 2026</div>
             <div class="nextgp-empty"><span>Сезон завершён</span></div>
+        `;
+    }
+    
+    block.addEventListener('click', () => {
+        document.querySelectorAll('.menu-item').forEach(btn => {
+            if (btn.dataset.tab === 'calendar') btn.click();
+        });
+    });
+    return block;
+}
+
+function createAfterNextGPBlock() {
+    const block = document.createElement('div');
+    block.className = 'main-block afternextgp-block clickable';
+    
+    const now = new Date();
+    let afterNextGP = null;
+    let afterNextTrack = null;
+    
+    if (typeof calendarData !== 'undefined') {
+        const activeGPs = calendarData
+            .filter(gp => !gp.canceled)
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        let foundFirst = false;
+        
+        for (const gp of activeGPs) {
+            const raceDate = new Date(gp.date);
+            const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
+            
+            if (raceEnd > now) {
+                if (!foundFirst) {
+                    foundFirst = true; // Пропускаем первый (предстоящий)
+                    continue;
+                }
+                afterNextGP = gp;
+                afterNextTrack = getTrackById(gp.track);
+                break;
+            }
+        }
+    }
+    
+    if (afterNextGP && afterNextTrack) {
+        block.innerHTML = `
+            <div class="main-block-title">
+                <img src="Images/Flags/${afterNextTrack.country}.svg" class="nextgp-flag-inline" title="${getCountryName(afterNextTrack.country)}"> ${afterNextTrack.name}
+            </div>
+            <div class="nextgp-details">
+                <div class="nextgp-detail"><img src="Images/Icon/calendar.webp" class="main-icon"><span class="nextgp-value">${formatDateLong(afterNextGP.date)}</span></div>
+            </div>
+        `;
+    } else {
+        block.innerHTML = `
+            <div class="main-block-title">Далее</div>
+            <div class="nextgp-empty"><span>Нет данных</span></div>
         `;
     }
     
@@ -535,7 +598,7 @@ function createTyreBlock() {
     }).join('');
     
     // Промежуточные и дождевые
-    const rainActive = weatherData.humidity  > 70;
+    const rainActive = weatherData.rain  > 70;
 
     let bottomHTML = `
         <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Intermediate">
