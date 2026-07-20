@@ -1,8 +1,8 @@
 const tyreData = {
     compounds: {
-        Hard: "C2",    
-        Medium: "C3",  
-        Soft: "C4"    
+        Hard: "C3",    
+        Medium: "C4",  
+        Soft: "C5"    
     }
 };
 
