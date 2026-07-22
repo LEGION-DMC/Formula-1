@@ -371,32 +371,43 @@ function createPenaltiesTable() {
     
     const tbody = document.createElement('tbody');
     
+    // Просто берём данные из загруженного файла
     const sorted = [...penaltiesData]
         .filter(p => p.fines > 0)
         .sort((a, b) => b.fines - a.fines);
     
-    sorted.forEach(row => {
-        const driver = findDriverByName(row.driver);
-        if (!driver) return;
-        
+    if (sorted.length === 0) {
         const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td class="team-cell stats-clickable" data-team="${driver.team}">
-                <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
-            </td>
-            <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
-                <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
-                <span>${row.driver}</span>
-            </td>
-            <td class="fines-cell">${row.fines}</td>
-        `;
+        tr.innerHTML = `<td colspan="3" style="text-align:center;color:#666;padding:20px;">Нет данных о штрафах</td>`;
         tbody.appendChild(tr);
-    });
+    } else {
+        sorted.forEach(row => {
+            const driver = findDriverByName(row.driver);
+            if (!driver) {
+                console.warn('Пилот не найден:', row.driver);
+                return;
+            }
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="team-cell stats-clickable" data-team="${driver.team}">
+                    <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
+                </td>
+                <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
+                    <img src="Images/Flags/${driver.country}.svg" alt="" class="stats-flag">
+                    <span>${row.driver}</span>
+                </td>
+                <td class="fines-cell">${row.fines}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
     
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     wrapper.appendChild(tableContainer);
     
+    // Обработчики кликов
     wrapper.addEventListener('click', (e) => {
         const driverCell = e.target.closest('.stats-driver-clickable');
         if (driverCell) {
