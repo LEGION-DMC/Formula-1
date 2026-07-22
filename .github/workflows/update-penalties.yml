@@ -1,0 +1,40 @@
+name: Обновление штрафов F1
+
+on:
+  schedule:
+    - cron: '0 6,18 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-penalties:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Клонируем репозиторий
+        uses: actions/checkout@v4
+        
+      - name: Устанавливаем Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          
+      - name: Загружаем данные штрафов
+        run: node scripts/fetch-penalties.js
+        
+      - name: Проверяем изменения
+        id: check
+        run: |
+          if git diff --quiet data/penalties-data.js; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Сохраняем изменения
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name "F1 Bot"
+          git config user.email "bot@f1-tracker.local"
+          git add data/penalties-data.js
+          git commit -m "🔄 Автообновление штрафов: $(date +%d.%m.%Y)"
+          git push
