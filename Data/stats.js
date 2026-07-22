@@ -73,7 +73,7 @@ const pitstopData = [
 ];
 
 const penaltiesData = [
-    { driver: "Оливер Берман", fines: 4 },
+    { driver: "Оливер Берман", fines: 8 },
     { driver: "Александр Албон", fines: 3 },
     { driver: "Андреа Кими Антонелли", fines: 3 },
     { driver: "Льюис Хэмилтон", fines: 3 },

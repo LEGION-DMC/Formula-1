@@ -1,4 +1,3 @@
-// scripts/fetch-penalties.js
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
@@ -17,70 +16,44 @@ https.get(url, (res) => {
         
         const penalties = [];
         
-        // Ищем основную таблицу со штрафами
-        // На f1report.ru таблица имеет класс table или похожий
-        const tableMatch = html.match(/<table[^>]*class="[^"]*table[^"]*"[^>]*>([\s\S]*?)<\/table>/i);
+        // Пробуем найти таблицу
+        const tableMatch = html.match(/<table[^>]*>([\s\S]*?)<\/table>/i);
         
         if (!tableMatch) {
             console.log('Таблица не найдена!');
-            // Создаём пустой файл, чтобы не сломать сайт
-            writePenaltiesFile(penalties);
+            writePenaltiesFile([]);
             return;
         }
         
         const tableHtml = tableMatch[1];
-        
-        // Ищем строки таблицы (пропускаем заголовок)
         const rows = tableHtml.match(/<tr[^>]*>[\s\S]*?<\/tr>/gi) || [];
         
         rows.forEach(row => {
-            // Пропускаем строки-заголовки
             if (row.includes('<th')) return;
             
-            // Извлекаем ячейки
             const cells = row.match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || [];
             
             if (cells.length >= 3) {
-                // Очищаем от HTML-тегов
-                const cleanCell = (html) => html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+                const cleanCell = (html) => html.replace(/<[^>]*>/g, '').trim();
                 
-                const position = cleanCell(cells[0]);  // Позиция
-                const driverRaw = cells[1];            // Пилот (может содержать ссылку)
-                const points = cleanCell(cells[2]);   // Штрафные баллы
+                const driverName = cleanCell(cells[1]);
+                const fines = parseInt(cleanCell(cells[2]));
                 
-                // Извлекаем имя пилота
-                const driverName = driverRaw.replace(/<[^>]*>/g, '').trim();
-                
-                // Парсим количество штрафов
-                const fines = parseInt(points);
-                
-                if (driverName && !isNaN(fines)) {
+                if (driverName && !isNaN(fines) && driverName.length > 2) {
                     penalties.push({
                         driver: driverName,
                         fines: fines
                     });
-                    
-                    console.log(`  ${driverName}: ${fines} штрафов`);
                 }
             }
         });
         
-        // Убираем дубликаты (если есть)
-        const uniquePenalties = [];
-        const seen = new Set();
-        penalties.forEach(p => {
-            if (!seen.has(p.driver)) {
-                seen.add(p.driver);
-                uniquePenalties.push(p);
-            }
-        });
-        
-        console.log(`Найдено ${uniquePenalties.length} пилотов со штрафами`);
-        writePenaltiesFile(uniquePenalties);
+        console.log(`Найдено ${penalties.length} записей`);
+        writePenaltiesFile(penalties);
     });
     
 }).on('error', (err) => {
-    console.error('Ошибка загрузки:', err.message);
+    console.error('Ошибка:', err.message);
     process.exit(1);
 });
 
@@ -94,7 +67,6 @@ const penaltiesData = ${JSON.stringify(penalties, null, 4)};
     
     const filePath = path.join(__dirname, '..', 'data', 'penalties-data.js');
     
-    // Убедимся, что папка существует
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
