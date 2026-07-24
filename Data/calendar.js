@@ -114,8 +114,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "https://rutube.ru/video/a1fd78e2a2feb33f0fef612d1e89d2fb/",
+		recordingRace: "https://rutube.ru/video/8d838029ed38ee3be92af7472ac078f4/"
 	},
 	{   id: "netherlands",
 		track: "zandvoort",
