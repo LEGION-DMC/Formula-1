@@ -337,7 +337,7 @@ const tracksData = [
         lapRecord: "1:22.109 (Ферстаппен, 2021)"
     },
 	// 2027
-    { id: "istanbul",
+    { id: "istambul_park",
         name: "Гран-при Турции",
         country: "tr",
         location: "Стамбул, Турция",
@@ -364,6 +364,20 @@ const tracksData = [
         direction:  "по часовой стрелки",
         firstrace: "2020",
         lapRecord: "1.16.466 (Боттас, 2020)"
+    },
+    { id: "sepang",
+        name: "Гран При Малайзии",
+        country: "my",
+        location: "Куала-Лумпур, Малайзия",
+        trackName: "Сепанг",
+        length: "5 543",
+        laps: 56,
+        turns: 15,
+		elevation: '18',
+		speed: '212',
+        direction:  "по часовой стрелки",
+        firstrace: "1999",
+        lapRecord: "1.34.080 (Феттель, 2017)"
     },
 	// Убраны из календаря
     { id: "imola",
