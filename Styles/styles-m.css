@@ -669,6 +669,14 @@ body {
 
 /* ГЛАВНАЯ                                        */
 /* ============================================== */
+.main-title {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+    
+.main-header {
+    padding: 0px 0 10px 0;
+}
 
 .main-blocks {
     grid-template-columns: 1fr;
@@ -754,4 +762,8 @@ body {
 
 .tyre-type {
     font-size: 0.6rem;
+}
+
+.afternextgp-block.clickable {
+    display: none;
 }

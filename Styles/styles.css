@@ -620,6 +620,14 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    transition: all 0.25s ease; /* Добавлено: плавность для всех свойств */
+    border: 1px solid transparent;
+}
+
+.stat-cell:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid red;
 }
 
 .stat-number {
@@ -1040,7 +1048,16 @@ h1, h2 {
     flex-direction: column;
     gap: 5px;
     text-align: center;
+    transition: all 0.25s ease; /* Добавлено: плавность для всех свойств */
+    border: 1px solid transparent;
 }
+
+.tm-bolid-info-cell:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid red;
+}
+
 
 .tm-bolid-info-label {
     font-family: 'F1Text', sans-serif;
@@ -1746,7 +1763,7 @@ h1, h2 {
 .tm-detail-row-inline {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
@@ -1769,6 +1786,8 @@ h1, h2 {
     word-spacing: -2px;
     color: #888;
     text-transform: uppercase;
+    align-items: center;
+    display: flex;
 }
 
 .record-icon {
@@ -1776,6 +1795,7 @@ h1, h2 {
     height: 20px;
     object-fit: contain;
     opacity: 0.7;
+    margin-right: 8px;
 }
 
 .tm-record {
@@ -1799,7 +1819,15 @@ h1, h2 {
     padding: 10px 4px 6px 4px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
+    transition: all 0.25s ease; /* Добавлено: плавность для всех свойств */
+    border: 1px solid transparent;
+}
+
+.tm-stat-cell:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid red;
 }
 
 .tm-stat-value {
@@ -1814,12 +1842,11 @@ h1, h2 {
     font-size: 1.83rem;
     font-weight: bold;
     margin: -14px 0 -3px 0;
-    color: var(--red-accent);
 }
 
 .tm-stat-label {
     font-family: 'F1Text', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     word-spacing: -2px;
     color: #888;
     text-transform: uppercase;
@@ -1890,6 +1917,38 @@ h1, h2 {
 /* ============================================== */
 /* ГЛАВНАЯ СТРАНИЦА                               */
 /* ============================================== */
+
+.main-header {
+    text-align: center;
+    padding: 0 0 15px;
+    width: 100%;
+    position: relative;
+}
+
+.main-title {
+    font-family: 'F1Title', 'F1Text', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    background: linear-gradient(135deg, #e10600, #ff4d4d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    display: inline-block;
+    border-bottom: none;
+}
+
+.main-title-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.4) 10%, rgba(225, 6, 0, 0.4) 90%, transparent);
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+}
 
 /* Сетка плашек */
 .main-blocks {
@@ -1971,15 +2030,14 @@ h1, h2 {
     align-items: center;
     gap: 4px;
     transition: all 0.3s ease;
+    transition: all 0.25s ease; /* Добавлено: плавность для всех свойств */
+    border: 1px solid transparent;
 }
 
 .weather-param-cell:hover {
     transform: translateY(-3px);
     background: rgba(255, 255, 255, 0.06);
-}
-
-.weather-param-cell:active {
-    transform: scale(0.95);
+    border: 1px solid red;
 }
 
 .weather-value {
