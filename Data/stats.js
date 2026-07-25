@@ -1,47 +1,47 @@
 const qualiData = [
-    { driver1: "Андреа Кими Антонелли", 
-      score1: 6, 
+    { driver1: "Андреа Кими Антонелли",
+      score1: 6,
       score2: 4,
       driver2: "Джордж Расселл" },
-    { driver1: "Шарль Леклер", 
-      score1: 6, 
+    { driver1: "Шарль Леклер",
+      score1: 6,
       score2: 4,
       driver2: "Льюис Хэмилтон" },
-    { driver1: "Ландо Норрис", 
-      score1: 6, 
+    { driver1: "Ландо Норрис",
+      score1: 6,
       score2: 4,
       driver2: "Оскар Пиастри" },
-    { driver1: "Макс Ферстаппен", 
-      score1: 7, 
+    { driver1: "Макс Ферстаппен",
+      score1: 7,
       score2: 3,
       driver2: "Иcаак Хаджар" },
-    { driver1: "Лиам Лоусон", 
-      score1: 6, 
-      score2: 4,
+    { driver1: "Лиам Лоусон",
+      score1: 6,
+      score2: 5,
       driver2: "Арвид Линдблад" },
-    { driver1: "Нико Хюлькенберг", 
-      score1: 5, 
+    { driver1: "Нико Хюлькенберг",
+      score1: 6,
       score2: 5,
       driver2: "Габриэл Бортолето" },
-    { driver1: "Карлос Сайнс", 
-      score1: 8, 
+    { driver1: "Карлос Сайнс",
+      score1: 9,
       score2: 2,
       driver2: "Александр Албон" },
-    { driver1: "Эстебан Окон", 
-      score1: 2, 
+    { driver1: "Эстебан Окон",
+      score1: 3,
       score2: 8,
       driver2: "Оливер Берман" },
-    { driver1: "Пьер Гасли", 
-      score1: 7, 
+    { driver1: "Пьер Гасли",
+      score1: 8,
       score2: 3,
       driver2: "Франко Колапинто" },
-    { driver1: "Фернандо Алонсо", 
-      score1: 8, 
+    { driver1: "Фернандо Алонсо",
+      score1: 9,
       score2: 2,
       driver2: "Лэнс Стролл" },
-    { driver1: "Серхио Перес", 
-      score1: 6, 
-      score2: 4,
+    { driver1: "Серхио Перес",
+      score1: 6,
+      score2: 5,
       driver2: "Валттери Боттас" },
 ];
 
@@ -86,7 +86,7 @@ const penaltiesData = [
     { driver: "Шарль Леклер", fines: 1 },
     { driver: "Эстебан Окон", fines: 1 },
     { driver: "Франко Колапинто", fines: 1 },
-	
+
     { driver: "Ландо Норрис", fines: 0 },
     { driver: "Макс Ферстаппен", fines: 0 },
     { driver: "Иcаак Хаджар", fines: 0 },
@@ -96,7 +96,7 @@ const penaltiesData = [
     { driver: "Арвид Линдблад", fines: 0 },
     { driver: "Джордж Расселл", fines: 0 },
     { driver: "Валттери Боттас", fines: 0 },
-	
+
     { driver: "Юки Цунода", fines: 3 },
     { driver: "Гуан Ю Чжоу", fines: 0 },
     { driver: "Джек Дуэн", fines: 0 },
@@ -152,41 +152,41 @@ syncPenaltiesToDrivers();
 
 function initStatsPage(container) {
     'use strict';
-    
+
     // Сбрасываем стили, которые могли остаться от других вкладок
     container.style.display = 'block';
     container.style.flexDirection = '';
     container.style.gap = '';
     container.style.padding = '20px';
-    
+
     container.innerHTML = '';
-    
+
     const grid = document.createElement('div');
     grid.className = 'stats-grid';
-    
+
     grid.appendChild(createQualiTable());
     grid.appendChild(createPitstopTable());
     grid.appendChild(createPenaltiesTable());
     grid.appendChild(createLapRecordTable());
-    
+
     container.appendChild(grid);
 }
 
 function createQualiTable() {
     const wrapper = document.createElement('div');
     wrapper.className = 'stats-table-wrapper';
-    
+
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
     tableTitle.textContent = 'Квалификационный зачёт';
     wrapper.appendChild(tableTitle);
-    
+
     const tableContainer = document.createElement('div');
     tableContainer.className = 'stats-table-container';
-    
+
     const table = document.createElement('table');
     table.className = 'stats-table quali-table';
-    
+
     const thead = document.createElement('thead');
     thead.innerHTML = `
         <tr>
@@ -196,15 +196,15 @@ function createQualiTable() {
         </tr>
     `;
     table.appendChild(thead);
-    
+
     const tbody = document.createElement('tbody');
-    
+
     qualiData.forEach(row => {
         const driver1 = findDriverByName(row.driver1);
         const driver2 = findDriverByName(row.driver2);
-        
+
         if (!driver1 || !driver2) return;
-        
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td class="driver-cell driver-cell-left stats-driver-clickable" data-driver-id="${driver1.id}">
@@ -225,11 +225,11 @@ function createQualiTable() {
         `;
         tbody.appendChild(tr);
     });
-    
+
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     wrapper.appendChild(tableContainer);
-    
+
     wrapper.addEventListener('click', (e) => {
         const driverCell = e.target.closest('.stats-driver-clickable');
         if (driverCell) {
@@ -244,25 +244,25 @@ function createQualiTable() {
             return;
         }
     });
-    
+
     return wrapper;
 }
 
 function createPitstopTable() {
     const wrapper = document.createElement('div');
     wrapper.className = 'stats-table-wrapper';
-    
+
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
     tableTitle.textContent = 'Лучшие пит-стопы сезона';
     wrapper.appendChild(tableTitle);
-    
+
     const tableContainer = document.createElement('div');
     tableContainer.className = 'stats-table-container';
-    
+
     const table = document.createElement('table');
     table.className = 'stats-table pitstop-table';
-    
+
     const thead = document.createElement('thead');
     thead.innerHTML = `
         <tr>
@@ -274,33 +274,33 @@ function createPitstopTable() {
         </tr>
     `;
     table.appendChild(thead);
-    
+
     const tbody = document.createElement('tbody');
-    
+
     // Фильтруем валидные
-    const validPitstops = pitstopData.filter(row => 
+    const validPitstops = pitstopData.filter(row =>
         row.driver !== 'none' && row.time !== '0.00' && row.time !== '0.00s'
     );
-    
+
     // Находим лучшее (минимальное) время
     let bestTime = Infinity;
     validPitstops.forEach(row => {
         const t = parseFloat(row.time);
         if (!isNaN(t) && t < bestTime) bestTime = t;
     });
-    
+
     validPitstops.forEach((row, index) => {
         const driver = findDriverById(row.driver);
         if (!driver) return;
-        
+
         const gpCountry = getGPCountry(row.gpId);
-        const gpName = getGPName(row.gpId);           
+        const gpName = getGPName(row.gpId);
 		const gpShort = gpName.replace('Гран-при ', '').replace('-Каталунии', '');
-        
+
         // Проверяем, лучшее ли это время
         const currentTime = parseFloat(row.time);
         const isBest = !isNaN(currentTime) && currentTime === bestTime;
-        
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td class="pos-cell">${index + 1}</td>
@@ -321,11 +321,11 @@ function createPitstopTable() {
         `;
         tbody.appendChild(tr);
     });
-    
+
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     wrapper.appendChild(tableContainer);
-    
+
     wrapper.addEventListener('click', (e) => {
         const driverCell = e.target.closest('.stats-driver-clickable');
         if (driverCell) {
@@ -340,25 +340,25 @@ function createPitstopTable() {
             return;
         }
     });
-    
+
     return wrapper;
 }
 
 function createPenaltiesTable() {
     const wrapper = document.createElement('div');
     wrapper.className = 'stats-table-wrapper';
-    
+
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
     tableTitle.textContent = 'Штрафы суперлицензии пилотов';
     wrapper.appendChild(tableTitle);
-    
+
     const tableContainer = document.createElement('div');
     tableContainer.className = 'stats-table-container';
-    
+
     const table = document.createElement('table');
     table.className = 'stats-table penalties-table';
-    
+
     const thead = document.createElement('thead');
     thead.innerHTML = `
         <tr>
@@ -368,17 +368,17 @@ function createPenaltiesTable() {
         </tr>
     `;
     table.appendChild(thead);
-    
+
     const tbody = document.createElement('tbody');
-    
+
     const sorted = [...penaltiesData]
         .filter(p => p.fines > 0)
         .sort((a, b) => b.fines - a.fines);
-    
+
     sorted.forEach(row => {
         const driver = findDriverByName(row.driver);
         if (!driver) return;
-        
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td class="team-cell stats-clickable" data-team="${driver.team}">
@@ -392,11 +392,11 @@ function createPenaltiesTable() {
         `;
         tbody.appendChild(tr);
     });
-    
+
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     wrapper.appendChild(tableContainer);
-    
+
     wrapper.addEventListener('click', (e) => {
         const driverCell = e.target.closest('.stats-driver-clickable');
         if (driverCell) {
@@ -411,25 +411,25 @@ function createPenaltiesTable() {
             return;
         }
     });
-    
+
     return wrapper;
 }
 
 function createLapRecordTable() {
     const wrapper = document.createElement('div');
     wrapper.className = 'stats-table-wrapper';
-    
+
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
     tableTitle.textContent = 'Рекорды лучшего круга';
     wrapper.appendChild(tableTitle);
-    
+
     const tableContainer = document.createElement('div');
     tableContainer.className = 'stats-table-container';
-    
+
     const table = document.createElement('table');
     table.className = 'stats-table lap-record-table';
-    
+
     const thead = document.createElement('thead');
     thead.innerHTML = `
         <tr>
@@ -441,15 +441,15 @@ function createLapRecordTable() {
         </tr>
     `;
     table.appendChild(thead);
-    
+
     const tbody = document.createElement('tbody');
-    
-    const validRecords = lapRecordData.filter(row => 
-        row.driver !== 'none' && 
-        row.time !== '0.00s' && 
+
+    const validRecords = lapRecordData.filter(row =>
+        row.driver !== 'none' &&
+        row.time !== '0.00s' &&
         row.time !== '0:00.000'
     );
-    
+
     if (validRecords.length === 0) {
         const tr = document.createElement('tr');
         tr.innerHTML = `<td colspan="5" style="text-align:center;color:#666;padding:20px;">Нет данных</td>`;
@@ -458,11 +458,11 @@ function createLapRecordTable() {
         validRecords.forEach((row, index) => {
             const driver = findDriverById(row.driver);
             if (!driver) return;
-            
+
             const gpCountry = getGPCountry(row.gpId);
-			const gpName = getGPName(row.gpId);           
+			const gpName = getGPName(row.gpId);
 			const gpShort = gpName.replace('Гран-при ', '');
-            
+
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="pos-cell">${index + 1}</td>
@@ -484,11 +484,11 @@ function createLapRecordTable() {
             tbody.appendChild(tr);
         });
     }
-    
+
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     wrapper.appendChild(tableContainer);
-	
+
     wrapper.addEventListener('click', (e) => {
         const driverCell = e.target.closest('.stats-driver-clickable');
         if (driverCell) {
@@ -503,6 +503,6 @@ function createLapRecordTable() {
             return;
         }
     });
-    
+
     return wrapper;
 }
