@@ -192,6 +192,28 @@ body {
 .driver-team img { width: 30px; height: 15px; }
 .driver-team span { display: none; }
 
+.driver-titles-overlay {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.75rem;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 3;
+    letter-spacing: 1px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.driver-titles-overlay .titles-row {
+    line-height: 0.7;
+    white-space: nowrap;
+}
+
 .driver-modal { max-width: 95%; max-height: 90vh; }
 
 .modal-close-btn {
@@ -276,7 +298,7 @@ body {
     .tm-full-logo { max-height: 50px; }
     .tm-full-name { font-size: 1.1rem; }
     .tm-divider { 
-        margin: 10px 0px 10px 0px;
+        margin: 8px 0px 5px 0px;
     }
     .tm-divider:nth-of-type(4) {
         display: none;

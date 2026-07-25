@@ -1005,6 +1005,21 @@ function renderConstructorStandingsPanel(container, filterTeam) {
     grid.appendChild(leftCol);
     grid.appendChild(rightCol);
     container.appendChild(grid);
+    
+    // Добавляем обработчик правого клика для всех строк команд
+    container.addEventListener('contextmenu', (e) => {
+        const row = e.target.closest('.constructor-row');
+        if (!row) return;
+        
+        // Предотвращаем стандартное контекстное меню
+        e.preventDefault();
+        
+        const teamName = row.dataset.team;
+        const teamData = getTeamData(teamName);
+        if (teamData) {
+            openTeamModal(teamData);
+        }
+    });
 }
 
 function createConstructorRow(team, pos, filterTeam) {

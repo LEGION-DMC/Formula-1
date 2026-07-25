@@ -396,6 +396,29 @@ h1, h2 {
     object-fit: cover;
 }
 
+.driver-titles-overlay {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.85rem;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 3;
+    line-height: 1;
+    letter-spacing: 1px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.driver-titles-overlay .titles-row {
+    line-height: 0.7;
+    white-space: nowrap;
+}
+
 .driver-number-overlay {
     position: absolute;
     top: -5px;
@@ -883,7 +906,7 @@ h1, h2 {
     width: 100%; display: flex; justify-content: center; margin-bottom: 12px; 
 }
 
-.tm-full-logo { max-width: 100%; max-height: 100px; object-fit: contain; }
+.tm-full-logo { max-width: 100%; max-height: 100px; object-fit: contain; margin-top: 5px;  }
 
 .tm-full-name {
     font-family: 'F1Title', sans-serif;
@@ -891,7 +914,7 @@ h1, h2 {
     color: var(--team-color);
     text-align: center;
     border-bottom: none;
-    padding-bottom: 0;
+    margin-bottom: -10px;
 }
 
 .tm-divider {
@@ -899,7 +922,6 @@ h1, h2 {
     height: 1px;
     background: linear-gradient(to right, transparent, var(--team-color), transparent);
     border: none;
-    margin: 10px 0;
 }
 
 .tm-info-row { 
@@ -1211,6 +1233,9 @@ h1, h2 {
 
 .gp-cell .gp-full { display: inline; }
 .gp-cell .gp-short { display: none; }
+
+.gp-clickable { cursor: pointer; }
+.gp-clickable:hover { color: var(--red-accent); }
 
 /* ============================================== */
 /* ВКЛАДКА РЕЗУЛЬТАТЫ                             */

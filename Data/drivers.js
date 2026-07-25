@@ -600,7 +600,7 @@ function renderDriverCards(drivers, container) {
     drivers.forEach(driver => {
         const card = document.createElement('div');
         card.className = 'driver-card';
-		card.style.setProperty('--team-color', getTeamColor(driver.team));
+        card.style.setProperty('--team-color', getTeamColor(driver.team));
         
         const portraitWrapper = document.createElement('div');
         portraitWrapper.className = 'driver-portrait-wrapper';
@@ -620,12 +620,53 @@ function renderDriverCards(drivers, container) {
         flagImg.onerror = () => { flagImg.style.display = 'none'; };
         flagOverlay.appendChild(flagImg);
         
+        // Золотые звёздочки за титулы
+        const titlesOverlay = document.createElement('div');
+        titlesOverlay.className = 'driver-titles-overlay';
+        if (driver.titles > 0) {
+            const starsCount = driver.titles;
+            const maxPerRow = 5;
+            
+            if (starsCount <= maxPerRow) {
+                // Одна строка
+                let starsHtml = '';
+                for (let i = 0; i < starsCount; i++) {
+                    starsHtml += '☆';
+                }
+                titlesOverlay.textContent = starsHtml;
+            } else {
+                // Две строки
+                const firstRow = Math.ceil(starsCount / 2);
+                const secondRow = starsCount - firstRow;
+                
+                let firstRowHtml = '';
+                for (let i = 0; i < firstRow; i++) {
+                    firstRowHtml += '☆';
+                }
+                
+                let secondRowHtml = '';
+                for (let i = 0; i < secondRow; i++) {
+                    secondRowHtml += '☆';
+                }
+                
+                titlesOverlay.innerHTML = `
+                    <div class="titles-row">${firstRowHtml}</div>
+                    <div class="titles-row">${secondRowHtml}</div>
+                `;
+                titlesOverlay.classList.add('titles-multi-row');
+            }
+            titlesOverlay.title = `${driver.titles}× чемпион мира`;
+        } else {
+            titlesOverlay.style.display = 'none';
+        }
+        
         const numberOverlay = document.createElement('div');
         numberOverlay.className = 'driver-number-overlay';
         numberOverlay.textContent = driver.number;
         
         portraitWrapper.appendChild(portraitImg);
         portraitWrapper.appendChild(flagOverlay);
+        portraitWrapper.appendChild(titlesOverlay);
         portraitWrapper.appendChild(numberOverlay);
         
         const nameDiv = document.createElement('div');
@@ -635,24 +676,24 @@ function renderDriverCards(drivers, container) {
         const divider = document.createElement('div');
         divider.className = 'driver-card-divider';
         
-		const teamDiv = document.createElement('div');
-		teamDiv.className = 'driver-team';
-		const teamLogo = document.createElement('img');
-		teamLogo.src = getTeamLogo(driver.team);
-		teamLogo.alt = driver.team;
-		teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
-		const teamName = document.createElement('span');
-		teamName.textContent = driver.team;
-		teamDiv.appendChild(teamLogo);
-		teamDiv.appendChild(teamName);
+        const teamDiv = document.createElement('div');
+        teamDiv.className = 'driver-team';
+        const teamLogo = document.createElement('img');
+        teamLogo.src = getTeamLogo(driver.team);
+        teamLogo.alt = driver.team;
+        teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
+        const teamName = document.createElement('span');
+        teamName.textContent = driver.team;
+        teamDiv.appendChild(teamLogo);
+        teamDiv.appendChild(teamName);
 
-		teamDiv.addEventListener('click', (e) => {
-			e.stopPropagation(); 
-			const teamData = getTeamData(driver.team);
-			if (teamData) {
-				openTeamModal(teamData);
-			}
-		});
+        teamDiv.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            const teamData = getTeamData(driver.team);
+            if (teamData) {
+                openTeamModal(teamData);
+            }
+        });
         
         card.appendChild(portraitWrapper);
         card.appendChild(nameDiv);

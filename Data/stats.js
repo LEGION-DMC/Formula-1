@@ -199,7 +199,39 @@ function createQualiTable() {
 
     const tbody = document.createElement('tbody');
 
-    qualiData.forEach(row => {
+    // Создаем карту команд с их очками для сортировки
+    const teamPointsMap = {};
+    if (typeof teamsData !== 'undefined') {
+        teamsData.forEach(team => {
+            teamPointsMap[team.shortName] = { points: 0, team: team.shortName };
+        });
+        
+        // Подсчитываем очки команд из combinedStandings
+        combinedStandings.forEach(entry => {
+            const driver = findDriverById(entry.driver);
+            if (driver && teamPointsMap[driver.team]) {
+                teamPointsMap[driver.team].points += entry.points;
+            }
+        });
+    }
+
+    // Сортируем данные квалификации по очкам команд
+    const sortedQualiData = [...qualiData].sort((a, b) => {
+        const driver1a = findDriverByName(a.driver1);
+        const driver1b = findDriverByName(b.driver1);
+        
+        if (!driver1a || !driver1b) return 0;
+        
+        const teamA = driver1a.team;
+        const teamB = driver1b.team;
+        
+        const pointsA = teamPointsMap[teamA]?.points || 0;
+        const pointsB = teamPointsMap[teamB]?.points || 0;
+        
+        return pointsB - pointsA;
+    });
+
+    sortedQualiData.forEach(row => {
         const driver1 = findDriverByName(row.driver1);
         const driver2 = findDriverByName(row.driver2);
 
@@ -295,7 +327,7 @@ function createPitstopTable() {
 
         const gpCountry = getGPCountry(row.gpId);
         const gpName = getGPName(row.gpId);
-		const gpShort = gpName.replace('Гран-при ', '').replace('-Каталунии', '');
+        const gpShort = gpName.replace('Гран-при ', '').replace('-Каталунии', '');
 
         // Проверяем, лучшее ли это время
         const currentTime = parseFloat(row.time);
@@ -304,18 +336,18 @@ function createPitstopTable() {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td class="pos-cell">${index + 1}</td>
-			<td class="gp-cell">
-				<img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
-				<span class="gp-full">${gpName}</span>
-				<span class="gp-short">${gpShort}</span>
-			</td>
+            <td class="gp-cell gp-clickable" data-gp-id="${row.gpId}">
+                <img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
+                <span class="gp-full">${gpName}</span>
+                <span class="gp-short">${gpShort}</span>
+            </td>
             <td class="team-cell stats-clickable" data-team="${driver.team}">
                 <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
             </td>
             <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
                 <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
                 <span class="driver-fullname">${driver.name}</span>
-				<span class="driver-shortname">${driver.namem}</span>
+                <span class="driver-shortname">${driver.namem}</span>
             </td>
             <td class="time-cell ${isBest ? 'best-time' : ''}">${row.time}</td>
         `;
@@ -337,6 +369,19 @@ function createPitstopTable() {
         if (teamCell) {
             const teamData = getTeamData(teamCell.dataset.team);
             if (teamData) openTeamModal(teamData);
+            return;
+        }
+        // Обработчик клика по названию Гран-при
+        const gpCell = e.target.closest('.gp-clickable');
+        if (gpCell) {
+            const gpId = gpCell.dataset.gpId;
+            const gp = getGPById(gpId);
+            if (gp) {
+                const track = getTrackById(gp.track);
+                if (track && typeof openTrackModal === 'function') {
+                    openTrackModal(track, gp);
+                }
+            }
             return;
         }
     });
