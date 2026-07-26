@@ -948,7 +948,9 @@ function getCountryName(code) {
         'qa': 'Катар',
         'ae': 'ОАЭ',
         'tr': 'Турция',
-        'pt': 'Португалия'
+        'pt': 'Португалия',
+        'co': 'Колумбия',
+        'my': 'Малайзия'
     };
     return countries[code] || code.toUpperCase();
 }

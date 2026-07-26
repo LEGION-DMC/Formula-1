@@ -11,8 +11,7 @@ const tracksData = [
 		speed: '238',
         direction: "по часовой стрелке",
         firstrace: "1996",
-        firstrace: "1996",
-        lapRecord: "1.19.813 (Леклер, 2024)"
+        lapRecord: "1.19.813 (Леклер, Ferrari, 2024)"
     },
     { id: "shanghai",
         name: "Гран-при Китая",
@@ -26,7 +25,7 @@ const tracksData = [
 		speed: '213',
         direction:  "по часовой стрелке",
         firstrace: "2004",
-        lapRecord: "1:32.238 (Шумахер, 2004)"
+        lapRecord: "1:32.238 (Шумахер, Ferrari, 2004)"
     },
     { id: "suzuka",
         name: "Гран-при Японии",
@@ -40,7 +39,7 @@ const tracksData = [
 		speed: '230',
         direction:  "по часовой стрелке",
         firstrace: "1987",
-        lapRecord: "1:30.965 (Антонелли, 2025)"
+        lapRecord: "1:30.965 (Антонелли, Mercedes, 2025)"
     },
     { id: "bahrain",
         name: "Гран-при Бахрейна",
@@ -54,7 +53,7 @@ const tracksData = [
 		speed: '216',
         direction:  "по часовой стрелке",
         firstrace: "2004",
-        lapRecord: "1:31.447 (Де ла Роса, 2005)"
+        lapRecord: "1:31.447 (Де ла Роса, McLaren, 2005)"
     },
     { id: "jeddah",
         name: "Гран-при Саудовской Аравии",
@@ -68,7 +67,7 @@ const tracksData = [
 		speed: '245',
         direction:  "против часовой стрелки",
         firstrace: "2021",
-        lapRecord: "1:30.734 (Хэмилтон, 2021)"
+        lapRecord: "1:30.734 (Хэмилтон, Mercedes, 2021)"
     },
     { id: "miami",
         name: "Гран-при Майами",
@@ -82,7 +81,7 @@ const tracksData = [
 		speed: '217',
         direction:  "по часовой стрелке",
         firstrace: "2022",
-        lapRecord: "1:29.708 (Ферстаппен, 2024)"
+        lapRecord: "1:29.708 (Ферстаппен, Red-Bull, 2024)"
     },
     { id: "villeneuve",
         name: "Гран-при Канады",
@@ -96,7 +95,7 @@ const tracksData = [
 		speed: '215',
         direction:  "против часовой стрелки",
         firstrace: "1978",
-        lapRecord: "1.13.078 (Боттас, 2019)"
+        lapRecord: "1.13.078 (Боттас, Mercedes, 2019)"
     },
     { id: "monaco",
         name: "Гран-при Монако",
@@ -110,7 +109,7 @@ const tracksData = [
 		speed: '165',
         direction:  "по часовой стрелке",
         firstrace: "1950",
-        lapRecord: "1.12.909 (Хэмилтон, 2021)"
+        lapRecord: "1.12.909 (Хэмилтон, Mercedes, 2021)"
     },
     { id: "catalunya",
         name: "Гран-при Барселоны-Каталунии",
@@ -124,7 +123,7 @@ const tracksData = [
 		speed: '221',
         direction:  "по часовой стрелке",
         firstrace: "1991",
-        lapRecord: "1:15.743 (Пиастри, 2025)"
+        lapRecord: "1:15.743 (Пиастри, McLaren, 2025)"
     },
     { id: "red_bull_ring",
         name: "Гран-при Австрии",
@@ -138,7 +137,7 @@ const tracksData = [
 		speed: '229',
         direction:  "по часовой стрелке",
         firstrace: "1997",
-        lapRecord: "1:05.619 (Сайнс, 2020)"
+        lapRecord: "1:05.619 (Сайнс, McLaren, 2020)"
     },
     { id: "silverstone",
         name: "Гран-при Великобритании",
@@ -152,7 +151,7 @@ const tracksData = [
 		speed: '243',
         direction:  "против часовой стрелки",
         firstrace: "1950",
-        lapRecord: "1.27.097 (Ферстаппен, 2020)"
+        lapRecord: "1.27.097 (Ферстаппен, Red-Bull, 2020)"
     },
     { id: "spa",
         name: "Гран-при Бельгии",
@@ -166,7 +165,7 @@ const tracksData = [
 		speed: '241',
         direction:  "по часовой стрелке",
         firstrace: "1950",
-        lapRecord: "1:44.701 (Перес, 2024)"
+        lapRecord: "1:44.701 (Перес, Red-Bull, 2024)"
     },
     { id: "hungaroring",
         name: "Гран-при Венгрии",
@@ -180,7 +179,7 @@ const tracksData = [
 		speed: '207',
         direction:  "по часовой стрелке",
         firstrace: "1986",
-        lapRecord: "1:16.627 (Хэмилтон, 2020)"
+        lapRecord: "1:16.627 (Хэмилтон, Mercedes, 2020)"
     },
     { id: "zandvoort",
         name: "Гран-при Нидерландов",
@@ -194,7 +193,7 @@ const tracksData = [
 		speed: '215',
         direction:  "против часовой стрелки",
         firstrace: "1952",
-        lapRecord: "1.11.097 (Хэмилтон, 2021)"
+        lapRecord: "1.11.097 (Хэмилтон, Mercedes, 2021)"
     },
     { id: "monza",
         name: "Гран-при Италии",
@@ -208,7 +207,7 @@ const tracksData = [
 		speed: '257',
         direction:  "по часовой стрелке",
         firstrace: "1950",
-        lapRecord: "1:20.901 (Норрис, 2025)"
+        lapRecord: "1:20.901 (Норрис, McLaren, 2025)"
     },
     { id: "madring",
         name: "Гран-при Испании",
@@ -236,7 +235,7 @@ const tracksData = [
 		speed: '215',
         direction:  "против часовой стрелки",
         firstrace: "2016",
-        lapRecord: "1.43.009 (Леклер, 2019)"
+        lapRecord: "1.43.009 (Леклер, Ferrari, 2019)"
     },
     { id: "marina_bay",
         name: "Гран-при Сингапура",
@@ -250,7 +249,7 @@ const tracksData = [
 		speed: '188',
         direction:  "против часовой стрелки",
         firstrace: "2008",
-        lapRecord: "1:34.486 (Рикиардо, 2024)"
+        lapRecord: "1:34.486 (Риккардо, Red-Bull, 2024)"
     },
     { id: "americas",
         name: "Гран-при США",
@@ -264,7 +263,7 @@ const tracksData = [
 		speed: '206',
         direction:  "против часовой стрелки",
         firstrace: "2012",
-        lapRecord: "1:36.169 (Леклер, 2019)"
+        lapRecord: "1:36.169 (Леклер, Ferrari, 2019)"
     },
     { id: "rodriguez",
         name: "Гран-при Мехико",
@@ -278,7 +277,7 @@ const tracksData = [
 		speed: '202',
         direction:  "против часовой стрелки",
         firstrace: "1963",
-        lapRecord: "1:17.774 (Боттас, 2021)"
+        lapRecord: "1:17.774 (Боттас, Mercedes, 2021)"
     },
     { id: "interlagos",
         name: "Гран-при Сан-Паулу",
@@ -292,7 +291,7 @@ const tracksData = [
 		speed: '220',
         direction:  "против часовой стрелки",
         firstrace: "1973",
-        lapRecord: "1:10.540 (Боттас, 2018)"
+        lapRecord: "1:10.540 (Боттас, Mercedes, 2018)"
     },
     { id: "vegas",
         name: "Гран-при Лас-Вегаса",
@@ -306,7 +305,7 @@ const tracksData = [
 		speed: '235',
         direction:  "против часовой стрелки",
         firstrace: "2023",
-        lapRecord: "1:32.312 (Рассел, 2024)"
+        lapRecord: "1:32.312 (Рассел, Mercedes, 2024)"
     },
     { id: "lusail",
         name: "Гран-при Катара",
@@ -320,7 +319,7 @@ const tracksData = [
 		speed: '235',
         direction:  "по часовой стрелке",
         firstrace: "2021",
-        lapRecord: "1:22.384 (Норрис, 2024)"
+        lapRecord: "1:22.384 (Норрис, McLaren, 2024)"
     },
     { id: "yas_marina",
         name: "Гран-при Абу-Даби",
@@ -334,7 +333,7 @@ const tracksData = [
 		speed: '222',
         direction:  "против часовой стрелки",
         firstrace: "2009",
-        lapRecord: "1:22.109 (Ферстаппен, 2021)"
+        lapRecord: "1:22.109 (Ферстаппен, Red-Bull, 2021)"
     },
 	// 2027
     { id: "istambul_park",
@@ -349,7 +348,7 @@ const tracksData = [
 		speed: '227',
         direction:  "против часовой стрелки",
         firstrace: "2005",
-        lapRecord: "1.24.770 (Монтойя, 2005)"
+        lapRecord: "1.24.770 (Монтойя, McLaren, 2005)"
     },
     { id: "portimao",
         name: "Гран При Португалии",
@@ -363,7 +362,7 @@ const tracksData = [
 		speed: '213',
         direction:  "по часовой стрелки",
         firstrace: "2020",
-        lapRecord: "1.16.466 (Боттас, 2020)"
+        lapRecord: "1.16.466 (Боттас, Mercedes, 2020)"
     },
     { id: "sepang",
         name: "Гран При Малайзии",
@@ -377,7 +376,7 @@ const tracksData = [
 		speed: '212',
         direction:  "по часовой стрелки",
         firstrace: "1999",
-        lapRecord: "1.34.080 (Феттель, 2017)"
+        lapRecord: "1.34.080 (Феттель, Ferrari, 2017)"
     },
 	// Убраны из календаря
     { id: "imola",
@@ -392,7 +391,7 @@ const tracksData = [
 		speed: '234',
         direction:  "по часовой стрелки",
         firstrace: "1980",
-        lapRecord: "1.15.484 (Хэмилтон, 2020)"
+        lapRecord: "1.15.484 (Хэмилтон, Mercedes, 2020)"
     },
 ];
 

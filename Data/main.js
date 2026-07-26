@@ -138,7 +138,7 @@ async function initMainPage(container) {
     const header = document.createElement('div');
     header.className = 'main-header';
     header.innerHTML = `
-        <h1 class="main-title">77-й чемпионат мира Formula 1 2026</h1>
+        <h1 class="main-title">77 чемпионат мира Formula 1</h1>
         <hr class="main-title-divider">
     `;
     container.appendChild(header);

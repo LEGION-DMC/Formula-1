@@ -1830,6 +1830,20 @@ h1, h2 {
     font-size: 0.9rem;
 }
 
+.tm-record-pilot-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.tm-record-team-logo {
+    width: 20px !important;
+    height: 20px !important;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 /* Сетка характеристик */
 .tm-stats-grid {
     display: grid;

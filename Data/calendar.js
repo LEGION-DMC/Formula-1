@@ -565,6 +565,29 @@ function openTrackModal(track, gp) {
     function close() { overlay.remove(); unlock(); document.removeEventListener('keydown', esc); }
     function esc(e) { if (e.key === 'Escape') close(); }
     
+    // Парсим рекорд круга для извлечения данных
+    let lapRecordDisplay = track.lapRecord;
+    const lapRecordParts = track.lapRecord.match(/^([\d:.]+)\s*\(([^,]+),\s*([^,]+),\s*(\d{4})\)$/);
+    
+    if (lapRecordParts) {
+        const time = lapRecordParts[1];
+        const pilot = lapRecordParts[2].trim();
+        const team = lapRecordParts[3].trim();
+        const year = lapRecordParts[4].trim();
+        
+        // Создаем путь к логотипу команды
+        const teamLogoPath = `Images/Teams/${team.toLowerCase().replace(/ /g, '_')}-m.png`;
+        
+        lapRecordDisplay = `
+            ${time}
+            <span class="tm-record-pilot-info">
+                (${pilot},
+                <img src="${teamLogoPath}" alt="${team}" class="tm-record-team-logo" onerror="this.style.display='none'">
+                ${year})
+            </span>
+        `;
+    }
+    
     modal.innerHTML = `
         <button class="track-modal-close">&times;</button>
         <div class="track-modal-layout">
@@ -621,7 +644,7 @@ function openTrackModal(track, gp) {
                 </div>
                 <div class="tm-detail-row">
                     <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга:</span>
-                    <span class="tm-record">${track.lapRecord}</span>
+                    <span class="tm-record">${lapRecordDisplay}</span>
                 </div>
             </div>
         </div>
