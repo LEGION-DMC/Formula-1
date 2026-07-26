@@ -1614,7 +1614,7 @@ h1, h2 {
 .calendar-card-info { flex: 1; padding: 5px 5px; display: flex; flex-direction: column; gap: 5px; }
 
 .calendar-card-header { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-.calendar-flag { width: 20px; height: 14px; border-radius: 2px; }
+.calendar-flag { width: 20px; height: 14px; border-radius: 2px; margin-top: -2px; }
 .calendar-gp-name { font-family: 'F1Title', sans-serif; font-size: 0.95rem; color: var(--text-light); }
 
 .nav-gp-full { display: inline; }
@@ -1771,6 +1771,14 @@ h1, h2 {
 .tm-header {
     display: flex; align-items: center; gap: 10px;
 }
+
+.tm-header img { 
+    width: 25px; 
+    height: 20px; 
+    border-radius: 4px; 
+    margin-top: -5px; 
+}
+
 .tm-header h2 {
     font-family: 'F1Title', sans-serif;
     font-size: 1.5rem;
