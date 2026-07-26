@@ -1516,7 +1516,7 @@ h1, h2 {
     width: 320px;
     backdrop-filter: blur(8px);
     border-right: 1px solid var(--border-color);
-    padding: 10px 5px;
+    padding: 10px 5px 0 2px;
     overflow-y: auto;
     height: calc(100vh);
     position: sticky; top: 0;
@@ -1535,7 +1535,7 @@ h1, h2 {
 
 .calendar-nav-item {
     display: flex; align-items: center; gap: 8px;
-    padding: 7px 5px;
+    padding: 7px 3px;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -1549,7 +1549,19 @@ h1, h2 {
 .calendar-nav-item.completed { opacity: 0.4; }
 .calendar-nav-item.canceled { opacity: 0.4; }
 
-.calendar-nav-flag { width: 18px; height: 13px; border-radius: 2px; flex-shrink: 0; }
+.calendar-nav-number {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.7rem;
+    color: var(--red-accent);
+    min-width: 18px;
+    text-align: center;
+    font-weight: bold;
+    opacity: 1;
+    flex-shrink: 0;
+}
+
+.calendar-nav-flag { width: 18px; height: 13px; 
+    border-radius: 2px; flex-shrink: 0; }
 .calendar-nav-name { font-size: 0.8rem; color: var(--text-light); flex: 1; }
 .calendar-nav-date { font-family: 'F1Numbers', sans-serif; font-size: 0.75rem; color: var(--red-accent); white-space: nowrap; }
 

@@ -270,7 +270,9 @@ function buildCalendarNav(panel, cardsArea) {
     title.textContent = 'Календарь Гран-при 2026';
     panel.appendChild(title);
     
-    calendarData.forEach(gp => {
+    let gpNumber = 0; // Счетчик для нумерации только неотмененных ГП
+    
+    calendarData.forEach((gp) => {
         const track = getTrackForGP(gp.id);
         if (!track) return;
         
@@ -283,7 +285,16 @@ function buildCalendarNav(panel, cardsArea) {
         item.className = `calendar-nav-item ${isCanceled ? 'canceled' : isPast ? 'completed' : ''}`;
         item.dataset.gpId = gp.id;
         
+        // Увеличиваем номер только для неотмененных ГП
+        if (!isCanceled) {
+            gpNumber++;
+        }
+        
+        // Для отмененных показываем "-", для остальных - номер
+        const displayNumber = isCanceled ? '-' : gpNumber;
+        
         item.innerHTML = `
+            <span class="calendar-nav-number">${displayNumber}</span>
             <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-nav-flag" title="${getCountryName(track.country)}">
             <span class="calendar-nav-name">
 				<span class="nav-gp-full">${track.name}</span>
