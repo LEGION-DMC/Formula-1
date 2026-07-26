@@ -114,7 +114,7 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/a1fd78e2a2feb33f0fef612d1e89d2fb/",
+		recordingQuali: "https://rutube.ru/video/55ded792e68ca0eae882078b50c05f7a/",
 		recordingRace: "https://rutube.ru/video/8d838029ed38ee3be92af7472ac078f4/"
 	},
 	{   id: "netherlands",
