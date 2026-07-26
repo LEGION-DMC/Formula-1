@@ -1233,9 +1233,9 @@ h1, h2 {
 
 .gp-cell .gp-full { display: inline; }
 .gp-cell .gp-short { display: none; }
+.gp-cell .gp-full:hover { color: var(--red-accent); }
 
 .gp-clickable { cursor: pointer; }
-.gp-clickable:hover { color: var(--red-accent); }
 
 /* ============================================== */
 /* ВКЛАДКА РЕЗУЛЬТАТЫ                             */
