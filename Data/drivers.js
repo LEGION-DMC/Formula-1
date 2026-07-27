@@ -14,6 +14,21 @@ const driversData = [
         poles: 16,
         bio: "Дебют в Ф1: 2019 (McLaren). Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул."
     },
+    {   id: "vandoorne", 
+        number: 2,
+        name: "Стоффель Вандорн",
+        namem: "С. Вандорн",
+        country: "be",
+        team: "Резерв",
+        birthPlace: "Кортрейк, Бельгия",
+        birthDate: "26.03.1992",
+        titles: 0,
+		hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+        bio: "Дебют 2016 (McLaren). В настоящее время резервный гонщик команды Aston Martin."
+    },
     {   id: "verstappen", 
         number: 3,
         name: "Макс Ферстаппен",
@@ -165,6 +180,21 @@ const driversData = [
         poles: 1,
         bio: "Дебют 2017 (Williams). Сын миллиардера Лоуренса Стролла, владельца Aston Martin. Критикуют за то, что место куплено, но подиумы (Баку-2017, 2020) и поул есть. Нестабилен, часто разбивает машину, но в дожде быстр."
     },
+    {   id: "vries", 
+        number: 21,
+        name: "Ник де Врис",
+        namem: "Н. Врис",
+        country: "nl",
+        team: "Резерв",
+        birthPlace: "Эйтвеллингерга, Нидерланды",
+        birthDate: "05.02.1995",
+        titles: 0,
+		hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+        bio: "Дебют 2022 (McLaren). В настоящее время резервный гонщик команды McLaren."
+    },
     {   id: "tsunoda",
         number: 22,
         name: "Юки Цунода",
@@ -224,6 +254,21 @@ const driversData = [
         podiums: 1,
         poles: 1,
         bio: "Дебют 2010 (Williams). Рекордсмен по количеству гонок без подиума (200+). Суперстабилен, король квалификаций. Возвращенец в 2023-м после 3 лет простоя, заменил больного Стролла и сразу набрал очки. Лидер Haas, в 2026-м переходит в Audi."
+    },
+    {   id: "stevens", 
+        number: 28,
+        name: "Уилл Стивенс",
+        namem: "У. Стивенс",
+        country: "gb",
+        team: "Резерв",
+        birthPlace: "Рочфорд, Великобритания",
+        birthDate: "28.06.1991",
+        titles: 0,
+		hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+        bio: "Дебют 2014 (Marussia). В настоящее время резервный гонщик команды McLaren."
     },
     {   id: "lawson",
         number: 30,
@@ -300,6 +345,21 @@ const driversData = [
         poles: 104,
         bio: "Дебют 2007 (McLaren). 7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). Рекордсмен по победам, поулам, подиумам. После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда."
     },
+    {   id: "fittipaldi", 
+        number: 51,
+        name: "Пьетро Фиттипальди",
+        namem: "П. Фиттипальди",
+        country: "us",
+        team: "Резерв",
+        birthPlace: "Майами, США",
+        birthDate: "25.06.1996",
+        titles: 0,
+		hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+        bio: "Дебют 2020 (Haas). В настоящее время резервный гонщик команды Cadillac."
+    },
     {   id: "sainz",
         number: 55,
         name: "Карлос Сайнс",
@@ -375,22 +435,34 @@ const driversData = [
         poles: 0,
         bio: "Дебют 2024 (Ferrari на замену Сайнсу). Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy."
     },
+    {   id: "giovinazzi", 
+        number: 99,
+        name: "Антонио Джовинацци",
+        namem: "А. Джовинацци",
+        country: "it",
+        team: "Резерв",
+        birthPlace: "Мартина-Франка, Италия",
+        birthDate: "14.12.1993",
+        titles: 0,
+		hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+        bio: "Дебют 2017 (Sauber). В настоящее время резервный гонщик команды Ferrari."
+    },
 ];
 
 function initDriversPage(container) {
     'use strict';
     
-     
     container.innerHTML = '';
     container.style.display = 'flex';
     container.style.gap = '0';
     container.style.padding = '0';
     
-     
     const filterPanel = document.createElement('div');
     filterPanel.className = 'drivers-filter-panel';
     
-     
     const cardsArea = document.createElement('div');
     cardsArea.className = 'drivers-cards-area';
     cardsArea.id = 'driversCardsContainer';
@@ -399,8 +471,6 @@ function initDriversPage(container) {
     container.appendChild(cardsArea);
     
     buildFilterPanel(filterPanel, cardsArea);
-    
-    renderDriverCards(driversData, cardsArea);
 }
 
 function buildFilterPanel(panel, cardsArea) {
@@ -432,17 +502,12 @@ function buildFilterPanel(panel, cardsArea) {
     // Чекбокс ВСЕ
     const allCheckbox = createCheckbox('all', 'ВСЕ', true, checkboxesContainer);
     
-    // Чекбоксы команд
+    // Чекбоксы команд (без Резерва)
     const teamCheckboxes = {};
     regularTeams.forEach(team => {
         const cb = createCheckbox(team, team, false, checkboxesContainer);
         teamCheckboxes[team] = cb;
     });
-    
-    if (reserveTeam) {
-        const cb = createCheckbox(reserveTeam, 'Резерв', false, checkboxesContainer);
-        teamCheckboxes[reserveTeam] = cb;
-    }
     
     // Разделитель перед чемпионами
     const divider2 = document.createElement('hr');
@@ -452,6 +517,15 @@ function buildFilterPanel(panel, cardsArea) {
     const champsContainer = document.createElement('div');
     champsContainer.className = 'filter-checkboxes';
     const champsCheckbox = createCheckbox('champs', 'Чемпионы мира', false, champsContainer);
+    
+    // Разделитель перед Резервом
+    const divider3 = document.createElement('hr');
+    divider3.className = 'filter-divider filter-divider-reserve';
+    
+    // Чекбокс "Резерв" (отдельно)
+    const reserveContainer = document.createElement('div');
+    reserveContainer.className = 'filter-checkboxes';
+    const reserveCheckbox = createCheckbox('reserve', 'Резерв', false, reserveContainer);
     
     // Кнопка сброса
     const resetBtn = document.createElement('button');
@@ -465,11 +539,15 @@ function buildFilterPanel(panel, cardsArea) {
     panel.appendChild(checkboxesContainer);
     panel.appendChild(divider2);
     panel.appendChild(champsContainer);
+    panel.appendChild(divider3);
+    panel.appendChild(reserveContainer);
     panel.appendChild(resetBtn);
     
     // Состояние фильтров
-    let activeTeamFilters = new Set(teams);
+    let showReserve = false;
+    let activeTeamFilters = new Set(regularTeams);
     let champsOnly = false;
+    let isReserveOnlyMode = false; // Флаг режима "только резерв"
     
     function applyFilters() {
         const searchTerm = searchInput.value.toLowerCase().trim();
@@ -482,6 +560,11 @@ function buildFilterPanel(panel, cardsArea) {
         // Фильтр «Чемпионы мира»
         if (champsOnly) {
             filtered = filtered.filter(driver => driver.titles > 0);
+        }
+        
+        // Фильтр резервистов
+        if (!showReserve) {
+            filtered = filtered.filter(driver => driver.team !== reserveTeam);
         }
         
         // Поиск
@@ -506,6 +589,80 @@ function buildFilterPanel(panel, cardsArea) {
     // Поиск
     searchInput.addEventListener('input', applyFilters);
     
+    // Чекбокс "Резерв" - обработка ЛКМ и ПКМ
+    const reserveLabel = reserveCheckbox.closest('.filter-checkbox-label');
+    const reserveCheckmark = reserveLabel.querySelector('.checkmark');
+    
+    // Функция для сброса желтого цвета
+    function resetReserveColor() {
+        reserveLabel.classList.remove('reserve-active');
+        reserveCheckmark.style.backgroundColor = '';
+        reserveCheckmark.style.borderColor = '';
+    }
+    
+    // Функция для установки желтого цвета
+    function setReserveColor() {
+        reserveLabel.classList.add('reserve-active');
+        reserveCheckmark.style.backgroundColor = '#FFD700';
+        reserveCheckmark.style.borderColor = '#FFD700';
+    }
+    
+    // Функция для восстановления основных команд
+    function restoreRegularTeams() {
+        activeTeamFilters = new Set(regularTeams);
+        allCheckbox.checked = true;
+        Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
+        champsCheckbox.checked = false;
+        champsOnly = false;
+        isReserveOnlyMode = false;
+        resetReserveColor();
+    }
+    
+    // ЛКМ - переключение
+    reserveCheckbox.addEventListener('change', () => {
+        showReserve = reserveCheckbox.checked;
+        
+        if (showReserve) {
+            // Если был режим "только резерв", выходим из него
+            if (isReserveOnlyMode) {
+                restoreRegularTeams();
+            }
+            activeTeamFilters.add(reserveTeam);
+            resetReserveColor();
+        } else {
+            activeTeamFilters.delete(reserveTeam);
+            // Если был режим "только резерв", восстанавливаем основные команды
+            if (isReserveOnlyMode) {
+                restoreRegularTeams();
+            }
+            resetReserveColor();
+        }
+        
+        applyFilters();
+    });
+    
+    // ПКМ - показать только резерв
+    reserveLabel.addEventListener('contextmenu', (e) => {
+        e.preventDefault(); // Отключаем контекстное меню браузера
+        
+        // Сбрасываем все фильтры команд
+        allCheckbox.checked = false;
+        Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
+        champsCheckbox.checked = false;
+        champsOnly = false;
+        
+        // Устанавливаем только резерв
+        reserveCheckbox.checked = true;
+        showReserve = true;
+        activeTeamFilters = new Set([reserveTeam]);
+        isReserveOnlyMode = true;
+        
+        // Устанавливаем желтый цвет
+        setReserveColor();
+        
+        applyFilters();
+    });
+    
     // Чекбоксы команд
     checkboxesContainer.addEventListener('change', (e) => {
         if (e.target.type === 'checkbox') {
@@ -516,11 +673,18 @@ function buildFilterPanel(panel, cardsArea) {
                 if (checkbox.checked) {
                     // Сбрасываем выбор команд
                     Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
-                    activeTeamFilters = new Set(teams);
+                    activeTeamFilters = new Set(regularTeams);
                     
-                    // И СБРАСЫВАЕМ фильтр "Чемпионы мира"
+                    // Сбрасываем фильтр "Чемпионы мира"
                     champsCheckbox.checked = false;
                     champsOnly = false;
+                    
+                    // Сбрасываем резерв
+                    reserveCheckbox.checked = false;
+                    showReserve = false;
+                    activeTeamFilters.delete(reserveTeam);
+                    resetReserveColor();
+                    isReserveOnlyMode = false;
                 } else {
                     const anyTeamChecked = Object.values(teamCheckboxes).some(cb => cb.checked);
                     if (!anyTeamChecked) {
@@ -539,13 +703,29 @@ function buildFilterPanel(panel, cardsArea) {
                 
                 if (selectedTeams.size === 0) {
                     allCheckbox.checked = true;
-                    activeTeamFilters = new Set(teams);
+                    activeTeamFilters = new Set(regularTeams);
                     
-                    // И СБРАСЫВАЕМ фильтр "Чемпионы мира"
+                    // Сбрасываем фильтр "Чемпионы мира"
                     champsCheckbox.checked = false;
                     champsOnly = false;
+                    
+                    // Сбрасываем резерв
+                    reserveCheckbox.checked = false;
+                    showReserve = false;
+                    activeTeamFilters.delete(reserveTeam);
+                    resetReserveColor();
+                    isReserveOnlyMode = false;
                 } else {
                     activeTeamFilters = selectedTeams;
+                    // Если резерв был включен, добавляем его обратно
+                    if (showReserve) {
+                        activeTeamFilters.add(reserveTeam);
+                    }
+                    // Если был режим "только резерв", выходим из него
+                    if (isReserveOnlyMode) {
+                        isReserveOnlyMode = false;
+                        resetReserveColor();
+                    }
                 }
             }
             
@@ -565,10 +745,18 @@ function buildFilterPanel(panel, cardsArea) {
         allCheckbox.checked = true;
         Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
         champsCheckbox.checked = false;
-        activeTeamFilters = new Set(teams);
+        reserveCheckbox.checked = false;
+        activeTeamFilters = new Set(regularTeams);
         champsOnly = false;
+        showReserve = false;
+        activeTeamFilters.delete(reserveTeam);
+        resetReserveColor();
+        isReserveOnlyMode = false;
         applyFilters();
     });
+    
+    // ПРИМЕНЯЕМ ФИЛЬТРЫ СРАЗУ ПРИ ЗАГРУЗКЕ
+    applyFilters();
 }
 
 function createCheckbox(value, label, checked, container) {

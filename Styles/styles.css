@@ -294,6 +294,15 @@ h1, h2 {
 
 .checkbox-text { user-select: none; }
 
+.filter-checkbox-label.reserve-active input[type="checkbox"] {
+    background-color: #FFD700 !important;
+    border-color: #FFD700 !important;
+}
+
+.filter-checkbox-label.reserve-active input[type="checkbox"]:checked::after {
+    color: #000 !important;
+}
+
 .filter-reset-btn {
     width: 100%;
     padding: 8px;

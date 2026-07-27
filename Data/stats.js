@@ -100,6 +100,11 @@ const penaltiesData = [
     { driver: "Юки Цунода", fines: 3 },
     { driver: "Гуан Ю Чжоу", fines: 0 },
     { driver: "Джек Дуэн", fines: 0 },
+    { driver: "Стоффель Вандорн", fines: 0 },
+    { driver: "Ник де Врис", fines: 0 },
+    { driver: "Уилл Стивенс", fines: 0 },
+    { driver: "Пьетро Фиттипальди", fines: 0 },
+    { driver: "Антонио Джовинацци", fines: 0 },
 ];
 
 const lapRecordData = [
