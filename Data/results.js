@@ -680,6 +680,45 @@ function initResultsPage(container) {
     refreshAll();
 }
 
+function calculateRaceWinners() {
+    const winners = {};
+    const allGPs = getAllGPs();
+    
+    allGPs.forEach(gpId => {
+        const results = detailedResults[gpId];
+        if (!results) return;
+        
+        // Проверяем, есть ли реальные результаты
+        const hasResults = Object.keys(results).some(key => 
+            key !== "000" && results[key] !== undefined
+        );
+        if (!hasResults) return;
+        
+        // Находим победителя (пилота с 25 очками)
+        for (const [driverId, points] of Object.entries(results)) {
+            if (driverId === "000") continue;
+            if (points === 25) {
+                if (!winners[driverId]) {
+                    winners[driverId] = { driverId, wins: 0 };
+                }
+                winners[driverId].wins += 1;
+                break;
+            }
+        }
+    });
+    
+    // Преобразуем в массив и сортируем по количеству побед
+    const sortedWinners = Object.values(winners)
+        .sort((a, b) => b.wins - a.wins)
+        .map(entry => ({
+            driver: findDriverById(entry.driverId),
+            wins: entry.wins
+        }))
+        .filter(entry => entry.driver !== undefined);
+    
+    return sortedWinners;
+}
+
 function createSimpleTable(data, startIndex, filterTeam, isSprint = false) {
     const table = document.createElement('table');
     table.className = 'results-table';
@@ -997,14 +1036,71 @@ function renderConstructorStandingsPanel(container, filterTeam) {
     grid.appendChild(rightCol);
     container.appendChild(grid);
     
+    // ДОБАВЛЯЕМ НОВУЮ ТАБЛИЦУ ПОБЕДИТЕЛЕЙ
+    // ========================================
+    const winnersDiv = document.createElement('div');
+    winnersDiv.className = 'race-winners-section';
+    
+    const winnersTitle = document.createElement('h4');
+    winnersTitle.className = 'race-winners-title';
+    winnersTitle.textContent = 'Победители ГП сезона';
+    winnersDiv.appendChild(winnersTitle);
+    
+    const winnersList = document.createElement('div');
+    winnersList.className = 'race-winners-list';
+    
+    const winnersData = calculateRaceWinners();
+    
+    if (winnersData.length === 0) {
+        const emptyMsg = document.createElement('div');
+        emptyMsg.className = 'race-winners-empty';
+        emptyMsg.textContent = 'Нет данных о победителях';
+        winnersList.appendChild(emptyMsg);
+    } else {
+        winnersData.forEach((winner, index) => {
+            const row = document.createElement('div');
+            row.className = 'race-winner-row';
+            
+            // Лого команды
+            const teamLogo = document.createElement('img');
+            teamLogo.className = 'race-winner-logo';
+            teamLogo.src = getTeamLogo(winner.driver.team);
+            teamLogo.onerror = function() { this.style.display = 'none'; };
+            
+            // Флаг
+            const flag = document.createElement('img');
+            flag.className = 'race-winner-flag';
+            flag.src = `Images/Flags/${winner.driver.country}.svg`;
+            flag.title = getCountryName(winner.driver.country);
+            flag.onerror = function() { this.style.display = 'none'; };
+            
+            // Имя пилота
+            const name = document.createElement('span');
+            name.className = 'race-winner-name';
+            name.textContent = winner.driver.name;
+            
+            // Количество побед
+            const wins = document.createElement('span');
+            wins.className = 'race-winner-wins';
+            wins.textContent = winner.wins;
+            
+            row.appendChild(teamLogo);
+            row.appendChild(flag);
+            row.appendChild(name);
+            row.appendChild(wins);
+            winnersList.appendChild(row);
+        });
+    }
+    
+    winnersDiv.appendChild(winnersList);
+    container.appendChild(winnersDiv);
+    
     // Добавляем обработчик правого клика для всех строк команд
     container.addEventListener('contextmenu', (e) => {
         const row = e.target.closest('.constructor-row');
         if (!row) return;
         
-        // Предотвращаем стандартное контекстное меню
         e.preventDefault();
-        
         const teamName = row.dataset.team;
         const teamData = getTeamData(teamName);
         if (teamData) {

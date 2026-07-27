@@ -1280,6 +1280,95 @@ h1, h2 {
 .constructor-name { font-family: 'F1Text', sans-serif; font-size: 0.85rem; color: var(--text-light); flex: 1; }
 .constructor-points { font-family: 'F1Numbers', sans-serif; font-size: 1rem; color: var(--team-color); }
 
+
+
+
+
+
+
+
+
+
+.race-winners-section {
+    margin-top: 5px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.race-winners-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-left: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.race-winner-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px 5px 0px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-light);
+}
+
+.race-winner-row:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--red-accent);
+}
+
+.race-winner-row .race-winner-logo {
+    width: 24px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.race-winner-row .race-winner-flag {
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.race-winner-row .race-winner-name {
+    flex: 1;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.race-winner-row .race-winner-wins {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffd700;
+    min-width: 24px;
+    text-align: right;
+}
+
+.race-winners-empty {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.75rem;
+    color: #666;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
 .results-table-wrapper { margin-bottom: 5px; }
 
 .results-section-block {
