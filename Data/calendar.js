@@ -218,50 +218,197 @@ const calendarData = [
 	},
 ];
 
-function getGPById(id) { return calendarData.find(g => g.id === id); }
-function getTrackForGP(gpId) { const gp = getGPById(gpId); return gp ? getTrackById(gp.track) : null; }
+let animationTimeout = null;
+let currentHighlightedGpId = null;
+
+function getGPById(id) {
+    return calendarData.find(g => g.id === id);
+}
+
+function getTrackForGP(gpId) {
+    const gp = getGPById(gpId);
+    return gp ? getTrackById(gp.track) : null;
+}
 
 function formatDateLong(dateStr) {
     const d = new Date(dateStr);
-    return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 }
 
 function formatDateMini(dateStr) {
     const d = new Date(dateStr);
-    return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+    return d.toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'short'
+    });
 }
 
-function initCalendarPage(container) {
-    'use strict';
+function animateCalendarCardsAppearance(container) {
+    const cards = container.querySelectorAll('.calendar-card');
     
-    container.innerHTML = '';
-    container.style.display = 'flex';
-    container.style.gap = '0';
-    container.style.padding = '0';
+    if (cards.length === 0) return Promise.resolve();
     
-    // Панель навигации (слева)
-    const navPanel = document.createElement('div');
-    navPanel.className = 'calendar-nav-panel';
+    const containerWidth = container.offsetWidth || container.parentElement.offsetWidth || 1200;
+    const cardMinWidth = 300;
+    const gap = 20;
+    const cols = Math.max(1, Math.floor((containerWidth + gap) / (cardMinWidth + gap)));
     
-    // Область с карточками
-    const cardsArea = document.createElement('div');
-    cardsArea.className = 'calendar-cards-area';
-    cardsArea.id = 'calendarCardsArea';
+    return new Promise((resolve) => {
+        cards.forEach((card) => {
+            card.style.transition = 'none';
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95) translateY(20px)';
+        });
+        
+        void document.body.offsetHeight;
+        
+        cards.forEach((card, index) => {
+            const rowIndex = Math.floor(index / cols);
+            const delay = rowIndex * 100;
+            
+            // Только анимация появления
+            card.style.transition = `opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms`;
+            
+            requestAnimationFrame(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1) translateY(0)';
+            });
+        });
+        
+        const maxDelay = (Math.ceil(cards.length / cols) - 1) * 100 + 400;
+        setTimeout(resolve, maxDelay + 100);
+    });
+}
+
+function smoothScrollToElement(element, duration = 800) {
+    if (!element) return;
+
+    // Получаем позицию элемента относительно окна
+    const rect = element.getBoundingClientRect();
     
-    container.appendChild(navPanel);
-    container.appendChild(cardsArea);
+    // Вычисляем позицию для центрирования
+    // Высота окна / 2 - половина высоты элемента
+    const offsetY = window.innerHeight / 2 - rect.height / 2;
+    const targetPosition = rect.top + window.pageYOffset - offsetY;
+
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const startTime = performance.now();
+
+    function animation(currentTime) {
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        // easeInOutCubic
+        const ease = progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+        window.scrollTo(0, startPosition + distance * ease);
+
+        if (progress < 1) {
+            requestAnimationFrame(animation);
+        }
+    }
+
+    requestAnimationFrame(animation);
+}
+
+function scrollToGPCard(gpId, cardsArea) {
+    // Если клик по уже выделенному ГП — игнорируем
+    if (currentHighlightedGpId === gpId) return;
     
-    // Строим навигацию
-    buildCalendarNav(navPanel, cardsArea);
+    // Отменяем предыдущий таймаут, если он был
+    if (animationTimeout) {
+        clearTimeout(animationTimeout);
+        animationTimeout = null;
+    }
+
+    // Снимаем все выделения
+    clearAllHighlights(cardsArea);
+
+    const card = cardsArea.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
+    if (!card) return;
+
+    // Запоминаем текущий выделенный ГП
+    currentHighlightedGpId = gpId;
+
+    // Плавный скролл к карточке
+    smoothScrollToElement(card, 800);
+    card.classList.add('highlight');
+
+    // Устанавливаем новый таймаут
+    animationTimeout = setTimeout(() => {
+        card.classList.remove('highlight');
+        card.classList.add('upcoming-highlight');
+
+        const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
+        if (navItem) navItem.classList.add('upcoming-highlight');
+        
+        animationTimeout = null;
+    }, 2000);
+}
+
+function scrollToCurrentGP() {
+    const cardsArea = document.getElementById('calendarCardsArea');
+    if (!cardsArea) return;
+
+    // Отменяем предыдущий таймаут
+    if (animationTimeout) {
+        clearTimeout(animationTimeout);
+        animationTimeout = null;
+    }
+
+    clearAllHighlights(cardsArea);
+
+    const cards = cardsArea.querySelectorAll('.calendar-card');
+    const now = new Date();
+
+    const activeCards = Array.from(cards).filter(card => {
+        const gp = getGPById(card.dataset.gpId);
+        return gp && !gp.canceled;
+    });
+
+    let target = activeCards.find(c => new Date(c.dataset.date).toDateString() === now.toDateString());
+    if (!target) target = activeCards.find(c => new Date(c.dataset.date) > now);
+    if (!target && activeCards.length) target = activeCards[activeCards.length - 1];
+
+    if (!target) return;
+
+    const gpId = target.dataset.gpId;
+    currentHighlightedGpId = gpId;
+
+    smoothScrollToElement(target, 800);
+    target.classList.add('highlight');
+
+    animationTimeout = setTimeout(() => {
+        target.classList.remove('highlight');
+        target.classList.add('upcoming-highlight');
+
+        const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
+        if (navItem) navItem.classList.add('upcoming-highlight');
+        
+        animationTimeout = null;
+    }, 2000);
+}
+
+function clearAllHighlights(cardsArea) {
+    // Снимаем постоянную подсветку с карточек
+    cardsArea.querySelectorAll('.calendar-card.upcoming-highlight')
+        .forEach(c => c.classList.remove('upcoming-highlight'));
     
-    // Рендерим карточки
-    renderCalendarCards(cardsArea);
+    // Снимаем постоянную подсветку с навигации
+    document.querySelectorAll('.calendar-nav-item.upcoming-highlight')
+        .forEach(c => c.classList.remove('upcoming-highlight'));
     
-    // Запускаем таймеры
-    initCalendarTimers();
-    
-    // Прокрутка к текущему событию
-    setTimeout(() => scrollToCurrentGP(), 600);
+    // Снимаем временную подсветку со всех карточек
+    cardsArea.querySelectorAll('.calendar-card.highlight')
+        .forEach(c => c.classList.remove('highlight'));
 }
 
 function buildCalendarNav(panel, cardsArea) {
@@ -269,119 +416,51 @@ function buildCalendarNav(panel, cardsArea) {
     title.className = 'calendar-nav-title';
     title.textContent = 'Календарь Гран-при 2026';
     panel.appendChild(title);
-    
-    let gpNumber = 0; // Счетчик для нумерации только неотмененных ГП
-    
+
+    let gpNumber = 0;
+
     calendarData.forEach((gp) => {
         const track = getTrackForGP(gp.id);
         if (!track) return;
-        
+
         const now = new Date();
         const raceDate = new Date(gp.date);
         const isPast = raceDate < now && !gp.canceled;
         const isCanceled = gp.canceled;
-        
+
         const item = document.createElement('div');
         item.className = `calendar-nav-item ${isCanceled ? 'canceled' : isPast ? 'completed' : ''}`;
         item.dataset.gpId = gp.id;
-        
-        // Увеличиваем номер только для неотмененных ГП
-        if (!isCanceled) {
-            gpNumber++;
-        }
-        
-        // Для отмененных показываем "-", для остальных - номер
+
+        if (!isCanceled) gpNumber++;
+
         const displayNumber = isCanceled ? '-' : gpNumber;
-        
+
         item.innerHTML = `
             <span class="calendar-nav-number">${displayNumber}</span>
             <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-nav-flag" title="${getCountryName(track.country)}">
             <span class="calendar-nav-name">
-				<span class="nav-gp-full">${track.name}</span>
-				<span class="nav-gp-short">${track.name.replace('Гран-при ', 'ГП ').replace('-Каталунии', '')}</span>
-			</span>
+                <span class="nav-gp-full">${track.name}</span>
+                <span class="nav-gp-short">${track.name.replace('Гран-при ', 'ГП ').replace('-Каталунии', '')}</span>
+            </span>
             <span class="calendar-nav-date">${formatDateMini(gp.date)}</span>
         `;
+
+        item.addEventListener('click', () => {
+            // Если клик по уже выделенному ГП — игнорируем
+            if (currentHighlightedGpId === gp.id) return;
+            scrollToGPCard(gp.id, cardsArea);
+        });
         
-        item.addEventListener('click', () => scrollToGPCard(gp.id, cardsArea));
         panel.appendChild(item);
     });
-}
-
-function scrollToGPCard(gpId, cardsArea) {
-    // Снимаем все постоянные подсветки
-    cardsArea.querySelectorAll('.calendar-card.upcoming-highlight').forEach(c => c.classList.remove('upcoming-highlight'));
-    document.querySelectorAll('.calendar-nav-item.upcoming-highlight').forEach(c => c.classList.remove('upcoming-highlight'));
-    
-    // Снимаем highlight со всех карточек
-    cardsArea.querySelectorAll('.calendar-card.highlight').forEach(c => c.classList.remove('highlight'));
-    
-    const card = cardsArea.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
-    if (card) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        card.classList.add('highlight');
-        setTimeout(() => card.classList.remove('highlight'), 2000);
-        
-        // После пульсации — постоянная рамка
-        setTimeout(() => {
-            card.classList.add('upcoming-highlight');
-        }, 2000);
-        
-        // Подсветка в мини-календаре
-        const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
-        if (navItem) {
-            navItem.classList.add('upcoming-highlight');
-        }
-    }
-}
-
-function scrollToCurrentGP() {
-    const cardsArea = document.getElementById('calendarCardsArea');
-    if (!cardsArea) return;
-    
-    // Снимаем старые классы
-    cardsArea.querySelectorAll('.calendar-card.upcoming-highlight').forEach(c => c.classList.remove('upcoming-highlight'));
-    document.querySelectorAll('.calendar-nav-item.upcoming-highlight').forEach(c => c.classList.remove('upcoming-highlight'));
-    cardsArea.querySelectorAll('.calendar-card.highlight').forEach(c => c.classList.remove('highlight'));
-    
-    const cards = cardsArea.querySelectorAll('.calendar-card');
-    const now = new Date();
-    
-    const activeCards = Array.from(cards).filter(card => {
-        const gp = getGPById(card.dataset.gpId);
-        return gp && !gp.canceled;
-    });
-    
-    let target = activeCards.find(c => new Date(c.dataset.date).toDateString() === now.toDateString());
-    if (!target) target = activeCards.find(c => new Date(c.dataset.date) > now);
-    if (!target && activeCards.length) target = activeCards[activeCards.length - 1];
-    
-    if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // Сначала пульсация
-        target.classList.add('highlight');
-        
-        // Через 2 секунды — постоянная рамка
-        const gpId = target.dataset.gpId;
-        setTimeout(() => {
-            target.classList.remove('highlight');
-            target.classList.add('upcoming-highlight');
-            
-            // Подсветка в мини-календаре
-            const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
-            if (navItem) {
-                navItem.classList.add('upcoming-highlight');
-            }
-        }, 2000);
-    }
 }
 
 function renderCalendarCards(container) {
     calendarData.forEach(gp => {
         const track = getTrackForGP(gp.id);
         if (!track) return;
-        
+
         const now = new Date();
         const raceDate = new Date(gp.date);
         const oneHourBeforeRace = new Date(raceDate.getTime() - 60 * 60 * 1000);
@@ -389,29 +468,30 @@ function renderCalendarCards(container) {
         const isToday = raceDate.toDateString() === now.toDateString();
         const isFuture = raceDate > now;
         const nearStart = isFuture && now >= oneHourBeforeRace;
-        
-        // Расчёт времени квалификации (на сутки раньше гонки, то же время)
+
         const qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
         const oneHourBeforeQuali = new Date(qualiDate.getTime() - 60 * 60 * 1000);
-        // Кнопка появляется за час до квалификации и остаётся навсегда
         const qualiActive = gp.recordingQuali && now >= oneHourBeforeQuali;
-        
+
         const card = document.createElement('div');
         card.className = 'calendar-card';
         card.dataset.gpId = gp.id;
         card.dataset.date = gp.date;
+
         if (gp.canceled) card.classList.add('canceled');
         if (isToday) card.classList.add('today');
-        
-        // Левая часть — изображение трассы
+
+        // Изображение трассы
         const imageDiv = document.createElement('div');
         imageDiv.className = 'calendar-card-image';
-        imageDiv.innerHTML = `<img src="Images/Tracks/${track.id}.webp" alt="${track.id}." onerror="this.src='Images/Tracks/default.png'">`;
-        
-        // Правая часть — информация
+        imageDiv.innerHTML = `
+            <img src="Images/Tracks/${track.id}.webp" alt="${track.id}" onerror="this.src='Images/Tracks/default.png'">
+        `;
+
+        // Информация
         const infoDiv = document.createElement('div');
         infoDiv.className = 'calendar-card-info';
-        
+
         // Заголовок
         const header = document.createElement('div');
         header.className = 'calendar-card-header';
@@ -420,12 +500,8 @@ function renderCalendarCards(container) {
             <span class="calendar-gp-name">${track.name}</span>
             ${gp.hasSprint ? '<span class="calendar-sprint-badge-inline">СПРИНТ</span>' : ''}
         `;
-        
-        // Разделитель
-        const divider1 = document.createElement('div');
-        divider1.className = 'calendar-card-divider';
-        
-        // Место и трасса
+
+        // Детали
         const details = document.createElement('div');
         details.className = 'calendar-card-details';
         details.innerHTML = `
@@ -442,44 +518,35 @@ function renderCalendarCards(container) {
                 <span>${formatDateLong(gp.date)}</span>
             </div>
         `;
-        
-        // Разделитель
-        const divider2 = document.createElement('div');
-        divider2.className = 'calendar-card-divider';
-        
+
         // Футер
         const footer = document.createElement('div');
         footer.className = 'calendar-card-footer';
-        
+
         if (gp.canceled) {
             footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
         } else {
             let btns = '';
             let showTimer = false;
-            
-            // Спринт — если есть ссылка
+
             if (gp.hasSprint && gp.recordingSprint) {
                 btns += `<a href="${gp.recordingSprint}" target="_blank" class="calendar-btn sprint">Спринт</a>`;
             }
 
-            // Квалификация — показываем за час до квалификации и навсегда после
             if (qualiActive) {
                 btns += `<a href="${gp.recordingQuali}" target="_blank" class="calendar-btn quali">Квалификация</a>`;
             }
-			
-            // Гонка — если прошла, сегодня или остался час
+
             if (isPast || nearStart) {
-				if (gp.recordingRace) {
-					btns += `<a href="${gp.recordingRace}" target="_blank" class="calendar-btn race">Гонка</a>`;
-				} else if (isPast) {
-					btns += '<span class="calendar-btn disabled">Нет записи</span>';
-				}
-			} else {
-				// Будущая гонка, больше часа — таймер
-				showTimer = true;
-			}
-            
-            // Таймер
+                if (gp.recordingRace) {
+                    btns += `<a href="${gp.recordingRace}" target="_blank" class="calendar-btn race">Гонка</a>`;
+                } else if (isPast) {
+                    btns += '<span class="calendar-btn disabled">Нет записи</span>';
+                }
+            } else {
+                showTimer = true;
+            }
+
             if (showTimer) {
                 btns += `
                     <div class="calendar-countdown">
@@ -493,25 +560,32 @@ function renderCalendarCards(container) {
                     </div>
                 `;
             }
-            
+
             footer.innerHTML = btns;
         }
-        
+
+        // Сборка карточки
+        const divider1 = document.createElement('div');
+        divider1.className = 'calendar-card-divider';
+
+        const divider2 = document.createElement('div');
+        divider2.className = 'calendar-card-divider';
+
         infoDiv.appendChild(header);
         infoDiv.appendChild(divider1);
         infoDiv.appendChild(details);
         infoDiv.appendChild(divider2);
         infoDiv.appendChild(footer);
-        
+
         card.appendChild(imageDiv);
         card.appendChild(infoDiv);
-        
+
         card.addEventListener('click', (e) => {
             if (!e.target.closest('a')) {
                 openTrackModal(track, gp);
             }
         });
-        
+
         container.appendChild(card);
     });
 }
@@ -527,22 +601,22 @@ function updateCalendarTimer(timer) {
     const target = new Date(timer.dataset.date);
     const now = new Date();
     const diff = target - now;
-    
+
     if (diff <= 0) {
         timer.innerHTML = '<span class="calendar-race-started">Событие началось!</span>';
         return;
     }
-    
+
     const days = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const mins = Math.floor((diff % 3600000) / 60000);
     const secs = Math.floor((diff % 60000) / 1000);
-    
+
     const daysEl = timer.querySelector('.calendar-timer-days');
     const hoursEl = timer.querySelector('.calendar-timer-hours');
     const minutesEl = timer.querySelector('.calendar-timer-minutes');
     const secondsEl = timer.querySelector('.calendar-timer-seconds');
-    
+
     if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
     if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
     if (minutesEl) minutesEl.textContent = String(mins).padStart(2, '0');
@@ -552,13 +626,13 @@ function updateCalendarTimer(timer) {
 function openTrackModal(track, gp) {
     const existing = document.querySelector('.track-modal-overlay');
     if (existing) existing.remove();
-    
+
     const scrollY = window.scrollY;
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = '100%';
     document.body.style.overflowY = 'scroll';
-    
+
     function unlock() {
         document.body.style.position = '';
         document.body.style.top = '';
@@ -566,29 +640,35 @@ function openTrackModal(track, gp) {
         document.body.style.overflowY = '';
         window.scrollTo(0, scrollY);
     }
-    
+
     const overlay = document.createElement('div');
     overlay.className = 'track-modal-overlay';
-    
+
     const modal = document.createElement('div');
     modal.className = 'track-modal';
-    
-    function close() { overlay.remove(); unlock(); document.removeEventListener('keydown', esc); }
-    function esc(e) { if (e.key === 'Escape') close(); }
-    
-    // Парсим рекорд круга для извлечения данных
+
+    function close() {
+        overlay.remove();
+        unlock();
+        document.removeEventListener('keydown', esc);
+    }
+
+    function esc(e) {
+        if (e.key === 'Escape') close();
+    }
+
+    // Рекорд круга
     let lapRecordDisplay = track.lapRecord;
     const lapRecordParts = track.lapRecord.match(/^([\d:.]+)\s*\(([^,]+),\s*([^,]+),\s*(\d{4})\)$/);
-    
+
     if (lapRecordParts) {
         const time = lapRecordParts[1];
         const pilot = lapRecordParts[2].trim();
         const team = lapRecordParts[3].trim();
         const year = lapRecordParts[4].trim();
-        
-        // Создаем путь к логотипу команды
+
         const teamLogoPath = `Images/Teams/${team.toLowerCase().replace(/ /g, '_')}-m.png`;
-        
+
         lapRecordDisplay = `
             ${time}
             <span class="tm-record-pilot-info">
@@ -598,12 +678,12 @@ function openTrackModal(track, gp) {
             </span>
         `;
     }
-    
+
     modal.innerHTML = `
         <button class="track-modal-close">&times;</button>
         <div class="track-modal-layout">
             <div class="tm-track-image">
-                <img src="Images/Tracks/${track.id}.webp" alt="${track.trackName}"  onerror="this.src='Images/Tracks/default.webp'">
+                <img src="Images/Tracks/${track.id}.webp" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
             </div>
             <div class="tm-track-info">
                 <div class="tm-header">
@@ -633,7 +713,7 @@ function openTrackModal(track, gp) {
                     </div>
                     <div class="tm-stat-cell">
                         <span class="tm-stat-value">${track.turns}</span>
-                        <span class="tm-stat-label">Поворотов</span> 
+                        <span class="tm-stat-label">Поворотов</span>
                     </div>
                     <div class="tm-stat-cell">
                         <span class="tm-stat-value">${track.elevation} м</span>
@@ -660,16 +740,43 @@ function openTrackModal(track, gp) {
             </div>
         </div>
     `;
-    
+
     modal.querySelector('.track-modal-close').addEventListener('click', close);
 
     overlay.appendChild(modal);
-    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay) close();
+    });
     document.addEventListener('keydown', esc);
     document.body.appendChild(overlay);
-    
+
     requestAnimationFrame(() => {
         overlay.classList.add('active');
         modal.classList.add('active');
+    });
+}
+
+function initCalendarPage(container) {
+    container.innerHTML = '';
+    container.style.display = 'flex';
+    container.style.gap = '0';
+    container.style.padding = '0';
+
+    const navPanel = document.createElement('div');
+    navPanel.className = 'calendar-nav-panel';
+
+    const cardsArea = document.createElement('div');
+    cardsArea.className = 'calendar-cards-area';
+    cardsArea.id = 'calendarCardsArea';
+
+    container.appendChild(navPanel);
+    container.appendChild(cardsArea);
+
+    buildCalendarNav(navPanel, cardsArea);
+    renderCalendarCards(cardsArea);
+    initCalendarTimers();
+
+    animateCalendarCardsAppearance(cardsArea).then(() => {
+        scrollToCurrentGP();
     });
 }

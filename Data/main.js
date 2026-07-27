@@ -1,8 +1,8 @@
 const tyreData = {
     compounds: {
-        Hard: "C3",    
-        Medium: "C4",  
-        Soft: "C5"    
+        Hard: "",    
+        Medium: "",  
+        Soft: ""    
     }
 };
 
@@ -319,6 +319,61 @@ function addGPModalOnRightClick(block, gp, track) {
     });
 }
 
+function navigateToCalendarWithScroll(targetGpId) {
+    // Находим кнопку календаря в меню
+    const menuItems = document.querySelectorAll('.menu-item');
+    let calendarBtn = null;
+    
+    menuItems.forEach(btn => {
+        if (btn.dataset.tab === 'calendar') {
+            calendarBtn = btn;
+        }
+    });
+    
+    if (!calendarBtn) {
+        console.warn('Кнопка календаря не найдена');
+        return;
+    }
+    
+    // Кликаем по кнопке календаря
+    calendarBtn.click();
+    
+    // Ждём рендеринга страницы и анимации карточек
+    const checkForCards = setInterval(() => {
+        const cardsArea = document.getElementById('calendarCardsArea');
+        if (cardsArea) {
+            clearInterval(checkForCards);
+            
+            // Ждём завершения анимации появления карточек
+            const cards = cardsArea.querySelectorAll('.calendar-card');
+            if (cards.length > 0) {
+                // Проверяем, завершилась ли анимация
+                const checkAnimationComplete = setInterval(() => {
+                    const firstCard = cards[0];
+                    const isVisible = firstCard.style.opacity === '1' || 
+                                     firstCard.getBoundingClientRect().height > 0;
+                    
+                    if (isVisible) {
+                        clearInterval(checkAnimationComplete);
+                        
+                        // Если передан ID конкретного ГП — скроллим к нему
+                        if (targetGpId) {
+                            setTimeout(() => {
+                                scrollToGPCard(targetGpId, cardsArea);
+                            }, 300);
+                        } else {
+                            // Иначе скроллим к текущему ГП
+                            setTimeout(() => {
+                                scrollToCurrentGP();
+                            }, 300);
+                        }
+                    }
+                }, 100);
+            }
+        }
+    }, 200);
+}
+
 function createNextGPBlock() {
     const block = document.createElement('div');
     block.className = 'main-block nextgp-block clickable';
@@ -366,11 +421,16 @@ function createNextGPBlock() {
         `;
     }
     
-    // ЛКМ - переход в календарь
+    // ЛКМ - плавный переход в календарь с прокруткой к этому ГП
     block.addEventListener('click', () => {
-        document.querySelectorAll('.menu-item').forEach(btn => {
-            if (btn.dataset.tab === 'calendar') btn.click();
-        });
+        if (nextGP) {
+            navigateToCalendarWithScroll(nextGP.id);
+        } else {
+            // Если нет следующего ГП, просто переходим в календарь
+            document.querySelectorAll('.menu-item').forEach(btn => {
+                if (btn.dataset.tab === 'calendar') btn.click();
+            });
+        }
     });
     
     // ПКМ - открытие модального окна
@@ -426,11 +486,15 @@ function createAfterNextGPBlock() {
         `;
     }
     
-    // ЛКМ - переход в календарь
+    // ЛКМ - плавный переход в календарь с прокруткой к этому ГП
     block.addEventListener('click', () => {
-        document.querySelectorAll('.menu-item').forEach(btn => {
-            if (btn.dataset.tab === 'calendar') btn.click();
-        });
+        if (afterNextGP) {
+            navigateToCalendarWithScroll(afterNextGP.id);
+        } else {
+            document.querySelectorAll('.menu-item').forEach(btn => {
+                if (btn.dataset.tab === 'calendar') btn.click();
+            });
+        }
     });
     
     // ПКМ - открытие модального окна
@@ -438,7 +502,7 @@ function createAfterNextGPBlock() {
     
     return block;
 }
-    
+
 function createTyreBlock() {
     const block = document.createElement('div');
     block.className = 'main-block tyres-block';

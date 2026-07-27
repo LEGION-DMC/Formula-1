@@ -9,6 +9,7 @@ const teamsData = [
         founder: "Норберт Хауг",
         car: "W17 E",
         engine: "Mercedes",
+        power: "M17 E 1.6 V6T",
 		titles: 8,  
         firstWin: "Китай, Шанхай, 2012",
         debut: "2010",
@@ -25,6 +26,7 @@ const teamsData = [
         founder: "Энцо Феррари",
         car: "SF-26",
         engine: "Ferrari",
+        power: "067/6 1.6 V6t",
 		titles: 16,  
         firstWin: "Британия, Сильверстоун, 1951",
         debut: "1950",
@@ -42,6 +44,7 @@ const teamsData = [
         debut: "1966",
         car: "MCL40",
         engine: "Mercedes",
+        power: "M17 E 1.6 V6T",
 		titles: 10,  
         firstWin: "Бельгия, Спа-Франкоршам, 1968",
         debut: "1966",
@@ -58,6 +61,7 @@ const teamsData = [
         founder: "Дитрих Матешиц",
         car: "RB22",
         engine: "Red Bull Ford",
+        power: "DM01 1.6 V6T",
 		titles: 6,  
         firstWin: "Китай, Шанхай, 2009",
         debut: "2005",
@@ -74,6 +78,7 @@ const teamsData = [
         founder: "Фрэнк Уильямс",
         car: "FW48",
         engine: "Mercedes",
+        power: "M17 E 1.6 V6T",
 		titles: 9,  
         firstWin: "Британия, Сильверстоун, 1979",
         debut: "1975",
@@ -90,6 +95,7 @@ const teamsData = [
         founder: "Дитрих Матешиц",
         car: "VCARB 03",
         engine: "Red Bull Ford",
+        power: "DM01 1.6 V6T",
 		titles: 0,  
         firstWin: "Италия, Монца, 2008",
         debut: "2006",
@@ -106,6 +112,7 @@ const teamsData = [
         founder: "Лоуренс Стролл",
         car: "AMR26",
         engine: "Honda",
+        power: "RA626H 1.6 V6T",
 		titles: 0,  
         firstWin: "",
         debut: "2021",
@@ -123,6 +130,7 @@ const teamsData = [
         debut: "2016",
         car: "VF-26",
         engine: "Ferrari",
+        power: "067/6 1.6 V6t",
 		titles: 0,  
         firstWin: "",
         color: "#DFE1E2",
@@ -138,6 +146,7 @@ const teamsData = [
         founder: "Audi Formula Racing GmbH",
         car: "RS-26",
         engine: "Audi",
+        power: "AFR 26 H 1.6 V6T",
 		titles: 0,  
         firstWin: "",
         debut: "2026",
@@ -154,6 +163,7 @@ const teamsData = [
         founder: "Renault Group",
         car: "A526",
         engine: "Mercedes",
+        power: "M17 E 1.6 V6T",
 		titles: 0,  
         firstWin: "Венгрия, Хунгароринг, 2021",
         debut: "2021",
@@ -170,6 +180,7 @@ const teamsData = [
         founder: "TWG Cadillac",
         car: "MAC-26",
         engine: "Ferrari",
+        power: "067/6 1.6 V6t",
 		titles: 0,  
         firstWin: "",
         debut: "2026",
@@ -191,13 +202,61 @@ function getTeamData(teamShortName) {
     return teamsData.find(t => t.shortName === teamShortName);
 }
 
+function animateTeamsAppearance(container) {
+    const cards = container.querySelectorAll('.team-card');
+    
+    if (cards.length === 0) return;
+    
+    // Определяем количество колонок в сетке
+    const containerWidth = container.offsetWidth || container.parentElement.offsetWidth || 1200;
+    const cardMinWidth = 250; // минимальная ширина карточки из grid
+    const gap = 20; // gap из grid-template-columns
+    const cols = Math.max(1, Math.floor((containerWidth + gap) / (cardMinWidth + gap)));
+    
+    // Группируем карточки по рядам
+    const rows = [];
+    cards.forEach((card, index) => {
+        const rowIndex = Math.floor(index / cols);
+        if (!rows[rowIndex]) rows[rowIndex] = [];
+        rows[rowIndex].push(card);
+    });
+    
+    // Сбрасываем начальное состояние для всех карточек
+    cards.forEach((card) => {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.92) translateY(15px)';
+        card.style.transition = 'none';
+    });
+    
+    // Показываем ряды с задержкой
+    requestAnimationFrame(() => {
+        rows.forEach((rowCards, rowIndex) => {
+            const delay = rowIndex * 80; // 80ms между рядами
+            
+            rowCards.forEach((card) => {
+                // Добавляем небольшую случайность внутри ряда для естественности
+                const randomOffset = (Math.random() - 0.5) * 20;
+                const cardDelay = delay + randomOffset;
+                
+                // Устанавливаем transition с задержкой
+                card.style.transition = `opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${cardDelay}ms, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${cardDelay}ms`;
+                
+                // Показываем карточку
+                requestAnimationFrame(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1) translateY(0)';
+                });
+            });
+        });
+    });
+}
+
 function initTeamsPage(container) {
     'use strict';
     
     container.innerHTML = '';
-    container.style.padding= '20px 0px 2px 2px';
+    container.style.padding = '20px 0px 2px 2px';
     
-     
     const grid = document.createElement('div');
     grid.className = 'teams-grid';
     
@@ -207,6 +266,11 @@ function initTeamsPage(container) {
     });
     
     container.appendChild(grid);
+    
+    // Запускаем анимацию появления
+    requestAnimationFrame(() => {
+        animateTeamsAppearance(grid);
+    });
 }
 
 function createTeamCard(team) {
@@ -216,7 +280,6 @@ function createTeamCard(team) {
     card.className = 'team-card';
     card.style.setProperty('--team-color', team.color);
     
-     
     const logoContainer = document.createElement('div');
     logoContainer.className = 'team-card-logo';
     const logo = document.createElement('img');
@@ -225,16 +288,13 @@ function createTeamCard(team) {
     logo.onerror = () => { logo.style.display = 'none'; };
     logoContainer.appendChild(logo);
     
-     
     const nameDiv = document.createElement('div');
     nameDiv.className = 'team-card-name';
     nameDiv.textContent = team.shortName;
     
-     
     const divider = document.createElement('div');
     divider.className = 'team-card-divider';
     
-     
     const driversList = document.createElement('div');
     driversList.className = 'team-card-drivers';
     
@@ -248,27 +308,24 @@ function createTeamCard(team) {
             const driverRow = document.createElement('div');
             driverRow.className = 'team-driver-row';
             driverRow.addEventListener('click', (e) => {
-                e.stopPropagation();  
+                e.stopPropagation();
                 openDriverModal(driver);
             });
             
-             
             const numberSpan = document.createElement('span');
             numberSpan.className = 'team-driver-number';
             numberSpan.textContent = driver.number;
             
-             
-			const nameSpan = document.createElement('span');
-			nameSpan.className = 'team-driver-name';
-			nameSpan.innerHTML = `
-				<span class="driver-fullname">${driver.name}</span>
-				<span class="driver-shortname">${driver.namem}</span>
-			`;
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'team-driver-name';
+            nameSpan.innerHTML = `
+                <span class="driver-fullname">${driver.name}</span>
+                <span class="driver-shortname">${driver.namem}</span>
+            `;
             
-             
             const flagImg = document.createElement('img');
             flagImg.src = `Images/Flags/${driver.country}.svg`;
-			flagImg.title = getCountryName(driver.country);
+            flagImg.title = getCountryName(driver.country);
             flagImg.alt = driver.country;
             flagImg.className = 'team-driver-flag';
             flagImg.onerror = () => { flagImg.style.display = 'none'; };
@@ -285,7 +342,6 @@ function createTeamCard(team) {
     card.appendChild(divider);
     card.appendChild(driversList);
     
-     
     card.addEventListener('click', () => openTeamModal(team));
     
     return card;
@@ -523,7 +579,7 @@ function openTeamModal(team) {
         </div>
         <div class="tm-bolid-info-cell">
             <span class="tm-bolid-info-label">Силовая установка</span>
-            <span class="tm-bolid-info-value">1.6 V6 Turbo</span>
+            <span class="tm-bolid-info-value">${team.power}</span>
         </div>
     `;
     bolidPanel.appendChild(bolidInfo);

@@ -514,8 +514,13 @@ function buildFilterPanel(panel, cardsArea) {
             
             if (value === 'all') {
                 if (checkbox.checked) {
+                    // Сбрасываем выбор команд
                     Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
                     activeTeamFilters = new Set(teams);
+                    
+                    // И СБРАСЫВАЕМ фильтр "Чемпионы мира"
+                    champsCheckbox.checked = false;
+                    champsOnly = false;
                 } else {
                     const anyTeamChecked = Object.values(teamCheckboxes).some(cb => cb.checked);
                     if (!anyTeamChecked) {
@@ -535,6 +540,10 @@ function buildFilterPanel(panel, cardsArea) {
                 if (selectedTeams.size === 0) {
                     allCheckbox.checked = true;
                     activeTeamFilters = new Set(teams);
+                    
+                    // И СБРАСЫВАЕМ фильтр "Чемпионы мира"
+                    champsCheckbox.checked = false;
+                    champsOnly = false;
                 } else {
                     activeTeamFilters = selectedTeams;
                 }
@@ -586,6 +595,40 @@ function createCheckbox(value, label, checked, container) {
     return input;
 }
 
+function animateCardsAppearance(container) {
+    const cards = container.querySelectorAll('.driver-card');
+    
+    if (cards.length === 0) return;
+    
+    // Определяем количество колонок в сетке
+    const containerWidth = container.offsetWidth || container.parentElement.offsetWidth || 1200;
+    const cardMinWidth = 190; // min-width из grid-template-columns
+    const gap = 10; // gap из grid-template-columns
+    const cols = Math.max(1, Math.floor((containerWidth + gap) / (cardMinWidth + gap)));
+    
+    // Сбрасываем начальное состояние для всех карточек
+    cards.forEach((card) => {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.92) translateY(15px)';
+        card.style.transition = 'none';
+    });
+    
+    // Показываем карточки по рядам
+    requestAnimationFrame(() => {
+        cards.forEach((card, index) => {
+            const rowIndex = Math.floor(index / cols);
+            const delay = rowIndex * 80; // 80ms между рядами
+            
+            card.style.transition = `opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms`;
+            
+            requestAnimationFrame(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1) translateY(0)';
+            });
+        });
+    });
+}
+
 function renderDriverCards(drivers, container) {
     container.innerHTML = '';
     
@@ -597,6 +640,7 @@ function renderDriverCards(drivers, container) {
         return;
     }
     
+    // Создаём карточки
     drivers.forEach(driver => {
         const card = document.createElement('div');
         card.className = 'driver-card';
@@ -620,7 +664,6 @@ function renderDriverCards(drivers, container) {
         flagImg.onerror = () => { flagImg.style.display = 'none'; };
         flagOverlay.appendChild(flagImg);
         
-        // Золотые звёздочки за титулы
         const titlesOverlay = document.createElement('div');
         titlesOverlay.className = 'driver-titles-overlay';
         if (driver.titles > 0) {
@@ -628,14 +671,12 @@ function renderDriverCards(drivers, container) {
             const maxPerRow = 5;
             
             if (starsCount <= maxPerRow) {
-                // Одна строка
                 let starsHtml = '';
                 for (let i = 0; i < starsCount; i++) {
                     starsHtml += '☆';
                 }
                 titlesOverlay.textContent = starsHtml;
             } else {
-                // Две строки
                 const firstRow = Math.ceil(starsCount / 2);
                 const secondRow = starsCount - firstRow;
                 
@@ -703,6 +744,11 @@ function renderDriverCards(drivers, container) {
         card.addEventListener('click', () => openDriverModal(driver));
         
         container.appendChild(card);
+    });
+    
+    // Запускаем анимацию
+    requestAnimationFrame(() => {
+        animateCardsAppearance(container);
     });
 }
 

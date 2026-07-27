@@ -1060,6 +1060,7 @@ function renderConstructorStandingsPanel(container, filterTeam) {
         winnersData.forEach((winner, index) => {
             const row = document.createElement('div');
             row.className = 'race-winner-row';
+            row.dataset.driverId = winner.driver.id; // Добавляем data-атрибут
             
             // Лого команды
             const teamLogo = document.createElement('img');
@@ -1088,6 +1089,19 @@ function renderConstructorStandingsPanel(container, filterTeam) {
             row.appendChild(flag);
             row.appendChild(name);
             row.appendChild(wins);
+            
+            // ДОБАВЛЯЕМ ОБРАБОТЧИК КЛИКА ДЛЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА ПИЛОТА
+            row.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const driver = findDriverById(this.dataset.driverId);
+                if (driver) {
+                    openDriverModal(driver);
+                }
+            });
+            
+            // Добавляем курсор pointer для визуального отклика
+            row.style.cursor = 'pointer';
+            
             winnersList.appendChild(row);
         });
     }
