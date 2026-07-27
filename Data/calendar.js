@@ -144,7 +144,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "sepang",
+	{   id: "malaysia",
 		track: "sepang",
 		date: "2026-10-04 22:55",
 		hasSprint: false,
