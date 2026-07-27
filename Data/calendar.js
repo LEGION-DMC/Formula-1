@@ -298,7 +298,7 @@ function buildCalendarNav(panel, cardsArea) {
             <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-nav-flag" title="${getCountryName(track.country)}">
             <span class="calendar-nav-name">
 				<span class="nav-gp-full">${track.name}</span>
-				<span class="nav-gp-short">${track.name.replace('Гран-при ', 'ГП ')}</span>
+				<span class="nav-gp-short">${track.name.replace('Гран-при ', 'ГП ').replace('-Каталунии', '')}</span>
 			</span>
             <span class="calendar-nav-date">${formatDateMini(gp.date)}</span>
         `;

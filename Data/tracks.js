@@ -210,7 +210,7 @@ const tracksData = [
         lapRecord: "1.43.009 (Леклер, Ferrari, 2019)"
     },
     { id: "sepang",
-        name: "Гран При Малайзии",
+        name: "Гран-при Малайзии",
         country: "my",
         location: "Куала-Лумпур, Малайзия",
         trackName: "Сепанг",

@@ -327,7 +327,7 @@ function createPitstopTable() {
 
         const gpCountry = getGPCountry(row.gpId);
         const gpName = getGPName(row.gpId);
-        const gpShort = gpName.replace('Гран-при ', '').replace('-Каталунии', '');
+        const gpShort = gpName.replace('Гран-при ', 'ГП ').replace('-Каталунии', '');
 
         // Проверяем, лучшее ли это время
         const currentTime = parseFloat(row.time);
@@ -645,7 +645,7 @@ function createLapRecordTable() {
 
             const gpCountry = getGPCountry(gp.id);
             const gpName = getGPName(gp.id);
-            const gpShort = gpName.replace('Гран-при ', '').replace('-Каталунии', '');
+            const gpShort = gpName.replace('Гран-при ', 'ГП ').replace('-Каталунии', '');
 
             // Получаем логотип команды
             const teamLogo = getTeamLogo(teamName);
