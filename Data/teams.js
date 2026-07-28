@@ -11,7 +11,7 @@ const teamsData = [
         engine: "Mercedes",
         power: "M17 E 1.6 V6T",
 		titles: 8,  
-        firstWin: "Китай, Шанхай, 2012",
+        firstWin: "Гран-при Китая 2012",
         debut: "2010",
         color: "#75F1D3",
 		info: "В 1994 году компания Mercedes-Benz участвовала в F1, в качестве поставщика двигателей для гоночной команды Sauber. В 2009 году Mercedes-Benz приобрела 75% контрольного пакета в команде Brawn GP, выигравшей чемпионат 2009 года. Позднее Brawn GP, переименованная в Mercedes GP, дебютировала в 2010 году. За неё выступали немецкие пилоты Нико Росберг и Михаэль Шумахер."
@@ -28,7 +28,7 @@ const teamsData = [
         engine: "Ferrari",
         power: "067/6 1.6 V6t",
 		titles: 16,  
-        firstWin: "Британия, Сильверстоун, 1951",
+        firstWin: "Гран-при Великобритании 1951",
         debut: "1950",
         color: "#D52E37",
 		info: "Итальянская команда, представляющая собой подразделение автомобильной компании Ferrari Gestione Sportiva, занимающееся гонками. Команда принимает участие в гонках F1 с 1950 года по сей день и является самой старой и успешной командой в чемпионате."
@@ -46,7 +46,7 @@ const teamsData = [
         engine: "Mercedes",
         power: "M17 E 1.6 V6T",
 		titles: 10,  
-        firstWin: "Бельгия, Спа-Франкоршам, 1968",
+        firstWin: "Гран-при Бельгии 1968",
         debut: "1966",
         color: "#ef8733",
 		info: "Британская команда, представляющая собой подразделение McLaren Technology Group. В разное время команда участвовала и побеждала в различных автоспортивных соревнованиях, пять раз выигрывала соревнования Can-Am, трижды выигрывала 500 миль Индианаполиса, по одному разу в гонках 24 часа Ле-Мана и 12 часов Себринга, в настоящее время команда сконцентрирована на участии в чемпионате мира F1, где 10 раз завоёвывала кубок конструкторов."
@@ -63,7 +63,7 @@ const teamsData = [
         engine: "Red Bull Ford",
         power: "DM01 1.6 V6T",
 		titles: 6,  
-        firstWin: "Китай, Шанхай, 2009",
+        firstWin: "Гран-при Китая 2009",
         debut: "2005",
         color: "#4570C0",
 		info: "Австрийская команда, основана руководителем концерна по производству энергетических напитков Red Bull - Дитрихом Матешицем. Хотя база команды и расположена в Великобритания, но команда выступает под австрийской лицензией. Компания Ford Motor заявила о выходе принадлежащей ей команды Jaguar Racing из чемпионата F1 в сентябре 2004 года и уже ноябре Red Bull, подтвердил покупку Jaguar Racing в последний день подачи заявок на участие в сезоне 2005 года."
@@ -80,7 +80,7 @@ const teamsData = [
         engine: "Mercedes",
         power: "M17 E 1.6 V6T",
 		titles: 9,  
-        firstWin: "Британия, Сильверстоун, 1979",
+        firstWin: "Гран-при Великобритании 1979",
         debut: "1975",
         color: "#3267D4",
 		info: "Британская команда, созданая Фрэнком Уильямсом и Патриком Хэдом под названием Williams Grand Prix Engineering. В сезоне 1980 года команда выиграла свой первый кубок конструкторов, опередив почти вдвое по очкам занявшую 2-е место Ligier. Все шасси команды содержат приставку FW - инициалы основателя команды."
@@ -97,7 +97,7 @@ const teamsData = [
         engine: "Red Bull Ford",
         power: "DM01 1.6 V6T",
 		titles: 0,  
-        firstWin: "Италия, Монца, 2008",
+        firstWin: "Гран-при Италии 2008",
         debut: "2006",
         color: "#7091f8",
 		info: "Итальянская команда, принадлежащая австрийскому конгломерату Red Bull GmbH. С сезона 2006 по 2019 года команда выступала под названием Toro Rosso. К сезону 2020 года была переименована в AlphaTauri. К сезону 2024 года команда была переименована в своё текущее название."
@@ -127,12 +127,12 @@ const teamsData = [
 		license: "США",
         director: "Айо Комацу",
         founder: "Джин Хаас",
-        debut: "2016",
         car: "VF-26",
         engine: "Ferrari",
         power: "067/6 1.6 V6t",
 		titles: 0,  
         firstWin: "",
+        debut: "2016",
         color: "#DFE1E2",
 		info: "Американская команда, является первой американской командой, принявшей решение об участии в F1, со времён неудавшегося проекта US F1 Team, старт которого планировался в 2010 году."
     },
@@ -165,7 +165,7 @@ const teamsData = [
         engine: "Mercedes",
         power: "M17 E 1.6 V6T",
 		titles: 0,  
-        firstWin: "Венгрия, Хунгароринг, 2021",
+        firstWin: "Гран-при Венгрии 2021",
         debut: "2021",
         color: "#479FE2",
 		info: "Французская команда, созданная на базе команды Renault. В дебютном сезоне за Альпин выступали, двукратный чемпион мира - Фернандо Алонсо и выступавший за команду Renault в 2020 году Эстебан Окон. Коллектив использовал силовые установки Renault. Резервным пилотом команды в сезоне 2021 года стал российский гонщик Даниил Квят."
@@ -186,8 +186,29 @@ const teamsData = [
         debut: "2026",
         color: "#AAAADD",
 		info: "Американская команда, первый сезон которой начался в 2026 году в качестве конструктора, а с сезона 2029 года - будет ещё и в качестве поставщика двигателей."
-    }
+    },
 ];
+
+function getSeasonsCount(debutYear) {
+    const currentYear = new Date().getFullYear();
+    const debut = parseInt(debutYear);
+    if (debut > currentYear) return 0;
+    return currentYear - debut + 1;
+}
+
+teamsData.forEach(team => {
+    Object.defineProperty(team, 'seasons', {
+        get: function() {
+            const currentYear = new Date().getFullYear();
+            const debut = parseInt(this.debut);
+            
+            if (debut > currentYear) return 0;
+            return currentYear - debut + 1;
+        },
+        enumerable: true,
+        configurable: true
+    });
+});
 
 function getTeamDrivers(teamShortName) {
     return driversData.filter(driver => driver.team === teamShortName);
@@ -381,16 +402,24 @@ function openTeamModal(team) {
     statsPanel.style.setProperty('--team-color', team.color);
     statsPanel.innerHTML = `
         <div class="tm-stat-cell">
-            <span class="tm-stat-label">Дебют</span>
-            <span class="tm-stat-value">${team.debut}</span>
-        </div>
-        <div class="tm-stat-cell">
             <span class="tm-stat-label">Кубки конструкторов</span>
             <span class="tm-stat-value">${team.titles || 0}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Дебют</span>
+            <span class="tm-stat-value">${team.debut}</span>
         </div>
         <div class="tm-stat-cell tm-stat-full">
             <span class="tm-stat-label">Первая победа</span>
             <span class="tm-stat-value">${team.firstWin || '---'}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Гоночные сезоны</span>
+            <span class="tm-stat-value">${team.seasons}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">- СКОРО -</span>
+            <span class="tm-stat-value">---</span>
         </div>
     `;
     
@@ -570,7 +599,7 @@ function openTeamModal(team) {
             <span class="tm-bolid-info-value">${team.car}</span>
         </div>
         <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Двигатель</span>
+            <span class="tm-bolid-info-label">Силовая установка</span>
             <span class="tm-bolid-info-value">${team.engine}</span>
         </div>
         <div class="tm-bolid-info-cell">
@@ -578,7 +607,7 @@ function openTeamModal(team) {
             <span class="tm-bolid-info-value" style="color: #cece1a;">Pirelli</span>
         </div>
         <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Силовая установка</span>
+            <span class="tm-bolid-info-label">Двигатель</span>
             <span class="tm-bolid-info-value">${team.power}</span>
         </div>
     `;

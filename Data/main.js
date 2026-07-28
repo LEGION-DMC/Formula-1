@@ -1,8 +1,8 @@
-const tyreData = {
+const tyreData = {  // италия345  мадрид234
     compounds: {
-        Hard: "",    
-        Medium: "",  
-        Soft: ""    
+        Hard: "C2",    
+        Medium: "C3",  
+        Soft: "C4"    
     }
 };
 
