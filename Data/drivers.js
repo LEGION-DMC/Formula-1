@@ -7,12 +7,14 @@ const driversData = [
         team: "McLaren",
         birthPlace: "Бристоль, Великобритания",
         birthDate: "13.11.1999",
+		debut: "2019 - McLaren",
         titles: 1,
 		hattricks: 3,
         wins: 12,
         podiums: 47,
         poles: 16,
-        bio: "Дебют в Ф1: 2019 (McLaren). Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул."
+        note: "",
+        bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул."
     },
     {   id: "verstappen", 
         number: 3,
@@ -22,12 +24,14 @@ const driversData = [
         team: "Red Bull",
         birthPlace: "Хасселт, Бельгия",
         birthDate: "30.09.1997",
+		debut: "2015 - Toro Rosso",
         titles: 4,
 		hattricks: 14,
         wins: 71,
         podiums: 131,
         poles: 48,
-        bio: "Самый молодой дебютант в истории Ф1 (17 лет, 2015 Toro Rosso). Чемпион мира (2021, 2022, 2023, 2024). Агрессивный, феноменально стабильный. В 2021-м в драматичной финальной гонке отобрал титул у Хэмилтона. В 2023-м установил рекорд — 19 побед за сезон. В 2024-м начал доминировать, но к концу года Red Bull сдал позиции."
+        note: "Самый молодой дебютант в истории F1 - 17 лет",
+        bio: "Чемпион мира (2021, 2022, 2023, 2024). Агрессивный, феноменально стабильный. В 2021-м в драматичной финальной гонке отобрал титул у Хэмилтона. В 2023-м установил рекорд — 19 побед за сезон. В 2024-м начал доминировать, но к концу года Red Bull сдал позиции."
     },
     {   id: "bortoletto", 
         number: 5,
@@ -37,14 +41,16 @@ const driversData = [
         team: "Audi",
         birthPlace: "Бразилиа, Бразилия",
         birthDate: "14.12.2004",
+		debut: "2025 - Sauber",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебютант Ф1 (2025, Sauber/Audi). Чемпион Формулы-2 (2024). Протеже Фернандо Алонсо. Перспективный «контролёр» — пилот, который берет не чистым темпом, а умом и резиной. Станет третьим бразильцем на старте после ухода Массы."
+        note: "Третий Бразилец в истории F1",
+        bio: "Чемпион Формулы-2 (2024). Протеже Фернандо Алонсо. Перспективный «контролёр» — пилот, который берет не чистым темпом, а умом и резиной."
     },
-    {   id: "hadjar", 
+    {   id: "hadjar",
         number: 6,
         name: "Иcаак Хаджар",
         namem: "И. Хаджар",
@@ -52,12 +58,14 @@ const driversData = [
         team: "Red Bull",
         birthPlace: "Париж, Франция",
         birthDate: "28.09.2004",
+		debut: "2025 - Racing Bulls",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 1,
         poles: 0,
-        bio: "Дебютант Ф1 (2025, Racing Bulls). Чемпион Формулы-2 (2024). Воспитанник программы Red Bull. Резкий, быстрый, но склонен к авариям. Его сравнивают с молодым Феттелем."
+        note: "",
+        bio: "Чемпион Формулы-2 (2024). Воспитанник программы Red Bull. Резкий, быстрый, но склонен к авариям. Его сравнивают с молодым Феттелем."
     },
     {   id: "gasly",
         number: 10,
@@ -67,12 +75,13 @@ const driversData = [
         team: "Alpine",
         birthPlace: "Руан, Франция",
         birthDate: "07.02.1996",
+		debut: "2017 - Toro Rosso",
         titles: 0,
 		hattricks: 0,
         wins: 1,
         podiums: 6,
         poles: 0,
-        bio: "Дебют 2017 (Toro Rosso). Победитель Гран-при Италии (2020, AlphaTauri) — невероятная победа на фоне хаоса в Монце. Был уволен из Red Bull после полусезона из-за конфликта с Ферстаппеном, восстановил репутацию в Alpine. Технарь, отличный защитник позиции."
+        bio: "Победитель Гран-при Италии (2020, AlphaTauri) — невероятная победа на фоне хаоса в Монце. Был уволен из Red Bull после полусезона из-за конфликта с Ферстаппеном, восстановил репутацию в Alpine. Технарь, отличный защитник позиции."
     },
     {   id: "perez",
         number: 11,
@@ -82,12 +91,14 @@ const driversData = [
         team: "Cadillac",
         birthPlace: "Гвадалахара, Мексика",
         birthDate: "26.01.1990",
+		debut: "2011 - Sauber",
         titles: 0,
 		hattricks: 0,
         wins: 6,
         podiums: 39,
         poles: 3,
-        bio: "Дебют 2011 (Sauber). Ветеран. Главный специалист по сохранению шин и «король улиц» (победы в Баку, Сингапуре). Стал напарником Ферстаппена в Red Bull с 2021 года, помог ему выиграть первый титул, но к 2024-му резко сдал, едва набирая очки. В 2026-м перешел в новую команду Cadillac в качестве ведущего пилота."
+        note: "",
+        bio: "Ветеран. Главный специалист по сохранению шин и «король улиц» (победы в Баку, Сингапуре). Стал напарником Ферстаппена в Red Bull с 2021 года, помог ему выиграть первый титул, но к 2024-му резко сдал, едва набирая очки. В 2026-м перешел в новую команду Cadillac в качестве ведущего пилота."
     },
     {   id: "antonelli", 
         number: 12,
@@ -97,12 +108,14 @@ const driversData = [
         team: "Mercedes",
         birthPlace: "Болонья, Италия",
         birthDate: "25.08.2006",
+		debut: "2025 - Mercedes",
         titles: 0,
 		hattricks: 3,
         wins: 6,
         podiums: 12,
         poles: 6,
-        bio: "Дебютант Ф1 (2025, Mercedes). Вундеркинд, которого лично выбрал Тото Вольфф на замену Хэмилтону. Пропустил Ф2, перейдя в Ф1 сразу из Формулы-2 (чемпион 2024). Огромное давление, сравнивают с ранним Ферстаппеном."
+        note: "Выступает под номером #12 - легендарным номером Айртона Сенны",
+        bio: "Вундеркинд, которого лично выбрал Тото Вольфф на замену Хэмилтону. Пропустил Ф2, перейдя в Ф1 сразу из Формулы-2 (чемпион 2024). Огромное давление, сравнивают с ранним Ферстаппеном."
     },
     {   id: "alonso",
         number: 14,
@@ -112,12 +125,14 @@ const driversData = [
         team: "Aston Martin",
         birthPlace: "Овьедо, Испания",
         birthDate: "29.07.1981",
+		debut: "2001 - Minardi",
         titles: 2,
 		hattricks: 5,
         wins: 32,
         podiums: 106,
         poles: 22,
-        bio: "Дебют 2001 (Minardi). Двукратный чемпион (2005, 2006). Самый опытный пилот в истории (400+ Гран-при). Известен борьбой с Феттелем, Хэмилтоном (Инцидент в «Воротах гаража» 2007) и своей токсичностью в менеджменте. До сих пор один из лучших на старте."
+        note: "Самый опытный пилот в истории, более 400 Гран-при.",
+        bio: "Двукратный чемпион (2005, 2006). Известен борьбой с Феттелем, Хэмилтоном (Инцидент в «Воротах гаража» 2007) и своей токсичностью в менеджменте. До сих пор один из лучших на старте."
     },
     {   id: "leclerc",
         number: 16,
@@ -127,12 +142,14 @@ const driversData = [
         team: "Ferrari",
         birthPlace: "Монте-Карло, Монако",
         birthDate: "16.10.1997",
+		debut: "2018 - Sauber",
         titles: 0,
 		hattricks: 2,
         wins: 9,
         podiums: 54,
         poles: 27,
-        bio: "Дебют 2018 (Sauber). Гонщик Ferrari с 2019 года. «Король поулов» — феномен в квалификации. Много раз ошибался под давлением, но выиграл несколько выдающихся гонок (Монца-2019, Монако-2024). Главная надежда Ferrari на титул."
+        note: "",
+        bio: "Гонщик Ferrari с 2019 года. «Король поулов» — феномен в квалификации. Много раз ошибался под давлением, но выиграл несколько выдающихся гонок (Монца-2019, Монако-2024). Главная надежда Ferrari на титул."
     },
     {   id: "stroll",
         number: 18,
@@ -142,12 +159,14 @@ const driversData = [
         team: "Aston Martin",
         birthPlace: "Монреаль, Канада",
         birthDate: "29.10.1998",
+		debut: "2017 - Williams",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 3,
         poles: 1,
-        bio: "Дебют 2017 (Williams). Сын миллиардера Лоуренса Стролла, владельца Aston Martin. Критикуют за то, что место куплено, но подиумы (Баку-2017, 2020) и поул есть. Нестабилен, часто разбивает машину, но в дожде быстр."
+        note: "",
+        bio: "Сын миллиардера Лоуренса Стролла, владельца Aston Martin. Критикуют за то, что место куплено, но подиумы (Баку-2017, 2020) и поул есть. Нестабилен, часто разбивает машину, но в дожде быстр."
     },
     {   id: "albon",
         number: 23,
@@ -157,12 +176,14 @@ const driversData = [
         team: "Williams",
         birthPlace: "Лондон, Великобритания",
         birthDate: "23.03.1996",
+		debut: "2019 - Toro Rosso",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 2,
         poles: 0,
-        bio: "Дебют 2019 (Toro Rosso). Был напарником Ферстаппена в Red Bull (2019-2020), но уволен из-за нерезультативности. Вернулся в 2022-м в Williams, где стал лидером команды. Очень чистый, умный пилот."
+        note: "",
+        bio: "Был напарником Ферстаппена в Red Bull (2019-2020), но уволен из-за нерезультативности. Вернулся в 2022-м в Williams, где стал лидером команды. Очень чистый, умный пилот."
     },
     {   id: "hulkenberg",
         number: 27,
@@ -172,13 +193,15 @@ const driversData = [
         team: "Audi",
         birthPlace: "Эммерих-на-Рейне, Германия",
         birthDate: "19.08.1987",
+		debut: "2010 - Williams",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 1,
         poles: 1,
-        bio: "Дебют 2010 (Williams). Рекордсмен по количеству гонок без подиума (200+). Суперстабилен, король квалификаций. Возвращенец в 2023-м после 3 лет простоя, заменил больного Стролла и сразу набрал очки. Лидер Haas, в 2026-м переходит в Audi."
-    },
+        note: "Рекордсмен по количеству гонок без подиума, более 200.",
+		bio: "Суперстабилен, король квалификаций. В 2025 году на трассе Сильверстоун, прервал серию неудач - финишировав третьим. Возвращенец в 2023-м после 3 лет простоя, заменил больного Стролла и сразу набрал очки. В 2026-м переходит в Audi."
+	},
     {   id: "lawson",
         number: 30,
         name: "Лиам Лоусон",
@@ -187,12 +210,14 @@ const driversData = [
         team: "Racing Bulls",
         birthPlace: "Хастингс, Новая Зеландия",
         birthDate: "11.02.2002",
+		debut: "2023 - AlphaTauri",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебют 2023 (AlphaTauri на замену). Агрессивный, бескомпромиссный. Считался основным претендентом на место Переса в Red Bull. В 2024-м провел несколько гонок и произвел впечатление (особенно борьба с Ферстаппеном в тренировках)."
+        note: "",
+        bio: "Агрессивный, бескомпромиссный. Считался основным претендентом на место Переса в Red Bull. В 2024-м провел несколько гонок и произвел впечатление (особенно борьба с Ферстаппеном в тренировках)."
     },
     {   id: "ocon",
         number: 31,
@@ -202,12 +227,14 @@ const driversData = [
         team: "Haas",
         birthPlace: "Эвре, Франция",
         birthDate: "17.09.1996",
+		debut: "2016 - Manor",
         titles: 0,
 		hattricks: 0,
         wins: 1,
         podiums: 4,
         poles: 0,
-        bio: "Дебют 2016 (Manor). Победитель безумного Гран-при Венгрии (2021, Alpine). Физически очень сильный. Известен жёсткой, иногда грязной защитой (драка с Гасли в Alpine). Не очень любим за характер, но стабильно набирает очки. В 2025-м перешел в Haas."
+        note: "Победитель безумного Гран-при Венгрии 2021, Alpine.",
+        bio: "Физически очень сильный. Известен жёсткой, иногда грязной защитой (драка с Гасли в Alpine). Не очень любим за характер, но стабильно набирает очки. В 2025-м перешел в Haas."
     },
     {   id: "lindblad",
         number: 41,
@@ -217,12 +244,14 @@ const driversData = [
         team: "Racing Bulls",
         birthPlace: "Лондон, Англия",
         birthDate: "08.08.2007",
+		debut: "2026 - Racing Bulls",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебютант Ф1 (2026, Racing Bulls). Бронза Ф2 в 2024-м. Воспитанник Red Bull. Очень молод (родился в 2007-м). Считается «сырым», но супер-быстрым. Прямой конкурент Хаджару."
+        note: "",
+        bio: "Бронза Ф2 в 2024-м. Воспитанник Red Bull. Очень молод (родился в 2007-м). Считается «сырым», но супер-быстрым. Прямой конкурент Хаджару."
     },
     {   id: "colapinto",
         number: 43,
@@ -232,12 +261,14 @@ const driversData = [
         team: "Alpine",
         birthPlace: "Буэнос-Айрес, Аргентина",
         birthDate: "27.05.2003",
+		debut: "2024 - Williams",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебютант Ф1 (2024, Williams). Финишировал 2-м в Ф2 (2023). Первый аргентинец в Ф1 за 20 лет. В Williams заменил Сарджента. Мощный, рискованный стиль, напоминает раннего Мальдонадо. В 2026-м перешел в Alpine."
+        note: "Первый аргентинец в Ф1 за 20 лет.",
+        bio: "Финишировал 2-м в Ф2 (2023). В Williams заменил Сарджента. Мощный, рискованный стиль, напоминает раннего Мальдонадо. В 2026-м перешел в Alpine."
     },
     {   id: "hamilton",
         number: 44,
@@ -247,12 +278,14 @@ const driversData = [
         team: "Ferrari",
         birthPlace: "Стивенидж, Великобритания",
         birthDate: "07.01.1985",
+		debut: "2007 - McLaren",
         titles: 7,
 		hattricks: 19,
         wins: 106,
         podiums: 207,
         poles: 105,
-        bio: "Дебют 2007 (McLaren). 7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). Рекордсмен по победам, поулам, подиумам. После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда."
+        note: "Рекордсмен по победам, поулам, подиумам.",
+        bio: "7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда."
     },
     {   id: "sainz",
         number: 55,
@@ -262,12 +295,14 @@ const driversData = [
         team: "Williams",
         birthPlace: "Мадрид, Испания",
         birthDate: "01.09.1994",
+		debut: "2015 - Toro Rosso",
         titles: 0,
 		hattricks: 0,
         wins: 4,
         podiums: 29,
         poles: 6,
-        bio: "Дебют 2015 (Toro Rosso). Сын раллийного чемпиона. Победитель Гран-при (Великобритания-2022, Сингапур-2023, Австралия-2024). Супер-тактик, интеллектуал. Выжил из Ferrari, чтобы освободить место Хэмилтону, перешел в Williams как лидер проекта."
+        note: "",
+        bio: "Сын раллийного чемпиона. Победитель Гран-при (Великобритания-2022, Сингапур-2023, Австралия-2024). Супер-тактик, интеллектуал. Выжил из Ferrari, чтобы освободить место Хэмилтону, перешел в Williams как лидер проекта."
     },
     {   id: "russell",
         number: 63,
@@ -277,12 +312,14 @@ const driversData = [
         team: "Mercedes",
         birthPlace: "Кингс-Линн, Великобритания",
         birthDate: "15.02.1998",
+		debut: "2019 - Williams",
         titles: 0,
 		hattricks: 2,
         wins: 7,
         podiums: 29,
         poles: 11,
-        bio: "Дебют 2019 (Williams). Лидер гильдии пилотов (директор GPDA). Победитель Гран-при Сан-Паулу (2022) — первая победа Mercedes после долгого перерыва. Очень быстр, но иногда ошибается под давлением. Заменил Боттаса и стал ровней Хэмилтону."
+        note: "Лидер гильдии пилотов.",
+        bio: "Победитель Гран-при Сан-Паулу (2022) — первая победа Mercedes после долгого перерыва. Очень быстр, но иногда ошибается под давлением. Заменил Боттаса и стал ровней Хэмилтону."
     },
     {   id: "bottas",
         number: 77,
@@ -292,12 +329,14 @@ const driversData = [
         team: "Cadillac",
         birthPlace: "Настола, Финляндия",
         birthDate: "28.08.1989",
+		debut: "2013 - Williams",
         titles: 0,
 		hattricks: 2,
         wins: 10,
         podiums: 67,
         poles: 20,
-        bio: "Дебют 2013 (Williams). Бывший напарник Хэмилтона в Mercedes (2017-2021), 10 побед. Машина для квалификаций. В 2025-м покинул Sauber, в 2026-м стал пилотом Cadillac. Хотел взять номер #7, но он был занят, поэтому выбрал #77 (Val77eri Bo77as)."
+        note: "",
+        bio: "Бывший напарник Хэмилтона в Mercedes (2017-2021), 10 побед. Машина для квалификаций. В 2025-м покинул Sauber, в 2026-м стал пилотом Cadillac. Хотел взять номер #7, но он был занят, поэтому выбрал #77 (Val77eri Bo77as)."
     },
     {   id: "piastri",
         number: 81,
@@ -307,12 +346,14 @@ const driversData = [
         team: "McLaren",
         birthPlace: "Мельбурн, Австралия",
         birthDate: "06.04.2001",
+		debut: "2023 - McLaren",
         titles: 0,
 		hattricks: 3,
         wins: 9,
         podiums: 28,
         poles: 6,
-        bio: "Дебют 2023 (McLaren). Вундеркинд, выиграл Ф3 и Ф2 подряд. Хладнокровен как лед. Первую победу одержал в Венгрии-2024, обогнав Норриса по команде. Многие считают его будущим чемпионом."
+        note: "Выиграл Ф3 и Ф2 подряд.",
+        bio: "Первую победу одержал в Венгрии-2024, обогнав Норриса по команде. Многие считают его будущим чемпионом."
     },
     {   id: "bearman",
         number: 87,
@@ -322,12 +363,14 @@ const driversData = [
         team: "Haas",
         birthPlace: "Челмсфорд, Великобритания",
         birthDate: "08.05.2005",
+		debut: "2024 - Ferrari",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебют 2024 (Ferrari на замену Сайнсу). Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy."
+        note: "",
+        bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy."
     },
 	// Резерв
     {   id: "doohan", 
@@ -338,12 +381,14 @@ const driversData = [
         team: "Резерв",
         birthPlace: "Брисбен, Австралия",
         birthDate: "20.01.2003",
+		debut: "2024 - Alpine",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебютант Ф1 (2024, Alpine на замену). В настоящее время резервный гонщик команды Haas.  Сын пятикратного чемпиона мира по мотогонкам Мика Дуэна. Чемпион Формулы-2 (2023). В 2024 году подменял Окона и Гасли. Выбрал номер #7 в честь своего кумира Кими Райкконена. Считается перспективным стабильным гонщиком, но пока без очков в Ф1."
+        note: "",
+        bio: "Сын пятикратного чемпиона мира по мотогонкам Мика Дуэна. Чемпион Формулы-2 (2023). В 2024 году подменял Окона и Гасли. Выбрал номер #7 в честь своего кумира Кими Райкконена. Считается перспективным стабильным гонщиком, но пока без очков в Ф1."
     },
     {   id: "tsunoda",
         number: 22,
@@ -353,12 +398,14 @@ const driversData = [
         team: "Резерв",
         birthPlace: "Канагава, Япония",
         birthDate: "11.05.2000",
+		debut: "2021 - AlphaTauri",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебют 2021 (AlphaTauri). В настоящее время резервный гонщик команд Red Bull и Racing Bulls. За четыре сезона в Ф1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull."
+        note: "",
+        bio: "За четыре сезона в Ф1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull."
     },
     {   id: "zhou",
         number: 24,
@@ -368,12 +415,14 @@ const driversData = [
         team: "Резерв",
         birthPlace: "Шанхай, Китай",
         birthDate: "30.05.1999",
+		debut: "2022 - Alfa Romeo",
         titles: 0,
 		hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебют 2022 (Alfa Romeo). В настоящее время резервный гонщик команды Cadillac. Первый и единственный пилот из Китая в истории Формулы-1. Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках."
+        note: "Первый и единственный пилот из Китая в истории F1",
+        bio: "Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках."
     },
 ];
 
@@ -880,23 +929,36 @@ function openDriverModal(driver) {
     block1.appendChild(modalNumber);
     block1.appendChild(nameTeamContainer);
     
-    const block2 = document.createElement('div');
-    block2.className = 'modal-block';
-    
-    const detailsRow = document.createElement('div');
-    detailsRow.className = 'modal-details-row';
-    detailsRow.innerHTML = `
-        <div class="detail-cell">
-            <span class="detail-label">Место рождения</span>
-            <span class="detail-value">${driver.birthPlace}</span>
-        </div>
-        <div class="detail-cell">
-            <span class="detail-label">Дата рождения</span>
-            <span class="detail-value">${driver.birthDate} (${calculateAge(driver.birthDate)})</span>
-        </div>
-    `;
-    
-    block2.appendChild(detailsRow);
+	const block2 = document.createElement('div');
+	block2.className = 'modal-block';
+
+	// Первая строка: Место рождения и Дата рождения
+	const row1 = document.createElement('div');
+	row1.className = 'modal-details-row'; // Используем старый класс для двух элементов
+	row1.innerHTML = `
+		<div class="detail-cell">
+			<span class="detail-label">Место рождения</span>
+			<span class="detail-value">${driver.birthPlace}</span>
+		</div>
+		<div class="detail-cell">
+			<span class="detail-label">Дата рождения</span>
+			<span class="detail-value">${driver.birthDate} (${calculateAge(driver.birthDate)})</span>
+		</div>
+	`;
+
+	// Вторая строка: Дебют
+	const row2 = document.createElement('div');
+	row2.className = 'modal-details-row'; // Тот же класс, но с одним элементом
+	row2.style.gridTemplateColumns = '1fr'; // Переопределяем на одну колонку
+	row2.innerHTML = `
+		<div class="detail-cell">
+			<span class="detail-label">Дебют</span>
+			<span class="detail-value">${driver.debut}</span>
+		</div>
+	`;
+
+	block2.appendChild(row1);
+	block2.appendChild(row2);
     
     const block3 = document.createElement('div');
     block3.className = 'modal-block';
@@ -939,17 +1001,27 @@ function openDriverModal(driver) {
     topSection.appendChild(leftSide);
     topSection.appendChild(rightSide);
 
-    const bioSection = document.createElement('div');
-    bioSection.className = 'modal-bottom';
-    
-    const bioTitle = document.createElement('h3');
-    bioTitle.className = 'modal-bio-title';
-    bioTitle.textContent = 'Биография';
-    const bioText = document.createElement('p');
-    bioText.className = 'modal-bio-text';
-    bioText.textContent = driver.bio;
-    bioSection.appendChild(bioTitle);
-    bioSection.appendChild(bioText);
+	const bioSection = document.createElement('div');
+	bioSection.className = 'modal-bottom';
+
+	const bioTitle = document.createElement('h3');
+	bioTitle.className = 'modal-bio-title';
+	bioTitle.textContent = 'Биография';
+	const bioText = document.createElement('p');
+	bioText.className = 'modal-bio-text';
+	bioText.textContent = driver.bio;
+	bioSection.appendChild(bioTitle);
+	bioSection.appendChild(bioText);
+
+	// Компактное примечание после биографии
+	if (driver.note) {
+		const noteDiv = document.createElement('div');
+		noteDiv.className = 'modal-note-compact';
+		noteDiv.innerHTML = `
+			<span class="note-compact-text">${driver.note}</span>
+		`;
+		bioSection.appendChild(noteDiv);
+	}
     
     modal.appendChild(closeBtn);
     modal.appendChild(topSection);
