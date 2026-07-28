@@ -20,6 +20,7 @@ const driversData = [
         namem: "С. Вандорн",
         country: "be",
         team: "Резерв",
+		reserveFor: "Aston Martin",
         birthPlace: "Кортрейк, Бельгия",
         birthDate: "26.03.1992",
         titles: 0,
@@ -80,6 +81,7 @@ const driversData = [
         namem: "Д. Дуэн",
         country: "au",
         team: "Резерв",
+		reserveFor: "Alpine",
         birthPlace: "Брисбен, Австралия",
         birthDate: "20.01.2003",
         titles: 0,
@@ -87,7 +89,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебютант Ф1 (2024, Alpine на замену). Сын пятикратного чемпиона мира по мотогонкам Мика Дуэна. Чемпион Формулы-2 (2023). В 2024 году подменял Окона и Гасли, после чего закрепился как резервный пилот Alpine. Выбрал номер #7 в честь своего кумира Кими Райкконена. Считается перспективным стабильным гонщиком, но пока без очков в Ф1."
+        bio: "Дебютант Ф1 (2024, Alpine на замену). В настоящее время резервный гонщик команды Alpine.  Сын пятикратного чемпиона мира по мотогонкам Мика Дуэна. Чемпион Формулы-2 (2023). В 2024 году подменял Окона и Гасли. Выбрал номер #7 в честь своего кумира Кими Райкконена. Считается перспективным стабильным гонщиком, но пока без очков в Ф1."
     },
     {   id: "gasly",
         number: 10,
@@ -186,6 +188,7 @@ const driversData = [
         namem: "Н. Врис",
         country: "nl",
         team: "Резерв",
+		reserveFor: "McLaren",
         birthPlace: "Эйтвеллингерга, Нидерланды",
         birthDate: "05.02.1995",
         titles: 0,
@@ -201,6 +204,7 @@ const driversData = [
         namem: "Ю. Цунода",
         country: "jp",
         team: "Резерв",
+		reserveFor: "Red Bull",
         birthPlace: "Канагава, Япония",
         birthDate: "11.05.2000",
         titles: 0,
@@ -208,7 +212,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебют 2021 (AlphaTauri). Является резервным пилотом команд Red Bull и Racing Bulls. За четыре сезона в Ф1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull."
+        bio: "Дебют 2021 (AlphaTauri). В настоящее время резервный гонщик команд Red Bull и Racing Bulls. За четыре сезона в Ф1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull."
     },
     {   id: "albon",
         number: 23,
@@ -231,6 +235,7 @@ const driversData = [
         namem: "Г. Чжоу",
         country: "cn",
         team: "Резерв",
+		reserveFor: "Cadillac",
         birthPlace: "Шанхай, Китай",
         birthDate: "30.05.1999",
         titles: 0,
@@ -238,7 +243,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-        bio: "Дебют 2022 (Alfa Romeo). Первый и единственный пилот из Китая в истории Формулы-1. В настоящее время резервный гонщик команды Cadillac. Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках."
+        bio: "Дебют 2022 (Alfa Romeo). В настоящее время резервный гонщик команды Cadillac. Первый и единственный пилот из Китая в истории Формулы-1. Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках."
     },
     {   id: "hulkenberg",
         number: 27,
@@ -261,6 +266,7 @@ const driversData = [
         namem: "У. Стивенс",
         country: "gb",
         team: "Резерв",
+		reserveFor: "McLaren",
         birthPlace: "Рочфорд, Великобритания",
         birthDate: "28.06.1991",
         titles: 0,
@@ -351,6 +357,7 @@ const driversData = [
         namem: "П. Фиттипальди",
         country: "us",
         team: "Резерв",
+		reserveFor: "Cadillac",
         birthPlace: "Майами, США",
         birthDate: "25.06.1996",
         titles: 0,
@@ -441,6 +448,7 @@ const driversData = [
         namem: "А. Джовинацци",
         country: "it",
         team: "Резерв",
+		reserveFor: "Ferrari",
         birthPlace: "Мартина-Франка, Италия",
         birthDate: "14.12.1993",
         titles: 0,
@@ -547,24 +555,97 @@ function buildFilterPanel(panel, cardsArea) {
     let showReserve = false;
     let activeTeamFilters = new Set(regularTeams);
     let champsOnly = false;
-    let isReserveOnlyMode = false; // Флаг режима "только резерв"
+    let isReserveOnlyMode = false;
+    let selectedRegularTeams = new Set();
+    let isAllSelected = true;
+    
+    // Сохраняем состояние до перехода в режим "Только резерв"
+    let savedState = {
+        showReserve: false,
+        activeTeamFilters: new Set(regularTeams),
+        champsOnly: false,
+        selectedRegularTeams: new Set(),
+        isAllSelected: true,
+        allCheckboxChecked: true,
+        teamCheckboxesChecked: {}
+    };
+    
+    function saveCurrentState() {
+        savedState.showReserve = showReserve;
+        savedState.activeTeamFilters = new Set(activeTeamFilters);
+        savedState.champsOnly = champsOnly;
+        savedState.selectedRegularTeams = new Set(selectedRegularTeams);
+        savedState.isAllSelected = isAllSelected;
+        savedState.allCheckboxChecked = allCheckbox.checked;
+        savedState.teamCheckboxesChecked = {};
+        Object.entries(teamCheckboxes).forEach(([team, cb]) => {
+            savedState.teamCheckboxesChecked[team] = cb.checked;
+        });
+    }
+    
+    function restoreSavedState() {
+        showReserve = savedState.showReserve;
+        activeTeamFilters = new Set(savedState.activeTeamFilters);
+        champsOnly = savedState.champsOnly;
+        selectedRegularTeams = new Set(savedState.selectedRegularTeams);
+        isAllSelected = savedState.isAllSelected;
+        allCheckbox.checked = savedState.allCheckboxChecked;
+        Object.entries(teamCheckboxes).forEach(([team, cb]) => {
+            cb.checked = savedState.teamCheckboxesChecked[team] || false;
+        });
+        reserveCheckbox.checked = showReserve;
+        if (showReserve) {
+            activeTeamFilters.add(reserveTeam);
+        } else {
+            activeTeamFilters.delete(reserveTeam);
+        }
+    }
     
     function applyFilters() {
         const searchTerm = searchInput.value.toLowerCase().trim();
         
         let filtered = driversData;
         
-        // Фильтр по командам
-        filtered = filtered.filter(driver => activeTeamFilters.has(driver.team));
-        
-        // Фильтр «Чемпионы мира»
-        if (champsOnly) {
-            filtered = filtered.filter(driver => driver.titles > 0);
-        }
-        
-        // Фильтр резервистов
-        if (!showReserve) {
-            filtered = filtered.filter(driver => driver.team !== reserveTeam);
+        // Специальный режим "Только резерв"
+        if (isReserveOnlyMode) {
+            // Показываем только всех резервистов
+            filtered = filtered.filter(driver => driver.team === reserveTeam);
+        } else {
+            // Обычная фильтрация
+            // Фильтр по командам
+            filtered = filtered.filter(driver => activeTeamFilters.has(driver.team));
+            
+            // Фильтр «Чемпионы мира»
+            if (champsOnly) {
+                filtered = filtered.filter(driver => driver.titles > 0);
+            }
+            
+            // Фильтр резервистов
+            if (!showReserve) {
+                filtered = filtered.filter(driver => driver.team !== reserveTeam);
+            } else {
+                // Если выбрана "ВСЕ"
+                if (isAllSelected) {
+                    // Показываем все команды + всех резервистов
+                    filtered = filtered.filter(driver => {
+                        if (driver.team === reserveTeam) {
+                            return true; // Все резервисты
+                        }
+                        return activeTeamFilters.has(driver.team);
+                    });
+                } else {
+                    // Показываем только выбранные команды + их резервистов
+                    filtered = filtered.filter(driver => {
+                        // Если это резервист
+                        if (driver.team === reserveTeam) {
+                            // Показываем только если он прикреплён к одной из выбранных команд
+                            return selectedRegularTeams.has(driver.reserveFor);
+                        }
+                        // Если это обычный пилот
+                        return activeTeamFilters.has(driver.team);
+                    });
+                }
+            }
         }
         
         // Поиск
@@ -615,27 +696,46 @@ function buildFilterPanel(panel, cardsArea) {
         champsCheckbox.checked = false;
         champsOnly = false;
         isReserveOnlyMode = false;
+        selectedRegularTeams = new Set();
+        isAllSelected = true;
         resetReserveColor();
+        reserveCheckbox.checked = false;
+        showReserve = false;
+        activeTeamFilters.delete(reserveTeam);
     }
     
     // ЛКМ - переключение
     reserveCheckbox.addEventListener('change', () => {
+        // Если в режиме "Только резерв", выходим из него
+        if (isReserveOnlyMode) {
+            isReserveOnlyMode = false;
+            resetReserveColor();
+            // Восстанавливаем сохранённое состояние
+            restoreSavedState();
+            applyFilters();
+            return;
+        }
+        
         showReserve = reserveCheckbox.checked;
         
         if (showReserve) {
-            // Если был режим "только резерв", выходим из него
-            if (isReserveOnlyMode) {
-                restoreRegularTeams();
-            }
+            // Добавляем резерв в фильтр
             activeTeamFilters.add(reserveTeam);
             resetReserveColor();
+            
+            if (!isAllSelected && selectedRegularTeams.size === 0) {
+                // Если ни одна команда не выбрана, но "ВСЕ" не активно
+                const selectedTeams = Array.from(activeTeamFilters).filter(t => t !== reserveTeam);
+                selectedRegularTeams = new Set(selectedTeams);
+            }
         } else {
             activeTeamFilters.delete(reserveTeam);
-            // Если был режим "только резерв", восстанавливаем основные команды
-            if (isReserveOnlyMode) {
-                restoreRegularTeams();
-            }
             resetReserveColor();
+            if (!isAllSelected && selectedRegularTeams.size > 0) {
+                activeTeamFilters = new Set(selectedRegularTeams);
+            } else if (isAllSelected) {
+                activeTeamFilters = new Set(regularTeams);
+            }
         }
         
         applyFilters();
@@ -643,19 +743,24 @@ function buildFilterPanel(panel, cardsArea) {
     
     // ПКМ - показать только резерв
     reserveLabel.addEventListener('contextmenu', (e) => {
-        e.preventDefault(); // Отключаем контекстное меню браузера
+        e.preventDefault();
+        
+        // Сохраняем текущее состояние
+        saveCurrentState();
         
         // Сбрасываем все фильтры команд
         allCheckbox.checked = false;
         Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
         champsCheckbox.checked = false;
         champsOnly = false;
-        
-        // Устанавливаем только резерв
         reserveCheckbox.checked = true;
         showReserve = true;
-        activeTeamFilters = new Set([reserveTeam]);
+        
+        // Устанавливаем режим "Только резерв"
         isReserveOnlyMode = true;
+        activeTeamFilters = new Set([reserveTeam]);
+        selectedRegularTeams = new Set();
+        isAllSelected = false;
         
         // Устанавливаем желтый цвет
         setReserveColor();
@@ -663,78 +768,121 @@ function buildFilterPanel(panel, cardsArea) {
         applyFilters();
     });
     
-    // Чекбоксы команд
+    // Чекбоксы команд - обновлённая логика
     checkboxesContainer.addEventListener('change', (e) => {
         if (e.target.type === 'checkbox') {
             const checkbox = e.target;
             const value = checkbox.dataset.filterValue;
             
-            if (value === 'all') {
-                if (checkbox.checked) {
-                    // Сбрасываем выбор команд
-                    Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
-                    activeTeamFilters = new Set(regularTeams);
-                    
-                    // Сбрасываем фильтр "Чемпионы мира"
-                    champsCheckbox.checked = false;
-                    champsOnly = false;
-                    
-                    // Сбрасываем резерв
-                    reserveCheckbox.checked = false;
-                    showReserve = false;
-                    activeTeamFilters.delete(reserveTeam);
-                    resetReserveColor();
-                    isReserveOnlyMode = false;
-                } else {
-                    const anyTeamChecked = Object.values(teamCheckboxes).some(cb => cb.checked);
-                    if (!anyTeamChecked) {
-                        checkbox.checked = true;
-                    }
-                }
-            } else {
-                if (checkbox.checked) {
-                    allCheckbox.checked = false;
-                }
+            // Если в режиме "Только резерв"
+            if (isReserveOnlyMode) {
+                isReserveOnlyMode = false;
+                resetReserveColor();
                 
-                const selectedTeams = new Set();
-                Object.entries(teamCheckboxes).forEach(([team, cb]) => {
-                    if (cb.checked) selectedTeams.add(team);
-                });
+                // Восстанавливаем сохранённое состояние
+                restoreSavedState();
                 
-                if (selectedTeams.size === 0) {
-                    allCheckbox.checked = true;
-                    activeTeamFilters = new Set(regularTeams);
-                    
-                    // Сбрасываем фильтр "Чемпионы мира"
-                    champsCheckbox.checked = false;
-                    champsOnly = false;
-                    
-                    // Сбрасываем резерв
-                    reserveCheckbox.checked = false;
-                    showReserve = false;
-                    activeTeamFilters.delete(reserveTeam);
-                    resetReserveColor();
-                    isReserveOnlyMode = false;
-                } else {
-                    activeTeamFilters = selectedTeams;
-                    // Если резерв был включен, добавляем его обратно
-                    if (showReserve) {
-                        activeTeamFilters.add(reserveTeam);
-                    }
-                    // Если был режим "только резерв", выходим из него
-                    if (isReserveOnlyMode) {
-                        isReserveOnlyMode = false;
-                        resetReserveColor();
-                    }
-                }
+                // Применяем восстановленное состояние
+                applyFilters();
+                
+                // Теперь обрабатываем клик в обычном режиме
+                setTimeout(() => {
+                    handleTeamCheckboxClick(checkbox, value);
+                }, 0);
+                return;
             }
             
-            applyFilters();
+            handleTeamCheckboxClick(checkbox, value);
         }
     });
     
+    function handleTeamCheckboxClick(checkbox, value) {
+        if (value === 'all') {
+            if (checkbox.checked) {
+                // Сбрасываем выбор команд
+                Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
+                activeTeamFilters = new Set(regularTeams);
+                selectedRegularTeams = new Set();
+                isAllSelected = true;
+                
+                // Сбрасываем фильтр "Чемпионы мира"
+                champsCheckbox.checked = false;
+                champsOnly = false;
+                
+                // Сбрасываем резерв
+                reserveCheckbox.checked = false;
+                showReserve = false;
+                activeTeamFilters.delete(reserveTeam);
+                resetReserveColor();
+            } else {
+                const anyTeamChecked = Object.values(teamCheckboxes).some(cb => cb.checked);
+                if (!anyTeamChecked) {
+                    checkbox.checked = true;
+                } else {
+                    isAllSelected = false;
+                }
+            }
+        } else {
+            if (checkbox.checked) {
+                allCheckbox.checked = false;
+                isAllSelected = false;
+            }
+            
+            const selectedTeams = new Set();
+            Object.entries(teamCheckboxes).forEach(([team, cb]) => {
+                if (cb.checked) {
+                    selectedTeams.add(team);
+                }
+            });
+            
+            if (selectedTeams.size === 0) {
+                allCheckbox.checked = true;
+                activeTeamFilters = new Set(regularTeams);
+                selectedRegularTeams = new Set();
+                isAllSelected = true;
+                
+                // Сбрасываем фильтр "Чемпионы мира"
+                champsCheckbox.checked = false;
+                champsOnly = false;
+                
+                // Сбрасываем резерв
+                reserveCheckbox.checked = false;
+                showReserve = false;
+                activeTeamFilters.delete(reserveTeam);
+                resetReserveColor();
+            } else {
+                // Сохраняем выбранные команды
+                selectedRegularTeams = new Set(selectedTeams);
+                
+                // Если резерв включён, добавляем его
+                if (showReserve) {
+                    activeTeamFilters = new Set([...selectedTeams, reserveTeam]);
+                } else {
+                    activeTeamFilters = new Set(selectedTeams);
+                }
+            }
+        }
+        
+        applyFilters();
+    }
+    
     // Чекбокс «Чемпионы мира»
     champsCheckbox.addEventListener('change', () => {
+        // Если в режиме "Только резерв"
+        if (isReserveOnlyMode) {
+            isReserveOnlyMode = false;
+            resetReserveColor();
+            
+            // Восстанавливаем сохранённое состояние
+            restoreSavedState();
+            
+            // Устанавливаем фильтр чемпионов
+            champsOnly = champsCheckbox.checked;
+            // Применяем фильтры
+            applyFilters();
+            return;
+        }
+        
         champsOnly = champsCheckbox.checked;
         applyFilters();
     });
@@ -742,16 +890,7 @@ function buildFilterPanel(panel, cardsArea) {
     // Сброс
     resetBtn.addEventListener('click', () => {
         searchInput.value = '';
-        allCheckbox.checked = true;
-        Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
-        champsCheckbox.checked = false;
-        reserveCheckbox.checked = false;
-        activeTeamFilters = new Set(regularTeams);
-        champsOnly = false;
-        showReserve = false;
-        activeTeamFilters.delete(reserveTeam);
-        resetReserveColor();
-        isReserveOnlyMode = false;
+        restoreRegularTeams();
         applyFilters();
     });
     
@@ -905,24 +1044,36 @@ function renderDriverCards(drivers, container) {
         const divider = document.createElement('div');
         divider.className = 'driver-card-divider';
         
-        const teamDiv = document.createElement('div');
-        teamDiv.className = 'driver-team';
-        const teamLogo = document.createElement('img');
-        teamLogo.src = getTeamLogo(driver.team);
-        teamLogo.alt = driver.team;
-        teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
-        const teamName = document.createElement('span');
-        teamName.textContent = driver.team;
-        teamDiv.appendChild(teamLogo);
-        teamDiv.appendChild(teamName);
+		// Вместо текущего блока teamDiv:
+		const teamDiv = document.createElement('div');
+		teamDiv.className = 'driver-team';
 
-        teamDiv.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            const teamData = getTeamData(driver.team);
-            if (teamData) {
-                openTeamModal(teamData);
-            }
-        });
+		const teamLogo = document.createElement('img');
+		// Если это резервный пилот, показываем логотип команды, к которой прикреплён
+		const teamForDisplay = driver.reserveFor || driver.team;
+		teamLogo.src = getTeamLogo(teamForDisplay);
+		teamLogo.alt = driver.team;
+		teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
+
+		const teamName = document.createElement('span');
+		// Если резервный пилот, показываем "Резерв → Команда"
+		if (driver.team === 'Резерв' && driver.reserveFor) {
+			teamName.textContent = `${driver.reserveFor}`;
+			teamName.className = 'reserve-team-name';
+		} else {
+			teamName.textContent = driver.team;
+		}
+
+		teamDiv.appendChild(teamLogo);
+		teamDiv.appendChild(teamName);
+
+		teamDiv.addEventListener('click', (e) => {
+			e.stopPropagation(); 
+			const teamData = getTeamData(teamForDisplay);
+			if (teamData) {
+				openTeamModal(teamData);
+			}
+		});
         
         card.appendChild(portraitWrapper);
         card.appendChild(nameDiv);
@@ -1029,20 +1180,30 @@ function openDriverModal(driver) {
     nameRow.appendChild(flagIcon);
     nameRow.appendChild(fullName);
     
+	// В блоке teamRow:
 	const teamRow = document.createElement('div');
 	teamRow.className = 'modal-team-row';
+
+	const teamForDisplay = driver.reserveFor || driver.team;
 	const teamIcon = document.createElement('img');
-	teamIcon.src = getTeamLogo(driver.team);
+	teamIcon.src = getTeamLogo(teamForDisplay);
 	teamIcon.alt = driver.team;
 	teamIcon.className = 'modal-team-logo';
+
 	const teamLabel = document.createElement('span');
-	teamLabel.textContent = driver.team;
+	if (driver.team === 'Резерв' && driver.reserveFor) {
+		teamLabel.textContent = `${driver.reserveFor}`;
+		teamLabel.className = 'reserve-team-name';
+	} else {
+		teamLabel.textContent = driver.team;
+	}
+
 	teamRow.appendChild(teamIcon);
 	teamRow.appendChild(teamLabel);
 
 	teamRow.addEventListener('click', (e) => {
 		e.stopPropagation(); 
-		const teamData = getTeamData(driver.team);
+		const teamData = getTeamData(teamForDisplay);
 		if (teamData) {
 			openTeamModal(teamData);
 		}

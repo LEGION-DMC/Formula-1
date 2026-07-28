@@ -469,6 +469,10 @@ h1, h2 {
     transition: all 0.2s ease;
 }
 
+.driver-team .reserve-team-name {
+    color: #FFD700 !important;
+}
+
 .driver-team:hover { 
     transform: translateY(2px);background-color: rgba(255, 255, 255, 0.08); }
 .driver-team:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.96); }
@@ -612,6 +616,10 @@ h1, h2 {
     transition: all 0.2s ease;
     width: fit-content;
     color: gray; 
+}
+
+.modal-team-row .reserve-team-name {
+    color: #FFD700 !important;
 }
 
 .modal-team-row:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.97); }
