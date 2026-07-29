@@ -10,6 +10,7 @@ const teamsData = [
         car: "W17 E",
         engine: "Mercedes",
         power: "M17 E 1.6 V6T",
+		fuel: "Petronas",
 		titles: 8,  
         firstWin: "Гран-при Китая 2012",
         debut: "2010",
@@ -26,7 +27,8 @@ const teamsData = [
         founder: "Энцо Феррари",
         car: "SF-26",
         engine: "Ferrari",
-        power: "067/6 1.6 V6t",
+        power: "067/6 1.6 V6T H",
+		fuel: "Shell",
 		titles: 16,  
         firstWin: "Гран-при Великобритании 1951",
         debut: "1950",
@@ -45,6 +47,7 @@ const teamsData = [
         car: "MCL40",
         engine: "Mercedes",
         power: "M17 E 1.6 V6T",
+		fuel: "Petronas",
 		titles: 10,  
         firstWin: "Гран-при Бельгии 1968",
         debut: "1966",
@@ -62,28 +65,12 @@ const teamsData = [
         car: "RB22",
         engine: "Red Bull Ford",
         power: "DM01 1.6 V6T",
+		fuel: "ExxonMobil",
 		titles: 6,  
         firstWin: "Гран-при Китая 2009",
         debut: "2005",
         color: "#4570C0",
 		info: "Австрийская команда, основана руководителем концерна по производству энергетических напитков Red Bull - Дитрихом Матешицем. Хотя база команды и расположена в Великобритания, но команда выступает под австрийской лицензией. Компания Ford Motor заявила о выходе принадлежащей ей команды Jaguar Racing из чемпионата F1 в сентябре 2004 года и уже ноябре Red Bull, подтвердил покупку Jaguar Racing в последний день подачи заявок на участие в сезоне 2005 года."
-    },
-    {  shortName: "Williams",
-        fullName: "Atlassian Williams Racing",
-        base: "Гроу, Великобритания",
-		country: "gb",
-		license_country: "gb",
-		license: "Великобритания",
-        director: "Джеймс Ваулз",
-        founder: "Фрэнк Уильямс",
-        car: "FW48",
-        engine: "Mercedes",
-        power: "M17 E 1.6 V6T",
-		titles: 9,  
-        firstWin: "Гран-при Великобритании 1979",
-        debut: "1975",
-        color: "#3267D4",
-		info: "Британская команда, созданая Фрэнком Уильямсом и Патриком Хэдом под названием Williams Grand Prix Engineering. В сезоне 1980 года команда выиграла свой первый кубок конструкторов, опередив почти вдвое по очкам занявшую 2-е место Ligier. Все шасси команды содержат приставку FW - инициалы основателя команды."
     },
     {  shortName: "Racing Bulls",
         fullName: "Visa Cash App Racing Bulls F1 Team",
@@ -96,28 +83,30 @@ const teamsData = [
         car: "VCARB 03",
         engine: "Red Bull Ford",
         power: "DM01 1.6 V6T",
+		fuel: "ExxonMobil",
 		titles: 0,  
         firstWin: "Гран-при Италии 2008",
         debut: "2006",
         color: "#7091f8",
 		info: "Итальянская команда, принадлежащая австрийскому конгломерату Red Bull GmbH. С сезона 2006 по 2019 года команда выступала под названием Toro Rosso. К сезону 2020 года была переименована в AlphaTauri. К сезону 2024 года команда была переименована в своё текущее название."
     },
-    {  shortName: "Aston Martin", // 2027 - Aston Martin Aramco Honda
-        fullName: "Aston Martin Aramco F1 Team",
-        base: "Сильверстоун, Великобритания",
-		country: "gb",
-		license_country: "gb",
-		license: "Великобритания",
-        director: "Эдриан Ньюи",
-        founder: "Лоуренс Стролл",
-        car: "AMR26",
-        engine: "Honda",
-        power: "RA626H 1.6 V6T",
+    {  shortName: "Alpine", // 2027 - Gucci Racing Alpine F1 Team
+        fullName: "BWT Alpine F1 Team",
+        base: "Эсон, Франция",
+		country: "fr",
+		license_country: "fr",
+		license: "Франция",
+        director: "Флавио Бриаторе",
+        founder: "Renault Group",
+        car: "A526",
+        engine: "Mercedes",
+        power: "M17 E 1.6 V6T",
+		fuel: "Petronas",
 		titles: 0,  
-        firstWin: "",
+        firstWin: "Гран-при Венгрии 2021",
         debut: "2021",
-        color: "#4B9774",
-		info: "Британская команда, созданная на базе команды Racing Point, после покупки бизнесменом Лоуренсом Строллом 20% процентов в компании Aston Martin. Пилотами команды на дебютный сезон стали - Лэнс Стролл, сын Лоуренса, и четырёхкратный чемпион мира - Себастьян Феттель."
+        color: "#479FE2",
+		info: "Французская команда, созданная на базе команды Renault. В дебютном сезоне за Альпин выступали, двукратный чемпион мира - Фернандо Алонсо и выступавший за команду Renault в 2020 году Эстебан Окон. Коллектив использовал силовые установки Renault. Резервным пилотом команды в сезоне 2021 года стал российский гонщик Даниил Квят."
     },
     {  shortName: "Haas",
         fullName: "TGR Haas F1 Team",
@@ -130,6 +119,7 @@ const teamsData = [
         car: "VF-26",
         engine: "Ferrari",
         power: "067/6 1.6 V6t",
+		fuel: "Shell",
 		titles: 0,  
         firstWin: "",
         debut: "2016",
@@ -146,29 +136,49 @@ const teamsData = [
         founder: "Audi Formula Racing GmbH",
         car: "RS-26",
         engine: "Audi",
-        power: "AFR 26 H 1.6 V6T",
+        power: "AFR 26 1.6 V6H",
+		fuel: "BP",
 		titles: 0,  
         firstWin: "",
         debut: "2026",
         color: "#EB4526",
 		info: "Немецкая команда, была сформирована путём приобретения команды Sauber, с двигателями, разработанными Audi Formula Racing GmbH. В 1930-39 годах, задолго до проведения первого чемпионата мира в 1950 году, компания Audi AG уже участвовала в гонках Гран-при под названием Auto Union. Спустя 85 лет современная компания Audi решила вернутся."
     },
-    {  shortName: "Alpine", // 2027 - Gucci Racing Alpine F1 Team
-        fullName: "BWT Alpine F1 Team",
-        base: "Эсон, Франция",
-		country: "fr",
-		license_country: "fr",
-		license: "Франция",
-        director: "Флавио Бриаторе",
-        founder: "Renault Group",
-        car: "A526",
+    {  shortName: "Williams",
+        fullName: "Atlassian Williams Racing",
+        base: "Гроу, Великобритания",
+		country: "gb",
+		license_country: "gb",
+		license: "Великобритания",
+        director: "Джеймс Ваулз",
+        founder: "Фрэнк Уильямс",
+        car: "FW48",
         engine: "Mercedes",
         power: "M17 E 1.6 V6T",
+		fuel: "Petronas",
+		titles: 9,  
+        firstWin: "Гран-при Великобритании 1979",
+        debut: "1975",
+        color: "#3267D4",
+		info: "Британская команда, созданая Фрэнком Уильямсом и Патриком Хэдом под названием Williams Grand Prix Engineering. В сезоне 1980 года команда выиграла свой первый кубок конструкторов, опередив почти вдвое по очкам занявшую 2-е место Ligier. Все шасси команды содержат приставку FW - инициалы основателя команды."
+    },
+    {  shortName: "Aston Martin", // 2027 - Aston Martin Aramco Honda
+        fullName: "Aston Martin Aramco F1 Team",
+        base: "Сильверстоун, Великобритания",
+		country: "gb",
+		license_country: "gb",
+		license: "Великобритания",
+        director: "Эдриан Ньюи",
+        founder: "Лоуренс Стролл",
+        car: "AMR26",
+        engine: "Honda",
+        power: "RA626H 1.6 V6T",
+		fuel: "Aramco",
 		titles: 0,  
-        firstWin: "Гран-при Венгрии 2021",
+        firstWin: "",
         debut: "2021",
-        color: "#479FE2",
-		info: "Французская команда, созданная на базе команды Renault. В дебютном сезоне за Альпин выступали, двукратный чемпион мира - Фернандо Алонсо и выступавший за команду Renault в 2020 году Эстебан Окон. Коллектив использовал силовые установки Renault. Резервным пилотом команды в сезоне 2021 года стал российский гонщик Даниил Квят."
+        color: "#4B9774",
+		info: "Британская команда, созданная на базе команды Racing Point, после покупки бизнесменом Лоуренсом Строллом 20% процентов в компании Aston Martin. Пилотами команды на дебютный сезон стали - Лэнс Стролл, сын Лоуренса, и четырёхкратный чемпион мира - Себастьян Феттель."
     },
     {  shortName: "Cadillac",
         fullName: "Cadillac F1 Team",
@@ -181,6 +191,7 @@ const teamsData = [
         car: "MAC-26",
         engine: "Ferrari",
         power: "067/6 1.6 V6t",
+		fuel: "Shell",
 		titles: 0,  
         firstWin: "",
         debut: "2026",
@@ -278,10 +289,31 @@ function initTeamsPage(container) {
     container.innerHTML = '';
     container.style.padding = '20px 0px 2px 2px';
     
+    // Сортируем команды по очкам в Кубке конструкторов
+    const constructorStandings = calculateConstructorStandings();
+    
+    // Создаём массив команд в правильном порядке
+    const sortedTeams = [];
+    
+    // Сначала добавляем команды, у которых есть очки (отсортированные по убыванию)
+    constructorStandings.forEach(standing => {
+        const team = teamsData.find(t => t.shortName === standing.team);
+        if (team) {
+            sortedTeams.push(team);
+        }
+    });
+    
+    // Добавляем команды, которых нет в standings (с 0 очками)
+    teamsData.forEach(team => {
+        if (!sortedTeams.includes(team)) {
+            sortedTeams.push(team);
+        }
+    });
+    
     const grid = document.createElement('div');
     grid.className = 'teams-grid';
     
-    teamsData.forEach(team => {
+    sortedTeams.forEach(team => {
         const card = createTeamCard(team);
         grid.appendChild(card);
     });
@@ -603,8 +635,8 @@ function openTeamModal(team) {
             <span class="tm-bolid-info-value">${team.engine}</span>
         </div>
         <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Поставщик шин</span>
-            <span class="tm-bolid-info-value" style="color: #cece1a;">Pirelli</span>
+            <span class="tm-bolid-info-label">Топливо</span>
+            <span class="tm-bolid-info-value">${team.fuel}</span>
         </div>
         <div class="tm-bolid-info-cell">
             <span class="tm-bolid-info-label">Двигатель</span>
