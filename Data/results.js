@@ -403,6 +403,27 @@ const detailedSprintResults = {
 const driverStandings = [];
 const combinedStandings = [];
 
+function calculateConstructorStandings() {
+    const teams = {};
+    if (typeof teamsData !== 'undefined') {
+        teamsData.forEach(t => { teams[t.shortName] = { team: t.shortName, points: 0, color: t.color }; });
+    }
+    
+    // Используем combinedStandings для правильного подсчёта очков команд
+    combinedStandings.forEach(e => {
+        const d = findDriverById(e.driver);
+        if (d && teams[d.team]) teams[d.team].points += e.points;
+    });
+    
+    return Object.values(teams).sort((a, b) => b.points - a.points);
+}
+
+function getTeamPosition(teamName) {
+    const standings = calculateConstructorStandings();
+    const index = standings.findIndex(t => t.team === teamName);
+    return index >= 0 ? index + 1 : 999; // Если команда не найдена, возвращаем большое число
+}
+
 function calculateDriverStandings() {
     const pointsMap = {};
     
@@ -422,7 +443,19 @@ function calculateDriverStandings() {
     
     driverStandings.length = 0;
     Object.entries(pointsMap).forEach(([id, pts]) => driverStandings.push({ driver: id, points: pts }));
-    driverStandings.sort((a, b) => b.points - a.points);
+    
+    // СОРТИРОВКА: сначала по очкам, затем по позиции команды в КК
+    driverStandings.sort((a, b) => {
+        if (b.points !== a.points) return b.points - a.points;
+        
+        const driverA = findDriverById(a.driver);
+        const driverB = findDriverById(b.driver);
+        if (!driverA || !driverB) return 0;
+        
+        const teamPosA = getTeamPosition(driverA.team);
+        const teamPosB = getTeamPosition(driverB.team);
+        return teamPosA - teamPosB;
+    });
 }
 
 function calculateCombinedStandings() {
@@ -455,13 +488,20 @@ function calculateCombinedStandings() {
     
     combinedStandings.length = 0;
     Object.entries(pointsMap).forEach(([id, pts]) => combinedStandings.push({ driver: id, points: pts }));
-    combinedStandings.sort((a, b) => b.points - a.points);
+    
+    // ТА ЖЕ СОРТИРОВКА: сначала по очкам, затем по позиции команды в КК
+    combinedStandings.sort((a, b) => {
+        if (b.points !== a.points) return b.points - a.points;
+        
+        const driverA = findDriverById(a.driver);
+        const driverB = findDriverById(b.driver);
+        if (!driverA || !driverB) return 0;
+        
+        const teamPosA = getTeamPosition(driverA.team);
+        const teamPosB = getTeamPosition(driverB.team);
+        return teamPosA - teamPosB;
+    });
 }
-
-calculateDriverStandings();
-calculateCombinedStandings();
-
-const sprintStandings = [];
 
 function calculateSprintStandings() {
     const pointsMap = {};
@@ -482,9 +522,24 @@ function calculateSprintStandings() {
     
     sprintStandings.length = 0;
     Object.entries(pointsMap).forEach(([id, pts]) => sprintStandings.push({ driver: id, points: pts }));
-    sprintStandings.sort((a, b) => b.points - a.points);
+    
+    // ТА ЖЕ СОРТИРОВКА для спринтов
+    sprintStandings.sort((a, b) => {
+        if (b.points !== a.points) return b.points - a.points;
+        
+        const driverA = findDriverById(a.driver);
+        const driverB = findDriverById(b.driver);
+        if (!driverA || !driverB) return 0;
+        
+        const teamPosA = getTeamPosition(driverA.team);
+        const teamPosB = getTeamPosition(driverB.team);
+        return teamPosA - teamPosB;
+    });
 }
 
+calculateDriverStandings();
+calculateCombinedStandings();
+const sprintStandings = [];
 calculateSprintStandings();
 
 function renderDriverDetailedTable(container, filterTeam) {
@@ -573,21 +628,6 @@ function renderDriverDetailedTable(container, filterTeam) {
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
     container.appendChild(wrapper);
-}
-
-function calculateConstructorStandings() {
-    const teams = {};
-    if (typeof teamsData !== 'undefined') {
-        teamsData.forEach(t => { teams[t.shortName] = { team: t.shortName, points: 0, color: t.color }; });
-    }
-    
-    // Используем combinedStandings для правильного подсчёта очков команд
-    combinedStandings.forEach(e => {
-        const d = findDriverById(e.driver);
-        if (d && teams[d.team]) teams[d.team].points += e.points;
-    });
-    
-    return Object.values(teams).sort((a, b) => b.points - a.points);
 }
 
 function findDriverById(id) { return driversData.find(d => d.id === id); }
@@ -827,7 +867,7 @@ function renderSprintStandings(container, filterTeam) {
 
 function renderDriverDetailedTable(container, filterTeam) {
     const wrapper = document.createElement('div');
-    wrapper.className = 'results-section-block'; // Добавляем класс плашки
+    wrapper.className = 'results-section-block';
     wrapper.innerHTML = `
         <div class="results-header-row">
             <h3 class="results-table-title">Личный зачёт — по этапам</h3>
@@ -854,7 +894,7 @@ function renderDriverDetailedTable(container, filterTeam) {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const dimmed = filterTeam && driver.team !== filterTeam;
-        fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
+        fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">
             <div class="detailed-cell fixed-col-pos">${i + 1}</div>
             <div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
                 <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
@@ -878,15 +918,15 @@ function renderDriverDetailedTable(container, filterTeam) {
     });
     scrollHTML += '<div class="detailed-cell sum-col">Σ</div></div>';
     
-    sorted.forEach((entry) => {
+    sorted.forEach((entry, i) => {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const dimmed = filterTeam && driver.team !== filterTeam;
         
-        scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">`;
+        scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">`;
         
         let total = 0;
-        allGPs.forEach(gpId => {
+        allGPs.forEach((gpId, colIndex) => {
             const results = detailedResults[gpId] || {};
             const value = results[entry.driver];
             const isDNF = value === 'dnf';
@@ -895,16 +935,16 @@ function renderDriverDetailedTable(container, filterTeam) {
             total += pts;
             const noResults = !hasRealResults(gpId, false);
             
-            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf">DNF</div>`;
-            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns">DNS</div>`;
-            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</div>`;
+            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf" data-col="${colIndex}">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns" data-col="${colIndex}">DNS</div>`;
+            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">${pts > 0 ? pts : '-'}</div>`;
         });
         
         const sprintEntry = sprintStandings.find(s => s.driver === entry.driver);
         const sprintPoints = sprintEntry ? sprintEntry.points : 0;
         const combinedTotal = total + sprintPoints;
         
-        scrollHTML += `<div class="detailed-cell sum-col" title="Гонки: ${total} + Спринты: ${sprintPoints}">${combinedTotal}</div></div>`;
+        scrollHTML += `<div class="detailed-cell sum-col" title="Гонки: ${total} + Спринты: ${sprintPoints}" data-col="sum">${combinedTotal}</div></div>`;
     });
     scrollPart.innerHTML = scrollHTML;
     
@@ -912,11 +952,14 @@ function renderDriverDetailedTable(container, filterTeam) {
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
     container.appendChild(wrapper);
+    
+    // Добавляем обработчики событий после рендеринга
+    addHoverHandlers(fixedPart, scrollPart);
 }
 
 function renderSprintDetailedTable(container, filterTeam) {
     const wrapper = document.createElement('div');
-    wrapper.className = 'results-section-block'; // Добавляем класс плашки
+    wrapper.className = 'results-section-block';
     wrapper.innerHTML = `
         <div class="results-header-row">
             <h3 class="results-table-title">Спринтерский зачёт — по этапам</h3>
@@ -943,7 +986,7 @@ function renderSprintDetailedTable(container, filterTeam) {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const dimmed = filterTeam && driver.team !== filterTeam;
-        fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
+        fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">
             <div class="detailed-cell fixed-col-pos">${i + 1}</div>
             <div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
                 <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
@@ -967,15 +1010,15 @@ function renderSprintDetailedTable(container, filterTeam) {
     });
     scrollHTML += '<div class="detailed-cell sum-col">Σ</div></div>';
     
-    sorted.forEach((entry) => {
+    sorted.forEach((entry, i) => {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const dimmed = filterTeam && driver.team !== filterTeam;
         
-        scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">`;
+        scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">`;
         
         let total = 0;
-        allSPs.forEach(gpId => {
+        allSPs.forEach((gpId, colIndex) => {
             const results = detailedSprintResults[gpId] || {};
             const value = results[entry.driver];
             const isDNF = value === 'dnf';
@@ -984,12 +1027,12 @@ function renderSprintDetailedTable(container, filterTeam) {
             total += pts;
             const noResults = !hasRealResults(gpId, true);
             
-            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf">DNF</div>`;
-            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns">DNS</div>`;
-            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</div>`;
+            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf" data-col="${colIndex}">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns" data-col="${colIndex}">DNS</div>`;
+            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">${pts > 0 ? pts : '-'}</div>`;
         });
         
-        scrollHTML += `<div class="detailed-cell sum-col">${total}</div></div>`;
+        scrollHTML += `<div class="detailed-cell sum-col" data-col="sum">${total}</div></div>`;
     });
     scrollPart.innerHTML = scrollHTML;
     
@@ -997,6 +1040,121 @@ function renderSprintDetailedTable(container, filterTeam) {
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
     container.appendChild(wrapper);
+    
+    // Добавляем обработчики событий после рендеринга
+    addHoverHandlers(fixedPart, scrollPart);
+}
+
+function addHoverHandlers(fixedPart, scrollPart) {
+    const fixedRows = fixedPart.querySelectorAll('.detailed-data-row');
+    const scrollRows = scrollPart.querySelectorAll('.detailed-data-row');
+    const headerCells = scrollPart.querySelectorAll('.detailed-header-row .gp-col');
+    const dataRows = scrollPart.querySelectorAll('.detailed-data-row');
+    
+    // Функция для очистки всех подсветок
+    function clearAllHighlights() {
+        fixedRows.forEach(row => row.classList.remove('hovered-row'));
+        scrollRows.forEach(row => row.classList.remove('hovered-row'));
+        scrollPart.querySelectorAll('.detailed-cell').forEach(cell => {
+            cell.classList.remove('highlighted-cell', 'column-highlighted');
+        });
+        headerCells.forEach(cell => {
+            cell.classList.remove('column-header-highlighted');
+        });
+    }
+    
+    // Обработчики для хедера ГП (подсветка всей колонки)
+    headerCells.forEach((headerCell, colIndex) => {
+        headerCell.addEventListener('mouseenter', function(e) {
+            clearAllHighlights();
+            
+            // Подсвечиваем сам хедер
+            this.classList.add('column-header-highlighted');
+            
+            // Подсвечиваем все ячейки в этой колонке
+            dataRows.forEach(row => {
+                const cell = row.querySelector(`.gp-col[data-col="${colIndex}"]`);
+                if (cell) {
+                    cell.classList.add('column-highlighted');
+                }
+            });
+        });
+        
+        headerCell.addEventListener('mouseleave', function() {
+            clearAllHighlights();
+        });
+    });
+    
+    // Обработчики для строк фиксированной части
+    fixedRows.forEach((fixedRow, index) => {
+        fixedRow.addEventListener('mouseenter', function(e) {
+            clearAllHighlights();
+            
+            // Подсвечиваем строки в обеих частях
+            this.classList.add('hovered-row');
+            if (scrollRows[index]) {
+                scrollRows[index].classList.add('hovered-row');
+            }
+        });
+        
+        fixedRow.addEventListener('mouseleave', function() {
+            clearAllHighlights();
+        });
+    });
+    
+    // Обработчики для ячеек в скроллящейся части
+    scrollPart.querySelectorAll('.detailed-data-row .detailed-cell').forEach(cell => {
+        cell.addEventListener('mouseenter', function(e) {
+            e.stopPropagation();
+            clearAllHighlights();
+            
+            const row = this.closest('.detailed-data-row');
+            const rowIndex = row ? row.dataset.rowIndex : null;
+            
+            // Подсвечиваем строки в обеих частях
+            if (row) {
+                row.classList.add('hovered-row');
+                if (fixedRows[rowIndex]) {
+                    fixedRows[rowIndex].classList.add('hovered-row');
+                }
+            }
+            
+            // Отдельно подсвечиваем ячейку, на которую наведено
+            this.classList.add('highlighted-cell');
+        });
+        
+        cell.addEventListener('mouseleave', function(e) {
+            e.stopPropagation();
+            clearAllHighlights();
+        });
+    });
+    
+    // Обработчики для всей строки в скроллящейся части
+    scrollRows.forEach((scrollRow, index) => {
+        scrollRow.addEventListener('mouseenter', function(e) {
+            if (e.target === this) {
+                clearAllHighlights();
+                this.classList.add('hovered-row');
+                if (fixedRows[index]) {
+                    fixedRows[index].classList.add('hovered-row');
+                }
+            }
+        });
+        
+        scrollRow.addEventListener('mouseleave', function(e) {
+            if (e.target === this && !this.contains(e.relatedTarget)) {
+                clearAllHighlights();
+            }
+        });
+    });
+    
+    // Обработчик клика для снятия подсветки
+    scrollPart.addEventListener('click', function(e) {
+        const cell = e.target.closest('.detailed-cell');
+        if (cell && cell.classList.contains('highlighted-cell')) {
+            // Можно оставить или убрать подсветку
+        }
+    });
 }
 
 function renderConstructorStandingsPanel(container, filterTeam) {

@@ -1190,6 +1190,7 @@ h1, h2 {
     vertical-align: middle;
 }
 
+
 .pitstop-table .stats-driver-clickable {
     padding-left: 15px;
 }
@@ -1202,7 +1203,8 @@ h1, h2 {
     padding-left: 25px;
 }
 
-.stats-table tbody tr:hover { background-color: rgba(255, 255, 255, 0.02); }
+.stats-table tbody tr:hover { 
+    background-color: rgba(255, 255, 255, 0.05); }
 
 .stats-flag {
     width: 20px; height: 14px;
@@ -1362,7 +1364,6 @@ h1, h2 {
 
 .race-winner-row:hover {
     background: rgba(255, 255, 255, 0.08);
-    color: var(--red-accent);
     cursor: pointer;
     transform: translateX(4px); 
 }
@@ -1425,7 +1426,7 @@ h1, h2 {
 .results-detail-btn {
     font-family: 'F1Title', sans-serif;
     font-size: 0.7rem;
-    padding: 5px 12px 3px;
+    padding: 5px 12px 4px;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1502,8 +1503,6 @@ h1, h2 {
     gap: 8px; }
 
 .results-driver-clickable { cursor: pointer; transition: color 0.2s ease; }
-.results-driver-clickable:hover { 
-    color: var(--red-accent); }
 
 .results-flag { width: 20px; height: 14px; border-radius: 2px; }
 .results-driver span { color: var(--text-light); }
@@ -1517,6 +1516,18 @@ h1, h2 {
 .detailed-table-container {
     display: flex;
     overflow: hidden;
+}
+
+/* Подсветка активной ячейки (при наведении) */
+.detailed-scroll-part .detailed-data-row .detailed-cell.highlighted-cell {
+    background: rgba(25, 100, 200, 0.5) !important;
+    border-radius: 4px;
+}
+
+/* Состояния для фиксированной части */
+.detailed-fixed-part .detailed-data-row.hovered-row,
+.detailed-scroll-part .detailed-data-row.hovered-row {
+    background: rgba(255, 255, 255, 0.11);
 }
 
 /* Левая фиксированная часть */
@@ -1534,14 +1545,27 @@ h1, h2 {
 .detailed-scroll-part {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    flex: 1;
+    flex: 1;    
 }
+
+/* Единая фиксированная высота для строк в обеих частях */
 .detailed-fixed-part .detailed-data-row,
 .detailed-scroll-part .detailed-data-row {
     min-height: 25px;
+    height: 25px;                    /* ДОБАВЛЕНО: фиксированная высота */
     align-items: center;
     border-radius: 5px 0px 0px 5px;
+    overflow: hidden;                /* ДОБАВЛЕНО */
 }
+
+/* Единая фиксированная высота для заголовков */
+.detailed-fixed-part .detailed-header-row,
+.detailed-scroll-part .detailed-header-row {
+    height: 25px;                    /* ДОБАВЛЕНО */
+    min-height: 25px;
+    overflow: hidden;                /* ДОБАВЛЕНО */
+}
+
 /* Фиксируем Σ в скроллящейся части */
 .detailed-scroll-part .detailed-header-row .sum-col,
 .detailed-scroll-part .detailed-data-row .sum-col {
@@ -1555,7 +1579,21 @@ h1, h2 {
 .detailed-scroll-part .detailed-data-row {
     display: flex;
     min-width: max-content;
+    min-height: 25px;
+    height: 25px;                    /* ДОБАВЛЕНО */
     border-radius: 0px;
+    overflow: hidden;                /* ДОБАВЛЕНО */
+}
+
+/* Подсветка хедера колонки */
+.detailed-scroll-part .detailed-header-row .gp-col.column-header-highlighted {
+    background: rgba(255, 255, 255, 0.10);
+    border-radius: 4px 4px 0 0;
+}
+
+/* Подсветка всей колонки */
+.detailed-scroll-part .detailed-data-row .gp-col.column-highlighted {
+    background: rgba(255, 255, 255, 0.10);
 }
 
 /* Ячейки */
@@ -1570,6 +1608,7 @@ h1, h2 {
     font-size: 0.8rem;
     color: var(--text-light);
     white-space: nowrap;
+    line-height: 1;               
 }
 
 .detailed-header-row .detailed-cell {
@@ -1637,10 +1676,20 @@ h1, h2 {
     opacity: 0.5; color: #bbb; }
 
 /* DNF/DNS */
-.detailed-cell.dnf { color: #cc3300; 
+.detailed-cell.dnf,
+.detailed-cell.dns {
     font-family: 'F1Title', sans-serif; 
-    font-size: 0.6rem; }
-.detailed-cell.dns { color: #FFC107; font-family: 'F1Title', sans-serif; font-size: 0.6rem; }
+    font-size: 0.65rem;
+    padding: 7px 0 6px 0;
+}
+
+.detailed-cell.dnf { 
+    color: #cc3300;
+}
+
+.detailed-cell.dns { 
+    color: #FFC107;
+}
 
 /* ============================================== */
 /* ВКЛАДКА КАЛЕНДАРЬ                              */
