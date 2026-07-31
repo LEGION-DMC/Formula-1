@@ -9,10 +9,9 @@ const teamsData = [
         founder: "Норберт Хауг",
         car: "W17 E",
         engine: "Mercedes",
-        power: "M17 E 1.6 V6 T",
+        power: "M17 E 1.6 V6T",
 		fuel: "Petronas",
-		titles: 8, 
-		wins: 139,  
+		titles: 8,  
         firstWin: "Гран-при Китая 2012",
         debut: "2010",
         color: "#75F1D3",
@@ -28,10 +27,9 @@ const teamsData = [
         founder: "Энцо Феррари",
         car: "SF-26",
         engine: "Ferrari",
-        power: "067/6 1.6 V6 TH",
+        power: "067/6 1.6 V6T H",
 		fuel: "Shell",
 		titles: 16,  
-		wins: 250,  
         firstWin: "Гран-при Великобритании 1951",
         debut: "1950",
         color: "#D52E37",
@@ -48,10 +46,9 @@ const teamsData = [
         debut: "1966",
         car: "MCL40",
         engine: "Mercedes",
-        power: "M17 E 1.6 V6 T",
+        power: "M17 E 1.6 V6T",
 		fuel: "Petronas",
 		titles: 10,  
-		wins: 204,  
         firstWin: "Гран-при Бельгии 1968",
         debut: "1966",
         color: "#ef8733",
@@ -67,10 +64,9 @@ const teamsData = [
         founder: "Дитрих Матешиц",
         car: "RB22",
         engine: "Red Bull Ford",
-        power: "DM01 1.6 V6 T",
+        power: "DM01 1.6 V6T",
 		fuel: "ExxonMobil",
 		titles: 6,  
-		wins: 130,  
         firstWin: "Гран-при Китая 2009",
         debut: "2005",
         color: "#4570C0",
@@ -86,10 +82,9 @@ const teamsData = [
         founder: "Дитрих Матешиц",
         car: "VCARB 03",
         engine: "Red Bull Ford",
-        power: "DM01 1.6 V6 T",
+        power: "DM01 1.6 V6T",
 		fuel: "ExxonMobil",
 		titles: 0,  
-		wins: 0,  
         firstWin: "Гран-при Италии 2008",
         debut: "2006",
         color: "#7091f8",
@@ -105,10 +100,9 @@ const teamsData = [
         founder: "Renault Group",
         car: "A526",
         engine: "Mercedes",
-        power: "M17 E 1.6 V6 T",
+        power: "M17 E 1.6 V6T",
 		fuel: "Petronas",
 		titles: 0,  
-		wins: 1,  
         firstWin: "Гран-при Венгрии 2021",
         debut: "2021",
         color: "#479FE2",
@@ -124,10 +118,9 @@ const teamsData = [
         founder: "Джин Хаас",
         car: "VF-26",
         engine: "Ferrari",
-        power: "067/6 1.6 V6 T",
+        power: "067/6 1.6 V6t",
 		fuel: "Shell",
 		titles: 0,  
-		wins: 0,  
         firstWin: "",
         debut: "2016",
         color: "#DFE1E2",
@@ -143,10 +136,9 @@ const teamsData = [
         founder: "Audi Formula Racing GmbH",
         car: "RS-26",
         engine: "Audi",
-        power: "AFR 26 1.6 V6 H",
+        power: "AFR 26 1.6 V6H",
 		fuel: "BP",
 		titles: 0,  
-		wins: 0,  
         firstWin: "",
         debut: "2026",
         color: "#EB4526",
@@ -162,10 +154,9 @@ const teamsData = [
         founder: "Фрэнк Уильямс",
         car: "FW48",
         engine: "Mercedes",
-        power: "M17 E 1.6 V6 T",
+        power: "M17 E 1.6 V6T",
 		fuel: "Petronas",
 		titles: 9,  
-		wins: 114,  
         firstWin: "Гран-при Великобритании 1979",
         debut: "1975",
         color: "#3267D4",
@@ -181,10 +172,9 @@ const teamsData = [
         founder: "Лоуренс Стролл",
         car: "AMR26",
         engine: "Honda",
-        power: "RA626H 1.6 V6 T",
+        power: "RA626H 1.6 V6T",
 		fuel: "Aramco",
 		titles: 0,  
-		wins: 0,  
         firstWin: "",
         debut: "2021",
         color: "#4B9774",
@@ -200,34 +190,14 @@ const teamsData = [
         founder: "TWG Cadillac",
         car: "MAC-26",
         engine: "Ferrari",
-        power: "067/6 1.6 V6 T",
+        power: "067/6 1.6 V6t",
 		fuel: "Shell",
 		titles: 0,  
-		wins: 0,  
         firstWin: "",
         debut: "2026",
         color: "#AAAADD",
 		info: "Американская команда, первый сезон которой начался в 2026 году в качестве конструктора, а с сезона 2029 года - будет ещё и в качестве поставщика двигателей."
     },
-
-	{ shortName: "Safety Car",
-	  fullName: "FIA Safety Car",
-	  base: "Женева, Швейцария",
-	  country: "ch",
-	  license_country: "ch",
-	  license: "Швейцария",
-	  director: "FIA",
-	  founder: "FIA",
-	  car: "GT 63 S 4MATIC+",
-	  engine: "Mercedes-AMG",
-	  power: "M177 4.0 V8 BT",
-	  fuel: "Petronas",
-	  titles: 0,
-	  firstWin: "",
-	  debut: "1973",
-	  color: "#FF1801",
-	  info: "Официальный автомобиль безопасности Формулы-1. Используется для ограничения скорости на трассе в случае аварий или неблагоприятных погодных условий. С 2021 года используется Mercedes-AMG GT R."
-	}
 ];
 
 function getSeasonsCount(debutYear) {
@@ -328,41 +298,25 @@ function initTeamsPage(container) {
     // Сначала добавляем команды, у которых есть очки (отсортированные по убыванию)
     constructorStandings.forEach(standing => {
         const team = teamsData.find(t => t.shortName === standing.team);
-        if (team && team.shortName !== 'Safety Car') { // ← Исключаем Safety Car
+        if (team) {
             sortedTeams.push(team);
         }
     });
     
     // Добавляем команды, которых нет в standings (с 0 очками)
     teamsData.forEach(team => {
-        if (!sortedTeams.includes(team) && team.shortName !== 'Safety Car') { // ← Исключаем Safety Car
+        if (!sortedTeams.includes(team)) {
             sortedTeams.push(team);
         }
     });
     
-    // Создаём сетку
     const grid = document.createElement('div');
     grid.className = 'teams-grid';
     
-    // Добавляем все обычные команды
     sortedTeams.forEach(team => {
         const card = createTeamCard(team);
         grid.appendChild(card);
     });
-    
-    // Добавляем разделитель
-    const divider = document.createElement('div');
-    divider.className = 'teams-divider';
-    divider.textContent = '— Официальные автомобили Formula 1 —';
-    grid.appendChild(divider);
-    
-    // Добавляем Safety Car (только один раз)
-    const safetyCarData = teamsData.find(t => t.shortName === 'Safety Car');
-    if (safetyCarData) {
-        const safetyCard = createTeamCard(safetyCarData);
-        safetyCard.classList.add('safety-car');
-        grid.appendChild(safetyCard);
-    }
     
     container.appendChild(grid);
     
@@ -472,60 +426,36 @@ function openTeamModal(team) {
     // ====================
     // ЛЕВАЯ КОЛОНКА — Статистика
     // ====================
-	const leftColumn = document.createElement('div');
-	leftColumn.className = 'tm-left-column';
-
-	const statsPanel = document.createElement('div');
-	statsPanel.className = 'tm-stats-panel';
-	statsPanel.style.setProperty('--team-color', team.color);
-
-	const isSafetyCar = team.shortName === 'Safety Car';
-
-	let statsHTML = '';
-
-	if (!isSafetyCar) {
-		statsHTML += `
-			<div class="tm-stat-cell">
-				<span class="tm-stat-label">Кубки конструкторов</span>
-				<span class="tm-stat-value">${team.titles || 0}</span>
-			</div>
-		`;
-	}
-
-	if (!isSafetyCar) {
-		statsHTML += `
-			<div class="tm-stat-cell">
-				<span class="tm-stat-label">Победы</span>
-				<span class="tm-stat-value">${team.wins}</span>
-			</div>
-		`;
-	}
-
-	if (!isSafetyCar) {
-		statsHTML += `
-			<div class="tm-stat-cell tm-stat-full">
-				<span class="tm-stat-label">Первая победа</span>
-				<span class="tm-stat-value">${team.firstWin || '---'}</span>
-			</div>
-		`;
-	}
-
-	statsHTML += `
-		<div class="tm-stat-cell">
-			<span class="tm-stat-label">Гоночные сезоны</span>
-			<span class="tm-stat-value">${team.seasons}</span>
-		</div>
-	`;
-
-	statsHTML += `
-		<div class="tm-stat-cell">
-			<span class="tm-stat-label">Дебют</span>
-			<span class="tm-stat-value">${team.debut}</span>
-		</div>
-	`;
-
-	statsPanel.innerHTML = statsHTML;
-	leftColumn.appendChild(statsPanel);
+    const leftColumn = document.createElement('div');
+    leftColumn.className = 'tm-left-column';
+    
+    const statsPanel = document.createElement('div');
+    statsPanel.className = 'tm-stats-panel';
+    statsPanel.style.setProperty('--team-color', team.color);
+    statsPanel.innerHTML = `
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Кубки конструкторов</span>
+            <span class="tm-stat-value">${team.titles || 0}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Дебют</span>
+            <span class="tm-stat-value">${team.debut}</span>
+        </div>
+        <div class="tm-stat-cell tm-stat-full">
+            <span class="tm-stat-label">Первая победа</span>
+            <span class="tm-stat-value">${team.firstWin || '---'}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Гоночные сезоны</span>
+            <span class="tm-stat-value">${team.seasons}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">- СКОРО -</span>
+            <span class="tm-stat-value">---</span>
+        </div>
+    `;
+    
+    leftColumn.appendChild(statsPanel);
     
     // ====================
     // ЦЕНТР — Основная плашка
@@ -624,7 +554,7 @@ function openTeamModal(team) {
     
     const pilotsTitle = document.createElement('h3');
     pilotsTitle.className = 'tm-pilots-title';
-    pilotsTitle.textContent = isSafetyCar ? 'Водитель' : 'Пилоты';
+    pilotsTitle.textContent = 'Пилоты';
     pilotsSection.appendChild(pilotsTitle);
     
     const pilotsList = document.createElement('div');
@@ -677,7 +607,7 @@ function openTeamModal(team) {
     modal.appendChild(pilotsSection);
     
     // ====================
-    // ПРАВАЯ КОЛОНКА — Болид
+    // ПРАВАЯ КОЛОНКА — Болид (без изменений)
     // ====================
     const rightColumn = document.createElement('div');
     rightColumn.className = 'tm-right-column';
@@ -740,7 +670,7 @@ function openTeamModal(team) {
         statsPanel.style.opacity = '0';
         statsPanel.style.transform = 'translateX(-40px)';
         
-        // Правая колонка — выезжает справа
+        // Правая колонка — выезжает справа (без изменений)
         bolidPanel.style.transition = 'none';
         bolidPanel.style.opacity = '0';
         bolidPanel.style.transform = 'translateX(40px)';

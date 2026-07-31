@@ -424,6 +424,24 @@ const driversData = [
         note: "Первый и единственный пилот из Китая в истории F1",
         bio: "Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках."
     },
+	// Safety Car
+    {   id: "maylander", 
+        number: "SC",
+        name: "Бернд Майлендер",
+        namem: "Б. Майлендер",
+        country: "de",
+        team: "Safety Car",
+        birthPlace: "Вайблинген, Германия",
+        birthDate: "29.05.1971",
+		debut: "2000 - Safety Car",
+        titles: 0,
+		hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+        note: "",
+        bio: "Бессменным официальным пилотом автомобиля безопасности в чемпионатах F1. В 2000 году в составе заводской команды Porsche, пилотируя Porsche 911 GT3-R, одержал победу в гонке на выносливость «24 часа Нюрбургринга»."
+    },
 ];
 
 function initDriversPage(container) {
@@ -467,16 +485,18 @@ function buildFilterPanel(panel, cardsArea) {
     const checkboxesContainer = document.createElement('div');
     checkboxesContainer.className = 'filter-checkboxes';
     
+    // Исключаем Safety Car и Резерв из списка команд
     const teams = [...new Set(driversData.map(d => d.team))];
-    // Исключаем резерв из списка команд
     const regularTeams = teams
-        .filter(t => t.toLowerCase() !== 'резерв' && t.toLowerCase() !== 'reserve')
+        .filter(t => t.toLowerCase() !== 'резерв' && 
+                     t.toLowerCase() !== 'reserve' &&
+                     t.toLowerCase() !== 'safety car')
         .sort((a, b) => a.localeCompare(b, 'ru'));
     
     // Чекбокс ВСЕ
     const allCheckbox = createCheckbox('all', 'ВСЕ', true, checkboxesContainer);
     
-    // Чекбоксы команд (без Резерва)
+    // Чекбоксы команд (без Резерва и Safety Car)
     const teamCheckboxes = {};
     regularTeams.forEach(team => {
         const cb = createCheckbox(team, team, false, checkboxesContainer);
@@ -516,10 +536,11 @@ function buildFilterPanel(panel, cardsArea) {
         
         let filtered = driversData;
         
-        // Исключаем резервных пилотов всегда
+        // Исключаем резервных пилотов и Safety Car
         filtered = filtered.filter(driver => 
             driver.team.toLowerCase() !== 'резерв' && 
-            driver.team.toLowerCase() !== 'reserve'
+            driver.team.toLowerCase() !== 'reserve' &&
+            driver.team.toLowerCase() !== 'safety car'
         );
         
         // Фильтр по командам
@@ -929,70 +950,97 @@ function openDriverModal(driver) {
     block1.appendChild(modalNumber);
     block1.appendChild(nameTeamContainer);
     
-	const block2 = document.createElement('div');
-	block2.className = 'modal-block';
+    const block2 = document.createElement('div');
+    block2.className = 'modal-block';
 
-	// Первая строка: Место рождения и Дата рождения
-	const row1 = document.createElement('div');
-	row1.className = 'modal-details-row'; // Используем старый класс для двух элементов
-	row1.innerHTML = `
-		<div class="detail-cell">
-			<span class="detail-label">Место рождения</span>
-			<span class="detail-value">${driver.birthPlace}</span>
-		</div>
-		<div class="detail-cell">
-			<span class="detail-label">Дата рождения</span>
-			<span class="detail-value">${driver.birthDate} (${calculateAge(driver.birthDate)})</span>
-		</div>
-	`;
+    // Первая строка: Место рождения и Дата рождения
+    const row1 = document.createElement('div');
+    row1.className = 'modal-details-row';
+    row1.innerHTML = `
+        <div class="detail-cell">
+            <span class="detail-label">Место рождения</span>
+            <span class="detail-value">${driver.birthPlace}</span>
+        </div>
+        <div class="detail-cell">
+            <span class="detail-label">Дата рождения</span>
+            <span class="detail-value">${driver.birthDate} (${calculateAge(driver.birthDate)})</span>
+        </div>
+    `;
 
-	// Вторая строка: Дебют
-	const row2 = document.createElement('div');
-	row2.className = 'modal-details-row'; // Тот же класс, но с одним элементом
-	row2.style.gridTemplateColumns = '1fr'; // Переопределяем на одну колонку
-	row2.innerHTML = `
-		<div class="detail-cell">
-			<span class="detail-label">Дебют</span>
-			<span class="detail-value">${driver.debut}</span>
-		</div>
-	`;
+    // Вторая строка: Дебют
+    const row2 = document.createElement('div');
+    row2.className = 'modal-details-row';
+    row2.style.gridTemplateColumns = '1fr';
+    row2.innerHTML = `
+        <div class="detail-cell">
+            <span class="detail-label">Дебют</span>
+            <span class="detail-value">${driver.debut}</span>
+        </div>
+    `;
 
-	block2.appendChild(row1);
-	block2.appendChild(row2);
+    block2.appendChild(row1);
+    block2.appendChild(row2);
     
+    // Блок статистики
     const block3 = document.createElement('div');
     block3.className = 'modal-block';
     
-    const statsRow = document.createElement('div');
-    statsRow.className = 'modal-stats-row';
-    statsRow.innerHTML = `
-        <div class="stat-cell">
-            <span class="stat-number">${driver.titles}</span>
-            <span class="stat-text">Титулы</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.wins}</span>
-            <span class="stat-text">Победы</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.hattricks}</span>
-            <span class="stat-text">Хэт-Трики</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.podiums}</span>
-            <span class="stat-text">Подиумы</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.poles}</span>
-            <span class="stat-text">Поулы</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.fines}/12</span>
-            <span class="stat-text">Штрафы</span>
-        </div>
-    `;
+    // Проверяем, является ли пилот Safety Car
+    const isSafetyCar = driver.team.toLowerCase() === 'safety car' || 
+                        driver.id === 'maylander' ||
+                        driver.number === 'SC';
     
-    block3.appendChild(statsRow);
+    if (isSafetyCar) {
+        // Специальная статистика для Safety Car
+        const statsRow = document.createElement('div');
+        statsRow.className = 'modal-stats-row';
+        statsRow.innerHTML = `
+            <div class="stat-cell" title="«24 часа Нюрбургринга»">
+                <span class="stat-number">1</span>
+                <span class="stat-text">Титул</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-number">14</span>
+                <span class="stat-text">ГП завершеных SC</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-number">500+</span>
+                <span class="stat-text">Гран-При</span>
+            </div>
+        `;
+        block3.appendChild(statsRow);
+    } else {
+        // Обычная статистика для гонщиков
+        const statsRow = document.createElement('div');
+        statsRow.className = 'modal-stats-row';
+        statsRow.innerHTML = `
+            <div class="stat-cell">
+                <span class="stat-number">${driver.titles}</span>
+                <span class="stat-text">Титулы</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-number">${driver.wins}</span>
+                <span class="stat-text">Победы</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-number">${driver.hattricks}</span>
+                <span class="stat-text">Хэт-Трики</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-number">${driver.podiums}</span>
+                <span class="stat-text">Подиумы</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-number">${driver.poles}</span>
+                <span class="stat-text">Поулы</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-number">${driver.fines || 0}/12</span>
+                <span class="stat-text">Штрафы</span>
+            </div>
+        `;
+        block3.appendChild(statsRow);
+    }
     
     rightSide.appendChild(block1);
     rightSide.appendChild(block2);
@@ -1001,27 +1049,28 @@ function openDriverModal(driver) {
     topSection.appendChild(leftSide);
     topSection.appendChild(rightSide);
 
-	const bioSection = document.createElement('div');
-	bioSection.className = 'modal-bottom';
+    const bioSection = document.createElement('div');
+    bioSection.className = 'modal-bottom';
 
-	const bioTitle = document.createElement('h3');
-	bioTitle.className = 'modal-bio-title';
-	bioTitle.textContent = 'Биография';
-	const bioText = document.createElement('p');
-	bioText.className = 'modal-bio-text';
-	bioText.textContent = driver.bio;
-	bioSection.appendChild(bioTitle);
-	bioSection.appendChild(bioText);
+    const bioTitle = document.createElement('h3');
+    bioTitle.className = 'modal-bio-title';
+    bioTitle.textContent = 'Биография';
+    
+    const bioText = document.createElement('p');
+    bioText.className = 'modal-bio-text';
+    bioText.textContent = driver.bio;
+    bioSection.appendChild(bioTitle);
+    bioSection.appendChild(bioText);
 
-	// Компактное примечание после биографии
-	if (driver.note) {
-		const noteDiv = document.createElement('div');
-		noteDiv.className = 'modal-note-compact';
-		noteDiv.innerHTML = `
-			<span class="note-compact-text">${driver.note}</span>
-		`;
-		bioSection.appendChild(noteDiv);
-	}
+    // Компактное примечание после биографии
+    if (driver.note) {
+        const noteDiv = document.createElement('div');
+        noteDiv.className = 'modal-note-compact';
+        noteDiv.innerHTML = `
+            <span class="note-compact-text">${driver.note}</span>
+        `;
+        bioSection.appendChild(noteDiv);
+    }
     
     modal.appendChild(closeBtn);
     modal.appendChild(topSection);

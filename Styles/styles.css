@@ -742,6 +742,19 @@ h1, h2 {
     align-content: start;
 }
 
+.teams-divider {
+  width: 100%;
+  text-align: center;
+  padding: 5px 0 6px 0;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: #bbb;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  grid-column: 1 / -1;
+}
+
 /* ---------------------------------------------- */
 /* 2. КАРТОЧКА КОМАНДЫ                             */
 /* ---------------------------------------------- */
