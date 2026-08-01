@@ -350,7 +350,7 @@ const tracksData = [
         firstrace: "2020",
         lapRecord: "1.16.466 (Боттас, Mercedes, 2020)"
     },
-	// Убраны из календаря
+	// Убраны из календаря или не задействованные
     { id: "imola",
         name: "Гран При Эмилии-Романьи",
         country: "it",
@@ -378,6 +378,34 @@ const tracksData = [
         direction:  "против часовой стрелки",
         firstrace: "2021",
         lapRecord: "1:30.734 (Хэмилтон, Mercedes, 2021)"
+    },
+    { id: "hockenheimring",
+        name: "Гран-при Германии",
+        country: "de",
+        location: "Хоккенхайм, Германия",
+        trackName: "Хоккенхаймринг",
+        length: "4 574",
+        laps: 67,
+        turns: 13,
+		elevation: '8',
+		speed: '223',
+        direction:  "по часовой стрелки",
+        firstrace: "1970",
+        lapRecord: "1:13.780 (Райкконен, McLaren, 2004)"
+    },
+    { id: "korea",
+        name: "Гран-при Кореи",
+        country: "kr",
+        location: "Йонам, Республика Корея",
+        trackName: "Международный автодром Кореи",
+        length: "5 615",
+        laps: 55,
+        turns: 18,
+		elevation: '5',
+		speed: '203',
+        direction:  "против часовой стрелки",
+        firstrace: "2010",
+        lapRecord: "1:39.605 (Феттель, Red Bull, 2011)"
     },
 	// Временные
     { id: "sepang", // Гран-при Малайзии *Бахрейн
