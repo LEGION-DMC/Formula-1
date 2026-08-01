@@ -103,7 +103,7 @@ const penaltiesData = [
 ];
 
 const lapRecordData = [
-    { gpId: "australia", driver: "russell", time: "0:00.000" },
+    { gpId: "madrid", driver: "none", time: "1:00.000" },
 ];
 
 function findDriverByName(fullName) {

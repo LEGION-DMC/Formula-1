@@ -435,6 +435,7 @@ function calculateDriverStandings() {
     Object.values(detailedResults).forEach(gpResults => {
         Object.entries(gpResults).forEach(([driverId, points]) => {
             if (driverId === "000") return;
+            // Проверяем, что points - это число, а не статус (dnf, dns, dsq)
             if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
                 pointsMap[driverId] += points;
             }
@@ -470,6 +471,7 @@ function calculateCombinedStandings() {
     Object.values(detailedResults).forEach(gpResults => {
         Object.entries(gpResults).forEach(([driverId, points]) => {
             if (driverId === "000") return;
+            // Проверяем, что points - это число, а не статус (dnf, dns, dsq)
             if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
                 pointsMap[driverId] += points;
             }
@@ -480,6 +482,7 @@ function calculateCombinedStandings() {
     Object.values(detailedSprintResults).forEach(spResults => {
         Object.entries(spResults).forEach(([driverId, points]) => {
             if (driverId === "000") return;
+            // Проверяем, что points - это число, а не статус (dnf, dns, dsq)
             if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
                 pointsMap[driverId] += points;
             }
@@ -514,6 +517,7 @@ function calculateSprintStandings() {
     Object.values(detailedSprintResults).forEach(spResults => {
         Object.entries(spResults).forEach(([driverId, points]) => {
             if (driverId === "000") return;
+            // Проверяем, что points - это число, а не статус (dnf, dns, dsq)
             if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
                 pointsMap[driverId] += points;
             }
@@ -868,15 +872,15 @@ function renderSprintStandings(container, filterTeam) {
 function renderDriverDetailedTable(container, filterTeam) {
     const wrapper = document.createElement('div');
     wrapper.className = 'results-section-block';
-    wrapper.innerHTML = `
-        <div class="results-header-row">
-            <h3 class="results-table-title">Личный зачёт — по этапам</h3>
-            <button class="results-detail-btn active" data-table="drivers">Скрыть</button>
-        </div>
-        <div class="results-points-note">
-            <span class="points-note-icon">🛈</span>
-            <span class="points-note-text">Система начисления очков: 25 – 18 – 15 – 12 – 10 – 8 – 6 – 4 – 2 – 1</span>
-        </div>`;
+    
+    // Заголовок и кнопка
+    const headerRow = document.createElement('div');
+    headerRow.className = 'results-header-row';
+    headerRow.innerHTML = `
+        <h3 class="results-table-title">Личный зачёт — по этапам</h3>
+        <button class="results-detail-btn active" data-table="drivers">Скрыть</button>
+    `;
+    wrapper.appendChild(headerRow);
     
     const allGPs = getAllGPs();
     const sorted = [...combinedStandings].sort((a, b) => b.points - a.points);
@@ -931,12 +935,14 @@ function renderDriverDetailedTable(container, filterTeam) {
             const value = results[entry.driver];
             const isDNF = value === 'dnf';
             const isDNS = value === 'dns';
-            const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
+            const isDSQ = value === 'dsq';
+            const pts = (!isDNF && !isDNS && !isDSQ && typeof value === 'number') ? value : 0;
             total += pts;
             const noResults = !hasRealResults(gpId, false);
             
             if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf" data-col="${colIndex}">DNF</div>`;
             else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns" data-col="${colIndex}">DNS</div>`;
+            else if (isDSQ) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dsq" data-col="${colIndex}">DSQ</div>`;
             else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">${pts > 0 ? pts : '-'}</div>`;
         });
         
@@ -951,6 +957,40 @@ function renderDriverDetailedTable(container, filterTeam) {
     tableContainer.appendChild(fixedPart);
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
+
+	// ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ (второе, под статусами)
+	const pointsNote = document.createElement('div');
+	pointsNote.className = 'results-points-note';
+	pointsNote.innerHTML = `
+		<span class="points-note-icon">🛈 </span>
+		<span class="points-note-text">Система начисления очков:
+			<span class="points-pos">1</span> - 25 •
+			<span class="points-pos">2</span> - 18 •
+			<span class="points-pos">3</span> - 15 •
+			<span class="points-pos">4</span> - 12 •
+			<span class="points-pos">5</span> - 10 •
+			<span class="points-pos">6</span> - 8 •
+			<span class="points-pos">7</span> - 6 •
+			<span class="points-pos">8</span> - 4 •
+			<span class="points-pos">9</span> - 2 •
+			<span class="points-pos">10</span> - 1
+		</span>
+	`;
+	wrapper.appendChild(pointsNote);
+	
+    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ (первое)
+    const statusNote = document.createElement('div');
+    statusNote.className = 'results-points-note';
+    statusNote.innerHTML = `
+        <span class="points-note-icon">🛈</span>
+        <span class="points-note-text">
+            <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал) • 
+            <span class="dns-tag">DNS</span> — Did Not Start (не стартовал) • 
+            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+        </span>
+    `;
+    wrapper.appendChild(statusNote);
+
     container.appendChild(wrapper);
     
     // Добавляем обработчики событий после рендеринга
@@ -960,15 +1000,15 @@ function renderDriverDetailedTable(container, filterTeam) {
 function renderSprintDetailedTable(container, filterTeam) {
     const wrapper = document.createElement('div');
     wrapper.className = 'results-section-block';
-    wrapper.innerHTML = `
-        <div class="results-header-row">
-            <h3 class="results-table-title">Спринтерский зачёт — по этапам</h3>
-            <button class="results-detail-btn active" data-table="sprint">Скрыть</button>
-        </div>
-        <div class="results-points-note">
-            <span class="points-note-icon">🛈</span>
-            <span class="points-note-text">Система начисления очков: 8 – 7 – 6 – 5 – 4 – 3 – 2 – 1</span>
-        </div>`;
+    
+    // Заголовок и кнопка
+    const headerRow = document.createElement('div');
+    headerRow.className = 'results-header-row';
+    headerRow.innerHTML = `
+        <h3 class="results-table-title">Спринтерский зачёт — по этапам</h3>
+        <button class="results-detail-btn active" data-table="sprint">Скрыть</button>
+    `;
+    wrapper.appendChild(headerRow);
     
     const allSPs = getAllSprintGPs();
     const sorted = [...sprintStandings].sort((a, b) => b.points - a.points);
@@ -1023,12 +1063,14 @@ function renderSprintDetailedTable(container, filterTeam) {
             const value = results[entry.driver];
             const isDNF = value === 'dnf';
             const isDNS = value === 'dns';
-            const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
+            const isDSQ = value === 'dsq';
+            const pts = (!isDNF && !isDNS && !isDSQ && typeof value === 'number') ? value : 0;
             total += pts;
             const noResults = !hasRealResults(gpId, true);
             
             if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf" data-col="${colIndex}">DNF</div>`;
             else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns" data-col="${colIndex}">DNS</div>`;
+            else if (isDSQ) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dsq" data-col="${colIndex}">DSQ</div>`;
             else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">${pts > 0 ? pts : '-'}</div>`;
         });
         
@@ -1039,6 +1081,38 @@ function renderSprintDetailedTable(container, filterTeam) {
     tableContainer.appendChild(fixedPart);
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
+    
+	// ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ (второе, под статусами)
+	const pointsNote = document.createElement('div');
+	pointsNote.className = 'results-points-note';
+	pointsNote.innerHTML = `
+		<span class="points-note-icon">🛈 </span>
+		<span class="points-note-text">Система начисления очков:
+			<span class="points-pos">1</span> - 8 •
+			<span class="points-pos">2</span> - 7 •
+			<span class="points-pos">3</span> - 6 •
+			<span class="points-pos">4</span> - 5 •
+			<span class="points-pos">5</span> - 4 •
+			<span class="points-pos">6</span> - 3 •
+			<span class="points-pos">7</span> - 2 •
+			<span class="points-pos">8</span> - 1
+		</span>
+	`;
+	wrapper.appendChild(pointsNote);
+	
+    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ (первое)
+    const statusNote = document.createElement('div');
+    statusNote.className = 'results-points-note';
+    statusNote.innerHTML = `
+        <span class="points-note-icon">🛈</span>
+        <span class="points-note-text">
+            <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал) • 
+            <span class="dns-tag">DNS</span> — Did Not Start (не стартовал) • 
+            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+        </span>
+    `;
+    wrapper.appendChild(statusNote);
+    
     container.appendChild(wrapper);
     
     // Добавляем обработчики событий после рендеринга
