@@ -192,7 +192,7 @@ h1, h2 {
     min-width: 200px;
     background-color: rgba(255, 255, 255, 0.04);
     border-right: 1px solid var(--border-color);
-    padding: 20px 10px;
+    padding: 10px 8px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -202,6 +202,15 @@ h1, h2 {
     animation: slideInLeft 0.3s ease;
 }
 
+.filter-toggle-btn {
+    display: none;
+}
+
+.filter-checkboxes-popup {
+    display: none;
+}
+
+
 @keyframes slideInLeft {
     from { transform: translateX(-20px); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
@@ -209,7 +218,8 @@ h1, h2 {
 
 .driver-search-input {
     width: 100%;
-    padding: 10px 12px;
+    height: 30px;
+    padding: 10px 10px;
     background-color: rgba(30, 30, 30, 0.8);
     border: 1px solid var(--border-color);
     border-radius: 6px;
@@ -226,14 +236,13 @@ h1, h2 {
 .filter-divider {
     border: none;
     height: 1px;
-    background: radial-gradient(circle at center, var(--red-accent), transparent 130%);
+    background: radial-gradient(circle at center, var(--red-accent), transparent 110%);
+    margin-top: -4px;
+    margin-bottom: -4px;
 }
 
 .filter-divider-champ {
-    border: none;
-    height: 1px;
-    background: radial-gradient(circle at center, var(--red-accent), transparent 130%);
-    margin: -5px;
+    margin-bottom: -7px;
 }
 
 .filter-section-title {
@@ -242,28 +251,31 @@ h1, h2 {
     color: white;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: -5px;
-}
-
-.filter-checkboxes {
-    display: flex;
-    flex-direction: column;
+    margin-bottom: -8px;
 }
 
 .filter-checkbox-label {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 3px;
     cursor: pointer;
-    padding: 5px 0px;
+    padding: 3px 0px;
     border-radius: 5px;
-    transition: background 0.2s ease;
+    transition: all 0.2s ease;
     color: var(--text-gray);
     font-family: 'F1Text', sans-serif;
     font-size: 0.9rem;
 }
 
-.filter-checkbox-label:hover { color: var(--text-light); }
+/* Наведение на весь лейбл - меняем цвет */
+.filter-checkbox-label:hover {
+    color: var(--text-light);
+}
+
+/* Наведение на весь лейбл - смещаем ТОЛЬКО текст */
+.filter-checkbox-label:hover .checkbox-text {
+    transform: translateX(3px);
+}
 
 .filter-checkbox-label input[type="checkbox"] {
     appearance: none;
@@ -276,6 +288,7 @@ h1, h2 {
     cursor: pointer;
     position: relative;
     transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
 .filter-checkbox-label input[type="checkbox"]:checked {
@@ -292,7 +305,11 @@ h1, h2 {
     font-size: 12px;
 }
 
-.checkbox-text { user-select: none; }
+.checkbox-text {
+    user-select: none;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
 
 .filter-checkbox-label.reserve-active input[type="checkbox"] {
     background-color: #FFD700 !important;
@@ -361,7 +378,7 @@ h1, h2 {
 }
 
 .driver-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-3px) !important;
     border-color: var(--team-color, var(--red-accent));
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px color-mix(in srgb, var(--team-color, var(--red-accent)) 20%, transparent);
 }
@@ -789,7 +806,7 @@ h1, h2 {
 }
 
 .team-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-3px) !important;
     border-color: var(--team-color);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px color-mix(in srgb, var(--team-color) 20%, transparent);
 }

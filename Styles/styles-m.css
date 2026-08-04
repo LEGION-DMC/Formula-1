@@ -134,54 +134,212 @@ body {
     flex-direction: column;
 }
 
+/* ============================================== */
+/* МОБИЛЬНАЯ ПАНЕЛЬ ФИЛЬТРОВ                      */
+/* ============================================== */
 .drivers-filter-panel {
     width: 100%;
     min-width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px 10px;
+    gap: 6px;
+    padding: 8px 10px;
     height: auto;
     position: relative;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
+    background-color: rgba(18, 18, 18, 0.5);
 }
 
-.driver-search-input { width: 80%; order: 1; margin-bottom: 5px; }
+.driver-search-input {
+    width: calc(100% - 170px);
+    order: 1;
+    margin-bottom: 0;
+    height: 28px;
+    font-size: 0.8rem;
+    padding: 6px 8px;
+    flex: 1;
+    min-width: 120px;
+}
 
-.filter-reset-btn { width: auto; padding: 5px 10px; 
-    order: 1; font-size: 0.8rem; margin-bottom: 5px; }
+/* Кнопка фильтров */
+/* Кнопка фильтров - показываем на мобильной версии */
+.filter-toggle-btn {
+    display: flex !important;
+    order: 2;
+    background: rgba(225, 6, 0, 0.1);
+    border: 1px solid var(--red-accent);
+    border-radius: 5px;
+    color: var(--red-accent);
+    font-family: 'F1Text', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    height: 28px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
 
-.filter-divider { display: none; }
+.filter-toggle-btn:hover {
+    background: rgba(225, 6, 0, 0.35);
+}
 
-.filter-divider-champ {
-    display: block;
+.filter-toggle-btn.active {
+    background: var(--red-accent);
+    color: #fff;
+}
+
+.filter-reset-btn {
+    order: 3;
+    width: auto;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    height: 28px;
+    margin-bottom: 0;
+}
+
+.filter-divider {
+    display: none;
+}
+
+.filter-section-title {
+    display: none;
+}
+
+/* Мобильная панель чекбоксов (мини-модалка) */
+.filter-checkboxes-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.filter-checkboxes-popup.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.filter-checkboxes-popup-inner {
+    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px 15px 10px;
+    max-width: 350px;
+    width: 90%;
+    max-height: 70vh;
+    overflow-y: auto;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.filter-checkboxes-popup.active .filter-checkboxes-popup-inner {
+    transform: scale(1) translateY(0);
+}
+
+.filter-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-popup-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.filter-popup-close {
+    display: flex;
+    position: absolute;
+    top: 3px; right: 4px;
+    padding-left: 1px;
+    padding-bottom: 2px;
+    width: 25px; height: 25px;
+    border-radius: 20%;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-gray);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.filter-popup-close:hover {
+    color: var(--red-accent);
+}
+
+.filter-popup-section-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 10px 0 5px;
+}
+
+.filter-popup-section-title:first-of-type {
+    margin-top: 0;
+}
+
+.filter-popup-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+}
+
+.filter-popup-checkboxes .filter-checkbox-label {
+    font-size: 0.85rem;
+    padding: 4px 5px;
+    flex: 0 0 calc(50% - 4px);
+}
+
+.filter-popup-checkboxes .filter-checkbox-label input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+}
+
+.filter-popup-divider {
     border: none;
     height: 1px;
-    margin-top: -4px;
-    order: 2;
-    background: radial-gradient(circle at center, var(--red-accent), transparent 130%);
-}  
-
-.filter-section-title { display: none; }
-
-.filter-checkboxes {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5px;
-    order: 2;
-    margin-top: -8px;
+    background: radial-gradient(circle at center, var(--red-accent), transparent 110%);
+    margin: 5px 0;
 }
 
-.filter-checkbox-label {
-    font-size: 0.75rem;
-    padding: 4px 5px;
+.filter-popup-champs .filter-checkbox-label {
+    font-size: 0.85rem;
+    padding: 2px 5px;
+}
+
+/* Основные чекбоксы скрываем на мобильной версии */
+.filter-checkboxes {
+    display: none;
 }
 
 .drivers-cards-area {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 8px;
+    gap: 5px;
     padding: 8px;
 }
 

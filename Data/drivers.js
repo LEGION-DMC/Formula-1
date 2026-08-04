@@ -13,7 +13,7 @@ const driversData = [
         wins: 12,
         podiums: 47,
         poles: 16,
-        note: "",
+        note: "Выступает под #1 - в качестве действующего чемпиона мира. Собвсвенный момер пилота #4.",
         bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул."
     },
     {   id: "verstappen", 
@@ -472,6 +472,16 @@ function buildFilterPanel(panel, cardsArea) {
     searchInput.className = 'driver-search-input';
     searchInput.placeholder = 'Поиск...';
     
+    // Кнопка фильтров (только для мобильной версии)
+    const filterToggleBtn = document.createElement('button');
+    filterToggleBtn.className = 'filter-toggle-btn';
+    filterToggleBtn.innerHTML = '⚙';
+    
+    // Кнопка сброса
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'filter-reset-btn';
+    resetBtn.textContent = 'Сбросить';
+    
     // Разделитель
     const divider1 = document.createElement('hr');
     divider1.className = 'filter-divider';
@@ -481,7 +491,7 @@ function buildFilterPanel(panel, cardsArea) {
     filterTitle.className = 'filter-section-title';
     filterTitle.textContent = 'Команды';
     
-    // Контейнер чекбоксов команд
+    // Контейнер чекбоксов команд (скрыт на мобильной версии)
     const checkboxesContainer = document.createElement('div');
     checkboxesContainer.className = 'filter-checkboxes';
     
@@ -512,24 +522,84 @@ function buildFilterPanel(panel, cardsArea) {
     champsContainer.className = 'filter-checkboxes';
     const champsCheckbox = createCheckbox('champs', 'Чемпионы мира', false, champsContainer);
     
-    // Кнопка сброса
-    const resetBtn = document.createElement('button');
-    resetBtn.className = 'filter-reset-btn';
-    resetBtn.textContent = 'Сбросить';
+    // ==============================================
+    // МОБИЛЬНАЯ ПОПАПКА С ЧЕКБОКСАМИ
+    // ==============================================
+    const popupOverlay = document.createElement('div');
+    popupOverlay.className = 'filter-checkboxes-popup';
+    
+    const popupInner = document.createElement('div');
+    popupInner.className = 'filter-checkboxes-popup-inner';
+    
+    // Заголовок попапки
+    const popupHeader = document.createElement('div');
+    popupHeader.className = 'filter-popup-header';
+    
+    const popupTitle = document.createElement('span');
+    popupTitle.className = 'filter-popup-title';
+    popupTitle.textContent = 'Фильтры';
+    
+    const popupClose = document.createElement('button');
+    popupClose.className = 'filter-popup-close';
+    popupClose.innerHTML = '&times;';
+    popupClose.setAttribute('aria-label', 'Закрыть фильтры');
+    
+    popupHeader.appendChild(popupTitle);
+    popupHeader.appendChild(popupClose);
+    popupInner.appendChild(popupHeader);
+    
+    // Секция "Команды"
+    const popupTeamsTitle = document.createElement('div');
+    popupTeamsTitle.className = 'filter-popup-section-title';
+    popupTeamsTitle.textContent = 'Команды';
+    popupInner.appendChild(popupTeamsTitle);
+    
+    const popupCheckboxesContainer = document.createElement('div');
+    popupCheckboxesContainer.className = 'filter-popup-checkboxes';
+    
+    // Клонируем чекбоксы для попапки
+    const popupAllCheckbox = createCheckbox('all', 'ВСЕ', true, popupCheckboxesContainer);
+    const popupTeamCheckboxes = {};
+    regularTeams.forEach(team => {
+        const cb = createCheckbox(team, team, false, popupCheckboxesContainer);
+        popupTeamCheckboxes[team] = cb;
+    });
+    
+    popupInner.appendChild(popupCheckboxesContainer);
+    
+    // Разделитель
+    const popupDivider = document.createElement('hr');
+    popupDivider.className = 'filter-popup-divider';
+    popupInner.appendChild(popupDivider);
+    
+    // Секция "Чемпионы мира"
+    const popupChampsContainer = document.createElement('div');
+    popupChampsContainer.className = 'filter-popup-champs';
+    const popupChampsCheckbox = createCheckbox('champs', 'Чемпионы мира', false, popupChampsContainer);
+    popupInner.appendChild(popupChampsContainer);
+    
+    popupOverlay.appendChild(popupInner);
     
     // Собираем панель
     panel.appendChild(searchInput);
+    panel.appendChild(filterToggleBtn);
+    panel.appendChild(resetBtn);
     panel.appendChild(divider1);
     panel.appendChild(filterTitle);
     panel.appendChild(checkboxesContainer);
     panel.appendChild(divider2);
     panel.appendChild(champsContainer);
-    panel.appendChild(resetBtn);
+    panel.appendChild(popupOverlay);
     
     // Состояние фильтров
     let activeTeamFilters = new Set(regularTeams);
     let champsOnly = false;
     let isAllSelected = true;
+    
+    // Функция синхронизации чекбоксов (основные <-> попапка)
+    function syncCheckboxes(source, target) {
+        target.checked = source.checked;
+    }
     
     function applyFilters() {
         const searchTerm = searchInput.value.toLowerCase().trim();
@@ -570,78 +640,152 @@ function buildFilterPanel(panel, cardsArea) {
         renderDriverCards(filtered, cardsArea);
     }
     
-    // Поиск
-    searchInput.addEventListener('input', applyFilters);
-    
-    // Чекбоксы команд
-    checkboxesContainer.addEventListener('change', (e) => {
+    // Обработчик для чекбоксов (общий для основной и попап-версии)
+    function handleCheckboxChange(e, sourceCheckboxes, sourceAll, sourceTeamCheckboxes, isPopup) {
         if (e.target.type === 'checkbox') {
             const checkbox = e.target;
             const value = checkbox.dataset.filterValue;
+            const targetCheckboxes = isPopup ? teamCheckboxes : popupTeamCheckboxes;
+            const targetAll = isPopup ? allCheckbox : popupAllCheckbox;
+            const targetChamps = isPopup ? champsCheckbox : popupChampsCheckbox;
             
             if (value === 'all') {
                 if (checkbox.checked) {
                     // Сбрасываем выбор команд
-                    Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
+                    Object.values(sourceTeamCheckboxes).forEach(cb => cb.checked = false);
+                    Object.values(targetCheckboxes).forEach(cb => cb.checked = false);
                     activeTeamFilters = new Set(regularTeams);
                     isAllSelected = true;
                     
                     // Сбрасываем фильтр "Чемпионы мира"
-                    champsCheckbox.checked = false;
+                    sourceChampsCheckbox.checked = false;
+                    targetChamps.checked = false;
                     champsOnly = false;
                 } else {
-                    const anyTeamChecked = Object.values(teamCheckboxes).some(cb => cb.checked);
+                    const anyTeamChecked = Object.values(sourceTeamCheckboxes).some(cb => cb.checked);
                     if (!anyTeamChecked) {
                         checkbox.checked = true;
+                        if (targetAll) targetAll.checked = true;
                     } else {
                         isAllSelected = false;
                     }
                 }
             } else {
                 if (checkbox.checked) {
-                    allCheckbox.checked = false;
+                    sourceAll.checked = false;
+                    if (targetAll) targetAll.checked = false;
                     isAllSelected = false;
                 }
                 
                 const selectedTeams = new Set();
-                Object.entries(teamCheckboxes).forEach(([team, cb]) => {
+                Object.entries(sourceTeamCheckboxes).forEach(([team, cb]) => {
                     if (cb.checked) {
                         selectedTeams.add(team);
                     }
                 });
                 
                 if (selectedTeams.size === 0) {
-                    allCheckbox.checked = true;
+                    sourceAll.checked = true;
+                    if (targetAll) targetAll.checked = true;
                     activeTeamFilters = new Set(regularTeams);
                     isAllSelected = true;
                     
                     // Сбрасываем фильтр "Чемпионы мира"
-                    champsCheckbox.checked = false;
+                    sourceChampsCheckbox.checked = false;
+                    if (targetChamps) targetChamps.checked = false;
                     champsOnly = false;
                 } else {
                     activeTeamFilters = new Set(selectedTeams);
                 }
             }
             
+            // Синхронизация
+            Object.keys(sourceTeamCheckboxes).forEach(team => {
+                if (targetCheckboxes[team]) {
+                    targetCheckboxes[team].checked = sourceTeamCheckboxes[team].checked;
+                }
+                if (sourceCheckboxes[team]) {
+                    sourceCheckboxes[team].checked = targetCheckboxes[team].checked;
+                }
+            });
+            
+            if (sourceAll && targetAll) {
+                sourceAll.checked = targetAll.checked;
+            }
+            
             applyFilters();
         }
+    }
+    
+    // Обработчик для "Чемпионы мира"
+    function handleChampsChange(sourceCheckbox, targetCheckbox) {
+        champsOnly = sourceCheckbox.checked;
+        if (targetCheckbox) targetCheckbox.checked = sourceCheckbox.checked;
+        applyFilters();
+    }
+    
+    // Назначаем обработчики для основной панели
+    checkboxesContainer.addEventListener('change', (e) => {
+        handleCheckboxChange(e, teamCheckboxes, allCheckbox, teamCheckboxes, false);
     });
     
-    // Чекбокс «Чемпионы мира»
     champsCheckbox.addEventListener('change', () => {
-        champsOnly = champsCheckbox.checked;
-        applyFilters();
+        handleChampsChange(champsCheckbox, popupChampsCheckbox);
+    });
+    
+    // Назначаем обработчики для попапки
+    popupCheckboxesContainer.addEventListener('change', (e) => {
+        handleCheckboxChange(e, popupTeamCheckboxes, popupAllCheckbox, popupTeamCheckboxes, true);
+    });
+    
+    popupChampsCheckbox.addEventListener('change', () => {
+        handleChampsChange(popupChampsCheckbox, champsCheckbox);
+    });
+    
+    // Поиск
+    searchInput.addEventListener('input', applyFilters);
+    
+    // Кнопка фильтров - открывает попапку
+    filterToggleBtn.addEventListener('click', () => {
+        popupOverlay.classList.toggle('active');
+        filterToggleBtn.classList.toggle('active');
+    });
+    
+    // Закрытие попапки
+    popupClose.addEventListener('click', () => {
+        popupOverlay.classList.remove('active');
+        filterToggleBtn.classList.remove('active');
+    });
+    
+    popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) {
+            popupOverlay.classList.remove('active');
+            filterToggleBtn.classList.remove('active');
+        }
     });
     
     // Сброс
     resetBtn.addEventListener('click', () => {
         searchInput.value = '';
+        
+        // Сбрасываем основную панель
         allCheckbox.checked = true;
         Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
         champsCheckbox.checked = false;
+        
+        // Сбрасываем попапку
+        popupAllCheckbox.checked = true;
+        Object.values(popupTeamCheckboxes).forEach(cb => cb.checked = false);
+        popupChampsCheckbox.checked = false;
+        
         activeTeamFilters = new Set(regularTeams);
         champsOnly = false;
         isAllSelected = true;
+        
+        // Закрываем попапку
+        popupOverlay.classList.remove('active');
+        filterToggleBtn.classList.remove('active');
+        
         applyFilters();
     });
     
@@ -717,9 +861,16 @@ function renderDriverCards(drivers, container) {
         container.appendChild(empty);
         return;
     }
-    
+	
+    const sortedDrivers = [...drivers].sort((a, b) => {
+        // Safety Car (номер "SC") отправляем в конец
+        if (a.number === 'SC') return 1;
+        if (b.number === 'SC') return -1;
+        return Number(a.number) - Number(b.number);
+    });
+	
     // Создаём карточки
-    drivers.forEach(driver => {
+    sortedDrivers.forEach(driver => {
         const card = document.createElement('div');
         card.className = 'driver-card';
         card.style.setProperty('--team-color', getTeamColor(driver.team));
@@ -1131,7 +1282,8 @@ function getCountryName(code) {
         'tr': 'Турция',
         'pt': 'Португалия',
         'co': 'Колумбия',
-        'my': 'Малайзия'
+        'my': 'Малайзия',
+        'nz': 'Новая Зеландия',
     };
     return countries[code] || code.toUpperCase();
 }
