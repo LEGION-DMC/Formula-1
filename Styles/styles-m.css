@@ -847,6 +847,25 @@ body {
 .gp-cell .gp-full { display: none; }
 .gp-cell .gp-short { display: inline; }
 
+.results-points-note2 {
+    align-items: flex-start;
+    padding: 2px 4px;
+}
+
+.points-note-icon2 {
+    height: auto;
+    margin-top: 3.5%;
+}
+
+.points-note-text2 {
+    display: block;
+    line-height: 1.5;
+}
+    
+.points-note-text2 br {
+    display: block;
+}
+
 /* ГЛАВНАЯ                                        */
 /* ============================================== */
 .main-title {

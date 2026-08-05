@@ -145,7 +145,7 @@ const calendarData = [
 	},
 	{   id: "malaysia",
 		track: "sepang",
-		date: "2026-10-04 22:55",
+		date: "2026-10-04 16:00",
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
@@ -705,7 +705,7 @@ function renderCalendarCards(container) {
         const imageDiv = document.createElement('div');
         imageDiv.className = 'calendar-card-image';
         imageDiv.innerHTML = `
-            <img src="Images/Tracks/${track.id}.webp" alt="${track.id}" onerror="this.src='Images/Tracks/default.png'">
+            <img src="Images/Tracks/${track.id}.png" alt="${track.id}" onerror="this.src='Images/Tracks/default.png'">
         `;
 
         // Информация
@@ -843,6 +843,42 @@ function updateCalendarTimer(timer) {
     if (secondsEl) secondsEl.textContent = String(secs).padStart(2, '0');
 }
 
+function autoShrinkHeaders() {
+    const headers = document.querySelectorAll('.tm-header h2');
+    
+    headers.forEach(header => {
+        const container = header.closest('.tm-header') || header.parentElement;
+        // Вычитаем только правый отступ (30px)
+        const containerWidth = container.clientWidth - 35; // только правый отступ
+        
+        let fontSize = parseFloat(getComputedStyle(header).fontSize);
+        const minFontSize = 10;
+        
+        const temp = document.createElement('span');
+        temp.style.cssText = `
+            font-family: 'F1Title', sans-serif;
+            white-space: nowrap;
+            visibility: hidden;
+            position: absolute;
+            font-size: ${fontSize}px;
+        `;
+        temp.textContent = header.textContent;
+        document.body.appendChild(temp);
+        
+        while (temp.offsetWidth > containerWidth && fontSize > minFontSize) {
+            fontSize -= 1;
+            temp.style.fontSize = fontSize + 'px';
+        }
+        
+        header.style.fontSize = fontSize + 'px';
+        header.style.whiteSpace = 'nowrap';
+        header.style.overflow = 'hidden';
+        header.style.textOverflow = 'ellipsis';
+        
+        document.body.removeChild(temp);
+    });
+}
+
 function openTrackModal(track, gp) {
     const existing = document.querySelector('.track-modal-overlay');
     if (existing) existing.remove();
@@ -903,7 +939,7 @@ function openTrackModal(track, gp) {
         <button class="track-modal-close">&times;</button>
         <div class="track-modal-layout">
             <div class="tm-track-image">
-                <img src="Images/Tracks/${track.id}.webp" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
+                <img src="Images/Tracks/${track.id}.png" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
             </div>
             <div class="tm-track-info">
                 <div class="tm-header">
@@ -960,7 +996,8 @@ function openTrackModal(track, gp) {
             </div>
         </div>
     `;
-
+    setTimeout(autoShrinkHeaders, 10);
+	
     modal.querySelector('.track-modal-close').addEventListener('click', close);
 
     overlay.appendChild(modal);

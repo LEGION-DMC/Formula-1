@@ -963,32 +963,21 @@ function renderDriverDetailedTable(container, filterTeam) {
 	pointsNote.className = 'results-points-note';
 	pointsNote.innerHTML = `
 		<span class="points-note-icon">🛈 </span>
-		<span class="points-note-text">Система начисления очков:
-			<span class="points-pos">1</span> - 25 •
-			<span class="points-pos">2</span> - 18 •
-			<span class="points-pos">3</span> - 15 •
-			<span class="points-pos">4</span> - 12 •
-			<span class="points-pos">5</span> - 10 •
-			<span class="points-pos">6</span> - 8 •
-			<span class="points-pos">7</span> - 6 •
-			<span class="points-pos">8</span> - 4 •
-			<span class="points-pos">9</span> - 2 •
-			<span class="points-pos">10</span> - 1
-		</span>
+		<span class="points-note-text">Система начисления очков: <span>1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span></span>
 	`;
 	wrapper.appendChild(pointsNote);
 	
     // ПРИМЕЧАНИЕ О DNF/DNS/DSQ (первое)
-    const statusNote = document.createElement('div');
-    statusNote.className = 'results-points-note';
-    statusNote.innerHTML = `
-        <span class="points-note-icon">🛈</span>
-        <span class="points-note-text">
-            <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал) • 
-            <span class="dns-tag">DNS</span> — Did Not Start (не стартовал) • 
-            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
-        </span>
-    `;
+	const statusNote = document.createElement('div');
+	statusNote.className = 'results-points-note2';
+	statusNote.innerHTML = `
+		<span class="points-note-icon2">🛈</span>
+		<span class="points-note-text2">
+			<span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
+			<span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
+			<span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+		</span>
+	`;
     wrapper.appendChild(statusNote);
 
     container.appendChild(wrapper);
@@ -1087,30 +1076,21 @@ function renderSprintDetailedTable(container, filterTeam) {
 	pointsNote.className = 'results-points-note';
 	pointsNote.innerHTML = `
 		<span class="points-note-icon">🛈 </span>
-		<span class="points-note-text">Система начисления очков:
-			<span class="points-pos">1</span> - 8 •
-			<span class="points-pos">2</span> - 7 •
-			<span class="points-pos">3</span> - 6 •
-			<span class="points-pos">4</span> - 5 •
-			<span class="points-pos">5</span> - 4 •
-			<span class="points-pos">6</span> - 3 •
-			<span class="points-pos">7</span> - 2 •
-			<span class="points-pos">8</span> - 1
-		</span>
+		<span class="points-note-text">Система начисления очков: <span>1:8 • 2:7 • 3:6 • 4:5 • 5:4 • 6:3 • 7:2 • 8:1</span></span>
 	`;
 	wrapper.appendChild(pointsNote);
 	
     // ПРИМЕЧАНИЕ О DNF/DNS/DSQ (первое)
-    const statusNote = document.createElement('div');
-    statusNote.className = 'results-points-note';
-    statusNote.innerHTML = `
-        <span class="points-note-icon">🛈</span>
-        <span class="points-note-text">
-            <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал) • 
-            <span class="dns-tag">DNS</span> — Did Not Start (не стартовал) • 
-            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
-        </span>
-    `;
+	const statusNote = document.createElement('div');
+	statusNote.className = 'results-points-note2';
+	statusNote.innerHTML = `
+		<span class="points-note-icon2">🛈</span>
+		<span class="points-note-text2">
+			<span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
+			<span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
+			<span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+		</span>
+	`;
     wrapper.appendChild(statusNote);
     
     container.appendChild(wrapper);
@@ -1124,16 +1104,39 @@ function addHoverHandlers(fixedPart, scrollPart) {
     const scrollRows = scrollPart.querySelectorAll('.detailed-data-row');
     const headerCells = scrollPart.querySelectorAll('.detailed-header-row .gp-col');
     const dataRows = scrollPart.querySelectorAll('.detailed-data-row');
+    const allCells = scrollPart.querySelectorAll('.detailed-data-row .detailed-cell');
     
     // Функция для очистки всех подсветок
     function clearAllHighlights() {
         fixedRows.forEach(row => row.classList.remove('hovered-row'));
         scrollRows.forEach(row => row.classList.remove('hovered-row'));
+        
+        // Очищаем подсветку ячеек
         scrollPart.querySelectorAll('.detailed-cell').forEach(cell => {
             cell.classList.remove('highlighted-cell', 'column-highlighted');
         });
+        
+        // Очищаем подсветку хедера
         headerCells.forEach(cell => {
-            cell.classList.remove('column-header-highlighted');
+            cell.classList.remove('column-header-highlighted', 'column-highlighted');
+        });
+    }
+    
+    // Функция для подсветки колонки
+    function highlightColumn(colIndex) {
+        // Подсвечиваем хедер
+        headerCells.forEach((headerCell, index) => {
+            if (index === colIndex) {
+                headerCell.classList.add('column-header-highlighted');
+            }
+        });
+        
+        // Подсвечиваем все ячейки в этой колонке
+        dataRows.forEach(row => {
+            const cell = row.querySelector(`.gp-col[data-col="${colIndex}"]`);
+            if (cell) {
+                cell.classList.add('column-highlighted');
+            }
         });
     }
     
@@ -1141,20 +1144,11 @@ function addHoverHandlers(fixedPart, scrollPart) {
     headerCells.forEach((headerCell, colIndex) => {
         headerCell.addEventListener('mouseenter', function(e) {
             clearAllHighlights();
-            
-            // Подсвечиваем сам хедер
+            highlightColumn(colIndex);
             this.classList.add('column-header-highlighted');
-            
-            // Подсвечиваем все ячейки в этой колонке
-            dataRows.forEach(row => {
-                const cell = row.querySelector(`.gp-col[data-col="${colIndex}"]`);
-                if (cell) {
-                    cell.classList.add('column-highlighted');
-                }
-            });
         });
         
-        headerCell.addEventListener('mouseleave', function() {
+        headerCell.addEventListener('mouseleave', function(e) {
             clearAllHighlights();
         });
     });
@@ -1177,13 +1171,14 @@ function addHoverHandlers(fixedPart, scrollPart) {
     });
     
     // Обработчики для ячеек в скроллящейся части
-    scrollPart.querySelectorAll('.detailed-data-row .detailed-cell').forEach(cell => {
+    allCells.forEach(cell => {
         cell.addEventListener('mouseenter', function(e) {
             e.stopPropagation();
             clearAllHighlights();
             
             const row = this.closest('.detailed-data-row');
             const rowIndex = row ? row.dataset.rowIndex : null;
+            const colIndex = this.dataset.col;
             
             // Подсвечиваем строки в обеих частях
             if (row) {
@@ -1193,7 +1188,12 @@ function addHoverHandlers(fixedPart, scrollPart) {
                 }
             }
             
-            // Отдельно подсвечиваем ячейку, на которую наведено
+            // Подсвечиваем колонку
+            if (colIndex !== undefined && colIndex !== 'sum') {
+                highlightColumn(parseInt(colIndex));
+            }
+            
+            // Подсвечиваем саму ячейку
             this.classList.add('highlighted-cell');
         });
         
@@ -1222,11 +1222,11 @@ function addHoverHandlers(fixedPart, scrollPart) {
         });
     });
     
-    // Обработчик клика для снятия подсветки
+    // Добавляем обработчик для снятия подсветки при клике
     scrollPart.addEventListener('click', function(e) {
         const cell = e.target.closest('.detailed-cell');
         if (cell && cell.classList.contains('highlighted-cell')) {
-            // Можно оставить или убрать подсветку
+            // Можно оставить или убрать подсветку — оставляем
         }
     });
 }
