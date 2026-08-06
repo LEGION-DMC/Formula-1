@@ -424,7 +424,7 @@ const driversData = [
         note: "Первый и единственный пилот из Китая в истории F1",
         bio: "Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках."
     },
-	// Safety Car
+	// Safety Car - Medical Car
     {   id: "maylander", 
         number: "SC",
         name: "Бернд Майлендер",
@@ -434,13 +434,29 @@ const driversData = [
         birthPlace: "Вайблинген, Германия",
         birthDate: "29.05.1971",
 		debut: "2000 - Safety Car",
-        titles: 0,
-		hattricks: 0,
-        wins: 0,
-        podiums: 0,
-        poles: 0,
-        note: "",
         bio: "Бессменным официальным пилотом автомобиля безопасности в чемпионатах F1. В 2000 году в составе заводской команды Porsche, пилотируя Porsche 911 GT3-R, одержал победу в гонке на выносливость «24 часа Нюрбургринга»."
+    },
+    {   id: "сorreia", 
+        number: "M1",
+        name: "Бруно Коррейя",
+        namem: "Б. Коррейя",
+        country: "pt",
+        team: "Medical Car",
+        birthPlace: "Лиссабон, Португалия",
+        birthDate: "16.11.1977",
+		debut: "2015 - Medical Car",
+        bio: "Бывший гонщик португалец. В настоящее время он является пилотом автомобиля безопасности в FIA Formula E и делит обязанности с Карлом Рейндлером в качестве пилота медицинской машины в Formula 1."
+    },
+    {   id: "reindler", 
+        number: "M2",
+        name: "Карл Райндлер",
+        namem: "К. Райндлер",
+        country: "au",
+        team: "Medical Car",
+        birthPlace: "Перт, Австралия",
+        birthDate: "18.04.1985",
+		debut: "2025 - Medical Car",
+        bio: "Австралийский автогонщик, который ранее участвовал в чемпионате суперкаров. В настоящее время он делит обязанности с Бруно Коррейя в качестве пилота медицинской машины в Formula 1."
     },
 ];
 
@@ -500,7 +516,8 @@ function buildFilterPanel(panel, cardsArea) {
     const regularTeams = teams
         .filter(t => t.toLowerCase() !== 'резерв' && 
                      t.toLowerCase() !== 'reserve' &&
-                     t.toLowerCase() !== 'safety car')
+                     t.toLowerCase() !== 'safety car' &&
+                     t.toLowerCase() !== 'medical car')
         .sort((a, b) => a.localeCompare(b, 'ru'));
     
     // Чекбокс ВСЕ
@@ -1056,7 +1073,12 @@ function openDriverModal(driver) {
     const modalNumber = document.createElement('div');
     modalNumber.className = 'modal-number';
     modalNumber.textContent = driver.number;
-    
+	
+	if (driver.team === 'Safety Car' || driver.team === 'Medical Car') {
+		modalNumber.style.fontSize = '4rem';
+		modalNumber.style.minWidth = '30px';
+	}
+
     const nameTeamContainer = document.createElement('div');
     nameTeamContainer.className = 'modal-name-team';
     
@@ -1136,29 +1158,49 @@ function openDriverModal(driver) {
     const block3 = document.createElement('div');
     block3.className = 'modal-block';
     
-    // Проверяем, является ли пилот Safety Car
-    const isSafetyCar = driver.team.toLowerCase() === 'safety car' || 
-                        driver.id === 'maylander' ||
-                        driver.number === 'SC';
+    // ПРАВИЛЬНАЯ ПРОВЕРКА для служебных автомобилей
+    const isSafetyCar = driver.team === 'Safety Car';
+    const isMedicalCar = driver.team === 'Medical Car';
+    const isOfficialCar = isSafetyCar || isMedicalCar;
     
     if (isSafetyCar) {
-        // Специальная статистика для Safety Car
+        // Статистика для Бернда Майлендера (Safety Car)
         const statsRow = document.createElement('div');
         statsRow.className = 'modal-stats-row';
         statsRow.innerHTML = `
-            <div class="stat-cell" title="«24 часа Нюрбургринга»">
+            <div class="stat-cell" title="24 часа Нюрбургринга (2000)">
                 <span class="stat-number">1</span>
                 <span class="stat-text">Титул</span>
             </div>
             <div class="stat-cell">
-                <span class="stat-number">14</span>
-                <span class="stat-text">ГП завершеных SC</span>
+                <span class="stat-number">11</span>
+                <span class="stat-text">ГП завершено SC</span>
             </div>
             <div class="stat-cell">
                 <span class="stat-number">500+</span>
                 <span class="stat-text">Гран-При</span>
             </div>
         `;
+        block3.appendChild(statsRow);
+    } else if (isMedicalCar) {
+        // Статистика для медицинских автомобилей
+        const statsRow = document.createElement('div');
+        statsRow.className = 'modal-stats-row';
+        
+        // Определяем, какой именно пилот Medical Car
+        if (driver.id === 'сorreia') {
+            // Бруно Коррейя
+            statsRow.innerHTML = `
+                <div class="stat-cell">
+                    <span class="stat-number">FE</span>
+                    <span class="stat-text">Safety Car</span>
+                </div>
+            `;
+        } else if (driver.id === 'reindler') {
+            // Карл Райндлер
+            statsRow.innerHTML = `
+            `;
+        } 
         block3.appendChild(statsRow);
     } else {
         // Обычная статистика для гонщиков
