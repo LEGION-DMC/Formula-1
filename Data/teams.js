@@ -209,39 +209,6 @@ const teamsData = [
         color: "#AAAADD",
 		info: "Американская команда, первый сезон которой начался в 2026 году в качестве конструктора, а с сезона 2029 года - будет ещё и в качестве поставщика двигателей."
     },
-
-	{ shortName: "Safety Car",
-	  fullName: "FIA Safety Car",
-	  base: "Женева, Швейцария",
-	  country: "ch",
-	  license_country: "ch",
-	  license: "Швейцария",
-	  director: "FIA",
-	  founder: "FIA",
-	  car: "GT 63 S 4MATIC+",
-	  engine: "Mercedes-AMG",
-	  power: "M177 4.0 V8 BT",
-	  fuel: "Petronas",
-	  debut: "1973",
-	  color: "#FF1801",
-	  info: "Официальный автомобиль безопасности Формулы-1. Используется для ограничения скорости на трассе в случае аварий или неблагоприятных погодных условий. С 2021 года используется Mercedes-AMG GT R."
-	},
-	{ shortName: "Medical Car",
-	  fullName: "FIA Medical Car",
-	  base: "Аффальтербах, Германия",
-	  country: "de",
-	  license_country: "ch",
-	  license: "Швейцария",
-	  director: "FIA",
-	  founder: "FIA",
-	  car: "GT 63 S 4MATIC+",
-	  engine: "Mercedes-AMG",
-	  power: "M177 4.0 V8 BT",
-	  fuel: "Petronas",
-	  debut: "1978",
-	  color: "#FF1801",
-	  info: "Официальный медицинский автомобиль Формулы-1. Следует за пелотоном на первом круге и выезжает на трассу при серьёзных авариях для оказания экстренной помощи. Оснащён реанимационным оборудованием и дефибриллятором."
-	},
 ];
 
 function getSeasonsCount(debutYear) {
@@ -342,14 +309,14 @@ function initTeamsPage(container) {
     // Сначала добавляем команды, у которых есть очки (отсортированные по убыванию)
     constructorStandings.forEach(standing => {
         const team = teamsData.find(t => t.shortName === standing.team);
-        if (team && team.shortName !== 'Safety Car' && team.shortName !== 'Medical Car') { // ← Исключаем Safety Car и Medical Car
+        if (team) {
             sortedTeams.push(team);
         }
     });
     
     // Добавляем команды, которых нет в standings (с 0 очками)
     teamsData.forEach(team => {
-        if (!sortedTeams.includes(team) && team.shortName !== 'Safety Car' && team.shortName !== 'Medical Car') { // ← Исключаем оба
+        if (!sortedTeams.includes(team)) {
             sortedTeams.push(team);
         }
     });
@@ -358,33 +325,11 @@ function initTeamsPage(container) {
     const grid = document.createElement('div');
     grid.className = 'teams-grid';
     
-    // Добавляем все обычные команды
+    // Добавляем все команды
     sortedTeams.forEach(team => {
         const card = createTeamCard(team);
         grid.appendChild(card);
     });
-    
-    // Добавляем разделитель
-    const divider = document.createElement('div');
-    divider.className = 'teams-divider';
-    divider.textContent = '— Официальные автомобили Formula 1 —';
-    grid.appendChild(divider);
-    
-    // Добавляем Safety Car
-    const safetyCarData = teamsData.find(t => t.shortName === 'Safety Car');
-    if (safetyCarData) {
-        const safetyCard = createTeamCard(safetyCarData);
-        safetyCard.classList.add('safety-car');
-        grid.appendChild(safetyCard);
-    }
-    
-    // Добавляем Medical Car
-    const medicalCarData = teamsData.find(t => t.shortName === 'Medical Car');
-    if (medicalCarData) {
-        const medicalCard = createTeamCard(medicalCarData);
-        medicalCard.classList.add('medical-car');
-        grid.appendChild(medicalCard);
-    }
     
     container.appendChild(grid);
     
@@ -436,12 +381,7 @@ function createTeamCard(team) {
             const numberSpan = document.createElement('span');
             numberSpan.className = 'team-driver-number';
             numberSpan.textContent = driver.number;
-			
-			if (team.shortName === 'Safety Car' || team.shortName === 'Medical Car') {
-				numberSpan.style.fontSize = '1rem';
-				numberSpan.style.minWidth = '20px';
-			}
-			
+            
             const nameSpan = document.createElement('span');
             nameSpan.className = 'team-driver-name';
             nameSpan.innerHTML = `
@@ -506,47 +446,23 @@ function openTeamModal(team) {
     statsPanel.className = 'tm-stats-panel';
     statsPanel.style.setProperty('--team-color', team.color);
 
-    const isSafetyCar = team.shortName === 'Safety Car';
-    const isMedicalCar = team.shortName === 'Medical Car';
-    const isOfficialCar = isSafetyCar || isMedicalCar;
-
-    let statsHTML = '';
-
-    if (!isOfficialCar) {
-        statsHTML += `
-            <div class="tm-stat-cell">
-                <span class="tm-stat-label">Кубки конструкторов</span>
-                <span class="tm-stat-value">${team.titles || 0}</span>
-            </div>
-        `;
-    }
-
-    if (!isOfficialCar) {
-        statsHTML += `
-            <div class="tm-stat-cell">
-                <span class="tm-stat-label">Победы</span>
-                <span class="tm-stat-value">${team.wins}</span>
-            </div>
-        `;
-    }
-
-    if (!isOfficialCar) {
-        statsHTML += `
-            <div class="tm-stat-cell tm-stat-full">
-                <span class="tm-stat-label">Первая победа</span>
-                <span class="tm-stat-value">${team.firstWin || '---'}</span>
-            </div>
-        `;
-    }
-
-    statsHTML += `
+    const statsHTML = `
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Кубки конструкторов</span>
+            <span class="tm-stat-value">${team.titles || 0}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Победы</span>
+            <span class="tm-stat-value">${team.wins}</span>
+        </div>
+        <div class="tm-stat-cell tm-stat-full">
+            <span class="tm-stat-label">Первая победа</span>
+            <span class="tm-stat-value">${team.firstWin || '---'}</span>
+        </div>
         <div class="tm-stat-cell">
             <span class="tm-stat-label">Гоночные сезоны</span>
             <span class="tm-stat-value">${team.seasons}</span>
         </div>
-    `;
-
-    statsHTML += `
         <div class="tm-stat-cell">
             <span class="tm-stat-label">Дебют</span>
             <span class="tm-stat-value">${team.debut}</span>
@@ -606,7 +522,7 @@ function openTeamModal(team) {
             <img src="Images/Flags/${team.country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.country)}">${team.base}</span>
         </div>
         <div class="tm-info-cell">
-            <span class="tm-label">${isOfficialCar ? 'Ответственный' : 'Руководитель'}</span>
+            <span class="tm-label">Руководитель</span>
             <span class="tm-value">${team.director}</span>
         </div>
     `;
@@ -624,7 +540,7 @@ function openTeamModal(team) {
             <span class="tm-value"><img src="Images/Flags/${team.license_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.license_country)}">${team.license}</span>
         </div>
         <div class="tm-info-cell">
-            <span class="tm-label">${isOfficialCar ? 'Организация' : 'Основатель'}</span>
+            <span class="tm-label">Основатель</span>
             <span class="tm-value">${team.founder}</span>
         </div>
     `;
@@ -638,7 +554,7 @@ function openTeamModal(team) {
     infoRow3.className = 'tm-info-row';
     infoRow3.innerHTML = `
         <div class="tm-info-cell">
-            <span class="tm-label">О ${isOfficialCar ? 'автомобиле' : 'команде'}</span>
+            <span class="tm-label">О команде</span>
             <span class="tm-value">${team.info}</span>
         </div>
     `;
@@ -653,7 +569,7 @@ function openTeamModal(team) {
     
     const pilotsTitle = document.createElement('h3');
     pilotsTitle.className = 'tm-pilots-title';
-    pilotsTitle.textContent = isOfficialCar ? 'Водитель' : 'Пилоты';
+    pilotsTitle.textContent = 'Пилоты';
     pilotsSection.appendChild(pilotsTitle);
     
     const pilotsList = document.createElement('div');
@@ -726,7 +642,7 @@ function openTeamModal(team) {
     bolidInfo.className = 'tm-bolid-info';
     bolidInfo.innerHTML = `
         <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Модель</span>
+            <span class="tm-bolid-info-label">Шасси</span>
             <span class="tm-bolid-info-value">${team.car}</span>
         </div>
         <div class="tm-bolid-info-cell">
@@ -738,7 +654,7 @@ function openTeamModal(team) {
             <span class="tm-bolid-info-value">${team.fuel}</span>
         </div>
         <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Технические характеристики</span>
+            <span class="tm-bolid-info-label">Силовая установка</span>
             <span class="tm-bolid-info-value">${team.power}</span>
         </div>
     `;

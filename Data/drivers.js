@@ -424,40 +424,6 @@ const driversData = [
         note: "Первый и единственный пилот из Китая в истории F1",
         bio: "Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках."
     },
-	// Safety Car - Medical Car
-    {   id: "maylander", 
-        number: "SC",
-        name: "Бернд Майлендер",
-        namem: "Б. Майлендер",
-        country: "de",
-        team: "Safety Car",
-        birthPlace: "Вайблинген, Германия",
-        birthDate: "29.05.1971",
-		debut: "2000 - Safety Car",
-        bio: "Бессменным официальным пилотом автомобиля безопасности в чемпионатах F1. В 2000 году в составе заводской команды Porsche, пилотируя Porsche 911 GT3-R, одержал победу в гонке на выносливость «24 часа Нюрбургринга»."
-    },
-    {   id: "сorreia", 
-        number: "M1",
-        name: "Бруно Коррейя",
-        namem: "Б. Коррейя",
-        country: "pt",
-        team: "Medical Car",
-        birthPlace: "Лиссабон, Португалия",
-        birthDate: "16.11.1977",
-		debut: "2015 - Medical Car",
-        bio: "Бывший гонщик португалец. В настоящее время он является пилотом автомобиля безопасности в FIA Formula E и делит обязанности с Карлом Рейндлером в качестве пилота медицинской машины в Formula 1."
-    },
-    {   id: "reindler", 
-        number: "M2",
-        name: "Карл Райндлер",
-        namem: "К. Райндлер",
-        country: "au",
-        team: "Medical Car",
-        birthPlace: "Перт, Австралия",
-        birthDate: "18.04.1985",
-		debut: "2025 - Medical Car",
-        bio: "Австралийский автогонщик, который ранее участвовал в чемпионате суперкаров. В настоящее время он делит обязанности с Бруно Коррейя в качестве пилота медицинской машины в Formula 1."
-    },
 ];
 
 function initDriversPage(container) {
@@ -511,19 +477,17 @@ function buildFilterPanel(panel, cardsArea) {
     const checkboxesContainer = document.createElement('div');
     checkboxesContainer.className = 'filter-checkboxes';
     
-    // Исключаем Safety Car и Резерв из списка команд
+    // Получаем список команд (исключая резерв)
     const teams = [...new Set(driversData.map(d => d.team))];
     const regularTeams = teams
         .filter(t => t.toLowerCase() !== 'резерв' && 
-                     t.toLowerCase() !== 'reserve' &&
-                     t.toLowerCase() !== 'safety car' &&
-                     t.toLowerCase() !== 'medical car')
+                     t.toLowerCase() !== 'reserve')
         .sort((a, b) => a.localeCompare(b, 'ru'));
     
     // Чекбокс ВСЕ
     const allCheckbox = createCheckbox('all', 'ВСЕ', true, checkboxesContainer);
     
-    // Чекбоксы команд (без Резерва и Safety Car)
+    // Чекбоксы команд
     const teamCheckboxes = {};
     regularTeams.forEach(team => {
         const cb = createCheckbox(team, team, false, checkboxesContainer);
@@ -613,21 +577,15 @@ function buildFilterPanel(panel, cardsArea) {
     let champsOnly = false;
     let isAllSelected = true;
     
-    // Функция синхронизации чекбоксов (основные <-> попапка)
-    function syncCheckboxes(source, target) {
-        target.checked = source.checked;
-    }
-    
     function applyFilters() {
         const searchTerm = searchInput.value.toLowerCase().trim();
         
         let filtered = driversData;
         
-        // Исключаем резервных пилотов и Safety Car
+        // Исключаем резервных пилотов
         filtered = filtered.filter(driver => 
             driver.team.toLowerCase() !== 'резерв' && 
-            driver.team.toLowerCase() !== 'reserve' &&
-            driver.team.toLowerCase() !== 'safety car'
+            driver.team.toLowerCase() !== 'reserve'
         );
         
         // Фильтр по командам
@@ -839,24 +797,21 @@ function animateCardsAppearance(container) {
     
     if (cards.length === 0) return;
     
-    // Определяем количество колонок в сетке
     const containerWidth = container.offsetWidth || container.parentElement.offsetWidth || 1200;
-    const cardMinWidth = 190; // min-width из grid-template-columns
-    const gap = 10; // gap из grid-template-columns
+    const cardMinWidth = 190;
+    const gap = 10;
     const cols = Math.max(1, Math.floor((containerWidth + gap) / (cardMinWidth + gap)));
     
-    // Сбрасываем начальное состояние для всех карточек
     cards.forEach((card) => {
         card.style.opacity = '0';
         card.style.transform = 'scale(0.92) translateY(15px)';
         card.style.transition = 'none';
     });
     
-    // Показываем карточки по рядам
     requestAnimationFrame(() => {
         cards.forEach((card, index) => {
             const rowIndex = Math.floor(index / cols);
-            const delay = rowIndex * 80; // 80ms между рядами
+            const delay = rowIndex * 80;
             
             card.style.transition = `opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms`;
             
@@ -878,15 +833,9 @@ function renderDriverCards(drivers, container) {
         container.appendChild(empty);
         return;
     }
-	
-    const sortedDrivers = [...drivers].sort((a, b) => {
-        // Safety Car (номер "SC") отправляем в конец
-        if (a.number === 'SC') return 1;
-        if (b.number === 'SC') return -1;
-        return Number(a.number) - Number(b.number);
-    });
-	
-    // Создаём карточки
+    
+    const sortedDrivers = [...drivers].sort((a, b) => Number(a.number) - Number(b.number));
+    
     sortedDrivers.forEach(driver => {
         const card = document.createElement('div');
         card.className = 'driver-card';
@@ -995,7 +944,6 @@ function renderDriverCards(drivers, container) {
         container.appendChild(card);
     });
     
-    // Запускаем анимацию
     requestAnimationFrame(() => {
         animateCardsAppearance(container);
     });
@@ -1073,12 +1021,7 @@ function openDriverModal(driver) {
     const modalNumber = document.createElement('div');
     modalNumber.className = 'modal-number';
     modalNumber.textContent = driver.number;
-	
-	if (driver.team === 'Safety Car' || driver.team === 'Medical Car') {
-		modalNumber.style.fontSize = '4rem';
-		modalNumber.style.minWidth = '30px';
-	}
-
+    
     const nameTeamContainer = document.createElement('div');
     nameTeamContainer.className = 'modal-name-team';
     
@@ -1126,7 +1069,6 @@ function openDriverModal(driver) {
     const block2 = document.createElement('div');
     block2.className = 'modal-block';
 
-    // Первая строка: Место рождения и Дата рождения
     const row1 = document.createElement('div');
     row1.className = 'modal-details-row';
     row1.innerHTML = `
@@ -1140,7 +1082,6 @@ function openDriverModal(driver) {
         </div>
     `;
 
-    // Вторая строка: Дебют
     const row2 = document.createElement('div');
     row2.className = 'modal-details-row';
     row2.style.gridTemplateColumns = '1fr';
@@ -1158,82 +1099,36 @@ function openDriverModal(driver) {
     const block3 = document.createElement('div');
     block3.className = 'modal-block';
     
-    // ПРАВИЛЬНАЯ ПРОВЕРКА для служебных автомобилей
-    const isSafetyCar = driver.team === 'Safety Car';
-    const isMedicalCar = driver.team === 'Medical Car';
-    const isOfficialCar = isSafetyCar || isMedicalCar;
-    
-    if (isSafetyCar) {
-        // Статистика для Бернда Майлендера (Safety Car)
-        const statsRow = document.createElement('div');
-        statsRow.className = 'modal-stats-row';
-        statsRow.innerHTML = `
-            <div class="stat-cell" title="24 часа Нюрбургринга (2000)">
-                <span class="stat-number">1</span>
-                <span class="stat-text">Титул</span>
-            </div>
-            <div class="stat-cell">
-                <span class="stat-number">11</span>
-                <span class="stat-text">ГП завершено SC</span>
-            </div>
-            <div class="stat-cell">
-                <span class="stat-number">500+</span>
-                <span class="stat-text">Гран-При</span>
-            </div>
-        `;
-        block3.appendChild(statsRow);
-    } else if (isMedicalCar) {
-        // Статистика для медицинских автомобилей
-        const statsRow = document.createElement('div');
-        statsRow.className = 'modal-stats-row';
-        
-        // Определяем, какой именно пилот Medical Car
-        if (driver.id === 'сorreia') {
-            // Бруно Коррейя
-            statsRow.innerHTML = `
-                <div class="stat-cell">
-                    <span class="stat-number">FE</span>
-                    <span class="stat-text">Safety Car</span>
-                </div>
-            `;
-        } else if (driver.id === 'reindler') {
-            // Карл Райндлер
-            statsRow.innerHTML = `
-            `;
-        } 
-        block3.appendChild(statsRow);
-    } else {
-        // Обычная статистика для гонщиков
-        const statsRow = document.createElement('div');
-        statsRow.className = 'modal-stats-row';
-        statsRow.innerHTML = `
-            <div class="stat-cell">
-                <span class="stat-number">${driver.titles}</span>
-                <span class="stat-text">Титулы</span>
-            </div>
-            <div class="stat-cell">
-                <span class="stat-number">${driver.wins}</span>
-                <span class="stat-text">Победы</span>
-            </div>
-            <div class="stat-cell">
-                <span class="stat-number">${driver.hattricks}</span>
-                <span class="stat-text">Хэт-Трики</span>
-            </div>
-            <div class="stat-cell">
-                <span class="stat-number">${driver.podiums}</span>
-                <span class="stat-text">Подиумы</span>
-            </div>
-            <div class="stat-cell">
-                <span class="stat-number">${driver.poles}</span>
-                <span class="stat-text">Поулы</span>
-            </div>
-            <div class="stat-cell">
-                <span class="stat-number">${driver.fines || 0}/12</span>
-                <span class="stat-text">Штрафы</span>
-            </div>
-        `;
-        block3.appendChild(statsRow);
-    }
+    // Обычная статистика для всех гонщиков
+    const statsRow = document.createElement('div');
+    statsRow.className = 'modal-stats-row';
+    statsRow.innerHTML = `
+        <div class="stat-cell">
+            <span class="stat-number">${driver.titles}</span>
+            <span class="stat-text">Титулы</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.wins}</span>
+            <span class="stat-text">Победы</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.hattricks}</span>
+            <span class="stat-text">Хэт-Трики</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.podiums}</span>
+            <span class="stat-text">Подиумы</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.poles}</span>
+            <span class="stat-text">Поулы</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.fines || 0}/12</span>
+            <span class="stat-text">Штрафы</span>
+        </div>
+    `;
+    block3.appendChild(statsRow);
     
     rightSide.appendChild(block1);
     rightSide.appendChild(block2);
@@ -1255,7 +1150,6 @@ function openDriverModal(driver) {
     bioSection.appendChild(bioTitle);
     bioSection.appendChild(bioText);
 
-    // Компактное примечание после биографии
     if (driver.note) {
         const noteDiv = document.createElement('div');
         noteDiv.className = 'modal-note-compact';
