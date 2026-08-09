@@ -149,6 +149,7 @@ body {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     background-color: rgba(18, 18, 18, 0.5);
+    margin-top: 50px;
 }
 
 .driver-search-input {
@@ -405,6 +406,7 @@ body {
 
 .teams-grid { gap: 10px;
     padding-bottom: 20px;
+    margin-top: 40px;
  }
 
 .team-card {
@@ -513,7 +515,8 @@ body {
     }
 
 
-.stats-grid { grid-template-columns: 1fr; gap: 10px; }
+.stats-grid { grid-template-columns: 1fr; gap: 10px; 
+    margin-top: 40px;}
 .stats-table-wrapper { padding: 8px; }
 .stats-table { font-size: 0.75rem; }
 .stats-table thead th { font-size: 0.65rem; padding: 6px 4px; }
@@ -541,6 +544,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px 5px;
+    margin-top: 50px;
 }
 
 .calendar-nav-item {
@@ -643,6 +647,7 @@ body {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     padding: 10px 15px;
+    margin-top: 50px;
 }
 
 .constructor-row {
@@ -871,6 +876,7 @@ body {
 .main-title {
     font-size: 1.3rem;
     letter-spacing: 1px;
+    margin-top: 30px;
 }
     
 .main-header {
@@ -879,7 +885,7 @@ body {
 
 .main-blocks {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 8px;
 }
 
 /* Порядок плашек: ГП → Шины → Погода */
