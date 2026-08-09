@@ -515,61 +515,61 @@ function createTyreBlock() {
     const mediumCompound = tyreData.compounds.Medium;
     const softCompound = tyreData.compounds.Soft;
 
-	// Данные о характеристиках шин по ТИПАМ
-	const tyreSpecsByType = {
-		"Hard": {
-			img: "Images/Wheels/Hard.png",
-			common: { 
-				temp: "70 °C",
-				diameter: "18\"",
-				creator: "Pirelli"
-			},
-			front: { size: "280/705", weight: "10.4 кг" },
-			rear: { size: "375/710", weight: "12.8 кг" }
-		},
-		"Medium": {
-			img: "Images/Wheels/Medium.png",
-			common: { 
-				temp: "90 °C",
-				diameter: "18\"",
-				creator: "Pirelli"
-			},
-			front: { size: "280/705", weight: "10.4 кг" },
-			rear: { size: "375/710", weight: "12.8 кг" }
-		},
-		"Soft": {
-			img: "Images/Wheels/Soft.png",
-			common: { 
-				temp: "110 °C",
-				diameter: "18\"",
-				creator: "Pirelli"
-			},
-			front: { size: "280/705", weight: "10.4 кг" },
-			rear: { size: "375/710", weight: "12.8 кг" }
-		},
-		"Intermediate": {
-			img: "Images/Wheels/Intermediate.png",
-			common: { 
-				heating: "60 °C",
-				drainage: "31 л/с",
-				diameter: "18\"",
-				creator: "Pirelli"
-			},
-			front: { size: "280/710", weight: "10.3 кг" },
-			rear: { size: "375/715", weight: "13.2 кг" }
-		},
-		"Wet": {
-			img: "Images/Wheels/Wet.png",
-			common: { 
-				heating: "---",
-				drainage: "76 л/с",
-				diameter: "18\"",
-				creator: "Pirelli"
-			},
-			front: { size: "280/715", weight: "11.3 кг" },
-			rear: { size: "375/720", weight: "13.4 кг" }
-		}
-	};
+    // Данные о характеристиках шин по ТИПАМ
+    const tyreSpecsByType = {
+        "Hard": {
+            img: "Images/Wheels/Hard.png",
+            common: { 
+                temp: "70 °C",
+                diameter: "18\"",
+                creator: "Pirelli"
+            },
+            front: { size: "280/705", weight: "10.4 кг" },
+            rear: { size: "375/710", weight: "12.8 кг" }
+        },
+        "Medium": {
+            img: "Images/Wheels/Medium.png",
+            common: { 
+                temp: "90 °C",
+                diameter: "18\"",
+                creator: "Pirelli"
+            },
+            front: { size: "280/705", weight: "10.4 кг" },
+            rear: { size: "375/710", weight: "12.8 кг" }
+        },
+        "Soft": {
+            img: "Images/Wheels/Soft.png",
+            common: { 
+                temp: "110 °C",
+                diameter: "18\"",
+                creator: "Pirelli"
+            },
+            front: { size: "280/705", weight: "10.4 кг" },
+            rear: { size: "375/710", weight: "12.8 кг" }
+        },
+        "Intermediate": {
+            img: "Images/Wheels/Intermediate.png",
+            common: { 
+                heating: "60 °C",
+                drainage: "31 л/с",
+                diameter: "18\"",
+                creator: "Pirelli"
+            },
+            front: { size: "280/710", weight: "10.3 кг" },
+            rear: { size: "375/715", weight: "13.2 кг" }
+        },
+        "Wet": {
+            img: "Images/Wheels/Wet.png",
+            common: { 
+                heating: "---",
+                drainage: "76 л/с",
+                diameter: "18\"",
+                creator: "Pirelli"
+            },
+            front: { size: "280/715", weight: "11.3 кг" },
+            rear: { size: "375/720", weight: "13.4 кг" }
+        }
+    };
 
     // Маппинг составов на типы
     function getTyreTypeByCompound(compound) {
@@ -579,22 +579,7 @@ function createTyreBlock() {
         return null;
     }
 
-    // Функция получения спецификаций по составу
-    function getTyreSpecs(compoundName) {
-        if (compoundName === "Intermediate" || compoundName === "Wet") {
-            return tyreSpecsByType[compoundName];
-        }
-        const type = getTyreTypeByCompound(compoundName);
-        if (type) {
-            return tyreSpecsByType[type];
-        }
-        return null;
-    }
-
-    // Функция для получения типа и изображения (была пропущена)
     function getTyreInfo(compound) {
-        const imgNone = "Images/Wheels/Hard.png";
-        
         if (compound === hardCompound) {
             return { type: "Hard", img: "Images/Wheels/Hard.png", active: true };
         } else if (compound === mediumCompound) {
@@ -602,73 +587,64 @@ function createTyreBlock() {
         } else if (compound === softCompound) {
             return { type: "Soft", img: "Images/Wheels/Soft.png", active: true };
         } else {
-            return { type: "---", img: imgNone, active: false };
+            return { type: "---", img: "Images/Wheels/Hard.png", active: false };
         }
     }
-    
-    // Переменная для отслеживания текущей открытой плашки (должна быть ДО showTyreInfo)
-    let currentPopup = null;
 
-    // Функция для отображения информационной плашки
-    function showTyreInfo(compoundName, tyreElement) {
-        if (currentPopup) {
-            currentPopup.remove();
-            currentPopup = null;
-        }
+    // Функция для создания компактной карточки шины в модальном окне
+    function createTyreModalCard(compoundName) {
+        const specs = tyreSpecsByType[compoundName];
+        if (!specs) return null;
         
-        const specs = getTyreSpecs(compoundName);
-        if (!specs) return;
-        
-        const popup = document.createElement('div');
-        popup.className = 'tyre-info-popup';
-        popup.dataset.compound = compoundName;
-        
-        function createSpecCard(label, value) {
+        function createSpec(label, value) {
             return `
-                <div class="tyre-spec-card">
-                    <span class="tyre-spec-card-label">${label}</span>
-                    <span class="tyre-spec-card-value">${value}</span>
+                <div class="tyre-modal-spec">
+                    <span class="tyre-modal-spec-label">${label}</span>
+                    <span class="tyre-modal-spec-value">${value}</span>
                 </div>`;
         }
         
         let specsHTML = '';
         
         // Передние / задние
-        specsHTML += '<div class="tyre-info-specs-grid">';
-        specsHTML += '<div class="tyre-info-specs-col"><div class="tyre-info-specs-title">Передние</div><div class="tyre-spec-cards">';
-        specsHTML += createSpecCard('Размер', specs.front.size);
-        specsHTML += createSpecCard('Вес', specs.front.weight);
-        specsHTML += '</div></div>';
-        specsHTML += '<div class="tyre-info-specs-col"><div class="tyre-info-specs-title">Задние</div><div class="tyre-spec-cards">';
-        specsHTML += createSpecCard('Размер', specs.rear.size);
-        specsHTML += createSpecCard('Вес', specs.rear.weight);
-        specsHTML += '</div></div>';
-        specsHTML += '</div>';
+        specsHTML += `
+            <div class="tyre-modal-specs-row">
+                <div class="tyre-modal-specs-col">
+                    <div class="tyre-modal-specs-title">Передние</div>
+                    ${createSpec('Размер', specs.front.size)}
+                    ${createSpec('Вес', specs.front.weight)}
+                </div>
+                <div class="tyre-modal-specs-col">
+                    <div class="tyre-modal-specs-title">Задние</div>
+                    ${createSpec('Размер', specs.rear.size)}
+                    ${createSpec('Вес', specs.rear.weight)}
+                </div>
+            </div>
+        `;
         
-		// Общие параметры  
-		if (specs.common) {
-			specsHTML += '<div class="tyre-info-specs-section"><div class="tyre-info-specs-title">Общие</div><div class="tyre-spec-cards">';
-			
-			if (specs.common.diameter !== undefined) {
-				specsHTML += createSpecCard('Диаметр', specs.common.diameter);
-			}
-			if (specs.common.temp !== undefined) {
-				specsHTML += createSpecCard('Необходимый прогрев', specs.common.temp);
-			}
-			if (specs.common.heating !== undefined) {
-				specsHTML += createSpecCard('Необходимый прогрев', specs.common.heating);
-			}
-			if (specs.common.drainage !== undefined) {
-				specsHTML += createSpecCard('Водоотведение', specs.common.drainage);
-			}
-			if (specs.common.creator !== undefined) {
-				specsHTML += createSpecCard('Производитель', specs.common.creator);
-			}
-			
-			specsHTML += '</div></div>';
-		}
+        // Общие параметры  
+        if (specs.common) {
+            specsHTML += `<div class="tyre-modal-specs-section">`;
+            specsHTML += `<div class="tyre-modal-specs-title">Общие</div>`;
+            if (specs.common.diameter !== undefined) {
+                specsHTML += createSpec('Диаметр', specs.common.diameter);
+            }
+            if (specs.common.temp !== undefined) {
+                specsHTML += createSpec('Прогрев', specs.common.temp);
+            }
+            if (specs.common.heating !== undefined) {
+                specsHTML += createSpec('Прогрев', specs.common.heating);
+            }
+            if (specs.common.drainage !== undefined) {
+                specsHTML += createSpec('Водоотведение', specs.common.drainage);
+            }
+            if (specs.common.creator !== undefined) {
+                specsHTML += createSpec('Производитель', specs.common.creator);
+            }
+            specsHTML += `</div>`;
+        }
         
-        const typeName = getTyreTypeByCompound(compoundName) || compoundName;
+        const typeName = compoundName;
         
         let typeColorClass = '';
         switch(typeName) {
@@ -679,66 +655,79 @@ function createTyreBlock() {
             case 'Wet': typeColorClass = 'tyre-color-wet'; break;
         }
         
-        popup.innerHTML = `
-            <div class="tyre-info-header">
-                <img src="${specs.img}" class="tyre-info-img" onerror="this.src='Images/Wheels/Hard.png'">
-                <div class="tyre-info-name ${typeColorClass}">${typeName}</div>
+        return `
+            <div class="tyre-modal-card" data-tyre="${typeName}">
+                <div class="tyre-modal-card-header">
+                    <img src="${specs.img}" class="tyre-modal-card-img" onerror="this.src='Images/Wheels/Hard.png'">
+                    <div class="tyre-modal-card-name ${typeColorClass}">${typeName}</div>
+                </div>
+                ${specsHTML}
             </div>
-            ${specsHTML}`;
-        
-        document.body.appendChild(popup);
-        
-        requestAnimationFrame(() => {
-            const rect = tyreElement.getBoundingClientRect();
-            const popupWidth = popup.offsetWidth;
-            const popupHeight = popup.offsetHeight;
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            
-            let left = rect.right + 10;
-            let top = rect.top;
-            
-            if (left + popupWidth > windowWidth - 10) {
-                left = rect.left - popupWidth - 10;
-            }
-            if (left < 10) left = 10;
-            if (top + popupHeight > windowHeight - 10) {
-                top = windowHeight - popupHeight - 10;
-            }
-            if (top < 10) top = 10;
-            
-            popup.style.position = 'fixed';
-            popup.style.left = left + 'px';
-            popup.style.top = top + 'px';
-            
-            popup.classList.add('active');
-        });
-        
-        currentPopup = popup;
+        `;
     }
 
-    // Функция для скрытия плашки
-    function hideTyreInfo() {
-        if (currentPopup) {
-            currentPopup.classList.remove('active');
-            setTimeout(() => {
-                if (currentPopup) {
-                    currentPopup.remove();
-                    currentPopup = null;
+    // Функция для отображения МОДАЛЬНОГО окна (по центру) — ВСЕ ШИНЫ СРАЗУ
+    function showAllTyresModal() {
+        // Закрываем предыдущее модальное окно, если есть
+        const existingModal = document.querySelector('.tyre-modal-overlay');
+        if (existingModal) {
+            existingModal.remove();
+            return;
+        }
+        
+        // Порядок для десктопа: Hard, Medium, Soft, Intermediate, Wet
+        const tyreTypes = ["Hard", "Medium", "Soft", "Intermediate", "Wet"];
+        
+        // Создаём карточки для всех шин с разделителем
+        let cardsHTML = '';
+        tyreTypes.forEach((type, index) => {
+            const card = createTyreModalCard(type);
+            if (card) {
+                cardsHTML += card;
+                // Добавляем разделитель ПОСЛЕ 3-й карточки (Soft) 
+                // Индекс 2 = 3-й элемент (Hard=0, Medium=1, Soft=2)
+                if (index === 2) {
+                    cardsHTML += `<div class="tyre-modal-divider"></div>`;
                 }
-            }, 300);
-        }
+            }
+        });
+        
+        // Создаём оверлей модального окна
+        const overlay = document.createElement('div');
+        overlay.className = 'tyre-modal-overlay';
+        overlay.innerHTML = `
+            <div class="tyre-modal">
+                <button class="tyre-modal-close-btn" onclick="this.closest('.tyre-modal-overlay').remove()">✕</button>
+                <div class="tyre-modal-grid">
+                    ${cardsHTML}
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(overlay);
+        
+        // Активация с анимацией
+        requestAnimationFrame(() => {
+            overlay.classList.add('active');
+        });
+        
+        // Закрытие по клику на оверлей (вне модалки)
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
+        
+        // Закрытие по ESC
+        const escHandler = (e) => {
+            if (e.key === 'Escape') {
+                overlay.remove();
+                document.removeEventListener('keydown', escHandler);
+            }
+        };
+        document.addEventListener('keydown', escHandler);
     }
-    
-    // Закрытие при клике вне
-    document.addEventListener('click', (e) => {
-        if (currentPopup && 
-            !e.target.closest('.tyre-info-popup') && 
-            !e.target.closest('.tyre-item.clickable')) {
-            hideTyreInfo();
-        }
-    });
-    
+	
     // Формируем C1-C5
     let topHTML = allCompounds.map(c => {
         const info = getTyreInfo(c);
@@ -752,7 +741,7 @@ function createTyreBlock() {
     }).join('');
     
     // Промежуточные и дождевые
-    const rainActive = weatherData.rain  > 70;
+    const rainActive = weatherData.rain > 70;
 
     let bottomHTML = `
         <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Intermediate">
@@ -774,18 +763,11 @@ function createTyreBlock() {
         <div class="tyres-bottom">${bottomHTML}</div>
     `;
     
-    // Обработчики клика
-    block.querySelectorAll('.tyre-item.clickable').forEach(item => {
+    // Обработчики клика — открываем модальное окно со ВСЕМИ шинами
+    block.querySelectorAll('.tyre-item.clickable, .tyre-item.dimmed').forEach(item => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
-            const compound = item.dataset.compound;
-            
-            if (currentPopup && currentPopup.dataset.compound === compound) {
-                hideTyreInfo();
-                return;
-            }
-            
-            showTyreInfo(compound, item);
+            showAllTyresModal();
         });
     });
     

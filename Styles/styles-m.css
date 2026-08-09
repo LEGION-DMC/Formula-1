@@ -963,6 +963,93 @@ body {
     font-size: 0.6rem;
 }
 
+/* Модалка шин — мобильная версия (2 колонки) */
+.tyre-modal {
+    padding: 45px 10px 10px;
+    max-width: 98%;
+    max-height: 90vh;
+}
+
+/* Показываем кнопку закрытия ТОЛЬКО на мобилке */
+.tyre-modal-close-btn {
+        display: flex;
+        position: absolute;
+        top: 5px; right: 6px;
+        padding-bottom: 4px;
+        width: 25px; height: 25px;
+        border-radius: 20%;
+        background-color: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border-color);
+        color: var(--text-gray);
+        font-size: 1rem;
+        cursor: pointer;
+        z-index: 10;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+.tyre-modal-close-btn:hover {
+    background: var(--red-accent);
+    color: #fff;
+    border-color: var(--red-accent);
+}
+
+.tyre-modal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+/* Каждая карточка занимает 1 колонку */
+.tyre-modal-grid .tyre-modal-card {
+    grid-column: span 1;
+}
+
+/* Разделитель после 3-й карточки на мобилке */
+.tyre-modal-grid .tyre-modal-card:nth-child(3) {
+    grid-column: 1 / 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tyre-modal-card {
+    padding: 5px;
+}
+
+.tyre-modal-card-img {
+    width: 50px;
+    height: 50px;
+}
+
+.tyre-modal-card-name {
+    font-size: 0.7rem;
+}
+
+.tyre-modal-specs-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+}
+
+.tyre-modal-specs-title {
+    font-size: 0.55rem;
+}
+
+.tyre-modal-spec {
+    padding: 1px 2px;
+}
+
+.tyre-modal-spec-label {
+    font-size: 0.6rem;
+}
+
+.tyre-modal-spec-value {
+    font-size: 0.55rem;
+}
+
 .afternextgp-block.clickable {
     display: none;
 }
+
+.stats-grid .stats-table-wrapper:nth-child(1) { order: 1; }
+.stats-grid .stats-table-wrapper:nth-child(2) { order: 3; }
+.stats-grid .stats-table-wrapper:nth-child(3) { order: 2; } 
+.stats-grid .stats-table-wrapper:nth-child(4) { order: 4; }

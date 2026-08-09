@@ -2705,162 +2705,184 @@ h1, h2 {
     text-transform: uppercase;
 }
 
-/* ========================================== */
-/* ВСПЛЫВАЮЩАЯ ПЛАШКА ИНФОРМАЦИИ О ШИНЕ      */
-/* ========================================== */
-
-.tyre-info-popup {
+/* ============================================== */
+/* МОДАЛЬНОЕ ОКНО ДЛЯ ВСЕХ ШИН (3+2)             */
+/* ============================================== */
+.tyre-modal-overlay {
     position: fixed;
-    z-index: 1000;
-    background: rgba(20, 20, 20, 1);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-    padding: 8px;
-    width: 300px;
-    max-width: calc(100vw - 20px);
-    box-shadw: 0 12px 40px rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     opacity: 0;
-    transform: translateY(-8px);
-    transition: all 0.25s ease;
-    pointer-events: auto;
-    box-sizing: border-box;
-    overflow: hidden;
+    transition: opacity 0.3s ease;
 }
 
-.tyre-info-popup.active {
+.tyre-modal-overlay.active {
     opacity: 1;
-    transform: translateY(0);
 }
 
-/* Заголовок */
-.tyre-info-header {
-    text-align: center;
-    gap: 8px;
-    margin-bottom: 8px;
+.tyre-modal {
+    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px;
+    max-width: 780px;
+    width: 92%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+.tyre-modal-overlay.active .tyre-modal {
+    transform: scale(1) translateY(0);
+}
+
+/* Кнопка закрытия — скрываем на десктопе */
+.tyre-modal-close-btn {
+    display: none;
+}
+
+/* Сетка: 3 сверху, разделитель, 2 снизу по центру */
+.tyre-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+/* Каждая карточка занимает 1 колонку */
+.tyre-modal-grid .tyre-modal-card {
+    grid-column: span 1;
+}
+
+/* 3-я карточка (Soft) — в 3-й колонке */
+.tyre-modal-grid .tyre-modal-card:nth-child(3) {
+    grid-column: 3 / -1;
+}
+
+/* РАЗДЕЛИТЕЛЬ — отдельный элемент на всю ширину */
+.tyre-modal-divider {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding-bottom: 5px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    min-width: 0;
+    margin-bottom: 5px;
 }
 
-.tyre-info-img {
-    width: 100px;
-    height: 100px;
+/* 4-я карточка (Intermediate) — во 2-й колонке (по центру) */
+.tyre-modal-grid .tyre-modal-card:nth-child(5) {
+    grid-column: 1 / 1;
+}
+
+/* 5-я карточка (Wet) — в 3-й колонке */
+.tyre-modal-grid .tyre-modal-card:nth-child(6) {
+    grid-column: 2 / 2;
+}
+
+/* Карточка одной шины */
+.tyre-modal-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding: 5px 5px 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tyre-modal-card:hover {
+    border-color: rgba(255, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.tyre-modal-card-header {
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 3px;
+}
+
+.tyre-modal-card-img {
+    width: 85px;
+    height: 85px;
     object-fit: contain;
-    flex-shrink: 0;
+    display: block;
+    margin: 0 auto 5px;
+}
+
+.tyre-modal-card-name {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.8px;
 }
 
 /* Цвета названия по типу шины */
-.tyre-info-name {
-    font-family: 'F1Title', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 0.5px;
-    padding-top: 2px;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+.tyre-color-hard { color: #ffffff; }
+.tyre-color-medium { color: #f5c842; }
+.tyre-color-soft { color: #e10600; }
+.tyre-color-intermediate { color: #3cb043; }
+.tyre-color-wet { color: #4169e1; }
 
-.tyre-color-hard {
-    color: #ffffff; /* Белый — Hard */
-}
-
-.tyre-color-medium {
-    color: #f5c842; /* Жёлтый — Medium */
-}
-
-.tyre-color-soft {
-    color: #e10600; /* Красный — Soft */
-}
-
-.tyre-color-intermediate {
-    color: #3cb043; /* Зелёный — Intermediate */
-}
-
-.tyre-color-wet {
-    color: #4169e1; /* Синий — Wet */
-}
-
-/* Сетка Передние / Задние */
-.tyre-info-specs-grid {
+/* Спецификации внутри карточки */
+.tyre-modal-specs-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px;
-    margin-bottom: 5px;
-    min-width: 0;
 }
 
-.tyre-info-specs-col {
+.tyre-modal-specs-col {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    min-width: 0;
 }
 
-.tyre-info-specs-title {
+.tyre-modal-specs-title {
     font-family: 'F1Title', sans-serif;
     font-size: 0.7rem;
-    color: #bbb;
+    color: #888;
     text-transform: uppercase;
-    letter-spacing: 0.3px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.5px;
     text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1px;
 }
 
-/* Секция Общие */
-.tyre-info-specs-section {
-    padding-top: 6px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    min-width: 0;
-}
-
-.tyre-info-specs-section .tyre-info-specs-title {
-    margin-bottom: 4px;
-}
-
-/* Карточки параметров */
-.tyre-spec-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    min-width: 0;
-}
-
-.tyre-spec-card {
+.tyre-modal-spec {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 4px;
-    padding: 4px 5px;
-    transition: background 0.2s ease;
-    min-width: 0;
-    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 2px;
+    padding: 3px 3px;
+    margin-bottom: 3px;
 }
 
-.tyre-spec-card:hover {
-    background: rgba(255, 255, 255, 0.07);
-}
-
-.tyre-spec-card-label {
+.tyre-modal-spec-label {
     font-family: 'F1Text', sans-serif;
     font-size: 0.7rem;
-    color: #bbb;
+    color: #999;
     text-transform: uppercase;
-    word-spacing: -2px;
-    line-height: 1.2;
-    word-break: break-word;
-    min-width: 0;
-    flex-shrink: 1;
 }
 
-.tyre-spec-card-value {
+.tyre-modal-spec-value {
     font-family: 'F1Numbers', sans-serif;
-    font-size: 0.75rem;
-    color: #fff;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: auto;
+    font-size: 0.7rem;
+    color: #ddd;
+}
+
+.tyre-modal-specs-section {
+    padding-top: 3px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    margin-top: 5px;
+}
+
+.tyre-modal-specs-section .tyre-modal-specs-title {
+    margin-bottom: 2px;
 }
