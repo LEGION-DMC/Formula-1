@@ -533,23 +533,25 @@ body {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     padding: 10px;
+    margin-top: 50px;
+    column-count: 2;
+    column-gap: 10px;
 }
 
 .calendar-nav-title {
     font-size: 0.9rem;
-    grid-column: 1 / -1;
-}
-
-.calendar-nav-panel {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px 5px;
-    margin-top: 50px;
+    column-span: all; /* <- заголовок на всю ширину */
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .calendar-nav-item {
     padding: 4px 3px;
     gap: 5px;
+    break-inside: avoid;
+    display: flex;
+    align-items: center;
 }
 
 .calendar-nav-flag { width: 16px; height: 12px; }
@@ -876,7 +878,7 @@ body {
 .main-title {
     font-size: 1.3rem;
     letter-spacing: 1px;
-    margin-top: 30px;
+    margin-top: 45px;
 }
     
 .main-header {

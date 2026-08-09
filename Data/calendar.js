@@ -632,10 +632,14 @@ function clearAllHighlights(cardsArea) {
 }
 
 function buildCalendarNav(panel, cardsArea) {
-    const title = document.createElement('h3');
-    title.className = 'calendar-nav-title';
-    title.textContent = 'Календарь Гран-при 2026';
-    panel.appendChild(title);
+    // Проверяем, есть ли уже заголовок
+    let title = panel.querySelector('.calendar-nav-title');
+    if (!title) {
+        title = document.createElement('h3');
+        title.className = 'calendar-nav-title';
+        title.textContent = 'Календарь Гран-при 2026';
+        panel.appendChild(title);
+    }
 
     let gpNumber = 0;
 
@@ -652,9 +656,7 @@ function buildCalendarNav(panel, cardsArea) {
         item.className = `calendar-nav-item ${isCanceled ? 'canceled' : isPast ? 'completed' : ''}`;
         item.dataset.gpId = gp.id;
 
-        if (!isCanceled) gpNumber++;
-
-        const displayNumber = isCanceled ? '-' : gpNumber;
+        const displayNumber = isCanceled ? '-' : ++gpNumber;
 
         item.innerHTML = `
             <span class="calendar-nav-number">${displayNumber}</span>
@@ -665,9 +667,8 @@ function buildCalendarNav(panel, cardsArea) {
             </span>
             <span class="calendar-nav-date">${formatDateMini(gp.date)}</span>
         `;
-		
+        
         item.addEventListener('click', () => {
-            // Если клик по уже выделенному ГП — игнорируем
             if (currentHighlightedGpId === gp.id) return;
             scrollToGPCard(gp.id, cardsArea);
         });
