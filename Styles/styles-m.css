@@ -1074,12 +1074,6 @@ body {
 .stats-grid .stats-table-wrapper:nth-child(5) { order: 6; } /* Силовая установка */
 .stats-grid .stats-table-wrapper:nth-child(6) { order: 5; } /* Пустая ячейка */
 
-/* Стили для таблицы СУ на мобильной версии */
-
-.stats-grid .stats-table-wrapper:nth-child(6) .stats-table-title {
-    font-size: 0.85rem !important;
-}
-
 .engine-parts-table {
     font-size: 0.7rem;
 }

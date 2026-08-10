@@ -4,7 +4,7 @@
   "description": "Formula 1 2026",
   "start_url": "https://legion-dmc.github.io/Formula-1",
   "display": "standalone",
-  "background_color": "#0a0a0a",
+  "background_color": "#000000",
   "theme_color": "#E10600",
   "orientation": "portrait",
   "icons": [
@@ -24,10 +24,4 @@
       "type": "image/png"
     }
   ]
-   "splash_pages": [
-    {
-      "src": "Images/logo.png",
-      "sizes": "1242x2208",
-      "type": "image/png"
-    }
 }

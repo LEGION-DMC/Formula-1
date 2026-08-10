@@ -45,6 +45,33 @@ const qualiData = [
       driver2: "Валттери Боттас" },
 ];
 
+const pitstopData = [
+	{ gpId: "australia", driver: "russell", time: "2.17 " },
+	{ gpId: "china", driver: "hamilton", time: "2.29" },
+	{ gpId: "japan", driver: "hamilton", time: "2.00" },
+	{ gpId: "saudi", driver: "none", time: "0.00" },
+	{ gpId: "miami", driver: "lindblad", time: "2.08" },
+	{ gpId: "canada", driver: "lawson", time: "2.20" },
+	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
+	{ gpId: "barcelona", driver: "piastri", time: "2.13" },
+	{ gpId: "austria", driver: "lindblad", time: "2.03" },
+	{ gpId: "great-britain", driver: "russell", time: "2.18" },
+	{ gpId: "belgium", driver: "leclerc", time: "2.30" },
+	{ gpId: "hungary", driver: "lindblad", time: "1.99" },
+	{ gpId: "netherlands", driver: "none", time: "0.00" },
+	{ gpId: "italy", driver: "none", time: "0.00" },
+	{ gpId: "madrid", driver: "none", time: "0.00" },
+	{ gpId: "azerbaijan", driver: "none", time: "0.00" },
+	{ gpId: "malaysia", driver: "none", time: "0.00" },
+	{ gpId: "singapore", driver: "none", time: "0.00" },
+	{ gpId: "usa", driver: "none", time: "0.00" },
+	{ gpId: "mexico", driver: "none", time: "0.00" },
+	{ gpId: "saopaulo", driver: "none", time: "0.00" },
+	{ gpId: "vegas", driver: "none", time: "0.00" },
+	{ gpId: "qatar", driver: "none", time: "0.00" },
+	{ gpId: "abudhabi", driver: "none", time: "0.00" },
+];
+
 const penaltiesData = [
     { driver: "Оливер Берман", fines: 4 },
     { driver: "Александр Албон", fines: 3 },
@@ -73,33 +100,6 @@ const penaltiesData = [
     { driver: "Юки Цунода", fines: 0 }, // 3
     { driver: "Гуан Ю Чжоу", fines: 0 },
     { driver: "Джек Дуэн", fines: 0 },
-];
-
-const pitstopData = [
-	{ gpId: "australia", driver: "russell", time: "2.17 " },
-	{ gpId: "china", driver: "hamilton", time: "2.29" },
-	{ gpId: "japan", driver: "hamilton", time: "2.00" },
-	{ gpId: "saudi", driver: "none", time: "0.00" },
-	{ gpId: "miami", driver: "lindblad", time: "2.08" },
-	{ gpId: "canada", driver: "lawson", time: "2.20" },
-	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
-	{ gpId: "barcelona", driver: "piastri", time: "2.13" },
-	{ gpId: "austria", driver: "lindblad", time: "2.03" },
-	{ gpId: "great-britain", driver: "russell", time: "2.18" },
-	{ gpId: "belgium", driver: "leclerc", time: "2.30" },
-	{ gpId: "hungary", driver: "lindblad", time: "1.99" },
-	{ gpId: "netherlands", driver: "none", time: "0.00" },
-	{ gpId: "italy", driver: "none", time: "0.00" },
-	{ gpId: "madrid", driver: "none", time: "0.00" },
-	{ gpId: "azerbaijan", driver: "none", time: "0.00" },
-	{ gpId: "malaysia", driver: "none", time: "0.00" },
-	{ gpId: "singapore", driver: "none", time: "0.00" },
-	{ gpId: "usa", driver: "none", time: "0.00" },
-	{ gpId: "mexico", driver: "none", time: "0.00" },
-	{ gpId: "saopaulo", driver: "none", time: "0.00" },
-	{ gpId: "vegas", driver: "none", time: "0.00" },
-	{ gpId: "qatar", driver: "none", time: "0.00" },
-	{ gpId: "abudhabi", driver: "none", time: "0.00" },
 ];
 
 const lapRecordData = [
@@ -734,54 +734,6 @@ function createLapRecordTable() {
     tableContainer.appendChild(table);
     wrapper.appendChild(tableContainer);
 
-    // Добавляем стиль для отображения года рядом с логотипом и фиксированный отступ для ячеек пилотов
-    const style = document.createElement('style');
-    style.textContent = `
-        .team-logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .team-year {
-            font-size: 12px;
-            color: #888;
-            white-space: nowrap;
-        }
-        /* Фиксированный отступ для всех ячеек пилотов в таблице рекордов */
-        .lap-record-table .driver-cell {
-            padding-left: 55px !important;
-        }
-        /* Убираем двойной отступ у ячеек с флагом */
-        .lap-record-table .driver-cell .stats-flag {
-            margin-left: -35px;
-            margin-right: 8px;
-        }
-        /* Красный цвет для побитых рекордов */
-        .lap-record-table .time-cell.best-time {
-            color: var(--red-accent) !important;
-            text-shadow: 0 0 8px rgba(225, 6, 0, 0.3);
-        }
-        /* Стили для мобильных устройств - показываем сокращённые имена */
-        @media (max-width: 768px) {
-            .lap-record-table .driver-fullname {
-                display: none;
-            }
-            .lap-record-table .driver-shortname {
-                display: inline;
-            }
-        }
-        /* На десктопе показываем полные имена */
-        @media (min-width: 769px) {
-            .lap-record-table .driver-fullname {
-                display: inline;
-            }
-            .lap-record-table .driver-shortname {
-                display: none;
-            }
-        }
-    `;
-    wrapper.appendChild(style);
-
     wrapper.addEventListener('click', (e) => {
         const driverCell = e.target.closest('.stats-driver-clickable');
         if (driverCell) {
@@ -963,7 +915,7 @@ function createEnginePartsTable() {
     legend.className = 'engine-legend';
     legend.innerHTML = `
         <span class="engine-legend-item">
-            <span class="engine-legend-color normal"></span> Норма
+            <span class="engine-legend-color normal"></span> В пределах нормы
         </span>
         <span class="engine-legend-item">
             <span class="engine-legend-color at-limit"></span> Лимит достигнут
@@ -981,7 +933,7 @@ function createEnginePartsTable() {
     const note = document.createElement('div');
     note.className = 'engine-note';
     note.innerHTML = `
-        <span class="engine-note-icon">ℹ️</span>
+        <span class="engine-note-icon">🛈</span>
         <span class="engine-note-text">
             Установка элементов сверх лимита: 1-й - штраф 10 мест, 2-й и более - 5 мест. 
             При штрафе более 15 позиций - старт с последней. 
