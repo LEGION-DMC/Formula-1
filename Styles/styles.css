@@ -1766,9 +1766,16 @@ h1, h2 {
     color: var(--team-color);
 }
 
+/* ============================================== */
 /* ВКЛАДКА СТАТИСТИКИ                             */
 /* ============================================== */
-.stats-grid { display: grid; grid-template-columns: 0.75fr 1.2fr; gap: 10px; }
+
+.stats-grid { 
+    display: grid; 
+    grid-template-columns: 0.75fr 1.2fr; 
+    gap: 10px;
+    align-items: start; /* Важно: выравнивание по верхнему краю */
+}
 
 .stats-table-wrapper {
     background: rgba(255, 255, 255, 0.04);
@@ -1776,6 +1783,9 @@ h1, h2 {
     border-radius: 10px;
     padding: 10px;
     overflow: hidden;
+    height: auto; /* Автоматическая высота */
+    display: flex;
+    flex-direction: column;
 }
 
 .stats-table-title {
@@ -1785,9 +1795,13 @@ h1, h2 {
     margin-bottom: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
 }
 
-.stats-table-container { overflow-x: auto; }
+.stats-table-container { 
+    overflow: visible; /* Убираем скролл */
+    flex: 0 1 auto; /* Автоматический размер */
+}
 
 .stats-table {
     width: 100%;
@@ -1817,7 +1831,6 @@ h1, h2 {
     border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     vertical-align: middle;
 }
-
 
 .pitstop-table .stats-driver-clickable {
     padding-left: 15px;
@@ -1910,6 +1923,174 @@ h1, h2 {
 .gp-cell .gp-full:hover { color: var(--red-accent); }
 
 .gp-clickable { cursor: pointer; }
+
+.engine-parts-table .engine-cell {
+    font-family: 'F1Numbers', sans-serif;
+    text-align: center;
+    padding: 5px 8px;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.engine-parts-table .engine-cell.over-limit {
+    color: #E10600 !important;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(225, 6, 0, 0.3);
+}
+
+.engine-parts-table .engine-cell.at-limit {
+    color: #FFD700 !important;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.engine-parts-table .engine-divider td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3px 0;
+}
+
+.engine-parts-table .engine-divider:last-child td {
+    border-bottom: none;
+}
+
+.engine-parts-table .driver-cell {
+    padding-left: 15px;
+}
+
+.engine-parts-table thead th {
+    font-size: 0.6rem;
+    padding: 5px 4px;
+}
+
+/* Легенда */
+.engine-legend {
+    display: flex;
+    gap: 5px;
+    padding: 5px 0 0 0;
+    font-size: 0.75rem;
+    color: var(--text-gray);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.engine-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.engine-legend-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.engine-legend-color.normal {
+    background: var(--text-light);
+}
+
+.engine-legend-color.at-limit {
+    background: #FFD700;
+}
+
+.engine-legend-color.over-limit {
+    background: #E10600;
+}
+
+/* Примечание */
+.engine-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    margin-top: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #999;
+    line-height: 1.4;
+}
+
+.engine-note-icon {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 15px;
+}
+
+.engine-note-text {
+    color: #aaa;
+}
+
+.engine-abbrev-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    margin-top: 5px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    color: #999;
+    line-height: 1.6;
+    flex-wrap: wrap;
+}
+
+.engine-abbrev-icon {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.engine-abbrev-text {
+    color: #aaa;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+}
+
+.engine-abbrev-text strong {
+    color: #ccc;
+    font-family: 'F1Title', sans-serif;
+    font-weight: normal;
+    font-size: 0.7rem;
+    margin-right: 2px;
+}
+
+.abbrev-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+.abbrev-code {
+    color: var(--red-accent);
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.stats-grid .empty-placeholder {
+    background: rgba(255, 255, 255, 0);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    text-transform: uppercase;
+    height: auto;
+}
+
+.stats-grid .empty-placeholder:hover {
+    opacity: 0.5;
+}
 
 /* ============================================== */
 /* ВКЛАДКА РЕЗУЛЬТАТЫ                             */

@@ -45,33 +45,6 @@ const qualiData = [
       driver2: "Валттери Боттас" },
 ];
 
-const pitstopData = [
-	{ gpId: "australia", driver: "russell", time: "2.17 " },
-	{ gpId: "china", driver: "hamilton", time: "2.29" },
-	{ gpId: "japan", driver: "hamilton", time: "2.00" },
-	{ gpId: "saudi", driver: "none", time: "0.00" },
-	{ gpId: "miami", driver: "lindblad", time: "2.08" },
-	{ gpId: "canada", driver: "lawson", time: "2.20" },
-	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
-	{ gpId: "barcelona", driver: "piastri", time: "2.13" },
-	{ gpId: "austria", driver: "lindblad", time: "2.03" },
-	{ gpId: "great-britain", driver: "russell", time: "2.18" },
-	{ gpId: "belgium", driver: "leclerc", time: "2.30" },
-	{ gpId: "hungary", driver: "lindblad", time: "1.99" },
-	{ gpId: "netherlands", driver: "none", time: "0.00" },
-	{ gpId: "italy", driver: "none", time: "0.00" },
-	{ gpId: "madrid", driver: "none", time: "0.00" },
-	{ gpId: "azerbaijan", driver: "none", time: "0.00" },
-	{ gpId: "malaysia", driver: "none", time: "0.00" },
-	{ gpId: "singapore", driver: "none", time: "0.00" },
-	{ gpId: "usa", driver: "none", time: "0.00" },
-	{ gpId: "mexico", driver: "none", time: "0.00" },
-	{ gpId: "saopaulo", driver: "none", time: "0.00" },
-	{ gpId: "vegas", driver: "none", time: "0.00" },
-	{ gpId: "qatar", driver: "none", time: "0.00" },
-	{ gpId: "abudhabi", driver: "none", time: "0.00" },
-];
-
 const penaltiesData = [
     { driver: "Оливер Берман", fines: 4 },
     { driver: "Александр Албон", fines: 3 },
@@ -102,8 +75,60 @@ const penaltiesData = [
     { driver: "Джек Дуэн", fines: 0 },
 ];
 
+const pitstopData = [
+	{ gpId: "australia", driver: "russell", time: "2.17 " },
+	{ gpId: "china", driver: "hamilton", time: "2.29" },
+	{ gpId: "japan", driver: "hamilton", time: "2.00" },
+	{ gpId: "saudi", driver: "none", time: "0.00" },
+	{ gpId: "miami", driver: "lindblad", time: "2.08" },
+	{ gpId: "canada", driver: "lawson", time: "2.20" },
+	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
+	{ gpId: "barcelona", driver: "piastri", time: "2.13" },
+	{ gpId: "austria", driver: "lindblad", time: "2.03" },
+	{ gpId: "great-britain", driver: "russell", time: "2.18" },
+	{ gpId: "belgium", driver: "leclerc", time: "2.30" },
+	{ gpId: "hungary", driver: "lindblad", time: "1.99" },
+	{ gpId: "netherlands", driver: "none", time: "0.00" },
+	{ gpId: "italy", driver: "none", time: "0.00" },
+	{ gpId: "madrid", driver: "none", time: "0.00" },
+	{ gpId: "azerbaijan", driver: "none", time: "0.00" },
+	{ gpId: "malaysia", driver: "none", time: "0.00" },
+	{ gpId: "singapore", driver: "none", time: "0.00" },
+	{ gpId: "usa", driver: "none", time: "0.00" },
+	{ gpId: "mexico", driver: "none", time: "0.00" },
+	{ gpId: "saopaulo", driver: "none", time: "0.00" },
+	{ gpId: "vegas", driver: "none", time: "0.00" },
+	{ gpId: "qatar", driver: "none", time: "0.00" },
+	{ gpId: "abudhabi", driver: "none", time: "0.00" },
+];
+
 const lapRecordData = [
     { gpId: "madrid", driver: "none", time: "1:00.000" },
+];
+
+const enginePartsData = [
+    { driver: "Оскар Пиастри", ice: 3, tc: 3, exh: 2, mguk: 1, es: 2, puce: 2, puanc: 3 },
+    { driver: "Ландо Норрис", ice: 3, tc: 3, exh: 3, mguk: 2, es: 3, puce: 4, puanc: 4 },
+    { driver: "Джордж Расселл", ice: 3, tc: 3, exh: 3, mguk: 2, es: 3, puce: 3, puanc: 5 },
+    { driver: "Андреа Кими Антонелли", ice: 4, tc: 3, exh: 4, mguk: 2, es: 3, puce: 3, puanc: 5 },
+    { driver: "Макс Ферстаппен", ice: 3, tc: 3, exh: 3, mguk: 2, es: 2, puce: 2, puanc: 3 },
+    { driver: "Иcаак Хаджар", ice: 5, tc: 5, exh: 5, mguk: 2, es: 4, puce: 4, puanc: 5 },
+    { driver: "Шарль Леклер", ice: 3, tc: 3, exh: 2, mguk: 3, es: 3, puce: 3, puanc: 4 },
+    { driver: "Льюис Хэмилтон", ice: 3, tc: 3, exh: 2, mguk: 3, es: 3, puce: 3, puanc: 4 },
+    { driver: "Александр Албон", ice: 3, tc: 3, exh: 3, mguk: 2, es: 3, puce: 3, puanc: 4 },
+    { driver: "Карлос Сайнс", ice: 3, tc: 3, exh: 3, mguk: 2, es: 3, puce: 4, puanc: 4 },
+    { driver: "Арвид Линдблад", ice: 2, tc: 2, exh: 2, mguk: 2, es: 2, puce: 2, puanc: 4 },
+    { driver: "Лиам Лоусон", ice: 3, tc: 3, exh: 3, mguk: 2, es: 2, puce: 2, puanc: 4 },
+    { driver: "Лэнс Стролл", ice: 3, tc: 3, exh: 3, mguk: 4, es: 5, puce: 5, puanc: 5 },
+    { driver: "Фернандо Алонсо", ice: 3, tc: 3, exh: 2, mguk: 4, es: 5, puce: 5, puanc: 7 },
+    { driver: "Эстебан Окон", ice: 3, tc: 3, exh: 2, mguk: 3, es: 3, puce: 3, puanc: 4 },
+    { driver: "Оливер Берман", ice: 3, tc: 3, exh: 3, mguk: 3, es: 3, puce: 3, puanc: 3 },
+    { driver: "Нико Хюлькенберг", ice: 3, tc: 3, exh: 3, mguk: 3, es: 1, puce: 1, puanc: 4 },
+    { driver: "Габриэл Бортолето", ice: 2, tc: 2, exh: 2, mguk: 3, es: 2, puce: 3, puanc: 4 },
+    { driver: "Пьер Гасли", ice: 3, tc: 3, exh: 3, mguk: 2, es: 2, puce: 2, puanc: 4 },
+    { driver: "Франко Колапинто", ice: 3, tc: 3, exh: 2, mguk: 2, es: 3, puce: 3, puanc: 3 },
+    { driver: "Серхио Перес", ice: 3, tc: 3, exh: 2, mguk: 3, es: 3, puce: 3, puanc: 3 },
+    { driver: "Валттери Боттас", ice: 3, tc: 3, exh: 2, mguk: 3, es: 3, puce: 3, puanc: 3 },
 ];
 
 function findDriverByName(fullName) {
@@ -153,22 +178,23 @@ syncPenaltiesToDrivers();
 function initStatsPage(container) {
     'use strict';
 
-    // Сбрасываем стили, которые могли остаться от других вкладок
     container.style.display = 'block';
     container.style.flexDirection = '';
     container.style.gap = '';
     container.style.padding = '20px';
-
     container.innerHTML = '';
 
     const grid = document.createElement('div');
     grid.className = 'stats-grid';
-
     grid.appendChild(createQualiTable());
     grid.appendChild(createPitstopTable());
     grid.appendChild(createPenaltiesTable());
     grid.appendChild(createLapRecordTable());
-
+    
+    const emptyWrapper = document.createElement('div');
+    emptyWrapper.className = 'stats-table-wrapper empty-placeholder';
+    grid.appendChild(emptyWrapper);
+    grid.appendChild(createEnginePartsTable());
     container.appendChild(grid);
 }
 
@@ -783,6 +809,215 @@ function createLapRecordTable() {
                     openTrackModal(track, gp);
                 }
             }
+        }
+    });
+
+    return wrapper;
+}
+
+function createEnginePartsTable() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'stats-table-wrapper';
+
+    const tableTitle = document.createElement('h3');
+    tableTitle.className = 'stats-table-title';
+    tableTitle.textContent = 'Замена элементов силовой установки';
+    wrapper.appendChild(tableTitle);
+
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'stats-table-container';
+
+    const table = document.createElement('table');
+    table.className = 'stats-table engine-parts-table';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Команда</th>
+            <th>Пилоты</th>
+            <th title="Двигатель внутреннего сгорания">ICE</th>
+            <th title="Турбонагнетатель">TC</th>
+            <th title="Выхлопная система">EXH</th>
+            <th title="Кинетический мотор-генератор">MGU-K</th>
+            <th title="Накопитель энергии">ES</th>
+            <th title="Блок управляющей электроники">PU-CE</th>
+            <th title="Комплект вспомогательных компонентов">PU-ANC</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    // Лимиты компонентов
+    const limits = {
+        ice: 4,
+        tc: 4,
+        exh: 4,
+        mguk: 3,
+        es: 3,
+        puce: 3,
+        puanc: 6
+    };
+
+    // Функция определения цвета для значения
+    function getStatusClass(value, limit) {
+        if (value > limit) return 'over-limit';    // Красный
+        if (value === limit) return 'at-limit';    // Желтый
+        return '';                                  // Белый (норма)
+    }
+
+    // Группируем данные по командам
+    const teamsMap = {};
+    enginePartsData.forEach(item => {
+        const driver = findDriverByName(item.driver);
+        if (!driver) return;
+        if (!teamsMap[driver.team]) {
+            teamsMap[driver.team] = [];
+        }
+        teamsMap[driver.team].push({ driver, data: item });
+    });
+
+    // Сортировка команд по позиции в Кубке конструкторов
+    const teamPointsMap = {};
+    if (typeof teamsData !== 'undefined') {
+        teamsData.forEach(team => {
+            teamPointsMap[team.shortName] = { points: 0, team: team.shortName };
+        });
+        
+        if (typeof combinedStandings !== 'undefined') {
+            combinedStandings.forEach(entry => {
+                const driver = findDriverById(entry.driver);
+                if (driver && teamPointsMap[driver.team]) {
+                    teamPointsMap[driver.team].points += entry.points;
+                }
+            });
+        }
+    }
+
+    const sortedTeams = Object.keys(teamsMap).sort((a, b) => {
+        const pointsA = teamPointsMap[a]?.points || 0;
+        const pointsB = teamPointsMap[b]?.points || 0;
+        return pointsB - pointsA;
+    });
+
+    sortedTeams.forEach((teamName, teamIndex) => {
+        const drivers = teamsMap[teamName];
+        
+        drivers.sort((a, b) => {
+            const numA = parseInt(a.driver.number) || 0;
+            const numB = parseInt(b.driver.number) || 0;
+            return numA - numB;
+        });
+        
+        // Получаем логотип команды
+        const teamLogo = getTeamLogo(teamName);
+        
+        // Проходим по пилотам
+        drivers.forEach(({ driver, data }, driverIndex) => {
+            const tr = document.createElement('tr');
+            
+            // Для первого пилота добавляем rowspan
+            let teamCellHTML = '';
+            if (driverIndex === 0) {
+                const rowspan = drivers.length;
+                teamCellHTML = `
+                    <td class="team-cell stats-clickable" data-team="${teamName}" rowspan="${rowspan}">
+                        <img src="${teamLogo}" alt="${teamName}" class="stats-team-logo" onerror="this.style.display='none'">
+                    </td>
+                `;
+            }
+            
+            tr.innerHTML = `
+                ${teamCellHTML}
+                <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
+                    <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
+                    <span class="driver-fullname">${driver.name}</span>
+                    <span class="driver-shortname">${driver.namem}</span>
+                </td>
+                <td class="engine-cell ${getStatusClass(data.ice, limits.ice)}">${data.ice}</td>
+                <td class="engine-cell ${getStatusClass(data.tc, limits.tc)}">${data.tc}</td>
+                <td class="engine-cell ${getStatusClass(data.exh, limits.exh)}">${data.exh}</td>
+                <td class="engine-cell ${getStatusClass(data.mguk, limits.mguk)}">${data.mguk}</td>
+                <td class="engine-cell ${getStatusClass(data.es, limits.es)}">${data.es}</td>
+                <td class="engine-cell ${getStatusClass(data.puce, limits.puce)}">${data.puce}</td>
+                <td class="engine-cell ${getStatusClass(data.puanc, limits.puanc)}">${data.puanc}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+        
+        // Добавляем разделитель между командами (кроме последней)
+        if (teamIndex < sortedTeams.length - 1) {
+            const dividerTr = document.createElement('tr');
+            dividerTr.className = 'engine-divider';
+            dividerTr.innerHTML = `<td colspan="9"></td>`;
+            tbody.appendChild(dividerTr);
+        }
+    });
+
+    table.appendChild(tbody);
+    tableContainer.appendChild(table);
+    wrapper.appendChild(tableContainer);
+
+    // Легенда
+    const legend = document.createElement('div');
+    legend.className = 'engine-legend';
+    legend.innerHTML = `
+        <span class="engine-legend-item">
+            <span class="engine-legend-color normal"></span> Норма
+        </span>
+        <span class="engine-legend-item">
+            <span class="engine-legend-color at-limit"></span> Лимит достигнут
+        </span>
+        <span class="engine-legend-item">
+            <span class="engine-legend-color over-limit"></span> Лимит превышен
+        </span>
+        <span style="color:#888;font-size:0.65rem;margin-left:5px;">
+            Лимиты: ICE/TC/EXH:4, MGU-K/ES/PU-CE:3, PU-ANC:6
+        </span>
+    `;
+    wrapper.appendChild(legend);
+
+    // Примечание о штрафах
+    const note = document.createElement('div');
+    note.className = 'engine-note';
+    note.innerHTML = `
+        <span class="engine-note-icon">ℹ️</span>
+        <span class="engine-note-text">
+            Установка элементов сверх лимита: 1-й - штраф 10 мест, 2-й и более - 5 мест. 
+            При штрафе более 15 позиций - старт с последней. 
+            При нескольких гонщиках с таким штрафом - позиция определяется по квалификации.
+        </span>
+    `;
+    wrapper.appendChild(note);
+
+    // Расшифровка сокращений (скрытая, только для мобильных)
+    const abbrevNote = document.createElement('div');
+    abbrevNote.className = 'engine-abbrev-note';
+    abbrevNote.innerHTML = `
+        <span class="engine-abbrev-text">
+            <span class="abbrev-item"><span class="abbrev-code">ICE</span> — двигатель внутреннего сгорания</span>
+            <span class="abbrev-item"><span class="abbrev-code">TC</span> — турбонагнетатель</span>
+            <span class="abbrev-item"><span class="abbrev-code">EXH</span> — выхлопная система</span>
+            <span class="abbrev-item"><span class="abbrev-code">MGU-K</span> — кинетический мотор-генератор</span>
+            <span class="abbrev-item"><span class="abbrev-code">ES</span> — накопитель энергии</span>
+            <span class="abbrev-item"><span class="abbrev-code">PU-CE</span> — блок управляющей электроники</span>
+            <span class="abbrev-item"><span class="abbrev-code">PU-ANC</span> — комплект вспомогательных компонентов</span>
+        </span>
+    `;
+    wrapper.appendChild(abbrevNote);
+
+    wrapper.addEventListener('click', (e) => {
+        const driverCell = e.target.closest('.stats-driver-clickable');
+        if (driverCell) {
+            const driver = findDriverById(driverCell.dataset.driverId);
+            if (driver) openDriverModal(driver);
+            return;
+        }
+        const teamCell = e.target.closest('.stats-clickable');
+        if (teamCell) {
+            const teamData = getTeamData(teamCell.dataset.team);
+            if (teamData) openTeamModal(teamData);
+            return;
         }
     });
 
