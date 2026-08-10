@@ -45,33 +45,6 @@ const qualiData = [
       driver2: "Валттери Боттас" },
 ];
 
-const pitstopData = [
-	{ gpId: "australia", driver: "russell", time: "2.17 " },
-	{ gpId: "china", driver: "hamilton", time: "2.29" },
-	{ gpId: "japan", driver: "hamilton", time: "2.00" },
-	{ gpId: "saudi", driver: "none", time: "0.00" },
-	{ gpId: "miami", driver: "lindblad", time: "2.08" },
-	{ gpId: "canada", driver: "lawson", time: "2.20" },
-	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
-	{ gpId: "barcelona", driver: "piastri", time: "2.13" },
-	{ gpId: "austria", driver: "lindblad", time: "2.03" },
-	{ gpId: "great-britain", driver: "russell", time: "2.18" },
-	{ gpId: "belgium", driver: "leclerc", time: "2.30" },
-	{ gpId: "hungary", driver: "lindblad", time: "1.99" },
-	{ gpId: "netherlands", driver: "none", time: "0.00" },
-	{ gpId: "italy", driver: "none", time: "0.00" },
-	{ gpId: "madrid", driver: "none", time: "0.00" },
-	{ gpId: "azerbaijan", driver: "none", time: "0.00" },
-	{ gpId: "malaysia", driver: "none", time: "0.00" },
-	{ gpId: "singapore", driver: "none", time: "0.00" },
-	{ gpId: "usa", driver: "none", time: "0.00" },
-	{ gpId: "mexico", driver: "none", time: "0.00" },
-	{ gpId: "saopaulo", driver: "none", time: "0.00" },
-	{ gpId: "vegas", driver: "none", time: "0.00" },
-	{ gpId: "qatar", driver: "none", time: "0.00" },
-	{ gpId: "abudhabi", driver: "none", time: "0.00" },
-];
-
 const penaltiesData = [
     { driver: "Оливер Берман", fines: 4 },
     { driver: "Александр Албон", fines: 3 },
@@ -100,6 +73,33 @@ const penaltiesData = [
     { driver: "Юки Цунода", fines: 0 }, // 3
     { driver: "Гуан Ю Чжоу", fines: 0 },
     { driver: "Джек Дуэн", fines: 0 },
+];
+
+const pitstopData = [
+	{ gpId: "australia", driver: "russell", time: "2.17 " },
+	{ gpId: "china", driver: "hamilton", time: "2.29" },
+	{ gpId: "japan", driver: "hamilton", time: "2.00" },
+	{ gpId: "saudi", driver: "none", time: "0.00" },
+	{ gpId: "miami", driver: "lindblad", time: "2.08" },
+	{ gpId: "canada", driver: "lawson", time: "2.20" },
+	{ gpId: "monaco", driver: "antonelli", time: "2.17" },
+	{ gpId: "barcelona", driver: "piastri", time: "2.13" },
+	{ gpId: "austria", driver: "lindblad", time: "2.03" },
+	{ gpId: "great-britain", driver: "russell", time: "2.18" },
+	{ gpId: "belgium", driver: "leclerc", time: "2.30" },
+	{ gpId: "hungary", driver: "lindblad", time: "1.99" },
+	{ gpId: "netherlands", driver: "none", time: "0.00" },
+	{ gpId: "italy", driver: "none", time: "0.00" },
+	{ gpId: "madrid", driver: "none", time: "0.00" },
+	{ gpId: "azerbaijan", driver: "none", time: "0.00" },
+	{ gpId: "malaysia", driver: "none", time: "0.00" },
+	{ gpId: "singapore", driver: "none", time: "0.00" },
+	{ gpId: "usa", driver: "none", time: "0.00" },
+	{ gpId: "mexico", driver: "none", time: "0.00" },
+	{ gpId: "saopaulo", driver: "none", time: "0.00" },
+	{ gpId: "vegas", driver: "none", time: "0.00" },
+	{ gpId: "qatar", driver: "none", time: "0.00" },
+	{ gpId: "abudhabi", driver: "none", time: "0.00" },
 ];
 
 const lapRecordData = [
@@ -186,15 +186,24 @@ function initStatsPage(container) {
 
     const grid = document.createElement('div');
     grid.className = 'stats-grid';
-    grid.appendChild(createQualiTable());
-    grid.appendChild(createPitstopTable());
-    grid.appendChild(createPenaltiesTable());
-    grid.appendChild(createLapRecordTable());
+
+    // Левая колонка (3 таблицы: квалификация, штрафы, двигатели)
+    const leftCol = document.createElement('div');
+    leftCol.className = 'stats-left-col';
+    leftCol.appendChild(createQualiTable());
+    leftCol.appendChild(createPenaltiesTable());
+    leftCol.appendChild(createEnginePartsTable());
     
-    const emptyWrapper = document.createElement('div');
-    emptyWrapper.className = 'stats-table-wrapper empty-placeholder';
-    grid.appendChild(emptyWrapper);
-    grid.appendChild(createEnginePartsTable());
+    // Правая колонка (2 таблицы: пит-стопы, рекорды)
+    const rightCol = document.createElement('div');
+    rightCol.className = 'stats-right-col';
+    rightCol.appendChild(createPitstopTable());
+    rightCol.appendChild(createLapRecordTable());
+    
+    // Добавляем колонки в сетку
+    grid.appendChild(leftCol);
+    grid.appendChild(rightCol);
+    
     container.appendChild(grid);
 }
 
@@ -813,9 +822,9 @@ function createEnginePartsTable() {
 
     // Функция определения цвета для значения
     function getStatusClass(value, limit) {
-        if (value > limit) return 'over-limit';    // Красный
-        if (value === limit) return 'at-limit';    // Желтый
-        return '';                                  // Белый (норма)
+        if (value > limit) return 'over-limit';
+        if (value === limit) return 'at-limit';
+        return '';
     }
 
     // Группируем данные по командам
@@ -881,7 +890,7 @@ function createEnginePartsTable() {
             
             tr.innerHTML = `
                 ${teamCellHTML}
-                <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
+                <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}" data-team="${teamName}">
                     <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
                     <span class="driver-fullname">${driver.name}</span>
                     <span class="driver-shortname">${driver.namem}</span>
@@ -896,19 +905,99 @@ function createEnginePartsTable() {
             `;
             tbody.appendChild(tr);
         });
-        
-        // Добавляем разделитель между командами (кроме последней)
-        if (teamIndex < sortedTeams.length - 1) {
-            const dividerTr = document.createElement('tr');
-            dividerTr.className = 'engine-divider';
-            dividerTr.innerHTML = `<td colspan="9"></td>`;
-            tbody.appendChild(dividerTr);
-        }
     });
 
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     wrapper.appendChild(tableContainer);
+
+    // ====== ЛОГИКА HOVER ======
+    // Используем делегирование событий на tbody
+    let currentHighlightedTeam = null;
+    
+    tbody.addEventListener('mouseover', (e) => {
+        // Находим ячейку команды или пилота
+        const teamCell = e.target.closest('.team-cell');
+        const driverCell = e.target.closest('.driver-cell');
+        
+        // Сначала очищаем все выделения, но не сразу
+        clearHighlights();
+        
+        if (teamCell) {
+            // Наведены на команду - подсвечиваем обоих пилотов
+            const teamName = teamCell.dataset.team;
+            currentHighlightedTeam = teamName;
+            highlightTeamDrivers(teamName);
+            // Подсвечиваем саму ячейку команды
+            teamCell.classList.add('hovered');
+        } else if (driverCell) {
+            // Наведены на пилота - подсвечиваем всю его строку (кроме ячейки команды)
+            const tr = driverCell.closest('tr');
+            if (tr) {
+                // Подсвечиваем ячейку пилота
+                driverCell.classList.add('highlighted-single');
+                // Подсвечиваем все ячейки engine-cell в этой строке
+                const engineCells = tr.querySelectorAll('.engine-cell');
+                engineCells.forEach(cell => {
+                    cell.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
+                });
+            }
+        }
+    });
+
+    tbody.addEventListener('mouseout', (e) => {
+        // Проверяем, что мышь действительно покинула элемент
+        const relatedTarget = e.relatedTarget;
+        if (relatedTarget && tbody.contains(relatedTarget)) {
+            return; // Мышь перешла на другой элемент внутри tbody
+        }
+        // Если мышь покинула tbody, очищаем всё
+        clearHighlights();
+        currentHighlightedTeam = null;
+    });
+
+    // Обработчик для очистки при выходе из tbody
+    tbody.addEventListener('mouseleave', () => {
+        clearHighlights();
+        currentHighlightedTeam = null;
+    });
+
+    // Функция очистки всех выделений
+    function clearHighlights() {
+        // Убираем подсветку с ячеек команды
+        document.querySelectorAll('.engine-parts-table .team-cell.hovered').forEach(el => {
+            el.classList.remove('hovered');
+        });
+        // Убираем подсветку с ячеек пилотов
+        document.querySelectorAll('.engine-parts-table .driver-cell.highlighted-single').forEach(el => {
+            el.classList.remove('highlighted-single');
+        });
+        document.querySelectorAll('.engine-parts-table .driver-cell.highlighted-with-team').forEach(el => {
+            el.classList.remove('highlighted-with-team');
+        });
+        // Убираем подсветку с engine-cell
+        document.querySelectorAll('.engine-parts-table .engine-cell').forEach(el => {
+            el.style.backgroundColor = '';
+        });
+    }
+
+    // Функция подсветки обоих пилотов команды
+    function highlightTeamDrivers(teamName) {
+        const driverCells = tbody.querySelectorAll('.driver-cell');
+        driverCells.forEach(cell => {
+            if (cell.dataset.team === teamName) {
+                cell.classList.add('highlighted-with-team');
+                // Подсвечиваем все engine-cell в этой строке
+                const tr = cell.closest('tr');
+                if (tr) {
+                    const engineCells = tr.querySelectorAll('.engine-cell');
+                    engineCells.forEach(engineCell => {
+                        engineCell.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
+                    });
+                }
+            }
+        });
+    }
 
     // Легенда
     const legend = document.createElement('div');
@@ -935,9 +1024,8 @@ function createEnginePartsTable() {
     note.innerHTML = `
         <span class="engine-note-icon">🛈</span>
         <span class="engine-note-text">
-            Установка элементов сверх лимита: 1-й - штраф 10 мест, 2-й и более - 5 мест. 
-            При штрафе более 15 позиций - старт с последней. 
-            При нескольких гонщиках с таким штрафом - позиция определяется по квалификации.
+		•Установка сверх лимита: 1-й - штраф 10 мест, последующие - 5 мест. 
+		•При сумме штрафов более 15 позиций - старт с последней позиции.
         </span>
     `;
     wrapper.appendChild(note);
@@ -947,13 +1035,13 @@ function createEnginePartsTable() {
     abbrevNote.className = 'engine-abbrev-note';
     abbrevNote.innerHTML = `
         <span class="engine-abbrev-text">
-            <span class="abbrev-item"><span class="abbrev-code">ICE</span> — двигатель внутреннего сгорания</span>
-            <span class="abbrev-item"><span class="abbrev-code">TC</span> — турбонагнетатель</span>
-            <span class="abbrev-item"><span class="abbrev-code">EXH</span> — выхлопная система</span>
-            <span class="abbrev-item"><span class="abbrev-code">MGU-K</span> — кинетический мотор-генератор</span>
-            <span class="abbrev-item"><span class="abbrev-code">ES</span> — накопитель энергии</span>
-            <span class="abbrev-item"><span class="abbrev-code">PU-CE</span> — блок управляющей электроники</span>
-            <span class="abbrev-item"><span class="abbrev-code">PU-ANC</span> — комплект вспомогательных компонентов</span>
+            <span class="abbrev-item"><span class="abbrev-code">ICE</span> - двигатель внутреннего сгорания</span>
+            <span class="abbrev-item"><span class="abbrev-code">MGU-K</span> - кинетический мотор-генератор</span>
+            <span class="abbrev-item"><span class="abbrev-code">TC</span> - турбонагнетатель</span>
+            <span class="abbrev-item"><span class="abbrev-code">EXH</span> - выхлопная система</span>
+            <span class="abbrev-item"><span class="abbrev-code">ES</span> - накопитель энергии</span>
+            <span class="abbrev-item"><span class="abbrev-code">PU-CE</span> - блок управляющей электроники</span>
+            <span class="abbrev-item"><span class="abbrev-code">PU-ANC</span> - вспомогательные компоненты</span>
         </span>
     `;
     wrapper.appendChild(abbrevNote);

@@ -1774,7 +1774,28 @@ h1, h2 {
     display: grid; 
     grid-template-columns: 0.75fr 1.2fr; 
     gap: 10px;
-    align-items: start; /* Важно: выравнивание по верхнему краю */
+    align-items: start;
+}
+
+/* Левая и правая колонки */
+.stats-left-col,
+.stats-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Каждая обёртка таблицы занимает всю ширину своей колонки */
+.stats-left-col .stats-table-wrapper,
+.stats-right-col .stats-table-wrapper {
+    width: 100%;
+}
+
+/* Таблица двигателей - отдельно на всю ширину (3 строка, 1 ряд) */
+.stats-grid .stats-table-wrapper.engine-wrapper {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 0; /* Без отступа сверху */
 }
 
 .stats-table-wrapper {
@@ -1783,9 +1804,9 @@ h1, h2 {
     border-radius: 10px;
     padding: 10px;
     overflow: hidden;
-    height: auto; /* Автоматическая высота */
     display: flex;
     flex-direction: column;
+    height: auto;
 }
 
 .stats-table-title {
@@ -1799,8 +1820,8 @@ h1, h2 {
 }
 
 .stats-table-container { 
-    overflow: visible; /* Убираем скролл */
-    flex: 0 1 auto; /* Автоматический размер */
+    overflow: visible;
+    flex: 0 1 auto;
 }
 
 .stats-table {
@@ -1917,9 +1938,12 @@ h1, h2 {
     font-size: 12px;
     color: #888;
     white-space: nowrap;
-    margin: 2px 0 1.7px 0;
 }
-        /* Фиксированный отступ для всех ячеек пилотов в таблице рекордов */
+
+.lap-record-table tbody tr {
+    height: 27.95px;
+}
+
 .lap-record-table .driver-cell {
     padding-left: 55px !important;
 }
@@ -1954,47 +1978,100 @@ h1, h2 {
 .engine-parts-table .engine-cell {
     font-family: 'F1Numbers', sans-serif;
     text-align: center;
-    padding: 5px 8px;
-    font-size: 0.95rem;
+    padding: 3px 5px;
+    font-size: 0.9rem;
     color: var(--text-light);
     transition: color 0.3s ease;
 }
 
 .engine-parts-table .engine-cell.over-limit {
     color: #E10600 !important;
-    font-weight: bold;
     text-shadow: 0 0 10px rgba(225, 6, 0, 0.3);
 }
 
 .engine-parts-table .engine-cell.at-limit {
     color: #FFD700 !important;
-    font-weight: bold;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
 }
 
-.engine-parts-table .engine-divider td {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 3px 0;
-}
-
-.engine-parts-table .engine-divider:last-child td {
-    border-bottom: none;
-}
-
 .engine-parts-table .driver-cell {
-    padding-left: 15px;
+    padding-left: 5px;
 }
 
 .engine-parts-table thead th {
-    font-size: 0.6rem;
-    padding: 5px 4px;
+    text-align: center;
+    padding: 0px 3px 5px 3px;
+    color: #999;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    white-space: nowrap;
+}
+
+/* Базовый hover для строки (кроме ячейки команды) */
+.engine-parts-table tbody tr:hover {
+    background: transparent !important;
+    transform: none !important;
+}
+
+/* Подсветка всей строки при наведении на пилота (кроме ячейки команды) */
+.engine-parts-table .driver-cell.highlighted-single {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 4px 0 0 4px;
+}
+
+/* Подсветка остальных ячеек строки при наведении на пилота */
+.engine-parts-table .driver-cell.highlighted-single ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-single ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-single ~ .engine-cell ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-single ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-single ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-single ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-single ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Подсветка ячейки пилота при наведении на команду */
+.engine-parts-table .driver-cell.highlighted-with-team {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 4px 0 0 4px;
+}
+
+/* Подсветка остальных ячеек строки при наведении на команду */
+.engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell,
+.engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell ~ .engine-cell {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Подсветка ячейки команды при наведении на неё */
+.engine-parts-table .team-cell.hovered {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 4px 0 0 4px;
+}
+
+/* Отключаем стандартные transition для ячеек */
+.engine-parts-table .driver-cell,
+.engine-parts-table .engine-cell,
+.engine-parts-table .team-cell {
+    transition: none !important;
+}
+
+/* Для ячейки команды */
+.engine-parts-table .team-cell {
+    cursor: pointer;
 }
 
 /* Легенда */
 .engine-legend {
     display: flex;
     gap: 5px;
-    padding: 5px 0 0 0;
+    padding: 8px 0 0 0;
     font-size: 0.75rem;
     color: var(--text-gray);
     justify-content: center;
@@ -2043,9 +2120,9 @@ h1, h2 {
 }
 
 .engine-note-icon {
-    font-size: 0.9rem;
+    font-size: 1rem;
     flex-shrink: 0;
-    margin-top: 7px;
+    margin-top: 1%;
 }
 
 .engine-note-text {
@@ -2055,8 +2132,8 @@ h1, h2 {
 .engine-abbrev-note {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    padding: 8px 10px;
+    gap: 5px;
+    padding: 5px 5px;
     margin-top: 5px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.04);
@@ -2067,25 +2144,11 @@ h1, h2 {
     flex-wrap: wrap;
 }
 
-.engine-abbrev-icon {
-    font-size: 0.9rem;
-    flex-shrink: 0;
-    margin-top: 1px;
-}
-
 .engine-abbrev-text {
     color: #aaa;
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 12px;
-}
-
-.engine-abbrev-text strong {
-    color: #ccc;
-    font-family: 'F1Title', sans-serif;
-    font-weight: normal;
-    font-size: 0.7rem;
-    margin-right: 2px;
+    gap: 3px;
 }
 
 .abbrev-item {
@@ -2093,7 +2156,7 @@ h1, h2 {
     align-items: center;
     gap: 3px;
     background: rgba(255, 255, 255, 0.03);
-    padding: 0 5px;
+    padding: 0 3px;
     border-radius: 3px;
 }
 
@@ -2101,7 +2164,6 @@ h1, h2 {
     color: var(--red-accent);
     font-family: 'F1Numbers', 'F1Title', sans-serif;
     font-size: 0.7rem;
-    font-weight: bold;
 }
 
 .stats-grid .empty-placeholder {

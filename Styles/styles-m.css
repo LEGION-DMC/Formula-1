@@ -140,7 +140,251 @@ body {
 }
 
 /* ============================================== */
-/* МОБИЛЬНАЯ ПАНЕЛЬ ФИЛЬТРОВ                      */
+/* ВКЛАДКИ - НАВИГАЦИЯ                           */
+/* ============================================== */
+.tabs-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 8px 10px;
+    background: rgba(18, 18, 18, 0.5);
+    border-bottom: 1px solid var(--border-color);
+    margin-top: 50px;
+    position: sticky;
+    top: 50px;
+    z-index: 100;
+}
+
+.tab-btn {
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-gray);
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    background: rgba(225, 6, 0, 0.1);
+    border-color: var(--red-accent);
+    color: var(--text-light);
+}
+
+.tab-btn.active {
+    background: var(--red-accent);
+    border-color: var(--red-accent);
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================== */
+/* ВКЛАДКА: ГЛАВНАЯ                              */
+/* ============================================== */
+.main-page-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.main-title {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-top: 45px;
+}
+    
+.main-header {
+    padding: 0px 0 10px 0;
+}
+
+.main-blocks {
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+/* Порядок плашек: ГП → Шины → Погода */
+.main-blocks .nextgp-block { order: 1; }
+.main-blocks .tyres-block  { order: 2; }
+.main-blocks .weather-block { order: 3; }
+
+.main-block {
+    padding: 15px;
+}
+
+.main-block-title {
+    font-size: 0.9rem;
+}
+
+.afternextgp-block.clickable {
+    display: none;
+}
+
+/* Погода */
+.weather-icon-large {
+    width: 40px;
+    height: 40px;
+}
+
+.weather-type {
+    font-size: 1rem;
+}
+
+.weather-params {
+    gap: 6px;
+}
+
+.weather-param-cell {
+    padding: 8px 4px;
+}
+
+.weather-value {
+    font-size: 1.1rem;
+}
+
+/* ГП */
+.nextgp-flag-inline {
+    width: 20px;
+    height: 13px;
+}
+
+.nextgp-details {
+    gap: 6px;
+}
+
+.main-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.nextgp-value {
+    font-size: 0.8rem;
+}
+
+.nextgp-countdown {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.countdown-timer {
+    font-size: 0.85rem;
+}
+
+/* Шины */
+.tyres-top {
+    gap: 5px;
+}
+
+.tyre-img {
+    width: 32px;
+    height: 32px;
+}
+
+.tyre-name {
+    font-size: 0.7rem;
+}
+
+.tyre-type {
+    font-size: 0.6rem;
+}
+
+/* Модалка шин — мобильная версия (2 колонки) */
+.tyre-modal {
+    padding: 45px 10px 10px;
+    max-width: 98%;
+    max-height: 90vh;
+}
+
+.tyre-modal-close-btn {
+    display: flex;
+    position: absolute;
+    top: 5px; right: 6px;
+    padding-bottom: 4px;
+    width: 25px; height: 25px;
+    border-radius: 20%;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-gray);
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.tyre-modal-close-btn:hover {
+    background: var(--red-accent);
+    color: #fff;
+    border-color: var(--red-accent);
+}
+
+.tyre-modal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.tyre-modal-grid .tyre-modal-card {
+    grid-column: span 1;
+}
+
+.tyre-modal-grid .tyre-modal-card:nth-child(3) {
+    grid-column: 1 / 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tyre-modal-card {
+    padding: 5px;
+}
+
+.tyre-modal-card-img {
+    width: 50px;
+    height: 50px;
+}
+
+.tyre-modal-card-name {
+    font-size: 0.7rem;
+}
+
+.tyre-modal-specs-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+}
+
+.tyre-modal-specs-title {
+    font-size: 0.55rem;
+}
+
+.tyre-modal-spec {
+    padding: 1px 2px;
+}
+
+.tyre-modal-spec-label {
+    font-size: 0.6rem;
+}
+
+.tyre-modal-spec-value {
+    font-size: 0.55rem;
+}
+
+/* ============================================== */
+/* ВКЛАДКА: ПИЛОТЫ                               */
 /* ============================================== */
 .drivers-filter-panel {
     width: 100%;
@@ -168,7 +412,6 @@ body {
     min-width: 120px;
 }
 
-/* Кнопка фильтров */
 /* Кнопка фильтров - показываем на мобильной версии */
 .filter-toggle-btn {
     display: flex !important;
@@ -378,6 +621,7 @@ body {
     white-space: nowrap;
 }
 
+/* Модалка пилота */
 .driver-modal { max-width: 95%; max-height: 90vh; }
 
 .modal-close-btn {
@@ -409,10 +653,14 @@ body {
 .modal-stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .modal-bottom { padding: 0 20px 20px; }
 
-.teams-grid { gap: 10px;
-    padding-bottom: 20px;
+/* ============================================== */
+/* ВКЛАДКА: КОМАНДЫ                              */
+/* ============================================== */
+.teams-grid { 
+    gap: 10px; 
+    padding-bottom: 20px; 
     margin-top: 40px;
- }
+}
 
 .team-card {
     flex: 0 0 calc(50% - 8px);
@@ -427,109 +675,96 @@ body {
 .team-card-logo { width: 60px; height: 42px; }
 .team-card-name { font-size: 1rem; }
 
+/* Модалка команды */
+.team-modal-close-btn {
+    display: flex;
+    position: absolute;
+    top: 5px; right: 6px;
+    padding-bottom: 3px;
+    width: 35px; height: 35px;
+    border-radius: 20%;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-gray);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
 
-    .team-modal-close-btn {
-        display: flex;
-        position: absolute;
-        top: 5px; right: 6px;
-        padding-bottom: 3px;
-        width: 35px; height: 35px;
-        border-radius: 20%;
-        background-color: rgba(255, 255, 255, 0.08);
-        border: 1px solid var(--border-color);
-        color: var(--text-gray);
-        font-size: 1.5rem;
-        cursor: pointer;
-        z-index: 10;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
+.team-modal-overlay {
+    align-items: center;
+    padding-top: 5%;
+    flex-direction: column;
+    overflow-y: auto;
+}
 
-    /* Оверлей */
-    .team-modal-overlay {
-        align-items: center;
-        padding-top: 5%;
-        flex-direction: column;
-        overflow-y: auto;
-    }
+.team-modal { 
+    max-width: 95%; 
+    padding: 10px; 
+    order: 1;
+}
+.tm-full-logo { max-height: 50px; }
+.tm-full-name { font-size: 1.1rem; }
+.tm-divider { 
+    margin: 8px 0px 5px 0px;
+}
+.tm-divider:nth-of-type(4) {
+    display: none;
+}
+.tm-info-row .tm-info-cell:only-child {
+    display: none;
+}
+.tm-pilots-section { 
+    margin-top: 5px;
+}
+.tm-pilots-list { 
+    display: flex; 
+    flex-direction: column;
+    gap: 6px; 
+}
 
-    /* 1. ОСНОВНАЯ ПЛАШКА */
-    .team-modal { 
-        max-width: 95%; 
-        padding: 10px; 
-        order: 1;
-    }
-    .tm-full-logo { max-height: 50px; }
-    .tm-full-name { font-size: 1.1rem; }
-    .tm-divider { 
-        margin: 8px 0px 5px 0px;
-    }
-    .tm-divider:nth-of-type(4) {
-        display: none;
-    }
-    .tm-info-row .tm-info-cell:only-child {
-        display: none;
-    }
-    .tm-pilots-section { 
-        margin-top: 5px;
-    }
-    .tm-pilots-list { 
-        display: flex; 
-        flex-direction: column;
-        gap: 6px; 
-    }
+.tm-right-column {
+    margin-left: 0;
+    width: 90%;
+    order: 2;
+}
+.tm-right-column img {
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+.tm-bolid-panel {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    opacity: 1;
+    transform: none;
+}
+.tm-bolid-info {
+    margin: 0;
+}
 
-    /* 2. ПЛАШКА БОЛИДА */
-    .tm-right-column {
-        margin-left: 0;
-        width: 90%;
-        order: 2;
-    }
-    .tm-right-column img {
-        margin-top: -15px;
-        margin-bottom: 10px;
-    }
-    .tm-bolid-panel {
-        margin-top: 10px;
-        padding: 10px;
-        width: 100%;
-        opacity: 1;
-        transform: none;
-    }
-    .tm-bolid-info {
-        margin: 0;
-    }
+.tm-left-column {
+    margin-right: 0;
+    width: 90%;
+    order: 3;
+}
+.tm-stats-panel {
+    margin-top: 10px;
+    width: 100%;
+    opacity: 1;
+    transform: none;
+}
 
-    /* 3. ПЛАШКА ИСТОРИИ (СТАТИСТИКА) */
-    .tm-left-column {
-        margin-right: 0;
-        width: 90%;
-        order: 3;
-    }
-    .tm-stats-panel {
-        margin-top: 10px;
-        width: 100%;
-        opacity: 1;
-        transform: none;
-    }
+.tm-bolid-stats-panel {
+    display: none;
+}
 
-    /* Удаляем старый класс */
-    .tm-bolid-stats-panel {
-        display: none;
-    }
-
-
-.stats-grid { grid-template-columns: 1fr; gap: 10px; 
-    margin-top: 40px; }
-.stats-table-wrapper { padding: 8px; overflow-x: auto !important;}
-.stats-table { font-size: 0.75rem; }
-.stats-table thead th { font-size: 0.65rem; padding: 6px 4px; }
-.stats-table tbody td { padding: 4px; }
-.stats-flag { width: 16px; height: 11px; margin-right: 3px; }
-.stats-team-logo { width: 18px; height: 12px; }
-.driver-cell { font-size: 0.75rem; }
-
+/* ============================================== */
+/* ВКЛАДКА: КАЛЕНДАРЬ                            */
+/* ============================================== */
 .calendar-nav-panel {
     width: 100%;
     min-width: 100%;
@@ -538,14 +773,14 @@ body {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     padding: 10px;
-    margin-top: 50px;
     column-count: 2;
     column-gap: 10px;
+    margin-top: 50px;
 }
 
 .calendar-nav-title {
     font-size: 0.9rem;
-    column-span: all; /* <- заголовок на всю ширину */
+    column-span: all;
     margin-bottom: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -587,6 +822,7 @@ body {
 .calendar-countdown { font-size: 0.7rem; }
 .calendar-timer { font-size: 0.85rem; }
 
+/* Модалка трека */
 .track-modal-close {
     display: flex;
     position: absolute;
@@ -644,8 +880,10 @@ body {
 }
 
 .tm-stat-value { font-size: 1.2rem; }
-    
 
+/* ============================================== */
+/* ВКЛАДКА: РЕЗУЛЬТАТЫ                           */
+/* ============================================== */
 .results-constructors-panel {
     width: 100%;
     min-width: 100%;
@@ -675,7 +913,6 @@ body {
     grid-template-columns: 1fr 1fr;
 }
 
-/* Разделитель между колонками */
 .constructor-col:first-child {
     border-right: 1px solid rgba(255, 255, 255, 0.2);
     padding-right: 8px;
@@ -712,6 +949,7 @@ body {
     border-top: none;
 }
 
+/* Детальная таблица результатов */
 .detailed-table-container {
     display: flex;
     overflow: hidden;
@@ -745,7 +983,6 @@ body {
     align-items: center;
 }
 
-/* Ячейки */
 .detailed-cell {
     padding: 4px 0;
     text-align: center;
@@ -778,7 +1015,6 @@ body {
     opacity: 0.25;
 }
 
-/* Фиксированные колонки */
 .fixed-col-pos {
     width: 25px;
     font-family: 'F1Numbers', sans-serif;
@@ -793,17 +1029,14 @@ body {
     font-size: 0.7rem;
 }
 
-/* В мобильной версии — короткие имена */
 .fixed-col-driver .driver-fullname { display: none; }
 .fixed-col-driver .driver-shortname { display: inline; }
 
-/* На десктопе — полные имена */
 @media (min-width: 769px) {
     .fixed-col-driver .driver-fullname { display: inline; }
     .fixed-col-driver .driver-shortname { display: none; }
 }
 
-/* Скроллящиеся колонки */
 .gp-col {
     width: 28px;
     min-width: 28px;
@@ -817,11 +1050,9 @@ body {
     font-family: 'F1Numbers', sans-serif;
 }
 
-/* Будущие этапы */
 .detailed-cell.future-gp { opacity: 0.25; }
 .detailed-data-row .detailed-cell.future-gp { opacity: 0.5; color: #999; }
 
-/* DNF/DNS */
 .detailed-cell.dnf {
     color: #cc3300;
     font-family: 'F1Title', sans-serif;
@@ -834,27 +1065,13 @@ body {
     font-size: 0.55rem;
 }
 
-/* Кликабельный пилот */
 .fixed-col-driver.results-driver-clickable:hover {
     color: var(--red-accent);
-}
-
-.main-page-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
 }
 
 .driver-cell-left {
     width: 42%;
 }
-
-.main-page-content h1 { font-size: 1.5rem; }
-.main-page-content p { font-size: 0.9rem; }
-
-.driver-fullname { display: none; }
-.driver-shortname { display: inline; }
 
 .gp-cell .gp-full { display: none; }
 .gp-cell .gp-short { display: inline; }
@@ -878,219 +1095,84 @@ body {
     display: block;
 }
 
-/* ГЛАВНАЯ                                        */
 /* ============================================== */
-.main-title {
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-    margin-top: 45px;
-}
-    
-.main-header {
-    padding: 0px 0 10px 0;
-}
-
-.main-blocks {
-    grid-template-columns: 1fr;
-    gap: 8px;
-}
-
-/* Порядок плашек: ГП → Шины → Погода */
-.main-blocks .nextgp-block { order: 1; }
-.main-blocks .tyres-block  { order: 2; }
-.main-blocks .weather-block { order: 3; }
-
-.main-block {
-    padding: 15px;
-}
-
-.main-block-title {
-    font-size: 0.9rem;
-}
-
-/* Погода */
-.weather-icon-large {
-    width: 40px;
-    height: 40px;
-}
-
-.weather-type {
-    font-size: 1rem;
-}
-
-.weather-params {
-    gap: 6px;
-}
-
-.weather-param-cell {
-    padding: 8px 4px;
-}
-
-.weather-value {
-    font-size: 1.1rem;
-}
-
-/* ГП */
-.nextgp-flag-inline {
-    width: 20px;
-    height: 13px;
-}
-
-.nextgp-details {
-    gap: 6px;
-}
-
-.main-icon {
-    width: 16px;
-    height: 16px;
-}
-
-.nextgp-value {
-    font-size: 0.8rem;
-}
-
-.nextgp-countdown {
-    font-size: 0.8rem;
-    flex-wrap: wrap;
-}
-
-.countdown-timer {
-    font-size: 0.85rem;
-}
-
-/* Шины */
-.tyres-top {
-    gap: 5px;
-}
-
-.tyre-img {
-    width: 32px;
-    height: 32px;
-}
-
-.tyre-name {
-    font-size: 0.7rem;
-}
-
-.tyre-type {
-    font-size: 0.6rem;
-}
-
-/* Модалка шин — мобильная версия (2 колонки) */
-.tyre-modal {
-    padding: 45px 10px 10px;
-    max-width: 98%;
-    max-height: 90vh;
-}
-
-/* Показываем кнопку закрытия ТОЛЬКО на мобилке */
-.tyre-modal-close-btn {
-        display: flex;
-        position: absolute;
-        top: 5px; right: 6px;
-        padding-bottom: 4px;
-        width: 25px; height: 25px;
-        border-radius: 20%;
-        background-color: rgba(255, 255, 255, 0.08);
-        border: 1px solid var(--border-color);
-        color: var(--text-gray);
-        font-size: 1rem;
-        cursor: pointer;
-        z-index: 10;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
-
-.tyre-modal-close-btn:hover {
-    background: var(--red-accent);
-    color: #fff;
-    border-color: var(--red-accent);
-}
-
-.tyre-modal-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
-}
-
-/* Каждая карточка занимает 1 колонку */
-.tyre-modal-grid .tyre-modal-card {
-    grid-column: span 1;
-}
-
-/* Разделитель после 3-й карточки на мобилке */
-.tyre-modal-grid .tyre-modal-card:nth-child(3) {
-    grid-column: 1 / 1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.tyre-modal-card {
-    padding: 5px;
-}
-
-.tyre-modal-card-img {
-    width: 50px;
-    height: 50px;
-}
-
-.tyre-modal-card-name {
-    font-size: 0.7rem;
-}
-
-.tyre-modal-specs-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 3px;
-}
-
-.tyre-modal-specs-title {
-    font-size: 0.55rem;
-}
-
-.tyre-modal-spec {
-    padding: 1px 2px;
-}
-
-.tyre-modal-spec-label {
-    font-size: 0.6rem;
-}
-
-.tyre-modal-spec-value {
-    font-size: 0.55rem;
-}
-
-.afternextgp-block.clickable {
-    display: none;
-}
-
+/* ВКЛАДКА: СТАТИСТИКА                           */
 /* ============================================== */
-/* ТАБЛИЦА ЗАМЕН ЭЛЕМЕНТОВ СИЛОВОЙ УСТАНОВКИ      */
-/* ============================================== */
+.stats-grid { 
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px; 
+}
 
-/* Порядок таблиц на мобильной версии */
-.stats-grid .stats-table-wrapper:nth-child(1) { order: 1; } /* Квалификация */
-.stats-grid .stats-table-wrapper:nth-child(2) { order: 3; } /* Штрафы */
-.stats-grid .stats-table-wrapper:nth-child(3) { order: 2; } /* Пит-стопы */
-.stats-grid .stats-table-wrapper:nth-child(4) { order: 4; } /* Рекорды круга */
-.stats-grid .stats-table-wrapper:nth-child(5) { order: 6; } /* Силовая установка */
-.stats-grid .stats-table-wrapper:nth-child(6) { order: 5; } /* Пустая ячейка */
+.stats-left-col,
+.stats-right-col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
+.stats-left-col .stats-table-wrapper,
+.stats-right-col .stats-table-wrapper {
+    width: 100%;
+}
+
+.stats-left-col .stats-table-wrapper:nth-child(1) { order: 1; } /* Квалификация */
+.stats-left-col .stats-table-wrapper:nth-child(2) { order: 3; } /* Штрафы */
+.stats-left-col .stats-table-wrapper:nth-child(3) { order: 5; } /* Двигатели */
+.stats-right-col .stats-table-wrapper:nth-child(1) { order: 2; } /* Пит-стопы */
+.stats-right-col .stats-table-wrapper:nth-child(2) { order: 4; } /* Рекорды */
+
+.stats-table-wrapper { padding: 8px; overflow-x: auto !important; }
+.stats-table { font-size: 0.8rem; }
+.stats-table thead th { font-size: 0.65rem; padding: 2px 1px; }
+.stats-table tbody td { padding: 4px; }
+.stats-flag { width: 16px; height: 11px; margin-right: 0px; }
+.stats-team-logo { width: 20px; height: 14px; }
+.driver-cell { font-size: 0.75rem; }
+
+/* Таблица квалификации */
+.quali-table .driver-cell-left { width: 43% !important; }
+.quali-table .driver-cell-right { width: 40% !important; }
+.quali-table .score-cell { font-size: 0.9rem !important; }
+
+/* Таблица штрафов */
+.penalties-table .driver-cell { padding-left: 10px !important; }
+.penalties-table .fines-cell { font-size: 0.9rem !important; }
+
+/* Таблица пит-стопов */
+.pitstop-table .gp-cell { font-size: 0.75rem; }
+.pitstop-table .gp-full { display: none !important; }
+.pitstop-table .gp-short { display: inline !important; }
+.pitstop-table .time-cell { font-size: 0.75rem !important; padding-left: 15px !important; }
+.pitstop-table .driver-cell { padding-left: 8px !important; }
+
+/* Таблица рекордов */
+.lap-record-table .gp-cell { font-size: 0.75rem; }
+.lap-record-table .gp-full { display: none !important; }
+.lap-record-table .gp-short { display: inline !important; }
+.lap-record-table .driver-cell { padding-left: 18px !important; }
+.lap-record-table .team-cell { padding-left: 0px !important; }
+.lap-record-table .time-cell { font-size: 0.7rem !important; padding-left: 8px !important; }
+.lap-record-table .team-year { display: none !important; }
+
+/* Таблица замен элементов силовой установки */
 .engine-parts-table {
     font-size: 0.7rem;
 }
 
 .engine-parts-table thead th {
-    font-size: 0.6rem !important;
-    padding: 3px 2px !important;
+    font-size: 0.55rem !important;
+    padding: 0px 2px 2px 2px !important;
+    letter-spacing: 0.3px;
 }
 
 .engine-parts-table .engine-cell {
-    font-size: 0.7rem !important;
-    padding: 3px 2px !important;
+    font-size: 0.75rem !important;
 }
 
 .engine-parts-table .driver-cell {
     padding-left: 0px !important;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
 }
 
 .engine-parts-table .driver-fullname {
@@ -1104,29 +1186,25 @@ body {
 .engine-parts-table .stats-flag {
     width: 14px !important;
     height: 10px !important;
+    margin-right: 2px;
 }
 
 .engine-parts-table .stats-team-logo {
-    width: 22px !important;
-    height: 14px !important;
+    width: 23px !important;
+    height: 16px !important;
+    margin-left: -6px;
 }
 
-.engine-parts-table .team-cell {
-    width: 30px !important;
-    min-width: 30px !important;
-    padding: 3px 2px !important;
-}
-
-/* Легенда на мобильной версии */
 .engine-legend {
-    font-size: 0.6rem !important;
+    font-size: 0.65rem !important;
     gap: 5px !important;
     padding: 5px 0 0 0 !important;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .engine-legend-item {
-    gap: 3px !important;
+    gap: 5px !important;
 }
 
 .engine-legend-color {
@@ -1134,20 +1212,35 @@ body {
     height: 10px !important;
 }
 
-/* Примечание о штрафах на мобильной версии */
 .engine-note {
-    font-size: 0.6rem !important;
-    padding: 5px 6px !important;
-    margin-top: 5px !important;
+    font-size: 0.63rem !important;
+    padding: 2px 2px !important;
+    margin-top: 3px !important;
     line-height: 1.2 !important;
 }
 
 .engine-note-icon {
     font-size: 0.7rem !important;
+    margin-top: 1.2% !important;
 }
 
-/* Пустая ячейка на мобильной версии */
+.engine-abbrev-note {
+    font-size: 0.58rem !important;
+    padding: 2px 2px !important;
+    margin-top: 3px !important;
+    line-height: 1.2 !important;
+}
+
+.abbrev-code {
+    font-size: 0.6rem !important;
+}
+
 .stats-grid .empty-placeholder {
     display: none !important;
 }
 
+/* ============================================== */
+/* ОБЩИЕ СТИЛИ ДЛЯ КОРОТКИХ ИМЕН                   */
+/* ============================================== */
+.driver-fullname { display: none; }
+.driver-shortname { display: inline; }
