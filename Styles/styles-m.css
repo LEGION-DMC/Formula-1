@@ -1103,12 +1103,10 @@ body {
     flex-direction: column;
     margin-top: 40px; 
 }
-
+    
 .stats-left-col,
 .stats-right-col {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    display: contents !important;
 }
 
 .stats-left-col .stats-table-wrapper,
@@ -1117,7 +1115,7 @@ body {
 }
 
 .stats-left-col .stats-table-wrapper:nth-child(1) { order: 1; } /* Квалификация */
-.stats-left-col .stats-table-wrapper:nth-child(2) { order: 3; } /* Штрафы */
+.stats-left-col .stats-table-wrapper:nth-child(2) { order: 2; } /* Штрафы */
 .stats-left-col .stats-table-wrapper:nth-child(3) { order: 5; } /* Двигатели */
 .stats-right-col .stats-table-wrapper:nth-child(1) { order: 2; } /* Пит-стопы */
 .stats-right-col .stats-table-wrapper:nth-child(2) { order: 4; } /* Рекорды */

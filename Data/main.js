@@ -87,6 +87,7 @@ function updateWeatherDisplay(data) {
     if (rain) rain.textContent = `~ ${data.rain} %`;
 }
 
+
 function getWeatherLocation(nextGP, nextTrack) {
     if (!nextTrack) return '51.507,-0.128'; // Лондон по умолчанию
     
@@ -219,12 +220,45 @@ function createWeatherBlock() {
     const block = document.createElement('div');
     block.className = 'main-block weather-block';
     block.id = 'weatherBlock';
+    
+    // Получаем информацию о следующем ГП для отображения местоположения
+    let locationText = '';
+    const now = new Date();
+    let nextGP = null;
+    let nextTrack = null;
+    
+    if (typeof calendarData !== 'undefined') {
+        const activeGPs = calendarData
+            .filter(gp => !gp.canceled)
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        for (const gp of activeGPs) {
+            const raceDate = new Date(gp.date);
+            const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
+            
+            if (raceEnd > now) {
+                nextGP = gp;
+                nextTrack = getTrackById(gp.track);
+                break;
+            }
+        }
+    }
+    
+    if (nextTrack) {
+        // Используем trackName вместо name
+        const countryName = getCountryName(nextTrack.country);
+        locationText = `${nextTrack.trackName}, ${countryName}`;
+    } else {
+        locationText = 'Местоположение не определено';
+    }
+    
     block.innerHTML = `
         <div class="main-block-title">Погода</div>
         <div class="weather-header">
             <img src="Images/Weather/${weatherData.type}.png" alt="${weatherData.typeName}" class="weather-icon-large" id="weatherIcon">
             <span class="weather-type" id="weatherTypeName">${weatherData.typeName}</span>
         </div>
+        <div class="weather-location" id="weatherLocation">${locationText}</div>
         <hr class="main-divider">
         <div class="weather-params">
             <div class="weather-param-cell">
@@ -239,10 +273,10 @@ function createWeatherBlock() {
                 <span class="weather-value" id="weatherHumidity">${weatherData.humidity} %</span>
                 <span class="weather-label">Влажность</span>
             </div>
-			<div class="weather-param-cell">
-				<span class="weather-value" id="weatherRain">~ ${weatherData.rain} %</span>
-				<span class="weather-label">Вероятность осадков</span>
-			</div>
+            <div class="weather-param-cell">
+                <span class="weather-value" id="weatherRain">~ ${weatherData.rain} %</span>
+                <span class="weather-label">Вероятность осадков</span>
+            </div>
         </div>
     `;
     return block;
