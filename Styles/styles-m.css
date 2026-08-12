@@ -219,11 +219,6 @@ body {
     gap: 8px;
 }
 
-/* Порядок плашек: ГП → Шины → Погода */
-.main-blocks .nextgp-block { order: 1; }
-.main-blocks .tyres-block  { order: 2; }
-.main-blocks .weather-block { order: 3; }
-
 .main-block {
     padding: 15px;
 }

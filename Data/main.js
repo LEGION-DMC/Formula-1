@@ -87,7 +87,6 @@ function updateWeatherDisplay(data) {
     if (rain) rain.textContent = `~ ${data.rain} %`;
 }
 
-
 function getWeatherLocation(nextGP, nextTrack) {
     if (!nextTrack) return '51.507,-0.128'; // Лондон по умолчанию
     
@@ -135,7 +134,6 @@ async function initMainPage(container) {
     container.style.padding = '30px 20px';
     container.innerHTML = '';
     
-    // Создаём заголовок
     const header = document.createElement('div');
     header.className = 'main-header';
     header.innerHTML = `
@@ -147,24 +145,162 @@ async function initMainPage(container) {
     const blocks = document.createElement('div');
     blocks.className = 'main-blocks';
     
-    // Левая колонка — погода
-    blocks.appendChild(createWeatherBlock());
+    // ИЗМЕНЕНО: Статистика теперь первая (слева)
+    blocks.appendChild(createStatsBlock());
     
-    // Центральная колонка — предстоящий ГП + следующий ГП
     const centerColumn = document.createElement('div');
     centerColumn.className = 'main-center-column';
     centerColumn.appendChild(createNextGPBlock());
     centerColumn.appendChild(createAfterNextGPBlock());
     blocks.appendChild(centerColumn);
     
-    // Правая колонка — шины
+    blocks.appendChild(createWeatherBlock());
     blocks.appendChild(createTyreBlock());
-    
+	
     container.appendChild(blocks);
     
     startMainTimer();
-    
     await loadWeatherForNextGP();
+}
+
+function createStatsBlock() {
+    const block = document.createElement('div');
+    block.className = 'main-block statistics-block';
+    
+    const title = document.createElement('div');
+    title.className = 'main-block-title';
+    title.textContent = 'Краткая статистика сезона';
+    block.appendChild(title);
+  
+    const statsContainer = document.createElement('div');
+    statsContainer.className = 'statistics-container';
+    
+    // Лидер чемпионата
+    const leaderWrap = document.createElement('div');
+    leaderWrap.className = 'statistics-group';
+    const leaderLabel = document.createElement('span');
+    leaderLabel.className = 'statistics-label';
+    leaderLabel.textContent = 'Лидер чемпионата';
+    leaderWrap.appendChild(leaderLabel);
+    leaderWrap.appendChild(createStatRow('leader'));
+    statsContainer.appendChild(leaderWrap);
+    
+    // Лидер КК
+    const constructorWrap = document.createElement('div');
+    constructorWrap.className = 'statistics-group';
+    const constructorLabel = document.createElement('span');
+    constructorLabel.className = 'statistics-label';
+    constructorLabel.textContent = 'Лидер Кубка конструкторов';
+    constructorWrap.appendChild(constructorLabel);
+    constructorWrap.appendChild(createStatRow('constructor'));
+    statsContainer.appendChild(constructorWrap);
+    
+    // Лучший пит-стоп
+    const pitstopWrap = document.createElement('div');
+    pitstopWrap.className = 'statistics-group';
+    const pitstopLabel = document.createElement('span');
+    pitstopLabel.className = 'statistics-label';
+    pitstopLabel.textContent = 'Лучший пит-стоп сезона';
+    pitstopWrap.appendChild(pitstopLabel);
+    pitstopWrap.appendChild(createStatRow('pitstop'));
+    statsContainer.appendChild(pitstopWrap);
+    
+    block.appendChild(statsContainer);
+    return block;
+}
+
+function createStatRow(type) {
+    const row = document.createElement('div');
+    row.className = 'statistics-row';
+    
+    let iconHTML, nameHTML, valueHTML, clickTarget;
+    
+    if (type === 'leader') {
+        const leader = getChampionshipLeader();
+        if (leader) {
+            iconHTML = `<img src="Images/Flags/${leader.country}.svg" class="statistics-row-icon-img" onerror="this.style.display='none'">`;
+            nameHTML = `<span class="statistics-row-name">${leader.name}</span>`;
+            valueHTML = `<span class="statistics-row-value">${leader.points}</span>`;
+            clickTarget = 'results';
+        } else {
+            // Убираем иконку для "Нет данных"
+            iconHTML = '';
+            nameHTML = `<span class="statistics-row-name empty">Нет данных</span>`;
+            valueHTML = '';
+            clickTarget = 'results';
+        }
+    } else if (type === 'constructor') {
+        const leader = getConstructorLeader();
+        if (leader) {
+            iconHTML = `<img src="${getTeamLogo(leader.team)}" class="statistics-row-icon-img team-logo" onerror="this.style.display='none'">`;
+            nameHTML = `<span class="statistics-row-name">${leader.team}</span>`;
+            valueHTML = `<span class="statistics-row-value">${leader.points}</span>`;
+            clickTarget = 'results';
+        } else {
+            // Убираем иконку для "Нет данных"
+            iconHTML = '';
+            nameHTML = `<span class="statistics-row-name empty">Нет данных</span>`;
+            valueHTML = '';
+            clickTarget = 'results';
+        }
+    } else if (type === 'pitstop') {
+        const best = getBestPitstop();
+        if (best) {
+            iconHTML = `<img src="${getTeamLogo(best.team)}" class="statistics-row-icon-img team-logo" onerror="this.style.display='none'">`;
+            nameHTML = `<span class="statistics-row-name">${best.team}</span>`;
+            valueHTML = `<span class="statistics-row-value">${best.time}с</span>`;
+            clickTarget = 'stats';
+        } else {
+            // Убираем иконку для "Нет данных"
+            iconHTML = '';
+            nameHTML = `<span class="statistics-row-name empty">Нет данных</span>`;
+            valueHTML = '';
+            clickTarget = 'stats';
+        }
+    }
+    
+    // Левая часть: иконка + имя
+    const leftPart = document.createElement('div');
+    leftPart.className = 'statistics-row-left';
+    leftPart.innerHTML = iconHTML + nameHTML;
+    row.appendChild(leftPart);
+    
+    // Правая часть: значение
+    const rightPart = document.createElement('div');
+    rightPart.innerHTML = valueHTML;
+    row.appendChild(rightPart);
+    
+    // Клик для перехода
+    row.addEventListener('click', () => {
+        document.querySelectorAll('.menu-item').forEach(btn => {
+            if (btn.dataset.tab === clickTarget) btn.click();
+        });
+    });
+    
+    return row;
+}
+
+function getChampionshipLeader() {
+    if (typeof combinedStandings === 'undefined' || !combinedStandings.length) return null;
+    const d = findDriverById(combinedStandings[0].driver);
+    if (!d) return null;
+    return { ...d, points: combinedStandings[0].points };
+}
+
+function getConstructorLeader() {
+    if (typeof teamsData === 'undefined') return null;
+    const s = calculateConstructorStandings();
+    return s.length ? s[0] : null;
+}
+
+function getBestPitstop() {
+    if (typeof pitstopData === 'undefined') return null;
+    const v = pitstopData.filter(r => r.driver !== 'none' && r.time !== '0.00' && r.time !== '0.00s');
+    if (!v.length) return null;
+    let b = v[0], bt = parseFloat(b.time);
+    v.forEach(r => { const t = parseFloat(r.time); if (!isNaN(t) && t < bt) { bt = t; b = r; } });
+    const d = findDriverById(b.driver);
+    return d ? { team: d.team, time: b.time } : null;
 }
 
 async function loadWeatherForNextGP() {
@@ -253,7 +389,7 @@ function createWeatherBlock() {
     }
     
     block.innerHTML = `
-        <div class="main-block-title">Погода</div>
+        <div class="main-block-title">Погода предстоящего ГП</div>
         <div class="weather-header">
             <img src="Images/Weather/${weatherData.type}.png" alt="${weatherData.typeName}" class="weather-icon-large" id="weatherIcon">
             <span class="weather-type" id="weatherTypeName">${weatherData.typeName}</span>
@@ -781,17 +917,15 @@ function createTyreBlock() {
         <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Intermediate">
             <span class="tyre-name">Intermediate</span>
             <img src="${rainActive ? 'Images/Wheels/Intermediate.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
-            ${rainActive ? '' : '<span class="tyre-type">---</span>'}
         </div>
         <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Wet">
             <span class="tyre-name">Wet</span>
             <img src="${rainActive ? 'Images/Wheels/Wet.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
-            ${rainActive ? '' : '<span class="tyre-type">---</span>'}
         </div>
     `;
     
     block.innerHTML = `
-        <div class="main-block-title">Состав шин</div>
+        <div class="main-block-title">Состав шин предстоящего ГП</div>
         <div class="tyres-top">${topHTML}</div>
         <hr class="main-divider">
         <div class="tyres-bottom">${bottomHTML}</div>

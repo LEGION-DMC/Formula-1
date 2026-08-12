@@ -187,24 +187,39 @@ function initStatsPage(container) {
     const grid = document.createElement('div');
     grid.className = 'stats-grid';
 
-    // Левая колонка (3 таблицы: квалификация, штрафы, двигатели)
     const leftCol = document.createElement('div');
     leftCol.className = 'stats-left-col';
     leftCol.appendChild(createQualiTable());
     leftCol.appendChild(createPenaltiesTable());
     leftCol.appendChild(createEnginePartsTable());
     
-    // Правая колонка (2 таблицы: пит-стопы, рекорды)
     const rightCol = document.createElement('div');
     rightCol.className = 'stats-right-col';
     rightCol.appendChild(createPitstopTable());
     rightCol.appendChild(createLapRecordTable());
     
-    // Добавляем колонки в сетку
     grid.appendChild(leftCol);
     grid.appendChild(rightCol);
     
     container.appendChild(grid);
+
+    // Минималистичная анимация
+    animateStatsContent(container);
+}
+
+function animateStatsContent(container) {
+    const wrappers = container.querySelectorAll('.stats-table-wrapper');
+    
+    wrappers.forEach((wrapper, index) => {
+        wrapper.style.opacity = '0';
+        wrapper.style.transform = 'translateY(15px)';
+        wrapper.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        
+        setTimeout(() => {
+            wrapper.style.opacity = '1';
+            wrapper.style.transform = 'translateY(0)';
+        }, 150 + index * 80);
+    });
 }
 
 function createQualiTable() {

@@ -659,7 +659,7 @@ function initResultsPage(container) {
     calculateDriverStandings();
     calculateSprintStandings();
     calculateCombinedStandings();
-	
+    
     container.innerHTML = '';
     container.style.display = 'flex';
     container.style.gap = '0';
@@ -684,6 +684,9 @@ function initResultsPage(container) {
         else renderSprintStandings(mainArea, activeTeamFilter);
         constructorsPanel.innerHTML = '';
         renderConstructorStandingsPanel(constructorsPanel, activeTeamFilter);
+        
+        // Запускаем анимацию после рендера
+        animateResultsContent(container);
     }
     
     mainArea.addEventListener('click', (e) => {
@@ -695,7 +698,6 @@ function initResultsPage(container) {
             return;
         }
         
-         
         const driverRow = e.target.closest('.results-driver-clickable');
         if (driverRow) {
             const driver = findDriverById(driverRow.dataset.driverId);
@@ -703,7 +705,6 @@ function initResultsPage(container) {
             return;
         }
         
-         
         const teamCell = e.target.closest('.results-team-cell');
         if (teamCell) {
             const teamData = getTeamData(teamCell.dataset.team);
@@ -712,7 +713,6 @@ function initResultsPage(container) {
         }
     });
     
-     
     constructorsPanel.addEventListener('click', (e) => {
         const row = e.target.closest('.constructor-row');
         if (!row) return;
@@ -722,6 +722,45 @@ function initResultsPage(container) {
     });
     
     refreshAll();
+}
+
+function animateResultsContent(container) {
+    // Анимируем панель конструкторов (левая колонка)
+    const constructorPanel = container.querySelector('.results-constructors-panel');
+    if (constructorPanel) {
+        constructorPanel.style.opacity = '0';
+        constructorPanel.style.transform = 'translateX(-15px)';
+        constructorPanel.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        
+        setTimeout(() => {
+            constructorPanel.style.opacity = '1';
+            constructorPanel.style.transform = 'translateX(0)';
+        }, 100);
+    }
+    
+    // Анимируем блоки в главной области
+    const sections = container.querySelectorAll('.results-section-block');
+    sections.forEach((section, index) => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(15px)';
+        section.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        
+        setTimeout(() => {
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+        }, 150 + index * 80);
+    });
+    
+    // Анимируем таблицы в детальном режиме
+    const tables = container.querySelectorAll('.detailed-table-container');
+    tables.forEach((table, index) => {
+        table.style.opacity = '0';
+        table.style.transition = 'opacity 0.4s ease';
+        
+        setTimeout(() => {
+            table.style.opacity = '1';
+        }, 200 + index * 80);
+    });
 }
 
 function calculateRaceWinners() {

@@ -225,10 +225,142 @@ h1, h2 {
 /* Сетка плашек */
 .main-blocks {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    max-width: 1050px;
     margin: 0 auto;
+}
+
+.statistics-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+/* Контейнер для всех строк статистики */
+.statistics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+/* Группа строки статистики (лейбл + строка) */
+.statistics-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Лейбл строки статистики */
+.statistics-label {
+    font-family: 'F1Title', 'F1Text', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text-muted, #999);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* Строка статистики (кликабельная) */
+.statistics-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-height: 30px;
+}
+
+.statistics-row:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.statistics-row:active {
+    transform: scale(0.98);
+}
+
+/* Левая часть строки (иконка + имя) */
+.statistics-row-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+    flex: 1;
+}
+
+/* Иконка в строке статистики (изображение) */
+.statistics-row-icon-img {
+    width: 20px;
+    height: 13px;
+    flex-shrink: 0;
+    object-fit: contain;
+    border-radius: 2px;
+}
+
+/* Иконка команды (логотип) - увеличенная */
+.statistics-row-icon-img.team-logo {
+    width: 24px;
+    height: 15px;
+}
+
+/* Имя в строке статистики */
+.statistics-row-name {
+    font-family: 'F1Title', 'F1Text', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-light, #ddd);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 3px;
+}
+
+.statistics-row-name.empty {
+    color: var(--text-muted, #666);
+    font-weight: 400;
+}
+
+/* Значение в строке статистики (очки, время) */
+.statistics-row-value {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.9rem;
+    color: #E10600;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.statistics-row-name.empty {
+    color: var(--text-muted, #666);
+    font-weight: 400;
+    font-size: 0.75rem;
+    text-align: center;
+    width: 100%; /* Растягиваем на всю ширину */
+    justify-content: center; /* Центрируем текст */
+}
+
+/* Анимация при загрузке */
+.statistics-row {
+    animation: statisticsFadeIn 0.3s ease forwards;
+    opacity: 0;
+}
+
+.statistics-row:nth-child(1) { animation-delay: 0.05s; }
+.statistics-row:nth-child(2) { animation-delay: 0.10s; }
+.statistics-row:nth-child(3) { animation-delay: 0.15s; }
+
+@keyframes statisticsFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .main-block {
@@ -245,7 +377,7 @@ h1, h2 {
     font-size: 1rem;
     color: var(--text-light);
     margin-bottom: 0px;
-    padding-bottom: 8px;
+    padding-bottom: 5px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -253,7 +385,7 @@ h1, h2 {
     border: none;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.3) 20%, rgba(225, 6, 0, 0.3) 80%, transparent);
-    margin: 5px 0px 10px 0px;
+    margin: 0 0 8px;
 }
 
 .main-divider-timer {
@@ -569,6 +701,7 @@ h1, h2 {
 
 .tyre-item.dimmed.clickable {
     opacity: 0.35;
+    padding-bottom: 2vh;
 }
 
 .tyre-item.dimmed.clickable:hover {
@@ -3174,5 +3307,4 @@ h1, h2 {
     border-color: var(--red-accent);
     border-width: 1.8px;
     box-shadow: none;
-    animation: none;
 }

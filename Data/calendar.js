@@ -549,8 +549,12 @@ function scrollToGPCard(gpId, cardsArea) {
         animationTimeout = null;
     }
 
-    // Снимаем все выделения
-    clearAllHighlights(cardsArea);
+    // Снимаем выделение со старого ГП
+    const oldCard = cardsArea.querySelector(`.calendar-card.upcoming-highlight`);
+    if (oldCard) oldCard.classList.remove('upcoming-highlight');
+    
+    const oldNav = document.querySelector(`.calendar-nav-item.upcoming-highlight`);
+    if (oldNav) oldNav.classList.remove('upcoming-highlight');
 
     const card = cardsArea.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
     if (!card) return;
@@ -558,20 +562,14 @@ function scrollToGPCard(gpId, cardsArea) {
     // Запоминаем текущий выделенный ГП
     currentHighlightedGpId = gpId;
 
+    // Сразу применяем выделение к карточке и навигации
+    card.classList.add('upcoming-highlight');
+    
+    const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
+    if (navItem) navItem.classList.add('upcoming-highlight');
+
     // Плавный скролл к карточке
     smoothScrollToElement(card, 800);
-    card.classList.add('highlight');
-
-    // Устанавливаем новый таймаут
-    animationTimeout = setTimeout(() => {
-        card.classList.remove('highlight');
-        card.classList.add('upcoming-highlight');
-
-        const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
-        if (navItem) navItem.classList.add('upcoming-highlight');
-        
-        animationTimeout = null;
-    }, 2000);
 }
 
 function scrollToCurrentGP() {
@@ -1034,7 +1032,154 @@ function initCalendarPage(container) {
     renderCalendarCards(cardsArea);
     initCalendarTimers();
 
-    animateCalendarCardsAppearance(cardsArea).then(() => {
-        scrollToCurrentGP();
+    // Находим предстоящий ГП
+    const upcomingGpId = findUpcomingGP();
+    
+    // Сразу выделяем в навигации (без задержки)
+    if (upcomingGpId) {
+        const navItem = navPanel.querySelector(`.calendar-nav-item[data-gp-id="${upcomingGpId}"]`);
+        if (navItem) {
+            navItem.classList.add('upcoming-highlight');
+        }
+    }
+    
+    // Анимируем карточки и после анимации скроллим с пульсацией
+    animateCalendarContent(container, cardsArea, upcomingGpId).then(() => {
+        if (upcomingGpId) {
+            scrollToUpcomingGPWithGlow(cardsArea, upcomingGpId);
+        }
     });
+}
+
+function findUpcomingGP() {
+    const now = new Date();
+    const activeGPs = calendarData.filter(gp => !gp.canceled);
+    
+    // Ищем ГП, который идет сегодня
+    let target = activeGPs.find(gp => {
+        const raceDate = new Date(gp.date);
+        return raceDate.toDateString() === now.toDateString();
+    });
+    
+    // Если нет, ищем ближайший будущий
+    if (!target) {
+        target = activeGPs.find(gp => new Date(gp.date) > now);
+    }
+    
+    // Если нет, берем последний
+    if (!target && activeGPs.length) {
+        target = activeGPs[activeGPs.length - 1];
+    }
+    
+    return target ? target.id : null;
+}
+
+function scrollToUpcomingGPWithGlow(cardsArea, gpId) {
+    if (!gpId) return;
+    
+    const card = cardsArea.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
+    if (!card) return;
+    
+    // Сразу добавляем постоянное выделение карточке
+    card.classList.add('upcoming-highlight');
+    currentHighlightedGpId = gpId;
+    
+    // Плавный скролл к карточке
+    smoothScrollToElement(card, 800);
+    
+    // После скролла добавляем пульсацию бордюра
+    setTimeout(() => {
+        card.classList.add('highlight');
+        
+        // Через 2 секунды убираем пульсацию, оставляя постоянное выделение
+        setTimeout(() => {
+            card.classList.remove('highlight');
+        }, 1500);
+    }, 800);
+}
+
+function animateCalendarContent(container, cardsArea, upcomingGpId) {
+    return new Promise((resolve) => {
+        // Анимируем навигационную панель (слева)
+        const navPanel = container.querySelector('.calendar-nav-panel');
+        if (navPanel) {
+            navPanel.style.opacity = '0';
+            navPanel.style.transform = 'translateX(-15px)';
+            navPanel.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            
+            setTimeout(() => {
+                navPanel.style.opacity = '1';
+                navPanel.style.transform = 'translateX(0)';
+            }, 100);
+        }
+
+        // Анимируем карточки
+        const cards = cardsArea.querySelectorAll('.calendar-card');
+        if (cards.length === 0) {
+            resolve();
+            return;
+        }
+
+        cards.forEach((card, index) => {
+            // Если это предстоящий ГП - показываем сразу (но без анимации)
+            const isUpcoming = card.dataset.gpId === upcomingGpId;
+            
+            if (isUpcoming) {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+                card.style.transition = 'none';
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(15px)';
+                card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 + (index - 1) * 50);
+            }
+        });
+
+        const maxDelay = 200 + cards.length * 50 + 100;
+        setTimeout(resolve, maxDelay);
+    });
+}
+
+function scrollToGPCard(gpId, cardsArea) {
+    if (currentHighlightedGpId === gpId) return;
+    
+    if (animationTimeout) {
+        clearTimeout(animationTimeout);
+        animationTimeout = null;
+    }
+
+    // Снимаем выделение со старого ГП
+    const oldCard = cardsArea.querySelector(`.calendar-card.upcoming-highlight`);
+    if (oldCard) oldCard.classList.remove('upcoming-highlight');
+    
+    const oldNav = document.querySelector(`.calendar-nav-item.upcoming-highlight`);
+    if (oldNav) oldNav.classList.remove('upcoming-highlight');
+
+    const card = cardsArea.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
+    if (!card) return;
+
+    currentHighlightedGpId = gpId;
+
+    // Постоянное выделение
+    card.classList.add('upcoming-highlight');
+    
+    const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
+    if (navItem) navItem.classList.add('upcoming-highlight');
+
+    // Плавный скролл
+    smoothScrollToElement(card, 800);
+    
+    // Пульсация бордюра после скролла
+    setTimeout(() => {
+        card.classList.add('highlight');
+        
+        setTimeout(() => {
+            card.classList.remove('highlight');
+        }, 1500);
+    }, 800);
 }
