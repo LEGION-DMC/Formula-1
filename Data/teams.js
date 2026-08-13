@@ -196,7 +196,7 @@ const teamsData = [
 		country: "us",
 		license_country: "us",
 		license: "США",
-        director: "Грэм Лоудон",
+        director: "Марцин Будковски",
         founder: "TWG Cadillac",
         car: "MAC-26",
         engine: "Ferrari",

@@ -617,7 +617,7 @@ body {
 }
 
 /* Модалка пилота */
-.driver-modal { max-width: 95%; max-height: 90vh; }
+.driver-modal { max-width: 95%; max-height: 95vh; }
 
 .modal-close-btn {
     display: flex;
