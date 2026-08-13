@@ -1111,6 +1111,10 @@ function createCareerBlock(careerData) {
         const careerItem = document.createElement('div');
         careerItem.className = 'modal-career-item';
         careerItem.style.setProperty('--career-delay', `${index * 100}ms`);
+        
+        // Добавляем data-атрибут для специальных стилей
+        const teamSlug = item.team.toLowerCase().replace(/\s+/g, '-');
+        careerItem.setAttribute('data-team', teamSlug);
 
         // Логотип команды
         const logoWrapper = document.createElement('div');
@@ -1395,9 +1399,7 @@ function getTeamLogo(teamName) {
     
     // Список архивных команд
     const archiveTeams = [
-        'toro-rosso', 'minardi', 'manor', 'renault', 
-        'force-india', 'racing-point', 'alfa-romeo', 
-        'sauber', 'toyota', 'honda', 'alphatauri', 'bmw'
+        'toro-rosso', 'sauber', 'alphatauri', 'force-india', 'racing-point', 'minardi', 'manor', 'renault','alfa-romeo',
     ];
     
     if (archiveTeams.includes(slug)) {
