@@ -1279,7 +1279,7 @@ h1, h2 {
     border-radius: 10px;
     width: 90%;
     max-width: 750px;
-    max-height: 70vh;
+    max-height: 80vh;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -1455,10 +1455,11 @@ h1, h2 {
 
 .modal-bio-title {
     font-family: 'F1Title', sans-serif;
-    font-size: 1rem;
+    font-size: 14px;
     color: var(--text-gray);
     margin-bottom: 5px;
     padding-top: 10px;
+    letter-spacing: 0.08em;
 }
 
 .modal-bio-text {
@@ -1484,6 +1485,107 @@ h1, h2 {
     font-size: 0.85rem;
     color: #d4a843;
     font-style: italic;
+}
+
+/* Блок карьерного пути */
+.modal-career-container {
+    margin-top: 6px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-career-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 14px;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+
+.modal-career-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 3px;
+}
+
+.modal-career-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 5px;
+    transition: all 0.2s ease;
+    animation: careerItemAppear 0.4s ease forwards;
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+    min-width: auto;
+}
+
+@keyframes careerItemAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-career-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.modal-career-logo-wrapper {
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.modal-career-logo {
+    max-width: 27px;
+    max-height: 27px;
+    object-fit: contain;
+    transition: filter 0.2s ease;
+}
+
+.modal-career-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+}
+
+.modal-career-team-name {
+    font-family: 'F1Title', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.modal-career-year {
+    font-size: 9px;
+    font-weight: 500;
+    color: #999;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
+.modal-career-arrow {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 300;
+    flex-shrink: 0;
+    padding: 0 2px;
+    animation: arrowPulse 2s ease-in-out infinite;
 }
 
 /* ============================================== */
