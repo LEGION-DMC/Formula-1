@@ -647,7 +647,7 @@ body {
 .modal-details-row { gap: 50px; }
 .modal-stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .modal-bottom { padding: 0 20px 20px; }
-.modal-career-item { width: 111px; }
+.modal-career-item { width: 105px; }
 .modal-career-item[data-team="aston-martin"] .modal-career-team-name {
     font-size: 7.9px;
 }
