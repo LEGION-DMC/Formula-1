@@ -32,6 +32,41 @@
     --text-gray: #b0b0b0;
     --border-color: #333;
 }
+/* ============================================== */
+/* ТЁМНЫЙ ФОН ДЛЯ PWA ПРИ ЗАПУСКЕ                 */
+/* ============================================== */
+
+/* Затемнение фона при загрузке PWA */
+html, body {
+    background-color: #0a0a0a !important;
+    background-image: none !important;
+}
+
+/* Заполнитель для splash screen */
+body::before {
+    background: #0a0a0a !important;
+    filter: none !important;
+    transform: none !important;
+}
+
+/* Показываем чёрный фон до загрузки контента */
+body:not(.loaded) {
+    background-color: #0a0a0a !important;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Опционально: логотип или индикатор загрузки */
+body:not(.loaded) .content-area {
+    display: none;
+}
+
+/* После загрузки показываем контент */
+body.loaded .content-area {
+    display: block;
+}
 
 body {
     font-family: 'F1Text', Arial, sans-serif;
