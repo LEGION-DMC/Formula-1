@@ -1,4 +1,4 @@
-const driversData = [
+const driversData = [ 
     {   id: "norris", 
         number: 1,
         name: "Ландо Норрис",
@@ -48,7 +48,7 @@ const driversData = [
         team: "Audi",
         birthPlace: "Бразилиа, Бразилия",
         birthDate: "14.12.2004",
-        debut: "2025 - Sauber",
+        debut: "2025 - Stake",
         titles: 0,
         hattricks: 0,
         wins: 0,
@@ -57,7 +57,7 @@ const driversData = [
         note: "Третий Бразилец в истории F1",
         bio: "Чемпион Формулы-2 (2024). Протеже Фернандо Алонсо. Перспективный «контролёр» — пилот, который берет не чистым темпом, а умом и резиной.",
         career: [
-            { team: "Sauber", year: "2025" },
+            { team: "Stake", year: "2025" },
             { team: "Audi", year: "2026" }
         ]
     },
@@ -99,7 +99,7 @@ const driversData = [
         bio: "Победитель Гран-при Италии (2020, AlphaTauri) — невероятная победа на фоне хаоса в Монце. Был уволен из Red Bull после полусезона из-за конфликта с Ферстаппеном, восстановил репутацию в Alpine. Технарь, отличный защитник позиции.",
         career: [
             { team: "Toro Rosso", year: "2017-2018" },
-            { team: "Red Bull", year: "2019" },
+            { team: "Red Bull", year: "2019", temporarily: true },
             { team: "Toro Rosso", year: "2019" },
             { team: "AlphaTauri", year: "2020-2022" },
             { team: "Alpine", year: "2023" }
@@ -260,13 +260,13 @@ const driversData = [
         bio: "Суперстабилен, король квалификаций. В 2025 году на трассе Сильверстоун, прервал серию неудач - финишировав третьим. Возвращенец в 2023-м после 3 лет простоя, заменил больного Стролла и сразу набрал очки. В 2026-м переходит в Audi.",
         career: [
             { team: "Williams", year: "2010" },
-            { team: "Force India", year: "2011-2012" },
+            { team: "Force India", year: "2012" },
             { team: "Sauber", year: "2013" },
             { team: "Force India", year: "2014-2016" },
             { team: "Renault", year: "2017-2019" },
             { team: "Racing Point", year: "2020" },
             { team: "Haas", year: "2023-2024" },
-            { team: "Sauber", year: "2025" },
+            { team: "Stake", year: "2025" },
             { team: "Audi", year: "2026" }
         ]
     },
@@ -287,8 +287,9 @@ const driversData = [
         note: "",
         bio: "Агрессивный, бескомпромиссный. Считался основным претендентом на место Переса в Red Bull. В 2024-м провел несколько гонок и произвел впечатление (особенно борьба с Ферстаппеном в тренировках).",
         career: [
-            { team: "AlphaTauri", year: "2023-2024" },
-            { team: "Red Bull", year: "2025" },
+            { team: "AlphaTauri", year: "2023", temporarily: true },
+            { team: "Racing Bulls", year: "2024" },
+            { team: "Red Bull", year: "2025", temporarily: true },
             { team: "Racing Bulls", year: "2025" }
         ]
     },
@@ -310,7 +311,7 @@ const driversData = [
         bio: "Физически очень сильный. Известен жёсткой, иногда грязной защитой (драка с Гасли в Alpine). Не очень любим за характер, но стабильно набирает очки. В 2025-м перешел в Haas.",
         career: [
             { team: "Manor", year: "2016" },
-            { team: "Force India", year: "2017-2018" },
+            { team: "Force India", year: "2017" },
             { team: "Racing Point", year: "2018" },
             { team: "Renault", year: "2020" },
             { team: "Alpine", year: "2021-2024" },
@@ -445,7 +446,7 @@ const driversData = [
             { team: "Williams", year: "2013-2016" },
             { team: "Mercedes", year: "2017-2021" },
             { team: "Alfa Romeo", year: "2022-2023" },
-            { team: "Sauber", year: "2024-2025" },
+            { team: "Sauber", year: "2024" },
             { team: "Cadillac", year: "2026" }
         ]
     },
@@ -486,7 +487,8 @@ const driversData = [
         note: "",
         bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
         career: [
-            { team: "Ferrari", year: "2024" },
+            { team: "Ferrari", year: "2024", temporarily: true },
+            { team: "Haas", year: "2024", temporarily: true },
             { team: "Haas", year: "2025" }
         ]
     },
@@ -529,7 +531,8 @@ const driversData = [
         bio: "За четыре сезона в F1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull.",
         career: [
             { team: "AlphaTauri", year: "2021-2023" },
-            { team: "Racing Bulls", year: "2024-2025" },
+            { team: "Racing Bulls", year: "2024" },
+            { team: "Racing Bulls", year: "2025", temporarily: true },
             { team: "Red Bull", year: "2025" }
         ]
     },
@@ -1112,6 +1115,11 @@ function createCareerBlock(careerData) {
         careerItem.className = 'modal-career-item';
         careerItem.style.setProperty('--career-delay', `${index * 100}ms`);
         
+        // Если период временный - добавляем класс
+        if (item.temporarily) {
+            careerItem.classList.add('career-temporary');
+        }
+        
         // Добавляем data-атрибут для специальных стилей
         const teamSlug = item.team.toLowerCase().replace(/\s+/g, '-');
         careerItem.setAttribute('data-team', teamSlug);
@@ -1399,7 +1407,7 @@ function getTeamLogo(teamName) {
     
     // Список архивных команд
     const archiveTeams = [
-        'toro-rosso', 'sauber', 'alphatauri', 'force-india', 'racing-point', 'minardi', 'manor', 'renault','alfa-romeo',
+        'toro-rosso', 'sauber', 'alphatauri', 'force-india', 'racing-point', 'minardi', 'manor', 'renault','alfa-romeo', 'stake'
     ];
     
     if (archiveTeams.includes(slug)) {

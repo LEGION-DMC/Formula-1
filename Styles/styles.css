@@ -1523,6 +1523,12 @@ h1, h2 {
     opacity: 0;
     transform: translateY(8px) scale(0.95);
     min-width: auto;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Стили для временных команд в карьере (жёлтый бордюр) */
+.modal-career-item.career-temporary {
+    border: 1px solid rgba(255, 255, 0, 0.4) !important;
 }
 
 @keyframes careerItemAppear {

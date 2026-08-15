@@ -419,6 +419,20 @@ const tracksData = [
         firstrace: "1999",
         lapRecord: "1.34.080 (Феттель, Ferrari, 2017)"
     },
+    { id: "paul_ricard",
+        name: "Гран-при Франции",
+        country: "fr",
+        location: "Ле-Кастелле, Франция",
+        trackName: "Поль-Рикар",
+        length: "5 842",
+        laps: 53,
+        turns: 15,
+		elevation: '7',
+		speed: '309',
+        direction:  "по часовой стрелки",
+        firstrace: "1971",
+        lapRecord: "1.08.012 (Мэнселл, Ferrari, 1990)"
+    },
 ];
 
 function getTrackById(id) {
