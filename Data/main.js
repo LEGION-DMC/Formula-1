@@ -1089,17 +1089,3 @@ function startMainTimer() {
     // Обновляем каждую секунду
     mainTimerInterval = setInterval(updateTimer, 1000);
 }
-
-// Добавляем класс loaded после загрузки страницы
-document.addEventListener('DOMContentLoaded', function() {
-    document.body.classList.add('loaded');
-});
-
-// Если DOM уже загружен
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-        document.body.classList.add('loaded');
-    });
-} else {
-    document.body.classList.add('loaded');
-}
