@@ -23,7 +23,7 @@ const tracksData = [
         turns: 16,
 		elevation: '8',
 		speed: '213',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "2004",
         lapRecord: "1:32.238 (Шумахер, Ferrari, 2004)"
     },
@@ -37,7 +37,7 @@ const tracksData = [
         turns: 18,
 		elevation: '40',
 		speed: '230',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "1987",
         lapRecord: "1:30.965 (Антонелли, Mercedes, 2025)"
     },
@@ -51,7 +51,7 @@ const tracksData = [
         turns: 19,
 		elevation: '3',
 		speed: '217',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "2022",
         lapRecord: "1:29.708 (Ферстаппен, Red-Bull, 2024)"
     },
@@ -65,7 +65,7 @@ const tracksData = [
         turns: 14,
 		elevation: '5',
 		speed: '215',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "1978",
         lapRecord: "1.13.078 (Боттас, Mercedes, 2019)"
     },
@@ -79,7 +79,7 @@ const tracksData = [
         turns: 19,
 		elevation: '42',
 		speed: '165',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "1950",
         lapRecord: "1.12.909 (Хэмилтон, Mercedes, 2021)"
     },
@@ -93,7 +93,7 @@ const tracksData = [
         turns: 14,
 		elevation: '30',
 		speed: '221',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "1991",
         lapRecord: "1:15.743 (Пиастри, McLaren, 2025)"
     },
@@ -107,7 +107,7 @@ const tracksData = [
         turns: 10,
 		elevation: '65',
 		speed: '229',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "1997",
         lapRecord: "1:05.619 (Сайнс, McLaren, 2020)"
     },
@@ -121,7 +121,7 @@ const tracksData = [
         turns: 18,
 		elevation: '25',
 		speed: '243',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "1950",
         lapRecord: "1.27.097 (Ферстаппен, Red-Bull, 2020)"
     },
@@ -135,7 +135,7 @@ const tracksData = [
         turns: 20,
 		elevation: '102',
 		speed: '241',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "1950",
         lapRecord: "1:44.701 (Перес, Red-Bull, 2024)"
     },
@@ -149,7 +149,7 @@ const tracksData = [
         turns: 14,
 		elevation: '36',
 		speed: '207',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "1986",
         lapRecord: "1:16.627 (Хэмилтон, Mercedes, 2020)"
     },
@@ -163,7 +163,7 @@ const tracksData = [
         turns: 14,
 		elevation: '14',
 		speed: '215',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "1952",
         lapRecord: "1.11.097 (Хэмилтон, Mercedes, 2021)"
     },
@@ -177,7 +177,7 @@ const tracksData = [
         turns: 11,
 		elevation: '10',
 		speed: '257',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "1950",
         lapRecord: "1:20.901 (Норрис, McLaren, 2025)"
     },
@@ -191,7 +191,7 @@ const tracksData = [
         turns: 22,
 		elevation: '30',
 		speed: '~340',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "2026",
         lapRecord: "---"
     },
@@ -205,7 +205,7 @@ const tracksData = [
         turns: 20,
 		elevation: '25',
 		speed: '215',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "2016",
         lapRecord: "1.43.009 (Леклер, Ferrari, 2019)"
     },
@@ -219,7 +219,7 @@ const tracksData = [
         turns: 23,
 		elevation: '5',
 		speed: '188',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "2008",
         lapRecord: "1:34.486 (Риккардо, Red-Bull, 2024)"
     },
@@ -233,7 +233,7 @@ const tracksData = [
         turns: 20,
 		elevation: '41',
 		speed: '206',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "2012",
         lapRecord: "1:36.169 (Леклер, Ferrari, 2019)"
     },
@@ -247,7 +247,7 @@ const tracksData = [
         turns: 17,
 		elevation: '8',
 		speed: '202',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "1963",
         lapRecord: "1:17.774 (Боттас, Mercedes, 2021)"
     },
@@ -261,7 +261,7 @@ const tracksData = [
         turns: 15,
 		elevation: '43',
 		speed: '220',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "1973",
         lapRecord: "1:10.540 (Боттас, Mercedes, 2018)"
     },
@@ -275,7 +275,7 @@ const tracksData = [
         turns: 17,
 		elevation: '5',
 		speed: '235',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "2023",
         lapRecord: "1:32.312 (Рассел, Mercedes, 2024)"
     },
@@ -289,7 +289,7 @@ const tracksData = [
         turns: 16,
 		elevation: '5',
 		speed: '235',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "2021",
         lapRecord: "1:22.384 (Норрис, McLaren, 2024)"
     },
@@ -303,7 +303,7 @@ const tracksData = [
         turns: 16,
 		elevation: '5',
 		speed: '222',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "2009",
         lapRecord: "1:22.109 (Ферстаппен, Red-Bull, 2021)"
     },
@@ -317,7 +317,7 @@ const tracksData = [
         turns: 14,
 		elevation: '40',
 		speed: '227',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "2005",
         lapRecord: "1.24.770 (Монтойя, McLaren, 2005)"
     },
@@ -331,7 +331,7 @@ const tracksData = [
         turns: 15,
 		elevation: '30',
 		speed: '213',
-        direction:  "по часовой стрелки",
+        direction: "по часовой стрелке",
         firstrace: "2020",
         lapRecord: "1.16.466 (Боттас, Mercedes, 2020)"
     },
@@ -345,7 +345,7 @@ const tracksData = [
         turns: 19,
 		elevation: '30',
 		speed: '234',
-        direction:  "по часовой стрелки",
+        direction: "по часовой стрелке",
         firstrace: "1980",
         lapRecord: "1.15.484 (Хэмилтон, Mercedes, 2020)"
     },
@@ -359,7 +359,7 @@ const tracksData = [
         turns: 27,
 		elevation: '8',
 		speed: '245',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "2021",
         lapRecord: "1:30.734 (Хэмилтон, Mercedes, 2021)"
     },
@@ -373,7 +373,7 @@ const tracksData = [
         turns: 15,
 		elevation: '17',
 		speed: '216',
-        direction:  "по часовой стрелке",
+        direction: "по часовой стрелке",
         firstrace: "2004",
         lapRecord: "1:31.447 (Де ла Роса, McLaren, 2005)"
     },
@@ -387,7 +387,7 @@ const tracksData = [
         turns: 13,
 		elevation: '8',
 		speed: '223',
-        direction:  "по часовой стрелки",
+        direction: "по часовой стрелке",
         firstrace: "1970",
         lapRecord: "1:13.780 (Райкконен, McLaren, 2004)"
     },
@@ -401,7 +401,7 @@ const tracksData = [
         turns: 18,
 		elevation: '5',
 		speed: '203',
-        direction:  "против часовой стрелки",
+        direction:  "против часовой стрелке",
         firstrace: "2010",
         lapRecord: "1:39.605 (Феттель, Red Bull, 2011)"
     },
@@ -415,7 +415,7 @@ const tracksData = [
         turns: 15,
 		elevation: '18',
 		speed: '212',
-        direction:  "по часовой стрелки",
+        direction: "по часовой стрелке",
         firstrace: "1999",
         lapRecord: "1.34.080 (Феттель, Ferrari, 2017)"
     },
@@ -429,7 +429,7 @@ const tracksData = [
         turns: 15,
 		elevation: '7',
 		speed: '309',
-        direction:  "по часовой стрелки",
+        direction: "по часовой стрелке",
         firstrace: "1971",
         lapRecord: "1.08.012 (Мэнселл, Ferrari, 1990)"
     },

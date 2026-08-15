@@ -1550,8 +1550,8 @@ h1, h2 {
 }
 
 .modal-career-logo-wrapper {
-    width: 27px;
-    height: 27px;
+    width: 23px;
+    height: 23px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1559,8 +1559,8 @@ h1, h2 {
 }
 
 .modal-career-logo {
-    max-width: 27px;
-    max-height: 27px;
+    max-width: 23px;
+    max-height: 23px;
     object-fit: contain;
     transition: filter 0.2s ease;
 }
