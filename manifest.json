@@ -1,6 +1,6 @@
 {
-  "name": " ",
-  "short_name": "Formula 1",
+  "name": "Formula 1",
+  "short_name": " ",
   "description": "Formula 1 2026",
   "start_url": "https://legion-dmc.github.io/Formula-1",
   "display": "standalone",
