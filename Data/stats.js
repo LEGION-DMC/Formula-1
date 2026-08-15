@@ -817,7 +817,7 @@ function createEnginePartsTable() {
             <th title="Кинетический мотор-генератор">MGU-K</th>
             <th title="Накопитель энергии">ES</th>
             <th title="Блок управляющей электроники">PU-CE</th>
-            <th title="Комплект вспомогательных компонентов">PU-ANC</th>
+            <th title="Вспомогательные компоненты">PU-ANC</th>
         </tr>
     `;
     table.appendChild(thead);
@@ -1019,9 +1019,6 @@ function createEnginePartsTable() {
     legend.className = 'engine-legend';
     legend.innerHTML = `
         <span class="engine-legend-item">
-            <span class="engine-legend-color normal"></span> В пределах нормы
-        </span>
-        <span class="engine-legend-item">
             <span class="engine-legend-color at-limit"></span> Лимит достигнут
         </span>
         <span class="engine-legend-item">
@@ -1039,9 +1036,9 @@ function createEnginePartsTable() {
     note.innerHTML = `
         <span class="engine-note-icon">🛈</span>
         <span class="engine-note-text">
-		•Установка сверх лимита: 1-й - штраф 10 мест, последующие - 5 мест. 
+		•Установка сверх лимита - штраф: потеря 10 позиций, далее по 5.</br>
 		•При сумме штрафов более 15 позиций - старт с последней позиции.
-        </span>
+		</span>
     `;
     wrapper.appendChild(note);
 
