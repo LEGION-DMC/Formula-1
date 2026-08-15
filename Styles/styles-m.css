@@ -207,7 +207,6 @@ body {
 .main-title {
     font-size: 1.3rem;
     letter-spacing: 1px;
-    margin-top: 45px;
 }
     
 .main-header {
@@ -393,7 +392,6 @@ body {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     background-color: rgba(18, 18, 18, 0.5);
-    margin-top: 50px;
 }
 
 .driver-search-input {
@@ -657,7 +655,6 @@ body {
 .teams-grid { 
     gap: 10px; 
     padding-bottom: 20px; 
-    margin-top: 40px;
 }
 
 .team-card {
@@ -773,7 +770,6 @@ body {
     padding: 10px;
     column-count: 2;
     column-gap: 10px;
-    margin-top: 50px;
 }
 
 .calendar-nav-title {
@@ -890,7 +886,6 @@ body {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     padding: 10px 15px;
-    margin-top: 50px;
 }
 
 .constructor-row {
@@ -1099,7 +1094,6 @@ body {
 .stats-grid { 
     display: flex;
     flex-direction: column;
-    margin-top: 40px; 
 }
     
 .stats-left-col,

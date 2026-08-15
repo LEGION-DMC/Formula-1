@@ -1,172 +1,216 @@
 const driversData = [ 
-    {   id: "norris", 
-        number: 1,
+    {   number: 1, id: "norris",  
         name: "Ландо Норрис",
         namem: "Л. Норрис",
-        country: "gb",
-        team: "McLaren",
-        birthPlace: "Бристоль, Великобритания",
+        birthPlace: "Бристоль, Великобритания", country: "gb",
         birthDate: "13.11.1999",
-        debut: "2019 - McLaren",
+		
+        team: "McLaren",
+        debut: "2019 - McLaren",        
+		career: [
+            { team: "McLaren", year: "2019" }
+        ],
+		
         titles: 1,
         hattricks: 3,
         wins: 12,
         podiums: 47,
         poles: 16,
+		
         note: "Выступает под #1 - в качестве действующего чемпиона мира. Собственный номер пилота #4.",
         bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул.",
-        career: [
-            { team: "McLaren", year: "2019" }
-        ]
     },
-    {   id: "verstappen", 
-        number: 3,
-        name: "Макс Ферстаппен",
-        namem: "М. Ферстаппен",
-        country: "nl",
-        team: "Red Bull",
-        birthPlace: "Хасселт, Бельгия",
-        birthDate: "30.09.1997",
-        debut: "2015 - Toro Rosso",
-        titles: 4,
-        hattricks: 14,
-        wins: 71,
-        podiums: 131,
-        poles: 48,
-        note: "Самый молодой дебютант в истории F1 - 17 лет",
-        bio: "Чемпион мира (2021, 2022, 2023, 2024). Агрессивный, феноменально стабильный. В 2021-м в драматичной финальной гонке отобрал титул у Хэмилтона. В 2023-м установил рекорд — 19 побед за сезон. В 2024-м начал доминировать, но к концу года Red Bull сдал позиции.",
-        career: [
-            { team: "Toro Rosso", year: "2015" },
-            { team: "Red Bull", year: "2016" }
-        ]
-    },
-    {   id: "bortoletto", 
-        number: 5,
-        name: "Габриэл Бортолето",
-        namem: "Г. Бортолето",
-        country: "br",
-        team: "Audi",
-        birthPlace: "Бразилиа, Бразилия",
-        birthDate: "14.12.2004",
-        debut: "2025 - Stake",
+    {   number: 2, id: "vandoorne",      // Резерв
+        name: "Стоффель Вандорн",
+        namem: "С. Вандорн",
+        birthPlace: "Кортрейк, Бельгия", country: "be",
+        birthDate: "26.03.1991",
+		
+        team: "Резерв",
+		reserve: ["Aston Martin", "Alpine"],
+        debut: "2016 - McLaren",        
+		career: [
+            { team: "McLaren", year: "2016-2018" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        note: "Третий Бразилец в истории F1",
-        bio: "Чемпион Формулы-2 (2024). Протеже Фернандо Алонсо. Перспективный «контролёр» — пилот, который берет не чистым темпом, а умом и резиной.",
-        career: [
+		
+        note: "",
+        bio: "Чемпион серии GP2 (2015) и чемпион мира Формулы-E (2021-2022). Выполняет роль резервиста для команд Aston Martin и Alpine.",
+    },
+    {   number: 3, id: "verstappen", 
+        name: "Макс Ферстаппен",
+        namem: "М. Ферстаппен",
+        birthPlace: "Хасселт, Бельгия", country: "nl",
+        birthDate: "30.09.1997",
+		
+        team: "Red Bull",
+        debut: "2015 - Toro Rosso",        
+		career: [
+            { team: "Toro Rosso", year: "2015" },
+            { team: "Red Bull", year: "2016" }
+        ],
+		
+        titles: 4,
+        hattricks: 14,
+        wins: 71,
+        podiums: 131,
+        poles: 48,
+		
+        note: "Самый молодой дебютант в истории F1 - 17 лет",
+        bio: "Чемпион мира (2021, 2022, 2023, 2024). Агрессивный, феноменально стабильный. В 2021-м в драматичной финальной гонке отобрал титул у Хэмилтона. В 2023-м установил рекорд — 19 побед за сезон. В 2024-м начал доминировать, но к концу года Red Bull сдал позиции.",
+    },
+    {   number: 5, id: "bortoletto", 
+        name: "Габриэл Бортолето",
+        namem: "Г. Бортолето",
+        birthPlace: "Бразилиа, Бразилия", country: "br",
+        birthDate: "14.12.2004",
+		
+        team: "Audi",
+        debut: "2025 - Stake",        
+		career: [
             { team: "Stake", year: "2025" },
             { team: "Audi", year: "2026" }
-        ]
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+		
+        note: "Третий Бразилец в истории F1",
+        bio: "Чемпион Формулы-2 (2024). Протеже Фернандо Алонсо. Перспективный «контролёр» — пилот, который берет не чистым темпом, а умом и резиной.",
     },
-    {   id: "hadjar",
-        number: 6,
+    {   number: 6, id: "hadjar",
         name: "Иcаак Хаджар",
         namem: "И. Хаджар",
-        country: "fr",
-        team: "Red Bull",
-        birthPlace: "Париж, Франция",
+        birthPlace: "Париж, Франция", country: "fr",
         birthDate: "28.09.2004",
-        debut: "2025 - Racing Bulls",
+		
+        team: "Red Bull",
+        debut: "2025 - Racing Bulls",        
+		career: [
+            { team: "Racing Bulls", year: "2025" },
+            { team: "Red Bull", year: "2026" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 1,
         poles: 0,
+		
         note: "",
         bio: "Чемпион Формулы-2 (2024). Воспитанник программы Red Bull. Резкий, быстрый, но склонен к авариям. Его сравнивают с молодым Феттелем.",
-        career: [
-            { team: "Racing Bulls", year: "2025" },
-            { team: "Red Bull", year: "2026" }
-        ]
     },
-    {   id: "gasly",
-        number: 10,
-        name: "Пьер Гасли",
-        namem: "П. Гасли",
-        country: "fr",
-        team: "Alpine",
-        birthPlace: "Руан, Франция",
-        birthDate: "07.02.1996",
-        debut: "2017 - Toro Rosso",
+    {   number: 7, id: "doohan",	         // Резерв
+        name: "Джек Дуэн",
+        namem: "Д. Дуэн",
+        birthPlace: "Брисбен, Австралия", country: "au",
+        birthDate: "20.01.2003",
+		
+        team: "Резерв",
+		reserve: ["Alpine"],
+        debut: "2024 - Alpine",        
+		career: [
+            { team: "Alpine", year: "2024-2025" }
+        ],
+		
         titles: 0,
         hattricks: 0,
-        wins: 1,
-        podiums: 6,
+        wins: 0,
+        podiums: 0,
         poles: 0,
-        bio: "Победитель Гран-при Италии (2020, AlphaTauri) — невероятная победа на фоне хаоса в Монце. Был уволен из Red Bull после полусезона из-за конфликта с Ферстаппеном, восстановил репутацию в Alpine. Технарь, отличный защитник позиции.",
-        career: [
+		
+        note: "",
+        bio: "Сын пятикратного чемпиона мира по мотогонкам Мика Дуэна. Чемпион Формулы-2 (2023). В 2024 году подменял Окона и Гасли. Выбрал номер #7 в честь своего кумира Кими Райкконена. Считается перспективным стабильным гонщиком, но пока без очков в F1.",
+    },
+    {   number: 10, id: "gasly",
+        name: "Пьер Гасли",
+        namem: "П. Гасли",
+        birthPlace: "Руан, Франция", country: "fr",
+        birthDate: "07.02.1996",
+		
+        team: "Alpine",
+        debut: "2017 - Toro Rosso",        
+		career: [
             { team: "Toro Rosso", year: "2017-2018" },
             { team: "Red Bull", year: "2019", temporarily: true },
             { team: "Toro Rosso", year: "2019" },
             { team: "AlphaTauri", year: "2020-2022" },
             { team: "Alpine", year: "2023" }
-        ]
-    },
-    {   id: "perez",
-        number: 11,
-        name: "Серхио Перес",
-        namem: "С. Перес",
-        country: "mx",
-        team: "Cadillac",
-        birthPlace: "Гвадалахара, Мексика",
-        birthDate: "26.01.1990",
-        debut: "2011 - Sauber",
+        ],
+		
         titles: 0,
         hattricks: 0,
-        wins: 6,
-        podiums: 39,
-        poles: 3,
+        wins: 1,
+        podiums: 6,
+        poles: 0,
+		
         note: "",
-        bio: "Ветеран. Главный специалист по сохранению шин и «король улиц» (победы в Баку, Сингапуре). Стал напарником Ферстаппена в Red Bull с 2021 года, помог ему выиграть первый титул, но к 2024-му резко сдал, едва набирая очки. В 2026-м перешел в новую команду Cadillac в качестве ведущего пилота.",
-        career: [
+        bio: "Победитель Гран-при Италии (2020, AlphaTauri) — невероятная победа на фоне хаоса в Монце. Был уволен из Red Bull после полусезона из-за конфликта с Ферстаппеном, восстановил репутацию в Alpine. Технарь, отличный защитник позиции.",
+    },
+    {   number: 11, id: "perez",
+        name: "Серхио Перес",
+        namem: "С. Перес",
+        birthPlace: "Гвадалахара, Мексика", country: "mx",
+        birthDate: "26.01.1990",
+		
+        team: "Cadillac",
+        debut: "2011 - Sauber",        
+		career: [
             { team: "Sauber", year: "2011-2012" },
             { team: "McLaren", year: "2013" },
             { team: "Force India", year: "2014-2017" },
             { team: "Racing Point", year: "2018-2020" },
             { team: "Red Bull", year: "2021-2024" },
             { team: "Cadillac", year: "2026" }
-        ]
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 6,
+        podiums: 39,
+        poles: 3,
+		
+        note: "",
+        bio: "Ветеран. Главный специалист по сохранению шин и «король улиц» (победы в Баку, Сингапуре). Стал напарником Ферстаппена в Red Bull с 2021 года, помог ему выиграть первый титул, но к 2024-му резко сдал, едва набирая очки. В 2026-м перешел в новую команду Cadillac в качестве ведущего пилота.",
     },
-    {   id: "antonelli", 
-        number: 12,
+    {   number: 12, id: "antonelli", 
         name: "Андреа Кими Антонелли",
         namem: "А. Антонелли",
-        country: "it",
-        team: "Mercedes",
-        birthPlace: "Болонья, Италия",
+        birthPlace: "Болонья, Италия", country: "it",
         birthDate: "25.08.2006",
-        debut: "2025 - Mercedes",
+		
+        team: "Mercedes",
+        debut: "2025 - Mercedes",        
+		career: [
+            { team: "Mercedes", year: "2025" }
+        ],
+		
         titles: 0,
         hattricks: 3,
         wins: 6,
         podiums: 12,
         poles: 6,
+		
         note: "Выступает под #12 - номером легендарного Айртона Сенны",
         bio: "Вундеркинд, которого лично выбрал Тото Вольфф на замену Хэмилтону. Пропустил F2, перейдя в F1 сразу из Формулы-2 (чемпион 2024). Огромное давление, сравнивают с ранним Ферстаппеном.",
-        career: [
-            { team: "Mercedes", year: "2025" }
-        ]
     },
-    {   id: "alonso",
-        number: 14,
+    {   number: 14, id: "alonso",
         name: "Фернандо Алонсо",
         namem: "Ф. Алонсо",
-        country: "es",
-        team: "Aston Martin",
-        birthPlace: "Овьедо, Испания",
+        birthPlace: "Овьедо, Испания", country: "es",
         birthDate: "29.07.1981",
-        debut: "2001 - Minardi",
-        titles: 2,
-        hattricks: 5,
-        wins: 32,
-        podiums: 106,
-        poles: 22,
-        note: "Самый опытный пилот в истории, более 400 Гран-при.",
-        bio: "Двукратный чемпион (2005, 2006). Известен борьбой с Феттелем, Хэмилтоном (Инцидент в «Воротах гаража» 2007) и своей токсичностью в менеджменте. До сих пор один из лучших на старте.",
-        career: [
+		
+        team: "Aston Martin",
+        debut: "2001 - Minardi",        
+		career: [
             { team: "Minardi", year: "2001" },
             { team: "Renault", year: "2002-2006" },
             { team: "McLaren", year: "2007" },
@@ -175,90 +219,142 @@ const driversData = [
             { team: "McLaren", year: "2015-2018" },
             { team: "Alpine", year: "2021-2022" },
             { team: "Aston Martin", year: "2023" }
-        ]
+        ],
+		
+        titles: 2,
+        hattricks: 5,
+        wins: 32,
+        podiums: 106,
+        poles: 22,
+		
+        note: "Самый опытный пилот в истории, более 400 Гран-при.",
+        bio: "Двукратный чемпион (2005, 2006). Известен борьбой с Феттелем, Хэмилтоном (Инцидент в «Воротах гаража» 2007) и своей токсичностью в менеджменте. До сих пор один из лучших на старте.",
     },
-    {   id: "leclerc",
-        number: 16,
+    {   number: 16, id: "leclerc",
         name: "Шарль Леклер",
         namem: "Ш. Леклер",
-        country: "mc",
-        team: "Ferrari",
-        birthPlace: "Монте-Карло, Монако",
+        birthPlace: "Монте-Карло, Монако", country: "mc",
         birthDate: "16.10.1997",
-        debut: "2018 - Sauber",
+		
+        team: "Ferrari",
+        debut: "2018 - Sauber",        
+		career: [
+            { team: "Sauber", year: "2018" },
+            { team: "Ferrari", year: "2019" }
+        ],
+		
         titles: 0,
         hattricks: 2,
         wins: 9,
         podiums: 54,
         poles: 27,
+		
         note: "",
         bio: "Гонщик Ferrari с 2019 года. «Король поулов» — феномен в квалификации. Много раз ошибался под давлением, но выиграл несколько выдающихся гонок (Монца-2019, Монако-2024). Главная надежда Ferrari на титул.",
-        career: [
-            { team: "Sauber", year: "2018" },
-            { team: "Ferrari", year: "2019" }
-        ]
     },
-    {   id: "stroll",
-        number: 18,
+    {   number: 18, id: "stroll",
         name: "Лэнс Стролл",
         namem: "Л. Стролл",
-        country: "ca",
-        team: "Aston Martin",
-        birthPlace: "Монреаль, Канада",
+        birthPlace: "Монреаль, Канада", country: "ca",
         birthDate: "29.10.1998",
-        debut: "2017 - Williams",
+		
+        team: "Aston Martin",
+        debut: "2017 - Williams",        
+		career: [
+            { team: "Williams", year: "2017-2018" },
+            { team: "Racing Point", year: "2019-2020" },
+            { team: "Aston Martin", year: "2021" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 3,
         poles: 1,
+		
         note: "",
         bio: "Сын миллиардера Лоуренса Стролла, владельца Aston Martin. Критикуют за то, что место куплено, но подиумы (Баку-2017, 2020) и поул есть. Нестабилен, часто разбивает машину, но в дожде быстр.",
-        career: [
-            { team: "Williams", year: "2017-2018" },
-            { team: "Racing Point", year: "2019-2020" },
-            { team: "Aston Martin", year: "2021" }
-        ]
     },
-    {   id: "albon",
-        number: 23,
+    {   number: 22, id: "tsunoda",	     // Резерв
+        name: "Юки Цунода",
+        namem: "Ю. Цунода",
+        birthPlace: "Канагава, Япония", country: "jp",
+        birthDate: "11.05.2000",
+		
+        team: "Резерв",
+		reserve: ["Red Bull", "Racing Bulls"],
+        debut: "2021 - AlphaTauri",        
+		career: [
+            { team: "AlphaTauri", year: "2021-2023" },
+            { team: "Racing Bulls", year: "2024" },
+            { team: "Racing Bulls", year: "2025", temporarily: true },
+            { team: "Red Bull", year: "2025" }
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+		
+        note: "",
+        bio: "За четыре сезона в F1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull.",
+    },
+    {   number: 23, id: "albon",
         name: "Александр Албон",
         namem: "А. Албон",
-        country: "th",
-        team: "Williams",
-        birthPlace: "Лондон, Великобритания",
+        birthPlace: "Лондон, Великобритания", country: "th",
         birthDate: "23.03.1996",
-        debut: "2019 - Toro Rosso",
+		
+        team: "Williams",
+        debut: "2019 - Toro Rosso",        
+		career: [
+            { team: "Toro Rosso", year: "2019" },
+            { team: "Red Bull", year: "2019-2020" },
+            { team: "Williams", year: "2022" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 2,
         poles: 0,
+		
         note: "",
         bio: "Был напарником Ферстаппена в Red Bull (2019-2020), но уволен из-за нерезультативности. Вернулся в 2022-м в Williams, где стал лидером команды. Очень чистый, умный пилот.",
-        career: [
-            { team: "Toro Rosso", year: "2019" },
-            { team: "Red Bull", year: "2019-2020" },
-            { team: "Williams", year: "2022" }
-        ]
     },
-    {   id: "hulkenberg",
-        number: 27,
-        name: "Нико Хюлькенберг",
-        namem: "Н. Хюлькенберг",
-        country: "de",
-        team: "Audi",
-        birthPlace: "Эммерих-на-Рейне, Германия",
-        birthDate: "19.08.1987",
-        debut: "2010 - Williams",
+    {   number: 24, id: "zhou",	             // Резерв
+        name: "Гуан Ю Чжоу",
+        namem: "Г. Чжоу",
+        birthPlace: "Шанхай, Китай", country: "cn",
+        birthDate: "30.05.1999",
+		
+        team: "Резерв",
+		reserve: ["Cadillac"],
+        debut: "2022 - Alfa Romeo",        
+		career: [
+            { team: "Alfa Romeo", year: "2022-2023" },
+            { team: "Sauber", year: "2024" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
-        podiums: 1,
-        poles: 1,
-        note: "Рекордсмен по количеству гонок без подиума, более 200.",
-        bio: "Суперстабилен, король квалификаций. В 2025 году на трассе Сильверстоун, прервал серию неудач - финишировав третьим. Возвращенец в 2023-м после 3 лет простоя, заменил больного Стролла и сразу набрал очки. В 2026-м переходит в Audi.",
-        career: [
+        podiums: 0,
+        poles: 0,
+		
+        note: "Первый и единственный пилот из Китая в истории F1",
+        bio: "Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках.",
+    },
+    {   number: 27, id: "hulkenberg",
+        name: "Нико Хюлькенберг",
+        namem: "Н. Хюлькенберг",
+        birthPlace: "Эммерих-на-Рейне, Германия", country: "de",
+        birthDate: "19.08.1987",
+		
+        team: "Audi",
+        debut: "2010 - Williams",        
+		career: [
             { team: "Williams", year: "2010" },
             { team: "Force India", year: "2012" },
             { team: "Sauber", year: "2013" },
@@ -268,294 +364,271 @@ const driversData = [
             { team: "Haas", year: "2023-2024" },
             { team: "Stake", year: "2025" },
             { team: "Audi", year: "2026" }
-        ]
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 0,
+        podiums: 1,
+        poles: 1,
+		
+        note: "Рекордсмен по количеству гонок без подиума, более 200.",
+        bio: "Суперстабилен, король квалификаций. В 2025 году на трассе Сильверстоун, прервал серию неудач - финишировав третьим. Возвращенец в 2023-м после 3 лет простоя, заменил больного Стролла и сразу набрал очки. В 2026-м переходит в Audi.",
     },
-    {   id: "lawson",
-        number: 30,
+    {   number: 30, id: "lawson",
         name: "Лиам Лоусон",
         namem: "Л. Лоусон",
-        country: "nz",
-        team: "Racing Bulls",
-        birthPlace: "Хастингс, Новая Зеландия",
+        birthPlace: "Хастингс, Новая Зеландия", country: "nz",
         birthDate: "11.02.2002",
-        debut: "2023 - AlphaTauri",
+		
+        team: "Racing Bulls",
+        debut: "2023 - AlphaTauri",        
+		career: [
+            { team: "AlphaTauri", year: "2023", temporarily: true },
+            { team: "Racing Bulls", year: "2024" },
+            { team: "Red Bull", year: "2025", temporarily: true },
+            { team: "Racing Bulls", year: "2025" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
+		
         note: "",
         bio: "Агрессивный, бескомпромиссный. Считался основным претендентом на место Переса в Red Bull. В 2024-м провел несколько гонок и произвел впечатление (особенно борьба с Ферстаппеном в тренировках).",
-        career: [
-            { team: "AlphaTauri", year: "2023", temporarily: true },
-            { team: "Racing Bulls", year: "2024" },
-            { team: "Red Bull", year: "2025", temporarily: true },
-            { team: "Racing Bulls", year: "2025" }
-        ]
     },
-    {   id: "ocon",
-        number: 31,
+    {   number: 31, id: "ocon",
         name: "Эстебан Окон",
         namem: "Э. Окон",
-        country: "fr",
-        team: "Haas",
-        birthPlace: "Эвре, Франция",
+        birthPlace: "Эвре, Франция", country: "fr",
         birthDate: "17.09.1996",
-        debut: "2016 - Manor",
-        titles: 0,
-        hattricks: 0,
-        wins: 1,
-        podiums: 4,
-        poles: 0,
-        note: "Победитель безумного Гран-при Венгрии 2021, Alpine.",
-        bio: "Физически очень сильный. Известен жёсткой, иногда грязной защитой (драка с Гасли в Alpine). Не очень любим за характер, но стабильно набирает очки. В 2025-м перешел в Haas.",
-        career: [
+		
+        team: "Haas",
+        debut: "2016 - Manor",        
+		career: [
             { team: "Manor", year: "2016" },
             { team: "Force India", year: "2017" },
             { team: "Racing Point", year: "2018" },
             { team: "Renault", year: "2020" },
             { team: "Alpine", year: "2021-2024" },
             { team: "Haas", year: "2025" }
-        ]
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 1,
+        podiums: 4,
+        poles: 0,
+		
+        note: "Победитель безумного Гран-при Венгрии 2021, Alpine.",
+        bio: "Физически очень сильный. Известен жёсткой, иногда грязной защитой (драка с Гасли в Alpine). Не очень любим за характер, но стабильно набирает очки. В 2025-м перешел в Haas.",
     },
-    {   id: "lindblad",
-        number: 41,
+    {   number: 41, id: "lindblad",
         name: "Арвид Линдблад",
         namem: "А. Линдблад",
-        country: "gb",
-        team: "Racing Bulls",
-        birthPlace: "Лондон, Англия",
+        birthPlace: "Лондон, Англия", country: "gb",
         birthDate: "08.08.2007",
-        debut: "2026 - Racing Bulls",
+		
+        team: "Racing Bulls",
+        debut: "2026 - Racing Bulls",        
+		career: [
+            { team: "Racing Bulls", year: "2026" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
+		
         note: "",
         bio: "Бронза F2 в 2024-м. Воспитанник Red Bull. Очень молод (родился в 2007-м). Считается «сырым», но супер-быстрым. Прямой конкурент Хаджару.",
-        career: [
-            { team: "Racing Bulls", year: "2026" }
-        ]
     },
-    {   id: "colapinto",
-        number: 43,
+    {   number: 43, id: "colapinto",
         name: "Франко Колапинто",
         namem: "Ф. Колапинто",
-        country: "ar",
-        team: "Alpine",
-        birthPlace: "Буэнос-Айрес, Аргентина",
+        birthPlace: "Буэнос-Айрес, Аргентина", country: "ar",
         birthDate: "27.05.2003",
-        debut: "2024 - Williams",
+		
+        team: "Alpine",
+        debut: "2024 - Williams",        
+		career: [
+            { team: "Williams", year: "2024-2025" },
+            { team: "Alpine", year: "2026" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
+		
         note: "Первый аргентинец в F1 за 20 лет.",
         bio: "Финишировал 2-м в F2 (2023). В Williams заменил Сарджента. Мощный, рискованный стиль, напоминает раннего Мальдонадо. В 2026-м перешел в Alpine.",
-        career: [
-            { team: "Williams", year: "2024-2025" },
-            { team: "Alpine", year: "2026" }
-        ]
     },
-    {   id: "hamilton",
-        number: 44,
+    {   number: 44, id: "hamilton",
         name: "Льюис Хэмилтон",
         namem: "Л. Хэмилтон",
-        country: "gb",
-        team: "Ferrari",
-        birthPlace: "Стивенидж, Великобритания",
+        birthPlace: "Стивенидж, Великобритания", country: "gb",
         birthDate: "07.01.1985",
-        debut: "2007 - McLaren",
+		
+        team: "Ferrari",
+        debut: "2007 - McLaren",        
+		career: [
+            { team: "McLaren", year: "2007-2012" },
+            { team: "Mercedes", year: "2013-2024" },
+            { team: "Ferrari", year: "2025" }
+        ],
+		
         titles: 7,
         hattricks: 19,
         wins: 106,
         podiums: 207,
         poles: 105,
+		
         note: "Рекордсмен по победам, поулам, подиумам.",
         bio: "7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда.",
-        career: [
-            { team: "McLaren", year: "2007-2012" },
-            { team: "Mercedes", year: "2013-2024" },
-            { team: "Ferrari", year: "2025" }
-        ]
     },
-    {   id: "sainz",
-        number: 55,
+    {   number: 55, id: "sainz",
         name: "Карлос Сайнс",
         namem: "К. Сайнс",
-        country: "es",
-        team: "Williams",
-        birthPlace: "Мадрид, Испания",
+        birthPlace: "Мадрид, Испания", country: "es",
         birthDate: "01.09.1994",
-        debut: "2015 - Toro Rosso",
-        titles: 0,
-        hattricks: 0,
-        wins: 4,
-        podiums: 29,
-        poles: 6,
-        note: "",
-        bio: "Сын раллийного чемпиона. Победитель Гран-при (Великобритания-2022, Сингапур-2023, Австралия-2024). Супер-тактик, интеллектуал. Выжил из Ferrari, чтобы освободить место Хэмилтону, перешел в Williams как лидер проекта.",
-        career: [
+		
+        team: "Williams",
+        debut: "2015 - Toro Rosso",        
+		career: [
             { team: "Toro Rosso", year: "2015-2017" },
             { team: "Renault", year: "2017-2018" },
             { team: "McLaren", year: "2019-2020" },
             { team: "Ferrari", year: "2021-2024" },
             { team: "Williams", year: "2025" }
-        ]
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 4,
+        podiums: 29,
+        poles: 6,
+		
+        note: "",
+        bio: "Сын раллийного чемпиона. Победитель Гран-при (Великобритания-2022, Сингапур-2023, Австралия-2024). Супер-тактик, интеллектуал. Выжил из Ferrari, чтобы освободить место Хэмилтону, перешел в Williams как лидер проекта.",
     },
-    {   id: "russell",
-        number: 63,
+    {   number: 63, id: "russell",
         name: "Джордж Расселл",
         namem: "Д. Расселл",
-        country: "gb",
-        team: "Mercedes",
-        birthPlace: "Кингс-Линн, Великобритания",
+        birthPlace: "Кингс-Линн, Великобритания", country: "gb",
         birthDate: "15.02.1998",
-        debut: "2019 - Williams",
+		
+        team: "Mercedes",
+        debut: "2019 - Williams",        
+		career: [
+            { team: "Williams", year: "2019-2021" },
+            { team: "Mercedes", year: "2022" }
+        ],
+		
         titles: 0,
         hattricks: 2,
         wins: 7,
         podiums: 29,
         poles: 11,
+		
         note: "Лидер гильдии пилотов.",
         bio: "Победитель Гран-при Сан-Паулу (2022) — первая победа Mercedes после долгого перерыва. Очень быстр, но иногда ошибается под давлением. Заменил Боттаса и стал ровней Хэмилтону.",
-        career: [
-            { team: "Williams", year: "2019-2021" },
-            { team: "Mercedes", year: "2022" }
-        ]
     },
-    {   id: "bottas",
-        number: 77,
+    {   number: 77, id: "bottas",
         name: "Валттери Боттас",
         namem: "В. Боттас",
-        country: "fi",
-        team: "Cadillac",
-        birthPlace: "Настола, Финляндия",
+        birthPlace: "Настола, Финляндия", country: "fi",
         birthDate: "28.08.1989",
-        debut: "2013 - Williams",
-        titles: 0,
-        hattricks: 2,
-        wins: 10,
-        podiums: 67,
-        poles: 20,
-        note: "",
-        bio: "Бывший напарник Хэмилтона в Mercedes (2017-2021), 10 побед. Машина для квалификаций. В 2025-м покинул Sauber, в 2026-м стал пилотом Cadillac. Хотел взять номер #7, но он был занят, поэтому выбрал #77 (Val77eri Bo77as).",
-        career: [
+		
+        team: "Cadillac",
+        debut: "2013 - Williams",        
+		career: [
             { team: "Williams", year: "2013-2016" },
             { team: "Mercedes", year: "2017-2021" },
             { team: "Alfa Romeo", year: "2022-2023" },
             { team: "Sauber", year: "2024" },
             { team: "Cadillac", year: "2026" }
-        ]
+        ],
+		
+        titles: 0,
+        hattricks: 2,
+        wins: 10,
+        podiums: 67,
+        poles: 20,
+		
+        note: "",
+        bio: "Бывший напарник Хэмилтона в Mercedes (2017-2021), 10 побед. Машина для квалификаций. В 2025-м покинул Sauber, в 2026-м стал пилотом Cadillac. Хотел взять номер #7, но он был занят, поэтому выбрал #77 (Val77eri Bo77as).",
     },
-    {   id: "piastri",
-        number: 81,
+    {   number: 81, id: "piastri",
         name: "Оскар Пиастри",
         namem: "О. Пиастри",
-        country: "au",
-        team: "McLaren",
-        birthPlace: "Мельбурн, Австралия",
+        birthPlace: "Мельбурн, Австралия", country: "au",
         birthDate: "06.04.2001",
-        debut: "2023 - McLaren",
+		
+        team: "McLaren",
+        debut: "2023 - McLaren",        
+		career: [
+            { team: "McLaren", year: "2023" }
+        ],
+		
         titles: 0,
         hattricks: 3,
         wins: 9,
         podiums: 28,
         poles: 6,
+		
         note: "Выиграл F3 и F2 подряд.",
         bio: "Первую победу одержал в Венгрии-2024, обогнав Норриса по команде. Многие считают его будущим чемпионом.",
-        career: [
-            { team: "McLaren", year: "2023" }
-        ]
     },
-    {   id: "bearman",
-        number: 87,
+    {   number: 87, id: "bearman",
         name: "Оливер Берман",
         namem: "О. Берман",
-        country: "gb",
-        team: "Haas",
-        birthPlace: "Челмсфорд, Великобритания",
+        birthPlace: "Челмсфорд, Великобритания", country: "gb",
         birthDate: "08.05.2005",
-        debut: "2024 - Ferrari",
-        titles: 0,
-        hattricks: 0,
-        wins: 0,
-        podiums: 0,
-        poles: 0,
-        note: "",
-        bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
-        career: [
+		
+        team: "Haas",
+        debut: "2024 - Ferrari",        
+		career: [
             { team: "Ferrari", year: "2024", temporarily: true },
             { team: "Haas", year: "2024", temporarily: true },
             { team: "Haas", year: "2025" }
-        ]
-    },
-    // Резерв
-    {   id: "doohan", 
-        number: 7,
-        name: "Джек Дуэн",
-        namem: "Д. Дуэн",
-        country: "au",
-        team: "Резерв",
-        birthPlace: "Брисбен, Австралия",
-        birthDate: "20.01.2003",
-        debut: "2024 - Alpine",
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
+		
         note: "",
-        bio: "Сын пятикратного чемпиона мира по мотогонкам Мика Дуэна. Чемпион Формулы-2 (2023). В 2024 году подменял Окона и Гасли. Выбрал номер #7 в честь своего кумира Кими Райкконена. Считается перспективным стабильным гонщиком, но пока без очков в F1.",
-        career: [
-            { team: "Alpine", year: "2024-2025" }
-        ]
+        bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
     },
-    {   id: "tsunoda",
-        number: 22,
-        name: "Юки Цунода",
-        namem: "Ю. Цунода",
-        country: "jp",
+    {   number: 99, id: "giovinazzi",	    // Резерв
+        name: "Антонио Джовинацци",
+        namem: "А. Джовинацци",
+        birthPlace: "Мартина-Франка, Италия", country: "it",
+        birthDate: "14.12.1993",
+		
         team: "Резерв",
-        birthPlace: "Канагава, Япония",
-        birthDate: "11.05.2000",
-        debut: "2021 - AlphaTauri",
+		reserve: ["Ferrari"],
+        debut: "2017 - Sauber",        
+		career: [
+            { team: "Sauber", year: "2017", temporarily: true },
+            { team: "Alfa Romeo", year: "2019-2021" }
+        ],
+		
         titles: 0,
         hattricks: 0,
         wins: 0,
         podiums: 0,
         poles: 0,
-        note: "",
-        bio: "За четыре сезона в F1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull.",
-        career: [
-            { team: "AlphaTauri", year: "2021-2023" },
-            { team: "Racing Bulls", year: "2024" },
-            { team: "Racing Bulls", year: "2025", temporarily: true },
-            { team: "Red Bull", year: "2025" }
-        ]
-    },
-    {   id: "zhou",
-        number: 24,
-        name: "Гуан Ю Чжоу",
-        namem: "Г. Чжоу",
-        country: "cn",
-        team: "Резерв",
-        birthPlace: "Шанхай, Китай",
-        birthDate: "30.05.1999",
-        debut: "2022 - Alfa Romeo",
-        titles: 0,
-        hattricks: 0,
-        wins: 0,
-        podiums: 0,
-        poles: 0,
-        note: "Первый и единственный пилот из Китая в истории F1",
-        bio: "Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках.",
-        career: [
-            { team: "Alfa Romeo", year: "2022-2023" },
-            { team: "Sauber", year: "2024" }
-        ]
+		
+        note: "На ГП Сингапура 2019, за рулём скромной Alfa Romeo сенсационно лидировал на протяжении 4 кругов.",
+        bio: "Ныне является резервным пилотом Ferrari и триумфатором легендарного марафона «24 часа Ле-Мана».",
     },
 ];
 
@@ -627,7 +700,16 @@ function buildFilterPanel(panel, cardsArea) {
         teamCheckboxes[team] = cb;
     });
     
-    // Разделитель перед чемпионами
+    // ===== РАЗДЕЛИТЕЛЬ ПЕРЕД РЕЗЕРВИСТАМИ =====
+    const dividerReserve = document.createElement('hr');
+    dividerReserve.className = 'filter-divider filter-divider-reserve';
+    
+    // Чекбокс "Резервисты"
+    const reserveContainer = document.createElement('div');
+    reserveContainer.className = 'filter-checkboxes filter-reserve-section';
+    const reserveCheckbox = createCheckbox('reserve', 'Резервисты', false, reserveContainer);
+    
+    // ===== РАЗДЕЛИТЕЛЬ ПЕРЕД ЧЕМПИОНАМИ =====
     const divider2 = document.createElement('hr');
     divider2.className = 'filter-divider filter-divider-champ';
     
@@ -681,14 +763,25 @@ function buildFilterPanel(panel, cardsArea) {
     
     popupInner.appendChild(popupCheckboxesContainer);
     
-    // Разделитель
-    const popupDivider = document.createElement('hr');
-    popupDivider.className = 'filter-popup-divider';
-    popupInner.appendChild(popupDivider);
+    // ===== РАЗДЕЛИТЕЛЬ В ПОПАПКЕ =====
+    const popupDivider1 = document.createElement('hr');
+    popupDivider1.className = 'filter-popup-divider';
+    popupInner.appendChild(popupDivider1);
     
-    // Секция "Чемпионы мира"
+    // Секция "Резервисты" в попапке
+    const popupReserveContainer = document.createElement('div');
+    popupReserveContainer.className = 'filter-popup-section';
+    const popupReserveCheckbox = createCheckbox('reserve', 'Резервисты', false, popupReserveContainer);
+    popupInner.appendChild(popupReserveContainer);
+    
+    // ===== РАЗДЕЛИТЕЛЬ В ПОПАПКЕ =====
+    const popupDivider2 = document.createElement('hr');
+    popupDivider2.className = 'filter-popup-divider';
+    popupInner.appendChild(popupDivider2);
+    
+    // Секция "Чемпионы мира" в попапке
     const popupChampsContainer = document.createElement('div');
-    popupChampsContainer.className = 'filter-popup-champs';
+    popupChampsContainer.className = 'filter-popup-section';
     const popupChampsCheckbox = createCheckbox('champs', 'Чемпионы мира', false, popupChampsContainer);
     popupInner.appendChild(popupChampsContainer);
     
@@ -701,6 +794,8 @@ function buildFilterPanel(panel, cardsArea) {
     panel.appendChild(divider1);
     panel.appendChild(filterTitle);
     panel.appendChild(checkboxesContainer);
+    panel.appendChild(dividerReserve);
+    panel.appendChild(reserveContainer);
     panel.appendChild(divider2);
     panel.appendChild(champsContainer);
     panel.appendChild(popupOverlay);
@@ -708,6 +803,7 @@ function buildFilterPanel(panel, cardsArea) {
     // Состояние фильтров
     let activeTeamFilters = new Set(regularTeams);
     let champsOnly = false;
+    let showReserve = false;
     let isAllSelected = true;
     
     function applyFilters() {
@@ -715,14 +811,29 @@ function buildFilterPanel(panel, cardsArea) {
         
         let filtered = driversData;
         
-        // Исключаем резервных пилотов
-        filtered = filtered.filter(driver => 
-            driver.team.toLowerCase() !== 'резерв' && 
-            driver.team.toLowerCase() !== 'reserve'
-        );
-        
-        // Фильтр по командам
-        filtered = filtered.filter(driver => activeTeamFilters.has(driver.team));
+        // Фильтр по командам (основные команды)
+        if (!showReserve) {
+            filtered = filtered.filter(driver => 
+                driver.team.toLowerCase() !== 'резерв' && 
+                driver.team.toLowerCase() !== 'reserve'
+            );
+            filtered = filtered.filter(driver => activeTeamFilters.has(driver.team));
+        } else {
+            // Если включены резервисты - показываем их, но без фильтра по командам
+            const reserveDrivers = filtered.filter(driver => 
+                driver.team.toLowerCase() === 'резерв' || 
+                driver.team.toLowerCase() === 'reserve'
+            );
+            
+            // Основные пилоты с фильтром по командам
+            const mainDrivers = filtered.filter(driver => 
+                driver.team.toLowerCase() !== 'резерв' && 
+                driver.team.toLowerCase() !== 'reserve' &&
+                activeTeamFilters.has(driver.team)
+            );
+            
+            filtered = [...mainDrivers, ...reserveDrivers];
+        }
         
         // Фильтр «Чемпионы мира»
         if (champsOnly) {
@@ -756,6 +867,15 @@ function buildFilterPanel(panel, cardsArea) {
             const targetCheckboxes = isPopup ? teamCheckboxes : popupTeamCheckboxes;
             const targetAll = isPopup ? allCheckbox : popupAllCheckbox;
             const targetChamps = isPopup ? champsCheckbox : popupChampsCheckbox;
+            const targetReserve = isPopup ? reserveCheckbox : popupReserveCheckbox;
+            
+            // Обработка чекбокса "Резервисты"
+            if (value === 'reserve') {
+                showReserve = checkbox.checked;
+                if (targetReserve) targetReserve.checked = checkbox.checked;
+                applyFilters();
+                return;
+            }
             
             if (value === 'all') {
                 if (checkbox.checked) {
@@ -841,6 +961,12 @@ function buildFilterPanel(panel, cardsArea) {
         handleChampsChange(champsCheckbox, popupChampsCheckbox);
     });
     
+    reserveCheckbox.addEventListener('change', () => {
+        showReserve = reserveCheckbox.checked;
+        popupReserveCheckbox.checked = reserveCheckbox.checked;
+        applyFilters();
+    });
+    
     // Назначаем обработчики для попапки
     popupCheckboxesContainer.addEventListener('change', (e) => {
         handleCheckboxChange(e, popupTeamCheckboxes, popupAllCheckbox, popupTeamCheckboxes, true);
@@ -848,6 +974,12 @@ function buildFilterPanel(panel, cardsArea) {
     
     popupChampsCheckbox.addEventListener('change', () => {
         handleChampsChange(popupChampsCheckbox, champsCheckbox);
+    });
+    
+    popupReserveCheckbox.addEventListener('change', () => {
+        showReserve = popupReserveCheckbox.checked;
+        reserveCheckbox.checked = popupReserveCheckbox.checked;
+        applyFilters();
     });
     
     // Поиск
@@ -880,14 +1012,17 @@ function buildFilterPanel(panel, cardsArea) {
         allCheckbox.checked = true;
         Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
         champsCheckbox.checked = false;
+        reserveCheckbox.checked = false;
         
         // Сбрасываем попапку
         popupAllCheckbox.checked = true;
         Object.values(popupTeamCheckboxes).forEach(cb => cb.checked = false);
         popupChampsCheckbox.checked = false;
+        popupReserveCheckbox.checked = false;
         
         activeTeamFilters = new Set(regularTeams);
         champsOnly = false;
+        showReserve = false;
         isAllSelected = true;
         
         // Закрываем попапку
@@ -956,6 +1091,10 @@ function animateCardsAppearance(container) {
     });
 }
 
+function getCurrentWorldChampion() {
+    return driversData.find(driver => driver.number === 1);
+}
+
 function renderDriverCards(drivers, container) {
     container.innerHTML = '';
     
@@ -968,11 +1107,23 @@ function renderDriverCards(drivers, container) {
     }
     
     const sortedDrivers = [...drivers].sort((a, b) => Number(a.number) - Number(b.number));
+    const currentChampion = getCurrentWorldChampion();
+    const championId = currentChampion ? currentChampion.id : null;
     
     sortedDrivers.forEach(driver => {
         const card = document.createElement('div');
         card.className = 'driver-card';
         card.style.setProperty('--team-color', getTeamColor(driver.team));
+        
+        // Добавляем класс для чемпиона
+        if (driver.id === championId) {
+            card.classList.add('world-champion');
+        }
+        
+        // Добавляем класс для резервиста
+        if (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve') {
+            card.classList.add('reserve-driver');
+        }
         
         const portraitWrapper = document.createElement('div');
         portraitWrapper.className = 'driver-portrait-wrapper';
@@ -1048,24 +1199,35 @@ function renderDriverCards(drivers, container) {
         const teamDiv = document.createElement('div');
         teamDiv.className = 'driver-team';
 
-        const teamLogo = document.createElement('img');
-        teamLogo.src = getTeamLogo(driver.team);
-        teamLogo.alt = driver.team;
-        teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
+        // Проверяем, является ли пилот резервистом
+        const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
+        
+        if (isReserve) {
+            // Для резервистов показываем "Резерв" вместо логотипа команды
+            const reserveLabel = document.createElement('span');
+            reserveLabel.className = 'driver-reserve-label';
+            reserveLabel.textContent = 'Резерв';
+            teamDiv.appendChild(reserveLabel);
+        } else {
+            const teamLogo = document.createElement('img');
+            teamLogo.src = getTeamLogo(driver.team);
+            teamLogo.alt = driver.team;
+            teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
 
-        const teamName = document.createElement('span');
-        teamName.textContent = driver.team;
+            const teamName = document.createElement('span');
+            teamName.textContent = driver.team;
 
-        teamDiv.appendChild(teamLogo);
-        teamDiv.appendChild(teamName);
+            teamDiv.appendChild(teamLogo);
+            teamDiv.appendChild(teamName);
 
-        teamDiv.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            const teamData = getTeamData(driver.team);
-            if (teamData) {
-                openTeamModal(teamData);
-            }
-        });
+            teamDiv.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                const teamData = getTeamData(driver.team);
+                if (teamData) {
+                    openTeamModal(teamData);
+                }
+            });
+        }
         
         card.appendChild(portraitWrapper);
         card.appendChild(nameDiv);
@@ -1253,30 +1415,89 @@ function openDriverModal(driver) {
     nameRow.appendChild(flagIcon);
     nameRow.appendChild(fullName);
     
-    const teamRow = document.createElement('div');
-    teamRow.className = 'modal-team-row';
+	const teamRow = document.createElement('div');
+	teamRow.className = 'modal-team-row';
 
-    const teamIcon = document.createElement('img');
-    teamIcon.src = getTeamLogo(driver.team);
-    teamIcon.alt = driver.team;
-    teamIcon.className = 'modal-team-logo';
+	const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
 
-    const teamLabel = document.createElement('span');
-    teamLabel.textContent = driver.team;
+	if (isReserve && driver.reserve && driver.reserve.length > 0) {
+		// Для резервистов НЕ добавляем ничего в teamRow
+		// Создаем отдельный контейнер для резерва
+		const reserveContainer = document.createElement('div');
+		reserveContainer.className = 'modal-reserve-teams';
+		
+		const reserveLabel = document.createElement('span');
+		reserveLabel.className = 'modal-reserve-label';
+		reserveLabel.textContent = 'Резерв:';
+		reserveContainer.appendChild(reserveLabel);
+		
+		const teamsList = document.createElement('div');
+		teamsList.className = 'modal-reserve-teams-list';
+		
+		driver.reserve.forEach(teamName => {
+			const teamItem = document.createElement('div');
+			teamItem.className = 'modal-reserve-team-item';
+			
+			// Устанавливаем цвет команды для акцента при hover
+			const teamColor = getTeamColor(teamName);
+			teamItem.style.setProperty('--team-color', teamColor);
+			
+			const teamLogo = document.createElement('img');
+			teamLogo.src = getTeamLogo(teamName);
+			teamLogo.alt = teamName;
+			teamLogo.className = 'modal-team-logo';
+			teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
+			
+			const teamLabel = document.createElement('span');
+			teamLabel.textContent = teamName;
+			
+			teamItem.appendChild(teamLogo);
+			teamItem.appendChild(teamLabel);
+			
+			teamItem.addEventListener('click', (e) => {
+				e.stopPropagation();
+				const teamData = getTeamData(teamName);
+				if (teamData) {
+					openTeamModal(teamData);
+				}
+			});
+			
+			teamsList.appendChild(teamItem);
+		});
+		
+		reserveContainer.appendChild(teamsList);
+		
+		// teamRow скрываем
+		teamRow.style.display = 'none';
+		
+		// Добавляем сначала nameRow, потом teamRow (скрытый), потом reserveContainer
+		nameTeamContainer.appendChild(nameRow);
+		nameTeamContainer.appendChild(teamRow);
+		nameTeamContainer.appendChild(reserveContainer);
+	} else {
+		// Обычное отображение команды
+		const teamIcon = document.createElement('img');
+		teamIcon.src = getTeamLogo(driver.team);
+		teamIcon.alt = driver.team;
+		teamIcon.className = 'modal-team-logo';
 
-    teamRow.appendChild(teamIcon);
-    teamRow.appendChild(teamLabel);
+		const teamLabel = document.createElement('span');
+		teamLabel.textContent = driver.team;
 
-    teamRow.addEventListener('click', (e) => {
-        e.stopPropagation(); 
-        const teamData = getTeamData(driver.team);
-        if (teamData) {
-            openTeamModal(teamData);
-        }
-    });
-    
-    nameTeamContainer.appendChild(nameRow);
-    nameTeamContainer.appendChild(teamRow);
+		teamRow.appendChild(teamIcon);
+		teamRow.appendChild(teamLabel);
+
+		teamRow.addEventListener('click', (e) => {
+			e.stopPropagation(); 
+			const teamData = getTeamData(driver.team);
+			if (teamData) {
+				openTeamModal(teamData);
+			}
+		});
+		
+		nameTeamContainer.appendChild(nameRow);
+		nameTeamContainer.appendChild(teamRow);
+	}
     
     block1.appendChild(modalNumber);
     block1.appendChild(nameTeamContainer);
@@ -1401,7 +1622,6 @@ function openDriverModal(driver) {
         modal.classList.add('active');
     });
 }
-
 function getTeamLogo(teamName) {
     const slug = teamName.toLowerCase().replace(/\s+/g, '-');
     
@@ -1451,6 +1671,7 @@ function getCountryName(code) {
         'co': 'Колумбия',
         'my': 'Малайзия',
         'nz': 'Новая Зеландия',
+        'pl': 'Польша',
     };
     return countries[code] || code.toUpperCase();
 }

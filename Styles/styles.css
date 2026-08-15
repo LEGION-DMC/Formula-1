@@ -1113,6 +1113,10 @@ h1, h2 {
     backdrop-filter: blur(5px);
 }
 
+.driver-card.world-champion {
+    border: 1px solid #ffd700;
+}
+
 .driver-card::before {
     content: '';
     position: absolute;
@@ -1373,11 +1377,12 @@ h1, h2 {
 }
 
 .modal-team-row {
-    display: flex; align-items: center; gap: 8px;
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
     cursor: pointer;
     padding: 1px 5px;
-    margin-left: -7px;
-    padding-top: 3px;
+    margin-left: -6px;
     border-radius: 4px;
     transition: all 0.2s ease;
     width: fit-content;
@@ -1389,12 +1394,55 @@ h1, h2 {
 .modal-team-logo { width: 28px; height: 20px; object-fit: contain; }
 .modal-team-row span { 
     font-family: 'F1Title', sans-serif; 
-    font-size: 0.95rem; }
+    font-size: 0.95rem;
+    padding-top: 2px; }
 
 .modal-team-row:hover { 
     background-color: rgba(255, 255, 255, 0.05);
     transform: scale(1.03);
     color: var(--team-color);
+}
+
+.modal-reserve-teams {
+    display: flex;
+    align-items: center;
+}
+
+.modal-reserve-label {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-right: 3px;
+}
+
+.modal-reserve-teams-list {
+    display: flex;
+    gap: 5px;
+}
+
+.modal-reserve-team-item {
+    font-family: 'F1Title', sans-serif;
+    font-size: 13px;
+    display: flex; 
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    padding: 0px 5px 2px 5px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    width: fit-content;
+    color: gray; 
+}
+
+.modal-reserve-team-item span {
+    padding-top: 3px;
+}
+
+.modal-reserve-team-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: scale(1.02);
+    color: var(--team-color, #ff6b35);
 }
 
 .modal-details-row {
@@ -1523,7 +1571,7 @@ h1, h2 {
     gap: 3px;
     width: 124px;
     background: rgba(255, 255, 255, 0.04);
-    border-radius: 8px;
+    border-radius: 5px;
     padding: 5px;
     transition: all 0.2s ease;
     animation: careerItemAppear 0.4s ease forwards;
