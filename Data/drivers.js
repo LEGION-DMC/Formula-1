@@ -20,28 +20,6 @@ const driversData = [
         note: "Выступает под #1 - в качестве действующего чемпиона мира. Собственный номер пилота #4.",
         bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул.",
     },
-    {   number: 2, id: "vandoorne",      // Резерв
-        name: "Стоффель Вандорн",
-        namem: "С. Вандорн",
-        birthPlace: "Кортрейк, Бельгия", country: "be",
-        birthDate: "26.03.1991",
-		
-        team: "Резерв",
-		reserve: ["Aston Martin", "Alpine"],
-        debut: "2016 - McLaren",        
-		career: [
-            { team: "McLaren", year: "2016-2018" }
-        ],
-		
-        titles: 0,
-        hattricks: 0,
-        wins: 0,
-        podiums: 0,
-        poles: 0,
-		
-        note: "",
-        bio: "Чемпион серии GP2 (2015) и чемпион мира Формулы-E (2021-2022). Выполняет роль резервиста для команд Aston Martin и Alpine.",
-    },
     {   number: 3, id: "verstappen", 
         name: "Макс Ферстаппен",
         namem: "М. Ферстаппен",
@@ -115,7 +93,7 @@ const driversData = [
         birthDate: "20.01.2003",
 		
         team: "Резерв",
-		reserve: ["Alpine"],
+		reserve: ["Haas"],
         debut: "2024 - Alpine",        
 		career: [
             { team: "Alpine", year: "2024-2025" }
