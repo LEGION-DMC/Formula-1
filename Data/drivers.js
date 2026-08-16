@@ -49,9 +49,9 @@ const driversData = [
         birthDate: "14.12.2004",
 		
         team: "Audi",
-        debut: "2025 - Stake",        
+        debut: "2025 - Sauber",        
 		career: [
-            { team: "Stake", year: "2025" },
+            { team: "Sauber", year: "2025" },
             { team: "Audi", year: "2026" }
         ],
 		
@@ -65,7 +65,7 @@ const driversData = [
         bio: "Чемпион Формулы-2 (2024). Протеже Фернандо Алонсо. Перспективный «контролёр» — пилот, который берет не чистым темпом, а умом и резиной.",
     },
     {   number: 6, id: "hadjar",
-        name: "Иcаак Хаджар",
+        name: "Исак Хаджар",
         namem: "И. Хаджар",
         birthPlace: "Париж, Франция", country: "fr",
         birthDate: "28.09.2004",
@@ -96,7 +96,8 @@ const driversData = [
 		reserve: ["Haas"],
         debut: "2024 - Alpine",        
 		career: [
-            { team: "Alpine", year: "2024-2025" }
+            { team: "Alpine", year: "2024", temporarily: true },
+            { team: "Alpine", year: "2025", temporarily: true },
         ],
 		
         titles: 0,
@@ -118,8 +119,8 @@ const driversData = [
         debut: "2017 - Toro Rosso",        
 		career: [
             { team: "Toro Rosso", year: "2017-2018" },
-            { team: "Red Bull", year: "2019", temporarily: true },
-            { team: "Toro Rosso", year: "2019" },
+            { team: "Red Bull", year: "2019"},
+            { team: "Toro Rosso", year: "2019", temporarily: true },
             { team: "AlphaTauri", year: "2020-2022" },
             { team: "Alpine", year: "2023" }
         ],
@@ -144,8 +145,8 @@ const driversData = [
 		career: [
             { team: "Sauber", year: "2011-2012" },
             { team: "McLaren", year: "2013" },
-            { team: "Force India", year: "2014-2017" },
-            { team: "Racing Point", year: "2018-2020" },
+            { team: "Force India", year: "2014-2018" },
+            { team: "Racing Point", year: "2019-2020" },
             { team: "Red Bull", year: "2021-2024" },
             { team: "Cadillac", year: "2026" }
         ],
@@ -190,7 +191,7 @@ const driversData = [
         debut: "2001 - Minardi",        
 		career: [
             { team: "Minardi", year: "2001" },
-            { team: "Renault", year: "2002-2006" },
+            { team: "Renault", year: "2003-2006" },
             { team: "McLaren", year: "2007" },
             { team: "Renault", year: "2008-2009" },
             { team: "Ferrari", year: "2010-2014" },
@@ -302,7 +303,7 @@ const driversData = [
         bio: "Был напарником Ферстаппена в Red Bull (2019-2020), но уволен из-за нерезультативности. Вернулся в 2022-м в Williams, где стал лидером команды. Очень чистый, умный пилот.",
     },
     {   number: 24, id: "zhou",	             // Резерв
-        name: "Гуан Ю Чжоу",
+        name: "Гуаньюй Чжоу",
         namem: "Г. Чжоу",
         birthPlace: "Шанхай, Китай", country: "cn",
         birthDate: "30.05.1999",
@@ -312,7 +313,7 @@ const driversData = [
         debut: "2022 - Alfa Romeo",        
 		career: [
             { team: "Alfa Romeo", year: "2022-2023" },
-            { team: "Stake", year: "2024" }
+            { team: "Sauber", year: "2024" }
         ],
 		
         titles: 0,
@@ -334,13 +335,14 @@ const driversData = [
         debut: "2010 - Williams",        
 		career: [
             { team: "Williams", year: "2010" },
-            { team: "Force India", year: "2012" },
+            { team: "Force India", year: "2011-2012" },
             { team: "Sauber", year: "2013" },
             { team: "Force India", year: "2014-2016" },
             { team: "Renault", year: "2017-2019" },
-            { team: "Racing Point", year: "2020" },
+            { team: "Racing Point", year: "2020", temporarily: true },
+            { team: "Aston Martin", year: "2022", temporarily: true },
             { team: "Haas", year: "2023-2024" },
-            { team: "Stake", year: "2025" },
+            { team: "Sauber", year: "2025" },
             { team: "Audi", year: "2026" }
         ],
 		
@@ -363,7 +365,7 @@ const driversData = [
         debut: "2023 - AlphaTauri",        
 		career: [
             { team: "AlphaTauri", year: "2023", temporarily: true },
-            { team: "Racing Bulls", year: "2024" },
+            { team: "Racing Bulls", year: "2024", temporarily: true },
             { team: "Red Bull", year: "2025", temporarily: true },
             { team: "Racing Bulls", year: "2025" }
         ],
@@ -386,8 +388,8 @@ const driversData = [
         team: "Haas",
         debut: "2016 - Manor",        
 		career: [
-            { team: "Manor", year: "2016" },
-            { team: "Force India", year: "2017" },
+            { team: "Manor", year: "2016", temporarily: true },
+            { team: "Force India", year: "2017-2018" },
             { team: "Racing Point", year: "2018" },
             { team: "Renault", year: "2020" },
             { team: "Alpine", year: "2021-2024" },
@@ -433,8 +435,9 @@ const driversData = [
         team: "Alpine",
         debut: "2024 - Williams",        
 		career: [
-            { team: "Williams", year: "2024-2025" },
-            { team: "Alpine", year: "2026" }
+            { team: "Williams", year: "2024", temporarily: true },
+            { team: "Williams", year: "2025", temporarily: true },
+            { team: "Alpine", year: "2025-2026" },
         ],
 		
         titles: 0,
@@ -479,7 +482,8 @@ const driversData = [
         debut: "2015 - Toro Rosso",        
 		career: [
             { team: "Toro Rosso", year: "2015-2017" },
-            { team: "Renault", year: "2017-2018" },
+            { team: "Renault", year: "2017", temporarily: true },
+            { team: "Renault", year: "2018" },
             { team: "McLaren", year: "2019-2020" },
             { team: "Ferrari", year: "2021-2024" },
             { team: "Williams", year: "2025" }
@@ -503,7 +507,9 @@ const driversData = [
         team: "Mercedes",
         debut: "2019 - Williams",        
 		career: [
-            { team: "Williams", year: "2019-2021" },
+            { team: "Williams", year: "2019-2020" },
+            { team: "Mercedes", year: "2020", temporarily: true },
+            { team: "Williams", year: "2021" },
             { team: "Mercedes", year: "2022" }
         ],
 		
@@ -528,7 +534,7 @@ const driversData = [
             { team: "Williams", year: "2013-2016" },
             { team: "Mercedes", year: "2017-2021" },
             { team: "Alfa Romeo", year: "2022-2023" },
-            { team: "Stake", year: "2024" },
+            { team: "Sauber", year: "2024" },
             { team: "Cadillac", year: "2026" }
         ],
 		
@@ -584,29 +590,6 @@ const driversData = [
 		
         note: "",
         bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
-    },
-    {   number: 99, id: "giovinazzi",	    // Резерв
-        name: "Антонио Джовинацци",
-        namem: "А. Джовинацци",
-        birthPlace: "Мартина-Франка, Италия", country: "it",
-        birthDate: "14.12.1993",
-		
-        team: "Резерв",
-		reserve: ["Ferrari"],
-        debut: "2017 - Sauber",        
-		career: [
-            { team: "Sauber", year: "2017", temporarily: true },
-            { team: "Alfa Romeo", year: "2019-2021" }
-        ],
-		
-        titles: 0,
-        hattricks: 0,
-        wins: 0,
-        podiums: 0,
-        poles: 0,
-		
-        note: "На ГП Сингапура 2019, за рулём скромной Alfa Romeo сенсационно лидировал на протяжении 4 кругов.",
-        bio: "Ныне является резервным пилотом Ferrari и триумфатором легендарного марафона «24 часа Ле-Мана».",
     },
 ];
 
