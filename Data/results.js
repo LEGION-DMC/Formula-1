@@ -654,6 +654,8 @@ function hasRealResults(gpId, isSprint = false) {
     );
 }
 
+let isFirstRender = true;
+
 function initResultsPage(container) {
     'use strict';
     calculateDriverStandings();
@@ -676,7 +678,7 @@ function initResultsPage(container) {
     let activeTeamFilter = null;
     let detailMode = { drivers: false, sprint: false };
     
-    function refreshAll() {
+    function refreshAll(animate = false) {
         mainArea.innerHTML = '';
         if (detailMode.drivers) renderDriverDetailedTable(mainArea, activeTeamFilter);
         else renderDriverStandings(mainArea, activeTeamFilter);
@@ -685,8 +687,18 @@ function initResultsPage(container) {
         constructorsPanel.innerHTML = '';
         renderConstructorStandingsPanel(constructorsPanel, activeTeamFilter);
         
-        // Запускаем анимацию после рендера
-        animateResultsContent(container);
+        // Запускаем анимацию только если указано
+        if (animate) {
+            animateResultsContent(container);
+        } else {
+            // Если анимация не нужна, просто делаем элементы видимыми
+            makeAllVisible(container);
+        }
+        
+        // Сбрасываем флаг после первого рендера
+        if (isFirstRender) {
+            isFirstRender = false;
+        }
     }
     
     mainArea.addEventListener('click', (e) => {
@@ -694,7 +706,8 @@ function initResultsPage(container) {
         if (detailBtn) {
             if (detailBtn.dataset.table === 'drivers') detailMode.drivers = !detailMode.drivers;
             else detailMode.sprint = !detailMode.sprint;
-            refreshAll();
+            // При нажатии на Подробнее - НЕ анимируем
+            refreshAll(false);
             return;
         }
         
@@ -718,45 +731,77 @@ function initResultsPage(container) {
         if (!row) return;
         const team = row.dataset.team;
         activeTeamFilter = (activeTeamFilter === team) ? null : team;
-        refreshAll();
+        // При фильтрации команд - НЕ анимируем
+        refreshAll(false);
     });
     
-    refreshAll();
+    // Первый рендер с анимацией
+    refreshAll(true);
+}
+
+function makeAllVisible(container) {
+    // Делаем видимой панель конструкторов
+    const constructorPanel = container.querySelector('.results-constructors-panel');
+    if (constructorPanel) {
+        constructorPanel.style.opacity = '1';
+        constructorPanel.style.transform = 'translateX(0)';
+        constructorPanel.style.transition = 'none';
+    }
+    
+    // Делаем видимыми блоки в главной области
+    const sections = container.querySelectorAll('.results-section-block');
+    sections.forEach((section) => {
+        section.style.opacity = '1';
+        section.style.transform = 'translateY(0)';
+        section.style.transition = 'none';
+    });
+    
+    // Делаем видимыми таблицы в детальном режиме
+    const tables = container.querySelectorAll('.detailed-table-container');
+    tables.forEach((table) => {
+        table.style.opacity = '1';
+        table.style.transition = 'none';
+    });
 }
 
 function animateResultsContent(container) {
-    // Анимируем панель конструкторов (левая колонка)
+    // Сначала сбрасываем все стили для анимации
     const constructorPanel = container.querySelector('.results-constructors-panel');
     if (constructorPanel) {
         constructorPanel.style.opacity = '0';
         constructorPanel.style.transform = 'translateX(-15px)';
         constructorPanel.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-        
-        setTimeout(() => {
-            constructorPanel.style.opacity = '1';
-            constructorPanel.style.transform = 'translateX(0)';
-        }, 100);
     }
     
-    // Анимируем блоки в главной области
     const sections = container.querySelectorAll('.results-section-block');
-    sections.forEach((section, index) => {
+    sections.forEach((section) => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(15px)';
         section.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-        
+    });
+    
+    const tables = container.querySelectorAll('.detailed-table-container');
+    tables.forEach((table) => {
+        table.style.opacity = '0';
+        table.style.transition = 'opacity 0.4s ease';
+    });
+    
+    // Запускаем анимацию с задержками
+    setTimeout(() => {
+        if (constructorPanel) {
+            constructorPanel.style.opacity = '1';
+            constructorPanel.style.transform = 'translateX(0)';
+        }
+    }, 100);
+    
+    sections.forEach((section, index) => {
         setTimeout(() => {
             section.style.opacity = '1';
             section.style.transform = 'translateY(0)';
         }, 150 + index * 80);
     });
     
-    // Анимируем таблицы в детальном режиме
-    const tables = container.querySelectorAll('.detailed-table-container');
     tables.forEach((table, index) => {
-        table.style.opacity = '0';
-        table.style.transition = 'opacity 0.4s ease';
-        
         setTimeout(() => {
             table.style.opacity = '1';
         }, 200 + index * 80);

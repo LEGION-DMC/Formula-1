@@ -70,7 +70,7 @@ const penaltiesData = [
     { driver: "Джордж Расселл", fines: 0 },
     { driver: "Валттери Боттас", fines: 0 },
 
-    { driver: "Юки Цунода", fines: 0 }, // 3
+    { driver: "Юки Цунода", fines: 3 },
     { driver: "Гуан Ю Чжоу", fines: 0 },
     { driver: "Джек Дуэн", fines: 0 },
 ];
@@ -474,10 +474,18 @@ function createPenaltiesTable() {
         const driver = findDriverByName(row.driver);
         if (!driver) return;
 
+        const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
+        
+        let teamLogo = getTeamLogo(driver.team);
+        
+        if (isReserve) {
+            teamLogo = 'Images/logo.png';
+        }
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td class="team-cell stats-clickable" data-team="${driver.team}">
-                <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
+            <td class="team-cell ${isReserve ? 'reserve-team-cell' : 'stats-clickable'}" data-team="${driver.team}">
+                <img src="${teamLogo}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
             </td>
             <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
                 <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
@@ -573,7 +581,6 @@ function createLapRecordTable() {
 
     const tbody = document.createElement('tbody');
 
-    // Получаем все прошедшие ГП (дата гонки < текущая дата и не отменены)
     const now = new Date();
     const pastGPs = calendarData.filter(gp => {
         const raceDate = new Date(gp.date);
@@ -585,7 +592,6 @@ function createLapRecordTable() {
         tr.innerHTML = `<td colspan="5" style="text-align:center;color:#666;padding:20px;">Нет данных для текущего сезона</td>`;
         tbody.appendChild(tr);
     } else {
-        // Создаем карту уже побитых рекордов
         const brokenRecords = {};
         lapRecordData.forEach(row => {
             if (row.driver !== 'none' && row.time !== '0.00s' && row.time !== '0:00.000') {
@@ -595,7 +601,6 @@ function createLapRecordTable() {
 
         let index = 1;
         pastGPs.forEach(gp => {
-            // Проверяем, побит ли рекорд в этом сезоне
             const brokenRecord = brokenRecords[gp.id];
             
             let driver = null;
@@ -609,9 +614,9 @@ function createLapRecordTable() {
             let hasDriverId = false;
             let isBrokenRecord = false;
             let historicalDriver = null;
+            let isReserveDriver = false;
 
             if (brokenRecord) {
-                // Рекорд побит — используем данные из lapRecordData
                 driver = findDriverById(brokenRecord.driver);
                 time = brokenRecord.time;
                 isBrokenRecord = true;
@@ -621,48 +626,41 @@ function createLapRecordTable() {
                     driverShortNameForDisplay = driver.namem || driver.name;
                     driverCountry = driver.country;
                     hasDriverId = true;
+                    isReserveDriver = (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve');
                 }
                 recordYear = '2026';
             } else {
-                // Рекорд НЕ побит — используем исторический рекорд из данных трассы
                 const track = getTrackForGP(gp.id);
                 if (!track) return;
 
-                // Извлекаем имя пилота из lapRecord
                 const recordParts = track.lapRecord.match(/\(([^,]+),/);
                 const driverNameFromRecord = recordParts ? recordParts[1].trim() : 'Неизвестно';
                 
-                // Извлекаем только время
                 const timeParts = track.lapRecord.match(/^([^\s(]+)/);
                 time = timeParts ? timeParts[1].trim() : track.lapRecord;
                 
-                // Извлекаем команду из lapRecord
                 const teamParts = track.lapRecord.match(/,\s*([^,)]+)(?:,|\))/);
                 teamFromRecord = teamParts ? teamParts[1].trim() : '';
                 
-                // Извлекаем год из lapRecord
                 const yearParts = track.lapRecord.match(/,\s*(\d{4})/);
                 recordYear = yearParts ? yearParts[1].trim() : '';
                 
-                // Ищем пилота по фамилии в основном составе
                 const searchTerms = driverNameFromRecord.toLowerCase().split(/\s+/);
                 driver = driversData.find(d => {
                     const driverNameLower = d.name.toLowerCase();
                     return searchTerms.every(term => driverNameLower.includes(term));
                 });
                 
-                // Если пилот найден в основном составе
                 if (driver) {
                     driverNameForDisplay = driver.name;
                     driverShortNameForDisplay = driver.namem || driver.name;
                     driverCountry = driver.country;
                     hasDriverId = true;
+                    isReserveDriver = (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve');
                 } else {
-                    // Если не найден, ищем в исторических данных
                     historicalDriver = findHistoricalDriverByName(driverNameFromRecord);
                     if (historicalDriver) {
                         driverNameForDisplay = historicalDriver.name;
-                        // Для исторических пилотов делаем сокращение по имени
                         const nameParts = historicalDriver.name.split(' ');
                         if (nameParts.length >= 2) {
                             driverShortNameForDisplay = nameParts[0].charAt(0) + '. ' + nameParts[nameParts.length - 1];
@@ -671,17 +669,14 @@ function createLapRecordTable() {
                         }
                         driverCountry = historicalDriver.country;
                     } else {
-                        // Если пилот не найден нигде
                         driverNameForDisplay = driverNameFromRecord;
                         driverShortNameForDisplay = driverNameFromRecord;
                     }
                     hasDriverId = false;
                 }
                 
-                // ВСЕГДА используем команду из рекорда
                 teamName = teamFromRecord;
                 
-                // Пытаемся найти нормализованное название команды в teamsData
                 if (typeof teamsData !== 'undefined') {
                     const foundTeam = teamsData.find(t => 
                         t.name === teamFromRecord || 
@@ -697,31 +692,34 @@ function createLapRecordTable() {
             const gpName = getGPName(gp.id);
             const gpShort = gpName.replace('Гран-при ', 'ГП ').replace('-Каталунии', '');
 
-            // Получаем логотип команды
-            const teamLogo = getTeamLogo(teamName);
+            // Определяем логотип команды
+            let teamLogo = getTeamLogo(teamName);
+            
+            // Если это резервист — показываем нейтральный логотип
+            if (isReserveDriver) {
+                teamLogo = 'Images/logo.png';
+            }
+            
+            // Если команда не найдена или пуста
+            if (!teamName || teamName === 'Неизвестно' || teamName === '') {
+                teamLogo = 'Images/logo.png';
+                teamName = '—';
+            }
 
-            const tr = document.createElement('tr');
+            const driverClickable = driver && hasDriverId ? `stats-driver-clickable" data-driver-id="${driver.id}` : '';
+            const teamClickable = (teamName && teamName !== 'Неизвестно' && teamName !== '' && teamName !== '—' && !isReserveDriver) ? `stats-clickable" data-team="${teamName}` : '';
             
-            // Проверяем, есть ли у нас пилот для клика
-            const driverClickable = driver ? `stats-driver-clickable" data-driver-id="${driver.id}` : '';
-            const teamClickable = (teamName && teamName !== 'Неизвестно' && teamName !== '') ? `stats-clickable" data-team="${teamName}` : '';
-            
-            // Получаем флаг пилота
             let flagHtml = '';
-            if (driver) {
-                // Пилот из основного состава
+            if (driver && hasDriverId) {
                 flagHtml = `<img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">`;
             } else if (driverCountry) {
-                // Пилот из исторических данных
                 flagHtml = `<img src="Images/Flags/${driverCountry}.svg" alt="" title="${getCountryName(driverCountry)}" class="stats-flag">`;
             }
             
-            // Для всех строк добавляем класс с отступом, чтобы выровнять
             const driverCellClass = `driver-cell ${driverClickable}`;
-            
-            // Добавляем класс best-time для побитых рекордов
             const timeCellClass = `time-cell${isBrokenRecord ? ' best-time' : ''}`;
             
+            const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="pos-cell">${index}</td>
                 <td class="gp-cell" data-gp-id="${gp.id}">
@@ -729,7 +727,7 @@ function createLapRecordTable() {
                     <span class="gp-full">${gpName}</span>
                     <span class="gp-short">${gpShort}</span>
                 </td>
-                <td class="team-cell ${teamClickable}">
+                <td class="team-cell ${teamClickable} ${isReserveDriver ? 'reserve-team-cell' : ''}">
                     <div class="team-logo-wrapper">
                         <img src="${teamLogo}" alt="${teamName}" class="stats-team-logo" onerror="this.style.display='none'">
                         ${recordYear ? `<span class="team-year">(${recordYear})</span>` : ''}
@@ -746,7 +744,6 @@ function createLapRecordTable() {
             index++;
         });
 
-        // Если нет ни одного рекорда для показа
         if (tbody.children.length === 0) {
             const tr = document.createElement('tr');
             tr.innerHTML = `<td colspan="5" style="text-align:center;color:#666;padding:20px;">Нет данных для текущего сезона</td>`;
@@ -774,7 +771,6 @@ function createLapRecordTable() {
             if (teamData) openTeamModal(teamData);
             return;
         }
-        // Клик по ГП
         const gpCell = e.target.closest('.gp-cell');
         if (gpCell) {
             const gpId = gpCell.dataset.gpId;

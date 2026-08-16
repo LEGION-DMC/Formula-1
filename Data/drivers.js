@@ -334,7 +334,7 @@ const driversData = [
         debut: "2022 - Alfa Romeo",        
 		career: [
             { team: "Alfa Romeo", year: "2022-2023" },
-            { team: "Sauber", year: "2024" }
+            { team: "Stake", year: "2024" }
         ],
 		
         titles: 0,
@@ -550,7 +550,7 @@ const driversData = [
             { team: "Williams", year: "2013-2016" },
             { team: "Mercedes", year: "2017-2021" },
             { team: "Alfa Romeo", year: "2022-2023" },
-            { team: "Sauber", year: "2024" },
+            { team: "Stake", year: "2024" },
             { team: "Cadillac", year: "2026" }
         ],
 		
