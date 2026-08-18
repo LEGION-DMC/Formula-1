@@ -2,7 +2,9 @@ const driversData = [
     {   number: 1, id: "norris",  
         name: "Ландо Норрис",
         namem: "Л. Норрис",
-        birthPlace: "Бристоль, Великобритания", country: "gb",
+        namef: "Ландо Норрис",
+		
+        birthPlace:  "Бристоль, Великобритания", country: "gb",
         birthDate: "13.11.1999",
 		
         team: "McLaren",
@@ -23,7 +25,9 @@ const driversData = [
     {   number: 3, id: "verstappen", 
         name: "Макс Ферстаппен",
         namem: "М. Ферстаппен",
-        birthPlace: "Хасселт, Бельгия", country: "nl",
+        namef: "Макс Эмилиан Ферстаппен",
+		
+        birthPlace:  "Хасселт, Бельгия", country: "nl",
         birthDate: "30.09.1997",
 		
         team: "Red Bull",
@@ -45,7 +49,9 @@ const driversData = [
     {   number: 5, id: "bortoletto", 
         name: "Габриэл Бортолето",
         namem: "Г. Бортолето",
-        birthPlace: "Бразилиа, Бразилия", country: "br",
+        namef: "Габриэль Лоренсо Бортолето Оливейра",
+		
+        birthPlace:  "Бразилиа, Бразилия", country: "br",
         birthDate: "14.12.2004",
 		
         team: "Audi",
@@ -67,7 +73,9 @@ const driversData = [
     {   number: 6, id: "hadjar",
         name: "Исак Хаджар",
         namem: "И. Хаджар",
-        birthPlace: "Париж, Франция", country: "fr",
+        namef: "Изак Александре Хаджар",
+		
+        birthPlace:  "Париж, Франция", country: "fr",
         birthDate: "28.09.2004",
 		
         team: "Red Bull",
@@ -84,12 +92,14 @@ const driversData = [
         poles: 0,
 		
         note: "",
-        bio: "Чемпион Формулы-2 (2024). Воспитанник программы Red Bull. Резкий, быстрый, но склонен к авариям. Его сравнивают с молодым Феттелем.",
+        bio: "Вице-чемпион Формулы-2 (2024). Воспитанник программы Red Bull. Резкий, быстрый, но склонен к авариям. Его сравнивают с молодым Феттелем.",
     },
     {   number: 7, id: "doohan",	         // Резерв
         name: "Джек Дуэн",
         namem: "Д. Дуэн",
-        birthPlace: "Брисбен, Австралия", country: "au",
+        namef: "Джек Майкл Дуэн",
+		
+        birthPlace:  "Брисбен, Австралия", country: "au",
         birthDate: "20.01.2003",
 		
         team: "Резерв",
@@ -112,7 +122,9 @@ const driversData = [
     {   number: 10, id: "gasly",
         name: "Пьер Гасли",
         namem: "П. Гасли",
-        birthPlace: "Руан, Франция", country: "fr",
+        namef: "Пьер Жан-Жак Гасли",
+		
+        birthPlace:  "Руан, Франция", country: "fr",
         birthDate: "07.02.1996",
 		
         team: "Alpine",
@@ -137,7 +149,9 @@ const driversData = [
     {   number: 11, id: "perez",
         name: "Серхио Перес",
         namem: "С. Перес",
-        birthPlace: "Гвадалахара, Мексика", country: "mx",
+        namef: "Серхио Мишель Перес Мендоса",
+		
+        birthPlace:  "Гвадалахара, Мексика", country: "mx",
         birthDate: "26.01.1990",
 		
         team: "Cadillac",
@@ -161,8 +175,10 @@ const driversData = [
         bio: "Ветеран. Главный специалист по сохранению шин и «король улиц» (победы в Баку, Сингапуре). Стал напарником Ферстаппена в Red Bull с 2021 года, помог ему выиграть первый титул, но к 2024-му резко сдал, едва набирая очки. В 2026-м перешел в новую команду Cadillac в качестве ведущего пилота.",
     },
     {   number: 12, id: "antonelli", 
-        name: "Андреа Кими Антонелли",
+        name: "Кими Антонелли",
         namem: "А. Антонелли",
+        namef: "Андреа Кими Антонелли",
+		
         birthPlace: "Болонья, Италия", country: "it",
         birthDate: "25.08.2006",
 		
@@ -179,12 +195,14 @@ const driversData = [
         poles: 6,
 		
         note: "Выступает под #12 - номером легендарного Айртона Сенны",
-        bio: "Вундеркинд, которого лично выбрал Тото Вольфф на замену Хэмилтону. Пропустил F2, перейдя в F1 сразу из Формулы-2 (чемпион 2024). Огромное давление, сравнивают с ранним Ферстаппеном.",
+        bio: "Вундеркинд, которого лично выбрал Тото Вольфф на замену Хэмилтону. Пропустил F3, перейдя в F1 сразу из Формулы-2 (чемпион 2024). Огромное давление, сравнивают с ранним Ферстаппеном.",
     },
     {   number: 14, id: "alonso",
         name: "Фернандо Алонсо",
         namem: "Ф. Алонсо",
-        birthPlace: "Овьедо, Испания", country: "es",
+        namef: "Фернандо Алонсо Диас",
+		
+        birthPlace:  "Овьедо, Испания", country: "es",
         birthDate: "29.07.1981",
 		
         team: "Aston Martin",
@@ -212,7 +230,9 @@ const driversData = [
     {   number: 16, id: "leclerc",
         name: "Шарль Леклер",
         namem: "Ш. Леклер",
-        birthPlace: "Монте-Карло, Монако", country: "mc",
+        namef: "Шарль Марк Эрве Персеваль Леклер",
+		
+        birthPlace:  "Монте-Карло, Монако", country: "mc",
         birthDate: "16.10.1997",
 		
         team: "Ferrari",
@@ -234,7 +254,9 @@ const driversData = [
     {   number: 18, id: "stroll",
         name: "Лэнс Стролл",
         namem: "Л. Стролл",
-        birthPlace: "Монреаль, Канада", country: "ca",
+        namef: "Лэнс Якоб Струлович",
+		
+        birthPlace:  "Монреаль, Канада", country: "ca",
         birthDate: "29.10.1998",
 		
         team: "Aston Martin",
@@ -257,7 +279,9 @@ const driversData = [
     {   number: 22, id: "tsunoda",	     // Резерв
         name: "Юки Цунода",
         namem: "Ю. Цунода",
-        birthPlace: "Канагава, Япония", country: "jp",
+        namef: "Юки Цунода",
+		
+        birthPlace:  "Канагава, Япония", country: "jp",
         birthDate: "11.05.2000",
 		
         team: "Резерв",
@@ -282,7 +306,9 @@ const driversData = [
     {   number: 23, id: "albon",
         name: "Александр Албон",
         namem: "А. Албон",
-        birthPlace: "Лондон, Великобритания", country: "th",
+        namef: "Александр Филипп Албон Ансусинья",
+		
+        birthPlace:  "Лондон, Великобритания", country: "th",
         birthDate: "23.03.1996",
 		
         team: "Williams",
@@ -305,7 +331,9 @@ const driversData = [
     {   number: 24, id: "zhou",	             // Резерв
         name: "Гуаньюй Чжоу",
         namem: "Г. Чжоу",
-        birthPlace: "Шанхай, Китай", country: "cn",
+        namef: "Гуаньюй Чжоу",
+		
+        birthPlace:  "Шанхай, Китай", country: "cn",
         birthDate: "30.05.1999",
 		
         team: "Резерв",
@@ -328,7 +356,9 @@ const driversData = [
     {   number: 27, id: "hulkenberg",
         name: "Нико Хюлькенберг",
         namem: "Н. Хюлькенберг",
-        birthPlace: "Эммерих-на-Рейне, Германия", country: "de",
+        namef: "Николас Хюлькенберг",
+		
+        birthPlace:  "Эммерих-на-Рейне, Германия", country: "de",
         birthDate: "19.08.1987",
 		
         team: "Audi",
@@ -358,7 +388,9 @@ const driversData = [
     {   number: 30, id: "lawson",
         name: "Лиам Лоусон",
         namem: "Л. Лоусон",
-        birthPlace: "Хастингс, Новая Зеландия", country: "nz",
+        namef: "Лиам Джаред Лоусон",
+		
+        birthPlace:  "Хастингс, Новая Зеландия", country: "nz",
         birthDate: "11.02.2002",
 		
         team: "Racing Bulls",
@@ -382,7 +414,9 @@ const driversData = [
     {   number: 31, id: "ocon",
         name: "Эстебан Окон",
         namem: "Э. Окон",
-        birthPlace: "Эвре, Франция", country: "fr",
+        namef: "Эстебан Хосе Жан-Пьер Окон-Кельфан",
+		
+        birthPlace:  "Эвре, Франция", country: "fr",
         birthDate: "17.09.1996",
 		
         team: "Haas",
@@ -408,7 +442,9 @@ const driversData = [
     {   number: 41, id: "lindblad",
         name: "Арвид Линдблад",
         namem: "А. Линдблад",
-        birthPlace: "Лондон, Англия", country: "gb",
+        namef: "Арвид Ананд Олоф Линдблад",
+		
+        birthPlace:  "Лондон, Англия", country: "gb",
         birthDate: "08.08.2007",
 		
         team: "Racing Bulls",
@@ -424,12 +460,14 @@ const driversData = [
         poles: 0,
 		
         note: "",
-        bio: "Бронза F2 в 2024-м. Воспитанник Red Bull. Очень молод (родился в 2007-м). Считается «сырым», но супер-быстрым. Прямой конкурент Хаджару.",
+        bio: "Чемпион FRO 2025. Воспитанник Red Bull. Очень молод (родился в 2007-м). Считается «сырым», но супер-быстрым. Прямой конкурент Хаджару.",
     },
     {   number: 43, id: "colapinto",
         name: "Франко Колапинто",
         namem: "Ф. Колапинто",
-        birthPlace: "Буэнос-Айрес, Аргентина", country: "ar",
+        namef: "Франко Алехандро Колапинто",
+		
+        birthPlace:  "Буэнос-Айрес, Аргентина", country: "ar",
         birthDate: "27.05.2003",
 		
         team: "Alpine",
@@ -452,7 +490,9 @@ const driversData = [
     {   number: 44, id: "hamilton",
         name: "Льюис Хэмилтон",
         namem: "Л. Хэмилтон",
-        birthPlace: "Стивенидж, Великобритания", country: "gb",
+        namef: "Сэр Льюис Карл Дэвидсон Хэмилтон",
+		
+        birthPlace:  "Стивенидж, Великобритания", country: "gb",
         birthDate: "07.01.1985",
 		
         team: "Ferrari",
@@ -475,7 +515,9 @@ const driversData = [
     {   number: 55, id: "sainz",
         name: "Карлос Сайнс",
         namem: "К. Сайнс",
-        birthPlace: "Мадрид, Испания", country: "es",
+        namef: "Карлос Сайнс-Васкес де Кастро",
+		
+        birthPlace:  "Мадрид, Испания", country: "es",
         birthDate: "01.09.1994",
 		
         team: "Williams",
@@ -501,7 +543,9 @@ const driversData = [
     {   number: 63, id: "russell",
         name: "Джордж Расселл",
         namem: "Д. Расселл",
-        birthPlace: "Кингс-Линн, Великобритания", country: "gb",
+        namef: "Джордж Уильям Расселл",
+		
+        birthPlace:  "Кингс-Линн, Великобритания", country: "gb",
         birthDate: "15.02.1998",
 		
         team: "Mercedes",
@@ -525,7 +569,9 @@ const driversData = [
     {   number: 77, id: "bottas",
         name: "Валттери Боттас",
         namem: "В. Боттас",
-        birthPlace: "Настола, Финляндия", country: "fi",
+        namef: "Валттери Виктор Боттас",
+		
+        birthPlace:  "Настола, Финляндия", country: "fi",
         birthDate: "28.08.1989",
 		
         team: "Cadillac",
@@ -550,7 +596,9 @@ const driversData = [
     {   number: 81, id: "piastri",
         name: "Оскар Пиастри",
         namem: "О. Пиастри",
-        birthPlace: "Мельбурн, Австралия", country: "au",
+        namef: "Оскар Джек Пиастри",
+		
+        birthPlace:  "Мельбурн, Австралия", country: "au",
         birthDate: "06.04.2001",
 		
         team: "McLaren",
@@ -571,7 +619,9 @@ const driversData = [
     {   number: 87, id: "bearman",
         name: "Оливер Берман",
         namem: "О. Берман",
-        birthPlace: "Челмсфорд, Великобритания", country: "gb",
+        namef: "Оливер Джеймс Берман",
+		
+        birthPlace:  "Челмсфорд, Великобритания", country: "gb",
         birthDate: "08.05.2005",
 		
         team: "Haas",
@@ -1470,22 +1520,25 @@ function openDriverModal(driver) {
     row1.className = 'modal-details-row';
     row1.innerHTML = `
         <div class="detail-cell">
-            <span class="detail-label">Место рождения</span>
-            <span class="detail-value">${driver.birthPlace}</span>
-        </div>
-        <div class="detail-cell">
             <span class="detail-label">Дата рождения</span>
             <span class="detail-value">${driver.birthDate} (${calculateAge(driver.birthDate)})</span>
+        </div>
+        <div class="detail-cell">
+            <span class="detail-label">Полное имя</span>
+            <span class="detail-value">${driver.namef}</span>
         </div>
     `;
 
     const row2 = document.createElement('div');
     row2.className = 'modal-details-row';
-    row2.style.gridTemplateColumns = '1fr';
     row2.innerHTML = `
         <div class="detail-cell">
             <span class="detail-label">Дебют</span>
             <span class="detail-value">${driver.debut}</span>
+        </div>
+        <div class="detail-cell">
+            <span class="detail-label">Место рождения</span>
+            <span class="detail-value">${driver.birthPlace}</span>
         </div>
     `;
 
@@ -1583,6 +1636,7 @@ function openDriverModal(driver) {
         modal.classList.add('active');
     });
 }
+
 function getTeamLogo(teamName) {
     const slug = teamName.toLowerCase().replace(/\s+/g, '-');
     

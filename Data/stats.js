@@ -1,5 +1,5 @@
 const qualiData = [
-    { driver1: "Андреа Кими Антонелли",
+    { driver1: "Кими Антонелли",
       score1: 7,
       score2: 4,
       driver2: "Джордж Расселл" },
@@ -48,7 +48,7 @@ const qualiData = [
 const penaltiesData = [
     { driver: "Оливер Берман", fines: 4 },
     { driver: "Александр Албон", fines: 3 },
-    { driver: "Андреа Кими Антонелли", fines: 4 },
+    { driver: "Кими Антонелли", fines: 4 },
     { driver: "Льюис Хэмилтон", fines: 3 },
     { driver: "Лэнс Стролл", fines: 2 },
     { driver: "Карлос Сайнс", fines: 2 },
@@ -110,7 +110,7 @@ const enginePartsData = [
     { driver: "Оскар Пиастри", ice: 3, tc: 3, exh: 2, mguk: 1, es: 2, puce: 2, puanc: 3 },
     { driver: "Ландо Норрис", ice: 3, tc: 3, exh: 3, mguk: 2, es: 3, puce: 4, puanc: 4 },
     { driver: "Джордж Расселл", ice: 3, tc: 3, exh: 3, mguk: 2, es: 3, puce: 3, puanc: 5 },
-    { driver: "Андреа Кими Антонелли", ice: 4, tc: 3, exh: 4, mguk: 2, es: 3, puce: 3, puanc: 5 },
+    { driver: "Кими Антонелли", ice: 4, tc: 3, exh: 4, mguk: 2, es: 3, puce: 3, puanc: 5 },
     { driver: "Макс Ферстаппен", ice: 3, tc: 3, exh: 3, mguk: 2, es: 2, puce: 2, puanc: 3 },
     { driver: "Исак Хаджар", ice: 5, tc: 5, exh: 5, mguk: 2, es: 4, puce: 4, puanc: 5 },
     { driver: "Шарль Леклер", ice: 3, tc: 3, exh: 2, mguk: 3, es: 3, puce: 3, puanc: 4 },

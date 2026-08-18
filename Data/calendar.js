@@ -986,7 +986,7 @@ function openTrackModal(track, gp) {
                 <hr class="tm-divider">
                 <div class="tm-detail-row">
                     <span class="tm-label"><img src="Images/Icon/track.webp" class="record-icon">Первая гонка:</span>
-                    <span class="tm-record">${track.firstrace} г.</span>
+                    <span class="tm-record">${track.firstrace}<span class="gp-year-suffix"> г.</span></span>
                 </div>
                 <div class="tm-detail-row">
                     <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга:</span>
