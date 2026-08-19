@@ -176,7 +176,7 @@ const driversData = [
     },
     {   number: 12, id: "antonelli", 
         name: "Кими Антонелли",
-        namem: "А. Антонелли",
+        namem: "К. Антонелли",
         namef: "Андреа Кими Антонелли",
 		
         birthPlace: "Болонья, Италия", country: "it",
@@ -291,7 +291,8 @@ const driversData = [
             { team: "AlphaTauri", year: "2021-2023" },
             { team: "Racing Bulls", year: "2024" },
             { team: "Racing Bulls", year: "2025", temporarily: true },
-            { team: "Red Bull", year: "2025" }
+            { team: "Red Bull", year: "2025" },
+            { team: "Racing Bulls", year: "2025", temporarily: true },
         ],
 		
         titles: 0,
@@ -304,7 +305,7 @@ const driversData = [
         bio: "За четыре сезона в F1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull.",
     },
     {   number: 23, id: "albon",
-        name: "Александр Албон",
+        name: "Алекс Албон",
         namem: "А. Албон",
         namef: "Александр Филипп Албон Ансусинья",
 		

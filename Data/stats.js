@@ -26,7 +26,7 @@ const qualiData = [
     { driver1: "Карлос Сайнс",
       score1: 9,
       score2: 2,
-      driver2: "Александр Албон" },
+      driver2: "Алекс Албон" },
     { driver1: "Эстебан Окон",
       score1: 3,
       score2: 8,

@@ -400,19 +400,45 @@ const detailedSprintResults = {
     },
 };
 
+const constructorPenalties = {
+    "Mercedes": 0,
+    "Ferrari": 0,
+    "McLaren": 0,
+    "Red Bull": 0,
+    "Racing Bulls": 0,
+    "Alpine": 0,
+    "Haas": 0,
+    "Audi": 0,
+    "Williams": 0,
+    "Aston Martin": 0,
+    "Cadillac": 0,
+};
+
 const driverStandings = [];
 const combinedStandings = [];
 
 function calculateConstructorStandings() {
     const teams = {};
     if (typeof teamsData !== 'undefined') {
-        teamsData.forEach(t => { teams[t.shortName] = { team: t.shortName, points: 0, color: t.color }; });
+        teamsData.forEach(t => { 
+            teams[t.shortName] = { 
+                team: t.shortName, 
+                points: 0, 
+                color: t.color 
+            }; 
+        });
     }
     
-    // Используем combinedStandings для правильного подсчёта очков команд
     combinedStandings.forEach(e => {
         const d = findDriverById(e.driver);
         if (d && teams[d.team]) teams[d.team].points += e.points;
+    });
+    
+    // Применяем штрафы/бонусы
+    Object.keys(constructorPenalties).forEach(teamName => {
+        if (teams[teamName]) {
+            teams[teamName].points += constructorPenalties[teamName];
+        }
     });
     
     return Object.values(teams).sort((a, b) => b.points - a.points);

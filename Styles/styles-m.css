@@ -636,13 +636,14 @@ body {
 }
 
 .modal-top { flex-direction: column; }
-.modal-left { width: 100%; min-width: auto; padding: 25px 20px 10px; }
+.modal-left { width: 100%; min-width: auto; 
+    padding: 15px 0px 5px; }
 .modal-portrait { width: 150px; height: 150px; }
-.modal-right { width: 100%; padding: 10px 20px 20px; }
+.modal-right { width: 100%; padding: 10px 10px 0px; }
 .modal-right .modal-block:first-child { gap: 15px; }
 .modal-number { font-size: 3rem; min-width: 60px; }
 .modal-fullname { font-size: 1.3rem; }
-.modal-details-row { gap: 50px; }
+.modal-details-row { gap: 15px; }
 .modal-stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .modal-bottom { padding: 0 20px 20px; }
 .modal-career-item { width: 100px; }
