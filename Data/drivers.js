@@ -106,8 +106,7 @@ const driversData = [
 		reserve: ["Haas"],
         debut: "2024 - Alpine",        
 		career: [
-            { team: "Alpine", year: "2024", temporarily: true },
-            { team: "Alpine", year: "2025", temporarily: true },
+            { team: "Alpine", year: "2024-2025", temporarily: true },
         ],
 		
         titles: 0,
@@ -292,7 +291,7 @@ const driversData = [
             { team: "Racing Bulls", year: "2024" },
             { team: "Racing Bulls", year: "2025", temporarily: true },
             { team: "Red Bull", year: "2025" },
-            { team: "Racing Bulls", year: "2025", temporarily: true },
+            { team: "Racing Bulls", year: "2025-2026", temporarily: true },
         ],
 		
         titles: 0,
@@ -401,6 +400,7 @@ const driversData = [
             { team: "Racing Bulls", year: "2024", temporarily: true },
             { team: "Red Bull", year: "2025", temporarily: true },
             { team: "Racing Bulls", year: "2025" }
+            { team: "Red Bull", year: "2026", temporarily: true },
         ],
 		
         titles: 0,
@@ -474,8 +474,7 @@ const driversData = [
         team: "Alpine",
         debut: "2024 - Williams",        
 		career: [
-            { team: "Williams", year: "2024", temporarily: true },
-            { team: "Williams", year: "2025", temporarily: true },
+            { team: "Williams", year: "2024-2025", temporarily: true },
             { team: "Alpine", year: "2025-2026" },
         ],
 		
