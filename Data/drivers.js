@@ -399,7 +399,7 @@ const driversData = [
             { team: "AlphaTauri", year: "2023", temporarily: true },
             { team: "Racing Bulls", year: "2024", temporarily: true },
             { team: "Red Bull", year: "2025", temporarily: true },
-            { team: "Racing Bulls", year: "2025" }
+            { team: "Racing Bulls", year: "2025" },
             { team: "Red Bull", year: "2026", temporarily: true },
         ],
 		
