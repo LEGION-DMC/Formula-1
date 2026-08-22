@@ -1,11 +1,3 @@
-const tyreData = {  // италия345  мадрид234
-    compounds: {
-        Hard: "C2",    
-        Medium: "C3",  
-        Soft: "C4"    
-    }
-};
-
 const weatherData = {
     type: "cloud",
     typeName: "Загрузка...",
@@ -332,10 +324,7 @@ async function loadWeatherForNextGP() {
         console.log('Получена погода:', weather);
         
         if (weather) {
-            // Обновляем глобальную переменную
             Object.assign(weatherData, weather);
-            
-            // Обновляем DOM погоды
             updateWeatherDisplay(weather);
             
             // Обновляем блок шин
@@ -677,15 +666,43 @@ function createTyreBlock() {
     const block = document.createElement('div');
     block.className = 'main-block tyres-block';
     
-    // Все возможные составы C1-C5
-    const allCompounds = ["C1", "C2", "C3", "C4", "C5"];
+    // Получаем следующий ГП
+    const now = new Date();
+    let nextGP = null;
+    let nextTrack = null;
     
-    // Определяем типы по составам из tyreData
-    const hardCompound = tyreData.compounds.Hard;
-    const mediumCompound = tyreData.compounds.Medium;
-    const softCompound = tyreData.compounds.Soft;
+    if (typeof calendarData !== 'undefined') {
+        const activeGPs = calendarData
+            .filter(gp => !gp.canceled)
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        for (const gp of activeGPs) {
+            const raceDate = new Date(gp.date);
+            const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
+            
+            if (raceEnd > now) {
+                nextGP = gp;
+                nextTrack = getTrackById(gp.track);
+                break;
+            }
+        }
+    }
+    
+    // Получаем составы шин из календаря или используем значения по умолчанию
+    let hardCompound = "C2";
+    let mediumCompound = "C3";
+    let softCompound = "C4";
+    
+    if (nextGP && nextGP.tires) {
+        const tireParts = nextGP.tires.split(',').map(t => t.trim());
+        if (tireParts.length >= 3) {
+            hardCompound = tireParts[0];
+            mediumCompound = tireParts[1];
+            softCompound = tireParts[2];
+        }
+    }
 
-    // Данные о характеристиках шин по ТИПАМ
+    // Данные о характеристиках шин по ТИПАМ (вынесены наружу для доступа в модалке)
     const tyreSpecsByType = {
         "Hard": {
             img: "Images/Wheels/Hard.png",
@@ -740,15 +757,8 @@ function createTyreBlock() {
             rear: { size: "375/720", weight: "13.4 кг" }
         }
     };
-
+    
     // Маппинг составов на типы
-    function getTyreTypeByCompound(compound) {
-        if (compound === hardCompound) return "Hard";
-        if (compound === mediumCompound) return "Medium";
-        if (compound === softCompound) return "Soft";
-        return null;
-    }
-
     function getTyreInfo(compound) {
         if (compound === hardCompound) {
             return { type: "Hard", img: "Images/Wheels/Hard.png", active: true };
@@ -761,7 +771,7 @@ function createTyreBlock() {
         }
     }
 
-    // Функция для создания компактной карточки шины в модальном окне
+    // Функция для создания карточки шины в модальном окне
     function createTyreModalCard(compoundName) {
         const specs = tyreSpecsByType[compoundName];
         if (!specs) return null;
@@ -776,7 +786,6 @@ function createTyreBlock() {
         
         let specsHTML = '';
         
-        // Передние / задние
         specsHTML += `
             <div class="tyre-modal-specs-row">
                 <div class="tyre-modal-specs-col">
@@ -792,7 +801,6 @@ function createTyreBlock() {
             </div>
         `;
         
-        // Общие параметры  
         if (specs.common) {
             specsHTML += `<div class="tyre-modal-specs-section">`;
             specsHTML += `<div class="tyre-modal-specs-title">Общие</div>`;
@@ -836,33 +844,27 @@ function createTyreBlock() {
         `;
     }
 
-    // Функция для отображения МОДАЛЬНОГО окна (по центру) — ВСЕ ШИНЫ СРАЗУ
+    // Функция для отображения модального окна (ВСЕ ШИНЫ СРАЗУ)
     function showAllTyresModal() {
-        // Закрываем предыдущее модальное окно, если есть
         const existingModal = document.querySelector('.tyre-modal-overlay');
         if (existingModal) {
             existingModal.remove();
             return;
         }
         
-        // Порядок для десктопа: Hard, Medium, Soft, Intermediate, Wet
         const tyreTypes = ["Hard", "Medium", "Soft", "Intermediate", "Wet"];
         
-        // Создаём карточки для всех шин с разделителем
         let cardsHTML = '';
         tyreTypes.forEach((type, index) => {
             const card = createTyreModalCard(type);
             if (card) {
                 cardsHTML += card;
-                // Добавляем разделитель ПОСЛЕ 3-й карточки (Soft) 
-                // Индекс 2 = 3-й элемент (Hard=0, Medium=1, Soft=2)
                 if (index === 2) {
                     cardsHTML += `<div class="tyre-modal-divider"></div>`;
                 }
             }
         });
         
-        // Создаём оверлей модального окна
         const overlay = document.createElement('div');
         overlay.className = 'tyre-modal-overlay';
         overlay.innerHTML = `
@@ -876,19 +878,16 @@ function createTyreBlock() {
         
         document.body.appendChild(overlay);
         
-        // Активация с анимацией
         requestAnimationFrame(() => {
             overlay.classList.add('active');
         });
         
-        // Закрытие по клику на оверлей (вне модалки)
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) {
                 overlay.remove();
             }
         });
         
-        // Закрытие по ESC
         const escHandler = (e) => {
             if (e.key === 'Escape') {
                 overlay.remove();
@@ -897,8 +896,10 @@ function createTyreBlock() {
         };
         document.addEventListener('keydown', escHandler);
     }
-	
+    
     // Формируем C1-C5
+    const allCompounds = ["C1", "C2", "C3", "C4", "C5"];
+    
     let topHTML = allCompounds.map(c => {
         const info = getTyreInfo(c);
         return `
@@ -932,7 +933,8 @@ function createTyreBlock() {
     `;
     
     // Обработчики клика — открываем модальное окно со ВСЕМИ шинами
-    block.querySelectorAll('.tyre-item.clickable, .tyre-item.dimmed').forEach(item => {
+    // Добавляем обработчик на ВСЕ элементы tyre-item, включая dimmed
+    block.querySelectorAll('.tyre-item').forEach(item => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
             showAllTyresModal();
@@ -983,104 +985,73 @@ function startMainTimer() {
         
         const raceDate = new Date(nextGP.date);
         const diff = raceDate - now;
-        const oneHourBeforeRace = new Date(raceDate.getTime() - 60 * 60 * 1000);
         
-        // Расчёт времени квалификации (на сутки раньше гонки, то же время)
-		const qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
-		const halfHourBeforeQuali = new Date(qualiDate.getTime() - 30 * 60 * 1000);
-		const qualiActive = nextGP.recordingQuali && now >= halfHourBeforeQuali;
+        // Парсим даты из объекта ГП
+        const qualiDate = nextGP.quali ? new Date(nextGP.quali) : null;
+        const sprintDate = nextGP.sprint ? new Date(nextGP.sprint) : null;
         
-        // Обновляем только таймер, не трогая кнопки
+        // Обновляем только таймер
         const countdownEl = block.querySelector('.countdown-timer');
-        const raceBtnEl = block.querySelector('.main-gp-btn.race');
-        const sprintBtn = block.querySelector('.main-gp-btn.sprint');
-        const qualiBtn = block.querySelector('.main-gp-btn.quali');
-        
-        // Кнопки спринта и квалификации — обновляем только если их нет
         const linksContainer = block.querySelector('.nextgp-links');
-        if (!linksContainer) {
-            let linksHTML = '';
-            if (nextGP.hasSprint && nextGP.recordingSprint) {
-                linksHTML += `<a href="${nextGP.recordingSprint}" target="_blank" class="main-gp-btn sprint" onclick="event.stopPropagation()">Спринт</a>`;
+        
+        // Создаём контейнер для ссылок, если его нет
+        let linksDiv = linksContainer;
+        if (!linksDiv) {
+            const footer = block.querySelector('.nextgp-footer');
+            if (footer) {
+                linksDiv = document.createElement('div');
+                linksDiv.className = 'nextgp-links';
+                footer.appendChild(linksDiv);
             }
-            // Квалификация — показываем за час до квалификации и навсегда после
-            if (qualiActive) {
-                linksHTML += `<a href="${nextGP.recordingQuali}" target="_blank" class="main-gp-btn quali" onclick="event.stopPropagation()">Квалификация</a>`;
-            }
-            if (linksHTML) {
-                const footer = block.querySelector('.nextgp-footer');
-                if (footer) {
-                    const linksDiv = document.createElement('div');
-                    linksDiv.className = 'nextgp-links';
-                    linksDiv.innerHTML = linksHTML;
-                    footer.appendChild(linksDiv);
-                }
-            }
-        } else {
-            // Обновляем ссылки если их нет
-            if (!sprintBtn && nextGP.hasSprint && nextGP.recordingSprint) {
+        }
+        
+        if (linksDiv) {
+            // Очищаем контейнер
+            linksDiv.innerHTML = '';
+            
+            // Кнопка СПРИНТА — только если есть ссылка И время >= за час до спринта
+            if (sprintDate && nextGP.recordingSprint && now >= new Date(sprintDate.getTime() - 60 * 60 * 1000)) {
                 const sprintEl = document.createElement('a');
                 sprintEl.href = nextGP.recordingSprint;
                 sprintEl.target = '_blank';
                 sprintEl.className = 'main-gp-btn sprint';
                 sprintEl.textContent = 'Спринт';
                 sprintEl.onclick = (e) => e.stopPropagation();
-                linksContainer.appendChild(sprintEl);
+                linksDiv.appendChild(sprintEl);
             }
-            // Квалификация — появляется за час до квалификации и остаётся
-            if (!qualiBtn && qualiActive) {
+            
+            // Кнопка КВАЛИФИКАЦИИ — только если есть ссылка И время >= за час до квалификации
+            if (qualiDate && nextGP.recordingQuali && now >= new Date(qualiDate.getTime() - 60 * 60 * 1000)) {
                 const qualiEl = document.createElement('a');
                 qualiEl.href = nextGP.recordingQuali;
                 qualiEl.target = '_blank';
                 qualiEl.className = 'main-gp-btn quali';
                 qualiEl.textContent = 'Квалификация';
                 qualiEl.onclick = (e) => e.stopPropagation();
-                linksContainer.appendChild(qualiEl);
+                linksDiv.appendChild(qualiEl);
             }
         }
         
-        if (now >= oneHourBeforeRace && now < raceDate) {
-            // За час до гонки — кнопка
-            if (countdownEl) countdownEl.style.display = 'none';
-            if (!raceBtnEl) {
-                const btnContainer = block.querySelector('.nextgp-countdown');
-                if (btnContainer) {
-                    btnContainer.innerHTML = nextGP.recordingRace 
-                        ? `<a href="${nextGP.recordingRace}" target="_blank" class="main-gp-btn race" onclick="event.stopPropagation()">Гонка скоро начнётся</a>`
-                        : '<span class="calendar-status-text">Гонка скоро начнётся</span>';
-                }
-            }
-        } else if (now >= raceDate) {
-            // Гонка идёт
-            if (countdownEl) countdownEl.style.display = 'none';
-            if (!raceBtnEl) {
-                const btnContainer = block.querySelector('.nextgp-countdown');
-                if (btnContainer) {
-                    btnContainer.innerHTML = nextGP.recordingRace 
-                        ? `<a href="${nextGP.recordingRace}" target="_blank" class="main-gp-btn race" onclick="event.stopPropagation()">Гонка идёт</a>`
-                        : '<span class="calendar-status-text">Гонка идёт</span>';
-                }
-            }
-        } else {
-            // Таймер
-            if (raceBtnEl) raceBtnEl.remove();
-            if (countdownEl) {
-                countdownEl.style.display = '';
-                const d = Math.floor(diff / 86400000);
-                const h = Math.floor((diff % 86400000) / 3600000);
-                const m = Math.floor((diff % 3600000) / 60000);
-                const s = Math.floor((diff % 60000) / 1000);
-                countdownEl.innerHTML = `<strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.`;
+        // Обновляем таймер или кнопку гонки
+        const btnContainer = block.querySelector('.nextgp-countdown');
+        if (!btnContainer) return;
+        
+        // Кнопка ГОНКИ — только если есть ссылка И время >= за час до гонки
+        if (now >= new Date(raceDate.getTime() - 60 * 60 * 1000)) {
+            if (nextGP.recordingRace) {
+                btnContainer.innerHTML = `<a href="${nextGP.recordingRace}" target="_blank" class="main-gp-btn race" onclick="event.stopPropagation()">Гонка</a>`;
             } else {
-                const btnContainer = block.querySelector('.nextgp-countdown');
-                if (btnContainer) {
-                    const d = Math.floor(diff / 86400000);
-                    const h = Math.floor((diff % 86400000) / 3600000);
-                    const m = Math.floor((diff % 3600000) / 60000);
-                    const s = Math.floor((diff % 60000) / 1000);
-                    btnContainer.innerHTML = `<span>До гонки:</span> <span class="countdown-timer"><strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.</span>`;
-                }
+                btnContainer.innerHTML = '<span class="calendar-status-text">Гонка скоро начнётся</span>';
             }
+        } else if (diff > 0) {
+            // Таймер до гонки
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            btnContainer.innerHTML = `<span>До гонки:</span> <span class="countdown-timer"><strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.</span>`;
+        } else {
+            btnContainer.innerHTML = '<span class="calendar-status-text">Гонка завершена</span>';
         }
     };
     

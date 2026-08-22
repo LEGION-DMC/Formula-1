@@ -1,442 +1,389 @@
 const calendarData = [
 	{   id: "australia",
 		track: "albert_park",
+		
+		tires: "C3, C4, C5",
+		
 		date: "2026-03-08 11:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "https://rutube.ru/video/d73719ebc017833dc11b2b3e0eddffb8/",
 		recordingRace: "https://rutube.ru/video/264170a23560b1eec2e7b27978b62b3f/"
 	},
 	{   id: "china",
 		track: "shanghai",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-03-15 14:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: true,
 		canceled: false,
+		
 		recordingSprint: "https://rutube.ru/video/e01dc7aca552e6b3481e27a12b481e43/",
 		recordingQuali: "https://rutube.ru/video/70a7aa6656f6e5b4ddabcbf824253830/",
 		recordingRace: "https://rutube.ru/video/0cb1fa5f8d0b60b7266f43f015566674/"
 	},
 	{   id: "japan",
 		track: "suzuka",
+		
+		tires: "C1, C2, C3",
+		
 		date: "2026-03-29 12:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
+		
 		recordingQuali: "https://rutube.ru/video/bd3f864e23ef634c8140e77099e5deeb/",
 		recordingRace: "https://rutube.ru/video/6d24c1dd05e8824e81dd3aa3cdd5b86f/"
 	},
 	{   id: "saudi-arabia",
 		track: "jeddah",
+		
+		tires: "",
+		
 		date: "2026-04-19 00:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: true,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "miami",
 		track: "miami",
+		
+		tires: "C3, C4, C5",
+		
 		date: "2026-05-04 00:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: true,
 		canceled: false,
+		
 		recordingSprint: "https://rutube.ru/video/105d706e84f0903bb3bc0da3dd4e2f91/",
 		recordingQuali: "https://rutube.ru/video/b7b2f0fb0ba261b6b4c48905526440fe/",
 		recordingRace: "https://rutube.ru/video/3628eef00d9d494b12467d1ef0bc42c1/"
 	},
 	{   id: "canada",
 		track: "villeneuve",
+		
+		tires: "C3, C4, C5",
+		
 		date: "2026-05-25 03:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: true,
 		canceled: false,
+		
 		recordingSprint: "https://rutube.ru/video/bc877009b2b8fc79bc6f979462168e6f/",
 		recordingQuali: "https://rutube.ru/video/9d73b9e5e2f82f57b9a1ea2b0f43d1f7/",
 		recordingRace: "https://rutube.ru/video/03fefa5dc563eeccb70fdae0547937ee/"
 	},
 	{   id: "monaco",
 		track: "monaco",
+		
+		tires: "C3, C4, C5",
+		
 		date: "2026-06-07 20:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "https://rutube.ru/video/2f1325bbb1e0abd272265bae45143732/",
 		recordingRace: "https://rutube.ru/video/f85e53c184adb938f135e5f672dd34fb/"
 	},
 	{   id: "barcelona",
 		track: "catalunya",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-06-14 20:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "https://rutube.ru/video/8e12af772774917558cd3772f6ef7af7/",
 		recordingRace: "https://rutube.ru/video/d453cd08307bbb2f0328d9dd19fd1fdd/"
 	},
 	{   id: "austria",
 		track: "red_bull_ring",
+		
+		tires: "C3, C4, C5",
+		
 		date: "2026-06-28 20:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "https://rutube.ru/video/79b0880c155b53e864d72937ef75ef65/",
 		recordingRace: "https://rutube.ru/video/d8359daa94329ff700c3064ba10551a4/"
 	},
 	{   id: "great-britain",
 		track: "silverstone",
+		
+		tires: "C1, C2, C3",
+		
 		date: "2026-07-05 21:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: true,
 		canceled: false,
+		
 		recordingSprint: "https://rutube.ru/video/0e2264d285a6ec583de6f2bc063f2589/",
 		recordingQuali: "https://rutube.ru/video/92ae02a203708a3f296f8b57dd33cdfe/",
 		recordingRace: "https://rutube.ru/video/2ad23769b8475f5d88fabf24f7220eac/"
 	},
 	{   id: "belgium",
 		track: "spa",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-07-19 20:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "https://rutube.ru/video/40a90b042d58ae5cfc34ed9f1d6c24b2/",
 		recordingRace: "https://rutube.ru/video/f0ddd7af7d20cad89139a493c62e5781/"
 	},
 	{   id: "hungary",
 		track: "hungaroring",
+		
+		tires: "C3, C4, C5",
+		
 		date: "2026-07-26 20:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "https://rutube.ru/video/55ded792e68ca0eae882078b50c05f7a/",
 		recordingRace: "https://rutube.ru/video/8d838029ed38ee3be92af7472ac078f4/"
 	},
 	{   id: "netherlands",
 		track: "zandvoort",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-08-23 20:55",
+		quali: "2026-08-22 17:55",
+		sprint: "2026-08-22 21:55",
+		
 		hasSprint: true,
 		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		
+		recordingSprint: "https://rutube.ru/video/f713b3a245bd5134ee3fb404376598d5/",
+		recordingQuali: "https://rutube.ru/video/edeec7032e2bb086090efbf1028ddbbc/",
+		recordingRace: "https://rutube.ru/video/4ee70215ae4c152fcd01310ed5456721/"
 	},
 	{   id: "italy",
 		track: "monza",
+		
+		tires: "C3, C4, C5",
+		
 		date: "2026-09-06 20:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "spain",
 		track: "madring",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-09-13 20:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "azerbaijan",
 		track: "baku",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-09-26 18:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "malaysia",
 		track: "sepang",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-10-04 16:00",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "singapore",
 		track: "marina_bay",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-10-11 19:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: true,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "usa",
 		track: "americas",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-10-26 03:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "mexico",
 		track: "rodriguez",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-11-02 03:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "brazil",
 		track: "interlagos",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-11-09 00:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "las-vegas",
 		track: "vegas",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-11-22 11:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "qatar",
 		track: "lusail",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-11-30 23:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 	{   id: "abu-dhabi",
 		track: "yas_marina",
+		
+		tires: "C2, C3, C4",
+		
 		date: "2026-12-06 20:55",
+		quali: "",
+		sprint: "",
+		
 		hasSprint: false,
 		canceled: false,
+		
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
 	},
 ];
-
-/* 2027
-const calendarData = [
-	{   id: "bahrain",
-		track: "bahrain",
-		date: "2026-03-08 11:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "saudi-arabia",
-		track: "jeddah",
-		date: "2026-04-19 00:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "australia",
-		track: "albert_park",
-		date: "2026-03-08 11:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "japan",
-		track: "suzuka",
-		date: "2026-03-29 12:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "china",
-		track: "shanghai",
-		date: "2026-03-15 14:55",
-		hasSprint: true,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "miami",
-		track: "miami",
-		date: "2026-05-04 00:55",
-		hasSprint: true,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "canada",
-		track: "villeneuve",
-		date: "2026-05-25 03:55",
-		hasSprint: true,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "monaco",
-		track: "monaco",
-		date: "2026-06-07 20:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "portugal",
-		track: "portimao",
-		date: "2026-03-29 12:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "great-britain",
-		track: "silverstone",
-		date: "2026-07-05 21:55",
-		hasSprint: true,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "austria",
-		track: "red_bull_ring",
-		date: "2026-06-28 20:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "belgium",
-		track: "spa",
-		date: "2026-07-19 20:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "hungary",
-		track: "hungaroring",
-		date: "2026-07-26 20:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "italy",
-		track: "monza",
-		date: "2026-09-06 20:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "spain",
-		track: "madring",
-		date: "2026-09-13 20:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "azerbaijan",
-		track: "baku",
-		date: "2026-09-26 18:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "turkiye",
-		track: "istambul_park",
-		date: "2026-10-04 22:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "singapore",
-		track: "marina_bay",
-		date: "2026-10-11 19:55",
-		hasSprint: true,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "usa",
-		track: "americas",
-		date: "2026-10-26 03:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "mexico",
-		track: "rodriguez",
-		date: "2026-11-02 03:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "brazil",
-		track: "interlagos",
-		date: "2026-11-09 00:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "las-vegas",
-		track: "vegas",
-		date: "2026-11-22 11:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "qatar",
-		track: "lusail",
-		date: "2026-11-30 23:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-	{   id: "abu-dhabi",
-		track: "yas_marina",
-		date: "2026-12-06 20:55",
-		hasSprint: false,
-		canceled: false,
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
-	},
-];
-*/
 
 let animationTimeout = null;
 let currentHighlightedGpId = null;
@@ -688,9 +635,35 @@ function renderCalendarCards(container) {
         const isFuture = raceDate > now;
         const nearStart = isFuture && now >= oneHourBeforeRace;
 
-        const qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
-        const oneHourBeforeQuali = new Date(qualiDate.getTime() - 60 * 60 * 1000);
-        const qualiActive = gp.recordingQuali && now >= oneHourBeforeQuali;
+        // Проверка для квалификации
+        let qualiActive = false;
+        if (gp.recordingQuali) {
+            // Если есть явное время квалификации - используем его
+            let qualiDate;
+            if (gp.quali) {
+                qualiDate = new Date(gp.quali);
+            } else {
+                // Иначе за 24 часа до гонки
+                qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
+            }
+            const oneHourBeforeQuali = new Date(qualiDate.getTime() - 60 * 60 * 1000);
+            qualiActive = now >= oneHourBeforeQuali;
+        }
+
+        // Проверка для спринта
+        let sprintActive = false;
+        if (gp.hasSprint && gp.recordingSprint) {
+            // Если есть явное время спринта - используем его
+            let sprintDate;
+            if (gp.sprint) {
+                sprintDate = new Date(gp.sprint);
+            } else {
+                // Иначе за 24 часа до гонки
+                sprintDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
+            }
+            const oneHourBeforeSprint = new Date(sprintDate.getTime() - 60 * 60 * 1000);
+            sprintActive = now >= oneHourBeforeSprint;
+        }
 
         const card = document.createElement('div');
         card.className = 'calendar-card';
@@ -748,14 +721,17 @@ function renderCalendarCards(container) {
             let btns = '';
             let showTimer = false;
 
-            if (gp.hasSprint && gp.recordingSprint) {
+            // Спринт - показываем только если есть ссылка И время уже подошло
+            if (sprintActive) {
                 btns += `<a href="${gp.recordingSprint}" target="_blank" class="calendar-btn sprint">Спринт</a>`;
             }
 
+            // Квалификация - показываем только если есть ссылка И время уже подошло
             if (qualiActive) {
                 btns += `<a href="${gp.recordingQuali}" target="_blank" class="calendar-btn quali">Квалификация</a>`;
             }
 
+            // Гонка
             if (isPast || nearStart) {
                 if (gp.recordingRace) {
                     btns += `<a href="${gp.recordingRace}" target="_blank" class="calendar-btn race">Гонка</a>`;
