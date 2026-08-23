@@ -46,17 +46,18 @@ const qualiData = [
 ];
 
 const penaltiesData = [
+    { driver: "Кими Антонелли", fines: 4 },
     { driver: "Оливер Берман", fines: 4 },
     { driver: "Алекс Албон", fines: 3 },
-    { driver: "Кими Антонелли", fines: 4 },
     { driver: "Льюис Хэмилтон", fines: 3 },
+    { driver: "Франко Колапинто", fines: 3 },
     { driver: "Лэнс Стролл", fines: 2 },
     { driver: "Карлос Сайнс", fines: 2 },
     { driver: "Оскар Пиастри", fines: 2 },
     { driver: "Лиам Лоусон", fines: 2 },
     { driver: "Габриэл Бортолето", fines: 2 },
+    { driver: "Арвид Линдблад", fines: 2 },
     { driver: "Эстебан Окон", fines: 1 },
-    { driver: "Франко Колапинто", fines: 1 },
 
     { driver: "Ландо Норрис", fines: 0 },
     { driver: "Макс Ферстаппен", fines: 0 },
@@ -66,7 +67,6 @@ const penaltiesData = [
     { driver: "Пьер Гасли", fines: 0 },
     { driver: "Фернандо Алонсо", fines: 0 },
     { driver: "Нико Хюлькенберг", fines: 0 },
-    { driver: "Арвид Линдблад", fines: 0 },
     { driver: "Джордж Расселл", fines: 0 },
     { driver: "Валттери Боттас", fines: 0 },
 

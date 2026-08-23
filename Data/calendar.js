@@ -858,10 +858,10 @@ function openTrackModal(track, gp) {
         if (e.key === 'Escape') close();
     }
 
-    // Рекорд круга
+    // Рекорд круга (гонка)
     let lapRecordDisplay = track.lapRecord;
     const lapRecordParts = track.lapRecord.match(/^([\d:.]+)\s*\(([^,]+),\s*([^,]+),\s*(\d{4})\)$/);
-
+    
     if (lapRecordParts) {
         const time = lapRecordParts[1];
         const pilot = lapRecordParts[2].trim();
@@ -871,6 +871,28 @@ function openTrackModal(track, gp) {
         const teamLogoPath = `Images/Teams/${team.toLowerCase().replace(/ /g, '_')}-m.png`;
 
         lapRecordDisplay = `
+            ${time}
+            <span class="tm-record-pilot-info">
+                (${pilot},
+                <img src="${teamLogoPath}" alt="${team}" class="tm-record-team-logo" onerror="this.style.display='none'">
+                ${year})
+            </span>
+        `;
+    }
+
+    // Рекорд квалификации
+    let qulRecordDisplay = track.qulRecord;
+    const qulRecordParts = track.qulRecord ? track.qulRecord.match(/^([\d:.]+)\s*\(([^,]+),\s*([^,]+),\s*(\d{4})\)$/) : null;
+    
+    if (qulRecordParts) {
+        const time = qulRecordParts[1];
+        const pilot = qulRecordParts[2].trim();
+        const team = qulRecordParts[3].trim();
+        const year = qulRecordParts[4].trim();
+
+        const teamLogoPath = `Images/Teams/${team.toLowerCase().replace(/ /g, '_')}-m.png`;
+
+        qulRecordDisplay = `
             ${time}
             <span class="tm-record-pilot-info">
                 (${pilot},
@@ -935,14 +957,18 @@ function openTrackModal(track, gp) {
                     <span class="tm-record">${track.firstrace}<span class="gp-year-suffix"> г.</span></span>
                 </div>
                 <div class="tm-detail-row">
-                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга:</span>
+                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга в гонке:</span>
                     <span class="tm-record">${lapRecordDisplay}</span>
+                </div>
+                <div class="tm-detail-row">
+                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга в квалификации:</span>
+                    <span class="tm-record">${qulRecordDisplay || 'Нет данных'}</span>
                 </div>
             </div>
         </div>
     `;
     setTimeout(autoShrinkHeaders, 10);
-	
+    
     modal.querySelector('.track-modal-close').addEventListener('click', close);
 
     overlay.appendChild(modal);
