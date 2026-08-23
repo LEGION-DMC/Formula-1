@@ -209,6 +209,7 @@ const detailedResults = {
         "verstappen": "dnf",
         "bearman": "dnf",
         "stroll": "dnf",
+        "ocon": "dnf",
     },
     "italy": {
         "000": 25,
