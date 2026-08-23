@@ -210,6 +210,8 @@ const detailedResults = {
         "bearman": "dnf",
         "stroll": "dnf",
         "ocon": "dnf",
+        "bottas": "dnf",
+        "sainz": "dnf",
     },
     "italy": {
         "000": 25,
