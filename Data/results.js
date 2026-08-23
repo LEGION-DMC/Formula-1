@@ -208,6 +208,7 @@ const detailedResults = {
         "000": 1,
         "verstappen": "dnf",
         "bearman": "dnf",
+        "stroll": "dnf",
     },
     "italy": {
         "000": 25,
