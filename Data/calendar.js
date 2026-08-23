@@ -4,7 +4,7 @@ const calendarData = [
 		
 		tires: "C3, C4, C5",
 		
-		date: "2026-03-08 11:55",
+		date: "2026-03-08 12:00",
 		quali: "",
 		sprint: "",
 		
@@ -20,7 +20,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-03-15 14:55",
+		date: "2026-03-15 15:00",
 		quali: "",
 		sprint: "",
 		
@@ -36,7 +36,7 @@ const calendarData = [
 		
 		tires: "C1, C2, C3",
 		
-		date: "2026-03-29 12:55",
+		date: "2026-03-29 13:00",
 		quali: "",
 		sprint: "",
 		
@@ -52,7 +52,7 @@ const calendarData = [
 		
 		tires: "",
 		
-		date: "2026-04-19 00:55",
+		date: "2026-04-20 01:00",
 		quali: "",
 		sprint: "",
 		
@@ -68,7 +68,7 @@ const calendarData = [
 		
 		tires: "C3, C4, C5",
 		
-		date: "2026-05-04 00:55",
+		date: "2026-05-04 01:00",
 		quali: "",
 		sprint: "",
 		
@@ -84,7 +84,7 @@ const calendarData = [
 		
 		tires: "C3, C4, C5",
 		
-		date: "2026-05-25 03:55",
+		date: "2026-05-25 04:00",
 		quali: "",
 		sprint: "",
 		
@@ -100,7 +100,7 @@ const calendarData = [
 		
 		tires: "C3, C4, C5",
 		
-		date: "2026-06-07 20:55",
+		date: "2026-06-07 21:00",
 		quali: "",
 		sprint: "",
 		
@@ -116,7 +116,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-06-14 20:55",
+		date: "2026-06-14 21:00",
 		quali: "",
 		sprint: "",
 		
@@ -132,7 +132,7 @@ const calendarData = [
 		
 		tires: "C3, C4, C5",
 		
-		date: "2026-06-28 20:55",
+		date: "2026-06-28 21:00",
 		quali: "",
 		sprint: "",
 		
@@ -148,7 +148,7 @@ const calendarData = [
 		
 		tires: "C1, C2, C3",
 		
-		date: "2026-07-05 21:55",
+		date: "2026-07-05 22:00",
 		quali: "",
 		sprint: "",
 		
@@ -164,7 +164,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-07-19 20:55",
+		date: "2026-07-19 21:00",
 		quali: "",
 		sprint: "",
 		
@@ -180,7 +180,7 @@ const calendarData = [
 		
 		tires: "C3, C4, C5",
 		
-		date: "2026-07-26 20:55",
+		date: "2026-07-26 21:00",
 		quali: "",
 		sprint: "",
 		
@@ -196,9 +196,9 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-08-23 20:55",
-		quali: "2026-08-22 21:55",
-		sprint: "2026-08-22 17:55",
+		date: "2026-08-23 21:00",
+		quali: "2026-08-22 22:00",
+		sprint: "2026-08-22 18:00",
 		
 		hasSprint: true,
 		canceled: false,
@@ -212,7 +212,7 @@ const calendarData = [
 		
 		tires: "C3, C4, C5",
 		
-		date: "2026-09-06 20:55",
+		date: "2026-09-06 21:00",
 		quali: "",
 		sprint: "",
 		
@@ -228,7 +228,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-09-13 20:55",
+		date: "2026-09-13 21:00",
 		quali: "",
 		sprint: "",
 		
@@ -244,7 +244,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-09-26 18:55",
+		date: "2026-09-26 19:00",
 		quali: "",
 		sprint: "",
 		
@@ -260,7 +260,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-10-04 16:00",
+		date: "2026-10-04 23:00",
 		quali: "",
 		sprint: "",
 		
@@ -276,7 +276,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-10-11 19:55",
+		date: "2026-10-11 20:00",
 		quali: "",
 		sprint: "",
 		
@@ -292,7 +292,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-10-26 03:55",
+		date: "2026-10-26 04:00",
 		quali: "",
 		sprint: "",
 		
@@ -308,7 +308,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-11-02 03:55",
+		date: "2026-11-02 04:00",
 		quali: "",
 		sprint: "",
 		
@@ -324,7 +324,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-11-09 00:55",
+		date: "2026-11-09 01:00",
 		quali: "",
 		sprint: "",
 		
@@ -340,7 +340,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-11-22 11:55",
+		date: "2026-11-22 12:00",
 		quali: "",
 		sprint: "",
 		
@@ -356,7 +356,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-11-30 23:55",
+		date: "2026-11-30 00:00",
 		quali: "",
 		sprint: "",
 		
@@ -372,7 +372,7 @@ const calendarData = [
 		
 		tires: "C2, C3, C4",
 		
-		date: "2026-12-06 20:55",
+		date: "2026-12-06 21:00",
 		quali: "",
 		sprint: "",
 		
@@ -629,41 +629,11 @@ function renderCalendarCards(container) {
 
         const now = new Date();
         const raceDate = new Date(gp.date);
-        const oneHourBeforeRace = new Date(raceDate.getTime() - 60 * 60 * 1000);
+        const oneHourBeforeRace = new Date(raceDate.getTime() - 5 * 60 * 1000);
         const isPast = raceDate < now && !gp.canceled;
         const isToday = raceDate.toDateString() === now.toDateString();
         const isFuture = raceDate > now;
         const nearStart = isFuture && now >= oneHourBeforeRace;
-
-        // Проверка для квалификации
-        let qualiActive = false;
-        if (gp.recordingQuali) {
-            // Если есть явное время квалификации - используем его
-            let qualiDate;
-            if (gp.quali) {
-                qualiDate = new Date(gp.quali);
-            } else {
-                // Иначе за 24 часа до гонки
-                qualiDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
-            }
-            const oneHourBeforeQuali = new Date(qualiDate.getTime() - 60 * 60 * 1000);
-            qualiActive = now >= oneHourBeforeQuali;
-        }
-
-        // Проверка для спринта
-        let sprintActive = false;
-        if (gp.hasSprint && gp.recordingSprint) {
-            // Если есть явное время спринта - используем его
-            let sprintDate;
-            if (gp.sprint) {
-                sprintDate = new Date(gp.sprint);
-            } else {
-                // Иначе за 24 часа до гонки
-                sprintDate = new Date(raceDate.getTime() - 24 * 60 * 60 * 1000);
-            }
-            const oneHourBeforeSprint = new Date(sprintDate.getTime() - 60 * 60 * 1000);
-            sprintActive = now >= oneHourBeforeSprint;
-        }
 
         const card = document.createElement('div');
         card.className = 'calendar-card';
@@ -721,13 +691,13 @@ function renderCalendarCards(container) {
             let btns = '';
             let showTimer = false;
 
-            // Спринт - показываем только если есть ссылка И время уже подошло
-            if (sprintActive) {
+            // ✅ Кнопка спринта - отображается если есть ссылка
+            if (gp.hasSprint && gp.recordingSprint) {
                 btns += `<a href="${gp.recordingSprint}" target="_blank" class="calendar-btn sprint">Спринт</a>`;
             }
 
-            // Квалификация - показываем только если есть ссылка И время уже подошло
-            if (qualiActive) {
+            // ✅ Кнопка квалификации - отображается если есть ссылка
+            if (gp.recordingQuali) {
                 btns += `<a href="${gp.recordingQuali}" target="_blank" class="calendar-btn quali">Квалификация</a>`;
             }
 

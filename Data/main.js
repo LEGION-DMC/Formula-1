@@ -1010,7 +1010,7 @@ function startMainTimer() {
             linksDiv.innerHTML = '';
             
             // Кнопка СПРИНТА — только если есть ссылка И время >= за час до спринта
-            if (sprintDate && nextGP.recordingSprint && now >= new Date(sprintDate.getTime() - 60 * 60 * 1000)) {
+            if (sprintDate && nextGP.recordingSprint && now >= new Date(sprintDate.getTime() - 5 * 60 * 1000)) {
                 const sprintEl = document.createElement('a');
                 sprintEl.href = nextGP.recordingSprint;
                 sprintEl.target = '_blank';
@@ -1021,7 +1021,7 @@ function startMainTimer() {
             }
             
             // Кнопка КВАЛИФИКАЦИИ — только если есть ссылка И время >= за час до квалификации
-            if (qualiDate && nextGP.recordingQuali && now >= new Date(qualiDate.getTime() - 60 * 60 * 1000)) {
+            if (qualiDate && nextGP.recordingQuali && now >= new Date(qualiDate.getTime() - 5 * 60 * 1000)) {
                 const qualiEl = document.createElement('a');
                 qualiEl.href = nextGP.recordingQuali;
                 qualiEl.target = '_blank';
@@ -1037,7 +1037,7 @@ function startMainTimer() {
         if (!btnContainer) return;
         
         // Кнопка ГОНКИ — только если есть ссылка И время >= за час до гонки
-        if (now >= new Date(raceDate.getTime() - 60 * 60 * 1000)) {
+        if (now >= new Date(raceDate.getTime() - 5 * 60 * 1000)) {
             if (nextGP.recordingRace) {
                 btnContainer.innerHTML = `<a href="${nextGP.recordingRace}" target="_blank" class="main-gp-btn race" onclick="event.stopPropagation()">Гонка</a>`;
             } else {
