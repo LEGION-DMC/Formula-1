@@ -858,50 +858,6 @@ function openTrackModal(track, gp) {
         if (e.key === 'Escape') close();
     }
 
-    // Рекорд круга (гонка)
-    let lapRecordDisplay = track.lapRecord;
-    const lapRecordParts = track.lapRecord.match(/^([\d:.]+)\s*\(([^,]+),\s*([^,]+),\s*(\d{4})\)$/);
-    
-    if (lapRecordParts) {
-        const time = lapRecordParts[1];
-        const pilot = lapRecordParts[2].trim();
-        const team = lapRecordParts[3].trim();
-        const year = lapRecordParts[4].trim();
-
-        const teamLogoPath = `Images/Teams/${team.toLowerCase().replace(/ /g, '_')}-m.png`;
-
-        lapRecordDisplay = `
-            ${time}
-            <span class="tm-record-pilot-info">
-                (${pilot},
-                <img src="${teamLogoPath}" alt="${team}" class="tm-record-team-logo" onerror="this.style.display='none'">
-                ${year})
-            </span>
-        `;
-    }
-
-    // Рекорд квалификации
-    let qulRecordDisplay = track.qulRecord;
-    const qulRecordParts = track.qulRecord ? track.qulRecord.match(/^([\d:.]+)\s*\(([^,]+),\s*([^,]+),\s*(\d{4})\)$/) : null;
-    
-    if (qulRecordParts) {
-        const time = qulRecordParts[1];
-        const pilot = qulRecordParts[2].trim();
-        const team = qulRecordParts[3].trim();
-        const year = qulRecordParts[4].trim();
-
-        const teamLogoPath = `Images/Teams/${team.toLowerCase().replace(/ /g, '_')}-m.png`;
-
-        qulRecordDisplay = `
-            ${time}
-            <span class="tm-record-pilot-info">
-                (${pilot},
-                <img src="${teamLogoPath}" alt="${team}" class="tm-record-team-logo" onerror="this.style.display='none'">
-                ${year})
-            </span>
-        `;
-    }
-
     modal.innerHTML = `
         <button class="track-modal-close">&times;</button>
         <div class="track-modal-layout">
@@ -952,17 +908,24 @@ function openTrackModal(track, gp) {
                     </div>
                 </div>
                 <hr class="tm-divider">
-                <div class="tm-detail-row">
-                    <span class="tm-label"><img src="Images/Icon/track.webp" class="record-icon">Первая гонка:</span>
-                    <span class="tm-record">${track.firstrace}<span class="gp-year-suffix"> г.</span></span>
+				<div class="tm-stats-grid2">
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-label">Первая гонка</span>
+                        <span class="tm-stat-value">${track.firstrace}<span class="gp-year-suffix"> г.</span></span>
+                    </div>
                 </div>
-                <div class="tm-detail-row">
-                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга в гонке:</span>
-                    <span class="tm-record">${lapRecordDisplay}</span>
-                </div>
-                <div class="tm-detail-row">
-                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга в квал.:</span>
-                    <span class="tm-record">${qulRecordDisplay || 'Нет данных'}</span>
+                <hr class="tm-divider">
+				<div class="tm-stats-grid3">
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-label">Рекорд круга в гонке</span> ${(() => { const parts = track.lapRecord.split(', '); return `
+							<span class="tm-stat-value2">${parts[0]}</span>
+							<span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
+                    </div>
+                    <div class="tm-stat-cell">
+                        <span class="tm-stat-label">Рекорд круга в квалификации</span> ${(() => { const parts = track.qulRecord.split(', '); return `
+							<span class="tm-stat-value2">${parts[0]}</span>
+							<span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
+                    </div>
                 </div>
             </div>
         </div>

@@ -260,6 +260,7 @@ h1, h2 {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
+    padding-top: 3px;
 }
 
 /* Строка статистики (кликабельная) */
@@ -490,26 +491,6 @@ h1, h2 {
     transform: scale(0.97);
 }
 
-.nextgp-track {
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-}
-
-.nextgp-image {
-    width: 140px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 8px;
-    background: #111;
-}
-
-.nextgp-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
 .nextgp-flag-inline {
     width: 22px;
     height: 15px;
@@ -517,12 +498,6 @@ h1, h2 {
     vertical-align: middle;
     margin-right: 6px;
     margin-top: -2px;
-}
-
-.nextgp-name {
-    font-family: 'F1Title', sans-serif;
-    font-size: 1.1rem;
-    color: var(--text-light);
 }
 
 .nextgp-details {
@@ -560,6 +535,7 @@ h1, h2 {
     font-family: 'F1Title', sans-serif;
     font-size: 0.9rem;
     color: #aaa;
+    margin-bottom: -10px;
 }
 
 .countdown-timer strong {
@@ -692,7 +668,7 @@ h1, h2 {
     align-items: center;
     gap: 3px;
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 4px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.1);
     transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
@@ -711,9 +687,8 @@ h1, h2 {
 
 .tyre-item.dimmed.clickable {
     opacity: 0.35;
-    padding-bottom: 2vh;
+    padding-bottom: 1.8vh;
 }
-
 
 .tyre-item.clickable {
     cursor: pointer;
@@ -1863,6 +1838,10 @@ h1, h2 {
     color: var(--team-color);
 }
 
+.tm-stat-value .gp-year-suffix {
+    font-size: 0.7rem;
+}
+
 .tm-stat-label {
     font-family: 'F1Text', sans-serif;
     font-size: 0.7rem;
@@ -1925,7 +1904,12 @@ h1, h2 {
     padding-left: 10px; 
 }
 
-.tm-info-cell { display: flex; flex-direction: column; gap: 5px; }
+.tm-info-cell { display: flex; 
+    flex-direction: column; 
+    gap: 3px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
 
 .tm-info-row .tm-info-cell:only-child {
     grid-column: 1 / -1;
@@ -3287,9 +3271,9 @@ h1, h2 {
 }
 
 .tm-track-image {
-    width: 340px;
-    min-height: 255px;
-    max-height: 255px;
+    width: 350px;
+    min-height: 320px;
+    max-height: 320px;
     background: #111;
     display: flex;
     align-items: center;
@@ -3376,10 +3360,24 @@ h1, h2 {
     text-align: center;
 }
 
+.tm-track-info .tm-stats-grid2 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 6px;
+    text-align: center;
+}
+
+.tm-track-info .tm-stats-grid3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    text-align: center;
+}
+
 .tm-track-info .tm-stat-cell {
     background: rgba(255,255,255,0.04);
     border-radius: 6px;
-    padding: 8px 0px 6px 0px;
+    padding: 6px 0px 6px 0px;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -3400,6 +3398,19 @@ h1, h2 {
     color: var(--team-color, #E10600);
 }
 
+.tm-track-info .tm-stat-value2 {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--team-color, #E10600);
+}
+
+.tm-track-info .tm-stat-value-sub {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 0.63rem;
+    color: #999;
+}
+
 .tm-track-info .tm-stat-value-direction {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
     color: var(--team-color, #E10600);
@@ -3416,46 +3427,19 @@ h1, h2 {
     text-transform: uppercase;
 }
 
-.tm-track-info .tm-label {
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.8rem;
-    word-spacing: -3px;
-    margin-top: 5px;
-    color: #888;
-    text-transform: uppercase;
-    align-items: center;
-    display: flex;
-}
-
-.tm-track-info .record-icon {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-    opacity: 0.7;
-    margin-right: 6px;
-}
-
-.tm-track-info .tm-record {
-    font-family: 'F1Numbers', sans-serif;
-    color: #aab;
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-top: 4px;
-}
-
-.tm-track-info .tm-record .gp-year-suffix {
-    font-size: 0.5rem;
+.tm-track-info .gp-year-suffix {
+    font-size: 0.7rem;
 }
 
 .tm-track-info .tm-record-pilot-info {
     display: inline-flex;
     align-items: center;
-    gap: 3px;
+    gap: 2px;
 }
 
 .tm-track-info .tm-record-team-logo {
-    width: 18px !important;
-    height: 18px !important;
+    width: 17px !important;
+    height: 17px !important;
     object-fit: contain;
     display: inline-block;
     vertical-align: middle;

@@ -473,7 +473,7 @@ function openTeamModal(team) {
 	const statsHTML = `
 		<div class="tm-stat-cell">
 			<span class="tm-stat-label">Дебют</span>
-			<span class="tm-stat-value">${team.debut}</span>
+			<span class="tm-stat-value">${team.debut}<span class="gp-year-suffix"> г.</span></span>
 		</div>
 		<div class="tm-stat-cell">
 			<span class="tm-stat-label">Гоночные сезоны</span>
