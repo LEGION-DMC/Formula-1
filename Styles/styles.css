@@ -2383,6 +2383,44 @@ h1, h2 {
 .quali-table tbody td:nth-child(7) { 
     text-align: right; }
 
+.stats-table .separator-row td {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.table-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.separator-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    max-width: 190px;
+}
+
+.separator-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.replacement-driver .driver-fullname,
+.replacement-driver .driver-shortname {
+    color: #ffcc44 !important;
+}
+
+.replacement-driver:hover .driver-fullname,
+.replacement-driver:hover .driver-shortname {
+    color: var(--red-accent) !important;
+}
+
 .pitstop-table .time-cell { text-align: left; 
     padding-left: 25px; }
 
@@ -3092,6 +3130,45 @@ h1, h2 {
     min-width: 32px;
     max-width: 60px;
     text-align: center;
+}
+
+/* Жёлтые очки (замена пилота) */
+.detailed-cell.has-title {
+    color: #FFD700 !important;
+    font-weight: bold;
+}
+
+/* Кастомный тултип для замен */
+.replacement-tooltip {
+    position: fixed;
+    display: none;
+    background: rgba(0, 0, 0, 0.92);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-family: 'F1Text', sans-serif;
+    font-size: 13px;
+    line-height: 1.2;
+    pointer-events: none;
+    z-index: 9999;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    max-width: 300px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    transform: translateY(-100%);
+}
+
+.replacement-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgba(0, 0, 0, 0.92);
 }
 
 .sum-col {

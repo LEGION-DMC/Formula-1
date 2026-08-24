@@ -45,6 +45,11 @@ const qualiData = [
       driver2: "Валттери Боттас" },
 ];
 
+const replacementQualiData = [
+    { driver1: "Макс Ферстаппен", score1: 1, score2: 0, driver2: "Лиам Лоусон" },
+    { driver1: "Арвид Линдблад", score1: 1, score2: 0, driver2: "Юки Цунода" },
+];
+
 const penaltiesData = [
     { driver: "Кими Антонелли", fines: 4 },
     { driver: "Оливер Берман", fines: 4 },
@@ -256,7 +261,6 @@ function createQualiTable() {
             teamPointsMap[team.shortName] = { points: 0, team: team.shortName };
         });
         
-        // Подсчитываем очки команд из combinedStandings
         combinedStandings.forEach(entry => {
             const driver = findDriverById(entry.driver);
             if (driver && teamPointsMap[driver.team]) {
@@ -281,32 +285,83 @@ function createQualiTable() {
         return pointsB - pointsA;
     });
 
-    sortedQualiData.forEach(row => {
+    // Функция для создания строки таблицы
+    function createTableRow(row, isReplacement = false) {
         const driver1 = findDriverByName(row.driver1);
         const driver2 = findDriverByName(row.driver2);
 
-        if (!driver1 || !driver2) return;
+        if (!driver1 || !driver2) return null;
 
         const tr = document.createElement('tr');
+        if (isReplacement) {
+            tr.className = 'replacement-row';
+        }
+        
+        // Определяем класс для ячейки счета
+        let score1Class = '';
+        let score2Class = '';
+        if (row.score1 > row.score2) {
+            score1Class = 'winner';
+            score2Class = 'loser';
+        } else if (row.score1 < row.score2) {
+            score1Class = 'loser';
+            score2Class = 'winner';
+        } else {
+            score1Class = 'draw';
+            score2Class = 'draw';
+        }
+
+        // Для строк с заменой добавляем класс заменяющему пилоту (driver2)
+        const driver2Class = isReplacement ? 'replacement-driver' : '';
+
         tr.innerHTML = `
             <td class="driver-cell driver-cell-left stats-driver-clickable" data-driver-id="${driver1.id}">
                 <img src="Images/Flags/${driver1.country}.svg" alt="" title="${getCountryName(driver1.country)}" class="stats-flag">
-                    <span class="driver-fullname">${driver1.name}</span>
-					<span class="driver-shortname">${driver1.namem}</span>
+                <span class="driver-fullname">${driver1.name}</span>
+                <span class="driver-shortname">${driver1.namem}</span>
             </td>
-            <td class="score-cell ${row.score1 > row.score2 ? 'winner' : row.score1 < row.score2 ? 'loser' : 'draw'}">${row.score1}</td>
+            <td class="score-cell ${score1Class}">${row.score1}</td>
             <td class="vs-cell stats-clickable" data-team="${driver1.team}">
                 <img src="${getTeamLogo(driver1.team)}" alt="${driver1.team}" class="stats-team-logo" onerror="this.style.display='none'">
             </td>
-            <td class="score-cell ${row.score2 > row.score1 ? 'winner' : row.score2 < row.score1 ? 'loser' : 'draw'}">${row.score2}</td>
-            <td class="driver-cell driver-cell-right stats-driver-clickable" data-driver-id="${driver2.id}">
-                    <span class="driver-fullname">${driver2.name}</span>
-					<span class="driver-shortname">${driver2.namem}</span>
+            <td class="score-cell ${score2Class}">${row.score2}</td>
+            <td class="driver-cell driver-cell-right stats-driver-clickable ${driver2Class}" data-driver-id="${driver2.id}">
+                <span class="driver-fullname">${driver2.name}</span>
+                <span class="driver-shortname">${driver2.namem}</span>
                 <img src="Images/Flags/${driver2.country}.svg" alt="" title="${getCountryName(driver2.country)}" class="stats-flag">
             </td>
         `;
-        tbody.appendChild(tr);
+        return tr;
+    }
+
+    // Добавляем основные данные
+    sortedQualiData.forEach(row => {
+        const tr = createTableRow(row, false);
+        if (tr) tbody.appendChild(tr);
     });
+
+    // Проверяем, есть ли данные о заменах
+    if (typeof replacementQualiData !== 'undefined' && replacementQualiData.length > 0) {
+        // Добавляем разделитель
+        const separatorRow = document.createElement('tr');
+        separatorRow.className = 'separator-row';
+        separatorRow.innerHTML = `
+            <td colspan="6">
+                <div class="table-separator">
+                    <span class="separator-line"></span>
+                    <span class="separator-text">Временная замена пилотов</span>
+                    <span class="separator-line"></span>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(separatorRow);
+
+        // Добавляем данные о заменах
+        replacementQualiData.forEach(row => {
+            const tr = createTableRow(row, true);
+            if (tr) tbody.appendChild(tr);
+        });
+    }
 
     table.appendChild(tbody);
     tableContainer.appendChild(table);
@@ -359,6 +414,33 @@ function createPitstopTable() {
 
     const tbody = document.createElement('tbody');
 
+    // Функция для определения команды пилота
+    function getDriverTeam(driver) {
+        // Если пилот не резервный - возвращаем его команду
+        if (driver.team.toLowerCase() !== 'резерв' && driver.team.toLowerCase() !== 'reserve') {
+            return driver.team;
+        }
+        
+        // Для резервных пилотов ищем команду, которую они заменяли
+        if (typeof replacementQualiData !== 'undefined') {
+            for (const replacement of replacementQualiData) {
+                const replacedDriver = findDriverByName(replacement.driver2);
+                if (replacedDriver && replacedDriver.id === driver.id) {
+                    const mainDriver = findDriverByName(replacement.driver1);
+                    if (mainDriver) {
+                        return mainDriver.team;
+                    }
+                }
+            }
+        }
+        
+        if (driver.reserve && Array.isArray(driver.reserve) && driver.reserve.length > 0) {
+            return driver.reserve[0];
+        }
+        
+        return driver.team;
+    }
+
     // Фильтруем валидные
     const validPitstops = pitstopData.filter(row =>
         row.driver !== 'none' && row.time !== '0.00' && row.time !== '0.00s'
@@ -374,6 +456,9 @@ function createPitstopTable() {
     validPitstops.forEach((row, index) => {
         const driver = findDriverById(row.driver);
         if (!driver) return;
+
+        // Определяем команду для отображения
+        const displayTeam = getDriverTeam(driver);
 
         const gpCountry = getGPCountry(row.gpId);
         const gpName = getGPName(row.gpId);
@@ -391,8 +476,8 @@ function createPitstopTable() {
                 <span class="gp-full">${gpName}</span>
                 <span class="gp-short">${gpShort}</span>
             </td>
-            <td class="team-cell stats-clickable" data-team="${driver.team}">
-                <img src="${getTeamLogo(driver.team)}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
+            <td class="team-cell stats-clickable" data-team="${displayTeam}">
+                <img src="${getTeamLogo(displayTeam)}" alt="${displayTeam}" class="stats-team-logo" onerror="this.style.display='none'">
             </td>
             <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
                 <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
@@ -421,7 +506,6 @@ function createPitstopTable() {
             if (teamData) openTeamModal(teamData);
             return;
         }
-        // Обработчик клика по названию Гран-при
         const gpCell = e.target.closest('.gp-clickable');
         if (gpCell) {
             const gpId = gpCell.dataset.gpId;
@@ -466,6 +550,37 @@ function createPenaltiesTable() {
 
     const tbody = document.createElement('tbody');
 
+    // Функция для определения команды пилота
+    function getDriverTeam(driver) {
+        // Если пилот не резервный - возвращаем его команду
+        if (driver.team.toLowerCase() !== 'резерв' && driver.team.toLowerCase() !== 'reserve') {
+            return driver.team;
+        }
+        
+        // Для резервных пилотов ищем команду, которую они заменяли
+        if (typeof replacementQualiData !== 'undefined') {
+            for (const replacement of replacementQualiData) {
+                // Проверяем, является ли пилот заменяющим (driver2)
+                const replacedDriver = findDriverByName(replacement.driver2);
+                if (replacedDriver && replacedDriver.id === driver.id) {
+                    // Нашли замену, возвращаем команду основного пилота (driver1)
+                    const mainDriver = findDriverByName(replacement.driver1);
+                    if (mainDriver) {
+                        return mainDriver.team;
+                    }
+                }
+            }
+        }
+        
+        // Если не нашли в заменах, но у пилота есть резервные команды
+        if (driver.reserve && Array.isArray(driver.reserve) && driver.reserve.length > 0) {
+            return driver.reserve[0];
+        }
+        
+        // Если ничего не нашли, возвращаем "Резерв"
+        return driver.team;
+    }
+
     const sorted = [...penaltiesData]
         .filter(p => p.fines > 0)
         .sort((a, b) => b.fines - a.fines);
@@ -474,18 +589,19 @@ function createPenaltiesTable() {
         const driver = findDriverByName(row.driver);
         if (!driver) return;
 
-        const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
+        // Определяем команду для отображения
+        const displayTeam = getDriverTeam(driver);
         
-        let teamLogo = getTeamLogo(driver.team);
+        let teamLogo = getTeamLogo(displayTeam);
         
-        if (isReserve) {
+        if (!teamLogo || teamLogo === '') {
             teamLogo = 'Images/logo.png';
         }
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td class="team-cell ${isReserve ? 'reserve-team-cell' : 'stats-clickable'}" data-team="${driver.team}">
-                <img src="${teamLogo}" alt="${driver.team}" class="stats-team-logo" onerror="this.style.display='none'">
+            <td class="team-cell stats-clickable" data-team="${displayTeam}">
+                <img src="${teamLogo}" alt="${displayTeam}" class="stats-team-logo" onerror="this.style.display='none'">
             </td>
             <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
                 <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
