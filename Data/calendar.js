@@ -961,7 +961,7 @@ function openTrackModal(track, gp) {
                     <span class="tm-record">${lapRecordDisplay}</span>
                 </div>
                 <div class="tm-detail-row">
-                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга в квалификации:</span>
+                    <span class="tm-label"><img src="Images/Icon/tm-record.png" class="record-icon">Рекорд круга в квал.:</span>
                     <span class="tm-record">${qulRecordDisplay || 'Нет данных'}</span>
                 </div>
             </div>
