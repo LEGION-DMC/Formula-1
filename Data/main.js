@@ -521,7 +521,7 @@ function createWeatherBlock() {
     }
     
     block.innerHTML = `
-        <div class="main-block-title">Погода предстоящего ГП</div>
+        <div class="main-block-title">Погода предстоящего <span class="gp-full-text">Гран-При</span><span class="gp-short-text">ГП</span></div>
         <div class="weather-header">
             <img src="Images/Weather/${weatherData.type}.png" alt="${weatherData.typeName}" class="weather-icon-large" id="weatherIcon">
             <span class="weather-type" id="weatherTypeName">${weatherData.typeName}</span>
@@ -1069,7 +1069,7 @@ function createTyreBlock() {
     `;
     
     block.innerHTML = `
-        <div class="main-block-title">Состав шин предстоящего ГП</div>
+        <div class="main-block-title">Состав шин предстоящего <span class="gp-full-text">Гран-При</span><span class="gp-short-text">ГП</span></div>
         <div class="tyres-top">${topHTML}</div>
         <hr class="main-divider">
         <div class="tyres-bottom">${bottomHTML}</div>

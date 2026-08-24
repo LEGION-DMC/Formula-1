@@ -230,6 +230,14 @@ body {
     display: none;
 }
 
+.gp-full-text {
+    display: inline;
+}
+
+.gp-short-text {
+    display: none;
+}
+
 /* Погода */
 .weather-icon-large {
     width: 40px;
