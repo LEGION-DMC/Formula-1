@@ -676,8 +676,7 @@ body {
     display: flex;
     position: absolute;
     top: 5px; right: 6px;
-    padding-bottom: 3px;
-    width: 35px; height: 35px;
+    width: 30px; height: 30px;
     border-radius: 20%;
     background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--border-color);
@@ -822,8 +821,7 @@ body {
     display: flex;
     position: absolute;
     top: 5px; right: 6px;
-    padding-bottom: 3px;
-    width: 35px; height: 35px;
+    width: 30px; height: 30px;
     border-radius: 20%;
     background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--border-color);
@@ -854,7 +852,9 @@ body {
     padding: 10px 15px 15px;
 }
 
-.tm-track-info h2 { font-size: 1.2rem; }
+.tm-track-info .tm-header {
+    padding-top: 0px;
+}
 
 .tm-detail-row-inline {
     display: flex;
@@ -875,6 +875,10 @@ body {
 }
 
 .tm-stat-value { font-size: 1.2rem; }
+
+.tm-track-info .tm-divider {
+    display: block !important;    
+}
 
 /* ============================================== */
 /* ВКЛАДКА: РЕЗУЛЬТАТЫ                           */

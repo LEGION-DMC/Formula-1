@@ -3305,6 +3305,7 @@ h1, h2 {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding-top: 3px;
 }
 
 .tm-track-info .tm-header img {
@@ -3429,20 +3430,6 @@ h1, h2 {
 
 .tm-track-info .gp-year-suffix {
     font-size: 0.7rem;
-}
-
-.tm-track-info .tm-record-pilot-info {
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
-}
-
-.tm-track-info .tm-record-team-logo {
-    width: 17px !important;
-    height: 17px !important;
-    object-fit: contain;
-    display: inline-block;
-    vertical-align: middle;
 }
 
 .calendar-card.highlight {

@@ -633,23 +633,67 @@ function createLapRecordTable() {
                 const track = getTrackForGP(gp.id);
                 if (!track) return;
 
-                const recordParts = track.lapRecord.match(/\(([^,]+),/);
-                const driverNameFromRecord = recordParts ? recordParts[1].trim() : 'Неизвестно';
+                const lapRecord = track.lapRecord;
                 
-                const timeParts = track.lapRecord.match(/^([^\s(]+)/);
-                time = timeParts ? timeParts[1].trim() : track.lapRecord;
+                // Извлекаем время (до запятой)
+                const timeMatch = lapRecord.match(/^([^,]+)/);
+                time = timeMatch ? timeMatch[1].trim() : lapRecord;
                 
-                const teamParts = track.lapRecord.match(/,\s*([^,)]+)(?:,|\))/);
-                teamFromRecord = teamParts ? teamParts[1].trim() : '';
+                // Извлекаем пилота (после запятой до " - ")
+                let driverNameFromRecord = '';
+                const driverMatch = lapRecord.match(/,\s*([^-]+?)\s*-\s*/);
+                if (driverMatch) {
+                    driverNameFromRecord = driverMatch[1].trim();
+                } else {
+                    const fallbackMatch = lapRecord.match(/,\s*([^,]+?)(?:\s*-\s*|$)/);
+                    if (fallbackMatch) {
+                        driverNameFromRecord = fallbackMatch[1].trim();
+                    }
+                }
                 
-                const yearParts = track.lapRecord.match(/,\s*(\d{4})/);
-                recordYear = yearParts ? yearParts[1].trim() : '';
+                // Извлекаем команду (между " - " и " - " или в конце)
+                let teamMatch = lapRecord.match(/-\s*([^-]+?)(?:\s*-\s*|\s*$)/);
+                if (teamMatch && teamMatch[1]) {
+                    teamFromRecord = teamMatch[1].trim();
+                }
                 
-                const searchTerms = driverNameFromRecord.toLowerCase().split(/\s+/);
-                driver = driversData.find(d => {
-                    const driverNameLower = d.name.toLowerCase();
-                    return searchTerms.every(term => driverNameLower.includes(term));
-                });
+                // Извлекаем год (последние 4 цифры)
+                const yearMatch = lapRecord.match(/\b(\d{4})\b/);
+                recordYear = yearMatch ? yearMatch[1].trim() : '';
+                
+                // Если не удалось найти команду через дефисы, пробуем найти после запятой
+                if (!teamFromRecord || teamFromRecord === '') {
+                    const altTeamMatch = lapRecord.match(/,\s*[^-]+?\s*-\s*([^,]+?)(?:,|$)/);
+                    if (altTeamMatch) {
+                        teamFromRecord = altTeamMatch[1].trim();
+                    }
+                }
+                
+                // Поиск пилота по фамилии
+                if (driverNameFromRecord) {
+                    let lastName = driverNameFromRecord;
+                    
+                    if (driverNameFromRecord.includes('.')) {
+                        const parts = driverNameFromRecord.trim().split(/\s+/);
+                        if (parts.length >= 2) {
+                            lastName = parts[parts.length - 1];
+                        }
+                    }
+                    
+                    driver = driversData.find(d => {
+                        const driverNameLower = d.name.toLowerCase();
+                        const lastNameLower = lastName.toLowerCase();
+                        return driverNameLower.includes(lastNameLower);
+                    });
+                    
+                    if (!driver) {
+                        const searchTerms = driverNameFromRecord.toLowerCase().split(/\s+/);
+                        driver = driversData.find(d => {
+                            const driverNameLower = d.name.toLowerCase();
+                            return searchTerms.every(term => driverNameLower.includes(term));
+                        });
+                    }
+                }
                 
                 if (driver) {
                     driverNameForDisplay = driver.name;
@@ -657,7 +701,7 @@ function createLapRecordTable() {
                     driverCountry = driver.country;
                     hasDriverId = true;
                     isReserveDriver = (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve');
-                } else {
+                } else if (driverNameFromRecord) {
                     historicalDriver = findHistoricalDriverByName(driverNameFromRecord);
                     if (historicalDriver) {
                         driverNameForDisplay = historicalDriver.name;
@@ -695,19 +739,28 @@ function createLapRecordTable() {
             // Определяем логотип команды
             let teamLogo = getTeamLogo(teamName);
             
-            // Если это резервист — показываем нейтральный логотип
             if (isReserveDriver) {
                 teamLogo = 'Images/logo.png';
             }
             
-            // Если команда не найдена или пуста
             if (!teamName || teamName === 'Неизвестно' || teamName === '') {
                 teamLogo = 'Images/logo.png';
                 teamName = '—';
             }
 
-            const driverClickable = driver && hasDriverId ? `stats-driver-clickable" data-driver-id="${driver.id}` : '';
-            const teamClickable = (teamName && teamName !== 'Неизвестно' && teamName !== '' && teamName !== '—' && !isReserveDriver) ? `stats-clickable" data-team="${teamName}` : '';
+            // ===== ИСПРАВЛЕННОЕ ФОРМИРОВАНИЕ КЛАССОВ И АТРИБУТОВ =====
+            let driverClickable = '';
+            let teamClickableClass = '';
+            let teamClickableAttr = '';
+            
+            if (driver && hasDriverId) {
+                driverClickable = `stats-driver-clickable" data-driver-id="${driver.id}`;
+            }
+            
+            if (teamName && teamName !== 'Неизвестно' && teamName !== '' && teamName !== '—' && !isReserveDriver) {
+                teamClickableClass = 'stats-clickable';
+                teamClickableAttr = `data-team="${teamName}"`;
+            }
             
             let flagHtml = '';
             if (driver && hasDriverId) {
@@ -718,6 +771,7 @@ function createLapRecordTable() {
             
             const driverCellClass = `driver-cell ${driverClickable}`;
             const timeCellClass = `time-cell${isBrokenRecord ? ' best-time' : ''}`;
+            const teamCellClass = `team-cell ${teamClickableClass} ${isReserveDriver ? 'reserve-team-cell' : ''}`.trim();
             
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -727,7 +781,7 @@ function createLapRecordTable() {
                     <span class="gp-full">${gpName}</span>
                     <span class="gp-short">${gpShort}</span>
                 </td>
-                <td class="team-cell ${teamClickable} ${isReserveDriver ? 'reserve-team-cell' : ''}">
+                <td class="${teamCellClass}" ${teamClickableAttr}>
                     <div class="team-logo-wrapper">
                         <img src="${teamLogo}" alt="${teamName}" class="stats-team-logo" onerror="this.style.display='none'">
                         ${recordYear ? `<span class="team-year">(${recordYear})</span>` : ''}
