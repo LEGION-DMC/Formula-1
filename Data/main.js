@@ -117,6 +117,147 @@ function getWeatherLocation(nextGP, nextTrack) {
     return locationMap[nextGP.track] || '51.507,-0.128';
 }
 
+function getNextDriverBirthdays() {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const results = [];
+    
+    driversData.forEach(driver => {
+        // Парсим дату рождения (формат DD.MM.YYYY)
+        const parts = driver.birthDate.split('.');
+        if (parts.length !== 3) return;
+        
+        const day = parseInt(parts[0]);
+        const month = parseInt(parts[1]) - 1; // JS месяцы с 0
+        const year = parseInt(parts[2]);
+        
+        // Создаем дату рождения в текущем году
+        let birthThisYear = new Date(currentYear, month, day);
+        
+        // Если уже прошла в этом году - берем следующий год
+        if (birthThisYear < now) {
+            birthThisYear = new Date(currentYear + 1, month, day);
+        }
+        
+        const diff = birthThisYear - now;
+        results.push({
+            driver: driver,
+            date: birthThisYear,
+            diff: diff,
+            day: day,
+            month: month
+        });
+    });
+    
+    // Сортируем по дате (ближайшие сначала)
+    results.sort((a, b) => a.diff - b.diff);
+    
+    // Находим ближайшую уникальную дату
+    if (results.length === 0) return [];
+    
+    const nearestDate = results[0].date;
+    const nearestDateStr = nearestDate.toDateString();
+    
+    // Собираем всех пилотов у которых день рождения в эту дату
+    return results.filter(item => item.date.toDateString() === nearestDateStr);
+}
+
+function createBirthdayBlock() {
+    const block = document.createElement('div');
+    block.className = 'main-block birthday-block';
+    
+    const birthdayList = getNextDriverBirthdays();
+    
+    if (!birthdayList || birthdayList.length === 0) {
+        block.innerHTML = `
+            <div class="main-block-title">День рождения пилота</div>
+            <div class="birthday-empty">Нет данных</div>
+        `;
+        return block;
+    }
+    
+    const now = new Date();
+    const firstDate = birthdayList[0].date;
+    
+    // Форматируем дату
+    const day = String(firstDate.getDate()).padStart(2, '0');
+    const month = String(firstDate.getMonth() + 1).padStart(2, '0');
+    const year = firstDate.getFullYear();
+    const dateStr = `${day}.${month}.${year}`;
+    
+    // Дни до дня рождения
+    const diffDays = Math.ceil((firstDate - now) / (1000 * 60 * 60 * 24));
+    let daysText = '';
+    if (diffDays === 0) {
+        daysText = 'СЕГОДНЯ!';
+    } else if (diffDays === 1) {
+        daysText = 'Завтра!';
+    } else {
+        daysText = `Через ${diffDays} дн.`;
+    }
+    
+    // Собираем информацию о пилотах
+    let driversHTML = '';
+    birthdayList.forEach((item, index) => {
+        const driver = item.driver;
+        const ageNow = calculateAge(driver.birthDate);
+        const ageNext = ageNow + 1;
+        
+        driversHTML += `
+            <div class="birthday-driver-item" data-driver-id="${driver.id}">
+                <div class="birthday-driver-info">
+                    <span class="birthday-number">${driver.number}</span>
+                    <div class="birthday-name">
+                        <img src="Images/Flags/${driver.country}.svg" class="birthday-flag" onerror="this.style.display='none'">
+                        <span>${driver.name}</span>
+                    </div>
+                    <span class="birthday-age-small">${ageNext} лет</span>
+                </div>
+            </div>
+        `;
+    });
+    
+    block.innerHTML = `
+        <div class="main-block-title">День рождения пилота</div>
+        <div class="birthday-content">
+            <div class="birthday-date-row">
+                <span class="birthday-date">${dateStr}</span>
+                <span class="birthday-days">${daysText}</span>
+            </div>
+            <div class="birthday-drivers-list">
+                ${driversHTML}
+            </div>
+        </div>
+    `;
+    
+    // Клик по блоку - открываем модалку первого пилота (или можно сделать список)
+    block.addEventListener('click', () => {
+        if (birthdayList.length === 1) {
+            if (typeof openDriverModal === 'function') {
+                openDriverModal(birthdayList[0].driver);
+            }
+        } else {
+            // Если несколько пилотов - открываем модалку первого, 
+            // или можно сделать выпадающий список
+            if (typeof openDriverModal === 'function') {
+                openDriverModal(birthdayList[0].driver);
+            }
+        }
+    });
+    
+    // Обработчики для каждого пилота (чтобы открывалась его модалка)
+    block.querySelectorAll('.birthday-driver-item').forEach((item, index) => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (typeof openDriverModal === 'function') {
+                openDriverModal(birthdayList[index].driver);
+            }
+        });
+    });
+    
+    return block;
+}
+
 async function initMainPage(container) {
     'use strict';
     
@@ -137,7 +278,7 @@ async function initMainPage(container) {
     const blocks = document.createElement('div');
     blocks.className = 'main-blocks';
     
-    // ИЗМЕНЕНО: Статистика теперь первая (слева)
+    // Первый ряд
     blocks.appendChild(createStatsBlock());
     
     const centerColumn = document.createElement('div');
@@ -148,8 +289,25 @@ async function initMainPage(container) {
     
     blocks.appendChild(createWeatherBlock());
     blocks.appendChild(createTyreBlock());
-	
+    
     container.appendChild(blocks);
+    
+    // ===== ВТОРОЙ РЯД =====
+    const secondRow = document.createElement('div');
+    secondRow.className = 'main-second-row';
+    
+    // Разделитель
+    const divider = document.createElement('hr');
+    divider.className = 'main-row-divider';
+    container.appendChild(divider);
+    
+    // Блок дня рождения
+    secondRow.appendChild(createBirthdayBlock());
+    
+    // Здесь можно добавить другие блоки во второй ряд
+    // secondRow.appendChild(createAnotherBlock());
+    
+    container.appendChild(secondRow);
     
     startMainTimer();
     await loadWeatherForNextGP();
