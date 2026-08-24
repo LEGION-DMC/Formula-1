@@ -230,22 +230,7 @@ function createBirthdayBlock() {
         </div>
     `;
     
-    // Клик по блоку - открываем модалку первого пилота (или можно сделать список)
-    block.addEventListener('click', () => {
-        if (birthdayList.length === 1) {
-            if (typeof openDriverModal === 'function') {
-                openDriverModal(birthdayList[0].driver);
-            }
-        } else {
-            // Если несколько пилотов - открываем модалку первого, 
-            // или можно сделать выпадающий список
-            if (typeof openDriverModal === 'function') {
-                openDriverModal(birthdayList[0].driver);
-            }
-        }
-    });
-    
-    // Обработчики для каждого пилота (чтобы открывалась его модалка)
+    // Обработчики для каждого пилота — открываем его модалку
     block.querySelectorAll('.birthday-driver-item').forEach((item, index) => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
