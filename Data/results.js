@@ -1,4 +1,4 @@
-const detailedResults = {
+const detailedResults = { 
     "australia": {
         "russell": 25,
         "antonelli": 18,
@@ -212,6 +212,7 @@ const detailedResults = {
         "ocon": "dnf",
         "bottas": "dnf",
         "albon": "dnf",
+		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
     "italy": {
         "000": 25,
@@ -393,6 +394,7 @@ const detailedSprintResults = {
         "hamilton": 2,
         "gasly": 1,
         "hulkenberg": "dnf",
+		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
     "singapore": {
         "000": 8,
@@ -435,9 +437,78 @@ function calculateConstructorStandings() {
         });
     }
     
-    combinedStandings.forEach(e => {
-        const d = findDriverById(e.driver);
-        if (d && teams[d.team]) teams[d.team].points += e.points;
+    // Проходим по всем ГП
+    Object.keys(detailedResults).forEach(gpId => {
+        const gpResults = detailedResults[gpId];
+        if (!gpResults) return;
+        
+        Object.entries(gpResults).forEach(([driverId, data]) => {
+            if (driverId === "000") return;
+            
+            // Получаем очки пилота в этом ГП
+            const points = getDriverResultValue(gpResults, driverId);
+            if (typeof points !== 'number') return;
+            
+            // Определяем команду для этого пилота в этом ГП
+            const driver = findDriverById(driverId);
+            let teamName = null;
+            
+            // Проверяем, есть ли специальное указание команды в результатах
+            const gpTeam = getDriverResultTeam(gpResults, driverId, null);
+            if (gpTeam) {
+                teamName = gpTeam;
+            } else if (driver) {
+                // Если пилот резервист, но у него нет указания команды - пропускаем
+                if (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve') {
+                    return;
+                }
+                teamName = driver.team;
+            } else {
+                return;
+            }
+            
+            // Добавляем очки команде
+            if (teams[teamName]) {
+                teams[teamName].points += points;
+            }
+        });
+    });
+    
+    // Добавляем очки спринтов
+    Object.keys(detailedSprintResults).forEach(gpId => {
+        const spResults = detailedSprintResults[gpId];
+        if (!spResults) return;
+        
+        Object.entries(spResults).forEach(([driverId, data]) => {
+            if (driverId === "000") return;
+            
+            // Получаем очки пилота в этом спринте
+            const points = getDriverResultValue(spResults, driverId);
+            if (typeof points !== 'number') return;
+            
+            // Определяем команду для этого пилота в этом спринте
+            const driver = findDriverById(driverId);
+            let teamName = null;
+            
+            // Проверяем, есть ли специальное указание команды в результатах
+            const gpTeam = getDriverResultTeam(spResults, driverId, null);
+            if (gpTeam) {
+                teamName = gpTeam;
+            } else if (driver) {
+                // Если пилот резервист, но у него нет указания команды - пропускаем
+                if (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve') {
+                    return;
+                }
+                teamName = driver.team;
+            } else {
+                return;
+            }
+            
+            // Добавляем очки команде
+            if (teams[teamName]) {
+                teams[teamName].points += points;
+            }
+        });
     });
     
     // Применяем штрафы/бонусы
@@ -459,52 +530,55 @@ function getTeamPosition(teamName) {
 function calculateDriverStandings() {
     const pointsMap = {};
     
+    // Добавляем ВСЕХ пилотов с 0 очков
     driversData.forEach(driver => {
         if (driver.team.toLowerCase() === 'резерв') return;
         pointsMap[driver.id] = 0;
     });
     
+    // Добавляем резервистов, у которых есть результаты в гонках
     Object.values(detailedResults).forEach(gpResults => {
-        Object.entries(gpResults).forEach(([driverId, points]) => {
+        Object.entries(gpResults).forEach(([driverId, data]) => {
             if (driverId === "000") return;
-            // Проверяем, что points - это число, а не статус (dnf, dns, dsq)
-            if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+            const points = getDriverResultValue(gpResults, driverId);
+            // Если пилота нет в pointsMap (резервист), добавляем его
+            if (!pointsMap.hasOwnProperty(driverId)) {
+                pointsMap[driverId] = 0;
+            }
+            if (typeof points === 'number') {
                 pointsMap[driverId] += points;
             }
         });
     });
     
     driverStandings.length = 0;
-    Object.entries(pointsMap).forEach(([id, pts]) => driverStandings.push({ driver: id, points: pts }));
-    
-    // СОРТИРОВКА: сначала по очкам, затем по позиции команды в КК
-    driverStandings.sort((a, b) => {
-        if (b.points !== a.points) return b.points - a.points;
-        
-        const driverA = findDriverById(a.driver);
-        const driverB = findDriverById(b.driver);
-        if (!driverA || !driverB) return 0;
-        
-        const teamPosA = getTeamPosition(driverA.team);
-        const teamPosB = getTeamPosition(driverB.team);
-        return teamPosA - teamPosB;
+    Object.entries(pointsMap).forEach(([id, pts]) => {
+        driverStandings.push({ driver: id, points: pts });
     });
+    
+    // Используем новую функцию сортировки
+    driverStandings.sort(compareDrivers);
 }
 
 function calculateCombinedStandings() {
     const pointsMap = {};
     
+    // Добавляем ВСЕХ пилотов с 0 очков
     driversData.forEach(driver => {
         if (driver.team.toLowerCase() === 'резерв') return;
         pointsMap[driver.id] = 0;
     });
     
-    // Суммируем очки гонок
+    // Добавляем резервистов, у которых есть результаты в гонках
     Object.values(detailedResults).forEach(gpResults => {
-        Object.entries(gpResults).forEach(([driverId, points]) => {
+        Object.entries(gpResults).forEach(([driverId, data]) => {
             if (driverId === "000") return;
-            // Проверяем, что points - это число, а не статус (dnf, dns, dsq)
-            if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+            const points = getDriverResultValue(gpResults, driverId);
+            // Если пилота нет в pointsMap (резервист), добавляем его
+            if (!pointsMap.hasOwnProperty(driverId)) {
+                pointsMap[driverId] = 0;
+            }
+            if (typeof points === 'number') {
                 pointsMap[driverId] += points;
             }
         });
@@ -512,65 +586,59 @@ function calculateCombinedStandings() {
     
     // Добавляем очки спринтов
     Object.values(detailedSprintResults).forEach(spResults => {
-        Object.entries(spResults).forEach(([driverId, points]) => {
+        Object.entries(spResults).forEach(([driverId, data]) => {
             if (driverId === "000") return;
-            // Проверяем, что points - это число, а не статус (dnf, dns, dsq)
-            if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+            const points = getDriverResultValue(spResults, driverId);
+            // Если пилота нет в pointsMap (резервист), добавляем его
+            if (!pointsMap.hasOwnProperty(driverId)) {
+                pointsMap[driverId] = 0;
+            }
+            if (typeof points === 'number') {
                 pointsMap[driverId] += points;
             }
         });
     });
     
     combinedStandings.length = 0;
-    Object.entries(pointsMap).forEach(([id, pts]) => combinedStandings.push({ driver: id, points: pts }));
-    
-    // ТА ЖЕ СОРТИРОВКА: сначала по очкам, затем по позиции команды в КК
-    combinedStandings.sort((a, b) => {
-        if (b.points !== a.points) return b.points - a.points;
-        
-        const driverA = findDriverById(a.driver);
-        const driverB = findDriverById(b.driver);
-        if (!driverA || !driverB) return 0;
-        
-        const teamPosA = getTeamPosition(driverA.team);
-        const teamPosB = getTeamPosition(driverB.team);
-        return teamPosA - teamPosB;
+    Object.entries(pointsMap).forEach(([id, pts]) => {
+        combinedStandings.push({ driver: id, points: pts });
     });
+    
+    // Используем новую функцию сортировки
+    combinedStandings.sort(compareDrivers);
 }
 
 function calculateSprintStandings() {
     const pointsMap = {};
     
+    // Добавляем ВСЕХ пилотов с 0 очков
     driversData.forEach(driver => {
         if (driver.team.toLowerCase() === 'резерв') return;
         pointsMap[driver.id] = 0;
     });
     
+    // Добавляем резервистов, у которых есть результаты в спринтах
     Object.values(detailedSprintResults).forEach(spResults => {
-        Object.entries(spResults).forEach(([driverId, points]) => {
+        Object.entries(spResults).forEach(([driverId, data]) => {
             if (driverId === "000") return;
-            // Проверяем, что points - это число, а не статус (dnf, dns, dsq)
-            if (pointsMap.hasOwnProperty(driverId) && typeof points === 'number') {
+            const points = getDriverResultValue(spResults, driverId);
+            // Если пилота нет в pointsMap (резервист), добавляем его
+            if (!pointsMap.hasOwnProperty(driverId)) {
+                pointsMap[driverId] = 0;
+            }
+            if (typeof points === 'number') {
                 pointsMap[driverId] += points;
             }
         });
     });
     
     sprintStandings.length = 0;
-    Object.entries(pointsMap).forEach(([id, pts]) => sprintStandings.push({ driver: id, points: pts }));
-    
-    // ТА ЖЕ СОРТИРОВКА для спринтов
-    sprintStandings.sort((a, b) => {
-        if (b.points !== a.points) return b.points - a.points;
-        
-        const driverA = findDriverById(a.driver);
-        const driverB = findDriverById(b.driver);
-        if (!driverA || !driverB) return 0;
-        
-        const teamPosA = getTeamPosition(driverA.team);
-        const teamPosB = getTeamPosition(driverB.team);
-        return teamPosA - teamPosB;
+    Object.entries(pointsMap).forEach(([id, pts]) => {
+        sprintStandings.push({ driver: id, points: pts });
     });
+    
+    // Используем новую функцию сортировки
+    sprintStandings.sort(compareDrivers);
 }
 
 calculateDriverStandings();
@@ -889,16 +957,17 @@ function createSimpleTable(data, startIndex, filterTeam, isSprint = false) {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
         const pos = startIndex + i + 1;
-        const dimmed = filterTeam && driver.team !== filterTeam;
+        
+        // Определяем команду для отображения
+        const displayTeam = getDisplayTeamForDriver(driver, isSprint);
+        
+        const dimmed = filterTeam && displayTeam !== filterTeam;
         
         const tr = document.createElement('tr');
         if (dimmed) tr.className = 'filtered-out';
         
         if (!isSprint) {
-            // Для основной таблицы: entry.points уже содержит сумму (гонки + спринты)
             const totalPoints = entry.points;
-            
-            // Находим очки только за гонки для отображения при наведении
             const raceEntry = driverStandings.find(s => s.driver === entry.driver);
             const racePoints = raceEntry ? raceEntry.points : 0;
             const sprintPoints = totalPoints - racePoints;
@@ -906,7 +975,7 @@ function createSimpleTable(data, startIndex, filterTeam, isSprint = false) {
             tr.innerHTML = `
                 <td class="results-pos">${pos}</td>
                 <td class="results-driver results-driver-clickable" data-driver-id="${driver.id}">
-                    <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                    <img src="${getTeamLogo(displayTeam)}" class="results-team-logo" onerror="this.style.display='none'">
                     <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
                 </td>
                 <td class="results-points">${totalPoints}</td>`;
@@ -929,11 +998,10 @@ function createSimpleTable(data, startIndex, filterTeam, isSprint = false) {
                 });
             }
         } else {
-            // Для спринта — обычное отображение
             tr.innerHTML = `
                 <td class="results-pos">${pos}</td>
                 <td class="results-driver results-driver-clickable" data-driver-id="${driver.id}">
-                    <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                    <img src="${getTeamLogo(displayTeam)}" class="results-team-logo" onerror="this.style.display='none'">
                     <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
                 </td>
                 <td class="results-points">${entry.points}</td>`;
@@ -948,15 +1016,15 @@ function createSimpleTable(data, startIndex, filterTeam, isSprint = false) {
 
 function renderDriverStandings(container, filterTeam) {
     const wrapper = document.createElement('div');
-    wrapper.className = 'results-section-block'; // Добавляем класс плашки
+    wrapper.className = 'results-section-block';
     wrapper.innerHTML = `
         <div class="results-header-row">
             <h3 class="results-table-title">Личный зачёт</h3>
             <button class="results-detail-btn" data-table="drivers">Подробнее</button>
         </div>`;
     
-    // Используем combinedStandings для правильной сортировки по сумме очков
-    const sorted = [...combinedStandings].sort((a, b) => b.points - a.points);
+    // Используем combinedStandings (уже отсортированы)
+    const sorted = [...combinedStandings];
     const half = Math.ceil(sorted.length / 2);
     const cols = document.createElement('div');
     cols.className = 'results-columns';
@@ -968,19 +1036,20 @@ function renderDriverStandings(container, filterTeam) {
 
 function renderSprintStandings(container, filterTeam) {
     const wrapper = document.createElement('div');
-    wrapper.className = 'results-section-block'; // Добавляем класс плашки
+    wrapper.className = 'results-section-block';
     wrapper.innerHTML = `
         <div class="results-header-row">
             <h3 class="results-table-title">Спринтерский зачёт</h3>
             <button class="results-detail-btn" data-table="sprint">Подробнее</button>
         </div>`;
     
-    const sorted = [...sprintStandings].sort((a, b) => b.points - a.points);
+    // Используем sprintStandings (уже отсортированы)
+    const sorted = [...sprintStandings];
     const half = Math.ceil(sorted.length / 2);
     const cols = document.createElement('div');
     cols.className = 'results-columns';
-    cols.appendChild(createSimpleTable(sorted.slice(0, half), 0, filterTeam, true)); 
-    cols.appendChild(createSimpleTable(sorted.slice(half), half, filterTeam, true)); 
+    cols.appendChild(createSimpleTable(sorted.slice(0, half), 0, filterTeam, true));
+    cols.appendChild(createSimpleTable(sorted.slice(half), half, filterTeam, true));
     wrapper.appendChild(cols);
     container.appendChild(wrapper);
 }
@@ -999,7 +1068,8 @@ function renderDriverDetailedTable(container, filterTeam) {
     wrapper.appendChild(headerRow);
     
     const allGPs = getAllGPs();
-    const sorted = [...combinedStandings].sort((a, b) => b.points - a.points);
+    // Используем combinedStandings (уже отсортированы)
+    const sorted = [...combinedStandings];
     
     const tableContainer = document.createElement('div');
     tableContainer.className = 'detailed-table-container';
@@ -1013,11 +1083,15 @@ function renderDriverDetailedTable(container, filterTeam) {
     sorted.forEach((entry, i) => {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
-        const dimmed = filterTeam && driver.team !== filterTeam;
+        
+        // Используем функцию для определения команды
+        const displayTeam = getDisplayTeamForDriver(driver, false);
+        
+        const dimmed = filterTeam && displayTeam !== filterTeam;
         fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">
             <div class="detailed-cell fixed-col-pos">${i + 1}</div>
             <div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
-                <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                <img src="${getTeamLogo(displayTeam)}" class="results-team-logo" onerror="this.style.display='none'">
                 <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
                 <span class="driver-fullname">${driver.name}</span>
                 <span class="driver-shortname">${driver.namem}</span>
@@ -1041,14 +1115,19 @@ function renderDriverDetailedTable(container, filterTeam) {
     sorted.forEach((entry, i) => {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
-        const dimmed = filterTeam && driver.team !== filterTeam;
+        
+        // Используем функцию для определения команды
+        const displayTeam = getDisplayTeamForDriver(driver, false);
+        const dimmed = filterTeam && displayTeam !== filterTeam;
         
         scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">`;
         
         let total = 0;
         allGPs.forEach((gpId, colIndex) => {
             const results = detailedResults[gpId] || {};
-            const value = results[entry.driver];
+            const value = getDriverResultValue(results, entry.driver);
+            const gpTeam = getDriverResultTeam(results, entry.driver, displayTeam);
+            
             const isDNF = value === 'dnf';
             const isDNS = value === 'dns';
             const isDSQ = value === 'dsq';
@@ -1056,10 +1135,17 @@ function renderDriverDetailedTable(container, filterTeam) {
             total += pts;
             const noResults = !hasRealResults(gpId, false);
             
-            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf" data-col="${colIndex}">DNF</div>`;
-            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns" data-col="${colIndex}">DNS</div>`;
-            else if (isDSQ) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dsq" data-col="${colIndex}">DSQ</div>`;
-            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">${pts > 0 ? pts : '-'}</div>`;
+            const isDifferentTeam = gpTeam && gpTeam !== displayTeam;
+            
+            let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
+            if (isDifferentTeam) {
+                cellClass += ' different-team';
+            }
+            
+            if (isDNF) scrollHTML += `<div class="${cellClass} dnf" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="${cellClass} dns" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNS</div>`;
+            else if (isDSQ) scrollHTML += `<div class="${cellClass} dsq" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DSQ</div>`;
+            else scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">${pts > 0 ? pts : '-'}</div>`;
         });
         
         const sprintEntry = sprintStandings.find(s => s.driver === entry.driver);
@@ -1074,26 +1160,26 @@ function renderDriverDetailedTable(container, filterTeam) {
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
 
-	// ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ (второе, под статусами)
-	const pointsNote = document.createElement('div');
-	pointsNote.className = 'results-points-note';
-	pointsNote.innerHTML = `
-		<span class="points-note-icon">🛈 </span>
-		<span class="points-note-text">Система начисления очков: <span>1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span></span>
-	`;
-	wrapper.appendChild(pointsNote);
-	
-    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ (первое)
-	const statusNote = document.createElement('div');
-	statusNote.className = 'results-points-note2';
-	statusNote.innerHTML = `
-		<span class="points-note-icon2">🛈</span>
-		<span class="points-note-text2">
-			<span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
-			<span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
-			<span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
-		</span>
-	`;
+    // ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ
+    const pointsNote = document.createElement('div');
+    pointsNote.className = 'results-points-note';
+    pointsNote.innerHTML = `
+        <span class="points-note-icon">🛈 </span>
+        <span class="points-note-text">Система начисления очков: <span>1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span></span>
+    `;
+    wrapper.appendChild(pointsNote);
+    
+    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ
+    const statusNote = document.createElement('div');
+    statusNote.className = 'results-points-note2';
+    statusNote.innerHTML = `
+        <span class="points-note-icon2">🛈</span>
+        <span class="points-note-text2">
+            <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
+            <span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
+            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+        </span>
+    `;
     wrapper.appendChild(statusNote);
 
     container.appendChild(wrapper);
@@ -1116,7 +1202,8 @@ function renderSprintDetailedTable(container, filterTeam) {
     wrapper.appendChild(headerRow);
     
     const allSPs = getAllSprintGPs();
-    const sorted = [...sprintStandings].sort((a, b) => b.points - a.points);
+    // Используем sprintStandings (уже отсортированы)
+    const sorted = [...sprintStandings];
     
     const tableContainer = document.createElement('div');
     tableContainer.className = 'detailed-table-container';
@@ -1130,11 +1217,15 @@ function renderSprintDetailedTable(container, filterTeam) {
     sorted.forEach((entry, i) => {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
-        const dimmed = filterTeam && driver.team !== filterTeam;
+        
+        // Используем функцию для определения команды (для спринтов)
+        const displayTeam = getDisplayTeamForDriver(driver, true);
+        
+        const dimmed = filterTeam && displayTeam !== filterTeam;
         fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">
             <div class="detailed-cell fixed-col-pos">${i + 1}</div>
             <div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
-                <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
+                <img src="${getTeamLogo(displayTeam)}" class="results-team-logo" onerror="this.style.display='none'">
                 <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
                 <span class="driver-fullname">${driver.name}</span>
                 <span class="driver-shortname">${driver.namem}</span>
@@ -1158,14 +1249,26 @@ function renderSprintDetailedTable(container, filterTeam) {
     sorted.forEach((entry, i) => {
         const driver = findDriverById(entry.driver);
         if (!driver) return;
-        const dimmed = filterTeam && driver.team !== filterTeam;
+        
+        // Используем функцию для определения команды (для спринтов)
+        const displayTeam = getDisplayTeamForDriver(driver, true);
+        const dimmed = filterTeam && displayTeam !== filterTeam;
         
         scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">`;
         
         let total = 0;
         allSPs.forEach((gpId, colIndex) => {
             const results = detailedSprintResults[gpId] || {};
-            const value = results[entry.driver];
+            const value = getDriverResultValue(results, entry.driver);
+            const gpTeam = getDriverResultTeam(results, entry.driver, displayTeam);
+            
+            // Если пилота нет в результатах спринта - показываем "-"
+            if (value === undefined || value === null || value === "") {
+                const noResults = !hasRealResults(gpId, true);
+                scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">-</div>`;
+                return;
+            }
+            
             const isDNF = value === 'dnf';
             const isDNS = value === 'dns';
             const isDSQ = value === 'dsq';
@@ -1173,10 +1276,17 @@ function renderSprintDetailedTable(container, filterTeam) {
             total += pts;
             const noResults = !hasRealResults(gpId, true);
             
-            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf" data-col="${colIndex}">DNF</div>`;
-            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns" data-col="${colIndex}">DNS</div>`;
-            else if (isDSQ) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dsq" data-col="${colIndex}">DSQ</div>`;
-            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">${pts > 0 ? pts : '-'}</div>`;
+            const isDifferentTeam = gpTeam && gpTeam !== displayTeam;
+            
+            let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
+            if (isDifferentTeam) {
+                cellClass += ' different-team';
+            }
+            
+            if (isDNF) scrollHTML += `<div class="${cellClass} dnf" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="${cellClass} dns" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNS</div>`;
+            else if (isDSQ) scrollHTML += `<div class="${cellClass} dsq" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DSQ</div>`;
+            else scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">${pts > 0 ? pts : '0'}</div>`;
         });
         
         scrollHTML += `<div class="detailed-cell sum-col" data-col="sum">${total}</div></div>`;
@@ -1187,26 +1297,26 @@ function renderSprintDetailedTable(container, filterTeam) {
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
     
-	// ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ (второе, под статусами)
-	const pointsNote = document.createElement('div');
-	pointsNote.className = 'results-points-note';
-	pointsNote.innerHTML = `
-		<span class="points-note-icon">🛈 </span>
-		<span class="points-note-text">Система начисления очков: <span>1:8 • 2:7 • 3:6 • 4:5 • 5:4 • 6:3 • 7:2 • 8:1</span></span>
-	`;
-	wrapper.appendChild(pointsNote);
-	
-    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ (первое)
-	const statusNote = document.createElement('div');
-	statusNote.className = 'results-points-note2';
-	statusNote.innerHTML = `
-		<span class="points-note-icon2">🛈</span>
-		<span class="points-note-text2">
-			<span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
-			<span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
-			<span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
-		</span>
-	`;
+    // ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ
+    const pointsNote = document.createElement('div');
+    pointsNote.className = 'results-points-note';
+    pointsNote.innerHTML = `
+        <span class="points-note-icon">🛈 </span>
+        <span class="points-note-text">Система начисления очков: <span>1:8 • 2:7 • 3:6 • 4:5 • 5:4 • 6:3 • 7:2 • 8:1</span></span>
+    `;
+    wrapper.appendChild(pointsNote);
+    
+    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ
+    const statusNote = document.createElement('div');
+    statusNote.className = 'results-points-note2';
+    statusNote.innerHTML = `
+        <span class="points-note-icon2">🛈</span>
+        <span class="points-note-text2">
+            <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
+            <span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
+            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+        </span>
+    `;
     wrapper.appendChild(statusNote);
     
     container.appendChild(wrapper);
@@ -1484,4 +1594,201 @@ function createConstructorRow(team, pos, filterTeam) {
         <span class="constructor-name">${team.team}</span>
         <span class="constructor-points">${team.points}</span>`;
     return row;
+}
+
+function getDriverResultValue(results, driverId) {
+    const value = results[driverId];
+    // Если это объект с полем points
+    if (value && typeof value === 'object' && value.points !== undefined) {
+        return value.points;
+    }
+    return value;
+}
+
+function getDriverResultTeam(results, driverId, defaultTeam) {
+    const value = results[driverId];
+    // Если это объект с полем team
+    if (value && typeof value === 'object' && value.team) {
+        return value.team;
+    }
+    return defaultTeam;
+}
+
+function getDriverTeamForGP(driverId, gpId, isSprint = false) {
+    const results = isSprint ? detailedSprintResults[gpId] : detailedResults[gpId];
+    if (!results) return null;
+    
+    const driver = findDriverById(driverId);
+    const defaultTeam = driver ? driver.team : null;
+    
+    return getDriverResultTeam(results, driverId, defaultTeam);
+}
+
+function getDisplayTeamForDriver(driver, isSprint = false) {
+    // Если пилот не резервист - возвращаем его команду
+    if (driver.team.toLowerCase() !== 'резерв' && driver.team.toLowerCase() !== 'reserve') {
+        return driver.team;
+    }
+    
+    // Для резервистов ищем команду в результатах
+    const results = isSprint ? detailedSprintResults : detailedResults;
+    const allGPs = isSprint ? getAllSprintGPs() : getAllGPs();
+    
+    // Сначала проверяем специальные указания в данных
+    for (const gpId of allGPs) {
+        const gpResults = results[gpId];
+        if (gpResults) {
+            const gpTeam = getDriverResultTeam(gpResults, driver.id, null);
+            if (gpTeam) {
+                return gpTeam;
+            }
+        }
+    }
+    
+    // Если ничего не нашли, возвращаем "Резерв"
+    return 'Резерв';
+}
+
+function getDriverPointsForGP(driverId, gpId, isSprint = false) {
+    const results = isSprint ? detailedSprintResults[gpId] : detailedResults[gpId];
+    if (!results) return undefined;
+    
+    return getDriverResultValue(results, driverId);
+}
+
+function hasRealResults(gpId, isSprint = false) {
+    const results = isSprint ? detailedSprintResults[gpId] : detailedResults[gpId];
+    if (!results) return false;
+    return Object.keys(results).some(key => {
+        if (key === "000") return false;
+        const value = results[key];
+        // Проверяем, что значение существует и не является пустым
+        if (value === undefined || value === null || value === "") return false;
+        // Если это объект с points, проверяем что points не undefined
+        if (typeof value === 'object' && value.points !== undefined) return true;
+        return true;
+    });
+}
+
+function getAllDriversWithResults(isSprint = false) {
+    const results = isSprint ? detailedSprintResults : detailedResults;
+    const driversSet = new Set();
+    
+    // Добавляем всех пилотов из driversData
+    driversData.forEach(driver => {
+        if (driver.team.toLowerCase() !== 'резерв' && driver.team.toLowerCase() !== 'reserve') {
+            driversSet.add(driver.id);
+        }
+    });
+    
+    // Добавляем резервистов, у которых есть результаты
+    Object.values(results).forEach(gpResults => {
+        Object.keys(gpResults).forEach(key => {
+            if (key !== "000") {
+                driversSet.add(key);
+            }
+        });
+    });
+    
+    return Array.from(driversSet);
+}
+
+function getDriverResultValue(results, driverId) {
+    const value = results[driverId];
+    // Если это объект с полем points
+    if (value && typeof value === 'object' && value.points !== undefined) {
+        return value.points;
+    }
+    return value;
+}
+
+function getDriverResultTeam(results, driverId, defaultTeam) {
+    const value = results[driverId];
+    // Если это объект с полем team
+    if (value && typeof value === 'object' && value.team) {
+        return value.team;
+    }
+    return defaultTeam;
+}
+
+function getDisplayTeamForDriver(driver, isSprint = false) {
+    // Если пилот не резервист - возвращаем его команду
+    if (driver.team.toLowerCase() !== 'резерв' && driver.team.toLowerCase() !== 'reserve') {
+        return driver.team;
+    }
+    
+    // Для резервистов ищем команду в результатах
+    const results = isSprint ? detailedSprintResults : detailedResults;
+    const allGPs = isSprint ? getAllSprintGPs() : getAllGPs();
+    
+    // Сначала проверяем специальные указания в данных
+    for (const gpId of allGPs) {
+        const gpResults = results[gpId];
+        if (gpResults) {
+            const gpTeam = getDriverResultTeam(gpResults, driver.id, null);
+            if (gpTeam) {
+                return gpTeam;
+            }
+        }
+    }
+    
+    // Если ничего не нашли, возвращаем "Резерв"
+    return 'Резерв';
+}
+
+function getDriverTeamForGP(driverId, gpId, isSprint = false) {
+    const results = isSprint ? detailedSprintResults[gpId] : detailedResults[gpId];
+    if (!results) return null;
+    
+    const driver = findDriverById(driverId);
+    const defaultTeam = driver ? driver.team : null;
+    
+    return getDriverResultTeam(results, driverId, defaultTeam);
+}
+
+function getDriverPointsForGP(driverId, gpId, isSprint = false) {
+    const results = isSprint ? detailedSprintResults[gpId] : detailedResults[gpId];
+    if (!results) return undefined;
+    
+    return getDriverResultValue(results, driverId);
+}
+
+function hasRealResults(gpId, isSprint = false) {
+    const results = isSprint ? detailedSprintResults[gpId] : detailedResults[gpId];
+    if (!results) return false;
+    return Object.keys(results).some(key => {
+        if (key === "000") return false;
+        const value = results[key];
+        // Проверяем, что значение существует и не является пустым
+        if (value === undefined || value === null || value === "") return false;
+        // Если это объект с points, проверяем что points не undefined
+        if (typeof value === 'object' && value.points !== undefined) return true;
+        return true;
+    });
+}
+
+function compareDrivers(a, b) {
+    // Сначала сравниваем по очкам (по убыванию)
+    if (b.points !== a.points) {
+        return b.points - a.points;
+    }
+    
+    // Если очки равны, сортируем по позиции команды в Кубке конструкторов
+    const driverA = findDriverById(a.driver);
+    const driverB = findDriverById(b.driver);
+    if (!driverA || !driverB) return 0;
+    
+    // Получаем команду для отображения (учитываем резервистов)
+    const teamA = getDisplayTeamForDriver(driverA, false);
+    const teamB = getDisplayTeamForDriver(driverB, false);
+    
+    const teamPosA = getTeamPosition(teamA);
+    const teamPosB = getTeamPosition(teamB);
+    
+    if (teamPosA !== teamPosB) {
+        return teamPosA - teamPosB;
+    }
+    
+    // Если команда одна и та же, сортируем по номеру пилота
+    return Number(driverA.number) - Number(driverB.number);
 }
