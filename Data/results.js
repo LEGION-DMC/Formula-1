@@ -202,7 +202,7 @@ const detailedResults = {
         "hamilton": 12,
         "leclerc": 10,
         "piastri": 8,
-        "lawson": 6, "lawson_replacement": "Замена Хаджара в Red Bull, из-за травмы",
+        "lawson": 6,
         "hulkenberg": 4,
         "alonso": 2,
         "gasly": 1,
@@ -989,6 +989,7 @@ function renderDriverDetailedTable(container, filterTeam) {
     const wrapper = document.createElement('div');
     wrapper.className = 'results-section-block';
     
+    // Заголовок и кнопка
     const headerRow = document.createElement('div');
     headerRow.className = 'results-header-row';
     headerRow.innerHTML = `
@@ -1003,6 +1004,7 @@ function renderDriverDetailedTable(container, filterTeam) {
     const tableContainer = document.createElement('div');
     tableContainer.className = 'detailed-table-container';
     
+    // Левая фиксированная часть
     const fixedPart = document.createElement('div');
     fixedPart.className = 'detailed-fixed-part';
     
@@ -1024,6 +1026,7 @@ function renderDriverDetailedTable(container, filterTeam) {
     });
     fixedPart.innerHTML = fixedHTML;
     
+    // Правая скроллящаяся часть
     const scrollPart = document.createElement('div');
     scrollPart.className = 'detailed-scroll-part';
     
@@ -1046,11 +1049,6 @@ function renderDriverDetailedTable(container, filterTeam) {
         allGPs.forEach((gpId, colIndex) => {
             const results = detailedResults[gpId] || {};
             const value = results[entry.driver];
-            
-            const replacementKey = `${entry.driver}_replacement`;
-            const replacementText = results[replacementKey] || '';
-            const isReplacement = replacementText !== '';
-            
             const isDNF = value === 'dnf';
             const isDNS = value === 'dns';
             const isDSQ = value === 'dsq';
@@ -1058,92 +1056,49 @@ function renderDriverDetailedTable(container, filterTeam) {
             total += pts;
             const noResults = !hasRealResults(gpId, false);
             
-            let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
-            let content = '';
-            
-            if (isDNF) {
-                content = 'DNF';
-                cellClass += ' dnf';
-            } else if (isDNS) {
-                content = 'DNS';
-                cellClass += ' dns';
-            } else if (isDSQ) {
-                content = 'DSQ';
-                cellClass += ' dsq';
-            } else {
-                content = pts > 0 ? pts : '-';
-                if (isReplacement && pts > 0) {
-                    cellClass += ' has-title replacement-points';
-                }
-            }
-            
-            scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-replacement="${replacementText}">${content}</div>`;
+            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf" data-col="${colIndex}">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns" data-col="${colIndex}">DNS</div>`;
+            else if (isDSQ) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dsq" data-col="${colIndex}">DSQ</div>`;
+            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">${pts > 0 ? pts : '-'}</div>`;
         });
         
         const sprintEntry = sprintStandings.find(s => s.driver === entry.driver);
         const sprintPoints = sprintEntry ? sprintEntry.points : 0;
         const combinedTotal = total + sprintPoints;
         
-        scrollHTML += `<div class="detailed-cell sum-col" data-col="sum">${combinedTotal}</div></div>`;
+        scrollHTML += `<div class="detailed-cell sum-col" title="Гонки: ${total} + Спринты: ${sprintPoints}" data-col="sum">${combinedTotal}</div></div>`;
     });
     scrollPart.innerHTML = scrollHTML;
     
     tableContainer.appendChild(fixedPart);
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
-    
-    // ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ
-    const pointsNote = document.createElement('div');
-    pointsNote.className = 'results-points-note';
-    pointsNote.innerHTML = `
-        <span class="points-note-text">Система начисления очков: 1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span>
-    `;
-    wrapper.appendChild(pointsNote);
-    
-    // ПРИМЕЧАНИЕ О СТАТУСАХ
-    const statusNote = document.createElement('div');
-    statusNote.className = 'results-points-note2';
-    statusNote.innerHTML = `
-        <span class="points-note-text2">
-            <span class="dnf-tag">DNF</span> — Did Not Finish
-            <span class="dns-tag">DNS</span> — Did Not Start
-            <span class="dsq-tag">DSQ</span> — Disqualified
-        </span>
-    `;
+
+	// ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ (второе, под статусами)
+	const pointsNote = document.createElement('div');
+	pointsNote.className = 'results-points-note';
+	pointsNote.innerHTML = `
+		<span class="points-note-icon">🛈 </span>
+		<span class="points-note-text">Система начисления очков: <span>1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span></span>
+	`;
+	wrapper.appendChild(pointsNote);
+	
+    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ (первое)
+	const statusNote = document.createElement('div');
+	statusNote.className = 'results-points-note2';
+	statusNote.innerHTML = `
+		<span class="points-note-icon2">🛈</span>
+		<span class="points-note-text2">
+			<span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
+			<span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
+			<span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+		</span>
+	`;
     wrapper.appendChild(statusNote);
 
     container.appendChild(wrapper);
     
-    // Добавляем обработчики для кастомного тултипа
-    const replacementCells = scrollPart.querySelectorAll('.replacement-points');
-    replacementCells.forEach(cell => {
-        cell.addEventListener('mouseenter', function(e) {
-            const text = this.dataset.replacement || 'Пилот-замена';
-            showReplacementTooltip(this, text);
-        });
-        
-        cell.addEventListener('mouseleave', function() {
-            hideReplacementTooltip();
-        });
-        
-        cell.addEventListener('mousemove', function(e) {
-            // Обновляем позицию при движении мыши
-            const tooltip = document.getElementById('replacement-tooltip');
-            if (tooltip && tooltip.style.display !== 'none') {
-                const rect = this.getBoundingClientRect();
-                const tooltipWidth = Math.min(300, (this.dataset.replacement || '').length * 8 + 40);
-                const left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
-                const top = rect.top - 10;
-                
-                tooltip.style.width = tooltipWidth + 'px';
-                tooltip.style.left = Math.max(10, left) + 'px';
-                tooltip.style.top = top + 'px';
-                tooltip.style.transform = 'translateY(-100%)';
-            }
-        });
-    });
-    
-    // Добавляем обработчики для стандартного поведения таблицы
+    // Добавляем обработчики событий после рендеринга
     addHoverHandlers(fixedPart, scrollPart);
 }
 
@@ -1151,6 +1106,7 @@ function renderSprintDetailedTable(container, filterTeam) {
     const wrapper = document.createElement('div');
     wrapper.className = 'results-section-block';
     
+    // Заголовок и кнопка
     const headerRow = document.createElement('div');
     headerRow.className = 'results-header-row';
     headerRow.innerHTML = `
@@ -1165,6 +1121,7 @@ function renderSprintDetailedTable(container, filterTeam) {
     const tableContainer = document.createElement('div');
     tableContainer.className = 'detailed-table-container';
     
+    // Левая фиксированная часть
     const fixedPart = document.createElement('div');
     fixedPart.className = 'detailed-fixed-part';
     
@@ -1186,6 +1143,7 @@ function renderSprintDetailedTable(container, filterTeam) {
     });
     fixedPart.innerHTML = fixedHTML;
     
+    // Правая скроллящаяся часть
     const scrollPart = document.createElement('div');
     scrollPart.className = 'detailed-scroll-part';
     
@@ -1208,11 +1166,6 @@ function renderSprintDetailedTable(container, filterTeam) {
         allSPs.forEach((gpId, colIndex) => {
             const results = detailedSprintResults[gpId] || {};
             const value = results[entry.driver];
-            
-            const replacementKey = `${entry.driver}_replacement`;
-            const replacementText = results[replacementKey] || '';
-            const isReplacement = replacementText !== '';
-            
             const isDNF = value === 'dnf';
             const isDNS = value === 'dns';
             const isDSQ = value === 'dsq';
@@ -1220,26 +1173,10 @@ function renderSprintDetailedTable(container, filterTeam) {
             total += pts;
             const noResults = !hasRealResults(gpId, true);
             
-            let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
-            let content = '';
-            
-            if (isDNF) {
-                content = 'DNF';
-                cellClass += ' dnf';
-            } else if (isDNS) {
-                content = 'DNS';
-                cellClass += ' dns';
-            } else if (isDSQ) {
-                content = 'DSQ';
-                cellClass += ' dsq';
-            } else {
-                content = pts > 0 ? pts : '-';
-                if (isReplacement && pts > 0) {
-                    cellClass += ' has-title replacement-points';
-                }
-            }
-            
-            scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-replacement="${replacementText}">${content}</div>`;
+            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf" data-col="${colIndex}">DNF</div>`;
+            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns" data-col="${colIndex}">DNS</div>`;
+            else if (isDSQ) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dsq" data-col="${colIndex}">DSQ</div>`;
+            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">${pts > 0 ? pts : '-'}</div>`;
         });
         
         scrollHTML += `<div class="detailed-cell sum-col" data-col="sum">${total}</div></div>`;
@@ -1250,56 +1187,31 @@ function renderSprintDetailedTable(container, filterTeam) {
     tableContainer.appendChild(scrollPart);
     wrapper.appendChild(tableContainer);
     
-    // ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ
-    const pointsNote = document.createElement('div');
-    pointsNote.className = 'results-points-note';
-    pointsNote.innerHTML = `
-        <span class="points-note-text">Система начисления очков: 1:8 • 2:7 • 3:6 • 4:5 • 5:4 • 6:3 • 7:2 • 8:1</span>
-    `;
-    wrapper.appendChild(pointsNote);
-    
-    // ПРИМЕЧАНИЕ О СТАТУСАХ
-    const statusNote = document.createElement('div');
-    statusNote.className = 'results-points-note2';
-    statusNote.innerHTML = `
-        <span class="points-note-text2">
-            <span class="dnf-tag">DNF</span> — Did Not Finish
-            <span class="dns-tag">DNS</span> — Did Not Start
-            <span class="dsq-tag">DSQ</span> — Disqualified
-        </span>
-    `;
+	// ПРИМЕЧАНИЕ О СИСТЕМЕ НАЧИСЛЕНИЯ ОЧКОВ (второе, под статусами)
+	const pointsNote = document.createElement('div');
+	pointsNote.className = 'results-points-note';
+	pointsNote.innerHTML = `
+		<span class="points-note-icon">🛈 </span>
+		<span class="points-note-text">Система начисления очков: <span>1:8 • 2:7 • 3:6 • 4:5 • 5:4 • 6:3 • 7:2 • 8:1</span></span>
+	`;
+	wrapper.appendChild(pointsNote);
+	
+    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ (первое)
+	const statusNote = document.createElement('div');
+	statusNote.className = 'results-points-note2';
+	statusNote.innerHTML = `
+		<span class="points-note-icon2">🛈</span>
+		<span class="points-note-text2">
+			<span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
+			<span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
+			<span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+		</span>
+	`;
     wrapper.appendChild(statusNote);
     
     container.appendChild(wrapper);
     
-    // Добавляем обработчики для кастомного тултипа
-    const replacementCells = scrollPart.querySelectorAll('.replacement-points');
-    replacementCells.forEach(cell => {
-        cell.addEventListener('mouseenter', function(e) {
-            const text = this.dataset.replacement || 'Пилот-замена';
-            showReplacementTooltip(this, text);
-        });
-        
-        cell.addEventListener('mouseleave', function() {
-            hideReplacementTooltip();
-        });
-        
-        cell.addEventListener('mousemove', function(e) {
-            const tooltip = document.getElementById('replacement-tooltip');
-            if (tooltip && tooltip.style.display !== 'none') {
-                const rect = this.getBoundingClientRect();
-                const tooltipWidth = Math.min(300, (this.dataset.replacement || '').length * 8 + 40);
-                const left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
-                const top = rect.top - 10;
-                
-                tooltip.style.width = tooltipWidth + 'px';
-                tooltip.style.left = Math.max(10, left) + 'px';
-                tooltip.style.top = top + 'px';
-                tooltip.style.transform = 'translateY(-100%)';
-            }
-        });
-    });
-    
+    // Добавляем обработчики событий после рендеринга
     addHoverHandlers(fixedPart, scrollPart);
 }
 
@@ -1572,42 +1484,4 @@ function createConstructorRow(team, pos, filterTeam) {
         <span class="constructor-name">${team.team}</span>
         <span class="constructor-points">${team.points}</span>`;
     return row;
-}
-
-function createReplacementTooltip() {
-    // Создаем элемент тултипа, если его еще нет
-    let tooltip = document.getElementById('replacement-tooltip');
-    if (!tooltip) {
-        tooltip = document.createElement('div');
-        tooltip.id = 'replacement-tooltip';
-        tooltip.className = 'replacement-tooltip';
-        document.body.appendChild(tooltip);
-    }
-    return tooltip;
-}
-
-function showReplacementTooltip(element, text) {
-    const tooltip = createReplacementTooltip();
-    const rect = element.getBoundingClientRect();
-    
-    // Позиционируем тултип сверху над ячейкой
-    const tooltipWidth = Math.min(300, text.length * 8 + 40);
-    const left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
-    const top = rect.top - 10; // 10px отступ сверху
-    
-    tooltip.textContent = text;
-    tooltip.style.display = 'block';
-    tooltip.style.width = tooltipWidth + 'px';
-    tooltip.style.left = Math.max(10, left) + 'px';
-    tooltip.style.top = top + 'px';
-    tooltip.style.transform = 'translateY(-100%)';
-    tooltip.style.opacity = '1';
-}
-
-function hideReplacementTooltip() {
-    const tooltip = document.getElementById('replacement-tooltip');
-    if (tooltip) {
-        tooltip.style.opacity = '0';
-        tooltip.style.display = 'none';
-    }
 }

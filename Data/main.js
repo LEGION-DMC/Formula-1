@@ -117,25 +117,48 @@ function getWeatherLocation(nextGP, nextTrack) {
     return locationMap[nextGP.track] || '51.507,-0.128';
 }
 
+function calculateAgeOnDate(birthDate, targetDate) {
+    const parts = birthDate.split('.');
+    if (parts.length !== 3) return 0;
+    
+    const day = parseInt(parts[0]);
+    const month = parseInt(parts[1]) - 1;
+    const year = parseInt(parts[2]);
+    
+    const birth = new Date(year, month, day);
+    const target = new Date(targetDate);
+    
+    let age = target.getFullYear() - birth.getFullYear();
+    
+    // Проверяем, был ли уже день рождения в этом году
+    const birthdayThisYear = new Date(target.getFullYear(), month, day);
+    if (target < birthdayThisYear) {
+        age--;
+    }
+    
+    return age;
+}
+
 function getNextDriverBirthdays() {
     const now = new Date();
     const currentYear = now.getFullYear();
     const results = [];
     
+    // Создаём "сегодня" в 00:00:00 для корректного сравнения
+    const today = new Date(currentYear, now.getMonth(), now.getDate());
+    
     driversData.forEach(driver => {
-        // Парсим дату рождения (формат DD.MM.YYYY)
         const parts = driver.birthDate.split('.');
         if (parts.length !== 3) return;
         
         const day = parseInt(parts[0]);
-        const month = parseInt(parts[1]) - 1; // JS месяцы с 0
+        const month = parseInt(parts[1]) - 1;
         const year = parseInt(parts[2]);
         
-        // Создаем дату рождения в текущем году
         let birthThisYear = new Date(currentYear, month, day);
         
-        // Если уже прошла в этом году - берем следующий год
-        if (birthThisYear < now) {
+        // Сравниваем с НАЧАЛОМ дня
+        if (birthThisYear < today) {
             birthThisYear = new Date(currentYear + 1, month, day);
         }
         
@@ -149,17 +172,14 @@ function getNextDriverBirthdays() {
         });
     });
     
-    // Сортируем по дате (ближайшие сначала)
     results.sort((a, b) => a.diff - b.diff);
     
-    // Находим ближайшую уникальную дату
     if (results.length === 0) return [];
     
     const nearestDate = results[0].date;
-    const nearestDateStr = nearestDate.toDateString();
     
     // Собираем всех пилотов у которых день рождения в эту дату
-    return results.filter(item => item.date.toDateString() === nearestDateStr);
+    return results.filter(item => item.date.toDateString() === nearestDate.toDateString());
 }
 
 function createBirthdayBlock() {
@@ -186,22 +206,27 @@ function createBirthdayBlock() {
     const dateStr = `${day}.${month}.${year}`;
     
     // Дни до дня рождения
-    const diffDays = Math.ceil((firstDate - now) / (1000 * 60 * 60 * 24));
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const birthDate = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+    const diffDays = Math.ceil((birthDate - today) / (1000 * 60 * 60 * 24));
+    
     let daysText = '';
     if (diffDays === 0) {
         daysText = 'СЕГОДНЯ!';
     } else if (diffDays === 1) {
         daysText = 'Завтра!';
-    } else {
+    } else if (diffDays > 1) {
         daysText = `Через ${diffDays} дн.`;
+    } else {
+        daysText = `Прошло ${Math.abs(diffDays)} дн.`;
     }
     
     // Собираем информацию о пилотах
     let driversHTML = '';
     birthdayList.forEach((item, index) => {
         const driver = item.driver;
-        const ageNow = calculateAge(driver.birthDate);
-        const ageNext = ageNow + 1;
+        // 👇 Считаем возраст НА ДАТУ дня рождения (а не текущий)
+        const age = calculateAgeOnDate(driver.birthDate, item.date);
         
         driversHTML += `
             <div class="birthday-driver-item" data-driver-id="${driver.id}">
@@ -211,7 +236,7 @@ function createBirthdayBlock() {
                         <img src="Images/Flags/${driver.country}.svg" class="birthday-flag" onerror="this.style.display='none'">
                         <span>${driver.name}</span>
                     </div>
-                    <span class="birthday-age-small">${ageNext} лет</span>
+                    <span class="birthday-age-small">${age} лет</span>
                 </div>
             </div>
         `;
