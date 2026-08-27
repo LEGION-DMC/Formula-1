@@ -213,7 +213,7 @@ const calendarData = [
 		tires: "C3, C4, C5",
 		
 		date: "2026-09-06 21:00",
-		quali: "",
+		quali: "2026-09-05 22:00",
 		sprint: "",
 		
 		hasSprint: false,

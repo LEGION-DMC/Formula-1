@@ -15,9 +15,9 @@ const driversData = [
 		
         titles: 1,
         hattricks: 3,
-        wins: 12,
-        podiums: 47,
-        poles: 16,
+        wins: 13,
+        podiums: 48,
+        poles: 18,
 		
         note: "Выступает под #1 - в качестве действующего чемпиона мира. Собственный номер пилота #4.",
         bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул.",
@@ -55,9 +55,9 @@ const driversData = [
         birthDate: "14.12.2004",
 		
         team: "Audi",
-        debut: "2025 - Sauber",        
+        debut: "2025 - Stake",        
 		career: [
-            { team: "Sauber", year: "2025" },
+            { team: "Stake", year: "2025" },
             { team: "Audi", year: "2026" }
         ],
 		
@@ -341,7 +341,7 @@ const driversData = [
         debut: "2022 - Alfa Romeo",        
 		career: [
             { team: "Alfa Romeo", year: "2022-2023" },
-            { team: "Sauber", year: "2024" }
+            { team: "Stake", year: "2024" }
         ],
 		
         titles: 0,
@@ -372,7 +372,7 @@ const driversData = [
             { team: "Racing Point", year: "2020", temporarily: true },
             { team: "Aston Martin", year: "2022", temporarily: true },
             { team: "Haas", year: "2023-2024" },
-            { team: "Sauber", year: "2025" },
+            { team: "Stake", year: "2025" },
             { team: "Audi", year: "2026" }
         ],
 		
@@ -558,10 +558,10 @@ const driversData = [
         ],
 		
         titles: 0,
-        hattricks: 2,
+        hattricks: 1,
         wins: 7,
-        podiums: 29,
-        poles: 11,
+        podiums: 30,
+        poles: 12,
 		
         note: "Лидер гильдии пилотов.",
         bio: "Победитель Гран-при Сан-Паулу (2022) — первая победа Mercedes после долгого перерыва. Очень быстр, но иногда ошибается под давлением. Заменил Боттаса и стал ровней Хэмилтону.",
@@ -580,7 +580,7 @@ const driversData = [
             { team: "Williams", year: "2013-2016" },
             { team: "Mercedes", year: "2017-2021" },
             { team: "Alfa Romeo", year: "2022-2023" },
-            { team: "Sauber", year: "2024" },
+            { team: "Stake", year: "2024" },
             { team: "Cadillac", year: "2026" }
         ],
 		
@@ -1573,7 +1573,7 @@ function openDriverModal(driver) {
             <span class="stat-text">Поулы</span>
         </div>
         <div class="stat-cell">
-            <span class="stat-number">${driver.fines || 0}/12</span>
+            <span class="stat-number">${driver.fines || 0}<span class="gp-year-suffix">/12</span></span>
             <span class="stat-text">Штрафы</span>
         </div>
     `;

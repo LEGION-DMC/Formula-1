@@ -1632,6 +1632,10 @@ h1, h2 {
     color: var(--red-accent);
 }
 
+.stat-number .gp-year-suffix {
+    font-size: 1.2rem;
+}
+
 .stat-text {
     font-family: 'F1Text', sans-serif;
     font-size: 0.65rem;
