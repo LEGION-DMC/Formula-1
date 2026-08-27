@@ -675,7 +675,7 @@ body {
 @media (max-width: 480px) {
     .team-card { flex: 0 0 47%; 
         max-width: 47%;
-        max-height: 160px;
+        max-height: 155px;
     }
 }
 
