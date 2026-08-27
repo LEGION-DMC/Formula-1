@@ -393,7 +393,6 @@ const detailedSprintResults = {
         "verstappen": 3,
         "hamilton": 2,
         "gasly": 1,
-        "hulkenberg": "dnf",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
     "singapore": {
@@ -1272,10 +1271,31 @@ function renderSprintDetailedTable(container, filterTeam) {
             const isDNF = value === 'dnf';
             const isDNS = value === 'dns';
             const isDSQ = value === 'dsq';
-            const pts = (!isDNF && !isDNS && !isDSQ && typeof value === 'number') ? value : 0;
-            total += pts;
-            const noResults = !hasRealResults(gpId, true);
             
+            // Если значение 0 (число) - показываем прочерк
+            if (typeof value === 'number' && value === 0) {
+                const noResults = !hasRealResults(gpId, true);
+                scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">-</div>`;
+                return;
+            }
+            
+            // Если значение больше 0 - добавляем к сумме и показываем
+            if (typeof value === 'number' && value > 0) {
+                total += value;
+                const noResults = !hasRealResults(gpId, true);
+                const isDifferentTeam = gpTeam && gpTeam !== displayTeam;
+                
+                let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
+                if (isDifferentTeam) {
+                    cellClass += ' different-team';
+                }
+                
+                scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">${value}</div>`;
+                return;
+            }
+            
+            // Обработка DNF/DNS/DSQ
+            const noResults = !hasRealResults(gpId, true);
             const isDifferentTeam = gpTeam && gpTeam !== displayTeam;
             
             let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
@@ -1286,7 +1306,7 @@ function renderSprintDetailedTable(container, filterTeam) {
             if (isDNF) scrollHTML += `<div class="${cellClass} dnf" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNF</div>`;
             else if (isDNS) scrollHTML += `<div class="${cellClass} dns" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNS</div>`;
             else if (isDSQ) scrollHTML += `<div class="${cellClass} dsq" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DSQ</div>`;
-            else scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">${pts > 0 ? pts : '0'}</div>`;
+            else scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">-</div>`;
         });
         
         scrollHTML += `<div class="detailed-cell sum-col" data-col="sum">${total}</div></div>`;
