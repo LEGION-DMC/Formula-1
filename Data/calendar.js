@@ -1177,21 +1177,55 @@ function openVideoModal(videoId, title) {
         if (iframe) {
             iframe.src = '';
         }
+        // Очищаем превью, если есть
+        const preview = modal.querySelector('.video-preview-placeholder');
+        if (preview) preview.remove();
     }
 
     function esc(e) {
         if (e.key === 'Escape') close();
     }
 
-    // Формируем полный URL для Matreshka.tv
-    const embedUrl = `https://matreshka.tv/embed/video/${videoId}`;
+    // Определяем, мобильное ли устройство
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Формируем URL
+    let embedUrl;
+    if (isMobile) {
+        // Для мобильных используем прямой URL с параметрами совместимости
+        embedUrl = `https://matreshka.tv/embed/video/${videoId}?autoplay=1&rel=0&playsinline=1`;
+    } else {
+        embedUrl = `https://matreshka.tv/embed/video/${videoId}`;
+    }
 
     modal.innerHTML = `
         <button class="video-modal-close">&times;</button>
         <div class="video-modal-header">
             <span class="video-modal-title">${title}</span>
         </div>
-        <div class="video-modal-body">
+        <div class="video-modal-body" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            ${isMobile ? `
+                <div class="video-preview-placeholder" style="
+                    position: absolute; 
+                    top: 0; 
+                    left: 0; 
+                    width: 100%; 
+                    height: 100%; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center;
+                    background: #1a1a2e;
+                    color: #fff;
+                    flex-direction: column;
+                    z-index: 1;
+                    cursor: pointer;
+                    border-radius: 8px;
+                ">
+                    <div style="font-size: 48px; margin-bottom: 16px;">▶️</div>
+                    <div style="font-size: 18px; font-weight: 500; text-align: center; padding: 0 20px;">Нажмите для воспроизведения</div>
+                    <div style="font-size: 13px; color: #888; margin-top: 8px;">${title}</div>
+                </div>
+            ` : ''}
             <iframe 
                 width="560" 
                 height="315" 
@@ -1199,11 +1233,26 @@ function openVideoModal(videoId, title) {
                 title="${title}"
                 frameborder="0" 
                 allowfullscreen
+                allow="autoplay; encrypted-media"
                 style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
                 loading="lazy"
+                ${isMobile ? 'sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"' : ''}
             ></iframe>
         </div>
     `;
+
+    // Для мобильных: клик по превью загружает iframe
+    if (isMobile) {
+        const preview = modal.querySelector('.video-preview-placeholder');
+        const iframe = modal.querySelector('iframe');
+        if (preview && iframe) {
+            preview.addEventListener('click', function() {
+                // Загружаем iframe с autoplay
+                iframe.src = `https://matreshka.tv/embed/video/${videoId}?autoplay=1&rel=0&playsinline=1`;
+                this.style.display = 'none';
+            });
+        }
+    }
 
     modal.querySelector('.video-modal-close').addEventListener('click', close);
 
