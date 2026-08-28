@@ -1139,11 +1139,25 @@ function scrollToGPCard(gpId, cardsArea) {
 }
 
 function openVideoModal(videoId, title) {
+    // Если videoId пустой или undefined — ничего не делаем
     if (!videoId) return;
     
+    // Определяем, мобильное ли устройство
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Для мобильных — открываем в новой вкладке
+    if (isMobile) {
+        const videoPageUrl = `https://matreshka.tv/video/${videoId}`;
+        window.open(videoPageUrl, '_blank');
+        return;
+    }
+    
+    // Для ПК — показываем встроенный плеер в модальном окне
+    // Удаляем существующее модальное окно, если есть
     const existing = document.querySelector('.video-modal-overlay');
     if (existing) existing.remove();
 
+    // Блокируем скролл
     const scrollY = window.scrollY;
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
@@ -1158,9 +1172,11 @@ function openVideoModal(videoId, title) {
         window.scrollTo(0, scrollY);
     }
 
+    // Создаём overlay
     const overlay = document.createElement('div');
     overlay.className = 'video-modal-overlay';
 
+    // Создаём модальное окно
     const modal = document.createElement('div');
     modal.className = 'video-modal';
 
@@ -1168,56 +1184,37 @@ function openVideoModal(videoId, title) {
         overlay.remove();
         unlock();
         document.removeEventListener('keydown', esc);
+        const iframe = modal.querySelector('iframe');
+        if (iframe) {
+            iframe.src = '';
+        }
     }
 
     function esc(e) {
         if (e.key === 'Escape') close();
     }
 
-    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    // Используем embed с параметром platform для мобильных
-    const embedUrl = `https://matreshka.tv/embed/video/${videoId}${isMobile ? '?platform=mobile&autoplay=1' : ''}`;
+    // Формируем полный URL для Matreshka.tv
+    const embedUrl = `https://matreshka.tv/embed/video/${videoId}`;
 
     modal.innerHTML = `
         <button class="video-modal-close">&times;</button>
         <div class="video-modal-header">
             <span class="video-modal-title">${title}</span>
         </div>
-        <div class="video-modal-body" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+        <div class="video-modal-body">
             <iframe 
+                width="560" 
+                height="315" 
                 src="${embedUrl}" 
                 title="${title}"
                 frameborder="0" 
                 allowfullscreen
-                allow="autoplay; encrypted-media; fullscreen"
                 style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
                 loading="lazy"
-                ${isMobile ? 'sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-presentation"' : ''}
             ></iframe>
         </div>
     `;
-
-    // Для мобильных добавляем ссылку-дублер внизу
-    if (isMobile) {
-        const header = modal.querySelector('.video-modal-header');
-        const link = document.createElement('div');
-        link.style.cssText = `
-            padding: 8px 16px;
-            background: rgba(0,0,0,0.3);
-            text-align: center;
-            font-size: 12px;
-        `;
-        link.innerHTML = `
-            <a href="https://matreshka.tv/video/${videoId}" 
-               target="_blank" 
-               style="color: #e10600; text-decoration: none;"
-            >
-                Не работает плеер? Открыть в новой вкладке ↗
-            </a>
-        `;
-        header.parentNode.insertBefore(link, header.nextSibling);
-    }
 
     modal.querySelector('.video-modal-close').addEventListener('click', close);
 
