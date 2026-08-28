@@ -688,53 +688,53 @@ function renderCalendarCards(container) {
             </div>
         `;
 
-        // Футер
-        const footer = document.createElement('div');
-        footer.className = 'calendar-card-footer';
+// Футер
+const footer = document.createElement('div');
+footer.className = 'calendar-card-footer';
 
-        if (gp.canceled) {
-            footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
-        } else {
-            let btns = '';
-            let showTimer = false;
+if (gp.canceled) {
+    footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
+} else {
+    let btns = '';
+    let showTimer = false;
 
-            // ✅ Кнопка спринта - отображается если есть ссылка
-            if (gp.hasSprint && gp.recordingSprint) {
-                btns += `<a href="${gp.recordingSprint}" target="_blank" class="calendar-btn sprint">Спринт</a>`;
-            }
+    // ✅ Кнопка спринта - открывает видео в модалке
+    if (gp.hasSprint && gp.recordingSprint) {
+        btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${track.name}">Спринт</button>`;
+    }
 
-            // ✅ Кнопка квалификации - отображается если есть ссылка
-            if (gp.recordingQuali) {
-                btns += `<a href="${gp.recordingQuali}" target="_blank" class="calendar-btn quali">Квалификация</a>`;
-            }
+    // ✅ Кнопка квалификации - открывает видео в модалке
+    if (gp.recordingQuali) {
+        btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${track.name}">Квалификация</button>`;
+    }
 
-            // Гонка
-            if (isPast || nearStart) {
-                if (gp.recordingRace) {
-                    btns += `<a href="${gp.recordingRace}" target="_blank" class="calendar-btn race">Гонка</a>`;
-                } else if (isPast) {
-                    btns += '<span class="calendar-btn disabled">Нет записи</span>';
-                }
-            } else {
-                showTimer = true;
-            }
-
-            if (showTimer) {
-                btns += `
-                    <div class="calendar-countdown">
-                        <span>До гонки:</span>
-                        <div class="calendar-timer" data-date="${gp.date}">
-                            <span class="calendar-timer-days">00</span>д
-                            <span class="calendar-timer-hours">00</span>ч
-                            <span class="calendar-timer-minutes">00</span>м
-                            <span class="calendar-timer-seconds">00</span>с
-                        </div>
-                    </div>
-                `;
-            }
-
-            footer.innerHTML = btns;
+    // Гонка
+    if (isPast || nearStart) {
+        if (gp.recordingRace) {
+            btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${track.name}">Гонка</button>`;
+        } else if (isPast) {
+            btns += '<span class="calendar-btn disabled">Нет записи</span>';
         }
+    } else {
+        showTimer = true;
+    }
+
+    if (showTimer) {
+        btns += `
+            <div class="calendar-countdown">
+                <span>До гонки:</span>
+                <div class="calendar-timer" data-date="${gp.date}">
+                    <span class="calendar-timer-days">00</span>д
+                    <span class="calendar-timer-hours">00</span>ч
+                    <span class="calendar-timer-minutes">00</span>м
+                    <span class="calendar-timer-seconds">00</span>с
+                </div>
+            </div>
+        `;
+    }
+
+    footer.innerHTML = btns;
+}
 
         // Сборка карточки
         const divider1 = document.createElement('div');
@@ -752,6 +752,18 @@ function renderCalendarCards(container) {
         card.appendChild(imageDiv);
         card.appendChild(infoDiv);
 
+		// Обработчики для кнопок видео
+		card.querySelectorAll('.calendar-btn[data-video]').forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				e.stopPropagation(); // Чтобы не открывалась модалка трассы
+				const videoUrl = btn.dataset.video;
+				const title = btn.dataset.title;
+				if (typeof openVideoModal === 'function') {
+					openVideoModal(videoUrl, title);
+				}
+			});
+		});
+		
         card.addEventListener('click', (e) => {
             if (!e.target.closest('a')) {
                 openTrackModal(track, gp);
@@ -1124,4 +1136,94 @@ function scrollToGPCard(gpId, cardsArea) {
             card.classList.remove('highlight');
         }, 1500);
     }, 800);
+}
+
+// Функция для открытия видео в модальном окне
+function openVideoModal(videoUrl, title) {
+    // Удаляем существующее модальное окно, если есть
+    const existing = document.querySelector('.video-modal-overlay');
+    if (existing) existing.remove();
+
+    // Блокируем скролл
+    const scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflowY = 'scroll';
+
+    function unlock() {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflowY = '';
+        window.scrollTo(0, scrollY);
+    }
+
+    // Создаём overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'video-modal-overlay';
+
+    // Создаём модальное окно
+    const modal = document.createElement('div');
+    modal.className = 'video-modal';
+
+    function close() {
+        overlay.remove();
+        unlock();
+        document.removeEventListener('keydown', esc);
+        // Останавливаем видео при закрытии
+        const iframe = modal.querySelector('iframe');
+        if (iframe) {
+            iframe.src = '';
+        }
+    }
+
+    function esc(e) {
+        if (e.key === 'Escape') close();
+    }
+
+    // Извлекаем ID видео из URL rutube
+    let embedUrl = videoUrl;
+    // Если это ссылка на страницу rutube, конвертируем в embed
+    if (videoUrl.includes('rutube.ru/video/')) {
+        const videoId = videoUrl.split('/').pop().split('?')[0];
+        embedUrl = `https://rutube.ru/play/embed/${videoId}/?skinColor=E53935`;
+    }
+
+    modal.innerHTML = `
+        <button class="video-modal-close">&times;</button>
+        <div class="video-modal-header">
+            <span class="video-modal-title">${title}</span>
+        </div>
+        <div class="video-modal-body">
+            <iframe 
+                width="100%" 
+                height="100%" 
+                src="${embedUrl}" 
+                style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                allow="clipboard-write; autoplay" 
+                allowFullScreen
+                loading="lazy"
+            ></iframe>
+        </div>
+    `;
+
+    // Закрытие по клику на крестик
+    modal.querySelector('.video-modal-close').addEventListener('click', close);
+
+    overlay.appendChild(modal);
+    
+    // Закрытие по клику на фон
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay) close();
+    });
+    
+    document.addEventListener('keydown', esc);
+    document.body.appendChild(overlay);
+
+    // Анимация появления
+    requestAnimationFrame(() => {
+        overlay.classList.add('active');
+        modal.classList.add('active');
+    });
 }
