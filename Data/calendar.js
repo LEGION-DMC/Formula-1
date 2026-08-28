@@ -203,9 +203,9 @@ const calendarData = [
 		hasSprint: true,
 		canceled: false,
 		
-		recordingSprint: "https://rutube.ru/video/f713b3a245bd5134ee3fb404376598d5/",
-		recordingQuali: "https://rutube.ru/video/edeec7032e2bb086090efbf1028ddbbc/",
-		recordingRace: "https://rutube.ru/video/4ee70215ae4c152fcd01310ed5456721/"
+		recordingSprint: "",
+		recordingQuali: "",
+		recordingRace: "https://rutube.ru/video/8ef214ecabac601412ba3dd39d092856/"
 	},
 	{   id: "italy",
 		track: "monza",
