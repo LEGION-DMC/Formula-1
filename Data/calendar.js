@@ -2,7 +2,7 @@ const calendarData = [
 	{   id: "australia",
 		track: "albert_park",
 		
-		tires: "C3, C4, C5",
+		tires: "345",
 		
 		date: "2026-03-08 12:00",
 		quali: "",
@@ -18,7 +18,7 @@ const calendarData = [
 	{   id: "china",
 		track: "shanghai",
 		
-		tires: "C2, C3, C4",
+		tires: "234",
 		
 		date: "2026-03-15 15:00",
 		quali: "",
@@ -34,7 +34,7 @@ const calendarData = [
 	{   id: "japan",
 		track: "suzuka",
 		
-		tires: "C1, C2, C3",
+		tires: "123",
 		
 		date: "2026-03-29 13:00",
 		quali: "",
@@ -66,7 +66,7 @@ const calendarData = [
 	{   id: "miami",
 		track: "miami",
 		
-		tires: "C3, C4, C5",
+		tires: "345",
 		
 		date: "2026-05-04 01:00",
 		quali: "",
@@ -82,7 +82,7 @@ const calendarData = [
 	{   id: "canada",
 		track: "villeneuve",
 		
-		tires: "C3, C4, C5",
+		tires: "345",
 		
 		date: "2026-05-25 04:00",
 		quali: "",
@@ -98,7 +98,7 @@ const calendarData = [
 	{   id: "monaco",
 		track: "monaco",
 		
-		tires: "C3, C4, C5",
+		tires: "345",
 		
 		date: "2026-06-07 21:00",
 		quali: "",
@@ -114,7 +114,7 @@ const calendarData = [
 	{   id: "barcelona",
 		track: "catalunya",
 		
-		tires: "C2, C3, C4",
+		tires: "234",
 		
 		date: "2026-06-14 21:00",
 		quali: "",
@@ -130,7 +130,7 @@ const calendarData = [
 	{   id: "austria",
 		track: "red_bull_ring",
 		
-		tires: "C3, C4, C5",
+		tires: "345",
 		
 		date: "2026-06-28 21:00",
 		quali: "",
@@ -146,7 +146,7 @@ const calendarData = [
 	{   id: "great-britain",
 		track: "silverstone",
 		
-		tires: "C1, C2, C3",
+		tires: "123",
 		
 		date: "2026-07-05 22:00",
 		quali: "",
@@ -162,7 +162,7 @@ const calendarData = [
 	{   id: "belgium",
 		track: "spa",
 		
-		tires: "C2, C3, C4",
+		tires: "234",
 		
 		date: "2026-07-19 21:00",
 		quali: "",
@@ -178,7 +178,7 @@ const calendarData = [
 	{   id: "hungary",
 		track: "hungaroring",
 		
-		tires: "C3, C4, C5",
+		tires: "345",
 		
 		date: "2026-07-26 21:00",
 		quali: "",
@@ -194,7 +194,7 @@ const calendarData = [
 	{   id: "netherlands",
 		track: "zandvoort",
 		
-		tires: "C2, C3, C4",
+		tires: "234",
 		
 		date: "2026-08-23 21:00",
 		quali: "2026-08-22 22:00",
@@ -210,7 +210,7 @@ const calendarData = [
 	{   id: "italy",
 		track: "monza",
 		
-		tires: "C3, C4, C5",
+		tires: "345",
 		
 		date: "2026-09-06 21:00",
 		quali: "2026-09-05 22:00",
@@ -226,10 +226,10 @@ const calendarData = [
 	{   id: "spain",
 		track: "madring",
 		
-		tires: "C2, C3, C4",
+		tires: "234",
 		
 		date: "2026-09-13 21:00",
-		quali: "",
+		quali: "2026-09-12 22:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -242,10 +242,10 @@ const calendarData = [
 	{   id: "azerbaijan",
 		track: "baku",
 		
-		tires: "C3, C4, C5",
+		tires: "345",
 		
 		date: "2026-09-26 19:00",
-		quali: "",
+		quali: "2026-09-25 20:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -258,10 +258,10 @@ const calendarData = [
 	{   id: "malaysia",
 		track: "sepang",
 		
-		tires: "C2, C3, C4",
+		tires: "234",
 		
 		date: "2026-10-04 23:00",
-		quali: "",
+		quali: "2026-10-03 00:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -274,11 +274,11 @@ const calendarData = [
 	{   id: "singapore",
 		track: "marina_bay",
 		
-		tires: "C2, C4, C5",
+		tires: "345",
 		
 		date: "2026-10-11 20:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-10-10 21:00",
+		sprint: "2026-10-10 17:00",
 		
 		hasSprint: true,
 		canceled: false,
@@ -290,10 +290,10 @@ const calendarData = [
 	{   id: "usa",
 		track: "americas",
 		
-		tires: "C2, C3, C4",
+		tires: "",
 		
 		date: "2026-10-26 04:00",
-		quali: "",
+		quali: "2026-10-25 05:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -306,10 +306,10 @@ const calendarData = [
 	{   id: "mexico",
 		track: "rodriguez",
 		
-		tires: "C2, C3, C4",
+		tires: "",
 		
 		date: "2026-11-02 04:00",
-		quali: "",
+		quali: "2026-11-01 05:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -322,10 +322,10 @@ const calendarData = [
 	{   id: "brazil",
 		track: "interlagos",
 		
-		tires: "C2, C3, C4",
+		tires: "",
 		
 		date: "2026-11-09 01:00",
-		quali: "",
+		quali: "2026-11-08 02:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -338,10 +338,10 @@ const calendarData = [
 	{   id: "las-vegas",
 		track: "vegas",
 		
-		tires: "C2, C3, C4",
+		tires: "",
 		
 		date: "2026-11-22 12:00",
-		quali: "",
+		quali: "2026-11-21 13:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -354,10 +354,10 @@ const calendarData = [
 	{   id: "qatar",
 		track: "lusail",
 		
-		tires: "C2, C3, C4",
+		tires: "",
 		
 		date: "2026-11-30 00:00",
-		quali: "",
+		quali: "2026-11-29 01:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -370,10 +370,10 @@ const calendarData = [
 	{   id: "abu-dhabi",
 		track: "yas_marina",
 		
-		tires: "C2, C3, C4",
+		tires: "",
 		
 		date: "2026-12-06 21:00",
-		quali: "",
+		quali: "2026-12-05 22:00",
 		sprint: "",
 		
 		hasSprint: false,
@@ -387,6 +387,13 @@ const calendarData = [
 
 let animationTimeout = null;
 let currentHighlightedGpId = null;
+
+calendarData.forEach(gp => {
+    if (gp.tires && typeof gp.tires === 'string' && !gp.tires.includes('C')) {
+        const digits = gp.tires.replace(/\D/g, "").split("");
+        gp.tires = digits.map(d => `C${d}`).join(", ");
+    }
+});
 
 function getGPById(id) {
     return calendarData.find(g => g.id === id);
