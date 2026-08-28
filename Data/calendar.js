@@ -1139,14 +1139,11 @@ function scrollToGPCard(gpId, cardsArea) {
 }
 
 function openVideoModal(videoId, title) {
-    // Если videoId пустой или undefined — ничего не делаем
     if (!videoId) return;
     
-    // Удаляем существующее модальное окно, если есть
     const existing = document.querySelector('.video-modal-overlay');
     if (existing) existing.remove();
 
-    // Блокируем скролл
     const scrollY = window.scrollY;
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
@@ -1161,11 +1158,9 @@ function openVideoModal(videoId, title) {
         window.scrollTo(0, scrollY);
     }
 
-    // Создаём overlay
     const overlay = document.createElement('div');
     overlay.className = 'video-modal-overlay';
 
-    // Создаём модальное окно
     const modal = document.createElement('div');
     modal.className = 'video-modal';
 
@@ -1173,33 +1168,16 @@ function openVideoModal(videoId, title) {
         overlay.remove();
         unlock();
         document.removeEventListener('keydown', esc);
-        // Останавливаем все видео
-        const videos = modal.querySelectorAll('video');
-        videos.forEach(v => {
-            v.pause();
-            v.src = '';
-            v.load();
-        });
-        // Удаляем скрипт плеера если есть
-        const script = modal.querySelector('script');
-        if (script) script.remove();
     }
 
     function esc(e) {
         if (e.key === 'Escape') close();
     }
 
-    // Определяем, мобильное ли устройство
     const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    // Используем iframe с параметрами для мобильных
-    let embedUrl;
-    if (isMobile) {
-        // Для мобильных используем параметр для корректного отображения
-        embedUrl = `https://matreshka.tv/embed/video/${videoId}?autoplay=1&playsinline=1&controls=1&modestbranding=1`;
-    } else {
-        embedUrl = `https://matreshka.tv/embed/video/${videoId}`;
-    }
+    // Используем embed с параметром platform для мобильных
+    const embedUrl = `https://matreshka.tv/embed/video/${videoId}${isMobile ? '?platform=mobile&autoplay=1' : ''}`;
 
     modal.innerHTML = `
         <button class="video-modal-close">&times;</button>
@@ -1208,7 +1186,6 @@ function openVideoModal(videoId, title) {
         </div>
         <div class="video-modal-body" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
             <iframe 
-                id="videoIframe_${videoId}"
                 src="${embedUrl}" 
                 title="${title}"
                 frameborder="0" 
@@ -1216,47 +1193,30 @@ function openVideoModal(videoId, title) {
                 allow="autoplay; encrypted-media; fullscreen"
                 style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
                 loading="lazy"
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-presentation"
+                ${isMobile ? 'sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-presentation"' : ''}
             ></iframe>
         </div>
     `;
 
-    // Для мобильных устройств добавляем дополнительную обработку
+    // Для мобильных добавляем ссылку-дублер внизу
     if (isMobile) {
-        // Добавляем кнопку "Открыть в приложении" как fallback
-        setTimeout(() => {
-            const iframe = modal.querySelector('iframe');
-            if (iframe) {
-                // Пробуем определить, загрузился ли плеер
-                const checkLoaded = setInterval(() => {
-                    try {
-                        // Пытаемся получить доступ к содержимому iframe
-                        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-                        if (iframeDoc && iframeDoc.querySelector('video')) {
-                            clearInterval(checkLoaded);
-                        }
-                    } catch (e) {
-                        // Если доступ запрещен (CORS), значит плеер загрузился
-                        clearInterval(checkLoaded);
-                    }
-                }, 3000);
-
-                // Таймаут на случай, если плеер не загрузился
-                setTimeout(() => {
-                    clearInterval(checkLoaded);
-                    // Проверяем, есть ли видео в iframe
-                    try {
-                        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-                        if (iframeDoc && !iframeDoc.querySelector('video')) {
-                            // Если видео нет, показываем fallback
-                            showMobileFallback(modal, videoId, title);
-                        }
-                    } catch (e) {
-                        // Если CORS - все ок, плеер работает
-                    }
-                }, 5000);
-            }
-        }, 1000);
+        const header = modal.querySelector('.video-modal-header');
+        const link = document.createElement('div');
+        link.style.cssText = `
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            font-size: 12px;
+        `;
+        link.innerHTML = `
+            <a href="https://matreshka.tv/video/${videoId}" 
+               target="_blank" 
+               style="color: #e10600; text-decoration: none;"
+            >
+                Не работает плеер? Открыть в новой вкладке ↗
+            </a>
+        `;
+        header.parentNode.insertBefore(link, header.nextSibling);
     }
 
     modal.querySelector('.video-modal-close').addEventListener('click', close);
@@ -1274,63 +1234,4 @@ function openVideoModal(videoId, title) {
         overlay.classList.add('active');
         modal.classList.add('active');
     });
-}
-
-// Fallback для мобильных, если iframe не работает
-function showMobileFallback(modal, videoId, title) {
-    const body = modal.querySelector('.video-modal-body');
-    if (!body) return;
-
-    // Проверяем, есть ли уже fallback
-    if (body.querySelector('.mobile-fallback')) return;
-
-    const fallback = document.createElement('div');
-    fallback.className = 'mobile-fallback';
-    fallback.style.cssText = `
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: #1a1a2e;
-        color: #fff;
-        padding: 20px;
-        z-index: 5;
-        text-align: center;
-    `;
-    
-    fallback.innerHTML = `
-        <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
-        <h3 style="margin: 0 0 12px 0; font-size: 18px;">${title}</h3>
-        <p style="color: #888; margin: 0 0 20px 0; font-size: 14px; max-width: 320px;">
-            Видео не загрузилось во встроенном плеере
-        </p>
-        <a href="https://matreshka.tv/video/${videoId}" 
-           target="_blank" 
-           style="
-               display: inline-block;
-               padding: 12px 32px;
-               background: #e10600;
-               color: #fff;
-               text-decoration: none;
-               border-radius: 6px;
-               font-weight: 500;
-               font-size: 16px;
-               transition: background 0.2s;
-           "
-           onmouseover="this.style.background='#b80500'"
-           onmouseout="this.style.background='#e10600'"
-        >
-            Открыть на Matreshka.tv
-        </a>
-        <p style="color: #666; margin-top: 12px; font-size: 12px;">
-            Откроется в новом окне
-        </p>
-    `;
-    
-    body.appendChild(fallback);
 }
