@@ -12,8 +12,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/d73719ebc017833dc11b2b3e0eddffb8/",
-		recordingRace: "https://rutube.ru/video/264170a23560b1eec2e7b27978b62b3f/"
+		recordingQuali: "nQMAca7AQwY",
+		recordingRace: "CAPgpa-AQwY"
 	},
 	{   id: "china",
 		track: "shanghai",
@@ -27,9 +27,9 @@ const calendarData = [
 		hasSprint: true,
 		canceled: false,
 		
-		recordingSprint: "https://rutube.ru/video/e01dc7aca552e6b3481e27a12b481e43/",
-		recordingQuali: "https://rutube.ru/video/70a7aa6656f6e5b4ddabcbf824253830/",
-		recordingRace: "https://rutube.ru/video/0cb1fa5f8d0b60b7266f43f015566674/"
+		recordingSprint: "_wOAGcITRAY",
+		recordingQuali: "dgCgNcITRAY",
+		recordingRace: "qwGABcETRAY"
 	},
 	{   id: "japan",
 		track: "suzuka",
@@ -44,8 +44,8 @@ const calendarData = [
 		canceled: false,
 		recordingSprint: "",
 		
-		recordingQuali: "https://rutube.ru/video/bd3f864e23ef634c8140e77099e5deeb/",
-		recordingRace: "https://rutube.ru/video/6d24c1dd05e8824e81dd3aa3cdd5b86f/"
+		recordingQuali: "gALAmvo8RAY",
+		recordingRace: "hgKggPo8RAY"
 	},
 	{   id: "saudi-arabia",
 		track: "jeddah",
@@ -75,9 +75,9 @@ const calendarData = [
 		hasSprint: true,
 		canceled: false,
 		
-		recordingSprint: "https://rutube.ru/video/105d706e84f0903bb3bc0da3dd4e2f91/",
-		recordingQuali: "https://rutube.ru/video/b7b2f0fb0ba261b6b4c48905526440fe/",
-		recordingRace: "https://rutube.ru/video/3628eef00d9d494b12467d1ef0bc42c1/"
+		recordingSprint: "rgIAZ7tHRAY",
+		recordingQuali: "wQKgTrtHRAY",
+		recordingRace: "4QKASrtHRAY"
 	},
 	{   id: "canada",
 		track: "villeneuve",
@@ -91,9 +91,9 @@ const calendarData = [
 		hasSprint: true,
 		canceled: false,
 		
-		recordingSprint: "https://rutube.ru/video/bc877009b2b8fc79bc6f979462168e6f/",
-		recordingQuali: "https://rutube.ru/video/9d73b9e5e2f82f57b9a1ea2b0f43d1f7/",
-		recordingRace: "https://rutube.ru/video/03fefa5dc563eeccb70fdae0547937ee/"
+		recordingSprint: "pQLA_C1XRAY",
+		recordingQuali: "OQNgtC5XRAY",
+		recordingRace: "OgHg1C1XRAY"
 	},
 	{   id: "monaco",
 		track: "monaco",
@@ -108,8 +108,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/2f1325bbb1e0abd272265bae45143732/",
-		recordingRace: "https://rutube.ru/video/f85e53c184adb938f135e5f672dd34fb/"
+		recordingQuali: "IwGARvhfSQY",
+		recordingRace: "BgCAwrOLTwY"
 	},
 	{   id: "barcelona",
 		track: "catalunya",
@@ -124,8 +124,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/8e12af772774917558cd3772f6ef7af7/",
-		recordingRace: "https://rutube.ru/video/d453cd08307bbb2f0328d9dd19fd1fdd/"
+		recordingQuali: "5gKA2f_YdgY",
+		recordingRace: "wANgWyNueQY"
 	},
 	{   id: "austria",
 		track: "red_bull_ring",
@@ -140,8 +140,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/79b0880c155b53e864d72937ef75ef65/",
-		recordingRace: "https://rutube.ru/video/d8359daa94329ff700c3064ba10551a4/"
+		recordingQuali: "2QLgWtkR0QY",
+		recordingRace: "wQHgUnsH1wY"
 	},
 	{   id: "great-britain",
 		track: "silverstone",
@@ -155,9 +155,9 @@ const calendarData = [
 		hasSprint: true,
 		canceled: false,
 		
-		recordingSprint: "https://rutube.ru/video/0e2264d285a6ec583de6f2bc063f2589/",
-		recordingQuali: "https://rutube.ru/video/92ae02a203708a3f296f8b57dd33cdfe/",
-		recordingRace: "https://rutube.ru/video/2ad23769b8475f5d88fabf24f7220eac/"
+		recordingSprint: "FQKAZt21_QY",
+		recordingQuali: "PAPAGIPO-QY",
+		recordingRace: "tQPAbRGEAwc"
 	},
 	{   id: "belgium",
 		track: "spa",
@@ -172,8 +172,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/40a90b042d58ae5cfc34ed9f1d6c24b2/",
-		recordingRace: "https://rutube.ru/video/f0ddd7af7d20cad89139a493c62e5781/"
+		recordingQuali: "6gOg4PrsWgc",
+		recordingRace: "KwPAzW-yXQc"
 	},
 	{   id: "hungary",
 		track: "hungaroring",
@@ -188,8 +188,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/55ded792e68ca0eae882078b50c05f7a/",
-		recordingRace: "https://rutube.ru/video/8d838029ed38ee3be92af7472ac078f4/"
+		recordingQuali: "xQKgjsHNigc",
+		recordingRace: "twFAj8HNigc"
 	},
 	{   id: "netherlands",
 		track: "zandvoort",
@@ -203,9 +203,9 @@ const calendarData = [
 		hasSprint: true,
 		canceled: false,
 		
-		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: "https://rutube.ru/video/8ef214ecabac601412ba3dd39d092856/"
+		recordingSprint: "-ABgnWdaQAg",
+		recordingQuali: "LQKAG2daQAg",
+		recordingRace: "jwJgJ2daQAg"
 	},
 	{   id: "italy",
 		track: "monza",
@@ -688,53 +688,53 @@ function renderCalendarCards(container) {
             </div>
         `;
 
-// Футер
-const footer = document.createElement('div');
-footer.className = 'calendar-card-footer';
+		// Футер
+		const footer = document.createElement('div');
+		footer.className = 'calendar-card-footer';
 
-if (gp.canceled) {
-    footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
-} else {
-    let btns = '';
-    let showTimer = false;
+		if (gp.canceled) {
+			footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
+		} else {
+			let btns = '';
+			let showTimer = false;
 
-    // ✅ Кнопка спринта - открывает видео в модалке
-    if (gp.hasSprint && gp.recordingSprint) {
-        btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${track.name}">Спринт</button>`;
-    }
+			// ✅ Кнопка спринта - открывает видео в модалке
+			if (gp.hasSprint && gp.recordingSprint) {
+				btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${track.name}">Спринт</button>`;
+			}
 
-    // ✅ Кнопка квалификации - открывает видео в модалке
-    if (gp.recordingQuali) {
-        btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${track.name}">Квалификация</button>`;
-    }
+			// ✅ Кнопка квалификации - открывает видео в модалке
+			if (gp.recordingQuali) {
+				btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${track.name}">Квалификация</button>`;
+			}
 
-    // Гонка
-    if (isPast || nearStart) {
-        if (gp.recordingRace) {
-            btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${track.name}">Гонка</button>`;
-        } else if (isPast) {
-            btns += '<span class="calendar-btn disabled">Нет записи</span>';
-        }
-    } else {
-        showTimer = true;
-    }
+			// Гонка
+			if (isPast || nearStart) {
+				if (gp.recordingRace) {
+					btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${track.name}">Гонка</button>`;
+				} else if (isPast) {
+					btns += '<span class="calendar-btn disabled">Нет записи</span>';
+				}
+			} else {
+				showTimer = true;
+			}
 
-    if (showTimer) {
-        btns += `
-            <div class="calendar-countdown">
-                <span>До гонки:</span>
-                <div class="calendar-timer" data-date="${gp.date}">
-                    <span class="calendar-timer-days">00</span>д
-                    <span class="calendar-timer-hours">00</span>ч
-                    <span class="calendar-timer-minutes">00</span>м
-                    <span class="calendar-timer-seconds">00</span>с
-                </div>
-            </div>
-        `;
-    }
+			if (showTimer) {
+				btns += `
+					<div class="calendar-countdown">
+						<span>До гонки:</span>
+						<div class="calendar-timer" data-date="${gp.date}">
+							<span class="calendar-timer-days">00</span>д
+							<span class="calendar-timer-hours">00</span>ч
+							<span class="calendar-timer-minutes">00</span>м
+							<span class="calendar-timer-seconds">00</span>с
+						</div>
+					</div>
+				`;
+			}
 
-    footer.innerHTML = btns;
-}
+			footer.innerHTML = btns;
+		}
 
         // Сборка карточки
         const divider1 = document.createElement('div');
@@ -763,7 +763,7 @@ if (gp.canceled) {
 				}
 			});
 		});
-		
+	
         card.addEventListener('click', (e) => {
             if (!e.target.closest('a')) {
                 openTrackModal(track, gp);
@@ -1138,8 +1138,10 @@ function scrollToGPCard(gpId, cardsArea) {
     }, 800);
 }
 
-// Функция для открытия видео в модальном окне
-function openVideoModal(videoUrl, title) {
+function openVideoModal(videoId, title) {
+    // Если videoId пустой или undefined — ничего не делаем
+    if (!videoId) return;
+    
     // Удаляем существующее модальное окно, если есть
     const existing = document.querySelector('.video-modal-overlay');
     if (existing) existing.remove();
@@ -1171,7 +1173,6 @@ function openVideoModal(videoUrl, title) {
         overlay.remove();
         unlock();
         document.removeEventListener('keydown', esc);
-        // Останавливаем видео при закрытии
         const iframe = modal.querySelector('iframe');
         if (iframe) {
             iframe.src = '';
@@ -1182,13 +1183,8 @@ function openVideoModal(videoUrl, title) {
         if (e.key === 'Escape') close();
     }
 
-    // Извлекаем ID видео из URL rutube
-    let embedUrl = videoUrl;
-    // Если это ссылка на страницу rutube, конвертируем в embed
-    if (videoUrl.includes('rutube.ru/video/')) {
-        const videoId = videoUrl.split('/').pop().split('?')[0];
-        embedUrl = `https://rutube.ru/play/embed/${videoId}/?skinColor=E53935`;
-    }
+    // Формируем полный URL для Matreshka.tv
+    const embedUrl = `https://matreshka.tv/embed/video/${videoId}`;
 
     modal.innerHTML = `
         <button class="video-modal-close">&times;</button>
@@ -1197,23 +1193,22 @@ function openVideoModal(videoUrl, title) {
         </div>
         <div class="video-modal-body">
             <iframe 
-                width="100%" 
-                height="100%" 
+                width="560" 
+                height="315" 
                 src="${embedUrl}" 
-                style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-                allow="clipboard-write; autoplay" 
-                allowFullScreen
+                title="${title}"
+                frameborder="0" 
+                allowfullscreen
+                style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
                 loading="lazy"
             ></iframe>
         </div>
     `;
 
-    // Закрытие по клику на крестик
     modal.querySelector('.video-modal-close').addEventListener('click', close);
 
     overlay.appendChild(modal);
     
-    // Закрытие по клику на фон
     overlay.addEventListener('click', e => {
         if (e.target === overlay) close();
     });
@@ -1221,7 +1216,6 @@ function openVideoModal(videoUrl, title) {
     document.addEventListener('keydown', esc);
     document.body.appendChild(overlay);
 
-    // Анимация появления
     requestAnimationFrame(() => {
         overlay.classList.add('active');
         modal.classList.add('active');

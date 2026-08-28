@@ -531,16 +531,6 @@ h1, h2 {
     text-align: left;
 }
 
-.nextgp-countdown {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.9rem;
-    color: #aaa;
-    margin-bottom: -10px;
-}
-
 .countdown-timer strong {
     font-family: 'F1Numbers', sans-serif;
     color: var(--red-accent);
@@ -567,23 +557,40 @@ h1, h2 {
     margin-top: 5px;
 }
 
+.nextgp-buttons-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+/* Контейнер для кнопок (Спринт, Квалификация) */
 .nextgp-links {
     display: flex;
-    gap: 8px;
-    margin-top: 10px;
     flex-wrap: wrap;
+    gap: 6px;
+    order: 1;
+}
+
+/* Контейнер для таймера/кнопки Гонки */
+.nextgp-countdown {
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+    order: 2;
 }
 
 .nextgp-footer {
-    display: flex;
-    flex-direction: column;
+    display: flex; 
 }
 
 .main-gp-btn.race {
     border: 1px solid var(--red-accent);
     color: var(--red-accent);
     font-size: 0.9rem;
-    padding: 5px 6px 3px 6px;
+    padding: 4px 4px 1px 4px;
+    background: transparent;
 }
 
 .main-gp-btn.race:hover {
@@ -600,11 +607,14 @@ h1, h2 {
     text-decoration: none;
     transition: all 0.2s ease;
     cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
 }
 
 .main-gp-btn.sprint {
     border: 1px solid #FFC107;
     color: #FFC107;
+    background: transparent;
 }
 .main-gp-btn.sprint:hover {
     background: #FFC107;
@@ -614,6 +624,7 @@ h1, h2 {
 .main-gp-btn.quali {
     border: 1px solid #4CAF50;
     color: #4CAF50;
+    background: transparent;
 }
 .main-gp-btn.quali:hover {
     background: #4CAF50;
@@ -3772,7 +3783,7 @@ h1, h2 {
 }
 
 .video-modal-header {
-    padding:8px 15px 0;
+    padding: 8px 15px 0;
     color: #fff;
     font-family: 'F1Title', sans-serif;
 }
@@ -3793,85 +3804,4 @@ h1, h2 {
     padding: 15px 24px 24px;
     width: 100%;
     aspect-ratio: 16 / 9;
-}
-
-/* Стили для кнопок внутри видео модалки - теперь они цветные */
-.video-modal .calendar-btn,
-.video-modal .main-gp-btn {
-    display: inline-block;
-    padding: 8px 16px;
-    margin: 4px;
-    border-radius: 6px;
-    border: none;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    color: #fff !important;
-    background: transparent;
-}
-
-.video-modal .calendar-btn.sprint,
-.video-modal .main-gp-btn.sprint {
-    background: #FF6B00;
-    color: #fff !important;
-}
-
-.video-modal .calendar-btn.quali,
-.video-modal .main-gp-btn.quali {
-    background: #1a73e8;
-    color: #fff !important;
-}
-
-.video-modal .calendar-btn.race,
-.video-modal .main-gp-btn.race {
-    background: #E10600;
-    color: #fff !important;
-}
-
-.video-modal .calendar-btn:hover,
-.video-modal .main-gp-btn:hover {
-    opacity: 0.85;
-    transform: scale(1.05);
-}
-
-.video-modal .calendar-btn.sprint:hover {
-    background: #FF8C00;
-}
-
-.video-modal .calendar-btn.quali:hover {
-    background: #1a8af0;
-}
-
-.video-modal .calendar-btn.race:hover {
-    background: #FF1A1A;
-}
-
-/* Мобильная адаптация */
-@media (max-width: 768px) {
-    .video-modal {
-        width: 95%;
-        border-radius: 12px;
-    }
-    
-    .video-modal-body {
-        padding: 12px 12px 12px;
-    }
-    
-    .video-modal-header {
-        padding: 12px 16px 0;
-    }
-    
-    .video-modal-title {
-        font-size: 14px;
-    }
-    
-    .video-modal-close {
-        top: 8px;
-        right: 10px;
-        width: 36px;
-        height: 36px;
-        font-size: 22px;
-    }
 }

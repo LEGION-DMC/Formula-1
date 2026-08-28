@@ -1158,68 +1158,80 @@ function startMainTimer() {
         const qualiDate = nextGP.quali ? new Date(nextGP.quali) : null;
         const sprintDate = nextGP.sprint ? new Date(nextGP.sprint) : null;
         
-        // Обновляем только таймер
-        const countdownEl = block.querySelector('.countdown-timer');
-        const linksContainer = block.querySelector('.nextgp-links');
+        // Получаем контейнер для кнопок
+        const footer = block.querySelector('.nextgp-footer');
+        let linksDiv = block.querySelector('.nextgp-links');
         
         // Создаём контейнер для ссылок, если его нет
-        let linksDiv = linksContainer;
-        if (!linksDiv) {
-            const footer = block.querySelector('.nextgp-footer');
-            if (footer) {
-                linksDiv = document.createElement('div');
-                linksDiv.className = 'nextgp-links';
-                footer.appendChild(linksDiv);
-            }
+        if (!linksDiv && footer) {
+            linksDiv = document.createElement('div');
+            linksDiv.className = 'nextgp-links';
+            footer.appendChild(linksDiv);
+        }
+        
+        // Получаем контейнер для таймера/кнопки гонки
+        let btnContainer = block.querySelector('.nextgp-countdown');
+        if (!btnContainer && footer) {
+            btnContainer = document.createElement('div');
+            btnContainer.className = 'nextgp-countdown';
+            footer.appendChild(btnContainer);
         }
         
         if (linksDiv) {
-            // Очищаем контейнер
             linksDiv.innerHTML = '';
             
-            // Кнопка СПРИНТА — только если есть ссылка И время >= за час до спринта
+            // Кнопка СПРИНТА
             if (sprintDate && nextGP.recordingSprint && now >= new Date(sprintDate.getTime() - 5 * 60 * 1000)) {
-                const sprintEl = document.createElement('a');
-                sprintEl.href = nextGP.recordingSprint;
-                sprintEl.target = '_blank';
+                const sprintEl = document.createElement('button');
                 sprintEl.className = 'main-gp-btn sprint';
                 sprintEl.textContent = 'Спринт';
-                sprintEl.onclick = (e) => e.stopPropagation();
+                sprintEl.dataset.video = nextGP.recordingSprint;
+                sprintEl.dataset.title = `Спринт ${nextTrack.name}`;
+                sprintEl.onclick = (e) => {
+                    e.stopPropagation();
+                    if (typeof openVideoModal === 'function') {
+                        openVideoModal(sprintEl.dataset.video, sprintEl.dataset.title);
+                    }
+                };
                 linksDiv.appendChild(sprintEl);
             }
             
-            // Кнопка КВАЛИФИКАЦИИ — только если есть ссылка И время >= за час до квалификации
+            // Кнопка КВАЛИФИКАЦИИ
             if (qualiDate && nextGP.recordingQuali && now >= new Date(qualiDate.getTime() - 5 * 60 * 1000)) {
-                const qualiEl = document.createElement('a');
-                qualiEl.href = nextGP.recordingQuali;
-                qualiEl.target = '_blank';
+                const qualiEl = document.createElement('button');
                 qualiEl.className = 'main-gp-btn quali';
                 qualiEl.textContent = 'Квалификация';
-                qualiEl.onclick = (e) => e.stopPropagation();
+                qualiEl.dataset.video = nextGP.recordingQuali;
+                qualiEl.dataset.title = `Квалификация ${nextTrack.name}`;
+                qualiEl.onclick = (e) => {
+                    e.stopPropagation();
+                    if (typeof openVideoModal === 'function') {
+                        openVideoModal(qualiEl.dataset.video, qualiEl.dataset.title);
+                    }
+                };
                 linksDiv.appendChild(qualiEl);
             }
         }
         
         // Обновляем таймер или кнопку гонки
-        const btnContainer = block.querySelector('.nextgp-countdown');
-        if (!btnContainer) return;
-        
-        // Кнопка ГОНКИ — только если есть ссылка И время >= за час до гонки
-        if (now >= new Date(raceDate.getTime() - 5 * 60 * 1000)) {
-            if (nextGP.recordingRace) {
-                btnContainer.innerHTML = `<a href="${nextGP.recordingRace}" target="_blank" class="main-gp-btn race" onclick="event.stopPropagation()">Гонка</a>`;
+        if (btnContainer) {
+            // Кнопка ГОНКИ — только если есть ссылка И время >= за час до гонки
+            if (now >= new Date(raceDate.getTime() - 5 * 60 * 1000)) {
+                if (nextGP.recordingRace) {
+                    btnContainer.innerHTML = `<button class="main-gp-btn race" onclick="event.stopPropagation(); if(typeof openVideoModal==='function'){openVideoModal('${nextGP.recordingRace}', 'Гонка ${nextTrack.name}');}">Гонка</button>`;
+                } else {
+                    btnContainer.innerHTML = '<span class="calendar-status-text">Гонка скоро начнётся</span>';
+                }
+            } else if (diff > 0) {
+                // Таймер до гонки
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                btnContainer.innerHTML = `<span>До гонки:</span> <span class="countdown-timer"><strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.</span>`;
             } else {
-                btnContainer.innerHTML = '<span class="calendar-status-text">Гонка скоро начнётся</span>';
+                btnContainer.innerHTML = '<span class="calendar-status-text">Гонка завершена</span>';
             }
-        } else if (diff > 0) {
-            // Таймер до гонки
-            const d = Math.floor(diff / 86400000);
-            const h = Math.floor((diff % 86400000) / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
-            btnContainer.innerHTML = `<span>До гонки:</span> <span class="countdown-timer"><strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.</span>`;
-        } else {
-            btnContainer.innerHTML = '<span class="calendar-status-text">Гонка завершена</span>';
         }
     };
     
