@@ -279,10 +279,7 @@ h1, h2 {
 .statistics-row:hover {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid red;
-}
-
-.statistics-row:active {
-    transform: scale(0.98);
+    transform: translateX(1.5px) !important;
 }
 
 /* Левая часть строки (иконка + имя) */
@@ -679,6 +676,9 @@ h1, h2 {
     background: rgba(255, 255, 255, 0.1);
     transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
     transform: translateX(0);
+    min-height: 83px;
+    max-height: 84px;
+    box-sizing: border-box;
 }
 
 .tyre-item:hover {
@@ -693,7 +693,6 @@ h1, h2 {
 
 .tyre-item.dimmed.clickable {
     opacity: 0.35;
-    padding-bottom: 1.8vh;
 }
 
 .tyre-item.clickable {
@@ -927,8 +926,6 @@ h1, h2 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    max-width: 1500px;
-    margin: 0 auto;
     width: 100%;
 }
 
