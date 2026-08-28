@@ -242,7 +242,7 @@ const calendarData = [
 	{   id: "azerbaijan",
 		track: "baku",
 		
-		tires: "C2, C3, C4",
+		tires: "C3, C4, C5",
 		
 		date: "2026-09-26 19:00",
 		quali: "",
@@ -274,7 +274,7 @@ const calendarData = [
 	{   id: "singapore",
 		track: "marina_bay",
 		
-		tires: "C2, C3, C4",
+		tires: "C2, C4, C5",
 		
 		date: "2026-10-11 20:00",
 		quali: "",
