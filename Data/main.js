@@ -117,6 +117,27 @@ function getWeatherLocation(nextGP, nextTrack) {
     return locationMap[nextGP.track] || '51.507,-0.128';
 }
 
+function getYearsWord(age) {
+    if (age === undefined || age === null || isNaN(age)) return 'лет';
+    
+    const lastDigit = age % 10;
+    const lastTwoDigits = age % 100;
+    
+    // Исключения для 11-14 лет
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+        return 'лет';
+    }
+    
+    // Правила склонения
+    if (lastDigit === 1) {
+        return 'год';
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+        return 'года';
+    } else {
+        return 'лет';
+    }
+}
+
 function calculateAgeOnDate(birthDate, targetDate) {
     const parts = birthDate.split('.');
     if (parts.length !== 3) return 0;
@@ -236,7 +257,7 @@ function createBirthdayBlock() {
                         <img src="Images/Flags/${driver.country}.svg" class="birthday-flag" onerror="this.style.display='none'">
                         <span>${driver.name}</span>
                     </div>
-                    <span class="birthday-age-small">${age} лет</span>
+                    <span class="birthday-age-small">${age} ${getYearsWord(age)}</span>
                 </div>
             </div>
         `;

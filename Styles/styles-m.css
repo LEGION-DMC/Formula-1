@@ -661,6 +661,11 @@ body {
 .modal-career-item[data-team="aston-martin"] .modal-career-team-name {
     font-size: 7.9px;
 }
+
+.modal-reserve-team-item {
+    font-size: 10px;
+}
+
 /* ============================================== */
 /* ВКЛАДКА: КОМАНДЫ                              */
 /* ============================================== */

@@ -1521,26 +1521,37 @@ h1, h2 {
     align-items: center; 
     gap: 8px;
     cursor: pointer;
-    padding: 1px 5px;
+    padding: 3px 5px 3px 5px;
+    margin-top: -5px;
+    margin-bottom: -3px;
     margin-left: -6px;
     border-radius: 4px;
     transition: all 0.2s ease;
     width: fit-content;
     color: gray; 
+    transition: all 0.25s ease; 
+    border: 1px solid transparent;
 }
 
 .modal-team-row:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.97); }
 
-.modal-team-logo { width: 28px; height: 20px; object-fit: contain; }
+.modal-team-logo { 
+    width: 27px; 
+    height: 19px; 
+    object-fit: contain;
+}
+
 .modal-team-row span { 
     font-family: 'F1Title', sans-serif; 
     font-size: 0.95rem;
     padding-top: 2px; }
 
-.modal-team-row:hover { 
+.modal-team-row:hover {
     background-color: rgba(255, 255, 255, 0.05);
     transform: scale(1.03);
     color: var(--team-color);
+    transform: translateX(5px); 
+    border: 1px solid var(--team-color);
 }
 
 .modal-reserve-teams {
@@ -1558,7 +1569,7 @@ h1, h2 {
 
 .modal-reserve-teams-list {
     display: flex;
-    gap: 5px;
+    gap: 10px;
 }
 
 .modal-reserve-team-item {
@@ -1568,11 +1579,16 @@ h1, h2 {
     gap: 5px;
     align-items: center;
     cursor: pointer;
-    padding: 0px 5px 2px 5px;
+    padding: 3px 5px 3px 5px;
+    margin-top: -5px;
+    margin-bottom: -3px;
+    margin-left: -6px;
     border-radius: 4px;
     transition: all 0.2s ease;
     width: fit-content;
     color: gray; 
+    transition: all 0.25s ease; 
+    border: 1px solid transparent;
 }
 
 .modal-reserve-team-item span {
@@ -1583,6 +1599,7 @@ h1, h2 {
     background: rgba(255, 255, 255, 0.05);
     transform: scale(1.02);
     color: var(--team-color, #ff6b35);
+    border: 1px solid var(--team-color);
 }
 
 .modal-details-row {
@@ -1615,15 +1632,16 @@ h1, h2 {
     word-spacing: -4px;
 }
 
-.modal-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
+.modal-stats-row { display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 8px; text-align: center; }
 
 .stat-cell {
     background-color: rgba(255, 255, 255, 0.02);
     border-radius: 8px;
-    padding: 12px 5px;
+    padding: 5px 0px 8px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
     transition: all 0.25s ease; /* Добавлено: плавность для всех свойств */
     border: 1px solid transparent;
 }
@@ -1711,7 +1729,7 @@ h1, h2 {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 4px 3px;
+    gap: 5px 3px;
 }
 
 .modal-career-item {
@@ -1727,12 +1745,12 @@ h1, h2 {
     opacity: 0;
     transform: translateY(8px) scale(0.95);
     min-width: auto;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 /* Стили для временных команд в карьере (жёлтый бордюр) */
 .modal-career-item.career-temporary {
-    border: 1px solid rgba(255, 255, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 0, 0.6) !important;
 }
 
 @keyframes careerItemAppear {
@@ -1912,11 +1930,15 @@ h1, h2 {
     border-radius: 4px;
     transition: background 0.2s ease; 
     transition: all 0.2s ease;
+    transition: all 0.25s ease; 
+    border: 1px solid transparent;
 }
 
-.team-driver-row:not(.empty):hover { 
-    background-color: rgba(255, 255, 255, 0.08);
-    transform: translateX(2px); }
+.team-driver-row:hover {
+    transform: translateX(2px); 
+    border: 1px solid var(--team-color);
+}
+
 .team-driver-row:not(.empty):active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.98); }
 .team-driver-row.empty { color: #666; font-style: italic; justify-content: center; }
 
@@ -1988,12 +2010,19 @@ h1, h2 {
 .tm-stat-cell {
     background: rgba(255, 255, 255, 0.03);
     border-radius: 8px;
-    padding: 10px 8px;
+    padding: 8px 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 5px;
     text-align: center;
+    transition: all 0.25s ease; 
+    border: 1px solid transparent;
+}
+
+.tm-stat-cell:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid red;
 }
 
 .tm-stat-cell.tm-stat-full {
@@ -2136,11 +2165,15 @@ h1, h2 {
     transition: all 0.1s ease;
     background-color: rgba(255, 255, 255, 0.03);
     flex: 1;
+    transition: all 0.25s ease; 
+    border: 1px solid transparent;
 }
 
-.tm-pilot-row:hover { 
+
+.tm-pilot-row:hover {
     background-color: rgba(255, 255, 255, 0.1); 
     transform: translateY(-3px); 
+    border: 1px solid red;
 }
 
 .tm-pilot-row:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.98); }
@@ -2217,7 +2250,7 @@ h1, h2 {
     flex-direction: column;
     gap: 5px;
     text-align: center;
-    transition: all 0.25s ease; /* Добавлено: плавность для всех свойств */
+    transition: all 0.25s ease; 
     border: 1px solid transparent;
 }
 
