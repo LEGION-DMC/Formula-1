@@ -246,11 +246,13 @@ function createBirthdayBlock() {
     let driversHTML = '';
     birthdayList.forEach((item, index) => {
         const driver = item.driver;
-        // 👇 Считаем возраст НА ДАТУ дня рождения (а не текущий)
         const age = calculateAgeOnDate(driver.birthDate, item.date);
         
+        // 👇 Получаем цвет команды для бордюра
+        const teamColor = getTeamColor(driver.team);
+        
         driversHTML += `
-            <div class="birthday-driver-item" data-driver-id="${driver.id}">
+            <div class="birthday-driver-item" data-driver-id="${driver.id}" style="--team-color: ${teamColor}">
                 <div class="birthday-driver-info">
                     <span class="birthday-number">${driver.number}</span>
                     <div class="birthday-name">
@@ -395,6 +397,7 @@ function createStatRow(type) {
     row.className = 'statistics-row';
     
     let iconHTML, nameHTML, valueHTML, clickTarget;
+    let teamColor = '#FFFFFF'; // цвет по умолчанию
     
     if (type === 'leader') {
         const leader = getChampionshipLeader();
@@ -403,8 +406,8 @@ function createStatRow(type) {
             nameHTML = `<span class="statistics-row-name">${leader.name}</span>`;
             valueHTML = `<span class="statistics-row-value">${leader.points}</span>`;
             clickTarget = 'results';
+            teamColor = getTeamColor(leader.team);
         } else {
-            // Убираем иконку для "Нет данных"
             iconHTML = '';
             nameHTML = `<span class="statistics-row-name empty">Нет данных</span>`;
             valueHTML = '';
@@ -417,8 +420,8 @@ function createStatRow(type) {
             nameHTML = `<span class="statistics-row-name">${leader.team}</span>`;
             valueHTML = `<span class="statistics-row-value">${leader.points}</span>`;
             clickTarget = 'results';
+            teamColor = getTeamColor(leader.team);
         } else {
-            // Убираем иконку для "Нет данных"
             iconHTML = '';
             nameHTML = `<span class="statistics-row-name empty">Нет данных</span>`;
             valueHTML = '';
@@ -431,14 +434,17 @@ function createStatRow(type) {
             nameHTML = `<span class="statistics-row-name">${best.team}</span>`;
             valueHTML = `<span class="statistics-row-value">${best.time}с</span>`;
             clickTarget = 'stats';
+            teamColor = getTeamColor(best.team);
         } else {
-            // Убираем иконку для "Нет данных"
             iconHTML = '';
             nameHTML = `<span class="statistics-row-name empty">Нет данных</span>`;
             valueHTML = '';
             clickTarget = 'stats';
         }
     }
+    
+    // Устанавливаем цвет команды как CSS-переменную
+    row.style.setProperty('--team-color', teamColor);
     
     // Левая часть: иконка + имя
     const leftPart = document.createElement('div');
@@ -453,9 +459,21 @@ function createStatRow(type) {
     
     // Клик для перехода
     row.addEventListener('click', () => {
-        document.querySelectorAll('.menu-item').forEach(btn => {
-            if (btn.dataset.tab === clickTarget) btn.click();
-        });
+        if (clickTarget === 'stats') {
+            // Для пит-стопа используем специальную функцию с подсветкой
+            if (typeof navigateToStatsWithPitstopHighlight === 'function') {
+                navigateToStatsWithPitstopHighlight();
+            } else {
+                // Fallback: обычный переход
+                document.querySelectorAll('.menu-item').forEach(btn => {
+                    if (btn.dataset.tab === clickTarget) btn.click();
+                });
+            }
+        } else {
+            document.querySelectorAll('.menu-item').forEach(btn => {
+                if (btn.dataset.tab === clickTarget) btn.click();
+            });
+        }
     });
     
     return row;

@@ -1241,3 +1241,110 @@ function createEnginePartsTable() {
 
     return wrapper;
 }
+
+function scrollToPitstopTable(element) {
+    if (!element) return;
+    
+    // Проверяем, виден ли элемент полностью
+    const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const isFullyVisible = (
+        rect.top >= 50 &&
+        rect.bottom <= windowHeight - 20
+    );
+    
+    // Для мобильных или если элемент не виден полностью
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile || !isFullyVisible) {
+        // Получаем позицию элемента с учётом фиксированного меню
+        const headerHeight = document.querySelector('.main-header')?.offsetHeight || 60;
+        const menuHeight = document.querySelector('.menu')?.offsetHeight || 50;
+        const offset = headerHeight + menuHeight + 20;
+        
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        // Используем requestAnimationFrame для плавности
+        const startPosition = window.pageYOffset;
+        const targetPosition = Math.max(0, offsetPosition);
+        const distance = targetPosition - startPosition;
+        const duration = 600; // 600ms для плавности
+        let startTime = null;
+        
+        function smoothScroll(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            
+            // Easing function (ease-in-out cubic)
+            const ease = progress < 0.5 
+                ? 4 * progress * progress * progress 
+                : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            
+            const currentPosition = startPosition + distance * ease;
+            window.scrollTo(0, currentPosition);
+            
+            if (progress < 1) {
+                requestAnimationFrame(smoothScroll);
+            }
+        }
+        
+        requestAnimationFrame(smoothScroll);
+    }
+}
+
+function navigateToStatsWithPitstopHighlight() {
+    const menuItems = document.querySelectorAll('.menu-item');
+    let statsBtn = null;
+    
+    menuItems.forEach(btn => {
+        if (btn.dataset.tab === 'stats') {
+            statsBtn = btn;
+        }
+    });
+    
+    if (!statsBtn) {
+        console.warn('Кнопка статистики не найдена');
+        return;
+    }
+    
+    statsBtn.click();
+    
+    let attempts = 0;
+    const maxAttempts = 20;
+    
+    const checkForTable = setInterval(() => {
+        attempts++;
+        const pitstopWrapper = document.querySelector('.stats-table-wrapper:has(.pitstop-table)');
+        
+        if (pitstopWrapper || attempts >= maxAttempts) {
+            clearInterval(checkForTable);
+            
+            if (pitstopWrapper) {
+                // Даём время на рендеринг
+                const isMobile = window.innerWidth <= 768;
+                const delay = isMobile ? 400 : 250;
+                
+                setTimeout(() => {
+                    highlightPitstopTable();
+                    
+                    // Небольшая задержка перед прокруткой для корректного позиционирования
+                    setTimeout(() => {
+                        scrollToPitstopTable(pitstopWrapper);
+                    }, 100);
+                }, delay);
+            }
+        }
+    }, 150);
+}
+
+function highlightPitstopTable() {
+    const pitstopWrapper = document.querySelector('.stats-table-wrapper:has(.pitstop-table)');
+    if (!pitstopWrapper) return;
+    
+    pitstopWrapper.classList.add('highlight-pitstop');
+    
+    setTimeout(() => {
+        pitstopWrapper.classList.remove('highlight-pitstop');
+    }, 3000);
+}
