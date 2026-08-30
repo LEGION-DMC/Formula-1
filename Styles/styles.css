@@ -2023,7 +2023,7 @@ h1, h2 {
 .tm-stat-cell:hover {
     transform: translateY(-3px);
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid red;
+    border: 1px solid var(--team-color);
 }
 
 .tm-stat-cell.tm-stat-full {
@@ -2172,9 +2172,8 @@ h1, h2 {
 
 
 .tm-pilot-row:hover {
-    background-color: rgba(255, 255, 255, 0.1); 
     transform: translateY(-3px); 
-    border: 1px solid red;
+    border: 1px solid var(--team-color);
 }
 
 .tm-pilot-row:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.98); }
@@ -2258,7 +2257,7 @@ h1, h2 {
 .tm-bolid-info-cell:hover {
     transform: translateY(-3px);
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid red;
+    border: 1px solid var(--team-color);
 }
 
 
