@@ -1649,13 +1649,13 @@ h1, h2 {
 .stat-cell:hover {
     transform: translateY(-3px);
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid red;
+    border: 1px solid var(--team-color);
 }
 
 .stat-number {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
     font-size: 1.75rem;
-    color: var(--red-accent);
+    color: var(--team-color);
 }
 
 .stat-number .gp-year-suffix {
@@ -1732,6 +1732,7 @@ h1, h2 {
     gap: 5px 3px;
 }
 
+/* Базовый стиль для карьерных плашек */
 .modal-career-item {
     display: flex;
     align-items: center;
@@ -1745,12 +1746,8 @@ h1, h2 {
     opacity: 0;
     transform: translateY(8px) scale(0.95);
     min-width: auto;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-/* Стили для временных команд в карьере (жёлтый бордюр) */
-.modal-career-item.career-temporary {
-    border: 1px solid rgba(255, 255, 0, 0.6) !important;
+    /* Бордюр через var(--team-color) */
+    border: 1px solid var(--team-color);
 }
 
 @keyframes careerItemAppear {
@@ -1799,6 +1796,10 @@ h1, h2 {
     text-overflow: ellipsis;
     text-align: center;
     max-width: 80px;
+}
+
+.modal-career-team-name.career-temporary {
+    color: rgba(255, 255, 0, 0.6) !important;
 }
 
 /* Специально для Aston Martin */

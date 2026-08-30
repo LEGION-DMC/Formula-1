@@ -1288,10 +1288,9 @@ function createCareerBlock(careerData) {
         careerItem.className = 'modal-career-item';
         careerItem.style.setProperty('--career-delay', `${index * 100}ms`);
         
-        // Если период временный - добавляем класс
-        if (item.temporarily) {
-            careerItem.classList.add('career-temporary');
-        }
+        // 👇 Устанавливаем цвет команды для бордюра
+        const teamColor = getTeamColor(item.team);
+        careerItem.style.setProperty('--team-color', teamColor);
         
         // Добавляем data-атрибут для специальных стилей
         const teamSlug = item.team.toLowerCase().replace(/\s+/g, '-');
@@ -1322,6 +1321,11 @@ function createCareerBlock(careerData) {
         const teamName = document.createElement('div');
         teamName.className = 'modal-career-team-name';
         teamName.textContent = item.team;
+        
+        // 👇 Если временный период - добавляем класс для жёлтого текста
+        if (item.temporarily) {
+            teamName.classList.add('career-temporary');
+        }
 
         const year = document.createElement('div');
         year.className = 'modal-career-year';
@@ -1637,12 +1641,26 @@ function openDriverModal(driver) {
     });
 }
 
+const archiveTeamColors = {
+    'toro-rosso': '#469BFF',
+    'sauber': '#3A3D40',
+    'alphatauri': '#022B4A',
+    'force-india': '#FF9933',
+    'racing-point': '#F596C8',
+    'minardi': '#FFD700',
+    'manor': '#FF4C00',
+    'renault': '#FFF500',
+    'alfa-romeo': '#9B0000',
+    'stake': '#01C00E'
+};
+
 function getTeamLogo(teamName) {
     const slug = teamName.toLowerCase().replace(/\s+/g, '-');
     
     // Список архивных команд
     const archiveTeams = [
-        'toro-rosso', 'sauber', 'alphatauri', 'force-india', 'racing-point', 'minardi', 'manor', 'renault','alfa-romeo', 'stake'
+        'toro-rosso', 'sauber', 'alphatauri', 'force-india', 'racing-point', 
+        'minardi', 'manor', 'renault', 'alfa-romeo', 'stake'
     ];
     
     if (archiveTeams.includes(slug)) {
@@ -1650,6 +1668,19 @@ function getTeamLogo(teamName) {
     }
     
     return `Images/Teams/${slug}-m.png`;
+}
+
+function getTeamColor(teamName) {
+    const slug = teamName.toLowerCase().replace(/\s+/g, '-');
+    
+    // Проверяем архивные команды
+    if (archiveTeamColors[slug]) {
+        return archiveTeamColors[slug];
+    }
+    
+    // Проверяем действующие команды
+    const team = teamsData.find(t => t.shortName === teamName);
+    return team ? team.color : '#FFFFFF';
 }
 
 function getCountryName(code) {
