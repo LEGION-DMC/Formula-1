@@ -630,6 +630,8 @@ function buildCalendarNav(panel, cardsArea) {
 }
 
 function renderCalendarCards(container) {
+    let gpNumber = 0; // ← Добавлен счетчик этапов
+    
     calendarData.forEach(gp => {
         const track = getTrackForGP(gp.id);
         if (!track) return;
@@ -641,6 +643,9 @@ function renderCalendarCards(container) {
         const isToday = raceDate.toDateString() === now.toDateString();
         const isFuture = raceDate > now;
         const nearStart = isFuture && now >= oneHourBeforeRace;
+
+        const isCanceled = gp.canceled;
+        const displayNumber = isCanceled ? '-' : ++gpNumber; // ← Номер этапа
 
         const card = document.createElement('div');
         card.className = 'calendar-card';
@@ -661,13 +666,14 @@ function renderCalendarCards(container) {
         const infoDiv = document.createElement('div');
         infoDiv.className = 'calendar-card-info';
 
-        // Заголовок
+        // Заголовок с номером этапа
         const header = document.createElement('div');
         header.className = 'calendar-card-header';
         header.innerHTML = `
             <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-flag" title="${getCountryName(track.country)}">
             <span class="calendar-gp-name">${track.name}</span>
-            ${gp.hasSprint ? '<span class="calendar-sprint-badge-inline">СПРИНТ</span>' : ''}
+            ${gp.hasSprint ? '<span class="calendar-sprint-badge-inline">c</span>' : ''}
+            <span class="calendar-gp-number">${displayNumber}</span>
         `;
 
         // Детали

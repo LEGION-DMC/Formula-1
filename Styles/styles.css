@@ -1530,7 +1530,7 @@ h1, h2 {
     gap: 8px;
     cursor: pointer;
     padding: 3px 5px 3px 5px;
-    margin-top: -5px;
+    margin-top: -4px;
     margin-bottom: -3px;
     margin-left: -6px;
     border-radius: 4px;
@@ -3399,18 +3399,31 @@ h1, h2 {
 }
 
 .calendar-sprint-badge-inline {
-    background: #ffd700; color: black;
-    font-family: 'F1Title', sans-serif; font-size: 0.55rem;
-    padding: 3px 2px 1px 2px; border-radius: 2px;
-    animation: sprintPulse 1s ease infinite;     
-    margin-left: auto;                  
-    flex-shrink: 0;
-    margin-right: 1px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #ffd700;
+    color: black;
+    font-family: 'F1Title', sans-serif; 
+    font-size: 0.6rem;
+    padding: 3px 4px 1px 4px; 
+    border-radius: 50px;
+    animation: sprintPulse 1s ease infinite;  
 }
 
 .calendar-card-info { flex: 1; padding: 5px 5px; display: flex; flex-direction: column; gap: 5px; }
 
 .calendar-card-header { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+
+.calendar-gp-number {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 15px;
+    font-family: 'F1Title', sans-serif;
+    color: var(--accent-color, #e10600);
+}
+
 .calendar-flag { width: 20px; height: 14px; border-radius: 2px; margin-top: -2px; }
 .calendar-gp-name { 
     font-family: 'F1Title', sans-serif; 
@@ -3464,7 +3477,7 @@ h1, h2 {
 /* ===== КНОПКИ В КАРТОЧКАХ КАЛЕНДАРЯ ===== */
 .calendar-btn {
     display: inline-block;
-    padding: 3px 4px 1px 4px;
+    padding: 1px 4px 0px 4px;
     border-radius: 3px;
     font-family: 'F1Title', sans-serif;
     font-size: 0.7rem;
@@ -3544,12 +3557,14 @@ h1, h2 {
     display: inline-flex; 
     gap: 5px; 
     font-family: 'F1Numbers', sans-serif; 
-    color: #bbb; }
+    color: #bbb;
+}
 
 .calendar-timer-days, .calendar-timer-hours, 
 .calendar-timer-minutes, .calendar-timer-seconds  {
     color: red; 
     font-size: 0.85rem;
+    margin-top: -1px;
 }
 
 .calendar-race-started { color: var(--red-accent); 

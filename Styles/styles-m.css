@@ -598,7 +598,9 @@ body {
 }
 
 .driver-portrait-wrapper { width: 125px; height: 120px; }
-.driver-number-overlay { font-size: 1.5rem; right: -3px; top: -5px; }
+.driver-number-overlay { font-size: 1.5rem; 
+    right: -3px; top: -5px; 
+}
 .driver-flag-overlay { width: 24px; height: 16px; top: -2px; left: -2px; }
 .driver-short-name { font-size: 0.75rem; width: 140px; }
 .driver-team img { width: 30px; height: 15px; }

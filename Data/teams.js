@@ -3,10 +3,10 @@ const teamsData = [
         fullName: "Mercedes-AMG PETRONAS F1 Team",
         color: "#75F1D3",
         
-        base: "Милтон-Кинс", country: "gb",
+        base: "Брэкли", country: "gb",
         license: "Германия", license_country: "de",
         director: "Тото Вольфф", director_country: "de",
-        founder: "Норберт Хауг", founder_country: "de",
+        founder: "Mercedes-Benz", founder_country: "de",
         
         car: "W17 E",
         engine: "Mercedes",
@@ -15,8 +15,8 @@ const teamsData = [
 
         debut: "2010",
         firstWin: "Гран-при Китая 2012",
-        wins: 139,
         titles: 8,
+		champ_dri: 3,
         
         info: "В 1994 году компания Mercedes-Benz участвовала в F1, в качестве поставщика двигателей для гоночной команды Sauber. В 2009 году Mercedes-Benz приобрела 75% контрольного пакета в команде Brawn GP, выигравшей чемпионат 2009 года. Позднее Brawn GP, переименованная в Mercedes GP, дебютировала в 2010 году. За неё выступали немецкие пилоты Нико Росберг и Михаэль Шумахер."
     },
@@ -36,8 +36,8 @@ const teamsData = [
 
         debut: "1950",
         firstWin: "Гран-при Великобритании 1951",
-        wins: 250,
         titles: 16,
+		champ_dri: 9,
         
         info: "Итальянская команда, представляющая собой подразделение автомобильной компании Ferrari Gestione Sportiva, занимающееся гонками. Команда принимает участие в гонках F1 с 1950 года по сей день и является самой старой и успешной командой в чемпионате."
     },
@@ -57,8 +57,8 @@ const teamsData = [
 
         debut: "1966",
         firstWin: "Гран-при Бельгии 1968",
-        wins: 205,
         titles: 10,
+		champ_dri: 8,
         
         info: "Британская команда, представляющая собой подразделение McLaren Technology Group. В разное время команда участвовала и побеждала в различных автоспортивных соревнованиях, пять раз выигрывала соревнования Can-Am, трижды выигрывала 500 миль Индианаполиса, по одному разу в гонках 24 часа Ле-Мана и 12 часов Себринга, в настоящее время команда сконцентрирована на участии в чемпионате мира F1, где 10 раз завоёвывала кубок конструкторов."
     },
@@ -78,8 +78,8 @@ const teamsData = [
 
         debut: "2005",
         firstWin: "Гран-при Китая 2009",
-        wins: 130,
         titles: 6,
+		champ_dri: 2,
         
         info: "Австрийская команда, основана руководителем концерна по производству энергетических напитков Red Bull - Дитрихом Матешицем. Хотя база команды и расположена в Великобритания, но команда выступает под австрийской лицензией. Компания Ford Motor заявила о выходе принадлежащей ей команды Jaguar Racing из чемпионата F1 в сентябре 2004 года и уже ноябре Red Bull, подтвердил покупку Jaguar Racing в последний день подачи заявок на участие в сезоне 2005 года."
     },
@@ -99,8 +99,8 @@ const teamsData = [
 
         debut: "2006",
         firstWin: "Гран-при Италии 2008",
-        wins: 1,
         titles: 0,
+		champ_dri: 0,
         
         info: "Итальянская команда, принадлежащая австрийскому конгломерату Red Bull GmbH. С сезона 2006 по 2019 года команда выступала под названием Toro Rosso. К сезону 2020 года была переименована в AlphaTauri. К сезону 2024 года команда была переименована в своё текущее название."
     },
@@ -108,8 +108,8 @@ const teamsData = [
         fullName: "BWT Alpine F1 Team",
         color: "#479FE2",
         
-        base: "Эсон", country: "fr",
-        license: "Франция", license_country: "fr",
+        base: "Энстоун", country: "gb",
+        license: "Великобритания", license_country: "gb",
         director: "Флавио Бриаторе", director_country: "it",
         founder: "Renault Group", founder_country: "fr",
         
@@ -120,8 +120,8 @@ const teamsData = [
 
         debut: "2021",
         firstWin: "Гран-при Венгрии 2021",
-        wins: 1,
         titles: 0,
+		champ_dri: 0,
         
         info: "Французская команда, созданная на базе команды Renault. В дебютном сезоне за Альпин выступали, двукратный чемпион мира - Фернандо Алонсо и выступавший за команду Renault в 2020 году Эстебан Окон. Коллектив использовал силовые установки Renault. Резервным пилотом команды в сезоне 2021 года стал российский гонщик Даниил Квят."
     },
@@ -141,8 +141,8 @@ const teamsData = [
 
         debut: "2016",
         firstWin: "",
-        wins: 0,
         titles: 0,
+		champ_dri: 0,
         
         info: "Американская команда, является первой американской командой, принявшей решение об участии в F1, со времён неудавшегося проекта US F1 Team, старт которого планировался в 2010 году."
     },
@@ -150,10 +150,10 @@ const teamsData = [
         fullName: "Audi Revolut F1 Team",
         color: "#EB4526",
         
-        base: "Бавария", country: "de",
+        base: "Хинвил", country: "ch",
         license: "Германия", license_country: "de",
         director: "Маттиа Бинотто", director_country: "it",
-        founder: "Audi FR GmbH", founder_country: "de",
+        founder: "Audi AG", founder_country: "de",
         
         car: "RS-26",
         engine: "Audi",
@@ -162,8 +162,8 @@ const teamsData = [
 
         debut: "2026",
         firstWin: "",
-        wins: 0,
         titles: 0,
+		champ_dri: 0,
         
         info: "Немецкая команда, была сформирована путём приобретения команды Sauber, с двигателями, разработанными Audi Formula Racing GmbH. В 1930-39 годах, задолго до проведения первого чемпионата мира в 1950 году, компания Audi AG уже участвовала в гонках Гран-при под названием Auto Union. Спустя 85 лет современная компания Audi решила вернутся."
     },
@@ -171,10 +171,10 @@ const teamsData = [
         fullName: "Atlassian Williams Racing",
         color: "#3267D4",
         
-        base: "Гроу", country: "gb",
+        base: "Гроув", country: "gb",
         license: "Великобритания", license_country: "gb",
         director: "Джеймс Ваулз", director_country: "gb",
-        founder: "Фрэнк Уильямс", founder_country: "gb",
+        founder: "Фрэнсис Уильямс", founder_country: "gb",
         
         car: "FW48",
         engine: "Mercedes",
@@ -183,8 +183,8 @@ const teamsData = [
 
         debut: "1975",
         firstWin: "Гран-при Великобритании 1979",
-        wins: 114,
         titles: 9,
+		champ_dri: 7,
         
         info: "Британская команда, созданая Фрэнком Уильямсом и Патриком Хэдом под названием Williams Grand Prix Engineering. В сезоне 1980 года команда выиграла свой первый кубок конструкторов, опередив почти вдвое по очкам занявшую 2-е место Ligier. Все шасси команды содержат приставку FW - инициалы основателя команды."
     },
@@ -204,8 +204,8 @@ const teamsData = [
 
         debut: "2021",
         firstWin: "",
-        wins: 0,
         titles: 0,
+		champ_dri: 0,
         
         info: "Британская команда, созданная на базе команды Racing Point, после покупки бизнесменом Лоуренсом Строллом 20% процентов в компании Aston Martin. Пилотами команды на дебютный сезон стали - Лэнс Стролл, сын Лоуренса, и четырёхкратный чемпион мира - Себастьян Феттель."
     },
@@ -216,7 +216,7 @@ const teamsData = [
         base: "Фишерс", country: "us",
         license: "США", license_country: "us",
         director: "Марцин Будковски", director_country: "pl",
-        founder: "TWG Cadillac", founder_country: "us",
+        founder: "TWG Global", founder_country: "us",
         
         car: "MAC-26",
         engine: "Ferrari",
@@ -225,8 +225,8 @@ const teamsData = [
 
         debut: "2026",
         firstWin: "",
-        wins: 0,
         titles: 0,
+		champ_dri: 0,
         
         info: "Американская команда, первый сезон которой начался в 2026 году в качестве конструктора, а с сезона 2029 года - будет ещё и в качестве поставщика двигателей."
     },
@@ -467,9 +467,6 @@ function openTeamModal(team) {
     statsPanel.className = 'tm-stats-panel';
     statsPanel.style.setProperty('--team-color', team.color);
 
-	const isRacingBulls = team.shortName === "Racing Bulls";
-	const winsLabel = isRacingBulls ? "Подиумы" : "Победы";
-
 	const statsHTML = `
 		<div class="tm-stat-cell">
 			<span class="tm-stat-label">Дебют</span>
@@ -484,12 +481,12 @@ function openTeamModal(team) {
 			<span class="tm-stat-value">${team.firstWin || '---'}</span>
 		</div>
 		<div class="tm-stat-cell">
-			<span class="tm-stat-label">${winsLabel}</span>
-			<span class="tm-stat-value">${team.wins}</span>
-		</div>
-		<div class="tm-stat-cell">
 			<span class="tm-stat-label">Кубки конструкторов</span>
 			<span class="tm-stat-value">${team.titles || 0}</span>
+		</div>
+		<div class="tm-stat-cell">
+			<span class="tm-stat-label">Пилоты - Чемпионы</span>
+			<span class="tm-stat-value">${team.champ_dri}</span>
 		</div>
 	`;
 

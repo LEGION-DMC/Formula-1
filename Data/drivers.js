@@ -190,7 +190,7 @@ const driversData = [
         titles: 0,
         hattricks: 3,
         wins: 6,
-        podiums: 12,
+        podiums: 13,
         poles: 6,
 		
         note: "Выступает под #12 - номером легендарного Айртона Сенны",
@@ -507,7 +507,7 @@ const driversData = [
         hattricks: 19,
         wins: 106,
         podiums: 207,
-        poles: 105,
+        poles: 104,
 		
         note: "Рекордсмен по победам, поулам, подиумам.",
         bio: "7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда.",
@@ -817,6 +817,22 @@ function buildFilterPanel(panel, cardsArea) {
     let showReserve = false;
     let isAllSelected = true;
     
+    // Функция синхронизации чекбоксов
+    function syncCheckboxes(source, target, sourceAll, targetAll) {
+        Object.keys(source).forEach(team => {
+            if (target[team]) {
+                target[team].checked = source[team].checked;
+            }
+            if (source[team]) {
+                source[team].checked = target[team].checked;
+            }
+        });
+        
+        if (sourceAll && targetAll) {
+            sourceAll.checked = targetAll.checked;
+        }
+    }
+    
     function applyFilters() {
         const searchTerm = searchInput.value.toLowerCase().trim();
         
@@ -824,24 +840,42 @@ function buildFilterPanel(panel, cardsArea) {
         
         // Фильтр по командам (основные команды)
         if (!showReserve) {
+            // Исключаем резервистов
             filtered = filtered.filter(driver => 
                 driver.team.toLowerCase() !== 'резерв' && 
                 driver.team.toLowerCase() !== 'reserve'
             );
-            filtered = filtered.filter(driver => activeTeamFilters.has(driver.team));
+            
+            // Фильтруем по выбранным командам
+            const isAllTeamsSelected = activeTeamFilters.size === regularTeams.length;
+            
+            if (!isAllTeamsSelected) {
+                filtered = filtered.filter(driver => activeTeamFilters.has(driver.team));
+            }
+            
         } else {
-            // Если включены резервисты - показываем их, но без фильтра по командам
+            // Если включены резервисты
             const reserveDrivers = filtered.filter(driver => 
                 driver.team.toLowerCase() === 'резерв' || 
                 driver.team.toLowerCase() === 'reserve'
             );
             
             // Основные пилоты с фильтром по командам
-            const mainDrivers = filtered.filter(driver => 
-                driver.team.toLowerCase() !== 'резерв' && 
-                driver.team.toLowerCase() !== 'reserve' &&
-                activeTeamFilters.has(driver.team)
-            );
+            const isAllTeamsSelected = activeTeamFilters.size === regularTeams.length;
+            let mainDrivers;
+            
+            if (isAllTeamsSelected) {
+                mainDrivers = filtered.filter(driver => 
+                    driver.team.toLowerCase() !== 'резерв' && 
+                    driver.team.toLowerCase() !== 'reserve'
+                );
+            } else {
+                mainDrivers = filtered.filter(driver => 
+                    driver.team.toLowerCase() !== 'резерв' && 
+                    driver.team.toLowerCase() !== 'reserve' &&
+                    activeTeamFilters.has(driver.team)
+                );
+            }
             
             filtered = [...mainDrivers, ...reserveDrivers];
         }
@@ -870,15 +904,15 @@ function buildFilterPanel(panel, cardsArea) {
         renderDriverCards(filtered, cardsArea);
     }
     
-    // Обработчик для чекбоксов (общий для основной и попап-версии)
     function handleCheckboxChange(e, sourceCheckboxes, sourceAll, sourceTeamCheckboxes, isPopup) {
         if (e.target.type === 'checkbox') {
             const checkbox = e.target;
             const value = checkbox.dataset.filterValue;
-            const targetCheckboxes = isPopup ? teamCheckboxes : popupTeamCheckboxes;
-            const targetAll = isPopup ? allCheckbox : popupAllCheckbox;
-            const targetChamps = isPopup ? champsCheckbox : popupChampsCheckbox;
-            const targetReserve = isPopup ? reserveCheckbox : popupReserveCheckbox;
+            const targetCheckboxes = isPopup ? popupTeamCheckboxes : teamCheckboxes;
+            const targetAll = isPopup ? popupAllCheckbox : allCheckbox;
+            const targetChamps = isPopup ? popupChampsCheckbox : champsCheckbox;
+            const targetReserve = isPopup ? popupReserveCheckbox : reserveCheckbox;
+            const sourceChampsCheckbox = isPopup ? popupChampsCheckbox : champsCheckbox;
             
             // Обработка чекбокса "Резервисты"
             if (value === 'reserve') {
@@ -901,57 +935,53 @@ function buildFilterPanel(panel, cardsArea) {
                     targetChamps.checked = false;
                     champsOnly = false;
                 } else {
+                    // Если "ВСЕ" выключен, проверяем есть ли выбранные команды
                     const anyTeamChecked = Object.values(sourceTeamCheckboxes).some(cb => cb.checked);
                     if (!anyTeamChecked) {
+                        // Если нет выбранных команд - включаем "ВСЕ" обратно
                         checkbox.checked = true;
                         if (targetAll) targetAll.checked = true;
+                        isAllSelected = true;
                     } else {
                         isAllSelected = false;
                     }
                 }
-            } else {
-                if (checkbox.checked) {
-                    sourceAll.checked = false;
-                    if (targetAll) targetAll.checked = false;
-                    isAllSelected = false;
-                }
                 
-                const selectedTeams = new Set();
-                Object.entries(sourceTeamCheckboxes).forEach(([team, cb]) => {
-                    if (cb.checked) {
-                        selectedTeams.add(team);
-                    }
-                });
-                
-                if (selectedTeams.size === 0) {
-                    sourceAll.checked = true;
-                    if (targetAll) targetAll.checked = true;
-                    activeTeamFilters = new Set(regularTeams);
-                    isAllSelected = true;
-                    
-                    // Сбрасываем фильтр "Чемпионы мира"
-                    sourceChampsCheckbox.checked = false;
-                    if (targetChamps) targetChamps.checked = false;
-                    champsOnly = false;
-                } else {
-                    activeTeamFilters = new Set(selectedTeams);
-                }
+                syncCheckboxes(sourceTeamCheckboxes, targetCheckboxes, sourceAll, targetAll);
+                applyFilters();
+                return;
             }
             
-            // Синхронизация
-            Object.keys(sourceTeamCheckboxes).forEach(team => {
-                if (targetCheckboxes[team]) {
-                    targetCheckboxes[team].checked = sourceTeamCheckboxes[team].checked;
-                }
-                if (sourceCheckboxes[team]) {
-                    sourceCheckboxes[team].checked = targetCheckboxes[team].checked;
+            // ЛОГИКА ДЛЯ КОМАНДНЫХ ЧЕКБОКСОВ
+            // Собираем выбранные команды
+            const selectedTeams = new Set();
+            Object.entries(sourceTeamCheckboxes).forEach(([team, cb]) => {
+                if (cb.checked) {
+                    selectedTeams.add(team);
                 }
             });
             
-            if (sourceAll && targetAll) {
-                sourceAll.checked = targetAll.checked;
+            // Обновляем состояние
+            if (selectedTeams.size === 0) {
+                // Если нет выбранных команд - включаем "ВСЕ"
+                sourceAll.checked = true;
+                if (targetAll) targetAll.checked = true;
+                activeTeamFilters = new Set(regularTeams);
+                isAllSelected = true;
+                
+                // Сбрасываем фильтр "Чемпионы мира"
+                sourceChampsCheckbox.checked = false;
+                if (targetChamps) targetChamps.checked = false;
+                champsOnly = false;
+            } else {
+                // Если есть выбранные команды - выключаем "ВСЕ"
+                sourceAll.checked = false;
+                if (targetAll) targetAll.checked = false;
+                activeTeamFilters = new Set(selectedTeams);
+                isAllSelected = false;
             }
             
+            syncCheckboxes(sourceTeamCheckboxes, targetCheckboxes, sourceAll, targetAll);
             applyFilters();
         }
     }
@@ -1718,6 +1748,7 @@ function getCountryName(code) {
         'my': 'Малайзия',
         'nz': 'Новая Зеландия',
         'pl': 'Польша',
+		'ch': 'Швейцария',
     };
     return countries[code] || code.toUpperCase();
 }

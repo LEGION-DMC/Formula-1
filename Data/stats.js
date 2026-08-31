@@ -114,7 +114,7 @@ const lapRecordData = [
 const enginePartsData = [
     { driver: "Оскар Пиастри", ice: 3, tc: 3, exh: 2, mguk: 2, es: 2, puce: 2, puanc: 3 },
     { driver: "Ландо Норрис", ice: 3, tc: 3, exh: 3, mguk: 2, es: 3, puce: 4, puanc: 4 },
-    { driver: "Джордж Расселл", ice: 3, tc: 4, exh: 4, mguk: 2, es: 3, puce: 3, puanc: 5 },
+    { driver: "Джордж Расселл", ice: 4, tc: 4, exh: 4, mguk: 2, es: 3, puce: 3, puanc: 5 },
     { driver: "Кими Антонелли", ice: 4, tc: 3, exh: 4, mguk: 2, es: 3, puce: 3, puanc: 5 },
     { driver: "Макс Ферстаппен", ice: 3, tc: 3, exh: 3, mguk: 3, es: 2, puce: 2, puanc: 3 },
     { driver: "Исак Хаджар", ice: 5, tc: 5, exh: 5, mguk: 3, es: 4, puce: 4, puanc: 5 },
@@ -128,7 +128,7 @@ const enginePartsData = [
     { driver: "Фернандо Алонсо", ice: 4, tc: 4, exh: 2, mguk: 4, es: 5, puce: 5, puanc: 7 },
     { driver: "Эстебан Окон", ice: 3, tc: 3, exh: 2, mguk: 3, es: 3, puce: 3, puanc: 4 },
     { driver: "Оливер Берман", ice: 3, tc: 3, exh: 3, mguk: 3, es: 3, puce: 3, puanc: 3 },
-    { driver: "Нико Хюлькенберг", ice: 3, tc: 3, exh: 3, mguk: 3, es: 1, puce: 1, puanc: 4 },
+    { driver: "Нико Хюлькенберг", ice: 4, tc: 4, exh: 4, mguk: 3, es: 1, puce: 1, puanc: 4 },
     { driver: "Габриэл Бортолето", ice: 2, tc: 2, exh: 2, mguk: 3, es: 2, puce: 3, puanc: 4 },
     { driver: "Пьер Гасли", ice: 3, tc: 3, exh: 3, mguk: 2, es: 2, puce: 2, puanc: 4 },
     { driver: "Франко Колапинто", ice: 3, tc: 3, exh: 2, mguk: 2, es: 3, puce: 3, puanc: 3 },
