@@ -614,61 +614,6 @@ function createWeatherBlock() {
     return block;
 }
 
-function createNextGPBlock() {
-    const block = document.createElement('div');
-    block.className = 'main-block nextgp-block clickable';
-    
-    const now = new Date();
-    let nextGP = null;
-    let nextTrack = null;
-    
-    if (typeof calendarData !== 'undefined') {
-        const activeGPs = calendarData
-            .filter(gp => !gp.canceled)
-            .sort((a, b) => new Date(a.date) - new Date(b.date));
-        
-        for (const gp of activeGPs) {
-            const raceDate = new Date(gp.date);
-            const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
-            
-            if (raceEnd > now) {
-                nextGP = gp;
-                nextTrack = getTrackById(gp.track);
-                break;
-            }
-        }
-    }
-    
-    if (nextGP && nextTrack) {
-        block.innerHTML = `
-            <div class="main-block-title">
-                <img src="Images/Flags/${nextTrack.country}.svg" class="nextgp-flag-inline" title="${getCountryName(nextTrack.country)}"> ${nextTrack.name}
-            </div>
-            <div class="nextgp-details">
-                <div class="nextgp-detail"><img src="Images/Icon/location.webp" class="main-icon"><span class="nextgp-value">${nextTrack.location}</span></div>
-                <div class="nextgp-detail"><img src="Images/Icon/track.webp" class="main-icon"><span class="nextgp-value">${nextTrack.trackName}</span></div>
-                <div class="nextgp-detail"><img src="Images/Icon/calendar.webp" class="main-icon"><span class="nextgp-value">${formatDateLong(nextGP.date)}</span></div>
-            </div>
-            <hr class="main-divider">
-            <div class="nextgp-footer">
-                <div class="nextgp-countdown"><span>Загрузка...</span></div>
-            </div>
-        `;
-    } else {
-        block.innerHTML = `
-            <div class="main-block-title">Сезон 2026</div>
-            <div class="nextgp-empty"><span>Сезон завершён</span></div>
-        `;
-    }
-    
-    block.addEventListener('click', () => {
-        document.querySelectorAll('.menu-item').forEach(btn => {
-            if (btn.dataset.tab === 'calendar') btn.click();
-        });
-    });
-    return block;
-}
-
 function addGPModalOnRightClick(block, gp, track) {
     block.addEventListener('contextmenu', (e) => {
         e.preventDefault(); // Отменяем стандартное контекстное меню

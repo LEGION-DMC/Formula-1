@@ -508,6 +508,10 @@ h1, h2 {
     margin-top: -2px;
 }
 
+.gp-number-badge-next {
+    margin-top: 0px;
+}
+
 .nextgp-details {
     display: flex;
     flex-direction: column;

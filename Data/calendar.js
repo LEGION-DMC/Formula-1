@@ -630,7 +630,7 @@ function buildCalendarNav(panel, cardsArea) {
 }
 
 function renderCalendarCards(container) {
-    let gpNumber = 0; // ← Добавлен счетчик этапов
+    let gpNumber = 0; 
     
     calendarData.forEach(gp => {
         const track = getTrackForGP(gp.id);
@@ -645,7 +645,7 @@ function renderCalendarCards(container) {
         const nearStart = isFuture && now >= oneHourBeforeRace;
 
         const isCanceled = gp.canceled;
-        const displayNumber = isCanceled ? '-' : ++gpNumber; // ← Номер этапа
+        const displayNumber = isCanceled ? '-' : ++gpNumber;
 
         const card = document.createElement('div');
         card.className = 'calendar-card';
