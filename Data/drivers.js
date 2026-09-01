@@ -401,6 +401,7 @@ const driversData = [
             { team: "Red Bull", year: "2025", temporarily: true },
             { team: "Racing Bulls", year: "2025" },
             { team: "Red Bull", year: "2026", temporarily: true },
+            { team: "Racing Bulls", year: "2026" },
         ],
 		
         titles: 0,
