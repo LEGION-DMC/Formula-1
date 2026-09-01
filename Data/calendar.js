@@ -730,10 +730,10 @@ function renderCalendarCards(container) {
 					<div class="calendar-countdown">
 						<span>До гонки:</span>
 						<div class="calendar-timer" data-date="${gp.date}">
-							<span class="calendar-timer-days">00</span>д
-							<span class="calendar-timer-hours">00</span>ч
-							<span class="calendar-timer-minutes">00</span>м
-							<span class="calendar-timer-seconds">00</span>с
+							<span class="calendar-timer-days">00</span>дн.
+							<span class="calendar-timer-hours">00</span>ч.
+							<span class="calendar-timer-minutes">00</span>м.
+							<span class="calendar-timer-seconds">00</span>с.
 						</div>
 					</div>
 				`;
@@ -807,7 +807,9 @@ function updateCalendarTimer(timer) {
     const minutesEl = timer.querySelector('.calendar-timer-minutes');
     const secondsEl = timer.querySelector('.calendar-timer-seconds');
 
-    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+    // Дни отображаем без ведущего нуля
+    if (daysEl) daysEl.textContent = String(days);
+    // Часы, минуты и секунды с ведущим нулём
     if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
     if (minutesEl) minutesEl.textContent = String(mins).padStart(2, '0');
     if (secondsEl) secondsEl.textContent = String(secs).padStart(2, '0');

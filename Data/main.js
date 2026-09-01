@@ -692,18 +692,21 @@ function createNextGPBlock() {
     const now = new Date();
     let nextGP = null;
     let nextTrack = null;
+    let gpNumber = '';
     
     if (typeof calendarData !== 'undefined') {
         const activeGPs = calendarData
             .filter(gp => !gp.canceled)
             .sort((a, b) => new Date(a.date) - new Date(b.date));
         
-        for (const gp of activeGPs) {
+        for (let i = 0; i < activeGPs.length; i++) {
+            const gp = activeGPs[i];
             const raceDate = new Date(gp.date);
             const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
             
             if (raceEnd > now) {
                 nextGP = gp;
+                gpNumber = i + 1;
                 nextTrack = getTrackById(gp.track);
                 break;
             }
@@ -712,8 +715,12 @@ function createNextGPBlock() {
     
     if (nextGP && nextTrack) {
         block.innerHTML = `
-            <div class="main-block-title">
-                <img src="Images/Flags/${nextTrack.country}.svg" class="nextgp-flag-inline" title="${getCountryName(nextTrack.country)}"> ${nextTrack.name}
+            <div class="main-block-title nextgp-title">
+                <span class="nextgp-title-left">
+                    <img src="Images/Flags/${nextTrack.country}.svg" class="nextgp-flag-inline" title="${getCountryName(nextTrack.country)}"> 
+                    ${nextTrack.name}
+                </span>
+                ${gpNumber ? `<span class="gp-number-badge-next">${gpNumber}</span>` : ''}
             </div>
             <div class="nextgp-details">
                 <div class="nextgp-detail"><img src="Images/Icon/location.webp" class="main-icon"><span class="nextgp-value">${nextTrack.location}</span></div>
@@ -732,19 +739,16 @@ function createNextGPBlock() {
         `;
     }
     
-    // ЛКМ - плавный переход в календарь с прокруткой к этому ГП
     block.addEventListener('click', () => {
         if (nextGP) {
             navigateToCalendarWithScroll(nextGP.id);
         } else {
-            // Если нет следующего ГП, просто переходим в календарь
             document.querySelectorAll('.menu-item').forEach(btn => {
                 if (btn.dataset.tab === 'calendar') btn.click();
             });
         }
     });
     
-    // ПКМ - открытие модального окна
     addGPModalOnRightClick(block, nextGP, nextTrack);
     
     return block;
@@ -757,6 +761,7 @@ function createAfterNextGPBlock() {
     const now = new Date();
     let afterNextGP = null;
     let afterNextTrack = null;
+    let gpNumber = '';
     
     if (typeof calendarData !== 'undefined') {
         const activeGPs = calendarData
@@ -765,7 +770,8 @@ function createAfterNextGPBlock() {
         
         let foundFirst = false;
         
-        for (const gp of activeGPs) {
+        for (let i = 0; i < activeGPs.length; i++) {
+            const gp = activeGPs[i];
             const raceDate = new Date(gp.date);
             const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
             
@@ -775,6 +781,7 @@ function createAfterNextGPBlock() {
                     continue;
                 }
                 afterNextGP = gp;
+                gpNumber = i + 1;
                 afterNextTrack = getTrackById(gp.track);
                 break;
             }
@@ -783,8 +790,12 @@ function createAfterNextGPBlock() {
     
     if (afterNextGP && afterNextTrack) {
         block.innerHTML = `
-            <div class="main-block-title">
-                <img src="Images/Flags/${afterNextTrack.country}.svg" class="nextgp-flag-inline" title="${getCountryName(afterNextTrack.country)}"> ${afterNextTrack.name}
+            <div class="main-block-title nextgp-title">
+                <span class="nextgp-title-left">
+                    <img src="Images/Flags/${afterNextTrack.country}.svg" class="nextgp-flag-inline" title="${getCountryName(afterNextTrack.country)}"> 
+                    ${afterNextTrack.name}
+                </span>
+                ${gpNumber ? `<span class="gp-number-badge-next">${gpNumber}</span>` : ''}
             </div>
             <div class="nextgp-details">
                 <div class="nextgp-detail"><img src="Images/Icon/calendar.webp" class="main-icon"><span class="nextgp-value">${formatDateLong(afterNextGP.date)}</span></div>
@@ -797,7 +808,6 @@ function createAfterNextGPBlock() {
         `;
     }
     
-    // ЛКМ - плавный переход в календарь с прокруткой к этому ГП
     block.addEventListener('click', () => {
         if (afterNextGP) {
             navigateToCalendarWithScroll(afterNextGP.id);
@@ -808,7 +818,6 @@ function createAfterNextGPBlock() {
         }
     });
     
-    // ПКМ - открытие модального окна
     addGPModalOnRightClick(block, afterNextGP, afterNextTrack);
     
     return block;

@@ -372,7 +372,7 @@ h1, h2 {
     background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 10px;
+    padding: 8px 10px;
     display: flex;
     flex-direction: column;
 }
@@ -381,8 +381,7 @@ h1, h2 {
     font-family: 'F1Title', sans-serif;
     font-size: 1rem;
     color: var(--text-light);
-    margin-bottom: 0px;
-    padding-bottom: 5px;
+    padding-bottom: 4px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -500,22 +499,18 @@ h1, h2 {
 }
 
 .nextgp-flag-inline {
-    width: 22px;
-    height: 15px;
+    width: 20px;
+    height: 14px;
     border-radius: 2px;
     vertical-align: middle;
-    margin-right: 6px;
+    margin-right: 0px;
     margin-top: -2px;
-}
-
-.gp-number-badge-next {
-    margin-top: 0px;
 }
 
 .nextgp-details {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     padding-top: 8px;
     padding-bottom: 8px;
 }
@@ -586,8 +581,14 @@ h1, h2 {
 .nextgp-countdown {
     display: flex;
     align-items: center;
-    margin-left: 6px;
+    margin-left: 1px;
     order: 2;
+    gap: 8px;
+}
+
+.nextgp-countdown strong {
+    margin-right: -5px;
+    margin-left: -5px;
 }
 
 .nextgp-footer {
@@ -662,6 +663,22 @@ h1, h2 {
 
 .afternextgp-block.clickable:active {
     transform: scale(0.97);
+}
+
+.main-block-title.nextgp-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -1px;
+}
+
+.gp-number-badge-next {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    color: var(--red-accent);
+    font-size: 16px;
+    margin-top: -3px;
+    margin-bottom: -2px;
+    padding-right: 7px;
 }
 
 /* ========================================== */
@@ -3403,9 +3420,7 @@ h1, h2 {
 }
 
 .calendar-sprint-badge-inline {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+    margin-top: -2px;
     background: #ffd700;
     color: black;
     font-family: 'F1Title', sans-serif; 
@@ -3556,19 +3571,20 @@ h1, h2 {
     
 }
 .calendar-countdown > span { font-size: 0.9rem; 
-    color: #bbb; }
+    color: #bbb; 
+}
 .calendar-timer { 
     display: inline-flex; 
-    gap: 5px; 
-    font-family: 'F1Numbers', sans-serif; 
+    gap: 4px; 
+    font-family: 'F1Text', sans-serif; 
     color: #bbb;
 }
 
 .calendar-timer-days, .calendar-timer-hours, 
 .calendar-timer-minutes, .calendar-timer-seconds  {
     color: red; 
+    font-family: 'F1Numbers', sans-serif; 
     font-size: 0.85rem;
-    margin-top: -1px;
 }
 
 .calendar-race-started { color: var(--red-accent); 
