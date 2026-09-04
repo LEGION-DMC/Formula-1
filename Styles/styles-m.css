@@ -605,6 +605,9 @@ body {
 .driver-short-name { font-size: 0.75rem; width: 140px; }
 .driver-team img { width: 30px; height: 15px; }
 .driver-team span { display: none; }
+.reserve-driver span {
+    display: initial;
+}
 
 .driver-titles-overlay {
     position: absolute;
