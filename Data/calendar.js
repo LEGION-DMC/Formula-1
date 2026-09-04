@@ -5,8 +5,8 @@ const calendarData = [
 		tires: "345",
 		
 		date: "2026-03-08 12:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-03-08 12:00",
+		sprint: "2026-03-08 12:00",
 		
 		hasSprint: false,
 		canceled: false,
@@ -21,8 +21,8 @@ const calendarData = [
 		tires: "234",
 		
 		date: "2026-03-15 15:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-03-15 15:00",
+		sprint: "2026-03-15 15:00",
 		
 		hasSprint: true,
 		canceled: false,
@@ -37,8 +37,8 @@ const calendarData = [
 		tires: "123",
 		
 		date: "2026-03-29 13:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-03-29 13:00",
+		sprint: "2026-03-29 13:00",
 		
 		hasSprint: false,
 		canceled: false,
@@ -53,8 +53,8 @@ const calendarData = [
 		tires: "",
 		
 		date: "2026-04-20 01:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-04-20 01:00",
+		sprint: "2026-04-20 01:00",
 		
 		hasSprint: false,
 		canceled: true,
@@ -69,8 +69,8 @@ const calendarData = [
 		tires: "345",
 		
 		date: "2026-05-04 01:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-05-04 01:00",
+		sprint: "2026-05-04 01:00",
 		
 		hasSprint: true,
 		canceled: false,
@@ -85,8 +85,8 @@ const calendarData = [
 		tires: "345",
 		
 		date: "2026-05-25 04:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-05-25 04:00",
+		sprint: "2026-05-25 04:00",
 		
 		hasSprint: true,
 		canceled: false,
@@ -101,8 +101,8 @@ const calendarData = [
 		tires: "345",
 		
 		date: "2026-06-07 21:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-06-07 21:00",
+		sprint: "2026-06-07 21:00",
 		
 		hasSprint: false,
 		canceled: false,
@@ -117,8 +117,8 @@ const calendarData = [
 		tires: "234",
 		
 		date: "2026-06-14 21:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-06-14 21:00",
+		sprint: "2026-06-14 21:00",
 		
 		hasSprint: false,
 		canceled: false,
@@ -133,8 +133,8 @@ const calendarData = [
 		tires: "345",
 		
 		date: "2026-06-28 21:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-06-28 21:00",
+		sprint: "2026-06-28 21:00",
 		
 		hasSprint: false,
 		canceled: false,
@@ -149,8 +149,8 @@ const calendarData = [
 		tires: "123",
 		
 		date: "2026-07-05 22:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-07-05 22:00",
+		sprint: "2026-07-05 22:00",
 		
 		hasSprint: true,
 		canceled: false,
@@ -165,8 +165,8 @@ const calendarData = [
 		tires: "234",
 		
 		date: "2026-07-19 21:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-07-19 21:00",
+		sprint: "2026-07-19 21:00",
 		
 		hasSprint: false,
 		canceled: false,
@@ -181,8 +181,8 @@ const calendarData = [
 		tires: "345",
 		
 		date: "2026-07-26 21:00",
-		quali: "",
-		sprint: "",
+		quali: "2026-07-26 21:00",
+		sprint: "2026-07-26 21:00",
 		
 		hasSprint: false,
 		canceled: false,
@@ -220,8 +220,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "https://rutube.ru/video/da918a72a96913e17b693a833fce4f29/",
+		recordingRace: "https://rutube.ru/video/ae323c7cf713b9d9b3866d887cea4410/"
 	},
 	{   id: "spain",
 		track: "madring",
@@ -629,6 +629,309 @@ function buildCalendarNav(panel, cardsArea) {
     });
 }
 
+function getVideoUrl(videoId) {
+    if (!videoId) return null;
+    
+    // Если это полная ссылка на Rutube или другой внешний ресурс
+    if (videoId.startsWith('http://') || videoId.startsWith('https://')) {
+        return videoId;
+    }
+    
+    // Если это ID видео для Matreshka (обычно строка без пробелов, длиной 8-12 символов)
+    if (videoId && !videoId.startsWith('http')) {
+        return `https://matreshka.tv/video/${videoId}`;
+    }
+    
+    return null;
+}
+
+function getAvailableSessionsForGP(gpId) {
+    const gp = getGPById(gpId);
+    if (!gp || gp.canceled) return [];
+    
+    const now = new Date();
+    const sessions = [];
+    
+    // Функция для проверки, наступило ли время события или до него осталось <= 5 минут
+    function isEventNearOrPassed(eventDateStr) {
+        if (!eventDateStr) return false;
+        const eventDate = new Date(eventDateStr);
+        const fiveMinutesBefore = new Date(eventDate.getTime() - 5 * 60 * 1000);
+        return now >= fiveMinutesBefore;
+    }
+    
+    // Проверяем спринт
+    if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
+        const videoUrl = getVideoUrl(gp.recordingSprint);
+        if (videoUrl) {
+            sessions.push({
+                type: 'sprint',
+                label: 'Спринт',
+                videoId: gp.recordingSprint,
+                videoUrl: videoUrl,
+                available: true
+            });
+        }
+    }
+    
+    // Проверяем квалификацию
+    if (gp.recordingQuali && gp.quali && isEventNearOrPassed(gp.quali)) {
+        const videoUrl = getVideoUrl(gp.recordingQuali);
+        if (videoUrl) {
+            sessions.push({
+                type: 'quali',
+                label: 'Квалификация',
+                videoId: gp.recordingQuali,
+                videoUrl: videoUrl,
+                available: true
+            });
+        }
+    }
+    
+    // Проверяем гонку
+    if (isEventNearOrPassed(gp.date)) {
+        if (gp.recordingRace) {
+            const videoUrl = getVideoUrl(gp.recordingRace);
+            if (videoUrl) {
+                sessions.push({
+                    type: 'race',
+                    label: 'Гонка',
+                    videoId: gp.recordingRace,
+                    videoUrl: videoUrl,
+                    available: true
+                });
+            }
+        }
+    }
+    
+    return sessions;
+}
+
+function openVideoModal(videoId, title) {
+    if (!videoId) return;
+    
+    // Находим ГП, к которому относится это видео
+    let currentGp = null;
+    let currentGpId = null;
+    
+    // Ищем ГП, у которого есть это видео ID
+    for (const gp of calendarData) {
+        if (gp.recordingSprint === videoId || gp.recordingQuali === videoId || gp.recordingRace === videoId) {
+            currentGp = gp;
+            currentGpId = gp.id;
+            break;
+        }
+    }
+    
+    // Если не нашли по ID, пробуем найти по title (может быть не совсем надежно)
+    if (!currentGp) {
+        for (const gp of calendarData) {
+            const track = getTrackForGP(gp.id);
+            if (track && title.includes(track.name.replace('Гран-при ', ''))) {
+                currentGp = gp;
+                currentGpId = gp.id;
+                break;
+            }
+        }
+    }
+    
+    // Получаем доступные сессии для этого ГП
+    const availableSessions = currentGp ? getAvailableSessionsForGP(currentGpId) : [];
+    
+    // Определяем, мобильное ли устройство
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Получаем URL для видео
+    const videoUrl = getVideoUrl(videoId);
+    if (!videoUrl) {
+        console.warn('Не удалось получить URL для видео:', videoId);
+        return;
+    }
+    
+    // Для мобильных — открываем в новой вкладке
+    if (isMobile) {
+        window.open(videoUrl, '_blank');
+        return;
+    }
+    
+    // Для ПК — показываем встроенный плеер в модальном окне
+    const existing = document.querySelector('.video-modal-overlay');
+    if (existing) existing.remove();
+
+    const scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflowY = 'scroll';
+
+    function unlock() {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflowY = '';
+        window.scrollTo(0, scrollY);
+    }
+
+    const overlay = document.createElement('div');
+    overlay.className = 'video-modal-overlay';
+
+    const modal = document.createElement('div');
+    modal.className = 'video-modal';
+
+    function close() {
+        overlay.remove();
+        unlock();
+        document.removeEventListener('keydown', esc);
+        const iframe = modal.querySelector('iframe');
+        if (iframe) {
+            iframe.src = '';
+        }
+    }
+
+    function esc(e) {
+        if (e.key === 'Escape') close();
+    }
+
+    // Определяем тип видео для отображения
+    let embedUrl = videoUrl;
+    let isRutube = videoUrl.includes('rutube.ru');
+    
+    // Для Rutube используем embed-ссылку
+    if (isRutube) {
+        if (videoUrl.includes('/video/')) {
+            const videoIdFromUrl = videoUrl.split('/video/')[1];
+            if (videoIdFromUrl) {
+                const cleanId = videoIdFromUrl.replace(/\/$/, '');
+                embedUrl = `https://rutube.ru/embed/${cleanId}`;
+            }
+        }
+    } else {
+        const match = videoUrl.match(/matreshka\.tv\/video\/([a-zA-Z0-9_-]+)/);
+        if (match) {
+            embedUrl = `https://matreshka.tv/embed/video/${match[1]}`;
+        }
+    }
+
+    // Создаем контейнер для видео и панели сессий
+    const modalContent = document.createElement('div');
+    modalContent.className = 'video-modal-content';
+    
+    // Контейнер для видео
+    const videoContainer = document.createElement('div');
+    videoContainer.className = 'video-container';
+    
+    // Панель сессий (справа)
+    const sessionsPanel = document.createElement('div');
+    sessionsPanel.className = 'video-sessions-panel';
+    
+    // Если есть доступные сессии, добавляем их в панель
+    if (availableSessions.length > 1) { // Показываем панель, если есть хотя бы 2 сессии (текущая + другие)
+        // Заголовок панели
+        const panelTitle = document.createElement('div');
+        panelTitle.className = 'panel-title';
+        panelTitle.textContent = 'Другие сессии';
+        sessionsPanel.appendChild(panelTitle);
+        
+        // Список сессий
+        const sessionsList = document.createElement('div');
+        sessionsList.className = 'sessions-list';
+        
+        availableSessions.forEach(session => {
+            const isActive = session.videoId === videoId;
+            const btn = document.createElement('button');
+            btn.className = `calendar-btn ${session.type} video-session-btn${isActive ? ' active' : ''}`;
+            
+            if (isActive) {
+                btn.innerHTML = `
+                    <span class="btn-content">
+                        <span><span class="btn-icon"> ${session.label}</span>
+                    </span>
+                `;
+            } else {
+                btn.innerHTML = `
+                    <span class="btn-content">
+                        <span><span class="btn-icon">${session.label}</span>
+                    </span>
+                `;
+            }
+            
+            btn.addEventListener('click', () => {
+                if (session.videoId === videoId) return;
+                // Закрываем текущее модальное окно и открываем новое
+                close();
+                // Определяем название для новой сессии
+                const newTitle = `${session.label} ${title.replace(/^(Спринт|Квалификация|Гонка)\s*/, '')}`;
+                openVideoModal(session.videoId, newTitle);
+            });
+            
+            sessionsList.appendChild(btn);
+        });
+        
+        sessionsPanel.appendChild(sessionsList);
+        
+        // Открываем панель с задержкой для анимации
+        setTimeout(() => {
+            sessionsPanel.classList.add('open');
+        }, 200);
+    }
+
+    // Собираем структуру
+    modalContent.appendChild(videoContainer);
+    if (availableSessions.length > 1) {
+        modalContent.appendChild(sessionsPanel);
+    }
+    modal.appendChild(modalContent);
+
+    // Заголовок видео
+    const header = document.createElement('div');
+    header.className = 'video-modal-header';
+    header.innerHTML = `<span class="video-modal-title">${title}</span>`;
+    videoContainer.appendChild(header);
+
+    // Тело с видео
+    const body = document.createElement('div');
+    body.className = 'video-modal-body';
+    
+    let iframeAttrs = `
+        width="560" 
+        height="315" 
+        src="${embedUrl}" 
+        title="${title}"
+        frameborder="0" 
+        allowfullscreen
+        style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        loading="lazy"
+    `;
+    
+    if (!isRutube) {
+        iframeAttrs += ` sandbox="allow-same-origin allow-scripts allow-popups allow-forms"`;
+    }
+    
+    body.innerHTML = `<iframe ${iframeAttrs}></iframe>`;
+    videoContainer.appendChild(body);
+
+    // Кнопка закрытия
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'video-modal-close';
+    closeBtn.innerHTML = '&times;';
+    modal.appendChild(closeBtn);
+    
+    closeBtn.addEventListener('click', close);
+
+    overlay.appendChild(modal);
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay) close();
+    });
+    
+    document.addEventListener('keydown', esc);
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(() => {
+        overlay.classList.add('active');
+        modal.classList.add('active');
+    });
+}
+
 function renderCalendarCards(container) {
     let gpNumber = 0; 
     
@@ -703,21 +1006,40 @@ function renderCalendarCards(container) {
 		} else {
 			let btns = '';
 			let showTimer = false;
-
-			// ✅ Кнопка спринта - открывает видео в модалке
-			if (gp.hasSprint && gp.recordingSprint) {
-				btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${track.name}">Спринт</button>`;
+			
+			const now = new Date();
+			
+			// Функция для проверки, наступило ли время события или до него осталось <= 5 минут
+			function isEventNearOrPassed(eventDateStr) {
+				if (!eventDateStr) return false;
+				const eventDate = new Date(eventDateStr);
+				const fiveMinutesBefore = new Date(eventDate.getTime() - 5 * 60 * 1000);
+				return now >= fiveMinutesBefore;
 			}
 
-			// ✅ Кнопка квалификации - открывает видео в модалке
-			if (gp.recordingQuali) {
-				btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${track.name}">Квалификация</button>`;
+			// Кнопка спринта - показываем за 5 минут до начала и после
+			if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
+				const videoUrl = getVideoUrl(gp.recordingSprint);
+				if (videoUrl) {
+					btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${track.name}">Спринт</button>`;
+				}
 			}
 
-			// Гонка
-			if (isPast || nearStart) {
+			// Кнопка квалификации - показываем за 5 минут до начала и после
+			if (gp.recordingQuali && gp.quali && isEventNearOrPassed(gp.quali)) {
+				const videoUrl = getVideoUrl(gp.recordingQuali);
+				if (videoUrl) {
+					btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${track.name}">Квалификация</button>`;
+				}
+			}
+
+			// Гонка - показываем за 5 минут до начала и после
+			if (isEventNearOrPassed(gp.date)) {
 				if (gp.recordingRace) {
-					btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${track.name}">Гонка</button>`;
+					const videoUrl = getVideoUrl(gp.recordingRace);
+					if (videoUrl) {
+						btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${track.name}">Гонка</button>`;
+					}
 				} else if (isPast) {
 					btns += '<span class="calendar-btn disabled">Нет записи</span>';
 				}
@@ -758,18 +1080,18 @@ function renderCalendarCards(container) {
         card.appendChild(imageDiv);
         card.appendChild(infoDiv);
 
-		// Обработчики для кнопок видео
-		card.querySelectorAll('.calendar-btn[data-video]').forEach(btn => {
-			btn.addEventListener('click', (e) => {
-				e.stopPropagation(); // Чтобы не открывалась модалка трассы
-				const videoUrl = btn.dataset.video;
-				const title = btn.dataset.title;
-				if (typeof openVideoModal === 'function') {
-					openVideoModal(videoUrl, title);
-				}
-			});
-		});
-	
+        // Обработчики для кнопок видео
+        card.querySelectorAll('.calendar-btn[data-video]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const videoId = btn.dataset.video;
+                const title = btn.dataset.title;
+                if (typeof openVideoModal === 'function') {
+                    openVideoModal(videoId, title);
+                }
+            });
+        });
+    
         card.addEventListener('click', (e) => {
             if (!e.target.closest('a')) {
                 openTrackModal(track, gp);
@@ -1144,99 +1466,4 @@ function scrollToGPCard(gpId, cardsArea) {
             card.classList.remove('highlight');
         }, 1500);
     }, 800);
-}
-
-function openVideoModal(videoId, title) {
-    // Если videoId пустой или undefined — ничего не делаем
-    if (!videoId) return;
-    
-    // Определяем, мобильное ли устройство
-    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    // Для мобильных — открываем в новой вкладке
-    if (isMobile) {
-        const videoPageUrl = `https://matreshka.tv/video/${videoId}`;
-        window.open(videoPageUrl, '_blank');
-        return;
-    }
-    
-    // Для ПК — показываем встроенный плеер в модальном окне
-    // Удаляем существующее модальное окно, если есть
-    const existing = document.querySelector('.video-modal-overlay');
-    if (existing) existing.remove();
-
-    // Блокируем скролл
-    const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflowY = 'scroll';
-
-    function unlock() {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflowY = '';
-        window.scrollTo(0, scrollY);
-    }
-
-    // Создаём overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'video-modal-overlay';
-
-    // Создаём модальное окно
-    const modal = document.createElement('div');
-    modal.className = 'video-modal';
-
-    function close() {
-        overlay.remove();
-        unlock();
-        document.removeEventListener('keydown', esc);
-        const iframe = modal.querySelector('iframe');
-        if (iframe) {
-            iframe.src = '';
-        }
-    }
-
-    function esc(e) {
-        if (e.key === 'Escape') close();
-    }
-
-    // Формируем полный URL для Matreshka.tv
-    const embedUrl = `https://matreshka.tv/embed/video/${videoId}`;
-
-    modal.innerHTML = `
-        <button class="video-modal-close">&times;</button>
-        <div class="video-modal-header">
-            <span class="video-modal-title">${title}</span>
-        </div>
-        <div class="video-modal-body">
-            <iframe 
-                width="560" 
-                height="315" 
-                src="${embedUrl}" 
-                title="${title}"
-                frameborder="0" 
-                allowfullscreen
-                style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                loading="lazy"
-            ></iframe>
-        </div>
-    `;
-
-    modal.querySelector('.video-modal-close').addEventListener('click', close);
-
-    overlay.appendChild(modal);
-    
-    overlay.addEventListener('click', e => {
-        if (e.target === overlay) close();
-    });
-    
-    document.addEventListener('keydown', esc);
-    document.body.appendChild(overlay);
-
-    requestAnimationFrame(() => {
-        overlay.classList.add('active');
-        modal.classList.add('active');
-    });
 }

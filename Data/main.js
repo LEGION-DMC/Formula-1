@@ -729,6 +729,7 @@ function createNextGPBlock() {
             </div>
             <hr class="main-divider">
             <div class="nextgp-footer">
+                <div class="nextgp-links"></div>
                 <div class="nextgp-countdown"><span>Загрузка...</span></div>
             </div>
         `;
@@ -750,6 +751,10 @@ function createNextGPBlock() {
     });
     
     addGPModalOnRightClick(block, nextGP, nextTrack);
+    
+    // Сохраняем данные для таймера
+    block._nextGP = nextGP;
+    block._nextTrack = nextTrack;
     
     return block;
 }
@@ -1115,31 +1120,34 @@ function startMainTimer() {
         if (!block) { clearInterval(mainTimerInterval); return; }
         
         const now = new Date();
-        let nextGP = null;
-        let nextTrack = null;
+        let nextGP = block._nextGP;
+        let nextTrack = block._nextTrack;
         
-        if (typeof calendarData !== 'undefined') {
-            const activeGPs = calendarData
-                .filter(gp => !gp.canceled)
-                .sort((a, b) => new Date(a.date) - new Date(b.date));
-            
-            for (const gp of activeGPs) {
-                const raceDate = new Date(gp.date);
-                const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
+        // Если данные не сохранены в блоке, получаем заново
+        if (!nextGP) {
+            if (typeof calendarData !== 'undefined') {
+                const activeGPs = calendarData
+                    .filter(gp => !gp.canceled)
+                    .sort((a, b) => new Date(a.date) - new Date(b.date));
                 
-                if (raceEnd > now) {
-                    nextGP = gp;
-                    nextTrack = getTrackById(gp.track);
-                    break;
+                for (const gp of activeGPs) {
+                    const raceDate = new Date(gp.date);
+                    const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
+                    
+                    if (raceEnd > now) {
+                        nextGP = gp;
+                        nextTrack = getTrackById(gp.track);
+                        break;
+                    }
                 }
             }
         }
         
         if (!nextGP || !nextTrack) {
-            block.innerHTML = `
-                <div class="main-block-title">🏎️ Сезон 2026</div>
-                <div class="nextgp-empty"><span>Сезон завершён</span></div>
-            `;
+            const footer = block.querySelector('.nextgp-footer');
+            if (footer) {
+                footer.innerHTML = '<span class="calendar-status-text">Сезон завершён</span>';
+            }
             clearInterval(mainTimerInterval);
             return;
         }
@@ -1151,80 +1159,103 @@ function startMainTimer() {
         const qualiDate = nextGP.quali ? new Date(nextGP.quali) : null;
         const sprintDate = nextGP.sprint ? new Date(nextGP.sprint) : null;
         
-        // Получаем контейнер для кнопок
+        // Получаем контейнеры
         const footer = block.querySelector('.nextgp-footer');
-        let linksDiv = block.querySelector('.nextgp-links');
+        if (!footer) return;
         
-        // Создаём контейнер для ссылок, если его нет
-        if (!linksDiv && footer) {
+        let linksDiv = footer.querySelector('.nextgp-links');
+        if (!linksDiv) {
             linksDiv = document.createElement('div');
             linksDiv.className = 'nextgp-links';
-            footer.appendChild(linksDiv);
+            footer.prepend(linksDiv);
         }
         
-        // Получаем контейнер для таймера/кнопки гонки
-        let btnContainer = block.querySelector('.nextgp-countdown');
-        if (!btnContainer && footer) {
-            btnContainer = document.createElement('div');
-            btnContainer.className = 'nextgp-countdown';
-            footer.appendChild(btnContainer);
+        let countdownDiv = footer.querySelector('.nextgp-countdown');
+        if (!countdownDiv) {
+            countdownDiv = document.createElement('div');
+            countdownDiv.className = 'nextgp-countdown';
+            footer.appendChild(countdownDiv);
         }
         
-        if (linksDiv) {
-            linksDiv.innerHTML = '';
-            
-            // Кнопка СПРИНТА
-            if (sprintDate && nextGP.recordingSprint && now >= new Date(sprintDate.getTime() - 5 * 60 * 1000)) {
-                const sprintEl = document.createElement('button');
-                sprintEl.className = 'main-gp-btn sprint';
-                sprintEl.textContent = 'Спринт';
-                sprintEl.dataset.video = nextGP.recordingSprint;
-                sprintEl.dataset.title = `Спринт ${nextTrack.name}`;
-                sprintEl.onclick = (e) => {
-                    e.stopPropagation();
-                    if (typeof openVideoModal === 'function') {
-                        openVideoModal(sprintEl.dataset.video, sprintEl.dataset.title);
-                    }
-                };
-                linksDiv.appendChild(sprintEl);
-            }
-            
-            // Кнопка КВАЛИФИКАЦИИ
-            if (qualiDate && nextGP.recordingQuali && now >= new Date(qualiDate.getTime() - 5 * 60 * 1000)) {
-                const qualiEl = document.createElement('button');
-                qualiEl.className = 'main-gp-btn quali';
-                qualiEl.textContent = 'Квалификация';
-                qualiEl.dataset.video = nextGP.recordingQuali;
-                qualiEl.dataset.title = `Квалификация ${nextTrack.name}`;
-                qualiEl.onclick = (e) => {
-                    e.stopPropagation();
-                    if (typeof openVideoModal === 'function') {
-                        openVideoModal(qualiEl.dataset.video, qualiEl.dataset.title);
-                    }
-                };
-                linksDiv.appendChild(qualiEl);
-            }
+        // Функция проверки, наступило ли время события или до него осталось <= 5 минут
+        function isEventNearOrPassed(eventDateStr) {
+            if (!eventDateStr) return false;
+            const eventDate = new Date(eventDateStr);
+            const fiveMinutesBefore = new Date(eventDate.getTime() - 5 * 60 * 1000);
+            return now >= fiveMinutesBefore;
         }
         
-        // Обновляем таймер или кнопку гонки
-        if (btnContainer) {
-            // Кнопка ГОНКИ — только если есть ссылка И время >= за час до гонки
-            if (now >= new Date(raceDate.getTime() - 5 * 60 * 1000)) {
-                if (nextGP.recordingRace) {
-                    btnContainer.innerHTML = `<button class="main-gp-btn race" onclick="event.stopPropagation(); if(typeof openVideoModal==='function'){openVideoModal('${nextGP.recordingRace}', 'Гонка ${nextTrack.name}');}">Гонка</button>`;
-                } else {
-                    btnContainer.innerHTML = '<span class="calendar-status-text">Гонка скоро начнётся</span>';
+        // Обновляем кнопки
+        let hasButtons = false;
+        linksDiv.innerHTML = '';
+        
+        // Кнопка СПРИНТА
+        if (sprintDate && nextGP.recordingSprint && isEventNearOrPassed(nextGP.sprint)) {
+            const sprintEl = document.createElement('button');
+            sprintEl.className = 'main-gp-btn sprint';
+            sprintEl.textContent = 'Спринт';
+            sprintEl.dataset.video = nextGP.recordingSprint;
+            sprintEl.dataset.title = `Спринт ${nextTrack.name}`;
+            sprintEl.onclick = (e) => {
+                e.stopPropagation();
+                if (typeof openVideoModal === 'function') {
+                    openVideoModal(sprintEl.dataset.video, sprintEl.dataset.title);
                 }
-            } else if (diff > 0) {
-                // Таймер до гонки
-                const d = Math.floor(diff / 86400000);
-                const h = Math.floor((diff % 86400000) / 3600000);
-                const m = Math.floor((diff % 3600000) / 60000);
-                const s = Math.floor((diff % 60000) / 1000);
-                btnContainer.innerHTML = `<span>До гонки:</span> <span class="countdown-timer"><strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.</span>`;
+            };
+            linksDiv.appendChild(sprintEl);
+            hasButtons = true;
+        }
+        
+        // Кнопка КВАЛИФИКАЦИИ
+        if (qualiDate && nextGP.recordingQuali && isEventNearOrPassed(nextGP.quali)) {
+            const qualiEl = document.createElement('button');
+            qualiEl.className = 'main-gp-btn quali';
+            qualiEl.textContent = 'Квалификация';
+            qualiEl.dataset.video = nextGP.recordingQuali;
+            qualiEl.dataset.title = `Квалификация ${nextTrack.name}`;
+            qualiEl.onclick = (e) => {
+                e.stopPropagation();
+                if (typeof openVideoModal === 'function') {
+                    openVideoModal(qualiEl.dataset.video, qualiEl.dataset.title);
+                }
+            };
+            linksDiv.appendChild(qualiEl);
+            hasButtons = true;
+        }
+        
+        // Если нет кнопок, показываем таймер или кнопку гонки
+        if (!hasButtons) {
+            linksDiv.innerHTML = '';
+        }
+        
+        // Обновляем таймер / кнопку гонки
+        if (isEventNearOrPassed(nextGP.date)) {
+            if (nextGP.recordingRace) {
+                const raceBtn = document.createElement('button');
+                raceBtn.className = 'main-gp-btn race';
+                raceBtn.textContent = 'Гонка';
+                raceBtn.dataset.video = nextGP.recordingRace;
+                raceBtn.dataset.title = `Гонка ${nextTrack.name}`;
+                raceBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    if (typeof openVideoModal === 'function') {
+                        openVideoModal(raceBtn.dataset.video, raceBtn.dataset.title);
+                    }
+                };
+                countdownDiv.innerHTML = '';
+                countdownDiv.appendChild(raceBtn);
             } else {
-                btnContainer.innerHTML = '<span class="calendar-status-text">Гонка завершена</span>';
+                countdownDiv.innerHTML = '<span class="calendar-status-text">Гонка началась</span>';
             }
+        } else if (diff > 0) {
+            // Таймер до гонки
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            countdownDiv.innerHTML = `<span>До гонки:</span> <span class="countdown-timer"><strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.</span>`;
+        } else {
+            countdownDiv.innerHTML = '<span class="calendar-status-text">Гонка завершена</span>';
         }
     };
     
