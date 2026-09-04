@@ -6,7 +6,7 @@ const calendarData = [
 		
 		date: "2026-03-08 12:00",
 		quali: "2026-03-08 12:00",
-		sprint: "2026-03-08 12:00",
+		sprint: " ",
 		
 		hasSprint: false,
 		canceled: false,
@@ -38,7 +38,7 @@ const calendarData = [
 		
 		date: "2026-03-29 13:00",
 		quali: "2026-03-29 13:00",
-		sprint: "2026-03-29 13:00",
+		sprint: "",
 		
 		hasSprint: false,
 		canceled: false,
@@ -102,7 +102,7 @@ const calendarData = [
 		
 		date: "2026-06-07 21:00",
 		quali: "2026-06-07 21:00",
-		sprint: "2026-06-07 21:00",
+		sprint: "",
 		
 		hasSprint: false,
 		canceled: false,
@@ -118,7 +118,7 @@ const calendarData = [
 		
 		date: "2026-06-14 21:00",
 		quali: "2026-06-14 21:00",
-		sprint: "2026-06-14 21:00",
+		sprint: "",
 		
 		hasSprint: false,
 		canceled: false,
@@ -134,7 +134,7 @@ const calendarData = [
 		
 		date: "2026-06-28 21:00",
 		quali: "2026-06-28 21:00",
-		sprint: "2026-06-28 21:00",
+		sprint: "",
 		
 		hasSprint: false,
 		canceled: false,
@@ -166,7 +166,7 @@ const calendarData = [
 		
 		date: "2026-07-19 21:00",
 		quali: "2026-07-19 21:00",
-		sprint: "2026-07-19 21:00",
+		sprint: "",
 		
 		hasSprint: false,
 		canceled: false,
@@ -182,7 +182,7 @@ const calendarData = [
 		
 		date: "2026-07-26 21:00",
 		quali: "2026-07-26 21:00",
-		sprint: "2026-07-26 21:00",
+		sprint: "",
 		
 		hasSprint: false,
 		canceled: false,
@@ -792,6 +792,18 @@ function openVideoModal(videoId, title) {
         if (e.key === 'Escape') close();
     }
 
+    // Очищаем заголовок от названий сессий
+    const cleanTitle = title.replace(/^(Спринт|Квалификация|Гонка)\s*/, '').trim();
+
+    // Получаем флаг страны для текущего ГП
+    let flagHtml = '';
+    if (currentGp) {
+        const track = getTrackForGP(currentGp.id);
+        if (track) {
+            flagHtml = `<img src="Images/Flags/${track.country}.svg" class="video-modal-flag" alt="" title="${getCountryName(track.country)}">`;
+        }
+    }
+
     // Определяем тип видео для отображения
     let embedUrl = videoUrl;
     let isRutube = videoUrl.includes('rutube.ru');
@@ -825,7 +837,7 @@ function openVideoModal(videoId, title) {
     sessionsPanel.className = 'video-sessions-panel';
     
     // Если есть доступные сессии, добавляем их в панель
-    if (availableSessions.length > 1) { // Показываем панель, если есть хотя бы 2 сессии (текущая + другие)
+    if (availableSessions.length > 1) {
         // Заголовок панели
         const panelTitle = document.createElement('div');
         panelTitle.className = 'panel-title';
@@ -857,10 +869,8 @@ function openVideoModal(videoId, title) {
             
             btn.addEventListener('click', () => {
                 if (session.videoId === videoId) return;
-                // Закрываем текущее модальное окно и открываем новое
                 close();
-                // Определяем название для новой сессии
-                const newTitle = `${session.label} ${title.replace(/^(Спринт|Квалификация|Гонка)\s*/, '')}`;
+                const newTitle = `${session.label} ${cleanTitle}`;
                 openVideoModal(session.videoId, newTitle);
             });
             
@@ -869,7 +879,6 @@ function openVideoModal(videoId, title) {
         
         sessionsPanel.appendChild(sessionsList);
         
-        // Открываем панель с задержкой для анимации
         setTimeout(() => {
             sessionsPanel.classList.add('open');
         }, 200);
@@ -882,10 +891,15 @@ function openVideoModal(videoId, title) {
     }
     modal.appendChild(modalContent);
 
-    // Заголовок видео
+    // Заголовок видео с флагом
     const header = document.createElement('div');
     header.className = 'video-modal-header';
-    header.innerHTML = `<span class="video-modal-title">${title}</span>`;
+    header.innerHTML = `
+        <span class="video-modal-title">
+            ${flagHtml}
+            <span>${cleanTitle}</span>
+        </span>
+    `;
     videoContainer.appendChild(header);
 
     // Тело с видео
@@ -896,7 +910,7 @@ function openVideoModal(videoId, title) {
         width="560" 
         height="315" 
         src="${embedUrl}" 
-        title="${title}"
+        title="${cleanTitle}"
         frameborder="0" 
         allowfullscreen
         style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
@@ -1173,6 +1187,17 @@ function autoShrinkHeaders() {
     });
 }
 
+function pluralize(number, one, few, many) {
+    const n = Math.abs(number);
+    if (n % 10 === 1 && n % 100 !== 11) {
+        return one;
+    } else if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) {
+        return few;
+    } else {
+        return many;
+    }
+}
+
 function openTrackModal(track, gp) {
     const existing = document.querySelector('.track-modal-overlay');
     if (existing) existing.remove();
@@ -1237,11 +1262,11 @@ function openTrackModal(track, gp) {
                     </div>
                     <div class="tm-stat-cell">
                         <span class="tm-stat-value">${track.laps}</span>
-                        <span class="tm-stat-label">Кругов</span>
+						<span class="tm-stat-label">${pluralize(track.laps, 'круг', 'круга', 'кругов')}</span>
                     </div>
                     <div class="tm-stat-cell">
                         <span class="tm-stat-value">${track.turns}</span>
-                        <span class="tm-stat-label">Поворотов</span>
+                        <span class="tm-stat-label">${pluralize(track.turns, 'поворот', 'поворота', 'поворотов')}</span>
                     </div>
                     <div class="tm-stat-cell">
                         <span class="tm-stat-value">${track.elevation} м</span>

@@ -15,6 +15,7 @@ const detailedResults = {
         "hadjar": "dnf",
         "piastri": "dns",
         "hulkenberg": "dns",
+        "tsunoda": "dnp",
     },
     "china": {
         "antonelli": 25,
@@ -34,6 +35,7 @@ const detailedResults = {
         "piastri": "dns",
         "bortoletto": "dns",
         "albon": "dns",
+        "tsunoda": "dnp",
     },
     "japan": {
         "antonelli": 25,
@@ -48,6 +50,7 @@ const detailedResults = {
         "ocon": 1,
         "stroll": "dnf",
         "bearman": "dnf",
+        "tsunoda": "dnp",
     },
     "saudi-arabia": {
         "000": 25,
@@ -76,6 +79,7 @@ const detailedResults = {
         "lawson": "dnf",
         "gasly": "dnf",
         "hadjar": "dnf",
+        "tsunoda": "dnp",
     },
     "canada": {
         "antonelli": 25,
@@ -94,15 +98,16 @@ const detailedResults = {
         "alonso": "dnf",
         "albon": "dnf",
         "lindblad": "dns",
+        "tsunoda": "dnp",
     },
     "monaco": {
         "antonelli": 25,
         "hamilton": 18,
-        "gasly": 15,
-        "hadjar": 12,
-        "piastri": 10,
-        "lawson": 8,
-        "lindblad": 6,
+        "hadjar": 15,
+        "piastri": 12,
+        "lawson": 10,
+        "lindblad": 8,
+        "gasly": 6,
         "albon": 4,
         "ocon": 2,
         "alonso": 1,
@@ -113,6 +118,7 @@ const detailedResults = {
         "bearman": "dnf",
         "bottas": "dnf",
         "verstappen": "dnf",
+        "tsunoda": "dnp",
     },
     "barcelona": {
         "hamilton": 25,
@@ -133,6 +139,7 @@ const detailedResults = {
         "hulkenberg": "dnf",
         "bottas": "dnf",
         "stroll": "dnf",
+        "tsunoda": "dnp",
     },
     "austria": {
         "russell": 25,
@@ -149,6 +156,7 @@ const detailedResults = {
         "sainz": "dnf",
         "perez": "dnf",
         "bottas": "dnf",
+        "tsunoda": "dnp",
     },
     "great-britain": {
         "leclerc": 25,
@@ -164,6 +172,7 @@ const detailedResults = {
         "hulkenberg": "dnf",
         "albon": "dnf",
         "verstappen": "dnf",
+        "tsunoda": "dnp",
     },
     "belgium": {
         "antonelli": 25,
@@ -179,6 +188,7 @@ const detailedResults = {
         "stroll": "dnf",
         "perez": "dnf",
         "russell": "dnf",
+        "tsunoda": "dnp",
     },
     "hungary": {
         "norris": 25,
@@ -194,6 +204,7 @@ const detailedResults = {
         "bottas": "dnf",
         "perez": "dnf",
         "piastri": "dnf",
+        "tsunoda": "dnp",
     },
     "netherlands": {
         "norris": 25,
@@ -212,6 +223,7 @@ const detailedResults = {
         "ocon": "dnf",
         "bottas": "dnf",
         "albon": "dnf",
+        "hadjar": "dnp",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
     "italy": {
@@ -349,6 +361,7 @@ const detailedSprintResults = {
         "hulkenberg": "dnf",
         "bottas": "dnf",
         "lindblad": "dnf",
+        "tsunoda": "dnp",
     },
     "miami": {
         "norris": 8,
@@ -362,6 +375,7 @@ const detailedSprintResults = {
         "hulkenberg": "dns",
         "lindblad": "dns",
         "bortoletto": "dsq",
+        "tsunoda": "dnp",
     },
     "canada": {
         "russell": 8,
@@ -373,6 +387,7 @@ const detailedSprintResults = {
         "verstappen": 2,
         "lindblad": 1,
         "alonso": "dnf",
+        "tsunoda": "dnp",
     },
     "great-britain": {
         "antonelli": 8,
@@ -383,6 +398,7 @@ const detailedSprintResults = {
         "verstappen": 3,
         "piastri": 2,
         "lawson": 1,
+        "tsunoda": "dnp",
     },
     "netherlands": {
         "russell": 8,
@@ -393,6 +409,7 @@ const detailedSprintResults = {
         "verstappen": 3,
         "hamilton": 2,
         "gasly": 1,
+        "hadjar": "dnp",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
     "singapore": {
@@ -645,94 +662,6 @@ calculateCombinedStandings();
 const sprintStandings = [];
 calculateSprintStandings();
 
-function renderDriverDetailedTable(container, filterTeam) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'results-table-wrapper';
-    wrapper.innerHTML = `
-        <div class="results-header-row">
-            <h3 class="results-table-title">Личный зачёт — по этапам</h3>
-            <button class="results-detail-btn active" data-table="drivers">Скрыть</button>
-        </div>`;
-    
-    const allGPs = getAllGPs();
-    // Используем combinedStandings для правильной сортировки
-    const sorted = [...combinedStandings].sort((a, b) => b.points - a.points);
-    
-    // Контейнер с двумя частями
-    const tableContainer = document.createElement('div');
-    tableContainer.className = 'detailed-table-container';
-    
-    // Левая фиксированная часть
-    const fixedPart = document.createElement('div');
-    fixedPart.className = 'detailed-fixed-part';
-    
-    let fixedHTML = '<div class="detailed-header-row"><div class="detailed-cell fixed-col-pos">#</div><div class="detailed-cell fixed-col-driver">Пилот</div></div>';
-    
-    sorted.forEach((entry, i) => {
-        const driver = findDriverById(entry.driver);
-        if (!driver) return;
-        const dimmed = filterTeam && driver.team !== filterTeam;
-        fixedHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">
-            <div class="detailed-cell fixed-col-pos">${i + 1}</div>
-            <div class="detailed-cell fixed-col-driver results-driver-clickable" data-driver-id="${driver.id}">
-                <img src="${getTeamLogo(driver.team)}" class="results-team-logo" onerror="this.style.display='none'">
-                <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag">
-                <span class="driver-fullname">${driver.name}</span>
-                <span class="driver-shortname">${driver.namem}</span>
-            </div>
-        </div>`;
-    });
-    fixedPart.innerHTML = fixedHTML;
-    
-    // Правая скроллящаяся часть
-    const scrollPart = document.createElement('div');
-    scrollPart.className = 'detailed-scroll-part';
-    
-    let scrollHTML = '<div class="detailed-header-row">';
-    allGPs.forEach(gpId => {
-        const country = getGPCountry(gpId);
-        const noResults = !hasRealResults(gpId, false);
-        scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}"><img src="Images/Flags/${country}.svg" title="${getCountryName(country)}" class="results-flag"></div>`;
-    });
-    scrollHTML += '<div class="detailed-cell sum-col">Σ</div></div>';
-    
-    sorted.forEach((entry) => {
-        const driver = findDriverById(entry.driver);
-        if (!driver) return;
-        const dimmed = filterTeam && driver.team !== filterTeam;
-        
-        scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}">`;
-        
-        let total = 0;
-        allGPs.forEach(gpId => {
-            const results = detailedResults[gpId] || {};
-            const value = results[entry.driver];
-            const isDNF = value === 'dnf';
-            const isDNS = value === 'dns';
-            const pts = (!isDNF && !isDNS && typeof value === 'number') ? value : 0;
-            total += pts;
-            const noResults = !hasRealResults(gpId, false);
-            
-            if (isDNF) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dnf">DNF</div>`;
-            else if (isDNS) scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''} dns">DNS</div>`;
-            else scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}">${pts > 0 ? pts : '-'}</div>`;
-        });
-        
-        // Показываем сумму гонок + спринтов
-        const sprintEntry = sprintStandings.find(s => s.driver === entry.driver);
-        const sprintPoints = sprintEntry ? sprintEntry.points : 0;
-        const combinedTotal = total + sprintPoints;
-        
-        scrollHTML += `<div class="detailed-cell sum-col" title="Гонки: ${total} + Спринты: ${sprintPoints}">${combinedTotal}</div></div>`;
-    });
-    scrollPart.innerHTML = scrollHTML;
-    
-    tableContainer.appendChild(fixedPart);
-    tableContainer.appendChild(scrollPart);
-    wrapper.appendChild(tableContainer);
-    container.appendChild(wrapper);
-}
-
 function findDriverById(id) { return driversData.find(d => d.id === id); }
 
 function getAllGPs() {
@@ -967,17 +896,17 @@ function createSimpleTable(data, startIndex, filterTeam, isSprint = false) {
         
         if (!isSprint) {
             const totalPoints = entry.points;
-            const raceEntry = driverStandings.find(s => s.driver === entry.driver);
-            const racePoints = raceEntry ? raceEntry.points : 0;
-            const sprintPoints = totalPoints - racePoints;
-            
-            tr.innerHTML = `
-                <td class="results-pos">${pos}</td>
-                <td class="results-driver results-driver-clickable" data-driver-id="${driver.id}">
-                    <img src="${getTeamLogo(displayTeam)}" class="results-team-logo" onerror="this.style.display='none'">
-                    <img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
-                </td>
-                <td class="results-points">${totalPoints}</td>`;
+			const raceEntry = driverStandings.find(s => s.driver === entry.driver);
+			const racePoints = raceEntry ? raceEntry.points : 0;
+			const sprintPoints = totalPoints - racePoints;
+
+			tr.innerHTML = `
+				<td class="results-pos">${pos}</td>
+				<td class="results-driver results-driver-clickable" data-driver-id="${driver.id}">
+					<img src="${getTeamLogo(displayTeam)}" class="results-team-logo" onerror="this.style.display='none'">
+					<img src="Images/Flags/${driver.country}.svg" title="${getCountryName(driver.country)}" class="results-flag"> ${driver.name}
+				</td>
+				<td class="results-points">${totalPoints}</td>`;
             
             const pointsCell = tr.querySelector('.results-points');
             
@@ -1130,7 +1059,9 @@ function renderDriverDetailedTable(container, filterTeam) {
             const isDNF = value === 'dnf';
             const isDNS = value === 'dns';
             const isDSQ = value === 'dsq';
-            const pts = (!isDNF && !isDNS && !isDSQ && typeof value === 'number') ? value : 0;
+            const isDNP = value === 'dnp';
+            
+            const pts = (!isDNF && !isDNS && !isDSQ && !isDNP && typeof value === 'number') ? value : 0;
             total += pts;
             const noResults = !hasRealResults(gpId, false);
             
@@ -1144,6 +1075,7 @@ function renderDriverDetailedTable(container, filterTeam) {
             if (isDNF) scrollHTML += `<div class="${cellClass} dnf" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNF</div>`;
             else if (isDNS) scrollHTML += `<div class="${cellClass} dns" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNS</div>`;
             else if (isDSQ) scrollHTML += `<div class="${cellClass} dsq" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DSQ</div>`;
+            else if (isDNP) scrollHTML += `<div class="${cellClass} dnp" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNP</div>`;
             else scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">${pts > 0 ? pts : '-'}</div>`;
         });
         
@@ -1168,7 +1100,7 @@ function renderDriverDetailedTable(container, filterTeam) {
     `;
     wrapper.appendChild(pointsNote);
     
-    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ
+    // ПРИМЕЧАНИЕ О DNF/DNS/DSQ/DNP
     const statusNote = document.createElement('div');
     statusNote.className = 'results-points-note2';
     statusNote.innerHTML = `
@@ -1176,7 +1108,8 @@ function renderDriverDetailedTable(container, filterTeam) {
         <span class="points-note-text2">
             <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
             <span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
-            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
+            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)<br>
+            <span class="dnp-tag">DNP</span> — Did Not Participate (не участвовал)
         </span>
     `;
     wrapper.appendChild(statusNote);
@@ -1256,58 +1189,60 @@ function renderSprintDetailedTable(container, filterTeam) {
         scrollHTML += `<div class="detailed-data-row ${dimmed ? 'filtered-out' : ''}" data-driver-id="${entry.driver}" data-row-index="${i}">`;
         
         let total = 0;
-        allSPs.forEach((gpId, colIndex) => {
-            const results = detailedSprintResults[gpId] || {};
-            const value = getDriverResultValue(results, entry.driver);
-            const gpTeam = getDriverResultTeam(results, entry.driver, displayTeam);
-            
-            // Если пилота нет в результатах спринта - показываем "-"
-            if (value === undefined || value === null || value === "") {
-                const noResults = !hasRealResults(gpId, true);
-                scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">-</div>`;
-                return;
-            }
-            
-            const isDNF = value === 'dnf';
-            const isDNS = value === 'dns';
-            const isDSQ = value === 'dsq';
-            
-            // Если значение 0 (число) - показываем прочерк
-            if (typeof value === 'number' && value === 0) {
-                const noResults = !hasRealResults(gpId, true);
-                scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">-</div>`;
-                return;
-            }
-            
-            // Если значение больше 0 - добавляем к сумме и показываем
-            if (typeof value === 'number' && value > 0) {
-                total += value;
-                const noResults = !hasRealResults(gpId, true);
-                const isDifferentTeam = gpTeam && gpTeam !== displayTeam;
-                
-                let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
-                if (isDifferentTeam) {
-                    cellClass += ' different-team';
-                }
-                
-                scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">${value}</div>`;
-                return;
-            }
-            
-            // Обработка DNF/DNS/DSQ
-            const noResults = !hasRealResults(gpId, true);
-            const isDifferentTeam = gpTeam && gpTeam !== displayTeam;
-            
-            let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
-            if (isDifferentTeam) {
-                cellClass += ' different-team';
-            }
-            
-            if (isDNF) scrollHTML += `<div class="${cellClass} dnf" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNF</div>`;
-            else if (isDNS) scrollHTML += `<div class="${cellClass} dns" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNS</div>`;
-            else if (isDSQ) scrollHTML += `<div class="${cellClass} dsq" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DSQ</div>`;
-            else scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">-</div>`;
-        });
+		allSPs.forEach((gpId, colIndex) => {
+			const results = detailedSprintResults[gpId] || {};
+			const value = getDriverResultValue(results, entry.driver);
+			const gpTeam = getDriverResultTeam(results, entry.driver, displayTeam);
+			
+			// Если пилота нет в результатах спринта - показываем "-"
+			if (value === undefined || value === null || value === "") {
+				const noResults = !hasRealResults(gpId, true);
+				scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}">-</div>`;
+				return;
+			}
+			
+			const isDNF = value === 'dnf';
+			const isDNS = value === 'dns';
+			const isDSQ = value === 'dsq';
+			const isDNP = value === 'dnp'; // НОВОЕ: проверка на DNP
+			
+			// Если значение 0 (число) - показываем прочерк
+			if (typeof value === 'number' && value === 0) {
+				const noResults = !hasRealResults(gpId, true);
+				scrollHTML += `<div class="detailed-cell gp-col ${noResults ? 'future-gp' : ''}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">-</div>`;
+				return;
+			}
+			
+			// Если значение больше 0 - добавляем к сумме и показываем
+			if (typeof value === 'number' && value > 0) {
+				total += value;
+				const noResults = !hasRealResults(gpId, true);
+				const isDifferentTeam = gpTeam && gpTeam !== displayTeam;
+				
+				let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
+				if (isDifferentTeam) {
+					cellClass += ' different-team';
+				}
+				
+				scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">${value}</div>`;
+				return;
+			}
+			
+			// Обработка DNF/DNS/DSQ/DNP
+			const noResults = !hasRealResults(gpId, true);
+			const isDifferentTeam = gpTeam && gpTeam !== displayTeam;
+			
+			let cellClass = `detailed-cell gp-col ${noResults ? 'future-gp' : ''}`;
+			if (isDifferentTeam) {
+				cellClass += ' different-team';
+			}
+			
+			if (isDNF) scrollHTML += `<div class="${cellClass} dnf" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNF</div>`;
+			else if (isDNS) scrollHTML += `<div class="${cellClass} dns" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNS</div>`;
+			else if (isDSQ) scrollHTML += `<div class="${cellClass} dsq" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DSQ</div>`;
+			else if (isDNP) scrollHTML += `<div class="${cellClass} dnp" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">DNP</div>`; // НОВОЕ
+			else scrollHTML += `<div class="${cellClass}" data-col="${colIndex}" data-gp-team="${gpTeam || ''}">-</div>`;
+		});
         
         scrollHTML += `<div class="detailed-cell sum-col" data-col="sum">${total}</div></div>`;
     });
@@ -1327,17 +1262,18 @@ function renderSprintDetailedTable(container, filterTeam) {
     wrapper.appendChild(pointsNote);
     
     // ПРИМЕЧАНИЕ О DNF/DNS/DSQ
-    const statusNote = document.createElement('div');
-    statusNote.className = 'results-points-note2';
-    statusNote.innerHTML = `
-        <span class="points-note-icon2">🛈</span>
-        <span class="points-note-text2">
-            <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
-            <span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
-            <span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)
-        </span>
-    `;
-    wrapper.appendChild(statusNote);
+	const statusNote = document.createElement('div');
+	statusNote.className = 'results-points-note2';
+	statusNote.innerHTML = `
+		<span class="points-note-icon2">🛈</span>
+		<span class="points-note-text2">
+			<span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
+			<span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
+			<span class="dsq-tag">DSQ</span> — Disqualified (дисквалифицирован)<br>
+			<span class="dnp-tag">DNP</span> — Did Not Participate (не участвовал)
+		</span>
+	`;
+	wrapper.appendChild(statusNote);
     
     container.appendChild(wrapper);
     

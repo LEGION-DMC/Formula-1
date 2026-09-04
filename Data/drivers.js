@@ -401,7 +401,6 @@ const driversData = [
             { team: "Red Bull", year: "2025", temporarily: true },
             { team: "Racing Bulls", year: "2025" },
             { team: "Red Bull", year: "2026", temporarily: true },
-            { team: "Racing Bulls", year: "2026" },
         ],
 		
         titles: 0,
@@ -1580,39 +1579,67 @@ function openDriverModal(driver) {
     block2.appendChild(row1);
     block2.appendChild(row2);
     
-    // Блок статистики
-    const block3 = document.createElement('div');
-    block3.className = 'modal-block';
-    
-    const statsRow = document.createElement('div');
-    statsRow.className = 'modal-stats-row';
-    statsRow.innerHTML = `
-        <div class="stat-cell">
-            <span class="stat-number">${driver.titles}</span>
-            <span class="stat-text">Титулы</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.wins}</span>
-            <span class="stat-text">Победы</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.hattricks}</span>
-            <span class="stat-text">Хэт-Трики</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.podiums}</span>
-            <span class="stat-text">Подиумы</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.poles}</span>
-            <span class="stat-text">Поулы</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.fines || 0}<span class="gp-year-suffix">/12</span></span>
-            <span class="stat-text">Штрафы</span>
-        </div>
-    `;
-    block3.appendChild(statsRow);
+	// Блок статистики
+	const block3 = document.createElement('div');
+	block3.className = 'modal-block';
+
+	// Функция склонения для числительных
+	function declension(num, titles) {
+		// titles: [именительный, родительный, множественный]
+		// Например: ['Титул', 'Титула', 'Титулов']
+		const n = Math.abs(num) % 100;
+		const n1 = n % 10;
+		if (n > 10 && n < 20) {
+			return titles[2]; // множественный
+		}
+		if (n1 > 1 && n1 < 5) {
+			return titles[1]; // родительный
+		}
+		if (n1 === 1) {
+			return titles[0]; // именительный
+		}
+		return titles[2];
+	}
+
+	// Настройка склонений для каждой метрики
+	const declensions = {
+		titles: ['Титул', 'Титула', 'Титулов'],
+		wins: ['Победа', 'Победы', 'Побед'],
+		hattricks: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'],
+		podiums: ['Подиум', 'Подиума', 'Подиумов'],
+		poles: ['Поул', 'Поула', 'Поулов'],
+		fines: ['Штраф', 'Штрафа', 'Штрафов']
+	};
+
+	const statsRow = document.createElement('div');
+	statsRow.className = 'modal-stats-row';
+	statsRow.innerHTML = `
+		<div class="stat-cell">
+			<span class="stat-number">${driver.titles}</span>
+			<span class="stat-text">${declension(driver.titles, declensions.titles)}</span>
+		</div>
+		<div class="stat-cell">
+			<span class="stat-number">${driver.wins}</span>
+			<span class="stat-text">${declension(driver.wins, declensions.wins)}</span>
+		</div>
+		<div class="stat-cell">
+			<span class="stat-number">${driver.hattricks}</span>
+			<span class="stat-text">${declension(driver.hattricks, declensions.hattricks)}</span>
+		</div>
+		<div class="stat-cell">
+			<span class="stat-number">${driver.podiums}</span>
+			<span class="stat-text">${declension(driver.podiums, declensions.podiums)}</span>
+		</div>
+		<div class="stat-cell">
+			<span class="stat-number">${driver.poles}</span>
+			<span class="stat-text">${declension(driver.poles, declensions.poles)}</span>
+		</div>
+		<div class="stat-cell">
+			<span class="stat-number">${driver.fines || 0}<span class="gp-year-suffix">/12</span></span>
+			<span class="stat-text">${declension(driver.fines || 0, declensions.fines)}</span>
+		</div>
+	`;
+	block3.appendChild(statsRow);
     
     rightSide.appendChild(block1);
     rightSide.appendChild(block2);

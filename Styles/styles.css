@@ -1281,7 +1281,7 @@ h1, h2 {
     background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    padding: 15px 15px;
+    padding: 15px 0px 8px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1486,20 +1486,20 @@ h1, h2 {
 .modal-top { display: flex; }
 
 .modal-left {
-    width: 40%;
+    width: 35%;
     min-width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 18px;
     background: linear-gradient(180deg, rgba(225, 6, 0, 0.03), transparent);
 }
 
 .modal-portrait {
     width: 250px;
-    height: 307px;
+    height: 300px;
     border-radius: 5%;
     object-fit: cover;
+    margin-left: 10px;
     object-position: top center;
     border: 1px solid var(--border-color);
     box-shadow: 0 0 40px rgba(225, 6, 0, 0.15);
@@ -1507,7 +1507,7 @@ h1, h2 {
 
 .modal-right {
     width: 65%;
-    padding: 25px 10px 0px 0px;
+    padding: 5px 10px 0px 5px;
     display: flex;
     flex-direction: column;
 }
@@ -1679,7 +1679,8 @@ h1, h2 {
 .stat-cell {
     background-color: rgba(255, 255, 255, 0.02);
     border-radius: 8px;
-    padding: 5px 0px 8px;
+    padding: 3px 0px 6px;
+    gap: 3px;
     display: flex;
     flex-direction: column;
     transition: all 0.25s ease; /* Добавлено: плавность для всех свойств */
@@ -1776,7 +1777,7 @@ h1, h2 {
 .modal-career-item {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 5px;
     width: 124px;
     background: rgba(255, 255, 255, 0.04);
     border-radius: 5px;
@@ -1786,8 +1787,7 @@ h1, h2 {
     opacity: 0;
     transform: translateY(8px) scale(0.95);
     min-width: auto;
-    /* Бордюр через var(--team-color) */
-    border: 1px solid var(--team-color);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 @keyframes careerItemAppear {
@@ -3030,6 +3030,16 @@ h1, h2 {
     line-height: 1.3;
 }
 
+.results-points-note2 .dnp-tag {
+    display: inline-block;
+    background: #888888;
+    color: #000;
+    padding: 0 3px;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
 .results-detail-btn:hover { background: var(--red-accent); color: #fff; }
 .results-detail-btn.active { background: rgba(255, 255, 255, 0.05); border-color: #666; color: #999; }
 .results-detail-btn.active:hover { background: rgba(255, 255, 255, 0.1); color: #ccc; }
@@ -3293,7 +3303,8 @@ h1, h2 {
 /* DNF/DNS */
 .detailed-cell.dnf,
 .detailed-cell.dns,
-.detailed-cell.dsq  {
+.detailed-cell.dsq,
+.dnp {
     font-family: 'F1Title', sans-serif; 
     font-size: 0.65rem;
     padding: 7px 0 6px 0;
@@ -3308,6 +3319,10 @@ h1, h2 {
 }
 
 .detailed-cell.dsq { 
+    color: #888888;
+}
+
+.detailed-cell.dnp { 
     color: #888888;
 }
 
@@ -3897,14 +3912,19 @@ h1, h2 {
     font-family: 'F1Title', sans-serif;
 }
 
+.video-modal-flag {
+    width: 25px;
+    height: 17px;
+    border-radius: 2px;
+    object-fit: cover;
+    vertical-align: middle;
+    margin-right: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
 .video-modal-title {
+    display: flex;
     font-size: 18px;
-    font-weight: 600;
-    color: #E10600;
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     margin-bottom: 5px;
 }
 
@@ -3980,16 +4000,12 @@ h1, h2 {
 /* Базовые стили кнопок */
 .video-session-btn {
     width: 100%;
-    padding: 3px 0px 1px 5px;
+    padding: 2px 0px 0px 5px;
     border: none;
-    border-left: 4px solid #333;
-    border-radius: 4px;
     background: transparent;
     color: #ccc;
     cursor: pointer;
     font-size: 13px;
-    font-weight: 400;
-    transition: all 0.3s ease;
     text-align: left;
     font-family: 'F1Title', sans-serif;
     position: relative;
@@ -4021,10 +4037,12 @@ h1, h2 {
 
 /* ===== СПРИНТ - ЖЁЛТЫЙ ===== */
 .video-session-btn.sprint {
-    border-left-color: #FFD700;
     color: #FFD700;
     border-left: 3px solid #FFD700;
-    border-radius: 3px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 4px;
 }
 
 .video-session-btn.sprint::before {
@@ -4047,10 +4065,12 @@ h1, h2 {
 
 /* ===== КВАЛИФИКАЦИЯ - ЗЕЛЁНЫЙ ===== */
 .video-session-btn.quali {
-    border-left-color: #00CC66;
     color: #00CC66;
     border-left: 3px solid #00CC66;
-    border-radius: 3px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 4px;
 }
 
 .video-session-btn.quali::before {
@@ -4067,13 +4087,14 @@ h1, h2 {
     color: #fff;
 }
 
-
 /* ===== ГОНКА - КРАСНЫЙ ===== */
 .video-session-btn.race {
-    border-left-color: #E10600;
     color: #E10600;
     border-left: 3px solid #E10600;
-    border-radius: 3px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 4px;
 }
 
 .video-session-btn.race::before {
@@ -4092,5 +4113,4 @@ h1, h2 {
 .video-session-btn.race.active {
     background: #E10600;
     color: #fff;
-    border-left-color: #E10600;
 }
