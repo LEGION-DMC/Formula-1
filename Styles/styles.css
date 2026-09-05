@@ -1293,6 +1293,46 @@ h1, h2 {
     backdrop-filter: blur(5px);
 }
 
+.driver-card-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.15;
+}
+
+.driver-card-bg-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.driver-card-bg-pattern svg g {
+    fill: var(--team-color);
+}
+
+.driver-card-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        rgba(0, 0, 0, 0.8) 0%, 
+        rgba(0, 0, 0, 0.2) 50%,
+        rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Контент поверх фона */
+.driver-card > *:not(.driver-card-bg-pattern):not(.driver-card-bg-overlay) {
+    position: relative;
+    z-index: 2;
+}
+
 .driver-card.world-champion {
     border: 1px solid #ffd700;
 }
@@ -1417,6 +1457,8 @@ h1, h2 {
     border-radius: 4px;
     transition: background 0.2s ease;
     transition: all 0.2s ease;
+    transition: all 0.25s ease; 
+    border: 1px solid transparent;
 }
 
 .driver-team .reserve-team-name {
@@ -1424,7 +1466,13 @@ h1, h2 {
 }
 
 .driver-team:hover { 
-    transform: translateY(2px);background-color: rgba(255, 255, 255, 0.08); }
+    transform: translateY(2px);
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: scale(1.03);
+    color: var(--team-color);
+    border: 1px solid var(--team-color);
+}
+
 .driver-team:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.96); }
 
 .driver-team img {
@@ -1465,11 +1513,11 @@ h1, h2 {
 .driver-modal-overlay.active { opacity: 1; }
 
 .driver-modal {
-    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
+    background: rgba(255, 255, 255, 0.0);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     width: 90%;
-    max-width: 750px;
+    max-width: 720px;
     max-height: 80vh;
     overflow-y: auto;
     display: flex;
@@ -1480,18 +1528,54 @@ h1, h2 {
     box-shadow: 0 25px 60px rgba(225, 6, 0, 0.2);
 }
 
+.driver-modal-pattern {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 100%;
+    height: 120%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.2;
+}
+
+.driver-modal-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.driver-modal-pattern svg g {
+    fill: var(--team-color);
+}
+
+.driver-modal-overlay-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Контент поверх фона */
+.driver-modal > *:not(.driver-modal-pattern):not(.driver-modal-overlay-bg) {
+    position: relative;
+    z-index: 2;
+}
+
 .driver-modal.active { transform: scale(1) translateY(0); }
 .modal-close-btn { display: none; }
 
 .modal-top { display: flex; }
 
 .modal-left {
-    width: 35%;
+    width: 39%;
     min-width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, rgba(225, 6, 0, 0.03), transparent);
 }
 
 .modal-portrait {
@@ -1500,9 +1584,8 @@ h1, h2 {
     border-radius: 5%;
     object-fit: cover;
     margin-left: 10px;
+    padding-bottom: 5px;
     object-position: top center;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0 40px rgba(225, 6, 0, 0.15);
 }
 
 .modal-right {
@@ -1524,6 +1607,7 @@ h1, h2 {
     align-items: center;
     gap: 5px;
     padding-top: 0;
+    padding-bottom: 0;
 }
 
 .modal-number {
@@ -1677,19 +1761,19 @@ h1, h2 {
     gap: 8px; text-align: center; }
 
 .stat-cell {
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 3px 0px 6px;
     gap: 3px;
     display: flex;
     flex-direction: column;
-    transition: all 0.25s ease; /* Добавлено: плавность для всех свойств */
+    transition: all 0.25s ease;
     border: 1px solid transparent;
 }
 
 .stat-cell:hover {
     transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.06);
+    background-color: rgba(255, 255, 255, 0.0);
     border: 1px solid var(--team-color);
 }
 
@@ -1712,7 +1796,7 @@ h1, h2 {
 }
 
 .modal-bottom {
-    padding: 0 20px 15px;
+    padding: 0 15px 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -1779,7 +1863,7 @@ h1, h2 {
     align-items: center;
     gap: 5px;
     width: 124px;
-    background: rgba(255, 255, 255, 0.04);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     padding: 5px;
     transition: all 0.2s ease;
@@ -1798,7 +1882,7 @@ h1, h2 {
 }
 
 .modal-career-item:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.0);
 }
 
 .modal-career-logo-wrapper {
@@ -2204,10 +2288,11 @@ h1, h2 {
 /* SVG паттерн для модального окна */
 .tm-modal-pattern {
     opacity: 0.2;
+    margin-left: -35px;
 }
 
 .tm-modal-pattern svg {
-    width: 100%;
+    width: 110%;
     height: 100%;
 }
 

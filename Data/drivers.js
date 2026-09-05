@@ -140,7 +140,7 @@ const driversData = [
         hattricks: 0,
         wins: 1,
         podiums: 6,
-        poles: 0,
+        poles: 1,
 		
         note: "",
         bio: "Победитель Гран-при Италии (2020, AlphaTauri) — невероятная победа на фоне хаоса в Монце. Был уволен из Red Bull после полусезона из-за конфликта с Ферстаппеном, восстановил репутацию в Alpine. Технарь, отличный защитник позиции.",
@@ -1154,7 +1154,20 @@ function renderDriverCards(drivers, container) {
     sortedDrivers.forEach(driver => {
         const card = document.createElement('div');
         card.className = 'driver-card';
-        card.style.setProperty('--team-color', getTeamColor(driver.team));
+        const teamColor = getTeamColor(driver.team);
+        card.style.setProperty('--team-color', teamColor);
+        
+        // === КЛЕТЧАТЫЙ ФОН ДЛЯ КАРТОЧКИ ПИЛОТА ===
+        const patternDiv = document.createElement('div');
+        patternDiv.className = 'driver-card-bg-pattern';
+        patternDiv.innerHTML = DRIVER_PATTERN_SVG;
+        card.appendChild(patternDiv);
+        
+        // Затемняющий оверлей для читаемости
+        const overlay = document.createElement('div');
+        overlay.className = 'driver-card-bg-overlay';
+        card.appendChild(overlay);
+        // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
         
         // Добавляем класс для чемпиона
         if (driver.id === championId) {
@@ -1406,7 +1419,24 @@ function openDriverModal(driver) {
     
     const modal = document.createElement('div');
     modal.className = 'driver-modal';
-    modal.style.setProperty('--team-color', getTeamColor(driver.team));
+    const teamColor = getTeamColor(driver.team);
+    modal.style.setProperty('--team-color', teamColor);
+    modal.style.position = 'relative';
+    modal.style.overflow = 'hidden';
+    
+    // === КЛЕТЧАТЫЙ ФОН ДЛЯ МОДАЛЬНОГО ОКНА ===
+    const modalPattern = document.createElement('div');
+    modalPattern.className = 'driver-modal-pattern';
+    modalPattern.innerHTML = DRIVER_PATTERN_SVG;
+    modal.appendChild(modalPattern);
+    
+    const modalOverlayBg = document.createElement('div');
+    modalOverlayBg.className = 'driver-modal-overlay-bg';
+    modal.appendChild(modalOverlayBg);
+    // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column;';
     
     const closeBtn = document.createElement('button');
     closeBtn.className = 'modal-close-btn';
@@ -1460,89 +1490,89 @@ function openDriverModal(driver) {
     nameRow.appendChild(flagIcon);
     nameRow.appendChild(fullName);
     
-	const teamRow = document.createElement('div');
-	teamRow.className = 'modal-team-row';
+    const teamRow = document.createElement('div');
+    teamRow.className = 'modal-team-row';
 
-	const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
+    const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
 
-	if (isReserve && driver.reserve && driver.reserve.length > 0) {
-		// Для резервистов НЕ добавляем ничего в teamRow
-		// Создаем отдельный контейнер для резерва
-		const reserveContainer = document.createElement('div');
-		reserveContainer.className = 'modal-reserve-teams';
-		
-		const reserveLabel = document.createElement('span');
-		reserveLabel.className = 'modal-reserve-label';
-		reserveLabel.textContent = 'Резерв:';
-		reserveContainer.appendChild(reserveLabel);
-		
-		const teamsList = document.createElement('div');
-		teamsList.className = 'modal-reserve-teams-list';
-		
-		driver.reserve.forEach(teamName => {
-			const teamItem = document.createElement('div');
-			teamItem.className = 'modal-reserve-team-item';
-			
-			// Устанавливаем цвет команды для акцента при hover
-			const teamColor = getTeamColor(teamName);
-			teamItem.style.setProperty('--team-color', teamColor);
-			
-			const teamLogo = document.createElement('img');
-			teamLogo.src = getTeamLogo(teamName);
-			teamLogo.alt = teamName;
-			teamLogo.className = 'modal-team-logo';
-			teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
-			
-			const teamLabel = document.createElement('span');
-			teamLabel.textContent = teamName;
-			
-			teamItem.appendChild(teamLogo);
-			teamItem.appendChild(teamLabel);
-			
-			teamItem.addEventListener('click', (e) => {
-				e.stopPropagation();
-				const teamData = getTeamData(teamName);
-				if (teamData) {
-					openTeamModal(teamData);
-				}
-			});
-			
-			teamsList.appendChild(teamItem);
-		});
-		
-		reserveContainer.appendChild(teamsList);
-		
-		// teamRow скрываем
-		teamRow.style.display = 'none';
-		
-		// Добавляем сначала nameRow, потом teamRow (скрытый), потом reserveContainer
-		nameTeamContainer.appendChild(nameRow);
-		nameTeamContainer.appendChild(teamRow);
-		nameTeamContainer.appendChild(reserveContainer);
-	} else {
-		// Обычное отображение команды
-		const teamIcon = document.createElement('img');
-		teamIcon.src = getTeamLogo(driver.team);
-		teamIcon.alt = driver.team;
-		teamIcon.className = 'modal-team-logo';
+    if (isReserve && driver.reserve && driver.reserve.length > 0) {
+        // Для резервистов НЕ добавляем ничего в teamRow
+        // Создаем отдельный контейнер для резерва
+        const reserveContainer = document.createElement('div');
+        reserveContainer.className = 'modal-reserve-teams';
+        
+        const reserveLabel = document.createElement('span');
+        reserveLabel.className = 'modal-reserve-label';
+        reserveLabel.textContent = 'Резерв:';
+        reserveContainer.appendChild(reserveLabel);
+        
+        const teamsList = document.createElement('div');
+        teamsList.className = 'modal-reserve-teams-list';
+        
+        driver.reserve.forEach(teamName => {
+            const teamItem = document.createElement('div');
+            teamItem.className = 'modal-reserve-team-item';
+            
+            // Устанавливаем цвет команды для акцента при hover
+            const teamColor = getTeamColor(teamName);
+            teamItem.style.setProperty('--team-color', teamColor);
+            
+            const teamLogo = document.createElement('img');
+            teamLogo.src = getTeamLogo(teamName);
+            teamLogo.alt = teamName;
+            teamLogo.className = 'modal-team-logo';
+            teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
+            
+            const teamLabel = document.createElement('span');
+            teamLabel.textContent = teamName;
+            
+            teamItem.appendChild(teamLogo);
+            teamItem.appendChild(teamLabel);
+            
+            teamItem.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const teamData = getTeamData(teamName);
+                if (teamData) {
+                    openTeamModal(teamData);
+                }
+            });
+            
+            teamsList.appendChild(teamItem);
+        });
+        
+        reserveContainer.appendChild(teamsList);
+        
+        // teamRow скрываем
+        teamRow.style.display = 'none';
+        
+        // Добавляем сначала nameRow, потом teamRow (скрытый), потом reserveContainer
+        nameTeamContainer.appendChild(nameRow);
+        nameTeamContainer.appendChild(teamRow);
+        nameTeamContainer.appendChild(reserveContainer);
+    } else {
+        // Обычное отображение команды
+        const teamIcon = document.createElement('img');
+        teamIcon.src = getTeamLogo(driver.team);
+        teamIcon.alt = driver.team;
+        teamIcon.className = 'modal-team-logo';
 
-		const teamLabel = document.createElement('span');
-		teamLabel.textContent = driver.team;
+        const teamLabel = document.createElement('span');
+        teamLabel.textContent = driver.team;
 
-		teamRow.appendChild(teamIcon);
-		teamRow.appendChild(teamLabel);
+        teamRow.appendChild(teamIcon);
+        teamRow.appendChild(teamLabel);
 
-		teamRow.addEventListener('click', (e) => {
-			e.stopPropagation(); 
-			const teamData = getTeamData(driver.team);
-			if (teamData) {
-				openTeamModal(teamData);
-			}
-		});
-		
-		nameTeamContainer.appendChild(nameRow);
-		nameTeamContainer.appendChild(teamRow);
-	}
+        teamRow.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            const teamData = getTeamData(driver.team);
+            if (teamData) {
+                openTeamModal(teamData);
+            }
+        });
+        
+        nameTeamContainer.appendChild(nameRow);
+        nameTeamContainer.appendChild(teamRow);
+    }
     
     block1.appendChild(modalNumber);
     block1.appendChild(nameTeamContainer);
@@ -1579,67 +1609,63 @@ function openDriverModal(driver) {
     block2.appendChild(row1);
     block2.appendChild(row2);
     
-	// Блок статистики
-	const block3 = document.createElement('div');
-	block3.className = 'modal-block';
+    // Блок статистики
+    const block3 = document.createElement('div');
+    block3.className = 'modal-block';
 
-	// Функция склонения для числительных
-	function declension(num, titles) {
-		// titles: [именительный, родительный, множественный]
-		// Например: ['Титул', 'Титула', 'Титулов']
-		const n = Math.abs(num) % 100;
-		const n1 = n % 10;
-		if (n > 10 && n < 20) {
-			return titles[2]; // множественный
-		}
-		if (n1 > 1 && n1 < 5) {
-			return titles[1]; // родительный
-		}
-		if (n1 === 1) {
-			return titles[0]; // именительный
-		}
-		return titles[2];
-	}
+    function declension(num, titles) {
+        const n = Math.abs(num) % 100;
+        const n1 = n % 10;
+        if (n > 10 && n < 20) {
+            return titles[2];
+        }
+        if (n1 > 1 && n1 < 5) {
+            return titles[1];
+        }
+        if (n1 === 1) {
+            return titles[0];
+        }
+        return titles[2];
+    }
 
-	// Настройка склонений для каждой метрики
-	const declensions = {
-		titles: ['Титул', 'Титула', 'Титулов'],
-		wins: ['Победа', 'Победы', 'Побед'],
-		hattricks: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'],
-		podiums: ['Подиум', 'Подиума', 'Подиумов'],
-		poles: ['Поул', 'Поула', 'Поулов'],
-		fines: ['Штраф', 'Штрафа', 'Штрафов']
-	};
+    const declensions = {
+        titles: ['Титул', 'Титула', 'Титулов'],
+        wins: ['Победа', 'Победы', 'Побед'],
+        hattricks: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'],
+        podiums: ['Подиум', 'Подиума', 'Подиумов'],
+        poles: ['Поул', 'Поула', 'Поулов'],
+        fines: ['Штраф', 'Штрафа', 'Штрафов']
+    };
 
-	const statsRow = document.createElement('div');
-	statsRow.className = 'modal-stats-row';
-	statsRow.innerHTML = `
-		<div class="stat-cell">
-			<span class="stat-number">${driver.titles}</span>
-			<span class="stat-text">${declension(driver.titles, declensions.titles)}</span>
-		</div>
-		<div class="stat-cell">
-			<span class="stat-number">${driver.wins}</span>
-			<span class="stat-text">${declension(driver.wins, declensions.wins)}</span>
-		</div>
-		<div class="stat-cell">
-			<span class="stat-number">${driver.hattricks}</span>
-			<span class="stat-text">${declension(driver.hattricks, declensions.hattricks)}</span>
-		</div>
-		<div class="stat-cell">
-			<span class="stat-number">${driver.podiums}</span>
-			<span class="stat-text">${declension(driver.podiums, declensions.podiums)}</span>
-		</div>
-		<div class="stat-cell">
-			<span class="stat-number">${driver.poles}</span>
-			<span class="stat-text">${declension(driver.poles, declensions.poles)}</span>
-		</div>
-		<div class="stat-cell">
-			<span class="stat-number">${driver.fines || 0}<span class="gp-year-suffix">/12</span></span>
-			<span class="stat-text">${declension(driver.fines || 0, declensions.fines)}</span>
-		</div>
-	`;
-	block3.appendChild(statsRow);
+    const statsRow = document.createElement('div');
+    statsRow.className = 'modal-stats-row';
+    statsRow.innerHTML = `
+        <div class="stat-cell">
+            <span class="stat-number">${driver.titles}</span>
+            <span class="stat-text">${declension(driver.titles, declensions.titles)}</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.wins}</span>
+            <span class="stat-text">${declension(driver.wins, declensions.wins)}</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.hattricks}</span>
+            <span class="stat-text">${declension(driver.hattricks, declensions.hattricks)}</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.podiums}</span>
+            <span class="stat-text">${declension(driver.podiums, declensions.podiums)}</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.poles}</span>
+            <span class="stat-text">${declension(driver.poles, declensions.poles)}</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${driver.fines || 0}<span class="gp-year-suffix">/12</span></span>
+            <span class="stat-text">${declension(driver.fines || 0, declensions.fines)}</span>
+        </div>
+    `;
+    block3.appendChild(statsRow);
     
     rightSide.appendChild(block1);
     rightSide.appendChild(block2);
@@ -1677,9 +1703,10 @@ function openDriverModal(driver) {
     }
     // ===== КОНЕЦ БЛОКА =====
     
-    modal.appendChild(closeBtn);
-    modal.appendChild(topSection);
-    modal.appendChild(bioSection);
+    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(topSection);
+    modalContent.appendChild(bioSection);
+    modal.appendChild(modalContent);
     overlay.appendChild(modal);
     
     overlay.addEventListener('click', (e) => {
@@ -1780,3 +1807,36 @@ function getCountryName(code) {
     };
     return countries[code] || code.toUpperCase();
 }
+
+const DRIVER_PATTERN_SVG = `
+<svg viewBox="0 0 928 800" preserveAspectRatio="xMidYMid slice" fill="none">
+    <g>
+        <!-- Ряд 1: 3 клетки -->
+        <path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path>
+        <path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path>
+        <path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path>
+        <!-- Ряд 2: 4 клетки -->
+        <path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path>
+        <path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path>
+        <path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path>
+        <!-- Ряд 3: 5 клеток -->
+        <path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path>
+        <path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path>
+        <path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path>
+        <!-- Ряд 4: 6 клеток -->
+        <path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path>
+        <path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path>
+        <path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path>
+        <!-- Ряд 5: 7 клеток -->
+        <path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path>
+        <path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path>
+        <path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path>
+        <path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path>
+        <!-- Ряд 6: 8 клеток -->
+        <path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path>
+        <path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path>
+        <path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path>
+        <path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path>
+    </g>
+</svg>
+`;
