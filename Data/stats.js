@@ -21,7 +21,7 @@ const qualiData = [
       driver2: "Арвид Линдблад" },
     { driver1: "Нико Хюлькенберг",
       score1: 6,
-      score2: 6,
+      score2: 7,
       driver2: "Габриэл Бортолето" },
     { driver1: "Карлос Сайнс",
       score1: 10,
@@ -29,7 +29,7 @@ const qualiData = [
       driver2: "Алекс Албон" },
     { driver1: "Эстебан Окон",
       score1: 4,
-      score2: 8,
+      score2: 9,
       driver2: "Оливер Берман" },
     { driver1: "Пьер Гасли",
       score1: 9,
@@ -47,7 +47,7 @@ const qualiData = [
 
 const replacementQualiData = [
     { driver1: "Макс Ферстаппен", 
-	score1: 1, 
+	score1: 2, 
 	score2: 0, 
 	driver2: "Лиам Лоусон" },
     { driver1: "Арвид Линдблад", 
