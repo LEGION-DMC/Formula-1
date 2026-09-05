@@ -3412,7 +3412,11 @@ h1, h2 {
 
 .calendar-card.highlight { border-color: var(--red-accent); 
     box-shadow: 0 0 20px rgba(225,6,0,0.5); }
-.calendar-card.canceled { opacity: 0.5; }
+
+.calendar-card.canceled div { 
+    opacity: 0.7; 
+    filter: grayscale(0.7);
+}
 
 .calendar-card.highlight {
     border-color: var(--red-accent);
