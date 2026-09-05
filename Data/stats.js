@@ -24,7 +24,7 @@ const qualiData = [
       score2: 6,
       driver2: "Габриэл Бортолето" },
     { driver1: "Карлос Сайнс",
-      score1: 9,
+      score1: 10,
       score2: 3,
       driver2: "Алекс Албон" },
     { driver1: "Эстебан Окон",
@@ -36,18 +36,24 @@ const qualiData = [
       score2: 3,
       driver2: "Франко Колапинто" },
     { driver1: "Фернандо Алонсо",
-      score1: 10,
+      score1: 11,
       score2: 2,
       driver2: "Лэнс Стролл" },
     { driver1: "Серхио Перес",
       score1: 6,
-      score2: 6,
+      score2: 7, 
       driver2: "Валттери Боттас" },
 ];
 
 const replacementQualiData = [
-    { driver1: "Макс Ферстаппен", score1: 1, score2: 0, driver2: "Лиам Лоусон" },
-    { driver1: "Арвид Линдблад", score1: 1, score2: 0, driver2: "Юки Цунода" },
+    { driver1: "Макс Ферстаппен", 
+	score1: 1, 
+	score2: 0, 
+	driver2: "Лиам Лоусон" },
+    { driver1: "Арвид Линдблад", 
+	score1: 2, 
+	score2: 0, 
+	driver2: "Юки Цунода" },
 ];
 
 const penaltiesData = [
