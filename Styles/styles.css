@@ -2973,6 +2973,7 @@ h1, h2 {
     border-radius: 5px;
     font-size: 13px;
     color: #bbb;
+    letter-spacing: -0.4px;
 }
 
 .points-note-text2 {
