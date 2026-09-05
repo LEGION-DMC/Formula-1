@@ -1130,6 +1130,11 @@ body {
 .gp-cell .gp-full { display: none; }
 .gp-cell .gp-short { display: inline; }
 
+.points-note-text {
+    display: grid;
+    letter-spacing: 0px;
+}
+
 .results-points-note2 {
     align-items: flex-start;
     padding: 2px 4px;

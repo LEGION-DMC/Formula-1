@@ -1095,7 +1095,6 @@ function renderDriverDetailedTable(container, filterTeam) {
     const pointsNote = document.createElement('div');
     pointsNote.className = 'results-points-note';
     pointsNote.innerHTML = `
-        <span class="points-note-icon">🛈 </span>
         <span class="points-note-text">Система начисления очков: <span>1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span></span>
     `;
     wrapper.appendChild(pointsNote);
@@ -1104,7 +1103,6 @@ function renderDriverDetailedTable(container, filterTeam) {
     const statusNote = document.createElement('div');
     statusNote.className = 'results-points-note2';
     statusNote.innerHTML = `
-        <span class="points-note-icon2">🛈</span>
         <span class="points-note-text2">
             <span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
             <span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
@@ -1256,7 +1254,6 @@ function renderSprintDetailedTable(container, filterTeam) {
     const pointsNote = document.createElement('div');
     pointsNote.className = 'results-points-note';
     pointsNote.innerHTML = `
-        <span class="points-note-icon">🛈 </span>
         <span class="points-note-text">Система начисления очков: <span>1:8 • 2:7 • 3:6 • 4:5 • 5:4 • 6:3 • 7:2 • 8:1</span></span>
     `;
     wrapper.appendChild(pointsNote);
@@ -1265,7 +1262,6 @@ function renderSprintDetailedTable(container, filterTeam) {
 	const statusNote = document.createElement('div');
 	statusNote.className = 'results-points-note2';
 	statusNote.innerHTML = `
-		<span class="points-note-icon2">🛈</span>
 		<span class="points-note-text2">
 			<span class="dnf-tag">DNF</span> — Did Not Finish (не финишировал)<br>
 			<span class="dns-tag">DNS</span> — Did Not Start (не стартовал)<br>
