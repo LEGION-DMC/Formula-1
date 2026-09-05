@@ -1895,15 +1895,50 @@ h1, h2 {
   grid-column: 1 / -1;
 }
 
+/* ============================================== */
+/* КЛЕТЧАТЫЙ ФОН ДЛЯ КАРТОЧЕК КОМАНД             */
+/* ============================================== */
+
+/* Базовый SVG паттерн (будет использоваться через CSS) */
+.team-card-bg-pattern,
+.tm-stats-pattern,
+.tm-modal-pattern,
+.tm-bolid-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    padding-right: 5px;
+}
+
+/* Затемнение для читаемости текста */
+.team-card-bg-overlay,
+.tm-stats-overlay,
+.tm-modal-overlay-bg,
+.tm-bolid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
 /* ---------------------------------------------- */
 /* 2. КАРТОЧКА КОМАНДЫ                             */
 /* ---------------------------------------------- */
+
 .team-card {
     --team-color: #FF0000;
     min-width: 275px;
     max-width: 290px;
     height: 180px;
-    background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
+    background: linear-gradient(145deg, rgba(10, 10, 10, 0.92), rgba(20, 20, 20, 0.88));
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 10px;
@@ -1916,16 +1951,43 @@ h1, h2 {
     overflow: hidden;
 }
 
+/* SVG паттерн для карточки */
+.team-card-bg-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.team-card-bg-pattern svg g {
+    fill: var(--team-color);
+}
+
+/* Затемнение для карточки */
+.team-card-bg-overlay {
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 1) 0%, 
+        rgba(0, 0, 0, 0.7) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
+}
+
+/* Контент поверх фона */
+.team-card > *:not(.team-card-bg-pattern):not(.team-card-bg-overlay) {
+    position: relative;
+    z-index: 2;
+}
+
+/* Полоса сверху при наведении */
 .team-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 3px;
     background: var(--team-color);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
+    z-index: 3;
 }
 
 .team-card:hover {
@@ -1934,8 +1996,14 @@ h1, h2 {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px color-mix(in srgb, var(--team-color) 20%, transparent);
 }
 
-.team-card:hover::before { transform: scaleX(1); }
-.team-card:active { transform: scale(0.96); transition: transform 0.1s ease; }
+.team-card:hover::before {
+    transform: scaleX(1);
+}
+
+.team-card:active {
+    transform: scale(0.96);
+    transition: transform 0.1s ease;
+}
 
 .team-card-logo {
     width: 90px; height: 55px;
@@ -1969,8 +2037,6 @@ h1, h2 {
     display: flex; align-items: center; gap: 5px;
     padding: 3px 5px;
     border-radius: 4px;
-    transition: background 0.2s ease; 
-    transition: all 0.2s ease;
     transition: all 0.25s ease; 
     border: 1px solid transparent;
 }
@@ -2006,6 +2072,7 @@ h1, h2 {
 
 /* ---------------------------------------------- */
 /* 3. МОДАЛЬНОЕ ОКНО (OVERLAY)                     */
+/* ---------------------------------------------- */
 .team-modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -2025,6 +2092,7 @@ h1, h2 {
 
 /* ---------------------------------------------- */
 /* 4. ЛЕВАЯ КОЛОНКА — СТАТИСТИКА                   */
+/* ---------------------------------------------- */
 .tm-left-column {
     display: flex;
     flex-direction: column;
@@ -2035,7 +2103,6 @@ h1, h2 {
 .tm-stats-panel {
     --team-color: #fff;
     width: 400px;
-    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 10px;
@@ -2046,10 +2113,32 @@ h1, h2 {
     transform: translateX(-40px);
     align-self: flex-start;
     margin-right: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* SVG паттерн для статистики */
+.tm-stats-pattern {
+    opacity: 0.1;
+}
+
+.tm-stats-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tm-stats-pattern svg g {
+    fill: var(--team-color);
+}
+
+/* Контент поверх фона */
+.tm-stats-panel > *:not(.tm-stats-pattern):not(.tm-stats-overlay) {
+    position: relative;
+    z-index: 2;
 }
 
 .tm-stat-cell {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 8px 10px;
     display: flex;
@@ -2062,7 +2151,7 @@ h1, h2 {
 
 .tm-stat-cell:hover {
     transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.0);
     border: 1px solid var(--team-color);
 }
 
@@ -2091,9 +2180,10 @@ h1, h2 {
 
 /* ---------------------------------------------- */
 /* 5. ЦЕНТРАЛЬНАЯ ПЛАШКА                           */
+/* ---------------------------------------------- */
 .team-modal {
     --team-color: #FF0000;
-    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
+    background: rgba(255, 255, 255, 0.0);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     width: 90%;
@@ -2108,6 +2198,27 @@ h1, h2 {
     transform: scale(0.9) translateY(20px);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+/* SVG паттерн для модального окна */
+.tm-modal-pattern {
+    opacity: 0.2;
+}
+
+.tm-modal-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tm-modal-pattern svg g {
+    fill: var(--team-color);
+}
+
+/* Контент поверх фона */
+.team-modal > *:not(.tm-modal-pattern):not(.tm-modal-overlay-bg) {
+    position: relative;
+    z-index: 2;
 }
 
 .team-modal.active { transform: scale(1) translateY(0); }
@@ -2203,17 +2314,16 @@ h1, h2 {
     padding: 8px 5px;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.1s ease;
-    background-color: rgba(255, 255, 255, 0.03);
-    flex: 1;
     transition: all 0.25s ease; 
+    background: rgba(255, 255, 255, 0.1);
+    flex: 1;
     border: 1px solid transparent;
 }
-
 
 .tm-pilot-row:hover {
     transform: translateY(-3px); 
     border: 1px solid var(--team-color);
+    background: rgba(255, 255, 255, 0.0);
 }
 
 .tm-pilot-row:active { background-color: rgba(255, 255, 255, 0.1); transform: scale(0.98); }
@@ -2244,6 +2354,7 @@ h1, h2 {
 
 /* ---------------------------------------------- */
 /* 6. ПРАВАЯ КОЛОНКА — БОЛИД                       */
+/* ---------------------------------------------- */
 .tm-right-column {
     display: flex;
     flex-direction: column;
@@ -2255,7 +2366,6 @@ h1, h2 {
 .tm-bolid-panel {
     --team-color: #fff;
     width: 400px;
-    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 10px;
@@ -2265,6 +2375,28 @@ h1, h2 {
     opacity: 0;
     transform: translateX(40px);
     align-self: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* SVG паттерн для болида */
+.tm-bolid-pattern {
+    opacity: 0.1;
+}
+
+.tm-bolid-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tm-bolid-pattern svg g {
+    fill: var(--team-color);
+}
+
+/* Контент поверх фона */
+.tm-bolid-panel > *:not(.tm-bolid-pattern):not(.tm-bolid-overlay) {
+    position: relative;
+    z-index: 2;
 }
 
 .tm-bolid-img {
@@ -2283,12 +2415,12 @@ h1, h2 {
 }
 
 .tm-bolid-info-cell {
-    background: rgba(255, 255, 255, 0.03);
     border-radius: 8px;
     padding: 8px 10px;
     display: flex;
     flex-direction: column;
     gap: 5px;
+    background: rgba(255, 255, 255, 0.1);
     text-align: center;
     transition: all 0.25s ease; 
     border: 1px solid transparent;
@@ -2296,10 +2428,9 @@ h1, h2 {
 
 .tm-bolid-info-cell:hover {
     transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.0);
     border: 1px solid var(--team-color);
 }
-
 
 .tm-bolid-info-label {
     font-family: 'F1Text', sans-serif;

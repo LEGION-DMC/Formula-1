@@ -367,6 +367,18 @@ function createTeamCard(team) {
     card.className = 'team-card';
     card.style.setProperty('--team-color', team.color);
     
+    // === КЛЕТЧАТЫЙ ФОН ===
+    const patternDiv = document.createElement('div');
+    patternDiv.className = 'team-card-bg-pattern';
+	patternDiv.innerHTML = TEAM_PATTERN_SVG;
+    card.appendChild(patternDiv);
+    
+    // Затемняющий оверлей
+    const overlay = document.createElement('div');
+    overlay.className = 'team-card-bg-overlay';
+    card.appendChild(overlay);
+    // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
+    
     const logoContainer = document.createElement('div');
     logoContainer.className = 'team-card-logo';
     const logo = document.createElement('img');
@@ -466,31 +478,45 @@ function openTeamModal(team) {
     const statsPanel = document.createElement('div');
     statsPanel.className = 'tm-stats-panel';
     statsPanel.style.setProperty('--team-color', team.color);
+    
+    // Клетчатый фон для statsPanel — ИСПРАВЛЕНО
+    const statsPattern = document.createElement('div');
+    statsPattern.className = 'tm-stats-pattern';
+    statsPattern.innerHTML = TEAM_PATTERN_SVG;  // было: patternDiv.innerHTML = TEAM_PATTERN_SVG;
+    statsPanel.appendChild(statsPattern);
+    
+    const statsOverlay = document.createElement('div');
+    statsOverlay.className = 'tm-stats-overlay';
+    statsPanel.appendChild(statsOverlay);
 
-	const statsHTML = `
-		<div class="tm-stat-cell">
-			<span class="tm-stat-label">Дебют</span>
-			<span class="tm-stat-value">${team.debut}<span class="gp-year-suffix"> г.</span></span>
-		</div>
-		<div class="tm-stat-cell">
-			<span class="tm-stat-label">Гоночные сезоны</span>
-			<span class="tm-stat-value">${team.seasons}</span>
-		</div>
-		<div class="tm-stat-cell tm-stat-full">
-			<span class="tm-stat-label">Первая победа</span>
-			<span class="tm-stat-value">${team.firstWin || '---'}</span>
-		</div>
-		<div class="tm-stat-cell">
-			<span class="tm-stat-label">Кубки конструкторов</span>
-			<span class="tm-stat-value">${team.titles || 0}</span>
-		</div>
-		<div class="tm-stat-cell">
-			<span class="tm-stat-label">Пилоты - Чемпионы</span>
-			<span class="tm-stat-value">${team.champ_dri}</span>
-		</div>
-	`;
-
-    statsPanel.innerHTML = statsHTML;
+    const statsContent = document.createElement('div');
+    statsContent.style.cssText = 'position: relative; z-index: 2; display: contents;';
+    
+    const statsHTML = `
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Дебют</span>
+            <span class="tm-stat-value">${team.debut}<span class="gp-year-suffix"> г.</span></span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Гоночные сезоны</span>
+            <span class="tm-stat-value">${team.seasons}</span>
+        </div>
+        <div class="tm-stat-cell tm-stat-full">
+            <span class="tm-stat-label">Первая победа</span>
+            <span class="tm-stat-value">${team.firstWin || '---'}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Кубки конструкторов</span>
+            <span class="tm-stat-value">${team.titles || 0}</span>
+        </div>
+        <div class="tm-stat-cell">
+            <span class="tm-stat-label">Пилоты - Чемпионы</span>
+            <span class="tm-stat-value">${team.champ_dri}</span>
+        </div>
+    `;
+    
+    statsContent.innerHTML = statsHTML;
+    statsPanel.appendChild(statsContent);
     leftColumn.appendChild(statsPanel);
     
     // ====================
@@ -499,6 +525,19 @@ function openTeamModal(team) {
     const modal = document.createElement('div');
     modal.className = 'team-modal';
     modal.style.setProperty('--team-color', team.color);
+    
+    // Клетчатый фон для модального окна — ИСПРАВЛЕНО
+    const modalPattern = document.createElement('div');
+    modalPattern.className = 'tm-modal-pattern';
+    modalPattern.innerHTML = TEAM_PATTERN_SVG;  // было: patternDiv.innerHTML = TEAM_PATTERN_SVG;
+    modal.appendChild(modalPattern);
+    
+    const modalOverlayBg = document.createElement('div');
+    modalOverlayBg.className = 'tm-modal-overlay-bg';
+    modal.appendChild(modalOverlayBg);
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center;';
     
     const closeBtn = document.createElement('button');
     closeBtn.className = 'team-modal-close-btn';
@@ -545,7 +584,7 @@ function openTeamModal(team) {
         <div class="tm-info-cell">
             <span class="tm-label">Руководитель</span>
             <span class="tm-value">
-			<img src="Images/Flags/${team.director_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.director_country)}">${team.director}</span>
+            <img src="Images/Flags/${team.director_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.director_country)}">${team.director}</span>
         </div>
     `;
     
@@ -564,7 +603,7 @@ function openTeamModal(team) {
         <div class="tm-info-cell">
             <span class="tm-label">Основатель</span>
             <span class="tm-value">
-			<img src="Images/Flags/${team.founder_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.founder_country)}">${team.founder}</span>
+            <img src="Images/Flags/${team.founder_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.founder_country)}">${team.founder}</span>
         </div>
     `;
     
@@ -632,17 +671,19 @@ function openTeamModal(team) {
     
     pilotsSection.appendChild(pilotsList);
     
-    modal.appendChild(closeBtn);
-    modal.appendChild(fullLogoContainer);
-    modal.appendChild(fullNameEl);
-    modal.appendChild(divider1);
-    modal.appendChild(infoRow1);     
-    modal.appendChild(divider2);
-    modal.appendChild(infoRow2);     
-    modal.appendChild(divider3);
-    modal.appendChild(infoRow3);     
-    modal.appendChild(divider4);
-    modal.appendChild(pilotsSection);
+    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(fullLogoContainer);
+    modalContent.appendChild(fullNameEl);
+    modalContent.appendChild(divider1);
+    modalContent.appendChild(infoRow1);     
+    modalContent.appendChild(divider2);
+    modalContent.appendChild(infoRow2);     
+    modalContent.appendChild(divider3);
+    modalContent.appendChild(infoRow3);     
+    modalContent.appendChild(divider4);
+    modalContent.appendChild(pilotsSection);
+    
+    modal.appendChild(modalContent);
     
     // ====================
     // ПРАВАЯ КОЛОНКА — Болид
@@ -654,12 +695,25 @@ function openTeamModal(team) {
     bolidPanel.className = 'tm-bolid-panel';
     bolidPanel.style.setProperty('--team-color', team.color);
     
+    // Клетчатый фон для bolidPanel — ИСПРАВЛЕНО
+    const bolidPattern = document.createElement('div');
+    bolidPattern.className = 'tm-bolid-pattern';
+    bolidPattern.innerHTML = TEAM_PATTERN_SVG;  // было: patternDiv.innerHTML = TEAM_PATTERN_SVG;
+    bolidPanel.appendChild(bolidPattern);
+    
+    const bolidOverlay = document.createElement('div');
+    bolidOverlay.className = 'tm-bolid-overlay';
+    bolidPanel.appendChild(bolidOverlay);
+    
+    const bolidContent = document.createElement('div');
+    bolidContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center;';
+    
     const bolidImg = document.createElement('img');
     bolidImg.src = `Images/Bolid/${team.shortName.toLowerCase().replace(/\s+/g, '-')}.webp`;
     bolidImg.alt = team.car;
     bolidImg.className = 'tm-bolid-img';
     bolidImg.onerror = () => { bolidPanel.style.display = 'none'; };
-    bolidPanel.appendChild(bolidImg);
+    bolidContent.appendChild(bolidImg);
     
     const bolidInfo = document.createElement('div');
     bolidInfo.className = 'tm-bolid-info';
@@ -681,7 +735,8 @@ function openTeamModal(team) {
             <span class="tm-bolid-info-value">${team.power}</span>
         </div>
     `;
-    bolidPanel.appendChild(bolidInfo);
+    bolidContent.appendChild(bolidInfo);
+    bolidPanel.appendChild(bolidContent);
     
     rightColumn.appendChild(bolidPanel);
     
@@ -731,3 +786,25 @@ function openTeamModal(team) {
         modal.classList.add('active');
     });
 }
+
+const TEAM_PATTERN_SVG = `
+<svg viewBox="0 0 928 634" preserveAspectRatio="xMidYMid slice" fill="none">
+    <g>
+        <!-- Ряд 1 -->
+        <path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path>
+        <path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path>
+        <path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path>
+        <!-- Ряд 2 -->
+        <path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path>
+        <path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path>
+        <path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path>
+        <!-- Ряд 3 -->
+        <path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path>
+        <path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path>
+        <path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path>
+        <!-- Ряд 4 -->
+        <path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path>
+        <path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path>
+        <path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path>
+</svg>
+`;
