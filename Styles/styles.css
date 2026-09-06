@@ -1902,20 +1902,20 @@ h1, h2 {
 
 .modal-reserve-teams-list {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .modal-reserve-team-item {
     font-family: 'F1Title', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     display: flex; 
-    gap: 5px;
+    gap: 3px;
     align-items: center;
     cursor: pointer;
-    padding: 3px 5px 3px 5px;
+    padding: 3px 5px 3px 4px;
     margin-top: -5px;
     margin-bottom: -3px;
-    margin-left: -6px;
+    margin-left: -2px;
     border-radius: 4px;
     transition: all 0.2s ease;
     width: fit-content;
