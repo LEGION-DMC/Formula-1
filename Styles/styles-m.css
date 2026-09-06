@@ -613,6 +613,12 @@ body {
     display: initial;
 }
 
+.driver-card-bg-pattern {
+    left: -50px;
+    width: 140%;
+    height: 105%;
+}
+
 .driver-titles-overlay {
     position: absolute;
     top: -7px;
