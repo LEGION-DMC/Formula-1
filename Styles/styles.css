@@ -1332,7 +1332,6 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    align-self: flex-start;
 }
 
 .pit-label {
