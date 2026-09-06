@@ -237,6 +237,7 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
+        "leclerc": "dnf",
         "hadjar": "dnp",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },

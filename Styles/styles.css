@@ -1220,6 +1220,8 @@ h1, h2 {
 }
 .starting-grid-wrapper {
     display: flex;
+    gap: 5px;
+    align-self: flex-start;
 }
 
 .starting-grid-container {
@@ -1231,98 +1233,13 @@ h1, h2 {
     overflow-x: auto;
 }
 
-/* ===== КОНТЕЙНЕР ПИТ-ЛЕЙНА ===== */
-.starting-grid-pit-container {
-    width: 90px;
-    border-left: 2px solid rgba(255, 107, 0, 0.5);
-    border-radius: 4px;
-    padding: 0px 5px;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-}
-
-.pit-label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 2px;
-}
-
-.pit-label-text {
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.6rem;
-    color: #FF6B00;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.pit-label-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(255, 107, 0, 0.4), transparent);
-}
-
-.pit-drivers-list {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.pit-driver-item {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    padding: 2px 4px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid transparent;
-    font-size: 0.7rem;
-}
-
-.pit-driver-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--team-color, #FF6B00);
-    transform: translateX(-2px);
-}
-
-.pit-driver-item:active {
-    transform: scale(0.95);
-}
-
-.pit-driver-pos {
-    font-family: 'F1Numbers', sans-serif;
-    font-size: 0.55rem;
-    color: #666;
-    min-width: 12px;
-    text-align: center;
-}
-
-.pit-driver-name {
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.65rem;
-    flex: 1;
-    white-space: nowrap;
-}
-
-.pit-driver-logo {
-    width: 14px;
-    height: 14px;
-    object-fit: contain;
-    flex-shrink: 0;
-    opacity: 0.8;
-}
-
 /* Каждый ряд — flex для горизонтального расположения */
 .grid-row {
     display: flex;
     gap: 5px;
     justify-content: flex-start;
     flex-wrap: nowrap;
-    margin-top: 8px;
+    margin-top: 11px;
 }
 
 /* 2-й ряд со смещением (шахматный порядок) */
@@ -1374,12 +1291,12 @@ h1, h2 {
 
 .grid-pos {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #666;
     text-align: center;
     flex-shrink: 0;
-    min-width: 15px;
-    margin-right: 5px;
+    min-width: 17px;
+    margin-right: 2px;
 }
 
 .grid-driver-info {
@@ -1399,6 +1316,107 @@ h1, h2 {
 }
 
 .grid-team-logo {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* ===== КОНТЕЙНЕР ПИТ-ЛЕЙНА ===== */
+.starting-grid-pit-container {
+    width: 90px;
+    border-left: 2px solid rgba(255, 107, 0, 0.4);
+    border-radius: 4px;
+    padding: 0px 3px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+.pit-label {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 1px;
+}
+
+.pit-label-text {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.55rem;
+    color: #FF6B00;
+    letter-spacing: 1px;
+}
+
+.pit-label-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 107, 0, 0.4), transparent);
+}
+
+.pit-drivers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.pit-drivers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    padding-top: 2px;
+}
+
+/* Если пилотов 2 или меньше — они в одну колонку */
+.pit-drivers-grid:has(.pit-driver-item:first-child:nth-last-child(-n+2)) {
+    grid-template-columns: 1fr;
+}
+
+.pit-driver-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    min-height: 22px;
+    width: 85px;
+}
+
+.pit-driver-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--team-color, #FF6B00);
+    transform: translateX(-2px);
+}
+
+.pit-driver-item:active {
+    transform: scale(0.95);
+}
+
+.pit-driver-pos {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 0.7rem;
+    color: #666;
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 17px;
+    margin-right: 2px;
+}
+
+.pit-driver-name {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pit-driver-logo {
     width: 15px;
     height: 15px;
     object-fit: contain;

@@ -418,9 +418,6 @@ function createStartingGridBlock() {
         </div>
     `;
     
-    // ════════════════════════════════════════════════════════════
-    // ║ КОНТЕЙНЕР ДЛЯ СЕТКИ + ПИТ-ЛЕЙН
-    // ════════════════════════════════════════════════════════════
     const wrapper = document.createElement('div');
     wrapper.className = 'starting-grid-wrapper';
     
@@ -530,71 +527,74 @@ function createStartingGridBlock() {
             </div>
         `;
         
-        // ════════════════════════════════════════════════════════════
-        // ║ ОТОБРАЖАЕМ ПИЛОТОВ С ПИТ-ЛЕЙНА
-        // ════════════════════════════════════════════════════════════
-        if (pitLaneDrivers.length > 0) {
-            let pitHTML = `
-                <div class="pit-label">
-                    <span class="pit-label-text">PIT</span>
-                    <span class="pit-label-line"></span>
-                </div>
-                <div class="pit-drivers-list">
-            `;
-            
-            pitLaneDrivers.forEach((item) => {
-                const driver = findDriverById(item.driverId);
-                if (!driver) return;
-                
-                const team = item.team || driver.team;
-                const teamColor = getTeamColor(team);
-                const teamLogoPath = getTeamLogo(team);
-                
-                let russianName = driver.name;
-                if (russianName.includes(' ')) {
-                    const parts = russianName.split(' ');
-                    russianName = parts[parts.length - 1];
-                }
-                
-                const russianLower = russianName.toLowerCase();
-                const driverNameMap = {
-                    'гасли': 'GAS', 'расселл': 'RUS', 'леклер': 'LEC',
-                    'хэмилтон': 'HAM', 'ферстаппен': 'VER', 'пиастри': 'PIA',
-                    'колапинто': 'COL', 'норрис': 'NOR', 'линдблад': 'LIN',
-                    'бортолето': 'BOR', 'берман': 'BEA', 'хюлькенберг': 'HUL',
-                    'сайнс': 'SAI', 'окон': 'OCO', 'цунода': 'TSU',
-                    'боттас': 'BOT', 'перес': 'PER', 'алонсо': 'ALO',
-                    'стролл': 'STR', 'антонелли': 'ANT', 'лоусон': 'LAW',
-                    'албон': 'ALB'
-                };
-                let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
-                
-                pitHTML += `
-                    <div class="pit-driver-item" data-driver-id="${driver.id}" style="--team-color: ${teamColor}">
-                        <span class="pit-driver-pos">${item.position}</span>
-                        <span class="pit-driver-name" style="color: ${teamColor}">${shortName}</span>
-                        <img src="${teamLogoPath}" class="pit-driver-logo" onerror="this.style.display='none'" title="${team}">
-                    </div>
-                `;
-            });
-            
-            pitHTML += `</div>`;
-            pitContainer.innerHTML = pitHTML;
-            
-            // Обработчики клика для пилотов в PIT
-            pitContainer.querySelectorAll('.pit-driver-item').forEach(item => {
-                const driverId = item.dataset.driverId;
-                const driver = findDriverById(driverId);
-                if (driver) {
-                    item.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        if (typeof openDriverModal === 'function') {
-                            openDriverModal(driver);
-                        }
-                    });
-                }
-            });
-        }
+		// ════════════════════════════════════════════════════════════
+		// ║ ОТОБРАЖАЕМ ПИЛОТОВ С ПИТ-ЛЕЙНА (по 2 в колонке)
+		// ════════════════════════════════════════════════════════════
+		if (pitLaneDrivers.length > 0) {
+			// Сортируем по позиции
+			pitLaneDrivers.sort((a, b) => a.position - b.position);
+			
+			let pitHTML = `
+				<div class="pit-label">
+					<span class="pit-label-text">PIT</span>
+					<span class="pit-label-line"></span>
+				</div>
+				<div class="pit-drivers-grid">
+			`;
+			
+			pitLaneDrivers.forEach((item) => {
+				const driver = findDriverById(item.driverId);
+				if (!driver) return;
+				
+				const team = item.team || driver.team;
+				const teamColor = getTeamColor(team);
+				const teamLogoPath = getTeamLogo(team);
+				
+				let russianName = driver.name;
+				if (russianName.includes(' ')) {
+					const parts = russianName.split(' ');
+					russianName = parts[parts.length - 1];
+				}
+				
+				const russianLower = russianName.toLowerCase();
+				const driverNameMap = {
+					'гасли': 'GAS', 'расселл': 'RUS', 'леклер': 'LEC',
+					'хэмилтон': 'HAM', 'ферстаппен': 'VER', 'пиастри': 'PIA',
+					'колапинто': 'COL', 'норрис': 'NOR', 'линдблад': 'LIN',
+					'бортолето': 'BOR', 'берман': 'BEA', 'хюлькенберг': 'HUL',
+					'сайнс': 'SAI', 'окон': 'OCO', 'цунода': 'TSU',
+					'боттас': 'BOT', 'перес': 'PER', 'алонсо': 'ALO',
+					'стролл': 'STR', 'антонелли': 'ANT', 'лоусон': 'LAW',
+					'албон': 'ALB'
+				};
+				let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
+				
+				pitHTML += `
+					<div class="pit-driver-item" data-driver-id="${driver.id}" style="--team-color: ${teamColor}">
+						<span class="pit-driver-pos">${item.position}</span>
+						<span class="pit-driver-name" style="color: ${teamColor}">${shortName}</span>
+						<img src="${teamLogoPath}" class="pit-driver-logo" onerror="this.style.display='none'" title="${team}">
+					</div>
+				`;
+			});
+			
+			pitHTML += `</div>`;
+			pitContainer.innerHTML = pitHTML;
+			
+			// Обработчики клика для пилотов в PIT
+			pitContainer.querySelectorAll('.pit-driver-item').forEach(item => {
+				const driverId = item.dataset.driverId;
+				const driver = findDriverById(driverId);
+				if (driver) {
+					item.addEventListener('click', (e) => {
+						e.stopPropagation();
+						if (typeof openDriverModal === 'function') {
+							openDriverModal(driver);
+						}
+					});
+				}
+			});
+		}
         
         // Добавляем обработчики клика для обычных ячеек
         gridContainer.querySelectorAll('.grid-cell[data-driver-id]').forEach(cell => {
