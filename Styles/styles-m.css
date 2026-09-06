@@ -1118,14 +1118,14 @@ body {
 .detailed-data-row .detailed-cell.future-gp { opacity: 0.5; color: #999; }
 
 .detailed-cell.dnf {
-    color: #cc3300;
-    font-family: 'F1Title', sans-serif;
     font-size: 0.55rem;
 }
 
 .detailed-cell.dns {
-    color: #FFC107;
-    font-family: 'F1Title', sans-serif;
+    font-size: 0.55rem;
+}
+
+.detailed-cell.dnp, .detailed-cell.dsq  {
     font-size: 0.55rem;
 }
 
