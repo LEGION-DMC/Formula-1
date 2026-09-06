@@ -1,3 +1,28 @@
+const startingGridData = [
+    { position: 1, driverId: 'gasly' },
+    { position: 2, driverId: 'russell' },
+    { position: 3, driverId: 'leclerc' },
+    { position: 4, driverId: 'hamilton' },
+    { position: 5, driverId: 'verstappen' },
+    { position: 6, driverId: 'piastri' },
+    { position: 7, driverId: 'colapinto' },
+    { position: 8, driverId: 'norris' },
+    { position: 9, driverId: 'lindblad' },
+    { position: 10, driverId: 'bortoleto' },
+    { position: 11, driverId: 'bearman' },
+    { position: 12, driverId: 'hulkenberg' },
+    { position: 13, driverId: 'sainz' },
+    { position: 14, driverId: 'ocon' },
+    { position: 15, driverId: 'tsunoda' },
+    { position: 16, driverId: 'bottas' },
+    { position: 17, driverId: 'perez' },
+    { position: 18, driverId: 'alonso' },
+    { position: 19, driverId: 'stroll' },
+    { position: 20, driverId: 'antonelli' }, 
+    { position: 21, driverId: 'lawson' },
+    { position: 22, driverId: 'albon' }
+];
+
 const weatherData = {
     type: "cloud",
     typeName: "Загрузка...",
@@ -328,22 +353,236 @@ async function initMainPage(container) {
     // ===== ВТОРОЙ РЯД =====
     const secondRow = document.createElement('div');
     secondRow.className = 'main-second-row';
-    
+
     // Разделитель
     const divider = document.createElement('hr');
     divider.className = 'main-row-divider';
     container.appendChild(divider);
-    
-    // Блок дня рождения
-    secondRow.appendChild(createBirthdayBlock());
-    
-    // Здесь можно добавить другие блоки во второй ряд
-    // secondRow.appendChild(createAnotherBlock());
-    
+
+    // Блок дня рождения (1 колонка)
+    const birthdayBlock = createBirthdayBlock();
+    secondRow.appendChild(birthdayBlock);
+
+    // Блок стартовой решётки (3 колонки)
+    const gridBlock = createStartingGridBlock();
+    secondRow.appendChild(gridBlock);
+
     container.appendChild(secondRow);
     
+	await loadWeatherForNextGP();
+	
+    // ===== ЗАПУСКАЕМ ТАЙМЕР =====
     startMainTimer();
-    await loadWeatherForNextGP();
+}
+
+function createStartingGridBlock() {
+    const block = document.createElement('div');
+    block.className = 'main-block starting-grid-block';
+    block.style.gridColumn = 'span 3';
+    
+    // Добавляем состояние для блюра
+    let isBlurred = true;
+    
+    // Получаем информацию о текущем ГП (для заголовка)
+    const now = new Date();
+    let nextGP = null;
+    let nextTrack = null;
+    
+    if (typeof calendarData !== 'undefined') {
+        const activeGPs = calendarData
+            .filter(gp => !gp.canceled)
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        for (const gp of activeGPs) {
+            const raceDate = new Date(gp.date);
+            const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
+            
+            if (raceEnd > now) {
+                nextGP = gp;
+                nextTrack = getTrackById(gp.track);
+                break;
+            }
+        }
+    }
+    
+	// Заголовок блока
+	block.innerHTML = `
+		<div class="main-block-title starting-grid-title">
+			<span class="gp-full-text">Ст. решётка на предстоящую гонку</span><span class="gp-short-text">Стартовая решётка на гонку предстоящего Гран-При</span>
+		</div>
+		<div class="starting-grid-blur-overlay">
+			<div class="starting-grid-blur-content">
+				<span class="starting-grid-blur-text">Стартовая решётка на гонку предстоящего Гран-При</span>
+				<span class="starting-grid-blur-title">Нажмите для показа</span>
+			</div>
+		</div>
+	`;
+    
+    // Контейнер для сетки
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'starting-grid-container blurred';
+    
+    // Используем статические данные
+    if (typeof startingGridData === 'undefined' || !startingGridData || startingGridData.length === 0) {
+        gridContainer.innerHTML = `
+            <div class="starting-grid-empty">
+                <span>Данные стартовой решётки отсутствуют</span>
+            </div>
+        `;
+        // Если нет данных, убираем блюр
+        gridContainer.classList.remove('blurred');
+        const overlay = block.querySelector('.starting-grid-blur-overlay');
+        if (overlay) overlay.style.display = 'none';
+    } else {
+        // Сортируем по позиции
+        const sortedGrid = [...startingGridData].sort((a, b) => a.position - b.position);
+        
+        // Берём первых 22 пилота (или сколько есть)
+        const topDrivers = sortedGrid.slice(0, 22);
+        
+        // Разбиваем на ряды для шахматного порядка:
+        // Ряд 1 (нечётные позиции): 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21
+        // Ряд 2 (чётные позиции):   2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22
+        const row1 = []; // нечётные
+        const row2 = []; // чётные
+        
+        topDrivers.forEach((item) => {
+            const pos = item.position;
+            if (pos % 2 === 1) {
+                row1.push(item);
+            } else {
+                row2.push(item);
+            }
+        });
+        
+        // Маппинг русских фамилий на английские (латиница)
+        const driverNameMap = {
+            'гасли': 'GAS',
+            'расселл': 'RUS',
+            'леклер': 'LEC',
+            'хэмилтон': 'HAM',
+            'ферстаппен': 'VER',
+            'пиастри': 'PIA',
+            'колапинто': 'COL',
+            'норрис': 'NOR',
+            'линдблад': 'LIN',
+            'бортолето': 'BOR',
+            'берман': 'BEA',
+            'хюлькенберг': 'HUL',
+            'сайнс': 'SAI',
+            'окон': 'OCO',
+            'цунода': 'TSU',
+            'боттас': 'BOT',
+            'перес': 'PER',
+            'алонсо': 'ALO',
+            'стролл': 'STR',
+            'антонелли': 'ANT',
+            'лоусон': 'LAW',
+            'албон': 'ALB'
+        };
+        
+        // Создаём HTML для ячейки
+        function renderDriverCell(item) {
+            const driver = findDriverById(item.driverId);
+            const pos = item.position;
+            
+            if (!driver) {
+                return `
+                    <div class="grid-cell empty" data-pos="${pos}">
+                        <span class="grid-pos">${pos}</span>
+                        <span class="grid-name">—</span>
+                    </div>
+                `;
+            }
+            
+            const teamColor = getTeamColor(driver.team);
+            const flagPath = `Images/Flags/${driver.country}.svg`;
+            
+            // Получаем фамилию на русском
+            let russianName = driver.name;
+            // Если есть пробел, берём только фамилию (последнюю часть)
+            if (russianName.includes(' ')) {
+                const parts = russianName.split(' ');
+                russianName = parts[parts.length - 1];
+            }
+            
+            // Переводим на английский (латиницу) через маппинг
+            const russianLower = russianName.toLowerCase();
+            let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
+            
+            return `
+                <div class="grid-cell" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
+                    <span class="grid-pos">${pos}</span>
+                    <div class="grid-driver-info">
+                        <span class="grid-name" style="color: ${teamColor}">${shortName}</span>
+                        <img src="${flagPath}" class="grid-flag" onerror="this.style.display='none'">
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Строим HTML для рядов
+        function buildRow(data) {
+            return data.map(item => renderDriverCell(item)).join('');
+        }
+        
+        // Для шахматного расположения: 2-й ряд имеет отступ слева
+        const row1HTML = buildRow(row1);
+        const row2HTML = buildRow(row2);
+        
+        gridContainer.innerHTML = `
+            <div class="grid-row grid-row-1">
+                ${row1HTML}
+            </div>
+            <div class="grid-row grid-row-2">
+                <div class="grid-row-offset"></div>
+                ${row2HTML}
+            </div>
+        `;
+        
+        // Добавляем обработчики клика для открытия модалки пилота
+        gridContainer.querySelectorAll('.grid-cell[data-driver-id]').forEach(cell => {
+            const driverId = cell.dataset.driverId;
+            const driver = findDriverById(driverId);
+            if (driver) {
+                cell.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (typeof openDriverModal === 'function') {
+                        openDriverModal(driver);
+                    }
+                });
+            }
+        });
+    }
+    
+    block.appendChild(gridContainer);
+    
+    // Обработчик клика по блоку для снятия блюра
+    block.addEventListener('click', function(e) {
+        // Если клик был по ячейке с пилотом — не снимаем блюр (обработчик выше)
+        if (e.target.closest('.grid-cell')) return;
+        
+        const overlay = this.querySelector('.starting-grid-blur-overlay');
+        const container = this.querySelector('.starting-grid-container');
+        
+        if (container && container.classList.contains('blurred')) {
+            // Снимаем блюр
+            container.classList.remove('blurred');
+            if (overlay) {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 400);
+            }
+        }
+    });
+    
+    return block;
+}
+
+function getGridForCurrentGP() {
+    // Возвращаем статические данные стартовой решётки
+    return startingGridData || [];
 }
 
 function createStatsBlock() {

@@ -1079,6 +1079,10 @@ h1, h2 {
     flex: 1;
 }
 
+.birthday-name span {
+    margin-top: 2px;
+}
+
 .birthday-flag {
     width: 22px;
     height: 16px;
@@ -1111,6 +1115,204 @@ h1, h2 {
 
 .birthday-block:active {
     transform: scale(0.97);
+}
+
+/* ===== БЛОК СТАРТОВОЙ РЕШЁТКИ ===== */
+.starting-grid-block {
+    background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 11px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    grid-column: span 3;
+}
+
+.starting-grid-block {
+    position: relative;
+    overflow: hidden;
+}
+
+.starting-grid-blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10;
+    transition: opacity 0.4s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    pointer-events: auto;
+}
+
+.starting-grid-blur-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px 10px;
+    transition: all 0.3s ease;
+}
+
+.starting-grid-blur-overlay:hover .starting-grid-blur-content {
+    transform: scale(1.05);
+}
+
+.starting-grid-blur-text {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+}
+
+.starting-grid-blur-title {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 6px;
+}
+
+.starting-grid-container.blurred {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.4s ease, -webkit-filter 0.4s ease;
+}
+
+.starting-grid-container:not(.blurred) {
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    pointer-events: auto;
+    transition: filter 0.4s ease, -webkit-filter 0.4s ease;
+}
+
+.starting-grid-block .main-block-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+.starting-grid-block:hover {
+    transform: translateY(-3px);
+    border-color: var(--red-accent);
+    box-shadow: 0 10px 25px rgba(225, 6, 0, 0.15);
+}
+
+.starting-grid-block:active {
+    transform: scale(0.97);
+}
+
+.starting-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 8px;
+    overflow-x: auto;
+}
+
+/* Каждый ряд — flex для горизонтального расположения */
+.grid-row {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+}
+
+/* 2-й ряд со смещением (шахматный порядок) */
+.grid-row-2 {
+    padding-left: calc(50% / 14); /* Смещение на половину ширины ячейки */
+}
+
+/* Элемент для смещения (невидимый) */
+.grid-row-offset {
+    width: 0;
+    flex-shrink: 0;
+}
+
+.grid-cell {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    min-height: 22px;
+    width: 85px;
+}
+
+.grid-cell:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--team-color, var(--red-accent));
+    transform: translateY(-1px);
+}
+
+.grid-cell:active {
+    transform: scale(0.97);
+}
+
+.grid-cell.empty {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.grid-cell.empty:hover {
+    transform: none;
+    border-color: transparent;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.grid-pos {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 0.8rem;
+    color: #666;
+    min-width: 15px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.grid-driver-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.grid-name {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.grid-flag {
+    width: 18px;
+    height: 14px;
+    border-radius: 2px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================== */
@@ -2314,7 +2516,13 @@ h1, h2 {
     width: 100%; display: flex; justify-content: center; margin-bottom: 12px; 
 }
 
-.tm-full-logo { max-width: 100%; max-height: 100px; object-fit: contain; margin-top: 5px;  }
+.tm-full-logo { 
+    max-width: 100%; 
+    max-height: 100px; 
+    object-fit: contain; 
+    margin-top: 5px; 
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+}
 
 .tm-full-name {
     font-family: 'F1Title', sans-serif;
