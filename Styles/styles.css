@@ -1479,7 +1479,7 @@ h1, h2 {
 }
 
 .driver-card {
-    background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.7));
+    background: linear-gradient(145deg, rgba(20, 20, 20, 0.5), rgba(30, 30, 30, 0.5));
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 15px 0px 8px 0px;
@@ -1577,6 +1577,7 @@ h1, h2 {
     object-fit: cover;
     object-position: top center;
     border-radius: 5%;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
 }
 
 .driver-flag-overlay {
@@ -2219,11 +2220,10 @@ h1, h2 {
 /* ---------------------------------------------- */
 
 .team-card {
-    --team-color: #FF0000;
     min-width: 275px;
     max-width: 290px;
     height: 180px;
-    background: linear-gradient(145deg, rgba(10, 10, 10, 0.92), rgba(20, 20, 20, 0.88));
+    --team-color: #FF0000;
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 10px;
@@ -3828,6 +3828,54 @@ h1, h2 {
 .calendar-card {
     transition: all 0.3s ease !important;
 }
+/* ============================================== */
+/* КЛЕТЧАТЫЙ ФОН ДЛЯ КАРТОЧЕК КАЛЕНДАРЯ          */
+/* ============================================== */
+
+.calendar-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-card-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.25;
+}
+
+.calendar-card-bg-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.calendar-card-bg-pattern svg g {
+    fill: var(--red-accent);
+}
+
+.calendar-card-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.7) 0%, 
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Контент поверх фона */
+.calendar-card > *:not(.calendar-card-bg-pattern):not(.calendar-card-bg-overlay) {
+    position: relative;
+    z-index: 2;
+}
 
 .calendar-card:hover {
     transform: translateY(-4px) !important;
@@ -3855,10 +3903,14 @@ h1, h2 {
 .calendar-card-image {
     width: 130px; min-width: 130px;
     position: relative;
-    background: #111;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: center; 
+    justify-content: center;
 }
-.calendar-card-image img { max-width: 115px; height: 95px; object-fit: contain; }
+.calendar-card-image img { 
+    max-width: 115px; height: 95px; 
+    object-fit: contain; 
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+}
 
 @keyframes sprintPulse {
     0%,100% { opacity: 1; } 50% { opacity: 0.5; }
@@ -4073,7 +4125,6 @@ h1, h2 {
 }
 
 .track-modal {
-    background: transparent;
     width: 100%;
     max-width: 870px;
     max-height: 90vh;
@@ -4094,22 +4145,66 @@ h1, h2 {
 }
 
 /* ========================================== */
+/* КЛЕТЧАТЫЙ ФОН ДЛЯ МОДАЛЬНОГО ОКНА ТРАССЫ  */
+/* ========================================== */
+
+.track-modal-pattern {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 60px);
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.15;
+}
+
+.track-modal-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.track-modal-pattern svg g {
+    fill: var(--red-accent);
+}
+
+.track-modal-overlay-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Контент поверх фона */
+.track-modal > *:not(.track-modal-pattern):not(.track-modal-overlay-bg) {
+    position: relative;
+    z-index: 2;
+}
+
+/* ========================================== */
 /* ПЛАШКА ТРАССЫ                             */
 /* ========================================== */
 
 .track-modal-layout {
     display: flex;
-    background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
+    background: rgba(255, 255, 255, 0.0);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     overflow: hidden;
+    position: relative;
 }
 
 .tm-track-image {
     width: 350px;
     min-height: 320px;
     max-height: 320px;
-    background: #111;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4125,7 +4220,7 @@ h1, h2 {
     height: auto;
     object-fit: contain;
     object-position: center;
-    display: block;
+    display: block;filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
 }
 
 .tm-track-info {
@@ -4211,7 +4306,7 @@ h1, h2 {
 }
 
 .tm-track-info .tm-stat-cell {
-    background: rgba(255,255,255,0.04);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     padding: 6px 0px 6px 0px;
     display: flex;
@@ -4223,8 +4318,8 @@ h1, h2 {
 
 .tm-track-info .tm-stat-cell:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid red;
+    background: rgba(255, 255, 255, 0.0);
+    border: 1px solid var(--red-accent);
 }
 
 .tm-track-info .tm-stat-value {

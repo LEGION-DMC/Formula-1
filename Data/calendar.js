@@ -971,6 +971,18 @@ function renderCalendarCards(container) {
 
         if (gp.canceled) card.classList.add('canceled');
         if (isToday) card.classList.add('today');
+        
+        // === КЛЕТЧАТЫЙ ФОН ДЛЯ КАРТОЧКИ КАЛЕНДАРЯ ===
+        const patternDiv = document.createElement('div');
+        patternDiv.className = 'calendar-card-bg-pattern';
+        patternDiv.innerHTML = CALENDAR_PATTERN_SVG;
+        card.appendChild(patternDiv);
+        
+        // Затемняющий оверлей
+        const overlay = document.createElement('div');
+        overlay.className = 'calendar-card-bg-overlay';
+        card.appendChild(overlay);
+        // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
 
         // Изображение трассы
         const imageDiv = document.createElement('div');
@@ -1011,72 +1023,68 @@ function renderCalendarCards(container) {
             </div>
         `;
 
-		// Футер
-		const footer = document.createElement('div');
-		footer.className = 'calendar-card-footer';
+        // Футер
+        const footer = document.createElement('div');
+        footer.className = 'calendar-card-footer';
 
-		if (gp.canceled) {
-			footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
-		} else {
-			let btns = '';
-			let showTimer = false;
-			
-			const now = new Date();
-			
-			// Функция для проверки, наступило ли время события или до него осталось <= 5 минут
-			function isEventNearOrPassed(eventDateStr) {
-				if (!eventDateStr) return false;
-				const eventDate = new Date(eventDateStr);
-				const fiveMinutesBefore = new Date(eventDate.getTime() - 5 * 60 * 1000);
-				return now >= fiveMinutesBefore;
-			}
+        if (gp.canceled) {
+            footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
+        } else {
+            let btns = '';
+            let showTimer = false;
+            
+            const now = new Date();
+            
+            function isEventNearOrPassed(eventDateStr) {
+                if (!eventDateStr) return false;
+                const eventDate = new Date(eventDateStr);
+                const fiveMinutesBefore = new Date(eventDate.getTime() - 5 * 60 * 1000);
+                return now >= fiveMinutesBefore;
+            }
 
-			// Кнопка спринта - показываем за 5 минут до начала и после
-			if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
-				const videoUrl = getVideoUrl(gp.recordingSprint);
-				if (videoUrl) {
-					btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${track.name}">Спринт</button>`;
-				}
-			}
+            if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
+                const videoUrl = getVideoUrl(gp.recordingSprint);
+                if (videoUrl) {
+                    btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${track.name}">Спринт</button>`;
+                }
+            }
 
-			// Кнопка квалификации - показываем за 5 минут до начала и после
-			if (gp.recordingQuali && gp.quali && isEventNearOrPassed(gp.quali)) {
-				const videoUrl = getVideoUrl(gp.recordingQuali);
-				if (videoUrl) {
-					btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${track.name}">Квалификация</button>`;
-				}
-			}
+            if (gp.recordingQuali && gp.quali && isEventNearOrPassed(gp.quali)) {
+                const videoUrl = getVideoUrl(gp.recordingQuali);
+                if (videoUrl) {
+                    btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${track.name}">Квалификация</button>`;
+                }
+            }
 
-			// Гонка - показываем за 5 минут до начала и после
-			if (isEventNearOrPassed(gp.date)) {
-				if (gp.recordingRace) {
-					const videoUrl = getVideoUrl(gp.recordingRace);
-					if (videoUrl) {
-						btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${track.name}">Гонка</button>`;
-					}
-				} else if (isPast) {
-					btns += '<span class="calendar-btn disabled">Нет записи</span>';
-				}
-			} else {
-				showTimer = true;
-			}
+            if (isEventNearOrPassed(gp.date)) {
+                if (gp.recordingRace) {
+                    const videoUrl = getVideoUrl(gp.recordingRace);
+                    if (videoUrl) {
+                        btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${track.name}">Гонка</button>`;
+                    }
+                } else if (isPast) {
+                    btns += '<span class="calendar-btn disabled">Нет записи</span>';
+                }
+            } else {
+                showTimer = true;
+            }
 
-			if (showTimer) {
-				btns += `
-					<div class="calendar-countdown">
-						<span>До гонки:</span>
-						<div class="calendar-timer" data-date="${gp.date}">
-							<span class="calendar-timer-days">00</span>дн.
-							<span class="calendar-timer-hours">00</span>ч.
-							<span class="calendar-timer-minutes">00</span>м.
-							<span class="calendar-timer-seconds">00</span>с.
-						</div>
-					</div>
-				`;
-			}
+            if (showTimer) {
+                btns += `
+                    <div class="calendar-countdown">
+                        <span>До гонки:</span>
+                        <div class="calendar-timer" data-date="${gp.date}">
+                            <span class="calendar-timer-days">00</span>дн.
+                            <span class="calendar-timer-hours">00</span>ч.
+                            <span class="calendar-timer-minutes">00</span>м.
+                            <span class="calendar-timer-seconds">00</span>с.
+                        </div>
+                    </div>
+                `;
+            }
 
-			footer.innerHTML = btns;
-		}
+            footer.innerHTML = btns;
+        }
 
         // Сборка карточки
         const divider1 = document.createElement('div');
@@ -1221,6 +1229,22 @@ function openTrackModal(track, gp) {
 
     const modal = document.createElement('div');
     modal.className = 'track-modal';
+    modal.style.position = 'relative';
+    modal.style.overflow = 'hidden';
+
+    // === КЛЕТЧАТЫЙ ФОН ДЛЯ МОДАЛЬНОГО ОКНА ТРАССЫ ===
+    const modalPattern = document.createElement('div');
+    modalPattern.className = 'track-modal-pattern';
+    modalPattern.innerHTML = CALENDAR_PATTERN_SVG;
+    modal.appendChild(modalPattern);
+    
+    const modalOverlayBg = document.createElement('div');
+    modalOverlayBg.className = 'track-modal-overlay-bg';
+    modal.appendChild(modalOverlayBg);
+    // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
+
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%;';
 
     function close() {
         overlay.remove();
@@ -1232,7 +1256,7 @@ function openTrackModal(track, gp) {
         if (e.key === 'Escape') close();
     }
 
-    modal.innerHTML = `
+    modalContent.innerHTML = `
         <button class="track-modal-close">&times;</button>
         <div class="track-modal-layout">
             <div class="tm-track-image">
@@ -1262,7 +1286,7 @@ function openTrackModal(track, gp) {
                     </div>
                     <div class="tm-stat-cell">
                         <span class="tm-stat-value">${track.laps}</span>
-						<span class="tm-stat-label">${pluralize(track.laps, 'круг', 'круга', 'кругов')}</span>
+                        <span class="tm-stat-label">${pluralize(track.laps, 'круг', 'круга', 'кругов')}</span>
                     </div>
                     <div class="tm-stat-cell">
                         <span class="tm-stat-value">${track.turns}</span>
@@ -1282,28 +1306,30 @@ function openTrackModal(track, gp) {
                     </div>
                 </div>
                 <hr class="tm-divider">
-				<div class="tm-stats-grid2">
+                <div class="tm-stats-grid2">
                     <div class="tm-stat-cell">
                         <span class="tm-stat-label">Первая гонка</span>
                         <span class="tm-stat-value">${track.firstrace}<span class="gp-year-suffix"> г.</span></span>
                     </div>
                 </div>
                 <hr class="tm-divider">
-				<div class="tm-stats-grid3">
+                <div class="tm-stats-grid3">
                     <div class="tm-stat-cell">
                         <span class="tm-stat-label">Рекорд круга в гонке</span> ${(() => { const parts = track.lapRecord.split(', '); return `
-							<span class="tm-stat-value2">${parts[0]}</span>
-							<span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
+                            <span class="tm-stat-value2">${parts[0]}</span>
+                            <span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
                     </div>
                     <div class="tm-stat-cell">
                         <span class="tm-stat-label">Рекорд круга в квалификации</span> ${(() => { const parts = track.qulRecord.split(', '); return `
-							<span class="tm-stat-value2">${parts[0]}</span>
-							<span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
+                            <span class="tm-stat-value2">${parts[0]}</span>
+                            <span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
                     </div>
                 </div>
             </div>
         </div>
     `;
+    
+    modal.appendChild(modalContent);
     setTimeout(autoShrinkHeaders, 10);
     
     modal.querySelector('.track-modal-close').addEventListener('click', close);
@@ -1492,3 +1518,30 @@ function scrollToGPCard(gpId, cardsArea) {
         }, 1500);
     }, 800);
 }
+
+const CALENDAR_PATTERN_SVG = `
+<svg viewBox="0 0 928 800" preserveAspectRatio="xMidYMid slice" fill="none">
+    <g>
+        <path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path>
+        <path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path>
+        <path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path>
+        <path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path>
+        <path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path>
+        <path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path>
+        <path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path>
+        <path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path>
+        <path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path>
+        <path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path>
+        <path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path>
+        <path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path>
+        <path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path>
+        <path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path>
+        <path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path>
+        <path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path>
+        <path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path>
+        <path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path>
+        <path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path>
+        <path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path>
+    </g>
+</svg>
+`;
