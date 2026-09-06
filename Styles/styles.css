@@ -1223,7 +1223,6 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin-top: 8px;
     overflow-x: auto;
 }
 
@@ -1233,11 +1232,13 @@ h1, h2 {
     gap: 5px;
     justify-content: flex-start;
     flex-wrap: nowrap;
+    margin-top: 8px;
 }
 
 /* 2-й ряд со смещением (шахматный порядок) */
 .grid-row-2 {
-    padding-left: calc(50% / 14); /* Смещение на половину ширины ячейки */
+    padding-left: calc(50% / 14); 
+    margin-top: 0px;
 }
 
 /* Элемент для смещения (невидимый) */

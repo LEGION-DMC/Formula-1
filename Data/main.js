@@ -766,9 +766,7 @@ async function loadWeatherForNextGP() {
     
     if (nextGP && nextTrack) {
         const location = getWeatherLocation(nextGP, nextTrack);
-        console.log('Загружаем погоду для:', location);
         const weather = await fetchWeatherWttr(location);
-        console.log('Получена погода:', weather);
         
         if (weather) {
             Object.assign(weatherData, weather);
@@ -781,7 +779,6 @@ async function loadWeatherForNextGP() {
                 if (oldTyreBlock) {
                     const newTyreBlock = createTyreBlock();
                     oldTyreBlock.replaceWith(newTyreBlock);
-                    console.log('Блок шин обновлён, rain =', weatherData.rain);
                 }
             }
         }
