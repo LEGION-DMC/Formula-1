@@ -1372,6 +1372,8 @@ function createTyreBlock() {
 }
 
 let mainTimerInterval = null;
+let soundPlayed5min = {}; 
+let soundPlayed0min = {}; 
 
 function startMainTimer() {
     if (mainTimerInterval) clearInterval(mainTimerInterval);
@@ -1446,6 +1448,62 @@ function startMainTimer() {
             return now >= fiveMinutesBefore;
         }
         
+        // ===== ПРОВЕРКА ДЛЯ ЗВУКОВЫХ ОПОВЕЩЕНИЙ =====
+        function checkAndPlaySound(eventDateStr, eventType, gpId) {
+            if (!eventDateStr) return;
+            
+            const eventDate = new Date(eventDateStr);
+            const fiveMinutesBefore = new Date(eventDate.getTime() - 5 * 60 * 1000);
+            const timeToEvent = eventDate - now;
+            
+            // Ключ для отслеживания конкретного события
+            const soundKey = `${gpId}_${eventType}`;
+            
+            // Инициализация флагов для этого события
+            if (soundPlayed5min[soundKey] === undefined) {
+                soundPlayed5min[soundKey] = false;
+            }
+            if (soundPlayed0min[soundKey] === undefined) {
+                soundPlayed0min[soundKey] = false;
+            }
+            
+            // ===== ЗА 5 МИНУТ =====
+            // Проверяем, что сейчас момент "ровно за 5 минут" (плюс-минус 1 секунда)
+            const fiveMinDiff = Math.abs(timeToEvent - 5 * 60 * 1000);
+            if (timeToEvent > 0 && fiveMinDiff < 1000 && !soundPlayed5min[soundKey]) {
+                playF1Sound();
+                soundPlayed5min[soundKey] = true;
+                console.log(`🔊 Звук за 5 минут до ${eventType}: ${eventDate}`);
+            }
+            
+            // ===== В 0 МИНУТ =====
+            // Проверяем, что сейчас момент начала события (плюс-минус 1 секунда)
+            if (timeToEvent > 0 && timeToEvent < 1000 && !soundPlayed0min[soundKey]) {
+                playF1Sound();
+                soundPlayed0min[soundKey] = true;
+                console.log(`🔊 Звук в момент начала ${eventType}: ${eventDate}`);
+            }
+            
+            // Если событие прошло, сбрасываем флаги для следующего ГП
+            if (timeToEvent < -1000) {
+                soundPlayed5min[soundKey] = false;
+                soundPlayed0min[soundKey] = false;
+            }
+        }
+        
+        // Проверяем звуки для СПРИНТА
+        if (sprintDate) {
+            checkAndPlaySound(nextGP.sprint, 'sprint', nextGP.id);
+        }
+        
+        // Проверяем звуки для КВАЛИФИКАЦИИ
+        if (qualiDate) {
+            checkAndPlaySound(nextGP.quali, 'quali', nextGP.id);
+        }
+        
+        // Проверяем звуки для ГОНКИ
+        checkAndPlaySound(nextGP.date, 'race', nextGP.id);
+        
         // Обновляем кнопки
         let hasButtons = false;
         linksDiv.innerHTML = '';
@@ -1490,6 +1548,7 @@ function startMainTimer() {
         }
         
         // Обновляем таймер / кнопку гонки
+        let hasRaceButton = false;
         if (isEventNearOrPassed(nextGP.date)) {
             if (nextGP.recordingRace) {
                 const raceBtn = document.createElement('button');
@@ -1505,6 +1564,7 @@ function startMainTimer() {
                 };
                 countdownDiv.innerHTML = '';
                 countdownDiv.appendChild(raceBtn);
+                hasRaceButton = true;
             } else {
                 countdownDiv.innerHTML = '<span class="calendar-status-text">Гонка началась</span>';
             }
@@ -1524,4 +1584,87 @@ function startMainTimer() {
     updateTimer();
     // Обновляем каждую секунду
     mainTimerInterval = setInterval(updateTimer, 1000);
+}
+
+function playF1Sound() {
+    try {
+        // Пробуем разные пути к файлу
+        const paths = [
+            'Styles/F1.mp3',      // Из корня сайта
+            '../Styles/F1.mp3',   // Из папки Data
+            'F1.mp3',             // В корне
+            '/Styles/F1.mp3',     // Абсолютный путь
+            'Sounds/F1.mp3',      // В папке Sounds
+            '../Sounds/F1.mp3',   // Из Data в Sounds
+        ];
+        
+        // Пробуем найти рабочий путь
+        let audio = null;
+        let workingPath = null;
+        
+        for (const path of paths) {
+            try {
+                const testAudio = new Audio(path);
+                // Проверяем, загружается ли файл
+                testAudio.preload = 'metadata';
+                testAudio.load();
+                
+                // Если нет ошибки сразу, используем этот путь
+                audio = testAudio;
+                workingPath = path;
+                break;
+            } catch (e) {
+                continue;
+            }
+        }
+        
+        if (!audio) {
+            console.warn('Звуковой файл не найден по указанным путям');
+            // Пытаемся воспроизвести через Web Audio API как запасной вариант
+            tryPlayBeepSound();
+            return;
+        }
+        
+        audio.volume = 1.0;
+        audio.currentTime = 0;
+        
+        // Воспроизводим
+        const playPromise = audio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch((error) => {
+                console.warn('Не удалось воспроизвести звук:', error);
+                // Запасной вариант - бип
+                tryPlayBeepSound();
+            });
+        }
+    } catch (error) {
+        console.warn('Ошибка при воспроизведении звука:', error);
+        tryPlayBeepSound();
+    }
+}
+
+function tryPlayBeepSound() {
+    try {
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(880, context.currentTime);
+        oscillator.frequency.setValueAtTime(1100, context.currentTime + 0.15);
+        
+        gain.gain.setValueAtTime(0.15, context.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.4);
+        
+        oscillator.start(context.currentTime);
+        oscillator.stop(context.currentTime + 0.4);
+        
+        console.log('🔔 Воспроизведён звуковой сигнал (Web Audio API)');
+    } catch (e) {
+        console.warn('Не удалось воспроизвести звук через Web Audio API:', e);
+    }
 }
