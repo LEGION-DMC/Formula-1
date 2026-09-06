@@ -1222,7 +1222,6 @@ h1, h2 {
 .starting-grid-wrapper {
     display: flex;
     gap: 5px;
-    align-self: flex-start;
 }
 
 .starting-grid-container {
