@@ -16,11 +16,11 @@ const startingGridData = [
     { position: 15, driverId: 'tsunoda', team: 'Racing Bulls' },
     { position: 16, driverId: 'bottas' },
     { position: 17, driverId: 'perez' },
-    { position: 18, driverId: 'alonso' },
-    { position: 19, driverId: 'stroll' },
-    { position: 20, driverId: 'antonelli' }, 
-    { position: 21, driverId: 'lawson', team: 'Red Bull' },
-    { position: 22, driverId: 'albon' }
+    { position: 18, driverId: 'stroll' },
+    { position: 19, driverId: 'antonelli' },
+    { position: 20, driverId: 'albon' }, 
+    { position: 21, driverId: 'alonso', pitLane: true }, 
+    { position: 22, driverId: 'lawson', team: 'Red Bull', pitLane: true }, 
 ];
 
 const weatherData = {
@@ -405,22 +405,32 @@ function createStartingGridBlock() {
         }
     }
     
-	// Заголовок блока
-	block.innerHTML = `
-		<div class="main-block-title starting-grid-title">
-			<span class="gp-full-text">Ст. решётка на предстоящую гонку</span><span class="gp-short-text">Стартовая решётка на гонку предстоящего Гран-При</span>
-		</div>
-		<div class="starting-grid-blur-overlay">
-			<div class="starting-grid-blur-content">
-				<span class="starting-grid-blur-text">Стартовая решётка на гонку предстоящего Гран-При</span>
-				<span class="starting-grid-blur-title">Нажмите для показа</span>
-			</div>
-		</div>
-	`;
+    // Заголовок блока
+    block.innerHTML = `
+        <div class="main-block-title starting-grid-title">
+            <span class="gp-full-text">Ст. решётка на предстоящую гонку</span><span class="gp-short-text">Стартовая решётка на гонку предстоящего Гран-При</span>
+        </div>
+        <div class="starting-grid-blur-overlay">
+            <div class="starting-grid-blur-content">
+                <span class="starting-grid-blur-text">Стартовая решётка на гонку предстоящего Гран-При</span>
+                <span class="starting-grid-blur-title">Нажмите для показа</span>
+            </div>
+        </div>
+    `;
+    
+    // ════════════════════════════════════════════════════════════
+    // ║ КОНТЕЙНЕР ДЛЯ СЕТКИ + ПИТ-ЛЕЙН
+    // ════════════════════════════════════════════════════════════
+    const wrapper = document.createElement('div');
+    wrapper.className = 'starting-grid-wrapper';
     
     // Контейнер для сетки
     const gridContainer = document.createElement('div');
     gridContainer.className = 'starting-grid-container blurred';
+    
+    // Контейнер для пит-лейна
+    const pitContainer = document.createElement('div');
+    pitContainer.className = 'starting-grid-pit-container';
     
     // Используем статические данные
     if (typeof startingGridData === 'undefined' || !startingGridData || startingGridData.length === 0) {
@@ -429,7 +439,6 @@ function createStartingGridBlock() {
                 <span>Данные стартовой решётки отсутствуют</span>
             </div>
         `;
-        // Если нет данных, убираем блюр
         gridContainer.classList.remove('blurred');
         const overlay = block.querySelector('.starting-grid-blur-overlay');
         if (overlay) overlay.style.display = 'none';
@@ -437,12 +446,14 @@ function createStartingGridBlock() {
         // Сортируем по позиции
         const sortedGrid = [...startingGridData].sort((a, b) => a.position - b.position);
         
-        // Берём первых 22 пилота (или сколько есть)
-        const topDrivers = sortedGrid.slice(0, 22);
+        // Разделяем на обычных пилотов и пит-лейн
+        const normalDrivers = sortedGrid.filter(item => !item.pitLane);
+        const pitLaneDrivers = sortedGrid.filter(item => item.pitLane === true);
+        
+        // Берём первых 22 пилота из обычных
+        const topDrivers = normalDrivers.slice(0, 22);
         
         // Разбиваем на ряды для шахматного порядка:
-        // Ряд 1 (нечётные позиции): 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21
-        // Ряд 2 (чётные позиции):   2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22
         const row1 = []; // нечётные
         const row2 = []; // чётные
         
@@ -455,103 +466,57 @@ function createStartingGridBlock() {
             }
         });
         
-        // Маппинг русских фамилий на английские (латиница)
-        const driverNameMap = {
-            'гасли': 'GAS',
-            'расселл': 'RUS',
-            'леклер': 'LEC',
-            'хэмилтон': 'HAM',
-            'ферстаппен': 'VER',
-            'пиастри': 'PIA',
-            'колапинто': 'COL',
-            'норрис': 'NOR',
-            'линдблад': 'LIN',
-            'бортолето': 'BOR',
-            'берман': 'BEA',
-            'хюлькенберг': 'HUL',
-            'сайнс': 'SAI',
-            'окон': 'OCO',
-            'цунода': 'TSU',
-            'боттас': 'BOT',
-            'перес': 'PER',
-            'алонсо': 'ALO',
-            'стролл': 'STR',
-            'антонелли': 'ANT',
-            'лоусон': 'LAW',
-            'албон': 'ALB'
-        };
+        function renderDriverCell(item) {
+            const driver = findDriverById(item.driverId);
+            const pos = item.position;
+            
+            if (!driver) {
+                return `
+                    <div class="grid-cell empty" data-pos="${pos}">
+                        <span class="grid-pos">${pos}</span>
+                        <span class="grid-name">—</span>
+                    </div>
+                `;
+            }
+            
+            const team = item.team || driver.team;
+            const teamColor = getTeamColor(team);
+            const teamLogoPath = getTeamLogo(team);
+            
+            let russianName = driver.name;
+            if (russianName.includes(' ')) {
+                const parts = russianName.split(' ');
+                russianName = parts[parts.length - 1];
+            }
+            
+            const russianLower = russianName.toLowerCase();
+            const driverNameMap = {
+                'гасли': 'GAS', 'расселл': 'RUS', 'леклер': 'LEC',
+                'хэмилтон': 'HAM', 'ферстаппен': 'VER', 'пиастри': 'PIA',
+                'колапинто': 'COL', 'норрис': 'NOR', 'линдблад': 'LIN',
+                'бортолето': 'BOR', 'берман': 'BEA', 'хюлькенберг': 'HUL',
+                'сайнс': 'SAI', 'окон': 'OCO', 'цунода': 'TSU',
+                'боттас': 'BOT', 'перес': 'PER', 'алонсо': 'ALO',
+                'стролл': 'STR', 'антонелли': 'ANT', 'лоусон': 'LAW',
+                'албон': 'ALB'
+            };
+            let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
+            
+            return `
+                <div class="grid-cell" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
+                    <span class="grid-pos">${pos}</span>
+                    <div class="grid-driver-info">
+                        <span class="grid-name" style="color: ${teamColor}">${shortName}</span>
+                        <img src="${teamLogoPath}" class="grid-team-logo" onerror="this.style.display='none'" title="${team}">
+                    </div>
+                </div>
+            `;
+        }
         
-		function renderDriverCell(item) {
-			const driver = findDriverById(item.driverId);
-			const pos = item.position;
-			
-			if (!driver) {
-				return `
-					<div class="grid-cell empty" data-pos="${pos}">
-						<span class="grid-pos">${pos}</span>
-						<span class="grid-name">—</span>
-					</div>
-				`;
-			}
-			
-			// Используем команду из данных стартовой решётки, если она есть
-			const team = item.team || driver.team;
-			const teamColor = getTeamColor(team);
-			const flagPath = `Images/Flags/${driver.country}.svg`;
-			const teamLogoPath = getTeamLogo(team);
-			
-			// Получаем фамилию на русском
-			let russianName = driver.name;
-			if (russianName.includes(' ')) {
-				const parts = russianName.split(' ');
-				russianName = parts[parts.length - 1];
-			}
-			
-			// Переводим на английский (латиницу) через маппинг
-			const russianLower = russianName.toLowerCase();
-			const driverNameMap = {
-				'гасли': 'GAS',
-				'расселл': 'RUS',
-				'леклер': 'LEC',
-				'хэмилтон': 'HAM',
-				'ферстаппен': 'VER',
-				'пиастри': 'PIA',
-				'колапинто': 'COL',
-				'норрис': 'NOR',
-				'линдблад': 'LIN',
-				'бортолето': 'BOR',
-				'берман': 'BEA',
-				'хюлькенберг': 'HUL',
-				'сайнс': 'SAI',
-				'окон': 'OCO',
-				'цунода': 'TSU',
-				'боттас': 'BOT',
-				'перес': 'PER',
-				'алонсо': 'ALO',
-				'стролл': 'STR',
-				'антонелли': 'ANT',
-				'лоусон': 'LAW',
-				'албон': 'ALB'
-			};
-			let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
-			
-			return `
-				<div class="grid-cell" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
-					<span class="grid-pos">${pos}</span>
-					<div class="grid-driver-info">
-						<span class="grid-name" style="color: ${teamColor}">${shortName}</span>
-						<img src="${teamLogoPath}" class="grid-team-logo" onerror="this.style.display='none'" title="${team}">
-					</div>
-				</div>
-			`;
-		}
-        
-        // Строим HTML для рядов
         function buildRow(data) {
             return data.map(item => renderDriverCell(item)).join('');
         }
         
-        // Для шахматного расположения: 2-й ряд имеет отступ слева
         const row1HTML = buildRow(row1);
         const row2HTML = buildRow(row2);
         
@@ -565,7 +530,73 @@ function createStartingGridBlock() {
             </div>
         `;
         
-        // Добавляем обработчики клика для открытия модалки пилота
+        // ════════════════════════════════════════════════════════════
+        // ║ ОТОБРАЖАЕМ ПИЛОТОВ С ПИТ-ЛЕЙНА
+        // ════════════════════════════════════════════════════════════
+        if (pitLaneDrivers.length > 0) {
+            let pitHTML = `
+                <div class="pit-label">
+                    <span class="pit-label-text">PIT</span>
+                    <span class="pit-label-line"></span>
+                </div>
+                <div class="pit-drivers-list">
+            `;
+            
+            pitLaneDrivers.forEach((item) => {
+                const driver = findDriverById(item.driverId);
+                if (!driver) return;
+                
+                const team = item.team || driver.team;
+                const teamColor = getTeamColor(team);
+                const teamLogoPath = getTeamLogo(team);
+                
+                let russianName = driver.name;
+                if (russianName.includes(' ')) {
+                    const parts = russianName.split(' ');
+                    russianName = parts[parts.length - 1];
+                }
+                
+                const russianLower = russianName.toLowerCase();
+                const driverNameMap = {
+                    'гасли': 'GAS', 'расселл': 'RUS', 'леклер': 'LEC',
+                    'хэмилтон': 'HAM', 'ферстаппен': 'VER', 'пиастри': 'PIA',
+                    'колапинто': 'COL', 'норрис': 'NOR', 'линдблад': 'LIN',
+                    'бортолето': 'BOR', 'берман': 'BEA', 'хюлькенберг': 'HUL',
+                    'сайнс': 'SAI', 'окон': 'OCO', 'цунода': 'TSU',
+                    'боттас': 'BOT', 'перес': 'PER', 'алонсо': 'ALO',
+                    'стролл': 'STR', 'антонелли': 'ANT', 'лоусон': 'LAW',
+                    'албон': 'ALB'
+                };
+                let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
+                
+                pitHTML += `
+                    <div class="pit-driver-item" data-driver-id="${driver.id}" style="--team-color: ${teamColor}">
+                        <span class="pit-driver-pos">${item.position}</span>
+                        <span class="pit-driver-name" style="color: ${teamColor}">${shortName}</span>
+                        <img src="${teamLogoPath}" class="pit-driver-logo" onerror="this.style.display='none'" title="${team}">
+                    </div>
+                `;
+            });
+            
+            pitHTML += `</div>`;
+            pitContainer.innerHTML = pitHTML;
+            
+            // Обработчики клика для пилотов в PIT
+            pitContainer.querySelectorAll('.pit-driver-item').forEach(item => {
+                const driverId = item.dataset.driverId;
+                const driver = findDriverById(driverId);
+                if (driver) {
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (typeof openDriverModal === 'function') {
+                            openDriverModal(driver);
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Добавляем обработчики клика для обычных ячеек
         gridContainer.querySelectorAll('.grid-cell[data-driver-id]').forEach(cell => {
             const driverId = cell.dataset.driverId;
             const driver = findDriverById(driverId);
@@ -580,18 +611,18 @@ function createStartingGridBlock() {
         });
     }
     
-    block.appendChild(gridContainer);
+    wrapper.appendChild(gridContainer);
+    wrapper.appendChild(pitContainer);
+    block.appendChild(wrapper);
     
     // Обработчик клика по блоку для снятия блюра
     block.addEventListener('click', function(e) {
-        // Если клик был по ячейке с пилотом — не снимаем блюр (обработчик выше)
-        if (e.target.closest('.grid-cell')) return;
+        if (e.target.closest('.grid-cell') || e.target.closest('.pit-driver-item')) return;
         
         const overlay = this.querySelector('.starting-grid-blur-overlay');
         const container = this.querySelector('.starting-grid-container');
         
         if (container && container.classList.contains('blurred')) {
-            // Снимаем блюр
             container.classList.remove('blurred');
             if (overlay) {
                 overlay.style.opacity = '0';
