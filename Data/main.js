@@ -482,44 +482,45 @@ function createStartingGridBlock() {
         };
         
         // Создаём HTML для ячейки
-        function renderDriverCell(item) {
-            const driver = findDriverById(item.driverId);
-            const pos = item.position;
-            
-            if (!driver) {
-                return `
-                    <div class="grid-cell empty" data-pos="${pos}">
-                        <span class="grid-pos">${pos}</span>
-                        <span class="grid-name">—</span>
-                    </div>
-                `;
-            }
-            
-            const teamColor = getTeamColor(driver.team);
-            const flagPath = `Images/Flags/${driver.country}.svg`;
-            
-            // Получаем фамилию на русском
-            let russianName = driver.name;
-            // Если есть пробел, берём только фамилию (последнюю часть)
-            if (russianName.includes(' ')) {
-                const parts = russianName.split(' ');
-                russianName = parts[parts.length - 1];
-            }
-            
-            // Переводим на английский (латиницу) через маппинг
-            const russianLower = russianName.toLowerCase();
-            let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
-            
-            return `
-                <div class="grid-cell" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
-                    <span class="grid-pos">${pos}</span>
-                    <div class="grid-driver-info">
-                        <span class="grid-name" style="color: ${teamColor}">${shortName}</span>
-                        <img src="${flagPath}" class="grid-flag" onerror="this.style.display='none'">
-                    </div>
-                </div>
-            `;
-        }
+function renderDriverCell(item) {
+    const driver = findDriverById(item.driverId);
+    const pos = item.position;
+    
+    if (!driver) {
+        return `
+            <div class="grid-cell empty" data-pos="${pos}">
+                <span class="grid-pos">${pos}</span>
+                <span class="grid-name">—</span>
+            </div>
+        `;
+    }
+    
+    const teamColor = getTeamColor(driver.team);
+    const flagPath = `Images/Flags/${driver.country}.svg`;
+    const teamLogoPath = getTeamLogo(driver.team);
+    
+    // Получаем фамилию на русском
+    let russianName = driver.name;
+    // Если есть пробел, берём только фамилию (последнюю часть)
+    if (russianName.includes(' ')) {
+        const parts = russianName.split(' ');
+        russianName = parts[parts.length - 1];
+    }
+    
+    // Переводим на английский (латиницу) через маппинг
+    const russianLower = russianName.toLowerCase();
+    let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
+    
+    return `
+        <div class="grid-cell" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
+            <span class="grid-pos">${pos}</span>
+            <div class="grid-driver-info">
+                <span class="grid-name" style="color: ${teamColor}">${shortName}</span>
+                <img src="${teamLogoPath}" class="grid-team-logo" onerror="this.style.display='none'" title="${driver.team}">
+            </div>
+        </div>
+    `;
+}
         
         // Строим HTML для рядов
         function buildRow(data) {

@@ -1285,9 +1285,10 @@ h1, h2 {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
     font-size: 0.8rem;
     color: #666;
-    min-width: 15px;
     text-align: center;
     flex-shrink: 0;
+    min-width: 15px;
+    margin-right: 5px;
 }
 
 .grid-driver-info {
@@ -1306,13 +1307,11 @@ h1, h2 {
     text-overflow: ellipsis;
 }
 
-.grid-flag {
-    width: 18px;
-    height: 14px;
-    border-radius: 2px;
-    object-fit: cover;
+.grid-team-logo {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
     flex-shrink: 0;
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================== */
