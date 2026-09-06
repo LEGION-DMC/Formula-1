@@ -238,6 +238,8 @@ const detailedResults = {
         "000": 2,
         "000": 1,
         "leclerc": "dnf",
+        "alonso": "dnf",
+        "stroll": "dnf",
         "hadjar": "dnp",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },

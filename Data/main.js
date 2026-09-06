@@ -1,4 +1,4 @@
-const startingGridData = [
+const startingGridData = [ 
     { position: 1, driverId: 'gasly' },
     { position: 2, driverId: 'russell' },
     { position: 3, driverId: 'leclerc' },

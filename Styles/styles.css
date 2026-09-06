@@ -1218,6 +1218,7 @@ h1, h2 {
 .starting-grid-block:active {
     transform: scale(0.97);
 }
+
 .starting-grid-wrapper {
     display: flex;
     gap: 5px;
