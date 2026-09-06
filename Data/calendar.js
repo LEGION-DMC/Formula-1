@@ -220,7 +220,7 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/da918a72a96913e17b693a833fce4f29/",
+		recordingQuali: "https://rutube.ru/video/947e5f26a01dc1f74461bac2a76adff7/",
 		recordingRace: "https://rutube.ru/video/ae323c7cf713b9d9b3866d887cea4410/"
 	},
 	{   id: "spain",

@@ -2289,6 +2289,7 @@ h1, h2 {
 .tm-modal-pattern {
     opacity: 0.2;
     margin-left: -35px;
+    margin-top: -10px;
 }
 
 .tm-modal-pattern svg {
