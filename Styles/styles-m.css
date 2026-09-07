@@ -681,6 +681,22 @@ body {
     font-size: 12px;
 }
 
+/* Перестраиваем модалку пилота для мобильных */
+.driver-modal-overlay {
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+
+.dm-right-column {
+    order: 2;
+    width: 90%;
+}
+
+.modal-bottom {
+    padding-bottom: 10px !important;
+}
+
 /* ============================================== */
 /* ВКЛАДКА: КОМАНДЫ                              */
 /* ============================================== */
