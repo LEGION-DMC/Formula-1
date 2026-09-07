@@ -671,7 +671,7 @@ body {
 .modal-fullname { font-size: 1.3rem; }
 .modal-details-row { gap: 15px; }
 .modal-stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.modal-bottom { padding: 0 20px 20px; }
+.modal-bottom { padding: 0 10px 10px; }
 .modal-career-item { width: 100px; }
 .modal-career-item[data-team="aston-martin"] .modal-career-team-name {
     font-size: 7.9px;
@@ -687,14 +687,8 @@ body {
     align-items: center !important;
 }
 
-
 .dm-right-column {
-    order: 2;
     width: 90%;
-}
-
-.modal-bottom {
-    padding-bottom: 10px !important;
 }
 
 /* ============================================== */
