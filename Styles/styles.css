@@ -1283,6 +1283,12 @@ h1, h2 {
     cursor: default;
 }
 
+.starting-grid-empty-text {
+    font-size: 20px;
+    opacity: 0.5;
+    text-align: center;
+}
+
 .grid-cell.empty:hover {
     transform: none;
     border-color: transparent;

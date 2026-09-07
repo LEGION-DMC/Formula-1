@@ -1,26 +1,26 @@
 const startingGridData = [   //team: 'Racing Bulls'    pitLane: true
-    { position: 1, driverId: '' },
-    { position: 2, driverId: '' },
-    { position: 3, driverId: '' },
-    { position: 4, driverId: '' },
-    { position: 5, driverId: '' },
-    { position: 6, driverId: '' },
-    { position: 7, driverId: '' },
-    { position: 8, driverId: '' },
-    { position: 9, driverId: '' },
-    { position: 10, driverId: '' },
-    { position: 11, driverId: '' },
-    { position: 12, driverId: '' },
-    { position: 13, driverId: '' },
-    { position: 14, driverId: '' },
-    { position: 15, driverId: '' },
-    { position: 16, driverId: '' },
-    { position: 17, driverId: '' },
-    { position: 18, driverId: '' },
-    { position: 19, driverId: '' },
-    { position: 20, driverId: '' },
-    { position: 21, driverId: '' },
-    { position: 22, driverId: '' },
+    { position: 1, driverId: '', pitLane: false, team: '' },
+    { position: 2, driverId: '', pitLane: false, team: '' },
+    { position: 3, driverId: '', pitLane: false, team: '' },
+    { position: 4, driverId: '', pitLane: false, team: '' },
+    { position: 5, driverId: '', pitLane: false, team: '' },
+    { position: 6, driverId: '', pitLane: false, team: '' },
+    { position: 7, driverId: '', pitLane: false, team: '' },
+    { position: 8, driverId: '', pitLane: false, team: '' },
+    { position: 9, driverId: '', pitLane: false, team: '' },
+    { position: 10, driverId: '', pitLane: false, team: '' },
+    { position: 11, driverId: '', pitLane: false, team: '' },
+    { position: 12, driverId: '', pitLane: false, team: '' },
+    { position: 13, driverId: '', pitLane: false, team: '' },
+    { position: 14, driverId: '', pitLane: false, team: '' },
+    { position: 15, driverId: '', pitLane: false, team: '' },
+    { position: 16, driverId: '', pitLane: false, team: '' },
+    { position: 17, driverId: '', pitLane: false, team: '' },
+    { position: 18, driverId: '', pitLane: false, team: '' },
+    { position: 19, driverId: '', pitLane: false, team: '' },
+    { position: 20, driverId: '', pitLane: false, team: '' },
+    { position: 21, driverId: '', pitLane: false, team: '' },
+    { position: 22, driverId: '', pitLane: false, team: '' },
 ];
 
 const weatherData = {
@@ -380,41 +380,14 @@ function createStartingGridBlock() {
     block.className = 'main-block starting-grid-block';
     block.style.gridColumn = 'span 3';
     
-    // Добавляем состояние для блюра
-    let isBlurred = true;
-    
-    // Получаем информацию о текущем ГП (для заголовка)
-    const now = new Date();
-    let nextGP = null;
-    let nextTrack = null;
-    
-    if (typeof calendarData !== 'undefined') {
-        const activeGPs = calendarData
-            .filter(gp => !gp.canceled)
-            .sort((a, b) => new Date(a.date) - new Date(b.date));
-        
-        for (const gp of activeGPs) {
-            const raceDate = new Date(gp.date);
-            const raceEnd = new Date(raceDate.getTime() + 3 * 60 * 60 * 1000);
-            
-            if (raceEnd > now) {
-                nextGP = gp;
-                nextTrack = getTrackById(gp.track);
-                break;
-            }
-        }
-    }
+    // Проверяем, есть ли хоть один пилот в данных
+    const hasAnyDriver = startingGridData && startingGridData.some(item => item.driverId && item.driverId !== '');
     
     // Заголовок блока
     block.innerHTML = `
         <div class="main-block-title starting-grid-title">
-            <span class="gp-full-text">Ст. решётка на предстоящую гонку</span><span class="gp-short-text">Стартовая решётка на гонку предстоящего Гран-При</span>
-        </div>
-        <div class="starting-grid-blur-overlay">
-            <div class="starting-grid-blur-content">
-                <span class="starting-grid-blur-text">Стартовая решётка на гонку предстоящего Гран-При</span>
-                <span class="starting-grid-blur-title">Нажмите для показа</span>
-            </div>
+            <span class="gp-full-text">Ст. решётка на предстоящую гонку</span>
+            <span class="gp-short-text">Стартовая решётка на гонку предстоящего Гран-При</span>
         </div>
     `;
     
@@ -423,23 +396,45 @@ function createStartingGridBlock() {
     
     // Контейнер для сетки
     const gridContainer = document.createElement('div');
-    gridContainer.className = 'starting-grid-container blurred';
+    gridContainer.className = 'starting-grid-container';
     
     // Контейнер для пит-лейна
     const pitContainer = document.createElement('div');
     pitContainer.className = 'starting-grid-pit-container';
     
-    // Используем статические данные
-    if (typeof startingGridData === 'undefined' || !startingGridData || startingGridData.length === 0) {
+    // ════════════════════════════════════════════════════════════
+    // ║ ЕСЛИ НЕТ НИ ОДНОГО ПИЛОТА — ПОКАЗЫВАЕМ СООБЩЕНИЕ     ║
+    // ════════════════════════════════════════════════════════════
+    if (!hasAnyDriver) {
         gridContainer.innerHTML = `
-            <div class="starting-grid-empty">
-                <span>Данные стартовой решётки отсутствуют</span>
+            <span class="starting-grid-empty-text">Квалификация ещё не состоялась</span>
+        `;
+        
+        // Скрываем пит-лейн
+        pitContainer.style.display = 'none';
+        
+        block.appendChild(wrapper);
+        wrapper.appendChild(gridContainer);
+        wrapper.appendChild(pitContainer);
+        
+    } else {
+        // ════════════════════════════════════════════════════════════
+        // ║ ЕСТЬ ПИЛОТЫ — ОТОБРАЖАЕМ СЕТКУ С БЛЮРОМ              ║
+        // ════════════════════════════════════════════════════════════
+        
+        // Добавляем блюр-оверлей
+        const overlay = document.createElement('div');
+        overlay.className = 'starting-grid-blur-overlay';
+        overlay.innerHTML = `
+            <div class="starting-grid-blur-content">
+                <span class="starting-grid-blur-text">Стартовая решётка на гонку предстоящего Гран-При</span>
+                <span class="starting-grid-blur-title">Нажмите для показа</span>
             </div>
         `;
-        gridContainer.classList.remove('blurred');
-        const overlay = block.querySelector('.starting-grid-blur-overlay');
-        if (overlay) overlay.style.display = 'none';
-    } else {
+        block.appendChild(overlay);
+        
+        gridContainer.classList.add('blurred');
+        
         // Сортируем по позиции
         const sortedGrid = [...startingGridData].sort((a, b) => a.position - b.position);
         
@@ -528,10 +523,9 @@ function createStartingGridBlock() {
         `;
         
         // ════════════════════════════════════════════════════════════
-        // ║ ОТОБРАЖАЕМ ПИЛОТОВ С ПИТ-ЛЕЙНА (по 2 в колонке)
+        // ║ ОТОБРАЖАЕМ ПИЛОТОВ С ПИТ-ЛЕЙНА                         ║
         // ════════════════════════════════════════════════════════════
         if (pitLaneDrivers.length > 0) {
-            // Сортируем по позиции
             pitLaneDrivers.sort((a, b) => a.position - b.position);
             
             let pitHTML = `
@@ -594,13 +588,13 @@ function createStartingGridBlock() {
                     });
                 }
             });
+            
+            // Показываем пит-лейн
+            pitContainer.style.display = '';
+            
         } else {
-            // ════════════════════════════════════════════════════════════
-            // ║ ЕСЛИ ПИТ-ЛЕЙН ПУСТ — СКРЫВАЕМ КОНТЕЙНЕР              ║
-            // ════════════════════════════════════════════════════════════
+            // Скрываем пит-лейн
             pitContainer.style.display = 'none';
-            // Также убираем левую границу у wrapper, чтобы не было лишних отступов
-            wrapper.style.gap = '0';
         }
         
         // Добавляем обработчики клика для обычных ячеек
@@ -616,29 +610,32 @@ function createStartingGridBlock() {
                 });
             }
         });
-    }
-    
-    wrapper.appendChild(gridContainer);
-    wrapper.appendChild(pitContainer);
-    block.appendChild(wrapper);
-    
-    // Обработчик клика по блоку для снятия блюра
-    block.addEventListener('click', function(e) {
-        if (e.target.closest('.grid-cell') || e.target.closest('.pit-driver-item')) return;
         
-        const overlay = this.querySelector('.starting-grid-blur-overlay');
-        const container = this.querySelector('.starting-grid-container');
-        
-        if (container && container.classList.contains('blurred')) {
-            container.classList.remove('blurred');
-            if (overlay) {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 400);
+        // Обработчик клика по блоку для снятия блюра
+        block.addEventListener('click', function(e) {
+            if (e.target.closest('.grid-cell') || e.target.closest('.pit-driver-item')) return;
+            
+            const overlay = this.querySelector('.starting-grid-blur-overlay');
+            const container = this.querySelector('.starting-grid-container');
+            
+            if (container && container.classList.contains('blurred')) {
+                container.classList.remove('blurred');
+                if (overlay) {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                    }, 400);
+                }
             }
-        }
-    });
+        });
+        
+        // ════════════════════════════════════════════════════════════
+        // ║ ДОБАВЛЯЕМ СЕТКУ И ПИТ-ЛЕЙН В ПРАВИЛЬНОМ ПОРЯДКЕ      ║
+        // ════════════════════════════════════════════════════════════
+        block.appendChild(wrapper);
+        wrapper.appendChild(gridContainer);
+        wrapper.appendChild(pitContainer);
+    }
     
     return block;
 }
