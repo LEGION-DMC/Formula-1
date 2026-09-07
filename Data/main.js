@@ -1,4 +1,4 @@
-const startingGridData = [   //team: 'Racing Bulls'    pitLane: true
+const startingGridData = [ 
     { position: 1, driverId: '', pitLane: false, team: '' },
     { position: 2, driverId: '', pitLane: false, team: '' },
     { position: 3, driverId: '', pitLane: false, team: '' },

@@ -797,8 +797,287 @@ body {
     transform: none;
 }
 
-.tm-bolid-stats-panel {
+/* ============================================== */
+/* СТАРТОВАЯ РЕШЁТКА — МОБИЛЬНАЯ ВЕРСИЯ          */
+/* ============================================== */
+
+/* Блок стартовой решётки */
+.starting-grid-block {
+    display: block !important;
+    padding: 10px 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.starting-grid-block .main-block-title {
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* ===== БЛЮР-ОВЕРЛЕЙ (РАБОТАЕТ НА МОБИЛЬНЫХ) ===== */
+.starting-grid-blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10;
+    transition: opacity 0.4s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    pointer-events: auto;
+}
+
+.starting-grid-blur-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 15px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.starting-grid-blur-text {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.9rem;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+}
+
+.starting-grid-blur-title {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 6px;
+    margin-top: 2px;
+}
+
+.starting-grid-blur-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Контейнер с блюром */
+.starting-grid-container.blurred {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.4s ease, -webkit-filter 0.4s ease;
+}
+
+.starting-grid-container:not(.blurred) {
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    pointer-events: auto;
+    transition: filter 0.4s ease, -webkit-filter 0.4s ease;
+}
+
+/* ===== ВЕРТИКАЛЬНАЯ СЕТКА — 2 КОЛОНКИ с правильным порядком ===== */
+.starting-grid-wrapper {
+    flex-direction: column;
+    gap: 6px;
+}
+
+.starting-grid-container {
+    width: 100%;
+    overflow-x: visible;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px 5px !important;
+}
+
+/* Ряды — скрываем, но сохраняем их для порядка в grid */
+.grid-row {
+    display: contents !important;
+}
+
+.grid-row-1 {
+    display: contents !important;
+}
+
+.grid-row-2 {
+    display: contents !important;
+}
+
+.grid-row-offset {
+    display: none !important;
+}
+
+/* ===== ПРАВИЛЬНЫЙ ПОРЯДОК — по номерам позиций ===== */
+.grid-cell[data-pos="1"] { order: 1; }
+.grid-cell[data-pos="2"] { order: 2; }
+.grid-cell[data-pos="3"] { order: 3; }
+.grid-cell[data-pos="4"] { order: 4; }
+.grid-cell[data-pos="5"] { order: 5; }
+.grid-cell[data-pos="6"] { order: 6; }
+.grid-cell[data-pos="7"] { order: 7; }
+.grid-cell[data-pos="8"] { order: 8; }
+.grid-cell[data-pos="9"] { order: 9; }
+.grid-cell[data-pos="10"] { order: 10; }
+.grid-cell[data-pos="11"] { order: 11; }
+.grid-cell[data-pos="12"] { order: 12; }
+.grid-cell[data-pos="13"] { order: 13; }
+.grid-cell[data-pos="14"] { order: 14; }
+.grid-cell[data-pos="15"] { order: 15; }
+.grid-cell[data-pos="16"] { order: 16; }
+.grid-cell[data-pos="17"] { order: 17; }
+.grid-cell[data-pos="18"] { order: 18; }
+.grid-cell[data-pos="19"] { order: 19; }
+.grid-cell[data-pos="20"] { order: 20; }
+
+/* ===== ОБЩИЙ СТИЛЬ ДЛЯ ЯЧЕЕК (grid-cell И pit-driver-item) ===== */
+.grid-cell,
+.pit-driver-item {
+    width: 100%;
+    padding: 3px 10px;
+    min-height: 25px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+}
+
+/* Цветная полоска слева для ячеек с пилотом */
+.grid-cell[data-driver-id],
+.pit-driver-item[data-driver-id] {
+    border-left: 2.5px solid var(--team-color, var(--red-accent));
+    cursor: pointer;
+}
+
+/* Активное состояние */
+.grid-cell[data-driver-id]:active,
+.pit-driver-item[data-driver-id]:active {
+    transform: scale(0.97);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Пустая ячейка */
+.grid-cell.empty {
+    border-left: 2.5px solid #333;
+    opacity: 0.4;
+}
+
+/* Номер позиции */
+.grid-cell .grid-pos,
+.pit-driver-item .pit-driver-pos {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.75rem;
+    color: #888;
+    min-width: 24px;
+    text-align: left;
+}
+
+/* Информация о пилоте */
+.grid-cell .grid-driver-info,
+.pit-driver-item .pit-driver-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+/* Имя пилота */
+.grid-cell .grid-name,
+.pit-driver-item .pit-driver-name {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Логотип команды */
+.grid-cell .grid-team-logo,
+.pit-driver-item .pit-driver-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Пустая ячейка */
+.grid-cell.empty .grid-pos {
+    color: #666;
+}
+
+.grid-cell.empty .grid-driver-info {
     display: none;
+}
+
+/* ===== ПИТ-ЛЕЙН ===== */
+.starting-grid-pit-container {
+    width: 100%;
+    border-left: none;
+    border-top: 2px solid rgba(255, 107, 0, 0.3);
+    padding: 5px 0 0;
+    margin-top: 4px;
+}
+
+.starting-grid-pit-container:empty {
+    display: none !important;
+}
+
+.pit-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+.pit-label-text {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.7rem;
+    color: #FF6B00;
+    letter-spacing: 2px;
+}
+
+.pit-label-line {
+    display: none;
+}
+
+/* Сетка пит-лейна — всегда 2 колонки */
+.pit-drivers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+/* Если только 1 пилот — 1 колонка */
+.pit-drivers-grid:has(.pit-driver-item:only-child) {
+    grid-template-columns: 1fr;
+}
+
+/* Если 2 пилота — 2 колонки (это по умолчанию) */
+.pit-drivers-grid:has(.pit-driver-item:nth-child(2):last-child) {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Текст "Квалификация ещё не состоялась" */
+.starting-grid-empty-text {
+    font-size: 0.85rem;
+    margin-top: 5px;
+    opacity: 0.6;
+    grid-column: 1 / -1; /* Растягиваем на всю ширину grid */
+}
+
+/* ===== АНИМАЦИИ ===== */
+.starting-grid-block:active {
+    transform: scale(0.98) !important;
 }
 
 /* ============================================== */
