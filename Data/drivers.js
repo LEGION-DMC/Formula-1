@@ -1500,9 +1500,17 @@ function openDriverModal(driver) {
 
 	// Текст с количеством штрафов
 	const penaltyText = document.createElement('div');
-	penaltyText.className = 'dm-penalty-text';
-	penaltyText.innerHTML = `${penaltyPoints} <span style="padding-left: 2px;">из 12 Штрафов</span>`;
-	penaltiesContent.appendChild(penaltyText);
+		penaltyText.className = 'dm-penalty-text';
+		penaltyText.innerHTML = `${penaltyPoints} <span style="padding-left: 2px;">из 12 Штрафов</span>`;
+		penaltiesContent.appendChild(penaltyText);
+
+		// Если 12 штрафов - показываем предупреждение о дисквалификации
+		if (penaltyPoints >= 12) {
+			const penaltyDsq = document.createElement('div');
+			penaltyDsq.className = 'dm-penalty-text-dsq';
+			penaltyDsq.textContent = 'DSQ на следующую гонку';
+			penaltiesContent.appendChild(penaltyDsq);
+	}
     
     penaltiesPanel.appendChild(penaltiesContent);
     rightColumn.appendChild(penaltiesPanel);

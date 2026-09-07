@@ -221,7 +221,7 @@ const calendarData = [
 		
 		recordingSprint: "",
 		recordingQuali: "https://rutube.ru/video/947e5f26a01dc1f74461bac2a76adff7/",
-		recordingRace: "https://rutube.ru/video/ae323c7cf713b9d9b3866d887cea4410/"
+		recordingRace: "GQNAdk6MmQg"
 	},
 	{   id: "spain",
 		track: "madring",

@@ -1287,6 +1287,7 @@ h1, h2 {
     font-size: 20px;
     opacity: 0.5;
     text-align: center;
+    margin-top: 20px;
 }
 
 .grid-cell.empty:hover {
@@ -2456,17 +2457,6 @@ h1, h2 {
     animation: penaltyLimitPulse 1s ease-in-out infinite;
 }
 
-@keyframes penaltyLimitPulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.6;
-        transform: scale(0.85);
-    }
-}
-
 .dm-penalty-text {
     font-family: 'F1Title', sans-serif;
     font-size: 12px;
@@ -2474,6 +2464,20 @@ h1, h2 {
     text-align: center;
     padding-top: 5px;
     letter-spacing: 1px;
+}
+
+.dm-penalty-text-dsq {
+    font-family: 'F1Title', sans-serif;
+    font-size: 9px;
+    color: #E10600;
+    text-align: center;
+    letter-spacing: 1px;
+    animation: penaltyWarningPulse 1s ease-in-out infinite;
+}
+
+@keyframes penaltyWarningPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 /* Адаптация для модального окна — панель справа */
