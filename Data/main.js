@@ -20,7 +20,7 @@ const startingGridData = [   //team: 'Racing Bulls'    pitLane: true
     { position: 19, driverId: '' },
     { position: 20, driverId: '' },
     { position: 21, driverId: '' },
-    { position: 22, driverId: '', },
+    { position: 22, driverId: '' },
 ];
 
 const weatherData = {
