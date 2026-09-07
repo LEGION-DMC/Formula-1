@@ -18,6 +18,7 @@ const driversData = [
         wins: 13,
         podiums: 48,
         poles: 18,
+		fastestLaps: 3,
 		
         note: "Выступает под #1 - в качестве действующего чемпиона мира. Собственный номер пилота #4.",
         bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул.",
@@ -40,8 +41,9 @@ const driversData = [
         titles: 4,
         hattricks: 14,
         wins: 71,
-        podiums: 131,
+        podiums: 132,
         poles: 48,
+		fastestLaps: 2,
 		
         note: "Самый молодой дебютант в истории F1 - 17 лет",
         bio: "Чемпион мира (2021, 2022, 2023, 2024). Агрессивный, феноменально стабильный. В 2021-м в драматичной финальной гонке отобрал титул у Хэмилтона. В 2023-м установил рекорд — 19 побед за сезон. В 2024-м начал доминировать, но к концу года Red Bull сдал позиции.",
@@ -66,6 +68,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "Третий Бразилец в истории F1",
         bio: "Чемпион Формулы-2 (2024). Протеже Фернандо Алонсо. Перспективный «контролёр» — пилот, который берет не чистым темпом, а умом и резиной.",
@@ -88,8 +91,9 @@ const driversData = [
         titles: 0,
         hattricks: 0,
         wins: 0,
-        podiums: 1,
+        podiums: 2,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "",
         bio: "Вице-чемпион Формулы-2 (2024). Воспитанник программы Red Bull. Резкий, быстрый, но склонен к авариям. Его сравнивают с молодым Феттелем.",
@@ -114,6 +118,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "",
         bio: "Сын пятикратного чемпиона мира по мотогонкам Мика Дуэна. Чемпион Формулы-2 (2023). В 2024 году подменял Окона и Гасли. Выбрал номер #7 в честь своего кумира Кими Райкконена. Считается перспективным стабильным гонщиком, но пока без очков в F1.",
@@ -139,8 +144,9 @@ const driversData = [
         titles: 0,
         hattricks: 0,
         wins: 1,
-        podiums: 6,
+        podiums: 5,
         poles: 1,
+		fastestLaps: 0,
 		
         note: "",
         bio: "Победитель Гран-при Италии (2020, AlphaTauri) — невероятная победа на фоне хаоса в Монце. Был уволен из Red Bull после полусезона из-за конфликта с Ферстаппеном, восстановил репутацию в Alpine. Технарь, отличный защитник позиции.",
@@ -168,7 +174,8 @@ const driversData = [
         hattricks: 0,
         wins: 6,
         podiums: 39,
-        poles: 3,
+        poles: 4,
+		fastestLaps: 1,
 		
         note: "",
         bio: "Ветеран. Главный специалист по сохранению шин и «король улиц» (победы в Баку, Сингапуре). Стал напарником Ферстаппена в Red Bull с 2021 года, помог ему выиграть первый титул, но к 2024-му резко сдал, едва набирая очки. В 2026-м перешел в новую команду Cadillac в качестве ведущего пилота.",
@@ -189,9 +196,10 @@ const driversData = [
 		
         titles: 0,
         hattricks: 3,
-        wins: 6,
-        podiums: 13,
+        wins: 7,
+        podiums: 14,
         poles: 6,
+		fastestLaps: 1,
 		
         note: "Выступает под #12 - номером легендарного Айртона Сенны",
         bio: "Вундеркинд, которого лично выбрал Тото Вольфф на замену Хэмилтону. Пропустил F3, перейдя в F1 сразу из Формулы-2 (чемпион 2024). Огромное давление, сравнивают с ранним Ферстаппеном.",
@@ -222,6 +230,7 @@ const driversData = [
         wins: 32,
         podiums: 106,
         poles: 22,
+		fastestLaps: 0,
 		
         note: "Самый опытный пилот в истории, более 400 Гран-при.",
         bio: "Двукратный чемпион (2005, 2006). Известен борьбой с Феттелем, Хэмилтоном (Инцидент в «Воротах гаража» 2007) и своей токсичностью в менеджменте. До сих пор один из лучших на старте.",
@@ -246,6 +255,7 @@ const driversData = [
         wins: 9,
         podiums: 54,
         poles: 27,
+		fastestLaps: 3,
 		
         note: "",
         bio: "Гонщик Ferrari с 2019 года. «Король поулов» — феномен в квалификации. Много раз ошибался под давлением, но выиграл несколько выдающихся гонок (Монца-2019, Монако-2024). Главная надежда Ferrari на титул.",
@@ -271,6 +281,7 @@ const driversData = [
         wins: 0,
         podiums: 3,
         poles: 1,
+		fastestLaps: 0,
 		
         note: "",
         bio: "Сын миллиардера Лоуренса Стролла, владельца Aston Martin. Критикуют за то, что место куплено, но подиумы (Баку-2017, 2020) и поул есть. Нестабилен, часто разбивает машину, но в дожде быстр.",
@@ -299,6 +310,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "",
         bio: "За четыре сезона в F1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull.",
@@ -324,6 +336,7 @@ const driversData = [
         wins: 0,
         podiums: 2,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "",
         bio: "Был напарником Ферстаппена в Red Bull (2019-2020), но уволен из-за нерезультативности. Вернулся в 2022-м в Williams, где стал лидером команды. Очень чистый, умный пилот.",
@@ -349,6 +362,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "Первый и единственный пилот из Китая в истории F1",
         bio: "Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках.",
@@ -381,6 +395,7 @@ const driversData = [
         wins: 0,
         podiums: 1,
         poles: 1,
+		fastestLaps: 0,
 		
         note: "Рекордсмен по количеству гонок без подиума, более 200.",
         bio: "Суперстабилен, король квалификаций. В 2025 году на трассе Сильверстоун, прервал серию неудач - финишировав третьим. Возвращенец в 2023-м после 3 лет простоя, заменил больного Стролла и сразу набрал очки. В 2026-м переходит в Audi.",
@@ -408,6 +423,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "",
         bio: "Агрессивный, бескомпромиссный. Считался основным претендентом на место Переса в Red Bull. В 2024-м провел несколько гонок и произвел впечатление (особенно борьба с Ферстаппеном в тренировках).",
@@ -436,6 +452,7 @@ const driversData = [
         wins: 1,
         podiums: 4,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "Победитель безумного Гран-при Венгрии 2021, Alpine.",
         bio: "Физически очень сильный. Известен жёсткой, иногда грязной защитой (драка с Гасли в Alpine). Не очень любим за характер, но стабильно набирает очки. В 2025-м перешел в Haas.",
@@ -459,6 +476,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "",
         bio: "Чемпион FRO 2025. Воспитанник Red Bull. Очень молод (родился в 2007-м). Считается «сырым», но супер-быстрым. Прямой конкурент Хаджару.",
@@ -483,6 +501,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "Первый аргентинец в F1 за 20 лет.",
         bio: "Финишировал 2-м в F2 (2023). В Williams заменил Сарджента. Мощный, рискованный стиль, напоминает раннего Мальдонадо. В 2026-м перешел в Alpine.",
@@ -507,7 +526,8 @@ const driversData = [
         hattricks: 19,
         wins: 106,
         podiums: 207,
-        poles: 104,
+        poles: 105,
+		fastestLaps: 5,
 		
         note: "Рекордсмен по победам, поулам, подиумам.",
         bio: "7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда.",
@@ -536,6 +556,7 @@ const driversData = [
         wins: 4,
         podiums: 29,
         poles: 6,
+		fastestLaps: 1,
 		
         note: "",
         bio: "Сын раллийного чемпиона. Победитель Гран-при (Великобритания-2022, Сингапур-2023, Австралия-2024). Супер-тактик, интеллектуал. Выжил из Ferrari, чтобы освободить место Хэмилтону, перешел в Williams как лидер проекта.",
@@ -560,8 +581,9 @@ const driversData = [
         titles: 0,
         hattricks: 1,
         wins: 7,
-        podiums: 30,
-        poles: 12,
+        podiums: 31,
+        poles: 11,
+		fastestLaps: 0,
 		
         note: "Лидер гильдии пилотов.",
         bio: "Победитель Гран-при Сан-Паулу (2022) — первая победа Mercedes после долгого перерыва. Очень быстр, но иногда ошибается под давлением. Заменил Боттаса и стал ровней Хэмилтону.",
@@ -589,6 +611,7 @@ const driversData = [
         wins: 10,
         podiums: 67,
         poles: 20,
+		fastestLaps: 3,
 		
         note: "",
         bio: "Бывший напарник Хэмилтона в Mercedes (2017-2021), 10 побед. Машина для квалификаций. В 2025-м покинул Sauber, в 2026-м стал пилотом Cadillac. Хотел взять номер #7, но он был занят, поэтому выбрал #77 (Val77eri Bo77as).",
@@ -612,6 +635,7 @@ const driversData = [
         wins: 9,
         podiums: 28,
         poles: 6,
+		fastestLaps: 1,
 		
         note: "Выиграл F3 и F2 подряд.",
         bio: "Первую победу одержал в Венгрии-2024, обогнав Норриса по команде. Многие считают его будущим чемпионом.",
@@ -637,6 +661,7 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
+		fastestLaps: 0,
 		
         note: "",
         bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
@@ -1417,6 +1442,74 @@ function openDriverModal(driver) {
     const overlay = document.createElement('div');
     overlay.className = 'driver-modal-overlay';
     
+    // ====================
+    // ПРАВАЯ КОЛОНКА — Штрафные баллы
+    // ====================
+    const rightColumn = document.createElement('div');
+    rightColumn.className = 'dm-right-column';
+    
+    const penaltiesPanel = document.createElement('div');
+    penaltiesPanel.className = 'dm-penalties-panel';
+    penaltiesPanel.style.setProperty('--team-color', getTeamColor(driver.team));
+    
+    // Клетчатый фон для панели штрафов
+    const penaltiesPattern = document.createElement('div');
+    penaltiesPattern.className = 'dm-penalties-pattern';
+    penaltiesPattern.innerHTML = DRIVER_PATTERN_SVG;
+    penaltiesPanel.appendChild(penaltiesPattern);
+    
+    const penaltiesOverlay = document.createElement('div');
+    penaltiesOverlay.className = 'dm-penalties-overlay';
+    penaltiesPanel.appendChild(penaltiesOverlay);
+    
+    const penaltiesContent = document.createElement('div');
+    penaltiesContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px;';
+    
+    // Заголовок
+    const penaltiesTitle = document.createElement('h3');
+    penaltiesTitle.className = 'dm-penalties-title';
+    penaltiesTitle.textContent = 'Штрафные баллы';
+    penaltiesContent.appendChild(penaltiesTitle);
+    
+	// Индикатор штрафных баллов
+	const penaltyPoints = driver.fines || 0;
+
+	// Строим сегменты
+	let penaltySegmentsHtml = '';
+	for (let i = 1; i <= 12; i++) {
+		let segmentClass = '';
+		if (i <= penaltyPoints) {
+			segmentClass = 'is-on';
+		}
+		if (i === 12) {
+			segmentClass += ' is-limit';
+		}
+		penaltySegmentsHtml += `<span class="msr-pp__seg ${segmentClass}"></span>`;
+	}
+
+	const meterWrapper = document.createElement('div');
+	meterWrapper.className = 'dm-penalty-meter-wrapper';
+	meterWrapper.innerHTML = `
+		<div class="dm-penalty-meter">
+			<div class="msr-pp__meter msr-pp__meter--wide" role="img" aria-label="${penaltyPoints} of 12 penalty points">
+				${penaltySegmentsHtml}
+			</div>
+		</div>
+	`;
+	penaltiesContent.appendChild(meterWrapper);
+
+	// Текст с количеством штрафов
+	const penaltyText = document.createElement('div');
+	penaltyText.className = 'dm-penalty-text';
+	penaltyText.innerHTML = `${penaltyPoints} <span style="padding-left: 2px;">из 12 Штрафов</span>`;
+	penaltiesContent.appendChild(penaltyText);
+    
+    penaltiesPanel.appendChild(penaltiesContent);
+    rightColumn.appendChild(penaltiesPanel);
+    
+    // ====================
+    // ЦЕНТР — Основная плашка
+    // ====================
     const modal = document.createElement('div');
     modal.className = 'driver-modal';
     const teamColor = getTeamColor(driver.team);
@@ -1424,7 +1517,7 @@ function openDriverModal(driver) {
     modal.style.position = 'relative';
     modal.style.overflow = 'hidden';
     
-    // === КЛЕТЧАТЫЙ ФОН ДЛЯ МОДАЛЬНОГО ОКНА ===
+    // Клетчатый фон для модального окна
     const modalPattern = document.createElement('div');
     modalPattern.className = 'driver-modal-pattern';
     modalPattern.innerHTML = DRIVER_PATTERN_SVG;
@@ -1433,7 +1526,6 @@ function openDriverModal(driver) {
     const modalOverlayBg = document.createElement('div');
     modalOverlayBg.className = 'driver-modal-overlay-bg';
     modal.appendChild(modalOverlayBg);
-    // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
     
     const modalContent = document.createElement('div');
     modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column;';
@@ -1496,8 +1588,6 @@ function openDriverModal(driver) {
     const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
 
     if (isReserve && driver.reserve && driver.reserve.length > 0) {
-        // Для резервистов НЕ добавляем ничего в teamRow
-        // Создаем отдельный контейнер для резерва
         const reserveContainer = document.createElement('div');
         reserveContainer.className = 'modal-reserve-teams';
         
@@ -1513,7 +1603,6 @@ function openDriverModal(driver) {
             const teamItem = document.createElement('div');
             teamItem.className = 'modal-reserve-team-item';
             
-            // Устанавливаем цвет команды для акцента при hover
             const teamColor = getTeamColor(teamName);
             teamItem.style.setProperty('--team-color', teamColor);
             
@@ -1542,15 +1631,12 @@ function openDriverModal(driver) {
         
         reserveContainer.appendChild(teamsList);
         
-        // teamRow скрываем
         teamRow.style.display = 'none';
         
-        // Добавляем сначала nameRow, потом teamRow (скрытый), потом reserveContainer
         nameTeamContainer.appendChild(nameRow);
         nameTeamContainer.appendChild(teamRow);
         nameTeamContainer.appendChild(reserveContainer);
     } else {
-        // Обычное отображение команды
         const teamIcon = document.createElement('img');
         teamIcon.src = getTeamLogo(driver.team);
         teamIcon.alt = driver.team;
@@ -1609,7 +1695,7 @@ function openDriverModal(driver) {
     block2.appendChild(row1);
     block2.appendChild(row2);
     
-    // Блок статистики
+    // Блок статистики (без штрафов, добавляем Рекорды круга)
     const block3 = document.createElement('div');
     block3.className = 'modal-block';
 
@@ -1628,41 +1714,43 @@ function openDriverModal(driver) {
         return titles[2];
     }
 
-    const declensions = {
+    const statsDeclensions = {
         titles: ['Титул', 'Титула', 'Титулов'],
         wins: ['Победа', 'Победы', 'Побед'],
         hattricks: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'],
         podiums: ['Подиум', 'Подиума', 'Подиумов'],
         poles: ['Поул', 'Поула', 'Поулов'],
-        fines: ['Штраф', 'Штрафа', 'Штрафов']
+        fastestLaps: ['Рекорд круга', 'Рекорда круга', 'Рекордов круга']
     };
+
+    const fastestLaps = driver.fastestLaps || 0;
 
     const statsRow = document.createElement('div');
     statsRow.className = 'modal-stats-row';
     statsRow.innerHTML = `
         <div class="stat-cell">
             <span class="stat-number">${driver.titles}</span>
-            <span class="stat-text">${declension(driver.titles, declensions.titles)}</span>
+            <span class="stat-text">${declension(driver.titles, statsDeclensions.titles)}</span>
         </div>
         <div class="stat-cell">
             <span class="stat-number">${driver.wins}</span>
-            <span class="stat-text">${declension(driver.wins, declensions.wins)}</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.hattricks}</span>
-            <span class="stat-text">${declension(driver.hattricks, declensions.hattricks)}</span>
+            <span class="stat-text">${declension(driver.wins, statsDeclensions.wins)}</span>
         </div>
         <div class="stat-cell">
             <span class="stat-number">${driver.podiums}</span>
-            <span class="stat-text">${declension(driver.podiums, declensions.podiums)}</span>
+            <span class="stat-text">${declension(driver.podiums, statsDeclensions.podiums)}</span>
         </div>
         <div class="stat-cell">
             <span class="stat-number">${driver.poles}</span>
-            <span class="stat-text">${declension(driver.poles, declensions.poles)}</span>
+            <span class="stat-text">${declension(driver.poles, statsDeclensions.poles)}</span>
         </div>
         <div class="stat-cell">
-            <span class="stat-number">${driver.fines || 0}<span class="gp-year-suffix">/12</span></span>
-            <span class="stat-text">${declension(driver.fines || 0, declensions.fines)}</span>
+            <span class="stat-number">${driver.hattricks}</span>
+            <span class="stat-text">${declension(driver.hattricks, statsDeclensions.hattricks)}</span>
+        </div>
+        <div class="stat-cell">
+            <span class="stat-number">${fastestLaps}</span>
+            <span class="stat-text">${declension(fastestLaps, statsDeclensions.fastestLaps)}</span>
         </div>
     `;
     block3.appendChild(statsRow);
@@ -1696,18 +1784,20 @@ function openDriverModal(driver) {
         bioSection.appendChild(noteDiv);
     }
 
-    // ===== БЛОК КАРЬЕРНОГО ПУТИ =====
+    // Блок карьерного пути
     const careerBlock = createCareerBlock(driver.career);
     if (careerBlock) {
         bioSection.appendChild(careerBlock);
     }
-    // ===== КОНЕЦ БЛОКА =====
     
     modalContent.appendChild(closeBtn);
     modalContent.appendChild(topSection);
     modalContent.appendChild(bioSection);
     modal.appendChild(modalContent);
+    
+    // Собираем всё вместе
     overlay.appendChild(modal);
+    overlay.appendChild(rightColumn);
     
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) closeModal();
@@ -1720,7 +1810,21 @@ function openDriverModal(driver) {
     
     document.body.appendChild(overlay);
     
+    // Анимация
     requestAnimationFrame(() => {
+        // Правая колонка — выезжает справа
+        penaltiesPanel.style.transition = 'none';
+        penaltiesPanel.style.opacity = '0';
+        penaltiesPanel.style.transform = 'translateX(40px)';
+        
+        requestAnimationFrame(() => {
+            // Правая — выезжает справа
+            penaltiesPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            penaltiesPanel.style.transitionDelay = '0.2s';
+            penaltiesPanel.style.opacity = '1';
+            penaltiesPanel.style.transform = 'translateX(0)';
+        });
+        
         overlay.classList.add('active');
         modal.classList.add('active');
     });
