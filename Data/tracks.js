@@ -188,7 +188,7 @@ const tracksData = [
         laps: 63,
         turns: 22,
 		elevation: '30',
-		speed: '~340',
+		speed: '340',
         direction: "по часовой стрелке",
         firstrace: "2026",
         lapRecord: "---",

@@ -2135,7 +2135,7 @@ h1, h2 {
 .modal-bio-text {
     font-family: 'F1Text', sans-serif;
     font-size: 0.85rem;
-    color: #aaa;
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.4;
 }
 

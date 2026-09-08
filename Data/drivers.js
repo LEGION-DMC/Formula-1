@@ -666,6 +666,32 @@ const driversData = [
         note: "",
         bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
     },
+    {   number: 99, id: "giovinazzi",
+        name: "Антонио Джовинацци",
+        namem: "А. Джовинацци",
+        namef: "Антонио Мария Джовинацци",
+		
+        birthPlace:  "Мартина-Франка, Италия", country: "it",
+        birthDate: "14.12.1993",
+		
+        team: "Резерв",
+		reserve: ["Ferrari"],
+        debut: "2017 - Sauber",        
+		career: [
+            { team: "Sauber", year: "2017", temporarily: true },
+            { team: "Alfa Romeo", year: "2019-2021" },
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+		fastestLaps: 0,
+		
+        note: "",
+        bio: "Гонщик, чья карьера в F1 была недолгой, но он добился большого успеха в гонках WEC, став чемпионом мира в составе Ferrari.",
+    },
 ];
 
 function initDriversPage(container) {
