@@ -1500,12 +1500,62 @@ body {
 .pitstop-table .gp-short { display: inline !important; }
 .pitstop-table .time-cell { font-size: 0.75rem !important; padding-left: 15px !important; }
 .pitstop-table .driver-cell { padding-left: 8px !important; }
+/* Исправление смещения в зачёте пит-стопов */
 .pitstop-standings-columns {
     grid-template-columns: 1fr;
     gap: 0;
 }
+
+.pitstop-standings-columns > table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Скрываем заголовок у второй таблицы */
 .pitstop-standings-columns > table:nth-child(2) thead {
     display: none;
+}
+
+/* Убираем верхнюю границу у первой строки второй таблицы */
+.pitstop-standings-columns > table:nth-child(2) tbody tr:first-child td {
+    border-top: none;
+}
+
+.pitstop-standings-columns .pitstop-table tbody td.team-cell {
+    text-align: left;
+    display: table-cell;      /* возвращаем табличную раскладку */
+    vertical-align: middle;
+}
+
+/* Ширины колонок — ТОЛЬКО для таблиц зачёта */
+.pitstop-standings-columns .pitstop-table thead th:nth-child(1),
+.pitstop-standings-columns .pitstop-table tbody td:nth-child(1) {
+    width: 4%;
+    text-align: center;
+}
+
+.pitstop-standings-columns .pitstop-table thead th:nth-child(2) {
+    width: 30%;
+    text-align: center;
+    padding-left: 10px;
+}
+
+.pitstop-standings-columns .pitstop-table tbody td:nth-child(2) {
+    width: 30%;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.pitstop-standings-columns .pitstop-table thead th:nth-child(3),
+.pitstop-standings-columns .pitstop-table tbody td:nth-child(3) {
+    width: 45%;
+    text-align: center;
+}
+
+.pitstop-standings-columns .pitstop-table thead th:nth-child(4),
+.pitstop-standings-columns .pitstop-table tbody td:nth-child(4) {
+    width: 10%;
+    text-align: center;
 }
 
 /* Таблица рекордов */
