@@ -1500,7 +1500,10 @@ body {
 .pitstop-table .gp-short { display: inline !important; }
 .pitstop-table .time-cell { font-size: 0.75rem !important; padding-left: 15px !important; }
 .pitstop-table .driver-cell { padding-left: 8px !important; }
-/* Исправление смещения в зачёте пит-стопов */
+.stats-table-wrapper:has(.pitstop-standings-columns) .stats-table-title {
+    font-size: 0.77rem;
+}
+
 .pitstop-standings-columns {
     grid-template-columns: 1fr;
     gap: 0;
