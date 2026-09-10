@@ -709,7 +709,7 @@ function createPitstopTable() {
 
     const tableTitle = document.createElement('h3');
     tableTitle.className = 'stats-table-title';
-    tableTitle.textContent = 'DHL Fastest Pit-Stop Award';
+    tableTitle.textContent = 'Чемпионат быстрейших пит-стопов сезона';
     headerRow.appendChild(tableTitle);
 
     const detailBtn = document.createElement('button');
@@ -731,11 +731,11 @@ function createPitstopTable() {
 		tableContainer.innerHTML = '';
 
 		if (mode === 'standings') {
-			tableTitle.textContent = 'DHL Fastest Pit Stop Award';
+			tableTitle.textContent = 'Чемпионат быстрейших пит-стопов сезона';
 			detailBtn.textContent = 'По Этапам';
 			tableContainer.appendChild(buildStandingsTable());
 		} else {
-			tableTitle.textContent = 'Лучшие пит-стопы сезона';
+			tableTitle.textContent = 'Быстрейшие пит-стопы сезона';
 			detailBtn.textContent = 'Зачёт';
 			const table = document.createElement('table');
 			table.className = 'stats-table pitstop-table';
