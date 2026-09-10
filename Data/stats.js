@@ -745,65 +745,77 @@ function createPitstopTable() {
 	}
 
     // ===== Таблица зачёта (по умолчанию) =====
-	function buildStandingsTable() {
-		const standings = buildDHLStandings(pitstopData);
+function buildStandingsTable() {
+    const standings = buildDHLStandings(pitstopData);
 
-		let bestOverallTime = Infinity;
-		standings.forEach(row => {
-			if (row.bestTimeNum < bestOverallTime) {
-				bestOverallTime = row.bestTimeNum;
-			}
-		});
+    let bestOverallTime = Infinity;
+    standings.forEach(row => {
+        if (row.bestTimeNum < bestOverallTime) {
+            bestOverallTime = row.bestTimeNum;
+        }
+    });
 
-		const half = Math.ceil(standings.length / 2);
-		const leftCol  = standings.slice(0, half);
-		const rightCol = standings.slice(half);
+    const half = Math.ceil(standings.length / 2);
+    const leftCol  = standings.slice(0, half);
+    const rightCol = standings.slice(half);
 
-		function buildTable(data, startIndex) {
-			const table = document.createElement('table');
-			table.className = 'stats-table pitstop-table';
+    function buildTable(data, startIndex) {
+        const table = document.createElement('table');
+        table.className = 'stats-table pitstop-table';
 
-			const thead = document.createElement('thead');
-			thead.innerHTML = `
-				<tr>
-					<th>#</th>
-					<th>Команда</th>
-					<th>Время лучшего Пит-Стопа (с)</th>
-					<th>Очки</th>
-				</tr>
-			`;
-			table.appendChild(thead);
+        const thead = document.createElement('thead');
+        thead.innerHTML = `
+            <tr>
+                <th>#</th>
+                <th>Команда</th>
+                <th>Время лучшего Пит-Стопа (с)</th>
+                <th>Очки</th>
+            </tr>
+        `;
+        table.appendChild(thead);
 
-			const tbody = document.createElement('tbody');
-			data.forEach((row, i) => {
-				const teamLogo = getTeamLogo(row.team);
-				const isBest = row.bestTimeNum === bestOverallTime;
-				const pos = startIndex + i + 1;
+        const tbody = document.createElement('tbody');
+        data.forEach((row, i) => {
+            const teamLogo = getTeamLogo(row.team);
+            const isBest = row.bestTimeNum === bestOverallTime;
+            const pos = startIndex + i + 1;
 
-				const tr = document.createElement('tr');
-				tr.innerHTML = `
-					<td class="pos-cell">${pos}</td>
-					<td class="team-cell stats-clickable" data-team="${row.team}">
-						<img src="${teamLogo}" alt="${row.team}" class="stats-team-logo" onerror="this.style.display='none'">
-						<span class="team-name">${row.team}</span>
-					</td>
-					<td class="time-cell ${isBest ? 'best-time' : ''}">${row.bestTime}</td>
-					<td class="pitstop-points-cell">${row.points}</td>
-				`;
-				tbody.appendChild(tr);
-			});
-			table.appendChild(tbody);
-			return table;
-		}
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="pos-cell">${pos}</td>
+                <td class="team-cell stats-clickable" data-team="${row.team}">
+                    <img src="${teamLogo}" alt="${row.team}" class="stats-team-logo" onerror="this.style.display='none'">
+                    <span class="team-name">${row.team}</span>
+                </td>
+                <td class="time-cell ${isBest ? 'best-time' : ''}">${row.bestTime}</td>
+                <td class="pitstop-points-cell">${row.points}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        return table;
+    }
 
-		const columnsWrapper = document.createElement('div');
-		columnsWrapper.className = 'pitstop-standings-columns';
-		columnsWrapper.appendChild(buildTable(leftCol, 0));
-		columnsWrapper.appendChild(buildTable(rightCol, half));
+    const columnsWrapper = document.createElement('div');
+    columnsWrapper.className = 'pitstop-standings-columns';
+    columnsWrapper.appendChild(buildTable(leftCol, 0));
+    columnsWrapper.appendChild(buildTable(rightCol, half));
 
-		return columnsWrapper;
-	}
+    // ===== Примечание о системе начисления очков =====
+    const note = document.createElement('div');
+    note.className = 'results-points-note';
+    note.innerHTML = `
+        <span class="points-note-text">Система начисления очков: <span>1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span></span>
+    `;
 
+    // Обёртка, чтобы примечание шло под обеими колонками
+    const result = document.createElement('div');
+    result.className = 'pitstop-standings-wrapper';
+    result.appendChild(columnsWrapper);
+    result.appendChild(note);
+
+    return result;
+}
     // ===== Таблица подробностей (лучший пит-стоп каждого этапа) =====
 	function buildDetailsTable(table) {
 		const thead = document.createElement('thead');
