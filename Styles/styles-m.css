@@ -1500,6 +1500,13 @@ body {
 .pitstop-table .gp-short { display: inline !important; }
 .pitstop-table .time-cell { font-size: 0.75rem !important; padding-left: 15px !important; }
 .pitstop-table .driver-cell { padding-left: 8px !important; }
+.pitstop-standings-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+.pitstop-standings-columns > table:nth-child(2) thead {
+    display: none;
+}
 
 /* Таблица рекордов */
 .lap-record-table .gp-cell { font-size: 0.75rem; }

@@ -793,12 +793,38 @@ function getConstructorLeader() {
 
 function getBestPitstop() {
     if (typeof pitstopData === 'undefined') return null;
-    const v = pitstopData.filter(r => r.driver !== 'none' && r.time !== '0.00' && r.time !== '0.00s');
-    if (!v.length) return null;
-    let b = v[0], bt = parseFloat(b.time);
-    v.forEach(r => { const t = parseFloat(r.time); if (!isNaN(t) && t < bt) { bt = t; b = r; } });
-    const d = findDriverById(b.driver);
-    return d ? { team: d.team, time: b.time } : null;
+    
+    let best = null;
+    let bestTimeNum = Infinity;
+    
+    pitstopData.forEach(gp => {
+        for (let i = 1; i <= 10; i++) {
+            const driverId = gp[`driver${i}`];
+            const timeStr  = gp[`time${i}`];
+            const teamOverride = gp[`team${i}`]; // 👈 учитываем замены
+            
+            if (!driverId || driverId === 'none') continue;
+            if (!timeStr || timeStr === '0.00' || timeStr === '0.00s') continue;
+            
+            const t = parseFloat(timeStr);
+            if (isNaN(t)) continue;
+            
+            if (t < bestTimeNum) {
+                bestTimeNum = t;
+                const driver = findDriverById(driverId);
+                if (!driver) continue;
+                
+                // Используем teamOverride, если есть, иначе — команду пилота
+                const team = teamOverride || (typeof getPitstopTeam === 'function' 
+                    ? getPitstopTeam(driver) 
+                    : driver.team);
+                
+                best = { team, time: timeStr };
+            }
+        }
+    });
+    
+    return best;
 }
 
 async function loadWeatherForNextGP() {

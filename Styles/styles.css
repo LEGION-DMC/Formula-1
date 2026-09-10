@@ -3041,7 +3041,7 @@ h1, h2 {
 .stats-grid .stats-table-wrapper.engine-wrapper {
     grid-column: 1 / -1;
     width: 100%;
-    margin-top: 0; /* Без отступа сверху */
+    margin-top: 0;
 }
 
 .stats-table-wrapper {
@@ -3087,6 +3087,23 @@ h1, h2 {
     flex-shrink: 0;
 }
 
+/* ===== Шапка таблицы с кнопкой «Подробнее» ===== */
+.stats-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stats-table-header .stats-table-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
 .stats-table-container { 
     overflow: visible;
     flex: 0 1 auto;
@@ -3100,10 +3117,11 @@ h1, h2 {
 }
 
 .stats-table thead th {
+    font-family: 'F1Title', sans-serif;
     text-align: center;
     padding: 0px 3px 5px 3px;
     color: #999;
-    font-size: 0.7rem;
+    font-size: 0.55rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -3121,11 +3139,49 @@ h1, h2 {
     vertical-align: middle;
 }
 
+/* ===== Таблица пит-стопов ===== */
+.pitstop-standings-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.pitstop-standings-columns .stats-table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
 .pitstop-table .stats-driver-clickable {
     padding-left: 15px;
 }
 
+.pitstop-table:has(.pitstop-points-cell) .team-cell {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    text-align: left;
+    width: auto;
+}
+
+.pitstop-table:has(.pitstop-points-cell) .team-name {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.pitstop-table:has(.pitstop-points-cell) .team-cell:hover .team-name {
+    color: var(--red-accent);
+}
+
+/* Ячейка с очками DHL */
+.pitstop-points-cell {
+    font-family: 'F1Numbers', sans-serif;
+    text-align: center;
+    width: 55px;
+}
+
+/* ===== Остальные таблицы статистики ===== */
 .lap-record-table .stats-driver-clickable {
     padding-left: 55px;
 }
@@ -3135,7 +3191,8 @@ h1, h2 {
 }
 
 .stats-table tbody tr:hover { 
-    background-color: rgba(255, 255, 255, 0.05); }
+    background-color: rgba(255, 255, 255, 0.05);
+}
 
 .stats-flag {
     width: 20px; height: 14px;
@@ -3159,8 +3216,7 @@ h1, h2 {
 }
 
 .gp-cell { color: var(--text-light); white-space: nowrap; }
-.time-cell { font-family: 'F1Numbers', 'F1Title', sans-serif; 
-    white-space: nowrap;}
+.time-cell { font-family: 'F1Numbers', 'F1Title', sans-serif; white-space: nowrap; }
 
 .fines-cell {
     font-family: 'F1Numbers', sans-serif;
@@ -3169,23 +3225,19 @@ h1, h2 {
     font-size: 1rem;
 }
 
-.score-cell { font-family: 'F1Numbers', 
-    sans-serif; 
-    text-align: center; 
-    font-size: 1rem; width: 10px; }
+.score-cell { font-family: 'F1Numbers', sans-serif; text-align: center; font-size: 1rem; width: 10px; }
 .score-cell.winner { color: #00cc66; }
 .score-cell.loser { color: #cc3300; }
 .score-cell.draw { color: var(--text-gray); }
 
 .vs-cell { text-align: center; width: 0px; }
 
-.quali-table .driver-cell { 
-    font-size: 0.85rem; 
-}
+.quali-table .driver-cell { font-size: 0.85rem; }
 
 .quali-table tbody td:nth-child(5),
 .quali-table tbody td:nth-child(7) { 
-    text-align: right; }
+    text-align: right;
+}
 
 .stats-table .separator-row td {
     padding: 0 !important;
@@ -3209,7 +3261,8 @@ h1, h2 {
 
 .separator-text {
     color: rgba(255, 255, 255, 0.5);
-    font-size: 0.7rem;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.6rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     white-space: nowrap;
@@ -3225,8 +3278,7 @@ h1, h2 {
     color: var(--red-accent) !important;
 }
 
-.pitstop-table .time-cell { text-align: left; 
-    padding-left: 25px; }
+.pitstop-table .time-cell { text-align: center; padding-left: 25px; }
 
 .time-cell.best-time {
     color: var(--red-accent);
@@ -3253,24 +3305,23 @@ h1, h2 {
 .lap-record-table .driver-cell {
     padding-left: 55px !important;
 }
-        /* Убираем двойной отступ у ячеек с флагом */
+
+/* Убираем двойной отступ у ячеек с флагом */
 .lap-record-table .driver-cell .stats-flag {
     margin-left: -35px;
     margin-right: 8px;
 }
-        /* Красный цвет для побитых рекордов */
+
+/* Красный цвет для побитых рекордов */
 .lap-record-table .time-cell.best-time {
     color: var(--red-accent) !important;
     text-shadow: 0 0 8px rgba(225, 6, 0, 0.3);
 }
 
-.stats-driver-clickable { cursor: pointer; 
-    transition: color 0.5s ease; }
+.stats-driver-clickable { cursor: pointer; transition: color 0.5s ease; }
 .stats-driver-clickable:hover span { color: var(--red-accent); }
 
-.stats-clickable { cursor: pointer; 
-    transition: opacity 0.2s ease; }
-.stats-clickable:hover { opacity: 0.3; }
+.stats-clickable { cursor: pointer; transition: opacity 0.2s ease; }
 
 .driver-fullname { display: inline; }
 .driver-shortname { display: none; }
@@ -3308,7 +3359,7 @@ h1, h2 {
     text-align: center;
     padding: 0px 3px 5px 3px;
     color: #999;
-    font-size: 0.7rem;
+    font-size: 0.55rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -3327,7 +3378,6 @@ h1, h2 {
     border-radius: 4px 0 0 4px;
 }
 
-/* Подсветка остальных ячеек строки при наведении на пилота */
 .engine-parts-table .driver-cell.highlighted-single ~ .engine-cell,
 .engine-parts-table .driver-cell.highlighted-single ~ .engine-cell ~ .engine-cell,
 .engine-parts-table .driver-cell.highlighted-single ~ .engine-cell ~ .engine-cell ~ .engine-cell,
@@ -3338,13 +3388,11 @@ h1, h2 {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Подсветка ячейки пилота при наведении на команду */
 .engine-parts-table .driver-cell.highlighted-with-team {
     background-color: rgba(255, 255, 255, 0.08);
     border-radius: 4px 0 0 4px;
 }
 
-/* Подсветка остальных ячеек строки при наведении на команду */
 .engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell,
 .engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell ~ .engine-cell,
 .engine-parts-table .driver-cell.highlighted-with-team ~ .engine-cell ~ .engine-cell ~ .engine-cell,
@@ -3355,20 +3403,17 @@ h1, h2 {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Подсветка ячейки команды при наведении на неё */
 .engine-parts-table .team-cell.hovered {
     background-color: rgba(255, 255, 255, 0.12);
     border-radius: 4px 0 0 4px;
 }
 
-/* Отключаем стандартные transition для ячеек */
 .engine-parts-table .driver-cell,
 .engine-parts-table .engine-cell,
 .engine-parts-table .team-cell {
     transition: none !important;
 }
 
-/* Для ячейки команды */
 .engine-parts-table .team-cell {
     cursor: pointer;
 }
@@ -3629,8 +3674,8 @@ h1, h2 {
 
 .results-detail-btn {
     font-family: 'F1Title', sans-serif;
-    font-size: 0.7rem;
-    padding: 5px 12px 4px;
+    font-size: 0.65rem;
+    padding: 4px 5px 2px;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -3745,10 +3790,11 @@ h1, h2 {
 }
 
 .results-table thead th {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.55rem;
     text-align: left;
     padding: 5px 8px;
     color: #999;
-    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -3887,7 +3933,8 @@ h1, h2 {
 
 .detailed-header-row .detailed-cell {
     color: #bbb;
-    font-size: 0.75rem;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.55rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
