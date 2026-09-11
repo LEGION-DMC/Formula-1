@@ -1266,6 +1266,22 @@ h1, h2 {
     border: 1px solid transparent;
     min-height: 22px;
     width: 85px;
+    position: relative;
+}
+
+/* Надпись "Поул" над 1-й позицией */
+.grid-pole-label {
+    position: absolute;
+    top: -13px;
+    left: 51%;
+    transform: translateX(-50%);
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.7px;
+    color: #FFD700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;
 }
 
 .grid-cell:hover {
@@ -1296,8 +1312,17 @@ h1, h2 {
     background: rgba(255, 255, 255, 0.03);
 }
 
+/* Поул — золотой нижний бордюр */
+.grid-cell.pole {
+    border-bottom: 1px solid #FFD700;
+}
+
+.grid-cell.pole .grid-pos{
+    color: #FFD700;
+}
+
 .grid-pos {
-    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-family: 'F1Numbers', sans-serif;
     font-size: 0.7rem;
     color: #666;
     text-align: center;
@@ -1313,8 +1338,9 @@ h1, h2 {
 }
 
 .grid-name {
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.85rem;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.75rem;
+    margin-bottom: -1px;
     color: var(--text-light);
     flex: 1;
     white-space: nowrap;
@@ -2086,8 +2112,8 @@ h1, h2 {
 .stat-cell {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    padding: 3px 0px 6px;
-    gap: 3px;
+    padding: 3px 0px 5px;
+    gap: 1px;
     display: flex;
     flex-direction: column;
     transition: all 0.25s ease;

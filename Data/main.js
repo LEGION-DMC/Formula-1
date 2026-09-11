@@ -1,24 +1,24 @@
 const startingGridData = [ 
-    { position: 1, driverId: '', pitLane: false, team: '' },
-    { position: 2, driverId: '', pitLane: false, team: '' },
-    { position: 3, driverId: '', pitLane: false, team: '' },
-    { position: 4, driverId: '', pitLane: false, team: '' },
-    { position: 5, driverId: '', pitLane: false, team: '' },
-    { position: 6, driverId: '', pitLane: false, team: '' },
-    { position: 7, driverId: '', pitLane: false, team: '' },
-    { position: 8, driverId: '', pitLane: false, team: '' },
-    { position: 9, driverId: '', pitLane: false, team: '' },
-    { position: 10, driverId: '', pitLane: false, team: '' },
-    { position: 11, driverId: '', pitLane: false, team: '' },
-    { position: 12, driverId: '', pitLane: false, team: '' },
-    { position: 13, driverId: '', pitLane: false, team: '' },
-    { position: 14, driverId: '', pitLane: false, team: '' },
-    { position: 15, driverId: '', pitLane: false, team: '' },
-    { position: 16, driverId: '', pitLane: false, team: '' },
-    { position: 17, driverId: '', pitLane: false, team: '' },
-    { position: 18, driverId: '', pitLane: false, team: '' },
-    { position: 19, driverId: '', pitLane: false, team: '' },
-    { position: 20, driverId: '', pitLane: false, team: '' },
+    { position: 1, driverId: '', team: '' },
+    { position: 2, driverId: '', team: '' },
+    { position: 3, driverId: '', team: '' },
+    { position: 4, driverId: '', team: '' },
+    { position: 5, driverId: '', team: '' },
+    { position: 6, driverId: '', team: '' },
+    { position: 7, driverId: '', team: '' },
+    { position: 8, driverId: '', team: '' },
+    { position: 9, driverId: '', team: '' },
+    { position: 10, driverId: '', team: '' },
+    { position: 11, driverId: '', team: '' },
+    { position: 12, driverId: '', team: '' },
+    { position: 13, driverId: '', team: '' },
+    { position: 14, driverId: '', team: '' },
+    { position: 15, driverId: '', team: '' },
+    { position: 16, driverId: '', team: '' },
+    { position: 17, driverId: '', team: '' },
+    { position: 18, driverId: '', team: '' },
+    { position: 19, driverId: '', team: '' },
+    { position: 20, driverId: '', team: '' },
     { position: 21, driverId: '', pitLane: false, team: '' },
     { position: 22, driverId: '', pitLane: false, team: '' },
 ];
@@ -402,9 +402,6 @@ function createStartingGridBlock() {
     const pitContainer = document.createElement('div');
     pitContainer.className = 'starting-grid-pit-container';
     
-    // ════════════════════════════════════════════════════════════
-    // ║ ЕСЛИ НЕТ НИ ОДНОГО ПИЛОТА — ПОКАЗЫВАЕМ СООБЩЕНИЕ     ║
-    // ════════════════════════════════════════════════════════════
     if (!hasAnyDriver) {
         gridContainer.innerHTML = `
             <span class="starting-grid-empty-text">Квалификация ещё не состоялась</span>
@@ -418,11 +415,6 @@ function createStartingGridBlock() {
         wrapper.appendChild(pitContainer);
         
     } else {
-        // ════════════════════════════════════════════════════════════
-        // ║ ЕСТЬ ПИЛОТЫ — ОТОБРАЖАЕМ СЕТКУ С БЛЮРОМ              ║
-        // ════════════════════════════════════════════════════════════
-        
-        // Добавляем блюр-оверлей
         const overlay = document.createElement('div');
         overlay.className = 'starting-grid-blur-overlay';
         overlay.innerHTML = `
@@ -461,10 +453,11 @@ function createStartingGridBlock() {
         function renderDriverCell(item) {
             const driver = findDriverById(item.driverId);
             const pos = item.position;
+            const poleClass = pos === 1 ? ' pole' : '';
             
             if (!driver) {
                 return `
-                    <div class="grid-cell empty" data-pos="${pos}">
+                    <div class="grid-cell empty${poleClass}" data-pos="${pos}">
                         <span class="grid-pos">${pos}</span>
                         <span class="grid-name">—</span>
                     </div>
@@ -482,20 +475,41 @@ function createStartingGridBlock() {
             }
             
             const russianLower = russianName.toLowerCase();
-            const driverNameMap = {
-                'гасли': 'GAS', 'расселл': 'RUS', 'леклер': 'LEC',
-                'хэмилтон': 'HAM', 'ферстаппен': 'VER', 'пиастри': 'PIA',
-                'колапинто': 'COL', 'норрис': 'NOR', 'линдблад': 'LIN',
-                'бортолето': 'BOR', 'берман': 'BEA', 'хюлькенберг': 'HUL',
-                'сайнс': 'SAI', 'окон': 'OCO', 'цунода': 'TSU',
-                'боттас': 'BOT', 'перес': 'PER', 'алонсо': 'ALO',
-                'стролл': 'STR', 'антонелли': 'ANT', 'лоусон': 'LAW',
-                'албон': 'ALB'
-            };
+			const driverNameMap = {
+				'норрис': 'NOR',
+				'ферстаппен': 'VER',
+				'бортолето': 'BOR',
+				'хаджар': 'HAD',
+				'дуэн': 'DOO',
+				'гасли': 'GAS',
+				'перес': 'PER',
+				'антонелли': 'ANT',
+				'алонсо': 'ALO',
+				'леклер': 'LEC',
+				'стролл': 'STR',
+				'цунода': 'TSU',
+				'албон': 'ALB',
+				'чжоу': 'ZHO',
+				'хюлькенберг': 'HUL',
+				'лоусон': 'LAW',
+				'окон': 'OCO',
+				'линдблад': 'LIN',
+				'колапинто': 'COL',
+				'хэмилтон': 'HAM',
+				'сайнс': 'SAI',
+				'расселл': 'RUS',
+				'боттас': 'BOT',
+				'пиастри': 'PIA',
+				'берман': 'BEA',
+				'джовинацци': 'GIO'
+			};
             let shortName = driverNameMap[russianLower] || russianName.toUpperCase().substring(0, 4);
             
+            const poleLabel = pos === 1 ? `<span class="grid-pole-label">- Поул -</span>` : '';
+
             return `
-                <div class="grid-cell" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
+                <div class="grid-cell${poleClass}" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
+                    ${poleLabel}
                     <span class="grid-pos">${pos}</span>
                     <div class="grid-driver-info">
                         <span class="grid-name" style="color: ${teamColor}">${shortName}</span>
