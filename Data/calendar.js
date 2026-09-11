@@ -236,8 +236,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "https://rutube.ru/video/9b94fe23561b821692e4f09ee172db87/",
+		recordingRace: "https://rutube.ru/video/18623b9d5b39a77a812084f53b7d8c9c/"
 	},
 	{   id: "azerbaijan",
 		track: "baku",
