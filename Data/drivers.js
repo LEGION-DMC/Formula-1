@@ -17,7 +17,7 @@ const driversData = [
         hattricks: 3,
         wins: 13,
         podiums: 48,
-        poles: 18,
+        poles: 19,
 		fastestLaps: 3,
 		
         note: "Выступает под #1 - в качестве действующего чемпиона мира. Собственный номер пилота #4.",
