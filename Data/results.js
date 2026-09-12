@@ -368,7 +368,7 @@ const detailedResults = {
 };
 
 const detailedSprintResults = {
-    "china": {
+    "gp2": {
         "russell": 8,
         "leclerc": 7,
         "hamilton": 6,
@@ -382,7 +382,7 @@ const detailedSprintResults = {
         "lindblad": "dnf",
         "tsunoda": "dnp",
     },
-    "miami": {
+    "gp5": {
         "norris": 8,
         "piastri": 7,
         "leclerc": 6,
@@ -396,7 +396,7 @@ const detailedSprintResults = {
         "bortoleto": "dsq",
         "tsunoda": "dnp",
     },
-    "canada": {
+    "gp6": {
         "russell": 8,
         "norris": 7,
         "antonelli": 6,
@@ -408,7 +408,7 @@ const detailedSprintResults = {
         "alonso": "dnf",
         "tsunoda": "dnp",
     },
-    "great-britain": {
+    "gp10": {
         "antonelli": 8,
         "hamilton": 7,
         "norris": 6,
@@ -419,7 +419,7 @@ const detailedSprintResults = {
         "lawson": 1,
         "tsunoda": "dnp",
     },
-    "netherlands": {
+    "gp13": {
         "russell": 8,
         "leclerc": 7,
         "norris": 6,
@@ -431,7 +431,7 @@ const detailedSprintResults = {
         "hadjar": "dnp",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
-    "singapore": {
+    "gp18": {
         "000": 8,
         "000": 7,
         "000": 6,
