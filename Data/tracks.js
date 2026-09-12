@@ -192,7 +192,7 @@ const tracksData = [
         direction: "по часовой стрелке",
         firstrace: "2026",
         lapRecord: "---",
-        qulRecord: "P1 - 1:34.077, Д. Рассел - Mercedes - 2026",
+        qulRecord: "P2 - 1:33.662, К. Антонелли - Mercedes - 2026",
     },
     { id: "baku",
         name: "Гран-при Азербайджана",
