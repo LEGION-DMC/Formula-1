@@ -382,7 +382,23 @@ const calendarData = [
 		recordingSprint: "",
 		recordingQuali: "",
 		recordingRace: ""
-	},
+	},/*
+	{   id: "gp24", name: "Гран-при Эмилии-Романьи",
+		track: "imola",
+		
+		tires: "",
+		
+		date: "2026-12-06 21:00",
+		quali: "2026-12-05 22:00",
+		sprint: "",
+		
+		hasSprint: false,
+		canceled: false,
+		
+		recordingSprint: "",
+		recordingQuali: "",
+		recordingRace: ""
+	},*/
 ];
 
 let animationTimeout = null;

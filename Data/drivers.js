@@ -39,7 +39,7 @@ const driversData = [
         ],
 		
         titles: 4,
-        hattricks: 14,
+        hattricks: 15,
         wins: 71,
         podiums: 132,
         poles: 48,
@@ -579,7 +579,7 @@ const driversData = [
         ],
 		
         titles: 0,
-        hattricks: 1,
+        hattricks: 2,
         wins: 7,
         podiums: 31,
         poles: 11,
@@ -1369,9 +1369,22 @@ function createCareerBlock(careerData) {
     const container = document.createElement('div');
     container.className = 'modal-career-container';
 
+    // Считаем количество сезонов от дебюта по данным career
+    const years = careerData
+        .map(item => parseInt(item.year.match(/\d{4}/)?.[0], 10))
+        .filter(y => !isNaN(y));
+
+    let seasonsCount = '';
+    if (years.length > 0) {
+        const debutYear = Math.min(...years);
+        const currentYear = new Date().getFullYear();
+        const seasons = currentYear - debutYear + 1; // +1, т.к. дебютный сезон тоже считается
+        seasonsCount = ` — ${seasons} ${declension(seasons, ['сезон', 'сезона', 'сезонов'])}`;
+    }
+
     const title = document.createElement('h3');
     title.className = 'modal-career-title';
-    title.textContent = 'Карьерный путь';
+    title.textContent = `Карьерный путь${seasonsCount}`;
     container.appendChild(title);
 
     const careerList = document.createElement('div');
@@ -1445,6 +1458,21 @@ function createCareerBlock(careerData) {
 
     container.appendChild(careerList);
     return container;
+}
+
+function declension(num, titles) {
+    const n = Math.abs(num) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) {
+        return titles[2];
+    }
+    if (n1 > 1 && n1 < 5) {
+        return titles[1];
+    }
+    if (n1 === 1) {
+        return titles[0];
+    }
+    return titles[2];
 }
 
 function openDriverModal(driver) {
@@ -1732,21 +1760,6 @@ function openDriverModal(driver) {
     // Блок статистики (без штрафов, добавляем Рекорды круга)
     const block3 = document.createElement('div');
     block3.className = 'modal-block';
-
-    function declension(num, titles) {
-        const n = Math.abs(num) % 100;
-        const n1 = n % 10;
-        if (n > 10 && n < 20) {
-            return titles[2];
-        }
-        if (n1 > 1 && n1 < 5) {
-            return titles[1];
-        }
-        if (n1 === 1) {
-            return titles[0];
-        }
-        return titles[2];
-    }
 
     const statsDeclensions = {
         titles: ['Титул', 'Титула', 'Титулов'],
