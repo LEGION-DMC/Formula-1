@@ -1,5 +1,5 @@
 const detailedResults = { 
-    "australia": {
+    "gp1": {
         "russell": 25,
         "antonelli": 18,
         "leclerc": 15,
@@ -17,7 +17,7 @@ const detailedResults = {
         "hulkenberg": "dns",
         "tsunoda": "dnp",
     },
-    "china": {
+    "gp2": {
         "antonelli": 25,
         "russell": 18,
         "hamilton": 15,
@@ -37,7 +37,7 @@ const detailedResults = {
         "albon": "dns",
         "tsunoda": "dnp",
     },
-    "japan": {
+    "gp3": {
         "antonelli": 25,
         "piastri": 18,
         "leclerc": 15,
@@ -52,7 +52,7 @@ const detailedResults = {
         "bearman": "dnf",
         "tsunoda": "dnp",
     },
-    "saudi-arabia": {
+    "gp4": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -64,7 +64,7 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-    "miami": {
+    "gp5": {
         "antonelli": 25,
         "norris": 18,
         "piastri": 15,
@@ -81,7 +81,7 @@ const detailedResults = {
         "hadjar": "dnf",
         "tsunoda": "dnp",
     },
-    "canada": {
+    "gp6": {
         "antonelli": 25,
         "hamilton": 18,
         "verstappen": 15,
@@ -100,7 +100,7 @@ const detailedResults = {
         "lindblad": "dns",
         "tsunoda": "dnp",
     },
-    "monaco": {
+    "gp7": {
         "antonelli": 25,
         "hamilton": 18,
         "hadjar": 15,
@@ -120,7 +120,7 @@ const detailedResults = {
         "verstappen": "dnf",
         "tsunoda": "dnp",
     },
-    "barcelona": {
+    "gp8": {
         "hamilton": 25,
         "russell": 18,
         "norris": 15,
@@ -141,7 +141,7 @@ const detailedResults = {
         "stroll": "dnf",
         "tsunoda": "dnp",
     },
-    "austria": {
+    "gp9": {
         "russell": 25,
         "verstappen": 18,
         "antonelli": 15,
@@ -158,7 +158,7 @@ const detailedResults = {
         "bottas": "dnf",
         "tsunoda": "dnp",
     },
-    "great-britain": {
+    "gp10": {
         "leclerc": 25,
         "russell": 18,
         "hamilton": 15,
@@ -174,7 +174,7 @@ const detailedResults = {
         "verstappen": "dnf",
         "tsunoda": "dnp",
     },
-    "belgium": {
+    "gp11": {
         "antonelli": 25,
         "leclerc": 18,
         "verstappen": 15,
@@ -190,7 +190,7 @@ const detailedResults = {
         "russell": "dnf",
         "tsunoda": "dnp",
     },
-    "hungary": {
+    "gp12": {
         "norris": 25,
         "verstappen": 18,
         "antonelli": 15,
@@ -206,7 +206,7 @@ const detailedResults = {
         "piastri": "dnf",
         "tsunoda": "dnp",
     },
-    "netherlands": {
+    "gp13": {
         "norris": 25,
         "antonelli": 18,
         "russell": 15,
@@ -226,7 +226,7 @@ const detailedResults = {
         "hadjar": "dnp",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
-    "italy": {
+    "gp14": {
         "antonelli": 25,
         "russell": 18,
         "verstappen": 15,
@@ -243,7 +243,7 @@ const detailedResults = {
         "hadjar": "dnp",
 		"tsunoda": { "points": 1, "team": "Racing Bulls" },
     },
-    "spain": {
+    "gp15": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -257,7 +257,7 @@ const detailedResults = {
         "hadjar": "dnp",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
-    "azerbaijan": {
+    "gp16": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -269,7 +269,7 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-    "singapore": {
+    "gp17": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -281,7 +281,7 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-    "usa": {
+    "gp18": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -293,7 +293,7 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-    "mexico": {
+    "gp19": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -305,7 +305,7 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-    "brazil": {
+    "gp20": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -317,7 +317,7 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-    "las-vegas": {
+    "gp21": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -329,7 +329,7 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-    "qatar": {
+    "gp22": {
         "000": 25,
         "000": 18,
         "000": 15,
@@ -341,7 +341,19 @@ const detailedResults = {
         "000": 2,
         "000": 1,
     },
-    "abu-dhabi": {
+    "gp23": {
+        "000": 25,
+        "000": 18,
+        "000": 15,
+        "000": 12,
+        "000": 10,
+        "000": 8,
+        "000": 6,
+        "000": 4,
+        "000": 2,
+        "000": 1,
+    },
+    "gp24": {
         "000": 25,
         "000": 18,
         "000": 15,
