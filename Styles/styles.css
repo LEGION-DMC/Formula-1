@@ -4614,8 +4614,14 @@ h1, h2 {
 .tm-track-info .tm-detail-row-inline {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 15px;
     flex-wrap: wrap;
+}
+
+.tm-detail-row-inline .tm-detail-row {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.8rem;
 }
 
 .tm-track-info .tm-detail-row {

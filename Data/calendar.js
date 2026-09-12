@@ -1,5 +1,5 @@
 const calendarData = [
-	{   id: "australia",
+	{   id: "gp1",   name: "Гран-при Австралии",
 		track: "albert_park",
 		
 		tires: "345",
@@ -15,7 +15,7 @@ const calendarData = [
 		recordingQuali: "nQMAca7AQwY",
 		recordingRace: "CAPgpa-AQwY"
 	},
-	{   id: "china",
+	{   id: "gp2",   name: "Гран-при Китая",
 		track: "shanghai",
 		
 		tires: "234",
@@ -31,7 +31,7 @@ const calendarData = [
 		recordingQuali: "dgCgNcITRAY",
 		recordingRace: "qwGABcETRAY"
 	},
-	{   id: "japan",
+	{   id: "gp3",   name: "Гран-при Японии",
 		track: "suzuka",
 		
 		tires: "123",
@@ -47,7 +47,7 @@ const calendarData = [
 		recordingQuali: "gALAmvo8RAY",
 		recordingRace: "hgKggPo8RAY"
 	},
-	{   id: "saudi-arabia",
+	{   id: "gp4",   name: "Гран-при Саудовской Аравии",
 		track: "jeddah",
 		
 		tires: "",
@@ -63,7 +63,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "miami",
+	{   id: "gp5",   name: "Гран-при Майами",
 		track: "miami",
 		
 		tires: "345",
@@ -79,7 +79,7 @@ const calendarData = [
 		recordingQuali: "wQKgTrtHRAY",
 		recordingRace: "4QKASrtHRAY"
 	},
-	{   id: "canada",
+	{   id: "gp6",   name: "Гран-при Канады",
 		track: "villeneuve",
 		
 		tires: "345",
@@ -95,7 +95,7 @@ const calendarData = [
 		recordingQuali: "OQNgtC5XRAY",
 		recordingRace: "OgHg1C1XRAY"
 	},
-	{   id: "monaco",
+	{   id: "gp7",   name: "Гран-при Монако",
 		track: "monaco",
 		
 		tires: "345",
@@ -111,7 +111,7 @@ const calendarData = [
 		recordingQuali: "IwGARvhfSQY",
 		recordingRace: "BgCAwrOLTwY"
 	},
-	{   id: "barcelona",
+	{   id: "gp8",   name: "Гран-при Барселоны-Каталунии",
 		track: "catalunya",
 		
 		tires: "234",
@@ -127,7 +127,7 @@ const calendarData = [
 		recordingQuali: "5gKA2f_YdgY",
 		recordingRace: "wANgWyNueQY"
 	},
-	{   id: "austria",
+	{   id: "gp9",   name: "Гран-при Австрии",
 		track: "red_bull_ring",
 		
 		tires: "345",
@@ -143,7 +143,7 @@ const calendarData = [
 		recordingQuali: "2QLgWtkR0QY",
 		recordingRace: "wQHgUnsH1wY"
 	},
-	{   id: "great-britain",
+	{   id: "gp10", name: "Гран-при Великобритании",
 		track: "silverstone",
 		
 		tires: "123",
@@ -159,7 +159,7 @@ const calendarData = [
 		recordingQuali: "PAPAGIPO-QY",
 		recordingRace: "tQPAbRGEAwc"
 	},
-	{   id: "belgium",
+	{   id: "gp11", name: "Гран-при Бельгии",
 		track: "spa",
 		
 		tires: "234",
@@ -175,7 +175,7 @@ const calendarData = [
 		recordingQuali: "6gOg4PrsWgc",
 		recordingRace: "KwPAzW-yXQc"
 	},
-	{   id: "hungary",
+	{   id: "gp12", name: "Гран-при Венгрии",
 		track: "hungaroring",
 		
 		tires: "345",
@@ -191,7 +191,7 @@ const calendarData = [
 		recordingQuali: "xQKgjsHNigc",
 		recordingRace: "twFAj8HNigc"
 	},
-	{   id: "netherlands",
+	{   id: "gp13", name: "Гран-при Нидерландов",
 		track: "zandvoort",
 		
 		tires: "234",
@@ -207,7 +207,7 @@ const calendarData = [
 		recordingQuali: "LQKAG2daQAg",
 		recordingRace: "jwJgJ2daQAg"
 	},
-	{   id: "italy",
+	{   id: "gp14", name: "Гран-при Италии",
 		track: "monza",
 		
 		tires: "345",
@@ -223,7 +223,7 @@ const calendarData = [
 		recordingQuali: "vABADUG2nwg",
 		recordingRace: "GQNAdk6MmQg"
 	},
-	{   id: "spain",
+	{   id: "gp15", name: "Гран-при Испании",
 		track: "madring",
 		
 		tires: "234",
@@ -239,7 +239,7 @@ const calendarData = [
 		recordingQuali: "https://rutube.ru/video/9b94fe23561b821692e4f09ee172db87/",
 		recordingRace: "https://rutube.ru/video/18623b9d5b39a77a812084f53b7d8c9c/"
 	},
-	{   id: "azerbaijan",
+	{   id: "gp16", name: "Гран-при Азербайджана",
 		track: "baku",
 		
 		tires: "345",
@@ -255,7 +255,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "malaysia",
+	{   id: "gp17", name: "Гран-при Бахрейна*",
 		track: "sepang",
 		
 		tires: "234",
@@ -271,7 +271,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "singapore",
+	{   id: "gp18", name: "Гран-при Сингапура",
 		track: "marina_bay",
 		
 		tires: "345",
@@ -287,7 +287,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "usa",
+	{   id: "gp19", name: "Гран-при США",
 		track: "americas",
 		
 		tires: "",
@@ -303,7 +303,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "mexico",
+	{   id: "gp20", name: "Гран-при Мехико",
 		track: "rodriguez",
 		
 		tires: "",
@@ -319,7 +319,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "brazil",
+	{   id: "gp21", name: "Гран-при Сан-Паулу",
 		track: "interlagos",
 		
 		tires: "",
@@ -335,7 +335,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "las-vegas",
+	{   id: "gp22", name: "Гран-при Лас-Вегаса",
 		track: "vegas",
 		
 		tires: "",
@@ -351,7 +351,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "qatar",
+	{   id: "gp23", name: "Гран-при Катара",
 		track: "lusail",
 		
 		tires: "",
@@ -367,7 +367,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},
-	{   id: "abu-dhabi",
+	{   id: "gp24", name: "Гран-при Абу-Даби",
 		track: "yas_marina",
 		
 		tires: "",
@@ -445,7 +445,6 @@ function animateCalendarCardsAppearance(container) {
             const rowIndex = Math.floor(index / cols);
             const delay = rowIndex * 100;
             
-            // Только анимация появления
             card.style.transition = `opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms`;
             
             requestAnimationFrame(() => {
@@ -462,11 +461,7 @@ function animateCalendarCardsAppearance(container) {
 function smoothScrollToElement(element, duration = 800) {
     if (!element) return;
 
-    // Получаем позицию элемента относительно окна
     const rect = element.getBoundingClientRect();
-    
-    // Вычисляем позицию для центрирования
-    // Высота окна / 2 - половина высоты элемента
     const offsetY = window.innerHeight / 2 - rect.height / 2;
     const targetPosition = rect.top + window.pageYOffset - offsetY;
 
@@ -478,7 +473,6 @@ function smoothScrollToElement(element, duration = 800) {
         const timeElapsed = currentTime - startTime;
         const progress = Math.min(timeElapsed / duration, 1);
 
-        // easeInOutCubic
         const ease = progress < 0.5
             ? 4 * progress * progress * progress
             : 1 - Math.pow(-2 * progress + 2, 3) / 2;
@@ -494,16 +488,13 @@ function smoothScrollToElement(element, duration = 800) {
 }
 
 function scrollToGPCard(gpId, cardsArea) {
-    // Если клик по уже выделенному ГП — игнорируем
     if (currentHighlightedGpId === gpId) return;
     
-    // Отменяем предыдущий таймаут, если он был
     if (animationTimeout) {
         clearTimeout(animationTimeout);
         animationTimeout = null;
     }
 
-    // Снимаем выделение со старого ГП
     const oldCard = cardsArea.querySelector(`.calendar-card.upcoming-highlight`);
     if (oldCard) oldCard.classList.remove('upcoming-highlight');
     
@@ -513,16 +504,13 @@ function scrollToGPCard(gpId, cardsArea) {
     const card = cardsArea.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
     if (!card) return;
 
-    // Запоминаем текущий выделенный ГП
     currentHighlightedGpId = gpId;
 
-    // Сразу применяем выделение к карточке и навигации
     card.classList.add('upcoming-highlight');
     
     const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
     if (navItem) navItem.classList.add('upcoming-highlight');
 
-    // Плавный скролл к карточке
     smoothScrollToElement(card, 800);
 }
 
@@ -530,7 +518,6 @@ function scrollToCurrentGP() {
     const cardsArea = document.getElementById('calendarCardsArea');
     if (!cardsArea) return;
 
-    // Отменяем предыдущий таймаут
     if (animationTimeout) {
         clearTimeout(animationTimeout);
         animationTimeout = null;
@@ -570,21 +557,17 @@ function scrollToCurrentGP() {
 }
 
 function clearAllHighlights(cardsArea) {
-    // Снимаем постоянную подсветку с карточек
     cardsArea.querySelectorAll('.calendar-card.upcoming-highlight')
         .forEach(c => c.classList.remove('upcoming-highlight'));
     
-    // Снимаем постоянную подсветку с навигации
     document.querySelectorAll('.calendar-nav-item.upcoming-highlight')
         .forEach(c => c.classList.remove('upcoming-highlight'));
     
-    // Снимаем временную подсветку со всех карточек
     cardsArea.querySelectorAll('.calendar-card.highlight')
         .forEach(c => c.classList.remove('highlight'));
 }
 
 function buildCalendarNav(panel, cardsArea) {
-    // Проверяем, есть ли уже заголовок
     let title = panel.querySelector('.calendar-nav-title');
     if (!title) {
         title = document.createElement('h3');
@@ -614,8 +597,8 @@ function buildCalendarNav(panel, cardsArea) {
             <span class="calendar-nav-number">${displayNumber}</span>
             <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-nav-flag" title="${getCountryName(track.country)}">
             <span class="calendar-nav-name">
-                <span class="nav-gp-full">${track.name}</span>
-                <span class="nav-gp-short">${track.name.replace('Гран-при ', 'ГП ').replace('-Каталунии', '')}</span>
+                <span class="nav-gp-full">${gp.name}</span>
+                <span class="nav-gp-short">${gp.name.replace('Гран-при ', 'ГП ').replace('-Каталунии', '')}</span>
             </span>
             <span class="calendar-nav-date">${formatDateMini(gp.date)}</span>
         `;
@@ -632,12 +615,10 @@ function buildCalendarNav(panel, cardsArea) {
 function getVideoUrl(videoId) {
     if (!videoId) return null;
     
-    // Если это полная ссылка на Rutube или другой внешний ресурс
     if (videoId.startsWith('http://') || videoId.startsWith('https://')) {
         return videoId;
     }
     
-    // Если это ID видео для Matreshka (обычно строка без пробелов, длиной 8-12 символов)
     if (videoId && !videoId.startsWith('http')) {
         return `https://matreshka.tv/video/${videoId}`;
     }
@@ -652,7 +633,6 @@ function getAvailableSessionsForGP(gpId) {
     const now = new Date();
     const sessions = [];
     
-    // Функция для проверки, наступило ли время события или до него осталось <= 5 минут
     function isEventNearOrPassed(eventDateStr) {
         if (!eventDateStr) return false;
         const eventDate = new Date(eventDateStr);
@@ -660,7 +640,6 @@ function getAvailableSessionsForGP(gpId) {
         return now >= fiveMinutesBefore;
     }
     
-    // Проверяем спринт
     if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
         const videoUrl = getVideoUrl(gp.recordingSprint);
         if (videoUrl) {
@@ -674,7 +653,6 @@ function getAvailableSessionsForGP(gpId) {
         }
     }
     
-    // Проверяем квалификацию
     if (gp.recordingQuali && gp.quali && isEventNearOrPassed(gp.quali)) {
         const videoUrl = getVideoUrl(gp.recordingQuali);
         if (videoUrl) {
@@ -688,7 +666,6 @@ function getAvailableSessionsForGP(gpId) {
         }
     }
     
-    // Проверяем гонку
     if (isEventNearOrPassed(gp.date)) {
         if (gp.recordingRace) {
             const videoUrl = getVideoUrl(gp.recordingRace);
@@ -710,11 +687,9 @@ function getAvailableSessionsForGP(gpId) {
 function openVideoModal(videoId, title) {
     if (!videoId) return;
     
-    // Находим ГП, к которому относится это видео
     let currentGp = null;
     let currentGpId = null;
     
-    // Ищем ГП, у которого есть это видео ID
     for (const gp of calendarData) {
         if (gp.recordingSprint === videoId || gp.recordingQuali === videoId || gp.recordingRace === videoId) {
             currentGp = gp;
@@ -723,11 +698,10 @@ function openVideoModal(videoId, title) {
         }
     }
     
-    // Если не нашли по ID, пробуем найти по title (может быть не совсем надежно)
     if (!currentGp) {
         for (const gp of calendarData) {
             const track = getTrackForGP(gp.id);
-            if (track && title.includes(track.name.replace('Гран-при ', ''))) {
+            if (track && title.includes(gp.name.replace('Гран-при ', ''))) {
                 currentGp = gp;
                 currentGpId = gp.id;
                 break;
@@ -735,26 +709,21 @@ function openVideoModal(videoId, title) {
         }
     }
     
-    // Получаем доступные сессии для этого ГП
     const availableSessions = currentGp ? getAvailableSessionsForGP(currentGpId) : [];
     
-    // Определяем, мобильное ли устройство
     const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // Получаем URL для видео
     const videoUrl = getVideoUrl(videoId);
     if (!videoUrl) {
         console.warn('Не удалось получить URL для видео:', videoId);
         return;
     }
     
-    // Для мобильных — открываем в новой вкладке
     if (isMobile) {
         window.open(videoUrl, '_blank');
         return;
     }
     
-    // Для ПК — показываем встроенный плеер в модальном окне
     const existing = document.querySelector('.video-modal-overlay');
     if (existing) existing.remove();
 
@@ -792,10 +761,8 @@ function openVideoModal(videoId, title) {
         if (e.key === 'Escape') close();
     }
 
-    // Очищаем заголовок от названий сессий
     const cleanTitle = title.replace(/^(Спринт|Квалификация|Гонка)\s*/, '').trim();
 
-    // Получаем флаг страны для текущего ГП
     let flagHtml = '';
     if (currentGp) {
         const track = getTrackForGP(currentGp.id);
@@ -804,11 +771,9 @@ function openVideoModal(videoId, title) {
         }
     }
 
-    // Определяем тип видео для отображения
     let embedUrl = videoUrl;
     let isRutube = videoUrl.includes('rutube.ru');
     
-    // Для Rutube используем embed-ссылку
     if (isRutube) {
         if (videoUrl.includes('/video/')) {
             const videoIdFromUrl = videoUrl.split('/video/')[1];
@@ -824,27 +789,21 @@ function openVideoModal(videoId, title) {
         }
     }
 
-    // Создаем контейнер для видео и панели сессий
     const modalContent = document.createElement('div');
     modalContent.className = 'video-modal-content';
     
-    // Контейнер для видео
     const videoContainer = document.createElement('div');
     videoContainer.className = 'video-container';
     
-    // Панель сессий (справа)
     const sessionsPanel = document.createElement('div');
     sessionsPanel.className = 'video-sessions-panel';
     
-    // Если есть доступные сессии, добавляем их в панель
     if (availableSessions.length > 1) {
-        // Заголовок панели
         const panelTitle = document.createElement('div');
         panelTitle.className = 'panel-title';
         panelTitle.textContent = 'Другие сессии';
         sessionsPanel.appendChild(panelTitle);
         
-        // Список сессий
         const sessionsList = document.createElement('div');
         sessionsList.className = 'sessions-list';
         
@@ -884,14 +843,12 @@ function openVideoModal(videoId, title) {
         }, 200);
     }
 
-    // Собираем структуру
     modalContent.appendChild(videoContainer);
     if (availableSessions.length > 1) {
         modalContent.appendChild(sessionsPanel);
     }
     modal.appendChild(modalContent);
 
-    // Заголовок видео с флагом
     const header = document.createElement('div');
     header.className = 'video-modal-header';
     header.innerHTML = `
@@ -902,7 +859,6 @@ function openVideoModal(videoId, title) {
     `;
     videoContainer.appendChild(header);
 
-    // Тело с видео
     const body = document.createElement('div');
     body.className = 'video-modal-body';
     
@@ -924,7 +880,6 @@ function openVideoModal(videoId, title) {
     body.innerHTML = `<iframe ${iframeAttrs}></iframe>`;
     videoContainer.appendChild(body);
 
-    // Кнопка закрытия
     const closeBtn = document.createElement('button');
     closeBtn.className = 'video-modal-close';
     closeBtn.innerHTML = '&times;';
@@ -972,40 +927,33 @@ function renderCalendarCards(container) {
         if (gp.canceled) card.classList.add('canceled');
         if (isToday) card.classList.add('today');
         
-        // === КЛЕТЧАТЫЙ ФОН ДЛЯ КАРТОЧКИ КАЛЕНДАРЯ ===
         const patternDiv = document.createElement('div');
         patternDiv.className = 'calendar-card-bg-pattern';
         patternDiv.innerHTML = CALENDAR_PATTERN_SVG;
         card.appendChild(patternDiv);
         
-        // Затемняющий оверлей
         const overlay = document.createElement('div');
         overlay.className = 'calendar-card-bg-overlay';
         card.appendChild(overlay);
-        // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
 
-        // Изображение трассы
         const imageDiv = document.createElement('div');
         imageDiv.className = 'calendar-card-image';
         imageDiv.innerHTML = `
             <img src="Images/Tracks/${track.id}.png" alt="${track.id}" onerror="this.src='Images/Tracks/default.png'">
         `;
 
-        // Информация
         const infoDiv = document.createElement('div');
         infoDiv.className = 'calendar-card-info';
 
-        // Заголовок с номером этапа
         const header = document.createElement('div');
         header.className = 'calendar-card-header';
         header.innerHTML = `
             <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-flag" title="${getCountryName(track.country)}">
-            <span class="calendar-gp-name">${track.name}</span>
+            <span class="calendar-gp-name">${gp.name}</span>
             ${gp.hasSprint ? '<span class="calendar-sprint-badge-inline">c</span>' : ''}
             <span class="calendar-gp-number">${displayNumber}</span>
         `;
 
-        // Детали
         const details = document.createElement('div');
         details.className = 'calendar-card-details';
         details.innerHTML = `
@@ -1023,7 +971,6 @@ function renderCalendarCards(container) {
             </div>
         `;
 
-        // Футер
         const footer = document.createElement('div');
         footer.className = 'calendar-card-footer';
 
@@ -1045,14 +992,14 @@ function renderCalendarCards(container) {
             if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
                 const videoUrl = getVideoUrl(gp.recordingSprint);
                 if (videoUrl) {
-                    btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${track.name}">Спринт</button>`;
+                    btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${gp.name}">Спринт</button>`;
                 }
             }
 
             if (gp.recordingQuali && gp.quali && isEventNearOrPassed(gp.quali)) {
                 const videoUrl = getVideoUrl(gp.recordingQuali);
                 if (videoUrl) {
-                    btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${track.name}">Квалификация</button>`;
+                    btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${gp.name}">Квалификация</button>`;
                 }
             }
 
@@ -1060,7 +1007,7 @@ function renderCalendarCards(container) {
                 if (gp.recordingRace) {
                     const videoUrl = getVideoUrl(gp.recordingRace);
                     if (videoUrl) {
-                        btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${track.name}">Гонка</button>`;
+                        btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${gp.name}">Гонка</button>`;
                     }
                 } else if (isPast) {
                     btns += '<span class="calendar-btn disabled">Нет записи</span>';
@@ -1086,7 +1033,6 @@ function renderCalendarCards(container) {
             footer.innerHTML = btns;
         }
 
-        // Сборка карточки
         const divider1 = document.createElement('div');
         divider1.className = 'calendar-card-divider';
 
@@ -1102,7 +1048,6 @@ function renderCalendarCards(container) {
         card.appendChild(imageDiv);
         card.appendChild(infoDiv);
 
-        // Обработчики для кнопок видео
         card.querySelectorAll('.calendar-btn[data-video]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1151,9 +1096,7 @@ function updateCalendarTimer(timer) {
     const minutesEl = timer.querySelector('.calendar-timer-minutes');
     const secondsEl = timer.querySelector('.calendar-timer-seconds');
 
-    // Дни отображаем без ведущего нуля
     if (daysEl) daysEl.textContent = String(days);
-    // Часы, минуты и секунды с ведущим нулём
     if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
     if (minutesEl) minutesEl.textContent = String(mins).padStart(2, '0');
     if (secondsEl) secondsEl.textContent = String(secs).padStart(2, '0');
@@ -1164,8 +1107,7 @@ function autoShrinkHeaders() {
     
     headers.forEach(header => {
         const container = header.closest('.tm-header') || header.parentElement;
-        // Вычитаем только правый отступ (30px)
-        const containerWidth = container.clientWidth - 35; // только правый отступ
+        const containerWidth = container.clientWidth - 35;
         
         let fontSize = parseFloat(getComputedStyle(header).fontSize);
         const minFontSize = 10;
@@ -1232,7 +1174,6 @@ function openTrackModal(track, gp) {
     modal.style.position = 'relative';
     modal.style.overflow = 'hidden';
 
-    // === КЛЕТЧАТЫЙ ФОН ДЛЯ МОДАЛЬНОГО ОКНА ТРАССЫ ===
     const modalPattern = document.createElement('div');
     modalPattern.className = 'track-modal-pattern';
     modalPattern.innerHTML = CALENDAR_PATTERN_SVG;
@@ -1241,7 +1182,6 @@ function openTrackModal(track, gp) {
     const modalOverlayBg = document.createElement('div');
     modalOverlayBg.className = 'track-modal-overlay-bg';
     modal.appendChild(modalOverlayBg);
-    // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
 
     const modalContent = document.createElement('div');
     modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%;';
@@ -1367,10 +1307,8 @@ function initCalendarPage(container) {
     renderCalendarCards(cardsArea);
     initCalendarTimers();
 
-    // Находим предстоящий ГП
     const upcomingGpId = findUpcomingGP();
     
-    // Сразу выделяем в навигации (без задержки)
     if (upcomingGpId) {
         const navItem = navPanel.querySelector(`.calendar-nav-item[data-gp-id="${upcomingGpId}"]`);
         if (navItem) {
@@ -1378,7 +1316,6 @@ function initCalendarPage(container) {
         }
     }
     
-    // Анимируем карточки и после анимации скроллим с пульсацией
     animateCalendarContent(container, cardsArea, upcomingGpId).then(() => {
         if (upcomingGpId) {
             scrollToUpcomingGPWithGlow(cardsArea, upcomingGpId);
@@ -1390,18 +1327,15 @@ function findUpcomingGP() {
     const now = new Date();
     const activeGPs = calendarData.filter(gp => !gp.canceled);
     
-    // Ищем ГП, который идет сегодня
     let target = activeGPs.find(gp => {
         const raceDate = new Date(gp.date);
         return raceDate.toDateString() === now.toDateString();
     });
     
-    // Если нет, ищем ближайший будущий
     if (!target) {
         target = activeGPs.find(gp => new Date(gp.date) > now);
     }
     
-    // Если нет, берем последний
     if (!target && activeGPs.length) {
         target = activeGPs[activeGPs.length - 1];
     }
@@ -1415,18 +1349,14 @@ function scrollToUpcomingGPWithGlow(cardsArea, gpId) {
     const card = cardsArea.querySelector(`.calendar-card[data-gp-id="${gpId}"]`);
     if (!card) return;
     
-    // Сразу добавляем постоянное выделение карточке
     card.classList.add('upcoming-highlight');
     currentHighlightedGpId = gpId;
     
-    // Плавный скролл к карточке
     smoothScrollToElement(card, 800);
     
-    // После скролла добавляем пульсацию бордюра
     setTimeout(() => {
         card.classList.add('highlight');
         
-        // Через 2 секунды убираем пульсацию, оставляя постоянное выделение
         setTimeout(() => {
             card.classList.remove('highlight');
         }, 1500);
@@ -1435,7 +1365,6 @@ function scrollToUpcomingGPWithGlow(cardsArea, gpId) {
 
 function animateCalendarContent(container, cardsArea, upcomingGpId) {
     return new Promise((resolve) => {
-        // Анимируем навигационную панель (слева)
         const navPanel = container.querySelector('.calendar-nav-panel');
         if (navPanel) {
             navPanel.style.opacity = '0';
@@ -1448,7 +1377,6 @@ function animateCalendarContent(container, cardsArea, upcomingGpId) {
             }, 100);
         }
 
-        // Анимируем карточки
         const cards = cardsArea.querySelectorAll('.calendar-card');
         if (cards.length === 0) {
             resolve();
@@ -1456,7 +1384,6 @@ function animateCalendarContent(container, cardsArea, upcomingGpId) {
         }
 
         cards.forEach((card, index) => {
-            // Если это предстоящий ГП - показываем сразу (но без анимации)
             const isUpcoming = card.dataset.gpId === upcomingGpId;
             
             if (isUpcoming) {
@@ -1488,7 +1415,6 @@ function scrollToGPCard(gpId, cardsArea) {
         animationTimeout = null;
     }
 
-    // Снимаем выделение со старого ГП
     const oldCard = cardsArea.querySelector(`.calendar-card.upcoming-highlight`);
     if (oldCard) oldCard.classList.remove('upcoming-highlight');
     
@@ -1500,16 +1426,13 @@ function scrollToGPCard(gpId, cardsArea) {
 
     currentHighlightedGpId = gpId;
 
-    // Постоянное выделение
     card.classList.add('upcoming-highlight');
     
     const navItem = document.querySelector(`.calendar-nav-item[data-gp-id="${gpId}"]`);
     if (navItem) navItem.classList.add('upcoming-highlight');
 
-    // Плавный скролл
     smoothScrollToElement(card, 800);
     
-    // Пульсация бордюра после скролла
     setTimeout(() => {
         card.classList.add('highlight');
         

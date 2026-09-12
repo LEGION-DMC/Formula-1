@@ -105,41 +105,9 @@ function updateWeatherDisplay(data) {
 }
 
 function getWeatherLocation(nextGP, nextTrack) {
-    if (!nextTrack) return '51.507,-0.128'; // Лондон по умолчанию
+    if (!nextTrack) return '51.507,-0.128';
     
-	const locationMap = {
-		"albert_park": "-37.849722, 144.968333",    // Мельбурн, Австралия
-		"shanghai": "31.338889, 121.219722",        // Шанхай, Китай
-		"suzuka": "34.843056, 136.540556",          // Судзука, Япония
-		"bahrain": "26.032500, 50.510556",          // Сахир, Бахрейн
-		"jeddah": "21.631944, 39.104444",           // Джидда, Саудовская Аравия
-		"miami": "25.958056, -80.238889",           // Майами, США
-		"villeneuve": "45.505556, -73.522500",      // Монреаль, Канада
-		"monaco": "43.734722, 7.420556",            // Монте-Карло, Монако
-		"catalunya": "41.570000, 2.261111",         // Барселона, Испания
-		"red_bull_ring": "47.219722, 14.764722",    // Шпильберг, Австрия
-		"silverstone": "52.078611, -1.016944",      // Сильверстоун, Англия
-		"spa": "50.437222, 5.971389",               // Спа, Бельгия
-		"hungaroring": "47.578889, 19.248611",      // Будапешт, Венгрия
-		"zandvoort": "52.388611, 4.540833",         // Зандвоорт, Нидерланды
-		"monza": "45.617817, 9.281055",             // Монца, Италия
-		"madring": "40.465682, -3.616496",          // Мадрид, Испания
-		"baku": "40.372500, 49.853333",             // Баку, Азербайджан
-		"marina_bay": "1.291389, 103.863889",       // Сингапур
-		"americas": "30.132778, -97.641111",        // Остин, США
-		"rodriguez": "19.404167, -99.090556",       // Мехико, Мексика
-		"interlagos": "-23.703611, -46.696944",     // Сан-Паулу, Бразилия
-		"vegas": "36.116111, -115.173611",          // Лас-Вегас, США
-		"lusail": "25.490000, 51.453889",           // Лусаил, Катар
-		"yas_marina": "24.467222, 54.603056",       // Абу-Даби, ОАЭ
-
-		"istanbul": "40.951667, 29.405833",         // Стамбул, Турция
-		"portimao": "37.226389, -8.630000",         // Портиман, Португалия
-
-		"imola": "44.343889, 11.716389"             // Имола, Италия
-	};
-    
-    return locationMap[nextGP.track] || '51.507,-0.128';
+    return nextTrack.weatherLocation || '51.507,-0.128';
 }
 
 function getYearsWord(age) {
@@ -1054,7 +1022,7 @@ function createNextGPBlock() {
             <div class="main-block-title nextgp-title">
                 <span class="nextgp-title-left">
                     <img src="Images/Flags/${nextTrack.country}.svg" class="nextgp-flag-inline" title="${getCountryName(nextTrack.country)}"> 
-                    ${nextTrack.name}
+                    ${nextGP.name}
                 </span>
                 ${gpNumber ? `<span class="gp-number-badge-next">${gpNumber}</span>` : ''}
             </div>
@@ -1134,7 +1102,7 @@ function createAfterNextGPBlock() {
             <div class="main-block-title nextgp-title">
                 <span class="nextgp-title-left">
                     <img src="Images/Flags/${afterNextTrack.country}.svg" class="nextgp-flag-inline" title="${getCountryName(afterNextTrack.country)}"> 
-                    ${afterNextTrack.name}
+                    ${afterNextGP.name}
                 </span>
                 ${gpNumber ? `<span class="gp-number-badge-next">${gpNumber}</span>` : ''}
             </div>
@@ -1589,7 +1557,7 @@ function startMainTimer() {
             sprintEl.className = 'main-gp-btn sprint';
             sprintEl.textContent = 'Спринт';
             sprintEl.dataset.video = nextGP.recordingSprint;
-            sprintEl.dataset.title = `Спринт ${nextTrack.name}`;
+            sprintEl.dataset.title = `Спринт ${nextGP.name}`;
             sprintEl.onclick = (e) => {
                 e.stopPropagation();
                 if (typeof openVideoModal === 'function') {
@@ -1606,7 +1574,7 @@ function startMainTimer() {
             qualiEl.className = 'main-gp-btn quali';
             qualiEl.textContent = 'Квалификация';
             qualiEl.dataset.video = nextGP.recordingQuali;
-            qualiEl.dataset.title = `Квалификация ${nextTrack.name}`;
+            qualiEl.dataset.title = `Квалификация ${nextGP.name}`;
             qualiEl.onclick = (e) => {
                 e.stopPropagation();
                 if (typeof openVideoModal === 'function') {
@@ -1630,7 +1598,7 @@ function startMainTimer() {
                 raceBtn.className = 'main-gp-btn race';
                 raceBtn.textContent = 'Гонка';
                 raceBtn.dataset.video = nextGP.recordingRace;
-                raceBtn.dataset.title = `Гонка ${nextTrack.name}`;
+                raceBtn.dataset.title = `Гонка ${nextGP.name}`;
                 raceBtn.onclick = (e) => {
                     e.stopPropagation();
                     if (typeof openVideoModal === 'function') {

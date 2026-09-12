@@ -1179,13 +1179,6 @@ body {
     padding-top: 0px;
 }
 
-.tm-detail-row-inline {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
 .tm-detail-row-inline .tm-detail-row {
     flex: 1;
     min-width: 0;
