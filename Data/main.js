@@ -15,12 +15,12 @@ const startingGridData = [
     { position: 14, driverId: '', team: '' },
     { position: 15, driverId: '', team: '' },
     { position: 16, driverId: '', team: '' },
-    { position: 17, driverId: '', team: '' },
-    { position: 18, driverId: '', team: '' },
-    { position: 19, driverId: '', team: '' },
-    { position: 20, driverId: '', team: '' },
-    { position: 21, driverId: '', pitLane: false, team: '' },
-    { position: 22, driverId: '', pitLane: false, team: '' },
+    { position: 17, driverId: 'sainz', team: '' },
+    { position: 18, driverId: 'alonso', team: '' },
+    { position: 19, driverId: 'perez', team: '' },
+    { position: 20, driverId: 'bottas', team: '' },
+    { position: 21, driverId: 'bearman', pitLane: false, team: '' },
+    { position: 22, driverId: 'stroll', pitLane: false, team: '' },
 ];
 
 const weatherData = {
