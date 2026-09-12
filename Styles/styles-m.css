@@ -938,6 +938,8 @@ body {
 .grid-cell[data-pos="18"] { order: 18; }
 .grid-cell[data-pos="19"] { order: 19; }
 .grid-cell[data-pos="20"] { order: 20; }
+.grid-cell[data-pos="21"] { order: 21; }
+.grid-cell[data-pos="22"] { order: 22; }
 
 /* ===== ОБЩИЙ СТИЛЬ ДЛЯ ЯЧЕЕК (grid-cell И pit-driver-item) ===== */
 .grid-cell,
