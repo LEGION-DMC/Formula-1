@@ -192,7 +192,7 @@ const tracksData = [
         direction: "по часовой стрелке",
         firstrace: "2026",
         lapRecord: "---",
-        qulRecord: "P2 - 1:33.662, К. Антонелли - Mercedes - 2026",
+        qulRecord: "P3 - 1:33.332, Ш. Леклер - Ferrari - 2026",
     },
     {   trackName: "Городская трасса Баку",
         id: "baku",
