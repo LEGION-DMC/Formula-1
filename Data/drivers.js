@@ -10,7 +10,7 @@ const driversData = [
         team: "McLaren",
         debut: "2019 - McLaren",        
 		career: [
-            { team: "McLaren", year: "2019" }
+            { team: "McLaren", year: "2019-н.в." }
         ],
 		
         titles: 1,
@@ -35,7 +35,7 @@ const driversData = [
         debut: "2015 - Toro Rosso",        
 		career: [
             { team: "Toro Rosso", year: "2015" },
-            { team: "Red Bull", year: "2016" }
+            { team: "Red Bull", year: "2016-н.в." }
         ],
 		
         titles: 4,
@@ -60,7 +60,7 @@ const driversData = [
         debut: "2025 - Stake",        
 		career: [
             { team: "Stake", year: "2025" },
-            { team: "Audi", year: "2026" }
+            { team: "Audi", year: "2026-н.в." }
         ],
 		
         titles: 0,
@@ -85,7 +85,7 @@ const driversData = [
         debut: "2025 - Racing Bulls",        
 		career: [
             { team: "Racing Bulls", year: "2025" },
-            { team: "Red Bull", year: "2026" }
+            { team: "Red Bull", year: "2026-н.в." }
         ],
 		
         titles: 0,
@@ -138,7 +138,7 @@ const driversData = [
             { team: "Red Bull", year: "2019"},
             { team: "Toro Rosso", year: "2019", temporarily: true },
             { team: "AlphaTauri", year: "2020-2022" },
-            { team: "Alpine", year: "2023" }
+            { team: "Alpine", year: "2023-н.в." }
         ],
 		
         titles: 0,
@@ -167,7 +167,7 @@ const driversData = [
             { team: "Force India", year: "2014-2018" },
             { team: "Racing Point", year: "2019-2020" },
             { team: "Red Bull", year: "2021-2024" },
-            { team: "Cadillac", year: "2026" }
+            { team: "Cadillac", year: "2026-н.в." }
         ],
 		
         titles: 0,
@@ -191,7 +191,7 @@ const driversData = [
         team: "Mercedes",
         debut: "2025 - Mercedes",        
 		career: [
-            { team: "Mercedes", year: "2025" }
+            { team: "Mercedes", year: "2025-н.в." }
         ],
 		
         titles: 0,
@@ -222,7 +222,7 @@ const driversData = [
             { team: "Ferrari", year: "2010-2014" },
             { team: "McLaren", year: "2015-2018" },
             { team: "Alpine", year: "2021-2022" },
-            { team: "Aston Martin", year: "2023" }
+            { team: "Aston Martin", year: "2023-н.в." }
         ],
 		
         titles: 2,
@@ -247,7 +247,7 @@ const driversData = [
         debut: "2018 - Sauber",        
 		career: [
             { team: "Sauber", year: "2018" },
-            { team: "Ferrari", year: "2019" }
+            { team: "Ferrari", year: "2019-н.в." }
         ],
 		
         titles: 0,
@@ -273,7 +273,7 @@ const driversData = [
 		career: [
             { team: "Williams", year: "2017-2018" },
             { team: "Racing Point", year: "2019-2020" },
-            { team: "Aston Martin", year: "2021" }
+            { team: "Aston Martin", year: "2021-н.в." }
         ],
 		
         titles: 0,
@@ -328,7 +328,7 @@ const driversData = [
 		career: [
             { team: "Toro Rosso", year: "2019" },
             { team: "Red Bull", year: "2019-2020" },
-            { team: "Williams", year: "2022" }
+            { team: "Williams", year: "2022-н.в." }
         ],
 		
         titles: 0,
@@ -387,7 +387,7 @@ const driversData = [
             { team: "Aston Martin", year: "2022", temporarily: true },
             { team: "Haas", year: "2023-2024" },
             { team: "Stake", year: "2025" },
-            { team: "Audi", year: "2026" }
+            { team: "Audi", year: "2026-н.в." }
         ],
 		
         titles: 0,
@@ -444,7 +444,7 @@ const driversData = [
             { team: "Racing Point", year: "2018" },
             { team: "Renault", year: "2020" },
             { team: "Alpine", year: "2021-2024" },
-            { team: "Haas", year: "2025" }
+            { team: "Haas", year: "2025-н.в." }
         ],
 		
         titles: 0,
@@ -468,7 +468,7 @@ const driversData = [
         team: "Racing Bulls",
         debut: "2026 - Racing Bulls",        
 		career: [
-            { team: "Racing Bulls", year: "2026" }
+            { team: "Racing Bulls", year: "2026-н.в." }
         ],
 		
         titles: 0,
@@ -493,7 +493,7 @@ const driversData = [
         debut: "2024 - Williams",        
 		career: [
             { team: "Williams", year: "2024-2025", temporarily: true },
-            { team: "Alpine", year: "2025-2026" },
+            { team: "Alpine", year: "2025-2026-н.в." },
         ],
 		
         titles: 0,
@@ -519,7 +519,7 @@ const driversData = [
 		career: [
             { team: "McLaren", year: "2007-2012" },
             { team: "Mercedes", year: "2013-2024" },
-            { team: "Ferrari", year: "2025" }
+            { team: "Ferrari", year: "2025-н.в." }
         ],
 		
         titles: 7,
@@ -548,7 +548,7 @@ const driversData = [
             { team: "Renault", year: "2018" },
             { team: "McLaren", year: "2019-2020" },
             { team: "Ferrari", year: "2021-2024" },
-            { team: "Williams", year: "2025" }
+            { team: "Williams", year: "2025-н.в." }
         ],
 		
         titles: 0,
@@ -575,7 +575,7 @@ const driversData = [
             { team: "Williams", year: "2019-2020" },
             { team: "Mercedes", year: "2020", temporarily: true },
             { team: "Williams", year: "2021" },
-            { team: "Mercedes", year: "2022" }
+            { team: "Mercedes", year: "2022-н.в." }
         ],
 		
         titles: 0,
@@ -603,7 +603,7 @@ const driversData = [
             { team: "Mercedes", year: "2017-2021" },
             { team: "Alfa Romeo", year: "2022-2023" },
             { team: "Stake", year: "2024" },
-            { team: "Cadillac", year: "2026" }
+            { team: "Cadillac", year: "2026-н.в." }
         ],
 		
         titles: 0,
@@ -627,7 +627,7 @@ const driversData = [
         team: "McLaren",
         debut: "2023 - McLaren",        
 		career: [
-            { team: "McLaren", year: "2023" }
+            { team: "McLaren", year: "2023-н.в." }
         ],
 		
         titles: 0,
@@ -653,7 +653,7 @@ const driversData = [
 		career: [
             { team: "Ferrari", year: "2024", temporarily: true },
             { team: "Haas", year: "2024", temporarily: true },
-            { team: "Haas", year: "2025" }
+            { team: "Haas", year: "2025-н.в." }
         ],
 		
         titles: 0,
@@ -666,7 +666,7 @@ const driversData = [
         note: "",
         bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
     },
-    {   number: 99, id: "giovinazzi",
+    {   number: 99, id: "giovinazzi",    // Резерв
         name: "Антонио Джовинацци",
         namem: "А. Джовинацци",
         namef: "Антонио Мария Джовинацци",
@@ -1369,16 +1369,47 @@ function createCareerBlock(careerData) {
     const container = document.createElement('div');
     container.className = 'modal-career-container';
 
-    // Считаем количество сезонов от дебюта по данным career
-    const years = careerData
-        .map(item => parseInt(item.year.match(/\d{4}/)?.[0], 10))
-        .filter(y => !isNaN(y));
+    // Считаем количество уникальных сезонов по данным career
+    // Поддерживаем: "2019", "2017-2019", "2019-н.в."
+    const seasonsSet = new Set();
+    const currentYear = new Date().getFullYear();
+
+    careerData.forEach(item => {
+        const yearStr = String(item.year);
+        
+        // Проверяем наличие маркера "н.в." (настоящее время)
+        const hasPresent = /н\.?\s*в\.?/i.test(yearStr);
+        
+        if (hasPresent) {
+            // Извлекаем год начала диапазона
+            const startMatch = yearStr.match(/(\d{4})/);
+            if (startMatch) {
+                const start = parseInt(startMatch[1], 10);
+                for (let y = start; y <= currentYear; y++) {
+                    seasonsSet.add(y);
+                }
+            }
+            return;
+        }
+        
+        // Обычные диапазоны и одиночные годы
+        const matches = yearStr.match(/\d{4}/g);
+        if (!matches) return;
+        
+        if (matches.length === 1) {
+            seasonsSet.add(parseInt(matches[0], 10));
+        } else {
+            const start = parseInt(matches[0], 10);
+            const end = parseInt(matches[1], 10);
+            for (let y = start; y <= end; y++) {
+                seasonsSet.add(y);
+            }
+        }
+    });
 
     let seasonsCount = '';
-    if (years.length > 0) {
-        const debutYear = Math.min(...years);
-        const currentYear = new Date().getFullYear();
-        const seasons = currentYear - debutYear + 1; // +1, т.к. дебютный сезон тоже считается
+    if (seasonsSet.size > 0) {
+        const seasons = seasonsSet.size;
         seasonsCount = ` — ${seasons} ${declension(seasons, ['сезон', 'сезона', 'сезонов'])}`;
     }
 
