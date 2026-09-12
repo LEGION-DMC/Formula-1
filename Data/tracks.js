@@ -192,7 +192,7 @@ const tracksData = [
         direction: "по часовой стрелке",
         firstrace: "2026",
         lapRecord: "---",
-        qulRecord: "1:32.557, М. Ферстаппен - Red Bull - 2026",
+        qulRecord: "1:31.824,  Л. Норрис - McLaren - 2026",
     },
     {   trackName: "Городская трасса Баку",
         id: "baku",
