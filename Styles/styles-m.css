@@ -801,6 +801,11 @@ body {
 /* СТАРТОВАЯ РЕШЁТКА — МОБИЛЬНАЯ ВЕРСИЯ          */
 /* ============================================== */
 
+.birthday-block {
+    padding: 11px 10px;
+    grid-column: span 3;
+}
+
 /* Блок стартовой решётки */
 .starting-grid-block {
     display: block !important;
@@ -898,6 +903,7 @@ body {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 5px 5px !important;
+    margin-top: 15px;
 }
 
 /* Ряды — скрываем, но сохраняем их для порядка в grid */
@@ -915,6 +921,10 @@ body {
 
 .grid-row-offset {
     display: none !important;
+}
+
+.grid-pole-label {
+    top: -15px;
 }
 
 /* ===== ПРАВИЛЬНЫЙ ПОРЯДОК — по номерам позиций ===== */
