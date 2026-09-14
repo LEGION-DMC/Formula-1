@@ -87,286 +87,359 @@ const penaltiesData = [
 ];
 
 const pitstopData = [
-    { gpId: "gp1",
-        driver1: "russell",  time1: "2.17",
-        driver2: "leclerc", time2: "2.22",
-        driver3: "verstappen",  time3: "2.24",
-        driver4: "hamilton",   time4: "2.26",
-        driver5: "lindblad",  time5: "2.42",
-        driver6: "antonelli",time6: "2.49",
-        driver7: "norris",time7:"2.52",
-        driver8: "lawson",   time8: "2.59",
-        driver9: "albon",    time9: "2.63",
-        driver10:"ocon",time10:"2.88",
-    },
-	{ gpId: "gp2", 
-		driver1: "hamilton", time1: "2.29" ,
-        driver2: "lawson", time2: "2.34",
-        driver3: "colapinto",  time3: "2.54",
-        driver4: "hadjar",   time4: "2.58",
-        driver5: "gasly",  time5: "2.82",
-        driver6: "bearman",time6: "2.86",
-        driver7: "lindblad",time7:"2.86",
-        driver8: "antonelli",   time8: "2.87",
-        driver9: "sainz",    time9: "2.89",
-        driver10:"alonso",time10:"2.99",
-	},
-	{ gpId: "gp3", 
-		driver1: "hamilton", time1: "2.00",
-        driver2: "leclerc", time2: "2.13",
-        driver3: "antonelli",  time3: "2.40",
-        driver4: "hulkenberg",   time4: "2.41",
-        driver5: "russell",  time5: "2.43",
-        driver6: "albon",time6: "2.47",
-        driver7: "piastri",time7:"2.49",
-        driver8: "norris",   time8: "2.59",
-        driver9: "bortoleto",    time9: "2.67",
-        driver10:"stroll",time10:"2.74", 
-	},
-	{ gpId: "gp5", 
-		driver1: "lindblad", time1: "2.08",
-        driver2: "antonelli", time2: "2.16",
-        driver3: "russell",  time3: "2.17",
-        driver4: "verstappen",   time4: "2.34",
-        driver5: "norris",  time5: "2.43",
-        driver6: "stroll",time6: "2.58",
-        driver7: "perez",time7:"2.73",
-        driver8: "colapinto",   time8: "2.80",
-        driver9: "bottas",    time9: "2.96",
-        driver10:"alonso",time10:"2.96", 
-	},
-	{ gpId: "gp6", 
-		driver1: "lawson", time1: "2.20",
-        driver2: "norris", time2: "2.26",
-        driver3: "bortoleto",  time3: "2.57",
-        driver4: "verstappen",   time4: "2.58",
-        driver5: "sainz",  time5: "2.62",
-        driver6: "hadjar",time6: "2.70",
-        driver7: "piastri",time7:"2.71",
-        driver8: "hulkenberg",   time8: "2.74",
-        driver9: "bottas",    time9: "2.93",
-        driver10:"stroll",time10:"2.94", 
-	},
-	{ gpId: "gp7", 
-		driver1: "antonelli", time1: "2.17",
-        driver2: "bortoleto", time2: "2.19",
-        driver3: "piastri",  time3: "2.22",
-        driver4: "russell",   time4: "2.26",
-        driver5: "hamilton",  time5: "2.27",
-        driver6: "hulkenberg",time6: "2.53",
-        driver7: "stroll",time7:"2.81",
-        driver8: "hadjar",   time8: "3.06",
-        driver9: "albon",    time9: "3.07",
-        driver10:"leclerc",time10:"3.11", 
-	},
-	{ gpId: "gp8", 
-		driver1: "piastri", time1: "2.13",
-        driver2: "bortoleto", time2: "2.21",
-        driver3: "hadjar",  time3: "2.25",
-        driver4: "russell",   time4: "2.27",
-        driver5: "albon",  time5: "2.28",
-        driver6: "norris",time6: "2.29",
-        driver7: "verstappen",time7:"2.39",
-        driver8: "antonelli",   time8: "2.46",
-        driver9: "alonso",    time9: "2.50",
-        driver10:"lindblad",time10:"2.53", 
-	},
-	{ gpId: "gp9", 
-		driver1: "lindblad", time1: "2.03",
-        driver2: "hamilton", time2: "2.05",
-        driver3: "verstappen",  time3: "2.13",
-        driver4: "leclerc",   time4: "2.21",
-        driver5: "russell",  time5: "2.23",
-        driver6: "gasly",time6: "2.30",
-        driver7: "lawson",time7:"2.30",
-        driver8: "hadjar",   time8: "2.32",
-        driver9: "antonelli",    time9: "2.43",
-        driver10:"piastri",time10:"2.44", 
-	},
-	{ gpId: "gp10", 
-		driver1: "russell", time1: "2.18",
-        driver2: "antonelli", time2: "2.30",
-        driver3: "lawson",  time3: "2.30",
-        driver4: "norris",   time4: "2.34",
-        driver5: "bortoleto",  time5: "2.37",
-        driver6: "leclerc",time6: "2.39",
-        driver7: "hamilton",time7:"2.49",
-        driver8: "verstappen",   time8: "2.51",
-        driver9: "gasly",    time9: "2.54",
-        driver10:"hulkenberg",time10:"2.65", 
-	},
-	{ gpId: "gp11", 
-		driver1: "leclerc", time1: "2.30",
-        driver2: "albon", time2: "2.35",
-        driver3: "verstappen",  time3: "2.36",
-        driver4: "antonelli",   time4: "2.39",
-        driver5: "bortoleto",  time5: "2.50",
-        driver6: "alonso",time6: "2.72",
-        driver7: "piastri",time7:"2.77",
-        driver8: "hadjar",   time8: "2.79",
-        driver9: "lawson",    time9: "2.98",
-        driver10:"hulkenberg",time10:"3.26", 
-	},
-	{ gpId: "gp12", 
-		driver1: "lindblad", time1: "1.99",
-        driver2: "antonelli", time2: "2.08",
-        driver3: "lawson",  time3: "2.14",
-        driver4: "stroll",   time4: "2.15",
-        driver5: "gasly",  time5: "2.22",
-        driver6: "verstappen",time6: "2.24",
-        driver7: "sainz",time7:"2.24",
-        driver8: "leclerc",   time8: "2.32",
-        driver9: "bortoleto",    time9: "2.33",
-        driver10:"hamilton",time10:"2.33", 
-	},
-	{ gpId: "gp13", 
-		driver1: "hulkenberg", time1: "2.30",
-        driver2: "stroll", time2: "2.31",
-        driver3: "russell",  time3: "2.32",
-        driver4: "tsunoda",   time4: "2.36", team4: "Racing Bulls",
-        driver5: "alonso",  time5: "2.37",
-        driver6: "albon",time6: "2.44",
-        driver7: "sainz",time7:"2.52",
-        driver8: "lawson",   time8: "2.56", team8: "Red Bull",
-        driver9: "ocon",    time9: "2.60",
-        driver10:"bortoleto",time10:"2.62", 
-	},
-	{ gpId: "gp14", 
-		driver1: "hulkenberg", time1: "2.44",
-        driver2: "verstappen", time2: "2.64",
-        driver3: "sainz",  time3: "2.65",
-        driver4: "antonelli", time4: "2.76",
-        driver5: "albon", time5: "4.48",
-        driver6: "ocon", time6: "4.79",
-        driver7: "perez", time7:"6.18",
-        driver8: "bottas", time8: "6.92",
-        driver9: "lawson", time9: "8.98", team9: "Red Bull",
-        driver10:"none", time10:"0.00", 
-	},
-	{ gpId: "gp15", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp16", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp17", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp18", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp19", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp20", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp21", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp22", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp23", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
-	{ gpId: "gp24", 
-		driver1: "none", time1: "0.00" ,
-        driver2: "none", time2: "0.00",
-        driver3: "none",  time3: "0.00",
-        driver4: "none",   time4: "0.00",
-        driver5: "none",  time5: "0.00",
-        driver6: "none",time6: "0.00",
-        driver7: "none",time7:"0.00",
-        driver8: "none",   time8: "0.00",
-        driver9: "none",    time9: "0.00",
-        driver10:"none",time10:"0.00", 
-	},
+  { gpId: "gp1",
+    driver: "russell",
+    time: "2.17",
+    teams: [
+      { team: "Ferrari", point: 18 },
+      { team: "Red Bull", point: 15 },
+      { team: "Ferrari", point: 12 },
+      { team: "Racing Bulls", point: 10 },
+      { team: "Mercedes", point: 8 },
+      { team: "McLaren", point: 6 },
+      { team: "Racing Bulls", point: 4 },
+      { team: "Williams", point: 2 },
+      { team: "Haas", point: 1 },
+    ],
+  },
+  { gpId: "gp2",
+    driver: "hamilton",
+    time: "2.29",
+    teams: [
+      { team: "Racing Bulls", point: 18 },
+      { team: "Alpine", point: 15 },
+      { team: "Red Bull", point: 12 },
+      { team: "Alpine", point: 10 },
+      { team: "Haas", point: 8 },
+      { team: "Racing Bulls", point: 6 },
+      { team: "Mercedes", point: 4 },
+      { team: "Williams", point: 2 },
+      { team: "Aston Martin", point: 1 },
+    ],
+  },
+  { gpId: "gp3",
+    driver: "hamilton",
+    time: "2.00",
+    teams: [
+      { team: "Ferrari", point: 18 },
+      { team: "Mercedes", point: 15 },
+      { team: "Audi", point: 12 },
+      { team: "Mercedes", point: 10 },
+      { team: "Williams", point: 8 },
+      { team: "McLaren", point: 6 },
+      { team: "McLaren", point: 4 },
+      { team: "Audi", point: 2 },
+      { team: "Aston Martin", point: 1 },
+    ],
+  },
+  { gpId: "gp5",
+    driver: "lindblad",
+    time: "2.08",
+    teams: [
+      { team: "Mercedes", point: 18 },
+      { team: "Mercedes", point: 15 },
+      { team: "Red Bull", point: 12 },
+      { team: "McLaren", point: 10 },
+      { team: "Aston Martin", point: 8 },
+      { team: "Cadillac", point: 6 },
+      { team: "Alpine", point: 4 },
+      { team: "Cadillac", point: 2 },
+      { team: "Aston Martin", point: 1 },
+    ],
+  },
+  { gpId: "gp6",
+    driver: "lawson",
+    time: "2.20",
+    teams: [
+      { team: "McLaren", point: 18 },
+      { team: "Audi", point: 15 },
+      { team: "Red Bull", point: 12 },
+      { team: "Williams", point: 10 },
+      { team: "Red Bull", point: 8 },
+      { team: "McLaren", point: 6 },
+      { team: "Audi", point: 4 },
+      { team: "Cadillac", point: 2 },
+      { team: "Aston Martin", point: 1 },
+    ],
+  },
+  { gpId: "gp7",
+    driver: "antonelli",
+    time: "2.17",
+    teams: [
+      { team: "Audi", point: 18 },
+      { team: "McLaren", point: 15 },
+      { team: "Mercedes", point: 12 },
+      { team: "Ferrari", point: 10 },
+      { team: "Audi", point: 8 },
+      { team: "Aston Martin", point: 6 },
+      { team: "Red Bull", point: 4 },
+      { team: "Williams", point: 2 },
+      { team: "Ferrari", point: 1 },
+    ],
+  },
+  { gpId: "gp8",
+    driver: "piastri",
+    time: "2.13",
+    teams: [
+      { team: "Audi", point: 18 },
+      { team: "Red Bull", point: 15 },
+      { team: "Mercedes", point: 12 },
+      { team: "Williams", point: 10 },
+      { team: "McLaren", point: 8 },
+      { team: "Red Bull", point: 6 },
+      { team: "Mercedes", point: 4 },
+      { team: "Aston Martin", point: 2 },
+      { team: "Racing Bulls", point: 1 },
+    ],
+  },
+  { gpId: "gp9",
+    driver: "lindblad",
+    time: "2.03",
+    teams: [
+      { team: "Ferrari", point: 18 },
+      { team: "Red Bull", point: 15 },
+      { team: "Ferrari", point: 12 },
+      { team: "Mercedes", point: 10 },
+      { team: "Alpine", point: 8 },
+      { team: "Racing Bulls", point: 6 },
+      { team: "Red Bull", point: 4 },
+      { team: "Mercedes", point: 2 },
+      { team: "McLaren", point: 1 },
+    ],
+  },
+  { gpId: "gp10",
+    driver: "russell",
+    time: "2.18",
+    teams: [
+      { team: "Mercedes", point: 18 },
+      { team: "Racing Bulls", point: 15 },
+      { team: "McLaren", point: 12 },
+      { team: "Audi", point: 10 },
+      { team: "Ferrari", point: 8 },
+      { team: "Ferrari", point: 6 },
+      { team: "Red Bull", point: 4 },
+      { team: "Alpine", point: 2 },
+      { team: "Audi", point: 1 },
+    ],
+  },
+  { gpId: "gp11",
+    driver: "leclerc",
+    time: "2.30",
+    teams: [
+      { team: "Williams", point: 18 },
+      { team: "Red Bull", point: 15 },
+      { team: "Mercedes", point: 12 },
+      { team: "Audi", point: 10 },
+      { team: "Aston Martin", point: 8 },
+      { team: "McLaren", point: 6 },
+      { team: "Red Bull", point: 4 },
+      { team: "Racing Bulls", point: 2 },
+      { team: "Audi", point: 1 },
+    ],
+  },
+  { gpId: "gp12",
+    driver: "lindblad",
+    time: "1.99",
+    teams: [
+      { team: "Mercedes", point: 18 },
+      { team: "Racing Bulls", point: 15 },
+      { team: "Aston Martin", point: 12 },
+      { team: "Alpine", point: 10 },
+      { team: "Red Bull", point: 8 },
+      { team: "Williams", point: 6 },
+      { team: "Ferrari", point: 4 },
+      { team: "Audi", point: 2 },
+      { team: "Ferrari", point: 1 },
+    ],
+  },
+  { gpId: "gp13",
+    driver: "hulkenberg",
+    time: "2.30",
+    teams: [
+      { team: "Aston Martin", point: 18 },
+      { team: "Mercedes", point: 15 },
+      { team: "Racing Bulls", point: 12 },
+      { team: "Aston Martin", point: 10 },
+      { team: "Williams", point: 8 },
+      { team: "Williams", point: 6 },
+      { team: "Red Bull", point: 4 },
+      { team: "Haas", point: 2 },
+      { team: "Audi", point: 1 },
+    ],
+  },
+  { gpId: "gp14",
+    driver: "hulkenberg",
+    time: "2.44",
+    teams: [
+      { team: "Red Bull", point: 18 },
+      { team: "Williams", point: 15 },
+      { team: "Mercedes", point: 12 },
+      { team: "Williams", point: 10 },
+      { team: "Haas", point: 8 },
+      { team: "Cadillac", point: 6 },
+      { team: "Cadillac", point: 4 },
+      { team: "Red Bull", point: 2 },
+    ],
+  },
+  { gpId: "gp15",
+    driver: "russell",
+    time: "2.14",
+    teams: [
+      { team: "Red Bull", point: 18 },
+      { team: "Audi", point: 15 },
+      { team: "Audi", point: 12 },
+      { team: "Red Bull", point: 10 },
+      { team: "Williams", point: 8 },
+      { team: "Haas", point: 6 },
+      { team: "Racing Bulls", point: 4 },
+      { team: "Haas", point: 2 },
+      { team: "Ferrari", point: 1 },
+    ],
+  },
+  { gpId: "gp16",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
+  { gpId: "gp17",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
+  { gpId: "gp18",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
+  { gpId: "gp19",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
+  { gpId: "gp20",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
+  { gpId: "gp21",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
+  { gpId: "gp22",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
+  { gpId: "gp23",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
+  { gpId: "gp24",
+    driver: "none",
+    time: "0.00",
+    teams: [
+      { team: "none", point: 18 },
+      { team: "none", point: 15 },
+      { team: "none", point: 12 },
+      { team: "none", point: 10 },
+      { team: "none", point: 8 },
+      { team: "none", point: 6 },
+      { team: "none", point: 4 },
+      { team: "none", point: 2 },
+      { team: "none", point: 1 },
+    ],
+  },
 ];
 
-const lapRecordData = [
-    { gpId: "gp15", driver: "russell", time: "1:35.587" },
+const fastestPitstopTeamData = [
+    { team: "Red Bull",     time: "2.24" },
+    { team: "Williams",     time: "2.28" },
+    { team: "Aston Martin", time: "2.31" },
+    { team: "Alpine",       time: "2.30" },
+    { team: "Haas",         time: "2.67" },
+    { team: "Cadillac",     time: "2.96" },
 ];
 
 const enginePartsData = [
@@ -647,54 +720,65 @@ const DHL_POINTS = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
 function buildDHLStandings(pitstopData) {
     const standings = {};
 
+    function ensureTeam(teamName) {
+        if (!standings[teamName]) {
+            standings[teamName] = {
+                team: teamName,
+                points: 0,
+                bestTime: null,
+                bestTimeNum: Infinity,
+                bestDriver: null,
+                bestGpId: null,
+            };
+        }
+        return standings[teamName];
+    }
+
     pitstopData.forEach(gp => {
-        const entries = [];
-        for (let i = 1; i <= 10; i++) {
-            const driverId = gp[`driver${i}`];
-            const timeStr  = gp[`time${i}`];
-            const teamOverride = gp[`team${i}`]; // 👈 НОВОЕ
-            if (!driverId || driverId === 'none') continue;
-            if (!timeStr || timeStr === '0.00' || timeStr === '0.00s') continue;
-            const t = parseFloat(timeStr);
-            if (isNaN(t)) continue;
-            entries.push({ driverId, time: timeStr, timeNum: t, teamOverride });
+        // 1. Лучший пилот этапа — 25 очков
+        if (gp.driver && gp.driver !== 'none' && gp.time && gp.time !== '0.00') {
+            const driver = findDriverById(gp.driver);
+            if (driver) {
+                const team = gp.team || getPitstopTeam(driver); // 👈 учитываем override
+                const entry = ensureTeam(team);
+                entry.points += 25;
+
+                const t = parseFloat(gp.time);
+                if (!isNaN(t) && t < entry.bestTimeNum) {
+                    entry.bestTime     = gp.time;
+                    entry.bestTimeNum  = t;
+                    entry.bestDriver   = driver;
+                    entry.bestGpId     = gp.gpId;
+                }
+            }
         }
 
-        entries.sort((a, b) => a.timeNum - b.timeNum);
+        // 2. Остальные очки — командам из массива teams
+        if (Array.isArray(gp.teams)) {
+            gp.teams.forEach(({ team, point }) => {
+                // 👇 пропускаем заглушки для будущих этапов
+                if (!team || team === 'none') return;
+                const entry = ensureTeam(team);
+                entry.points += point;
+            });
+        }
+    });
 
-        entries.forEach((entry, idx) => {
-            if (idx >= DHL_POINTS.length) return;
-            const driver = findDriverById(entry.driverId);
-            if (!driver) return;
-
-            // 👇 ИСПОЛЬЗУЕМ teamOverride, ЕСЛИ ОН ЕСТЬ
-            const team = entry.teamOverride || getPitstopTeam(driver);
-            const pts  = DHL_POINTS[idx];
-
-            if (!standings[team]) {
-                standings[team] = {
-                    team,
-                    points: 0,
-                    bestTime: entry.time,
-                    bestTimeNum: entry.timeNum,
-                    bestDriver: driver,
-                    bestGpId: gp.gpId,
-                };
-            }
-            standings[team].points += pts;
-
-            if (entry.timeNum < standings[team].bestTimeNum) {
-                standings[team].bestTime     = entry.time;
-                standings[team].bestTimeNum = entry.timeNum;
-                standings[team].bestDriver   = driver;
-                standings[team].bestGpId     = gp.gpId;
+    // 👇 Подставляем время из fastestPitstopTeamData для команд без своего победителя
+    if (typeof fastestPitstopTeamData !== 'undefined') {
+        fastestPitstopTeamData.forEach(({ team, time }) => {
+            const entry = standings[team];
+            if (entry && (!entry.bestTime || entry.bestTimeNum === Infinity)) {
+                entry.bestTime = time;
+                entry.bestTimeNum = parseFloat(time) || Infinity;
+                // bestDriver / bestGpId оставляем null — это не победитель этапа
             }
         });
-    });
+    }
 
     return Object.values(standings).sort((a, b) => {
         if (b.points !== a.points) return b.points - a.points;
-        return a.bestTimeNum - b.bestTimeNum;
+        return (a.bestTimeNum || Infinity) - (b.bestTimeNum || Infinity);
     });
 }
 
@@ -744,77 +828,80 @@ function createPitstopTable() {
 	}
 
     // ===== Таблица зачёта (по умолчанию) =====
-function buildStandingsTable() {
-    const standings = buildDHLStandings(pitstopData);
+	function buildStandingsTable() {
+		const standings = buildDHLStandings(pitstopData);
 
-    let bestOverallTime = Infinity;
-    standings.forEach(row => {
-        if (row.bestTimeNum < bestOverallTime) {
-            bestOverallTime = row.bestTimeNum;
-        }
-    });
+		let bestOverallTime = Infinity;
+		standings.forEach(row => {
+			if (row.bestTimeNum < bestOverallTime) {
+				bestOverallTime = row.bestTimeNum;
+			}
+		});
 
-    const half = Math.ceil(standings.length / 2);
-    const leftCol  = standings.slice(0, half);
-    const rightCol = standings.slice(half);
+		const half = Math.ceil(standings.length / 2);
+		const leftCol  = standings.slice(0, half);
+		const rightCol = standings.slice(half);
 
-    function buildTable(data, startIndex) {
-        const table = document.createElement('table');
-        table.className = 'stats-table pitstop-table';
+		function buildTable(data, startIndex) {
+			const table = document.createElement('table');
+			table.className = 'stats-table pitstop-table';
 
-        const thead = document.createElement('thead');
-        thead.innerHTML = `
-            <tr>
-                <th>#</th>
-                <th>Команда</th>
-                <th>Время лучшего Пит-Стопа (с)</th>
-                <th>Очки</th>
-            </tr>
-        `;
-        table.appendChild(thead);
+			const thead = document.createElement('thead');
+			thead.innerHTML = `
+				<tr>
+					<th>#</th>
+					<th>Команда</th>
+					<th>Время лучшего Пит-Стопа (с)</th>
+					<th>Очки</th>
+				</tr>
+			`;
+			table.appendChild(thead);
 
-        const tbody = document.createElement('tbody');
-        data.forEach((row, i) => {
-            const teamLogo = getTeamLogo(row.team);
-            const isBest = row.bestTimeNum === bestOverallTime;
-            const pos = startIndex + i + 1;
+			const tbody = document.createElement('tbody');
+			data.forEach((row, i) => {
+				const teamLogo = getTeamLogo(row.team);
+				const isBest = row.bestTimeNum === bestOverallTime;
+				const pos = startIndex + i + 1;
 
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td class="pos-cell">${pos}</td>
-                <td class="team-cell stats-clickable" data-team="${row.team}">
-                    <img src="${teamLogo}" alt="${row.team}" class="stats-team-logo" onerror="this.style.display='none'">
-                    <span class="team-name">${row.team}</span>
-                </td>
-                <td class="time-cell ${isBest ? 'best-time' : ''}">${row.bestTime}</td>
-                <td class="pitstop-points-cell">${row.points}</td>
-            `;
-            tbody.appendChild(tr);
-        });
-        table.appendChild(tbody);
-        return table;
-    }
+				const tr = document.createElement('tr');
+				tr.innerHTML = `
+					<td class="pos-cell">${pos}</td>
+					<td class="team-cell stats-clickable" data-team="${row.team}">
+						<img src="${teamLogo}" alt="${row.team}" class="stats-team-logo" onerror="this.style.display='none'">
+						<span class="team-name">${row.team}</span>
+					</td>
+					<td class="time-cell ${isBest ? 'best-time' : ''}">
+						${row.bestTime ?? '—'}
+					</td>
+					<td class="pitstop-points-cell">${row.points}</td>
+				`;
+				tbody.appendChild(tr);
+			});
+			table.appendChild(tbody);
+			return table;
+		}
 
-    const columnsWrapper = document.createElement('div');
-    columnsWrapper.className = 'pitstop-standings-columns';
-    columnsWrapper.appendChild(buildTable(leftCol, 0));
-    columnsWrapper.appendChild(buildTable(rightCol, half));
+		const columnsWrapper = document.createElement('div');
+		columnsWrapper.className = 'pitstop-standings-columns';
+		columnsWrapper.appendChild(buildTable(leftCol, 0));
+		columnsWrapper.appendChild(buildTable(rightCol, half));
 
-    // ===== Примечание о системе начисления очков =====
-    const note = document.createElement('div');
-    note.className = 'results-points-note';
-    note.innerHTML = `
-        <span class="points-note-text">Система начисления очков: <span>1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span></span>
-    `;
+		// ===== Примечание о системе начисления очков =====
+		const note = document.createElement('div');
+		note.className = 'results-points-note';
+		note.innerHTML = `
+			<span class="points-note-text">Система начисления очков: <span>1:25 • 2:18 • 3:15 • 4:12 • 5:10 • 6:8 • 7:6 • 8:4 • 9:2 • 10:1</span></span>
+		`;
 
-    // Обёртка, чтобы примечание шло под обеими колонками
-    const result = document.createElement('div');
-    result.className = 'pitstop-standings-wrapper';
-    result.appendChild(columnsWrapper);
-    result.appendChild(note);
+		// Обёртка, чтобы примечание шло под обеими колонками
+		const result = document.createElement('div');
+		result.className = 'pitstop-standings-wrapper';
+		result.appendChild(columnsWrapper);
+		result.appendChild(note);
 
-    return result;
-}
+		return result;
+	}
+
     // ===== Таблица подробностей (лучший пит-стоп каждого этапа) =====
 	function buildDetailsTable(table) {
 		const thead = document.createElement('thead');
@@ -831,68 +918,64 @@ function buildStandingsTable() {
 
 		const tbody = document.createElement('tbody');
 
-		// Собираем лучший пит-стоп каждого этапа
+		// Собираем только лучших пилотов этапов
 		const bestPerGP = [];
 		pitstopData.forEach(gp => {
-			let best = null;
-			for (let i = 1; i <= 10; i++) {
-				const driverId = gp[`driver${i}`];
-				const timeStr  = gp[`time${i}`];
-				const teamOverride = gp[`team${i}`]; // 👈 НОВОЕ
-				if (!driverId || driverId === 'none') continue;
-				if (!timeStr || timeStr === '0.00' || timeStr === '0.00s') continue;
-				const t = parseFloat(timeStr);
-				if (isNaN(t)) continue;
-				if (!best || t < best.timeNum) {
-					best = { driverId, time: timeStr, timeNum: t, gpId: gp.gpId, teamOverride };
-				}
-			}
-			if (best) bestPerGP.push(best);
+			if (!gp.driver || gp.driver === 'none') return;
+			if (!gp.time || gp.time === '0.00') return;
+
+			const t = parseFloat(gp.time);
+			if (isNaN(t) || t <= 0) return;
+
+			bestPerGP.push({
+				driverId: gp.driver,
+				time: gp.time,
+				timeNum: t,
+				gpId: gp.gpId,
+				team: gp.team || null,
+			});
 		});
 
-		// Находим лучший пит-стоп сезона среди всех этапов
+		// Лучший пит-стоп сезона
 		let bestOverallTime = Infinity;
 		bestPerGP.forEach(row => {
-			if (row.timeNum < bestOverallTime) {
-				bestOverallTime = row.timeNum;
-			}
+			if (row.timeNum < bestOverallTime) bestOverallTime = row.timeNum;
 		});
 
 		bestPerGP.forEach((row, idx) => {
-        const driver = findDriverById(row.driverId);
-        if (!driver) return;
+			const driver = findDriverById(row.driverId);
+			if (!driver) return;
 
-        // 👇 ИСПОЛЬЗУЕМ teamOverride, ЕСЛИ ОН ЕСТЬ
-        const team     = row.teamOverride || getPitstopTeam(driver);
-        const teamLogo = getTeamLogo(team);
-        const gpName   = getGPName(row.gpId);
-        const gpShort  = gpName.replace('Гран-при ', 'ГП ').replace('-Каталунии', '');
-        const gpCountry = getGPCountry(row.gpId);
-        const isBest = row.timeNum === bestOverallTime;
+			const team     = row.team || getPitstopTeam(driver);
+			const teamLogo = getTeamLogo(team);
+			const gpName   = getGPName(row.gpId);
+			const gpShort  = gpName.replace('Гран-при ', 'ГП ').replace('-Каталунии', '');
+			const gpCountry = getGPCountry(row.gpId);
+			const isBest = row.timeNum === bestOverallTime;
 
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td class="pos-cell">${idx + 1}</td>
-            <td class="gp-cell gp-clickable" data-gp-id="${row.gpId}">
-                <img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
-                <span class="gp-full">${gpName}</span>
-                <span class="gp-short">${gpShort}</span>
-            </td>
-            <td class="team-cell stats-clickable" data-team="${team}">
-                <img src="${teamLogo}" alt="${team}" class="stats-team-logo" onerror="this.style.display='none'">
-            </td>
-            <td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
-                <img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
-                <span class="driver-fullname">${driver.name}</span>
-                <span class="driver-shortname">${driver.namem}</span>
-            </td>
-            <td class="time-cell ${isBest ? 'best-time' : ''}">${row.time}</td>
-        `;
-        tbody.appendChild(tr);
-    });
+			const tr = document.createElement('tr');
+			tr.innerHTML = `
+				<td class="pos-cell">${idx + 1}</td>
+				<td class="gp-cell gp-clickable" data-gp-id="${row.gpId}">
+					<img src="Images/Flags/${gpCountry}.svg" alt="" class="stats-flag">
+					<span class="gp-full">${gpName}</span>
+					<span class="gp-short">${gpShort}</span>
+				</td>
+				<td class="team-cell stats-clickable" data-team="${team}">
+					<img src="${teamLogo}" alt="${team}" class="stats-team-logo" onerror="this.style.display='none'">
+				</td>
+				<td class="driver-cell stats-driver-clickable" data-driver-id="${driver.id}">
+					<img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">
+					<span class="driver-fullname">${driver.name}</span>
+					<span class="driver-shortname">${driver.namem}</span>
+				</td>
+				<td class="time-cell ${isBest ? 'best-time' : ''}">${row.time}</td>
+			`;
+			tbody.appendChild(tr);
+		});
 
-    table.appendChild(tbody);
-}
+		table.appendChild(tbody);
+	}
 
     // ===== Переключение режима =====
     detailBtn.addEventListener('click', () => {
@@ -1119,6 +1202,16 @@ function createLapRecordTable() {
 
     const tbody = document.createElement('tbody');
 
+    // Определяем текущий год сезона из календаря
+    let currentYear = new Date().getFullYear();
+    if (typeof calendarData !== 'undefined' && calendarData.length > 0) {
+        // Берём год из любого ГП (например, первого с датой)
+        const gpWithDate = calendarData.find(gp => gp.date);
+        if (gpWithDate) {
+            currentYear = new Date(gpWithDate.date).getFullYear();
+        }
+    }
+
     const now = new Date();
     const pastGPs = calendarData.filter(gp => {
         const raceDate = new Date(gp.date);
@@ -1130,187 +1223,154 @@ function createLapRecordTable() {
         tr.innerHTML = `<td colspan="5" style="text-align:center;color:#666;padding:20px;">Нет данных для текущего сезона</td>`;
         tbody.appendChild(tr);
     } else {
-        const brokenRecords = {};
-        lapRecordData.forEach(row => {
-            if (row.driver !== 'none' && row.time !== '0.00s' && row.time !== '0:00.000') {
-                brokenRecords[row.gpId] = row;
-            }
-        });
-
         let index = 1;
         pastGPs.forEach(gp => {
-            const brokenRecord = brokenRecords[gp.id];
-            
-            let driver = null;
-            let time = '';
-            let teamName = '';
-            let driverNameForDisplay = '';
-            let driverShortNameForDisplay = '';
-            let teamFromRecord = '';
-            let recordYear = '';
-            let driverCountry = '';
-            let hasDriverId = false;
-            let isBrokenRecord = false;
-            let historicalDriver = null;
-            let isReserveDriver = false;
+            const track = getTrackForGP(gp.id);
+            if (!track) return;
 
-            if (brokenRecord) {
-                driver = findDriverById(brokenRecord.driver);
-                time = brokenRecord.time;
-                isBrokenRecord = true;
-                if (driver) {
-                    teamName = driver.team;
-                    driverNameForDisplay = driver.name;
-                    driverShortNameForDisplay = driver.namem || driver.name;
-                    driverCountry = driver.country;
-                    hasDriverId = true;
-                    isReserveDriver = (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve');
-                }
-                recordYear = '2026';
+            const lapRecord = track.lapRecord;
+            if (!lapRecord) return;
+
+            // Извлекаем время (до первой запятой)
+            const timeMatch = lapRecord.match(/^([^,]+)/);
+            const time = timeMatch ? timeMatch[1].trim() : lapRecord;
+
+            // Извлекаем пилота (после первой запятой до " - ")
+            let driverNameFromRecord = '';
+            const driverMatch = lapRecord.match(/,\s*([^-]+?)\s*-\s*/);
+            if (driverMatch) {
+                driverNameFromRecord = driverMatch[1].trim();
             } else {
-                const track = getTrackForGP(gp.id);
-                if (!track) return;
-
-                const lapRecord = track.lapRecord;
-                
-                // Извлекаем время (до запятой)
-                const timeMatch = lapRecord.match(/^([^,]+)/);
-                time = timeMatch ? timeMatch[1].trim() : lapRecord;
-                
-                // Извлекаем пилота (после запятой до " - ")
-                let driverNameFromRecord = '';
-                const driverMatch = lapRecord.match(/,\s*([^-]+?)\s*-\s*/);
-                if (driverMatch) {
-                    driverNameFromRecord = driverMatch[1].trim();
-                } else {
-                    const fallbackMatch = lapRecord.match(/,\s*([^,]+?)(?:\s*-\s*|$)/);
-                    if (fallbackMatch) {
-                        driverNameFromRecord = fallbackMatch[1].trim();
-                    }
-                }
-                
-                // Извлекаем команду (между " - " и " - " или в конце)
-                let teamMatch = lapRecord.match(/-\s*([^-]+?)(?:\s*-\s*|\s*$)/);
-                if (teamMatch && teamMatch[1]) {
-                    teamFromRecord = teamMatch[1].trim();
-                }
-                
-                // Извлекаем год (последние 4 цифры)
-                const yearMatch = lapRecord.match(/\b(\d{4})\b/);
-                recordYear = yearMatch ? yearMatch[1].trim() : '';
-                
-                // Если не удалось найти команду через дефисы, пробуем найти после запятой
-                if (!teamFromRecord || teamFromRecord === '') {
-                    const altTeamMatch = lapRecord.match(/,\s*[^-]+?\s*-\s*([^,]+?)(?:,|$)/);
-                    if (altTeamMatch) {
-                        teamFromRecord = altTeamMatch[1].trim();
-                    }
-                }
-                
-                // Поиск пилота по фамилии
-                if (driverNameFromRecord) {
-                    let lastName = driverNameFromRecord;
-                    
-                    if (driverNameFromRecord.includes('.')) {
-                        const parts = driverNameFromRecord.trim().split(/\s+/);
-                        if (parts.length >= 2) {
-                            lastName = parts[parts.length - 1];
-                        }
-                    }
-                    
-                    driver = driversData.find(d => {
-                        const driverNameLower = d.name.toLowerCase();
-                        const lastNameLower = lastName.toLowerCase();
-                        return driverNameLower.includes(lastNameLower);
-                    });
-                    
-                    if (!driver) {
-                        const searchTerms = driverNameFromRecord.toLowerCase().split(/\s+/);
-                        driver = driversData.find(d => {
-                            const driverNameLower = d.name.toLowerCase();
-                            return searchTerms.every(term => driverNameLower.includes(term));
-                        });
-                    }
-                }
-                
-                if (driver) {
-                    driverNameForDisplay = driver.name;
-                    driverShortNameForDisplay = driver.namem || driver.name;
-                    driverCountry = driver.country;
-                    hasDriverId = true;
-                    isReserveDriver = (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve');
-                } else if (driverNameFromRecord) {
-                    historicalDriver = findHistoricalDriverByName(driverNameFromRecord);
-                    if (historicalDriver) {
-                        driverNameForDisplay = historicalDriver.name;
-                        const nameParts = historicalDriver.name.split(' ');
-                        if (nameParts.length >= 2) {
-                            driverShortNameForDisplay = nameParts[0].charAt(0) + '. ' + nameParts[nameParts.length - 1];
-                        } else {
-                            driverShortNameForDisplay = historicalDriver.name;
-                        }
-                        driverCountry = historicalDriver.country;
-                    } else {
-                        driverNameForDisplay = driverNameFromRecord;
-                        driverShortNameForDisplay = driverNameFromRecord;
-                    }
-                    hasDriverId = false;
-                }
-                
-                teamName = teamFromRecord;
-                
-                if (typeof teamsData !== 'undefined') {
-                    const foundTeam = teamsData.find(t => 
-                        t.name === teamFromRecord || 
-                        t.shortName === teamFromRecord
-                    );
-                    if (foundTeam) {
-                        teamName = foundTeam.shortName;
-                    }
+                const fallbackMatch = lapRecord.match(/,\s*([^,]+?)(?:\s*-\s*|$)/);
+                if (fallbackMatch) {
+                    driverNameFromRecord = fallbackMatch[1].trim();
                 }
             }
 
-            const gpCountry = getGPCountry(gp.id);
-            const gpName = getGPName(gp.id);
-            const gpShort = gpName.replace('Гран-при ', 'ГП ').replace('-Каталунии', '');
+            // Извлекаем команду (между " - " и " - " или в конце)
+            let teamFromRecord = '';
+            const teamMatch = lapRecord.match(/-\s*([^-]+?)(?:\s*-\s*|\s*$)/);
+            if (teamMatch && teamMatch[1]) {
+                teamFromRecord = teamMatch[1].trim();
+            }
 
-            // Определяем логотип команды
+            // Извлекаем год (последние 4 цифры)
+            const yearMatch = lapRecord.match(/\b(\d{4})\b/);
+            const recordYear = yearMatch ? yearMatch[1].trim() : '';
+
+            // Рекорд установлен в текущем году?
+            const isCurrentYearRecord = recordYear && parseInt(recordYear, 10) === currentYear;
+
+            // Поиск пилота
+            let driver = null;
+            let historicalDriver = null;
+            let driverNameForDisplay = '';
+            let driverShortNameForDisplay = '';
+            let driverCountry = '';
+            let hasDriverId = false;
+
+            if (driverNameFromRecord) {
+                let lastName = driverNameFromRecord;
+
+                if (driverNameFromRecord.includes('.')) {
+                    const parts = driverNameFromRecord.trim().split(/\s+/);
+                    if (parts.length >= 2) {
+                        lastName = parts[parts.length - 1];
+                    }
+                }
+
+                driver = driversData.find(d => {
+                    const driverNameLower = d.name.toLowerCase();
+                    const lastNameLower = lastName.toLowerCase();
+                    return driverNameLower.includes(lastNameLower);
+                });
+
+                if (!driver) {
+                    const searchTerms = driverNameFromRecord.toLowerCase().split(/\s+/);
+                    driver = driversData.find(d => {
+                        const driverNameLower = d.name.toLowerCase();
+                        return searchTerms.every(term => driverNameLower.includes(term));
+                    });
+                }
+            }
+
+            if (driver) {
+                driverNameForDisplay = driver.name;
+                driverShortNameForDisplay = driver.namem || driver.name;
+                driverCountry = driver.country;
+                hasDriverId = true;
+            } else if (driverNameFromRecord) {
+                historicalDriver = findHistoricalDriverByName(driverNameFromRecord);
+                if (historicalDriver) {
+                    driverNameForDisplay = historicalDriver.name;
+                    const nameParts = historicalDriver.name.split(' ');
+                    if (nameParts.length >= 2) {
+                        driverShortNameForDisplay = nameParts[0].charAt(0) + '. ' + nameParts[nameParts.length - 1];
+                    } else {
+                        driverShortNameForDisplay = historicalDriver.name;
+                    }
+                    driverCountry = historicalDriver.country;
+                } else {
+                    driverNameForDisplay = driverNameFromRecord;
+                    driverShortNameForDisplay = driverNameFromRecord;
+                }
+                hasDriverId = false;
+            }
+
+            // Определяем команду для отображения
+            let teamName = teamFromRecord;
+            if (typeof teamsData !== 'undefined') {
+                const foundTeam = teamsData.find(t =>
+                    t.name === teamFromRecord ||
+                    t.shortName === teamFromRecord
+                );
+                if (foundTeam) {
+                    teamName = foundTeam.shortName;
+                }
+            }
+
+            const isReserveDriver = driver &&
+                (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve');
+
             let teamLogo = getTeamLogo(teamName);
-            
             if (isReserveDriver) {
                 teamLogo = 'Images/logo.png';
             }
-            
             if (!teamName || teamName === 'Неизвестно' || teamName === '') {
                 teamLogo = 'Images/logo.png';
                 teamName = '—';
             }
 
-            // ===== ИСПРАВЛЕННОЕ ФОРМИРОВАНИЕ КЛАССОВ И АТРИБУТОВ =====
+            // Классы и атрибуты
             let driverClickable = '';
             let teamClickableClass = '';
             let teamClickableAttr = '';
-            
+
             if (driver && hasDriverId) {
                 driverClickable = `stats-driver-clickable" data-driver-id="${driver.id}`;
             }
-            
+
             if (teamName && teamName !== 'Неизвестно' && teamName !== '' && teamName !== '—' && !isReserveDriver) {
                 teamClickableClass = 'stats-clickable';
                 teamClickableAttr = `data-team="${teamName}"`;
             }
-            
+
             let flagHtml = '';
             if (driver && hasDriverId) {
                 flagHtml = `<img src="Images/Flags/${driver.country}.svg" alt="" title="${getCountryName(driver.country)}" class="stats-flag">`;
             } else if (driverCountry) {
                 flagHtml = `<img src="Images/Flags/${driverCountry}.svg" alt="" title="${getCountryName(driverCountry)}" class="stats-flag">`;
             }
-            
+
             const driverCellClass = `driver-cell ${driverClickable}`;
-            const timeCellClass = `time-cell${isBrokenRecord ? ' best-time' : ''}`;
+            // Красное выделение, если рекорд установлен в текущем году
+            const timeCellClass = `time-cell${isCurrentYearRecord ? ' best-time' : ''}`;
             const teamCellClass = `team-cell ${teamClickableClass} ${isReserveDriver ? 'reserve-team-cell' : ''}`.trim();
-            
+
+            const gpCountry = getGPCountry(gp.id);
+            const gpName = getGPName(gp.id);
+            const gpShort = gpName.replace('Гран-при ', 'ГП ').replace('-Каталунии', '');
+
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="pos-cell">${index}</td>

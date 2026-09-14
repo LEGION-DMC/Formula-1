@@ -781,9 +781,9 @@ function getBestPitstop() {
     
     pitstopData.forEach(gp => {
         for (let i = 1; i <= 10; i++) {
-            const driverId = gp[`driver${i}`];
-            const timeStr  = gp[`time${i}`];
-            const teamOverride = gp[`team${i}`]; // 👈 учитываем замены
+            const driverId = gp[`driver`];
+            const timeStr  = gp[`time`];
+            const teamOverride = gp[`team`];
             
             if (!driverId || driverId === 'none') continue;
             if (!timeStr || timeStr === '0.00' || timeStr === '0.00s') continue;
