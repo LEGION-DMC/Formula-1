@@ -366,7 +366,7 @@ const pitstopData = [
 ];
 
 const lapRecordData = [
-    { gpId: "gp15", driver: "none", time1: "1:00.000" },
+    { gpId: "gp15", driver: "russell", time: "1:35.587" },
 ];
 
 const enginePartsData = [

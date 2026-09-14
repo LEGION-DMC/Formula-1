@@ -16,7 +16,7 @@ const driversData = [
         titles: 1,
         hattricks: 3,
         wins: 13,
-        podiums: 48,
+        podiums: 49,
         poles: 19,
 		fastestLaps: 3,
 		
@@ -41,7 +41,7 @@ const driversData = [
         titles: 4,
         hattricks: 15,
         wins: 71,
-        podiums: 132,
+        podiums: 133,
         poles: 48,
 		fastestLaps: 2,
 		
@@ -196,7 +196,7 @@ const driversData = [
 		
         titles: 0,
         hattricks: 3,
-        wins: 7,
+        wins: 8,
         podiums: 14,
         poles: 6,
 		fastestLaps: 1,

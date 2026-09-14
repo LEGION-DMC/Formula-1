@@ -191,7 +191,7 @@ const tracksData = [
         speed: '324',
         direction: "по часовой стрелке",
         firstrace: "2026",
-        lapRecord: "---",
+        lapRecord: "1:35.587,  Д. Рассел - Mercedes - 2026",
         qulRecord: "1:31.824,  Л. Норрис - McLaren - 2026",
     },
     {   trackName: "Городская трасса Баку",
