@@ -687,8 +687,50 @@ body {
     align-items: center !important;
 }
 
+/* Правая колонка (штрафы + рекорды) — в строку */
 .dm-right-column {
     width: 90%;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: stretch;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+/* Панели внутри колонки — равной ширины */
+.dm-right-column .dm-penalties-panel,
+.dm-right-column .dm-fastest-laps-panel {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+}
+
+.dm-fl-flag {
+    width: 15px;
+    height: 11px;
+}
+
+.dm-fl-track {
+    font-size: 0.65rem;
+}
+
+.dm-fl-time {
+    font-size: 0.6rem;
+}
+
+.dm-fl-year {
+    font-size: 0.6rem;
+    min-width: 24px;
+}
+
+.dm-fastest-laps-counter {
+    font-size: 0.7rem;
+    padding-top: 5px;
+}
+
+.dm-fl-count {
+    font-size: 12px;
 }
 
 /* ============================================== */

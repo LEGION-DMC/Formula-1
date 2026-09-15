@@ -18,7 +18,6 @@ const driversData = [
         wins: 13,
         podiums: 49,
         poles: 19,
-		fastestLaps: 3,
 		
         note: "Выступает под #1 - в качестве действующего чемпиона мира. Собственный номер #4.",
         bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул.",
@@ -43,7 +42,6 @@ const driversData = [
         wins: 71,
         podiums: 133,
         poles: 48,
-		fastestLaps: 2,
 		
         note: "Самый молодой дебютант в истории F1 - 17 лет",
         bio: "Чемпион мира (2021, 2022, 2023, 2024). Агрессивный, феноменально стабильный. В 2021-м в драматичной финальной гонке отобрал титул у Хэмилтона. В 2023-м установил рекорд — 19 побед за сезон. В 2024-м начал доминировать, но к концу года Red Bull сдал позиции.",
@@ -68,7 +66,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "Третий Бразилец в истории F1",
         bio: "Чемпион Формулы-2 (2024). Протеже Фернандо Алонсо. Перспективный «контролёр» — пилот, который берет не чистым темпом, а умом и резиной.",
@@ -93,7 +90,6 @@ const driversData = [
         wins: 0,
         podiums: 2,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Вице-чемпион Формулы-2 (2024). Воспитанник программы Red Bull. Резкий, быстрый, но склонен к авариям. Его сравнивают с молодым Феттелем.",
@@ -118,7 +114,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Сын пятикратного чемпиона мира по мотогонкам Мика Дуэна. Чемпион Формулы-2 (2023). В 2024 году подменял Окона и Гасли. Выбрал номер #7 в честь своего кумира Кими Райкконена. Считается перспективным стабильным гонщиком, но пока без очков в F1.",
@@ -146,7 +141,6 @@ const driversData = [
         wins: 1,
         podiums: 5,
         poles: 1,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Победитель Гран-при Италии (2020, AlphaTauri) — невероятная победа на фоне хаоса в Монце. Был уволен из Red Bull после полусезона из-за конфликта с Ферстаппеном, восстановил репутацию в Alpine. Технарь, отличный защитник позиции.",
@@ -175,7 +169,6 @@ const driversData = [
         wins: 6,
         podiums: 39,
         poles: 4,
-		fastestLaps: 1,
 		
         note: "",
         bio: "Ветеран. Главный специалист по сохранению шин и «король улиц» (победы в Баку, Сингапуре). Стал напарником Ферстаппена в Red Bull с 2021 года, помог ему выиграть первый титул, но к 2024-му резко сдал, едва набирая очки. В 2026-м перешел в новую команду Cadillac в качестве ведущего пилота.",
@@ -199,7 +192,6 @@ const driversData = [
         wins: 8,
         podiums: 14,
         poles: 6,
-		fastestLaps: 1,
 		
         note: "Выступает под #12 - номером легендарного Айртона Сенны",
         bio: "Вундеркинд, которого лично выбрал Тото Вольфф на замену Хэмилтону. Пропустил F3, перейдя в F1 сразу из Формулы-2 (чемпион 2024). Огромное давление, сравнивают с ранним Ферстаппеном.",
@@ -230,7 +222,6 @@ const driversData = [
         wins: 32,
         podiums: 106,
         poles: 22,
-		fastestLaps: 0,
 		
         note: "Самый опытный пилот в истории, более 400 Гран-при.",
         bio: "Двукратный чемпион (2005, 2006). Известен борьбой с Феттелем, Хэмилтоном (Инцидент в «Воротах гаража» 2007) и своей токсичностью в менеджменте. До сих пор один из лучших на старте.",
@@ -255,7 +246,6 @@ const driversData = [
         wins: 9,
         podiums: 54,
         poles: 27,
-		fastestLaps: 3,
 		
         note: "",
         bio: "Гонщик Ferrari с 2019 года. «Король поулов» — феномен в квалификации. Много раз ошибался под давлением, но выиграл несколько выдающихся гонок (Монца-2019, Монако-2024). Главная надежда Ferrari на титул.",
@@ -281,7 +271,6 @@ const driversData = [
         wins: 0,
         podiums: 3,
         poles: 1,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Сын миллиардера Лоуренса Стролла, владельца Aston Martin. Критикуют за то, что место куплено, но подиумы (Баку-2017, 2020) и поул есть. Нестабилен, часто разбивает машину, но в дожде быстр.",
@@ -310,7 +299,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "",
         bio: "За четыре сезона в F1 неоднократно набирал очки, но так и не поднялся на подиум. Отличается эмоциональным стилем пилотирования и частыми переговорами по радио. В 2025 году уступил место в основном составе Хаджару, но остался в системе Red Bull.",
@@ -336,7 +324,6 @@ const driversData = [
         wins: 0,
         podiums: 2,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Был напарником Ферстаппена в Red Bull (2019-2020), но уволен из-за нерезультативности. Вернулся в 2022-м в Williams, где стал лидером команды. Очень чистый, умный пилот.",
@@ -362,7 +349,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "Первый и единственный пилот из Китая в истории F1",
         bio: "Стабильный, но не слишком быстрый пилот, набирал очки в отдельных гонках.",
@@ -395,7 +381,6 @@ const driversData = [
         wins: 0,
         podiums: 1,
         poles: 1,
-		fastestLaps: 0,
 		
         note: "Рекордсмен по количеству гонок без подиума, более 200.",
         bio: "Суперстабилен, король квалификаций. В 2025 году на трассе Сильверстоун, прервал серию неудач - финишировав третьим. Возвращенец в 2023-м после 3 лет простоя, заменил больного Стролла и сразу набрал очки. В 2026-м переходит в Audi.",
@@ -423,7 +408,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Агрессивный, бескомпромиссный. Считался основным претендентом на место Переса в Red Bull. В 2024-м провел несколько гонок и произвел впечатление (особенно борьба с Ферстаппеном в тренировках).",
@@ -452,7 +436,6 @@ const driversData = [
         wins: 1,
         podiums: 4,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "Победитель безумного Гран-при Венгрии 2021, Alpine.",
         bio: "Физически очень сильный. Известен жёсткой, иногда грязной защитой (драка с Гасли в Alpine). Не очень любим за характер, но стабильно набирает очки. В 2025-м перешел в Haas.",
@@ -476,7 +459,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Чемпион FRO 2025. Воспитанник Red Bull. Очень молод (родился в 2007-м). Считается «сырым», но супер-быстрым. Прямой конкурент Хаджару.",
@@ -501,7 +483,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "Первый аргентинец в F1 за 20 лет.",
         bio: "Финишировал 2-м в F2 (2023). В Williams заменил Сарджента. Мощный, рискованный стиль, напоминает раннего Мальдонадо. В 2026-м перешел в Alpine.",
@@ -527,7 +508,6 @@ const driversData = [
         wins: 106,
         podiums: 207,
         poles: 105,
-		fastestLaps: 5,
 		
         note: "Рекордсмен по победам, поулам, подиумам.",
         bio: "7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда.",
@@ -556,7 +536,6 @@ const driversData = [
         wins: 4,
         podiums: 29,
         poles: 6,
-		fastestLaps: 1,
 		
         note: "",
         bio: "Сын раллийного чемпиона. Победитель Гран-при (Великобритания-2022, Сингапур-2023, Австралия-2024). Супер-тактик, интеллектуал. Выжил из Ferrari, чтобы освободить место Хэмилтону, перешел в Williams как лидер проекта.",
@@ -583,7 +562,6 @@ const driversData = [
         wins: 7,
         podiums: 31,
         poles: 11,
-		fastestLaps: 0,
 		
         note: "Лидер гильдии пилотов.",
         bio: "Победитель Гран-при Сан-Паулу (2022) — первая победа Mercedes после долгого перерыва. Очень быстр, но иногда ошибается под давлением. Заменил Боттаса и стал ровней Хэмилтону.",
@@ -611,7 +589,6 @@ const driversData = [
         wins: 10,
         podiums: 67,
         poles: 20,
-		fastestLaps: 3,
 		
         note: "",
         bio: "Бывший напарник Хэмилтона в Mercedes (2017-2021), 10 побед. Машина для квалификаций. В 2025-м покинул Sauber, в 2026-м стал пилотом Cadillac. Хотел взять номер #7, но он был занят, поэтому выбрал #77 (Val77eri Bo77as).",
@@ -635,7 +612,6 @@ const driversData = [
         wins: 9,
         podiums: 28,
         poles: 6,
-		fastestLaps: 1,
 		
         note: "Выиграл F3 и F2 подряд.",
         bio: "Первую победу одержал в Венгрии-2024, обогнав Норриса по команде. Многие считают его будущим чемпионом.",
@@ -661,7 +637,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
@@ -687,7 +662,6 @@ const driversData = [
         wins: 0,
         podiums: 0,
         poles: 0,
-		fastestLaps: 0,
 		
         note: "",
         bio: "Гонщик, чья карьера в F1 была недолгой, но он добился большого успеха в гонках WEC, став чемпионом мира в составе Ferrari.",
@@ -695,6 +669,8 @@ const driversData = [
 ];
 
 function initDriversPage(container) {
+	calculateFastestLapsFromTracks();
+	
     'use strict';
     
     container.innerHTML = '';
@@ -1527,17 +1503,17 @@ function openDriverModal(driver) {
     const overlay = document.createElement('div');
     overlay.className = 'driver-modal-overlay';
     
-    // ====================
-    // ПРАВАЯ КОЛОНКА — Штрафные баллы
+     // ====================
+    // ПРАВАЯ КОЛОНКА — Штрафные баллы + Рекорды круга
     // ====================
     const rightColumn = document.createElement('div');
     rightColumn.className = 'dm-right-column';
     
+    // --- Панель штрафов (существующая) ---
     const penaltiesPanel = document.createElement('div');
     penaltiesPanel.className = 'dm-penalties-panel';
     penaltiesPanel.style.setProperty('--team-color', getTeamColor(driver.team));
     
-    // Клетчатый фон для панели штрафов
     const penaltiesPattern = document.createElement('div');
     penaltiesPattern.className = 'dm-penalties-pattern';
     penaltiesPattern.innerHTML = DRIVER_PATTERN_SVG;
@@ -1550,55 +1526,119 @@ function openDriverModal(driver) {
     const penaltiesContent = document.createElement('div');
     penaltiesContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px;';
     
-    // Заголовок
     const penaltiesTitle = document.createElement('h3');
     penaltiesTitle.className = 'dm-penalties-title';
     penaltiesTitle.textContent = 'Штрафные баллы';
     penaltiesContent.appendChild(penaltiesTitle);
     
-	// Индикатор штрафных баллов
-	const penaltyPoints = driver.fines || 0;
-
-	// Строим сегменты
-	let penaltySegmentsHtml = '';
-	for (let i = 1; i <= 12; i++) {
-		let segmentClass = '';
-		if (i <= penaltyPoints) {
-			segmentClass = 'is-on';
-		}
-		if (i === 12) {
-			segmentClass += ' is-limit';
-		}
-		penaltySegmentsHtml += `<span class="msr-pp__seg ${segmentClass}"></span>`;
-	}
-
-	const meterWrapper = document.createElement('div');
-	meterWrapper.className = 'dm-penalty-meter-wrapper';
-	meterWrapper.innerHTML = `
-		<div class="dm-penalty-meter">
-			<div class="msr-pp__meter msr-pp__meter--wide" role="img" aria-label="${penaltyPoints} of 12 penalty points">
-				${penaltySegmentsHtml}
-			</div>
-		</div>
-	`;
-	penaltiesContent.appendChild(meterWrapper);
-
-	// Текст с количеством штрафов
-	const penaltyText = document.createElement('div');
-		penaltyText.className = 'dm-penalty-text';
-		penaltyText.innerHTML = `${penaltyPoints} <span style="padding-left: 2px;">из 12 Штрафов</span>`;
-		penaltiesContent.appendChild(penaltyText);
-
-		// Если 12 штрафов - показываем предупреждение о дисквалификации
-		if (penaltyPoints >= 12) {
-			const penaltyDsq = document.createElement('div');
-			penaltyDsq.className = 'dm-penalty-text-dsq';
-			penaltyDsq.textContent = 'DSQ на следующую гонку';
-			penaltiesContent.appendChild(penaltyDsq);
-	}
+    const penaltyPoints = driver.fines || 0;
+    let penaltySegmentsHtml = '';
+    for (let i = 1; i <= 12; i++) {
+        let segmentClass = '';
+        if (i <= penaltyPoints) segmentClass = 'is-on';
+        if (i === 12) segmentClass += ' is-limit';
+        penaltySegmentsHtml += `<span class="msr-pp__seg ${segmentClass}"></span>`;
+    }
+    
+    const meterWrapper = document.createElement('div');
+    meterWrapper.className = 'dm-penalty-meter-wrapper';
+    meterWrapper.innerHTML = `
+        <div class="dm-penalty-meter">
+            <div class="msr-pp__meter msr-pp__meter--wide" role="img" aria-label="${penaltyPoints} of 12 penalty points">
+                ${penaltySegmentsHtml}
+            </div>
+        </div>
+    `;
+    penaltiesContent.appendChild(meterWrapper);
+    
+    const penaltyText = document.createElement('div');
+    penaltyText.className = 'dm-penalty-text';
+    penaltyText.innerHTML = `${penaltyPoints} <span style="padding-left: 2px;">из 12 Штрафов</span>`;
+    penaltiesContent.appendChild(penaltyText);
+    
+    if (penaltyPoints >= 12) {
+        const penaltyDsq = document.createElement('div');
+        penaltyDsq.className = 'dm-penalty-text-dsq';
+        penaltyDsq.textContent = 'DSQ на следующую гонку';
+        penaltiesContent.appendChild(penaltyDsq);
+    }
     
     penaltiesPanel.appendChild(penaltiesContent);
     rightColumn.appendChild(penaltiesPanel);
+ 
+     // ====================
+    // НОВАЯ ПАНЕЛЬ — Рекорды круга
+    // ====================
+    const fastestLapsPanel = document.createElement('div');
+    fastestLapsPanel.className = 'dm-fastest-laps-panel';
+    fastestLapsPanel.style.setProperty('--team-color', getTeamColor(driver.team));
+    
+    const flPattern = document.createElement('div');
+    flPattern.className = 'dm-penalties-pattern';
+    flPattern.innerHTML = DRIVER_PATTERN_SVG;
+    fastestLapsPanel.appendChild(flPattern);
+    
+    const flOverlay = document.createElement('div');
+    flOverlay.className = 'dm-penalties-overlay';
+    fastestLapsPanel.appendChild(flOverlay);
+    
+    const flContent = document.createElement('div');
+    flContent.className = 'dm-fastest-laps-content';
+    
+    const flTitle = document.createElement('h3');
+    flTitle.className = 'dm-fastest-laps-title';
+    flTitle.textContent = 'Действующий рекорд круга на трассе текущего сезона';
+    flContent.appendChild(flTitle);
+    
+    const tracks = driver.fastestLapsTracks || [];
+    
+    if (tracks.length > 0) {
+        const list = document.createElement('div');
+        list.className = 'dm-fastest-laps-list';
+        
+        // Сортируем: сначала свежие годы, потом по названию
+        // Сортируем по порядку трасс в календаре
+        const calendarOrder = new Map();
+        calendarData.forEach((gp, index) => {
+            if (!calendarOrder.has(gp.track)) {
+                calendarOrder.set(gp.track, index);
+            }
+        });
+
+        const sortedTracks = [...tracks].sort((a, b) => {
+            const orderA = calendarOrder.has(a.trackId) ? calendarOrder.get(a.trackId) : 9999;
+            const orderB = calendarOrder.has(b.trackId) ? calendarOrder.get(b.trackId) : 9999;
+            return orderA - orderB;
+        });
+        
+        sortedTracks.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'dm-fastest-lap-row';
+            
+            row.innerHTML = `
+                <img src="Images/Flags/${item.country}.svg" 
+                     alt="${item.country}" 
+                     class="dm-fl-flag" 
+                     title="${getCountryName(item.country)}"
+                     onerror="this.style.display='none'">
+                <span class="dm-fl-track">${item.trackNamem}</span>
+                <span class="dm-fl-time">${item.time}</span>
+                <span class="dm-fl-year">${item.year}</span>
+            `;
+            
+            list.appendChild(row);
+        });
+        
+        flContent.appendChild(list);
+    }
+    
+    const flCounter = document.createElement('div');
+    flCounter.className = 'dm-fastest-laps-counter';
+    flCounter.innerHTML = `<span class="dm-fl-count">${tracks.length}</span> ${declension(tracks.length, ['рекорд', 'рекорда', 'рекордов'])}`;
+    flContent.appendChild(flCounter);
+    
+    fastestLapsPanel.appendChild(flContent);
+    rightColumn.appendChild(fastestLapsPanel);
     
     // ====================
     // ЦЕНТР — Основная плашка
@@ -1798,7 +1838,6 @@ function openDriverModal(driver) {
         hattricks: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'],
         podiums: ['Подиум', 'Подиума', 'Подиумов'],
         poles: ['Поул', 'Поула', 'Поулов'],
-        fastestLaps: ['Рекорд круга', 'Рекорда круга', 'Рекордов круга']
     };
 
     const fastestLaps = driver.fastestLaps || 0;
@@ -1827,8 +1866,8 @@ function openDriverModal(driver) {
             <span class="stat-text">${declension(driver.hattricks, statsDeclensions.hattricks)}</span>
         </div>
         <div class="stat-cell">
-            <span class="stat-number">${fastestLaps}</span>
-            <span class="stat-text">${declension(fastestLaps, statsDeclensions.fastestLaps)}</span>
+            <span class="stat-number">---</span>
+            <span class="stat-text">---</span>
         </div>
     `;
     block3.appendChild(statsRow);
@@ -1887,22 +1926,32 @@ function openDriverModal(driver) {
     document.addEventListener('keydown', escHandler);
     
     document.body.appendChild(overlay);
-    
+
     // Анимация
     requestAnimationFrame(() => {
-        // Правая колонка — выезжает справа
+        // Обе панели правой колонки — выезжают справа
         penaltiesPanel.style.transition = 'none';
         penaltiesPanel.style.opacity = '0';
         penaltiesPanel.style.transform = 'translateX(40px)';
-        
+
+        fastestLapsPanel.style.transition = 'none';
+        fastestLapsPanel.style.opacity = '0';
+        fastestLapsPanel.style.transform = 'translateX(40px)';
+
         requestAnimationFrame(() => {
-            // Правая — выезжает справа
+            // Панель штрафов
             penaltiesPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             penaltiesPanel.style.transitionDelay = '0.2s';
             penaltiesPanel.style.opacity = '1';
             penaltiesPanel.style.transform = 'translateX(0)';
+
+            // Панель рекордов круга — с небольшой задержкой после штрафов
+            fastestLapsPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            fastestLapsPanel.style.transitionDelay = '0.35s';
+            fastestLapsPanel.style.opacity = '1';
+            fastestLapsPanel.style.transform = 'translateX(0)';
         });
-        
+
         overlay.classList.add('active');
         modal.classList.add('active');
     });
@@ -1988,6 +2037,47 @@ function getCountryName(code) {
 		'ch': 'Швейцария',
     };
     return countries[code] || code.toUpperCase();
+}
+
+function calculateFastestLapsFromTracks() {
+    // Сбрасываем текущие значения
+    driversData.forEach(driver => {
+        driver.fastestLaps = 0;
+        driver.fastestLapsTracks = [];
+    });
+
+    // Собираем ID трасс, которые есть в текущем календаре,
+    // ИСКЛЮЧАЯ отменённые этапы
+    const calendarTrackIds = new Set(
+        calendarData
+            .filter(gp => !gp.canceled)
+            .map(gp => gp.track)
+    );
+
+    tracksData.forEach(track => {
+        if (!calendarTrackIds.has(track.id)) return;
+
+        const record = track.lapRecord;
+        if (!record) return;
+
+        // Формат: "1:19.813, Ш. Леклер - Ferrari - 2024"
+        const parts = record.split(',');
+        if (parts.length < 2) return;
+
+        const pilotPart = parts[1].split('-')[0].trim();
+        const driver = driversData.find(d => d.namem === pilotPart);
+
+        if (driver) {
+            driver.fastestLaps = (driver.fastestLaps || 0) + 1;
+            driver.fastestLapsTracks.push({
+                trackId: track.id,
+                trackNamem: track.trackNamem,
+                country: track.country,
+                time: parts[0].trim(),
+                year: parts[1].split('-').pop().trim()
+            });
+        }
+    });
 }
 
 const DRIVER_PATTERN_SVG = `
