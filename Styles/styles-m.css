@@ -707,19 +707,9 @@ body {
     height: 11px;
 }
 
-/*
-.dm-fastest-laps-list {
-    display: none;
-}
-
-.dm-fastest-laps-counter {
-    padding-top: 10px;
-}
-
 .dm-fastest-laps-title {
     line-height: 1.5;
 }
-*/
 
 .dm-fl-flag {
     width: 15px;
@@ -740,13 +730,11 @@ body {
 }
 
 .dm-fastest-laps-counter {
-    font-size: 0.7rem;
-    padding-top: 5px;
-    padding-bottom: 3px;
+    font-size: 0.9rem;
 }
 
-.dm-fl-count {
-    font-size: 12px;
+.dm-fastest-laps-title + .dm-fastest-laps-counter {
+    padding-top: 5%;
 }
 
 /* ============================================== */

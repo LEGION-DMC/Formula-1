@@ -2625,6 +2625,7 @@ h1, h2 {
     text-transform: uppercase;
     letter-spacing: 1px;
     padding-top: 4px;
+    padding-bottom: 4px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
