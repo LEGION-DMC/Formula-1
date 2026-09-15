@@ -697,8 +697,14 @@ body {
     flex-wrap: nowrap;
 }
 
-.dm-right-column .dm-penalties-panel {
+.dm-right-column .dm-penalties-panel,
+.dm-right-column .dm-fastest-laps-panel  {
     flex: 1;
+}
+
+.dm-penalties-panel .msr-pp__seg {
+    width: 11px;
+    height: 11px;
 }
 
 /*
