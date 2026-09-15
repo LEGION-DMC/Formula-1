@@ -698,8 +698,7 @@ body {
 }
 
 /* Панели внутри колонки — равной ширины */
-.dm-right-column .dm-penalties-panel,
-.dm-right-column .dm-fastest-laps-panel {
+.dm-right-column .dm-penalties-panel {
     flex: 1;
 }
 
