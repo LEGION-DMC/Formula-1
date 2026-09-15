@@ -697,11 +697,11 @@ body {
     flex-wrap: nowrap;
 }
 
-/* Панели внутри колонки — равной ширины */
 .dm-right-column .dm-penalties-panel {
     flex: 1;
 }
 
+/*
 .dm-fastest-laps-list {
     display: none;
 }
@@ -712,6 +712,35 @@ body {
 
 .dm-fastest-laps-title {
     line-height: 1.5;
+}
+*/
+
+.dm-fl-flag {
+    width: 15px;
+    height: 11px;
+}
+
+.dm-fl-track {
+    font-size: 0.65rem;
+}
+
+.dm-fl-time {
+    font-size: 0.6rem;
+}
+
+.dm-fl-year {
+    font-size: 0.6rem;
+    min-width: 24px;
+}
+
+.dm-fastest-laps-counter {
+    font-size: 0.7rem;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+.dm-fl-count {
+    font-size: 12px;
 }
 
 /* ============================================== */
