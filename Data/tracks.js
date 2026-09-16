@@ -388,7 +388,7 @@ const tracksData = [
 		trackNamem: "Имола",
         id: "imola",
         country: "it",
-        location: "Портиман, Италия",
+        location: "Имола, Италия",
         weatherLocation: "44.343889,11.716389",
         length: "4 909",
         laps: 63,
