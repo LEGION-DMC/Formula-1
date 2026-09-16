@@ -50,7 +50,7 @@ function mapWttrWeatherType(description) {
 
 async function fetchWeatherWttr(location) {
     try {
-        const url = `http://wttr.in/${encodeURIComponent(location).replace(/%2g, ',')}?format=j1`;
+        const url = `http://wttr.in/${encodeURIComponent(location)}?format=j1`;
         const response = await fetch(url);
         
         if (!response.ok) throw new Error('Ошибка запроса');
