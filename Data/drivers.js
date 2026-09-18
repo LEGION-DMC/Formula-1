@@ -1483,6 +1483,10 @@ function declension(num, titles) {
 }
 
 function openDriverModal(driver) {
+	if (typeof calculateFastestLapsFromTracks === 'function') {
+        calculateFastestLapsFromTracks();
+    }
+	
     const existingModal = document.querySelector('.driver-modal-overlay');
     if (existingModal) existingModal.remove();
     
