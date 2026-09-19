@@ -737,6 +737,41 @@ body {
     padding-top: 5%;
 }
 
+.compare-selectors {
+    flex-direction: column;
+    gap: 5px;
+}
+
+.compare-row,
+.compare-row--fl {
+    grid-template-columns: 60px 185px 60px;
+}
+
+.compare-value {
+    font-size: 1rem;
+}
+
+.compare-label {
+    font-size: 0.7rem;
+}
+
+.compare-header-img {
+    width: 50px;
+    height: 50px;
+}
+
+.compare-header-name {
+    font-size: 0.65rem;
+}
+
+.compare-fl-center .compare-label {
+    font-size: 0.7rem;
+}
+
+.compare-sublabel {
+    font-size: 0.65rem;
+}
+
 /* ============================================== */
 /* ВКЛАДКА: КОМАНДЫ                              */
 /* ============================================== */

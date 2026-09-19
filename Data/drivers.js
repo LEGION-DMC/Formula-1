@@ -42,6 +42,7 @@ const driversData = [
         wins: 71,
         podiums: 133,
         poles: 48,
+		grandslam: 6,
 		
         note: "Самый молодой дебютант в истории F1 - 17 лет",
         bio: "Чемпион мира (2021, 2022, 2023, 2024). Агрессивный, феноменально стабильный. В 2021-м в драматичной финальной гонке отобрал титул у Хэмилтона. В 2023-м установил рекорд — 19 побед за сезон. В 2024-м начал доминировать, но к концу года Red Bull сдал позиции.",
@@ -192,6 +193,7 @@ const driversData = [
         wins: 8,
         podiums: 14,
         poles: 6,
+		grandslam: 1,
 		
         note: "Выступает под #12 - номером легендарного Айртона Сенны",
         bio: "Вундеркинд, которого лично выбрал Тото Вольфф на замену Хэмилтону. Пропустил F3, перейдя в F1 сразу из Формулы-2 (чемпион 2024). Огромное давление, сравнивают с ранним Ферстаппеном.",
@@ -222,6 +224,7 @@ const driversData = [
         wins: 32,
         podiums: 106,
         poles: 22,
+		grandslam: 1,
 		
         note: "Самый опытный пилот в истории, более 400 Гран-при.",
         bio: "Двукратный чемпион (2005, 2006). Известен борьбой с Феттелем, Хэмилтоном (Инцидент в «Воротах гаража» 2007) и своей токсичностью в менеджменте. До сих пор один из лучших на старте.",
@@ -246,6 +249,7 @@ const driversData = [
         wins: 9,
         podiums: 54,
         poles: 27,
+		grandslam: 1,
 		
         note: "",
         bio: "Гонщик Ferrari с 2019 года. «Король поулов» — феномен в квалификации. Много раз ошибался под давлением, но выиграл несколько выдающихся гонок (Монца-2019, Монако-2024). Главная надежда Ferrari на титул.",
@@ -508,6 +512,7 @@ const driversData = [
         wins: 106,
         podiums: 207,
         poles: 105,
+		grandslam: 6,
 		
         note: "Рекордсмен по победам, поулам, подиумам.",
         bio: "7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда.",
@@ -612,6 +617,7 @@ const driversData = [
         wins: 9,
         podiums: 28,
         poles: 6,
+		grandslam: 1,
 		
         note: "Выиграл F3 и F2 подряд.",
         bio: "Первую победу одержал в Венгрии-2024, обогнав Норриса по команде. Многие считают его будущим чемпионом.",
@@ -825,18 +831,47 @@ function buildFilterPanel(panel, cardsArea) {
     
     popupOverlay.appendChild(popupInner);
     
-    // Собираем панель
-    panel.appendChild(searchInput);
-    panel.appendChild(filterToggleBtn);
-    panel.appendChild(resetBtn);
-    panel.appendChild(divider1);
-    panel.appendChild(filterTitle);
-    panel.appendChild(checkboxesContainer);
-    panel.appendChild(dividerReserve);
-    panel.appendChild(reserveContainer);
-    panel.appendChild(divider2);
-    panel.appendChild(champsContainer);
-    panel.appendChild(popupOverlay);
+	// ===== КНОПКА СРАВНЕНИЯ ПИЛОТОВ =====
+	const compareDivider = document.createElement('hr');
+	compareDivider.className = 'filter-divider filter-divider-compare';
+
+	const compareBtn = document.createElement('button');
+	compareBtn.className = 'drivers-compare-btn';
+	compareBtn.innerHTML = 'Сравнение пилотов';
+	compareBtn.addEventListener('click', () => {
+		openDriversCompareModal();
+	});
+
+	// ===== КНОПКА СРАВНЕНИЯ В ПОПАПКЕ (мобильная версия) =====
+	const popupCompareDivider = document.createElement('hr');
+	popupCompareDivider.className = 'filter-popup-divider';
+
+	const popupCompareBtn = document.createElement('button');
+	popupCompareBtn.className = 'drivers-compare-btn drivers-compare-btn--popup';
+	popupCompareBtn.innerHTML = 'Сравнение пилотов';
+	popupCompareBtn.addEventListener('click', () => {
+		popupOverlay.classList.remove('active');
+		filterToggleBtn.classList.remove('active');
+		openDriversCompareModal();
+	});
+
+	popupInner.appendChild(popupCompareDivider);
+	popupInner.appendChild(popupCompareBtn);
+
+	// Собираем панель
+	panel.appendChild(searchInput);
+	panel.appendChild(filterToggleBtn);
+	panel.appendChild(resetBtn);
+	panel.appendChild(divider1);
+	panel.appendChild(filterTitle);
+	panel.appendChild(checkboxesContainer);
+	panel.appendChild(dividerReserve);
+	panel.appendChild(reserveContainer);
+	panel.appendChild(divider2);
+	panel.appendChild(champsContainer);
+	panel.appendChild(compareDivider);
+	panel.appendChild(compareBtn);
+	panel.appendChild(popupOverlay);
     
     // Состояние фильтров
     let activeTeamFilters = new Set(regularTeams);
@@ -1842,6 +1877,7 @@ function openDriverModal(driver) {
         hattricks: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'],
         podiums: ['Подиум', 'Подиума', 'Подиумов'],
         poles: ['Поул', 'Поула', 'Поулов'],
+        grandslam: ['Большой шлем', 'Больших шлема', 'Больших шлемов'],
     };
 
     const fastestLaps = driver.fastestLaps || 0;
@@ -1850,28 +1886,28 @@ function openDriverModal(driver) {
     statsRow.className = 'modal-stats-row';
     statsRow.innerHTML = `
         <div class="stat-cell">
-            <span class="stat-number">${driver.titles}</span>
+            <span class="stat-number">${driver.titles || 0}</span>
             <span class="stat-text">${declension(driver.titles, statsDeclensions.titles)}</span>
         </div>
         <div class="stat-cell">
-            <span class="stat-number">${driver.wins}</span>
+            <span class="stat-number">${driver.wins || 0}</span>
             <span class="stat-text">${declension(driver.wins, statsDeclensions.wins)}</span>
         </div>
         <div class="stat-cell">
-            <span class="stat-number">${driver.podiums}</span>
+            <span class="stat-number">${driver.podiums || 0}</span>
             <span class="stat-text">${declension(driver.podiums, statsDeclensions.podiums)}</span>
         </div>
         <div class="stat-cell">
-            <span class="stat-number">${driver.poles}</span>
+            <span class="stat-number">${driver.poles || 0}</span>
             <span class="stat-text">${declension(driver.poles, statsDeclensions.poles)}</span>
         </div>
         <div class="stat-cell">
-            <span class="stat-number">${driver.hattricks}</span>
+            <span class="stat-number">${driver.hattricks || 0}</span>
             <span class="stat-text">${declension(driver.hattricks, statsDeclensions.hattricks)}</span>
         </div>
         <div class="stat-cell">
-            <span class="stat-number">---</span>
-            <span class="stat-text">---</span>
+			<span class="stat-number">${driver.grandslam || 0}</span>
+			<span class="stat-text">${declension(driver.grandslam || 0, statsDeclensions.grandslam)}</span>
         </div>
     `;
     block3.appendChild(statsRow);
@@ -2081,6 +2117,323 @@ function calculateFastestLapsFromTracks() {
                 year: parts[1].split('-').pop().trim()
             });
         }
+    });
+}
+
+const COMPARE_METRICS = [
+    { key: 'titles',     label: 'Титул',           decl: ['Титул', 'Титула', 'Титулов'] },
+    { key: 'wins',       label: 'Победа',          decl: ['Победа', 'Победы', 'Побед'] },
+    { key: 'podiums',    label: 'Подиум',          decl: ['Подиум', 'Подиума', 'Подиумов'] },
+    { key: 'poles',      label: 'Поул',            decl: ['Поул', 'Поула', 'Поулов'] },
+    { key: 'hattricks',  label: 'Хэт-Трик',        decl: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'] },
+    { key: 'grandslam',  label: 'Большой шлем',    decl: ['Большой шлем', 'Больших шлема', 'Больших шлемов'] },
+];
+
+function getDriverCareerSeasons(driver) {
+    if (!driver.career || driver.career.length === 0) return 0;
+    const seasonsSet = new Set();
+    const currentYear = new Date().getFullYear();
+
+    driver.career.forEach(item => {
+        const yearStr = String(item.year);
+        const hasPresent = /н\.?\s*в\.?/i.test(yearStr);
+
+        if (hasPresent) {
+            const startMatch = yearStr.match(/(\d{4})/);
+            if (startMatch) {
+                const start = parseInt(startMatch[1], 10);
+                for (let y = start; y <= currentYear; y++) seasonsSet.add(y);
+            }
+            return;
+        }
+
+        const matches = yearStr.match(/\d{4}/g);
+        if (!matches) return;
+
+        if (matches.length === 1) {
+            seasonsSet.add(parseInt(matches[0], 10));
+        } else {
+            const start = parseInt(matches[0], 10);
+            const end = parseInt(matches[1], 10);
+            for (let y = start; y <= end; y++) seasonsSet.add(y);
+        }
+    });
+
+    return seasonsSet.size;
+}
+
+function getDriverCompareData(driver) {
+    if (!driver) return null;
+    return {
+        ...driver,
+        careerSeasons: getDriverCareerSeasons(driver),
+        fines: driver.fines || 0,
+        fastestLaps: driver.fastestLaps || 0,
+    };
+}
+
+function buildDriverOptions(selectedId, excludeId) {
+    return driversData
+        .filter(d => d.id !== excludeId)
+        .sort((a, b) => a.name.localeCompare(b.name, 'ru'))
+        .map(d => {
+            const selected = d.id === selectedId ? ' selected' : '';
+            const label = `${d.name} (${d.team})`;
+            return `<option value="${d.id}"${selected}>${label}</option>`;
+        })
+        .join('');
+}
+
+function getDriverById(id) {
+    return driversData.find(d => d.id === id) || null;
+}
+
+function renderCompareTable(container, driverA, driverB) {
+    if (!driverA || !driverB) {
+        container.innerHTML = '<div class="compare-empty">Выберите пилотов для сравнения</div>';
+        return;
+    }
+
+    const a = getDriverCompareData(driverA);
+    const b = getDriverCompareData(driverB);
+
+    // Определяем "победителя" по метрике (больше = лучше)
+    const cmpClass = (valA, valB) => {
+        if (valA === valB) return { a: '', b: '' };
+        return valA > valB
+            ? { a: 'compare-winner', b: 'compare-loser' }
+            : { a: 'compare-loser', b: 'compare-winner' };
+    };
+
+    // Блок основных метрик
+    let statsHtml = '';
+    COMPARE_METRICS.forEach(m => {
+        const valA = a[m.key] || 0;
+        const valB = b[m.key] || 0;
+        const cls = cmpClass(valA, valB);
+        statsHtml += `
+            <div class="compare-row compare-row--stat">
+                <span class="compare-value ${cls.a}">${valA}</span>
+                <span class="compare-label">${m.label}</span>
+                <span class="compare-value ${cls.b}">${valB}</span>
+            </div>
+        `;
+    });
+
+    // Карьерные сезоны
+    const seasonsCls = cmpClass(a.careerSeasons, b.careerSeasons);
+    const seasonsRow = `
+        <div class="compare-row compare-row--career">
+            <span class="compare-value ${seasonsCls.a}">${a.careerSeasons}</span>
+            <span class="compare-label">Карьерные сезоны</span>
+            <span class="compare-value ${seasonsCls.b}">${b.careerSeasons}</span>
+        </div>
+    `;
+
+    // Штрафные очки (меньше = лучше)
+    const finesCls = (valA, valB) => {
+        if (valA === valB) return { a: '', b: '' };
+        return valA < valB
+            ? { a: 'compare-winner', b: 'compare-loser' }
+            : { a: 'compare-loser', b: 'compare-winner' };
+    };
+    const finesCmp = finesCls(a.fines, b.fines);
+
+    // Рекорды круга
+    const flCmp = cmpClass(a.fastestLaps, b.fastestLaps);
+    const flRow = `
+        <div class="compare-row compare-row--fl">
+            <div class="compare-fl-side">
+                <span class="compare-value ${flCmp.a}">${a.fastestLaps}</span>
+            </div>
+            <div class="compare-fl-center">
+                <span class="compare-label">Действующий рекорд круга</span>
+                <span class="compare-sublabel">на трассе текущего сезона</span>
+            </div>
+            <div class="compare-fl-side">
+                <span class="compare-value ${flCmp.b}">${b.fastestLaps}</span>
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = `
+        <div class="compare-table">
+            <div class="compare-table-header">
+                <div class="compare-header-cell compare-header-cell--a">
+                    <img src="Images/Drivers/${a.id}.png" alt="${a.name}" class="compare-header-img" onerror="this.src='Images/Drivers/default.png'">
+                    <span class="compare-header-name">${a.namem}</span>
+                </div>
+                <div class="compare-header-cell compare-header-cell--vs">VS</div>
+                <div class="compare-header-cell compare-header-cell--b">
+                    <img src="Images/Drivers/${b.id}.png" alt="${b.name}" class="compare-header-img" onerror="this.src='Images/Drivers/default.png'">
+                    <span class="compare-header-name">${b.namem}</span>
+                </div>
+            </div>
+            <div class="compare-table-body">
+                <div class="compare-section">
+                    ${statsHtml}
+                </div>
+                <div class="compare-divider"></div>
+                <div class="compare-section">
+                    ${seasonsRow}
+                </div>
+                <div class="compare-divider"></div>
+                <div class="compare-section">
+                    <div class="compare-row compare-row--stat">
+                        <span class="compare-value ${finesCmp.a}">${a.fines}</span>
+                        <span class="compare-label">Штрафные очки</span>
+                        <span class="compare-value ${finesCmp.b}">${b.fines}</span>
+                    </div>
+                </div>
+                <div class="compare-divider"></div>
+                <div class="compare-section">
+                    ${flRow}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function openDriversCompareModal() {
+    // Пересчитываем рекорды круга, если функция доступна
+    if (typeof calculateFastestLapsFromTracks === 'function') {
+        calculateFastestLapsFromTracks();
+    }
+
+    // Удаляем старое окно, если есть
+    const existing = document.querySelector('.compare-modal-overlay');
+    if (existing) existing.remove();
+
+    // Блокируем скролл
+    const scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflowY = 'scroll';
+
+    function unlockScroll() {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflowY = '';
+        window.scrollTo(0, scrollY);
+    }
+
+    // Оверлей
+    const overlay = document.createElement('div');
+    overlay.className = 'compare-modal-overlay';
+
+    // Модальное окно
+    const modal = document.createElement('div');
+    modal.className = 'compare-modal';
+
+    // Заголовок
+    const header = document.createElement('div');
+    header.className = 'compare-modal-header';
+    header.innerHTML = `<h2 class="compare-modal-title">Сравнение пилотов</h2>`;
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'compare-modal-close';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.setAttribute('aria-label', 'Закрыть');
+    header.appendChild(closeBtn);
+
+    // Панель выбора пилотов
+    const selectors = document.createElement('div');
+    selectors.className = 'compare-selectors';
+
+    // Пилотов сортируем по имени
+    const sortedDrivers = [...driversData].sort((x, y) => x.name.localeCompare(y.name, 'ru'));
+
+    // Формируем опции с пустым первым пунктом
+    const driverOptionsHtml = 
+        `<option value="" disabled selected>— Выберите пилота —</option>` +
+        sortedDrivers
+            .map(d => `<option value="${d.id}">${d.name} (${d.team})</option>`)
+            .join('');
+
+    // Select A
+    const selectA = document.createElement('select');
+    selectA.className = 'compare-select';
+    selectA.innerHTML = driverOptionsHtml;
+
+    // Select B
+    const selectB = document.createElement('select');
+    selectB.className = 'compare-select';
+    selectB.innerHTML = driverOptionsHtml;
+
+    function syncSelects(source, target) {
+        const sourceVal = source.value;
+
+        // Блокируем в target тот же id, что выбран в source (кроме пустого)
+        Array.from(target.options).forEach(opt => {
+            opt.disabled = (sourceVal !== '' && opt.value === sourceVal);
+        });
+
+        // Если в target стоит тот же id, что в source — сбрасываем на пусто
+        if (target.value === sourceVal && sourceVal !== '') {
+            target.value = '';
+        }
+    }
+
+    selectors.appendChild(selectA);
+    selectors.appendChild(selectB);
+
+    // Контейнер таблицы
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'compare-table-container';
+
+    // Функция обновления
+    function updateCompare() {
+        const a = getDriverById(selectA.value);
+        const b = getDriverById(selectB.value);
+        renderCompareTable(tableContainer, a, b);
+    }
+
+    // События
+    selectA.addEventListener('change', () => {
+        syncSelects(selectA, selectB);
+        updateCompare();
+    });
+    selectB.addEventListener('change', () => {
+        syncSelects(selectB, selectA);
+        updateCompare();
+    });
+
+    // Первичная синхронизация
+    syncSelects(selectA, selectB);
+    syncSelects(selectB, selectA);
+    updateCompare();
+
+    // Сборка
+    modal.appendChild(header);
+    modal.appendChild(selectors);
+    modal.appendChild(tableContainer);
+    overlay.appendChild(modal);
+
+    // Закрытие
+    function closeModal() {
+        overlay.remove();
+        unlockScroll();
+        document.removeEventListener('keydown', escHandler);
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+    });
+
+    function escHandler(e) {
+        if (e.key === 'Escape') closeModal();
+    }
+    document.addEventListener('keydown', escHandler);
+
+    document.body.appendChild(overlay);
+
+    // Анимация появления
+    requestAnimationFrame(() => {
+        overlay.classList.add('active');
+        modal.classList.add('active');
     });
 }
 
