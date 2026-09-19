@@ -5263,6 +5263,9 @@ h1, h2 {
     display: flex;
     font-size: 18px;
     margin-bottom: 5px;
+    background: linear-gradient(135deg, #e10600, #ff4d4d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .video-modal-body {

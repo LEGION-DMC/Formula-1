@@ -383,7 +383,7 @@ const calendarData = [
 		recordingQuali: "",
 		recordingRace: ""
 	},/*
-	{   id: "gp24", name: "Гран-при Эмилии-Романьи",
+	{   id: "gp25", name: "Гран-при Эмилии-Романьи",
 		track: "imola",
 		
 		tires: "",
