@@ -2295,16 +2295,13 @@ function renderCompareTable(container, driverA, driverB) {
 }
 
 function openDriversCompareModal() {
-    // Пересчитываем рекорды круга, если функция доступна
     if (typeof calculateFastestLapsFromTracks === 'function') {
         calculateFastestLapsFromTracks();
     }
 
-    // Удаляем старое окно, если есть
     const existing = document.querySelector('.compare-modal-overlay');
     if (existing) existing.remove();
 
-    // Блокируем скролл
     const scrollY = window.scrollY;
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
@@ -2319,15 +2316,12 @@ function openDriversCompareModal() {
         window.scrollTo(0, scrollY);
     }
 
-    // Оверлей
     const overlay = document.createElement('div');
     overlay.className = 'compare-modal-overlay';
 
-    // Модальное окно
     const modal = document.createElement('div');
     modal.className = 'compare-modal';
 
-    // Заголовок
     const header = document.createElement('div');
     header.className = 'compare-modal-header';
     header.innerHTML = `<h2 class="compare-modal-title">Сравнение пилотов</h2>`;
@@ -2338,65 +2332,107 @@ function openDriversCompareModal() {
     closeBtn.setAttribute('aria-label', 'Закрыть');
     header.appendChild(closeBtn);
 
-    // Панель выбора пилотов
+    // ===== Верхний ряд: 2 селекта пилотов =====
     const selectors = document.createElement('div');
     selectors.className = 'compare-selectors';
 
-    // Пилотов сортируем по имени
-    const sortedDrivers = [...driversData].sort((x, y) => x.name.localeCompare(y.name, 'ru'));
+    const sortedDrivers = [...driversData].sort((x, y) => Number(x.number) - Number(y.number));
 
-    // Формируем опции с пустым первым пунктом
-    const driverOptionsHtml = 
+    const driverOptionsHtml =
         `<option value="" disabled selected>— Выберите пилота —</option>` +
         sortedDrivers
-            .map(d => `<option value="${d.id}">${d.name} (${d.team})</option>`)
+            .map(d => `<option value="${d.id}">#${d.number} ${d.name} (${d.team})</option>`)
             .join('');
 
-    // Select A
     const selectA = document.createElement('select');
     selectA.className = 'compare-select';
     selectA.innerHTML = driverOptionsHtml;
 
-    // Select B
     const selectB = document.createElement('select');
     selectB.className = 'compare-select';
     selectB.innerHTML = driverOptionsHtml;
 
-    function syncSelects(source, target) {
-        const sourceVal = source.value;
-
-        // Блокируем в target тот же id, что выбран в source (кроме пустого)
-        Array.from(target.options).forEach(opt => {
-            opt.disabled = (sourceVal !== '' && opt.value === sourceVal);
-        });
-
-        // Если в target стоит тот же id, что в source — сбрасываем на пусто
-        if (target.value === sourceVal && sourceVal !== '') {
-            target.value = '';
-        }
-    }
-
     selectors.appendChild(selectA);
     selectors.appendChild(selectB);
+
+    // ===== Нижний ряд: селект команды =====
+    const teamSelectorRow = document.createElement('div');
+    teamSelectorRow.className = 'compare-team-selector-row';
+
+    const teamSelect = document.createElement('select');
+    teamSelect.className = 'compare-select compare-select--team';
+
+	const allTeams = [...new Set(driversData.map(d => d.team))]
+		.filter(team => team.toLowerCase() !== 'резерв' && team.toLowerCase() !== 'reserve')
+		.sort((a, b) => a.localeCompare(b, 'ru'));
+
+    let teamOptionsHtml = `Пилоты по командам: <option value="" disabled selected>— Выберите команду —</option>`;
+    allTeams.forEach(team => {
+        teamOptionsHtml += `<option value="${team}">${team}</option>`;
+    });
+    teamSelect.innerHTML = teamOptionsHtml;
+
+    teamSelectorRow.appendChild(teamSelect);
 
     // Контейнер таблицы
     const tableContainer = document.createElement('div');
     tableContainer.className = 'compare-table-container';
 
-    // Функция обновления
     function updateCompare() {
         const a = getDriverById(selectA.value);
         const b = getDriverById(selectB.value);
         renderCompareTable(tableContainer, a, b);
     }
 
-    // События
+    function syncSelects(source, target) {
+        const sourceVal = source.value;
+        Array.from(target.options).forEach(opt => {
+            opt.disabled = (sourceVal !== '' && opt.value === sourceVal);
+        });
+        if (target.value === sourceVal && sourceVal !== '') {
+            target.value = '';
+        }
+    }
+
     selectA.addEventListener('change', () => {
         syncSelects(selectA, selectB);
+        teamSelect.value = ''; // сбрасываем выбор команды
         updateCompare();
     });
+
     selectB.addEventListener('change', () => {
         syncSelects(selectB, selectA);
+        teamSelect.value = ''; // сбрасываем выбор команды
+        updateCompare();
+    });
+
+    // ===== Обработка выбора команды =====
+    teamSelect.addEventListener('change', () => {
+        const team = teamSelect.value;
+        if (!team) return;
+
+        const teamDrivers = driversData
+            .filter(d => d.team === team)
+            .sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+
+        // Снимаем блокировку опций
+        Array.from(selectA.options).forEach(opt => opt.disabled = false);
+        Array.from(selectB.options).forEach(opt => opt.disabled = false);
+
+        if (teamDrivers.length >= 2) {
+            selectA.value = teamDrivers[0].id;
+            selectB.value = teamDrivers[1].id;
+        } else if (teamDrivers.length === 1) {
+            selectA.value = teamDrivers[0].id;
+            selectB.value = '';
+        } else {
+            selectA.value = '';
+            selectB.value = '';
+        }
+
+        syncSelects(selectA, selectB);
+        syncSelects(selectB, selectA);
+
         updateCompare();
     });
 
@@ -2405,13 +2441,12 @@ function openDriversCompareModal() {
     syncSelects(selectB, selectA);
     updateCompare();
 
-    // Сборка
     modal.appendChild(header);
     modal.appendChild(selectors);
+    modal.appendChild(teamSelectorRow);
     modal.appendChild(tableContainer);
     overlay.appendChild(modal);
 
-    // Закрытие
     function closeModal() {
         overlay.remove();
         unlockScroll();
@@ -2430,7 +2465,6 @@ function openDriversCompareModal() {
 
     document.body.appendChild(overlay);
 
-    // Анимация появления
     requestAnimationFrame(() => {
         overlay.classList.add('active');
         modal.classList.add('active');

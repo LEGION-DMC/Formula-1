@@ -2377,7 +2377,7 @@ h1, h2 {
     border-radius: 12px;
     width: 100%;
     max-width: 580px;
-    max-height: 65vh;
+    max-height: 80vh;
     overflow-y: auto;
     position: relative;
     background: linear-gradient(135deg, 
@@ -2431,6 +2431,19 @@ h1, h2 {
     gap: 10px;
     padding: 8px 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.compare-team-selector-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.compare-select--team {
+    max-width: 200px;
+    width: 100%;
 }
 
 .compare-select {
