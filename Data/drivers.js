@@ -948,20 +948,24 @@ function buildFilterPanel(panel, cardsArea) {
         }
         
         // Поиск
-        if (searchTerm) {
-            filtered = filtered.filter(driver => {
-                const countryName = getCountryName(driver.country).toLowerCase();
-                const checkStartsWith = (text) => {
-                    const words = text.toLowerCase().split(/\s+/);
-                    return words.some(word => word.startsWith(searchTerm));
-                };
-                return driver.number.toString().startsWith(searchTerm) ||
-                       checkStartsWith(driver.name) ||
-                       checkStartsWith(driver.namem) ||
-                       checkStartsWith(countryName) ||
-                       checkStartsWith(driver.team);
-            });
-        }
+	if (searchTerm) {
+		filtered = filtered.filter(driver => {
+			const countryName = getCountryName(driver.country).toLowerCase();
+			const synonyms = (countrySynonyms[driver.country] || []).map(s => s.toLowerCase());
+			const allCountryNames = [countryName, ...synonyms];
+
+			const checkStartsWith = (text) => {
+				const words = text.toLowerCase().split(/\s+/);
+				return words.some(word => word.startsWith(searchTerm));
+			};
+
+			return driver.number.toString().startsWith(searchTerm) ||
+				   checkStartsWith(driver.name) ||
+				   checkStartsWith(driver.namem) ||
+				   allCountryNames.some(name => checkStartsWith(name)) ||  // ← исправлено
+				   checkStartsWith(driver.team);
+		});
+	}
         
         renderDriverCards(filtered, cardsArea);
     }
@@ -2078,6 +2082,53 @@ function getCountryName(code) {
     };
     return countries[code] || code.toUpperCase();
 }
+
+const countrySynonyms = {
+    // Европа
+    'mc': ['Монегаск', 'Европеец'],
+    'de': ['Немец', 'Европеец'],
+    'es': ['Испанец', 'Европеец'],
+    'fr': ['Француз', 'Европеец'],
+    'it': ['Итальянец', 'Европеец'],
+    'at': ['Австриец', 'Европеец'],
+    'be': ['Бельгиец', 'Европеец'],
+    'hu': ['Венгр', 'Европеец'],    
+    'pt': ['Португалец', 'Европеец'],
+    'pl': ['Поляк', 'Европеец'],
+    'ch': ['Швейцарец', 'Европеец'],
+    'nl': ['Голландец', 'Нидерландец', 'Европеец'],
+	
+    'gb': ['Британец', 'Англичанин', 'Шотландец', 'Европеец'],
+	
+	// Северные страны
+    'fi': ['Финн', 'Скандинав', 'Европеец'],
+    'dk': ['Датчанин', 'Скандинав', 'Европеец'],
+
+    'az': ['Азербайджанец', 'Европеец', 'Азиат'],     
+	
+    // Азия и Ближний Восток
+    'jp': ['Японец', 'Азиат'],
+    'cn': ['Китаец', 'Азиат'],
+    'th': ['Таец', 'Азиат'],
+    'sg': ['Сингапурец', 'Азиат'],
+    'my': ['Малайзиец', 'Азиат'],
+    'tr': ['Турок', 'Азиат', 'Европеец'],         
+    'bh': ['Бахрейнец', 'Азиат', 'Араб'],
+    'sa': ['Саудовец', 'Саудиец', 'Азиат', 'Араб'],
+    'qa': ['Катарец', 'Азиат', 'Араб'],
+    'ae': ['Эмиратец', 'Азиат', 'Араб'],
+
+    // Америка
+    'us': ['Американец'],                         
+    'ca': ['Канадец'],
+    'mx': ['Мексиканец', 'Латиноамериканец'],
+    'br': ['Бразилец', 'Латиноамериканец'],
+    'co': ['Колумбиец', 'Латиноамериканец'],
+
+    // Океания
+	'au': ['Австралиец', 'Океаниец'],
+	'nz': ['Новозеландец', 'Океаниец'],
+};
 
 function calculateFastestLapsFromTracks() {
     // Сбрасываем текущие значения
