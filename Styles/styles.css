@@ -2373,7 +2373,6 @@ h1, h2 {
 }
 
 .compare-modal {
-    background: linear-gradient(160deg, rgba(20, 20, 20, 0.98), rgba(10, 10, 10, 0.98));
     border: 1px solid var(--border-color);
     border-radius: 12px;
     width: 100%;
@@ -2381,6 +2380,10 @@ h1, h2 {
     max-height: 65vh;
     overflow-y: auto;
     position: relative;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 1) 0%, 
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
     transform: scale(0.92) translateY(20px);
     opacity: 0;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
@@ -2444,9 +2447,10 @@ h1, h2 {
     transition: border-color 0.25s ease, background-color 0.25s ease;
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23b0b0b0' d='M6 8L2 4h8z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 1) 0%, 
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
     text-overflow: ellipsis;
 }
 
@@ -2499,8 +2503,8 @@ h1, h2 {
 }
 
 .compare-header-img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 8%;
     object-fit: cover;
     object-position: top center;

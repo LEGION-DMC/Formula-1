@@ -738,8 +738,11 @@ body {
 }
 
 .compare-selectors {
-    flex-direction: column;
     gap: 5px;
+}
+
+.compare-select {
+    font-size: 11.5px;
 }
 
 .compare-row,
@@ -753,11 +756,6 @@ body {
 
 .compare-label {
     font-size: 0.7rem;
-}
-
-.compare-header-img {
-    width: 50px;
-    height: 50px;
 }
 
 .compare-header-name {

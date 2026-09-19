@@ -2261,12 +2261,12 @@ function renderCompareTable(container, driverA, driverB) {
             <div class="compare-table-header">
                 <div class="compare-header-cell compare-header-cell--a">
                     <img src="Images/Drivers/${a.id}.png" alt="${a.name}" class="compare-header-img" onerror="this.src='Images/Drivers/default.png'">
-                    <span class="compare-header-name">${a.namem}</span>
+                    <span class="compare-header-name">${a.name}</span>
                 </div>
                 <div class="compare-header-cell compare-header-cell--vs">VS</div>
                 <div class="compare-header-cell compare-header-cell--b">
                     <img src="Images/Drivers/${b.id}.png" alt="${b.name}" class="compare-header-img" onerror="this.src='Images/Drivers/default.png'">
-                    <span class="compare-header-name">${b.namem}</span>
+                    <span class="compare-header-name">${b.name}</span>
                 </div>
             </div>
             <div class="compare-table-body">
