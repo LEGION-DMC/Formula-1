@@ -842,22 +842,6 @@ function buildFilterPanel(panel, cardsArea) {
 		openDriversCompareModal();
 	});
 
-	// ===== КНОПКА СРАВНЕНИЯ В ПОПАПКЕ (мобильная версия) =====
-	const popupCompareDivider = document.createElement('hr');
-	popupCompareDivider.className = 'filter-popup-divider';
-
-	const popupCompareBtn = document.createElement('button');
-	popupCompareBtn.className = 'drivers-compare-btn drivers-compare-btn--popup';
-	popupCompareBtn.innerHTML = 'Сравнение пилотов';
-	popupCompareBtn.addEventListener('click', () => {
-		popupOverlay.classList.remove('active');
-		filterToggleBtn.classList.remove('active');
-		openDriversCompareModal();
-	});
-
-	popupInner.appendChild(popupCompareDivider);
-	popupInner.appendChild(popupCompareBtn);
-
 	// Собираем панель
 	panel.appendChild(searchInput);
 	panel.appendChild(filterToggleBtn);
