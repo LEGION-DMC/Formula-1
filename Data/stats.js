@@ -58,7 +58,7 @@ const replacementQualiData = [
 
 const penaltiesData = [
     { driver: "Франко Колапинто", fines: 4 },
-    { driver: "Алекс Албон", fines: 3 },
+    { driver: "Юки Цунода", fines: 3 },
     { driver: "Лиам Лоусон", fines: 3 },
     { driver: "Лэнс Стролл", fines: 2 },
     { driver: "Карлос Сайнс", fines: 2 },
@@ -68,8 +68,9 @@ const penaltiesData = [
     { driver: "Арвид Линдблад", fines: 2 },
     { driver: "Льюис Хэмилтон", fines: 1 },
     { driver: "Кими Антонелли", fines: 1 },
+    { driver: "Алекс Албон", fines:  1 },
+	
     { driver: "Эстебан Окон", fines: 0 },
-
     { driver: "Ландо Норрис", fines: 0 },
     { driver: "Макс Ферстаппен", fines: 0 },
     { driver: "Шарль Леклер", fines: 0 },
@@ -81,7 +82,6 @@ const penaltiesData = [
     { driver: "Джордж Расселл", fines: 0 },
     { driver: "Валттери Боттас", fines: 0 },
 
-    { driver: "Юки Цунода", fines: 3 },
     { driver: "Гуан Ю Чжоу", fines: 0 },
     { driver: "Джек Дуэн", fines: 0 },
 ];
