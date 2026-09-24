@@ -1,4 +1,4 @@
-const teamsData = [
+const teamsData = [  // Двигатели 3 V8 T
     {  shortName: "Mercedes",
         fullName: "Mercedes-AMG PETRONAS F1 Team",
         color: "#75F1D3",
