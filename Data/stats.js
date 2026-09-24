@@ -456,7 +456,7 @@ const enginePartsData = [
     { driver: "Арвид Линдблад", ice: 3, tc: 3, exh: 3, mguk: 2, es: 2, puce: 2, puanc: 4 },
     { driver: "Лиам Лоусон", ice: 3, tc: 3, exh: 3, mguk: 2, es: 2, puce: 2, puanc: 5 },
     { driver: "Лэнс Стролл", ice: 5, tc: 5, exh: 3, mguk: 5, es: 6, puce: 5, puanc: 7 },
-    { driver: "Фернандо Алонсо", ice: 4, tc: 4, exh: 2, mguk: 5, es: 6, puce: 6, puanc: 7 },
+    { driver: "Фернандо Алонсо", ice: 4, tc: 4, exh: 2, mguk: 5, es: 6, puce: 6, puanc: 8 },
     { driver: "Эстебан Окон", ice: 3, tc: 3, exh: 3, mguk: 3, es: 3, puce: 3, puanc: 4 },
     { driver: "Оливер Берман", ice: 4, tc: 4, exh: 4, mguk: 4, es: 4, puce: 4, puanc: 4 },
     { driver: "Нико Хюлькенберг", ice: 4, tc: 4, exh: 4, mguk: 3, es: 1, puce: 1, puanc: 5 },

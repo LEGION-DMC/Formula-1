@@ -252,8 +252,8 @@ const calendarData = [
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "https://rutube.ru/video/e95c7887c361ec6022064a930516cd22/",
+		recordingRace: "https://rutube.ru/video/dce5a89ec8856d2116a985eb90fec5f2/"
 	},
 	{   id: "gp17", name: "Гран-при Бахрейна*",
 		track: "sepang",
