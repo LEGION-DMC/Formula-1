@@ -14,13 +14,13 @@ const startingGridData = [
     { position: 13, driverId: '', team: '' },
     { position: 14, driverId: '', team: '' },
     { position: 15, driverId: '', team: '' },
-    { position: 16, driverId: '', team: '' },
-    { position: 17, driverId: '', team: '' },
-    { position: 18, driverId: '', team: '' },
-    { position: 19, driverId: '', team: '' },
-    { position: 20, driverId: '', team: '' },
-    { position: 21, driverId: '', pitLane: false, team: '' },
-    { position: 22, driverId: '', pitLane: false, team: '' },
+    { position: 16, driverId: 'antonelli', team: '' },
+    { position: 17, driverId: 'bortoleto', team: '' },
+    { position: 18, driverId: 'hulkenberg', team: '' },
+    { position: 19, driverId: 'alonso', team: '' },
+    { position: 20, driverId: 'perez', team: '' },
+    { position: 21, driverId: 'bottas', pitLane: false, team: '' },
+    { position: 22, driverId: 'stroll', pitLane: false, team: '' },
 ];
 
 const newsData = [
