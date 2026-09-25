@@ -245,14 +245,14 @@ const calendarData = [
 		tires: "345",
 		
 		date: "2026-09-26 19:00",
-		quali: "2026-09-25 20:00",
+		quali: "2026-09-25 19:30",
 		sprint: "",
 		
 		hasSprint: false,
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "https://rutube.ru/video/e95c7887c361ec6022064a930516cd22/",
+		recordingQuali: "https://rutube.ru/video/9bfb55b8695a022a73f35f1b86872177/",
 		recordingRace: "https://rutube.ru/video/dce5a89ec8856d2116a985eb90fec5f2/"
 	},
 	{   id: "gp17", name: "Гран-при Бахрейна*",
