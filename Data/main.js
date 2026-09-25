@@ -23,6 +23,139 @@ const startingGridData = [
     { position: 22, driverId: '', pitLane: false, team: '' },
 ];
 
+const newsData = [
+    {
+        id: 1,
+        title: "Квят в деле",
+        text: "Бывший российский пилот Формулы-1 Даниил Квят помогает «Альпин» во время гоночного уикенда Гран-при Азербайджана, работая на симуляторе команды. <br/><br/>Задача Квята заключается в сопоставлении поведения машины в виртуальной среде с тем, что происходит непосредственно на трассе. Он наблюдает за реальными сессиями, сравнивает полученные данные с поведением болида в симуляторе и передаёт команде обратную связь, которая может использоваться при дальнейшей работе с машиной.",
+        date: "2026-09-25",
+        image: "Images/News/news1.png",
+        tag: "Команды"
+    },
+    {
+        id: 2,
+        title: "Рёв мотора",
+        text: "FIA и производители силовых установок согласовали основные параметры двигателей Формулы 1 следующего поколения. Британская пресса пишет, что Формула 1 планирует перейти на 3-литровый турбированный двигатель V8 с более компактным электрическим мотором мощностью 100 кВт, а масса всей силовой установки будет снижена как минимум на 50 кг.",
+        date: "2026-09-23",
+        image: "Images/News/news2.png",
+        tag: "Регламент"
+    },
+    {
+        id: 3,
+        title: "HAAS: Замена Окона",
+        text: "Руководитель Haas F1 Айо Комацу, подтвердивший накануне расставание с Эстебаном Оконом после окончания сезона, заявил в четверг, что команда назовёт состав уже в сентябре…",
+        date: "2026-09-24",
+        image: "Images/News/news3.png",
+        tag: "Команды"
+    },
+    {
+        id: 4,
+        title: "Пекло как в Пустыне",
+        text: "За прошедшие 14 гонок, мы так и не увидили ни одной дождевой.",
+        date: "2026-01-25",
+        image: "Images/News/news4.png",
+        tag: "Статистика"
+    },
+];
+
+function createNewsBlock() {
+    const block = document.createElement('div');
+    block.className = 'main-block news-block';
+    
+    // Заголовок
+    const title = document.createElement('div');
+    title.className = 'main-block-title';
+    title.textContent = 'Новости сайта';
+    block.appendChild(title);
+    
+    // Контейнер с карточками
+    const newsGrid = document.createElement('div');
+    newsGrid.className = 'news-grid';
+    
+    if (!newsData || newsData.length === 0) {
+        newsGrid.innerHTML = '<div class="news-empty">Новостей пока нет</div>';
+    } else {
+        newsData.forEach(news => {
+            const card = document.createElement('div');
+            card.className = 'news-card';
+            card.dataset.newsId = news.id;
+            
+            card.innerHTML = `
+                <div class="news-card-image">
+                    <img src="${news.image}" alt="${news.title}" onerror="this.style.display='none'">
+                </div>
+                <div class="news-card-body">
+                    <div class="news-card-header">
+                        <span class="news-card-tag">${news.tag || 'Новость'}</span>
+                        <span class="news-card-date">${formatNewsDate(news.date)}</span>
+                    </div>
+                    <div class="news-card-title">${news.title}</div>
+                    <div class="news-card-text">${news.text}</div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => {
+                if (typeof openNewsModal === 'function') {
+                    openNewsModal(news);
+                }
+            });
+            
+            newsGrid.appendChild(card);
+        });
+    }
+    
+    block.appendChild(newsGrid);
+    return block;
+}
+
+function formatNewsDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d)) return dateStr;
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}.${month}.${year}`;
+}
+
+function openNewsModal(news) {
+    const existing = document.querySelector('.news-modal-overlay');
+    if (existing) existing.remove();
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'news-modal-overlay';
+    overlay.innerHTML = `
+        <div class="news-modal">
+            <button class="news-modal-close" onclick="this.closest('.news-modal-overlay').remove()">✕</button>
+            <div class="news-modal-image">
+                <img src="${news.image}" alt="${news.title}" onerror="this.style.display='none'">
+            </div>
+            <div class="news-modal-body">
+                <div class="news-modal-header">
+                    <span class="news-card-tag">${news.tag || 'Новость'}</span>
+                    <span class="news-card-date">${formatNewsDate(news.date)}</span>
+                </div>
+                <h2 class="news-modal-title">${news.title}</h2>
+                <p class="news-modal-text">${news.text}</p>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => overlay.classList.add('active'));
+    
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.remove();
+    });
+    
+    const esc = (e) => {
+        if (e.key === 'Escape') {
+            overlay.remove();
+            document.removeEventListener('keydown', esc);
+        }
+    };
+    document.addEventListener('keydown', esc);
+}
+
 const weatherData = {
     type: "cloud",
     typeName: "Загрузка...",
@@ -337,6 +470,19 @@ async function initMainPage(container) {
 
     container.appendChild(secondRow);
     
+    // ===== ТРЕТИЙ РЯД — НОВОСТИ =====
+    const thirdDivider = document.createElement('hr');
+    thirdDivider.className = 'main-row-divider';
+    container.appendChild(thirdDivider);
+    
+    const thirdRow = document.createElement('div');
+    thirdRow.className = 'main-third-row';
+    
+    const newsBlock = createNewsBlock();
+    thirdRow.appendChild(newsBlock);
+    
+    container.appendChild(thirdRow);
+	
 	await loadWeatherForNextGP();
 	
     // ===== ЗАПУСКАЕМ ТАЙМЕР =====

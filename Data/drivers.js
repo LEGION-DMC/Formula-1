@@ -721,6 +721,36 @@ const driversData = [
         note: "",
         bio: "",
     },
+    {   number: 26, id: "kvyat",
+        name: "Даниил Квят",
+        namem: "Д. Квят",
+        namef: "Даниил Вячеславович Квят",
+		
+        birthPlace:  "Уфа, Россия", country: "ru",
+        birthDate: "26.04.1994",
+		
+        team: "Резерв",
+		reserve: ["Racing Bulls"],
+        debut: "2027 - Racing Bulls",        
+		career: [
+            { team: "Toro Rosso", year: "2014" },
+            { team: "Red Bull", year: "2015" },
+            { team: "Red Bull", year: "2016", temporarily: true },
+            { team: "Toro Rosso", year: "2016" },
+            { team: "Toro Rosso", year: "2017" },
+            { team: "Toro Rosso", year: "2019" },
+            { team: "AlphaTauri", year: "2020" },
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 0,
+        podiums: 3,
+        poles: 0,
+		
+        note: "",
+        bio: "",
+    },
 	*/
 ];
 
@@ -2098,6 +2128,7 @@ function getCountryName(code) {
         'br': 'Бразилия',
         'ar': 'Аргентина',
         'bh': 'Бахрейн',
+        'ru': 'Россия',
         'sa': 'Саудовская Аравия',
         'at': 'Австрия',
         'be': 'Бельгия',
@@ -2137,6 +2168,7 @@ const countrySynonyms = {
 	// Северные страны
     'fi': ['Финн', 'Скандинав', 'Европеец'],
     'dk': ['Датчанин', 'Скандинав', 'Европеец'],
+    'ru': ['Русский'],
 
     'az': ['Азербайджанец', 'Европеец', 'Азиат'],     
 	

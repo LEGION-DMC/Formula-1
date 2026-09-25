@@ -393,6 +393,18 @@ body {
     display: none;
 }
 
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .main-third-row {
+        grid-template-columns: 1fr;
+    }
+    .news-block {
+        grid-column: span 1;
+    }
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
 /* ============================================== */
 /* ВКЛАДКА: ПИЛОТЫ                               */
 /* ============================================== */
