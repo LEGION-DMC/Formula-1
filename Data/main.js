@@ -534,6 +534,7 @@ function createStartingGridBlock() {
         overlay.innerHTML = `
             <div class="starting-grid-blur-content">
                 <span class="starting-grid-blur-text">Стартовая решётка на гонку предстоящего Гран-При</span>
+                <span class="starting-grid-blur-title">! ОСТОРОЖНО СПОЙЛЕРЫ !</span>
                 <span class="starting-grid-blur-title">Нажмите для показа</span>
             </div>
         `;
