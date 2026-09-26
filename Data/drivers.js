@@ -40,7 +40,7 @@ const driversData = [
         titles: 4,
         hattricks: 15,
         wins: 71,
-        podiums: 133,
+        podiums: 134,
         poles: 48,
 		grandslam: 6,
 		
@@ -89,7 +89,7 @@ const driversData = [
         titles: 0,
         hattricks: 0,
         wins: 0,
-        podiums: 2,
+        podiums: 3,
         poles: 0,
 		
         note: "",
@@ -405,6 +405,7 @@ const driversData = [
             { team: "Red Bull", year: "2025", temporarily: true },
             { team: "Racing Bulls", year: "2025" },
             { team: "Red Bull", year: "2026", temporarily: true },
+            { team: "Racing Bulls", year: "2026" },
         ],
 		
         titles: 0,
@@ -432,7 +433,7 @@ const driversData = [
             { team: "Racing Point", year: "2018" },
             { team: "Renault", year: "2020" },
             { team: "Alpine", year: "2021-2024" },
-            { team: "Haas", year: "2025-н.в." }
+            { team: "Haas", year: "2025-2026" }
         ],
 		
         titles: 0,
@@ -564,9 +565,10 @@ const driversData = [
 		
         titles: 0,
         hattricks: 2,
-        wins: 7,
-        podiums: 31,
-        poles: 11,
+        wins: 8,
+        podiums: 32,
+        poles: 12,
+		grandslam: 1,
 		
         note: "Лидер гильдии пилотов.",
         bio: "Победитель Гран-при Сан-Паулу (2022) — первая победа Mercedes после долгого перерыва. Очень быстр, но иногда ошибается под давлением. Заменил Боттаса и стал ровней Хэмилтону.",

@@ -279,6 +279,7 @@ const detailedResults = {
         "albon": "dnf",
         "alonso": "dnf",
         "stroll": "dnf",
+        "tsunoda": "dnp",
     },
     "gp17": {
         "000": 25,
