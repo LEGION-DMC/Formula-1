@@ -10,12 +10,12 @@ const startingGridData = [
     { position: 9, driverId: '', team: '' },
     { position: 10, driverId: '', team: '' },
 	
-    { position: 11, driverId: '', team: '' },
-    { position: 12, driverId: '', team: '' },
-    { position: 13, driverId: '', team: '' },
-    { position: 14, driverId: '', team: '' },
-    { position: 15, driverId: '', team: '' },
-    { position: 16, driverId: '', team: '' },
+    { position: 11, driverId: 'lawson', team: '' },
+    { position: 12, driverId: 'alonso', team: '' },
+    { position: 13, driverId: 'sainz', team: '' },
+    { position: 14, driverId: 'stroll', team: '' },
+    { position: 15, driverId: 'colapinto', team: '' },
+    { position: 16, driverId: 'lindblad', team: '' },
 	
     { position: 17, driverId: 'hulkenberg', team: '' },
     { position: 18, driverId: 'bearman', team: '' },
@@ -357,7 +357,7 @@ function createStartingGridBlock() {
     block.innerHTML = `
         <div class="main-block-title starting-grid-title">
             <span class="gp-full-text">Ст. решётка на предстоящую гонку</span>
-            <span class="gp-short-text">Стартовая решётка на гонку предстоящего Гран-При</span>
+            <span class="gp-short-text">Стартовая решётка на предстоящую гонку</span>
         </div>
     `;
     
@@ -389,7 +389,7 @@ function createStartingGridBlock() {
         overlay.className = 'starting-grid-blur-overlay';
         overlay.innerHTML = `
             <div class="starting-grid-blur-content">
-                <span class="starting-grid-blur-text">Стартовая решётка на гонку предстоящего Гран-При</span>
+                <span class="starting-grid-blur-text">Стартовая решётка на предстоящую гонку</span>
                 <span class="starting-grid-blur-title">! ОСТОРОЖНО СПОЙЛЕРЫ !</span>
                 <span class="starting-grid-blur-title">Нажмите для показа</span>
             </div>
