@@ -2956,6 +2956,198 @@ h1, h2 {
     font-size: 15px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================== ПАНЕЛЬ ПОЗИЦИИ В ТОП-10 ==================== */
+.dm-avg-position-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.0);
+    width: 210px;
+}
+
+.dm-avg-position-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 10px 8px 10px;
+}
+
+/* ===== ЗАГОЛОВОК СВЕРХУ ===== */
+.dm-avg-position-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    width: 100%;
+    padding-bottom: 6px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 5px;
+}
+
+/* ===== СПИСОК СТРОК ===== */
+.dm-avg-position-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dm-avg-position-row {
+    display: grid;
+    grid-template-columns: 14px 1fr 18px;
+    align-items: center;
+    gap: 5px;
+    height: 14px;
+    padding: 0 3px;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+}
+
+/* Подсветка моды */
+.dm-avg-position-row.is-most-frequent {
+    background: color-mix(in srgb, var(--team-color) 15%, transparent);
+}
+
+.dm-avg-position-row.is-most-frequent .dm-avg-pos-count {
+    color: var(--team-color);
+}
+
+/* Подсветка лучшей позиции */
+.dm-avg-position-row.is-best {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.dm-avg-position-row.is-best .dm-avg-pos-count {
+    color: #FFD700;
+}
+
+/* Если лучшая = мода */
+.dm-avg-position-row.is-best.is-most-frequent {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 215, 0, 0.18) 0%,
+        color-mix(in srgb, var(--team-color) 18%, transparent) 100%
+    );
+}
+
+.dm-avg-position-row.is-best.is-most-frequent .dm-avg-pos-label {
+    color: #FFD700;
+}
+
+.dm-avg-position-row.is-best.is-most-frequent .dm-avg-pos-count {
+    color: var(--team-color);
+}
+
+/* Цифра слева */
+.dm-avg-pos-label {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    line-height: 1;
+}
+
+/* Линия-разделитель */
+.dm-avg-pos-line {
+    display: block;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    transition: background 0.2s ease;
+}
+
+.dm-avg-position-row.is-most-frequent .dm-avg-pos-line {
+    background: var(--team-color);
+    box-shadow: 0 0 5px color-mix(in srgb, var(--team-color) 50%, transparent);
+}
+
+.dm-avg-position-row.is-best .dm-avg-pos-line {
+    background: #FFD700;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+.dm-avg-position-row.is-best.is-most-frequent .dm-avg-pos-line {
+    background: linear-gradient(90deg, #FFD700, var(--team-color));
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+}
+
+/* Количество справа */
+.dm-avg-pos-count {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 11px;
+    color: var(--text-light);
+    text-align: right;
+    line-height: 1;
+}
+
+.dm-avg-pos-count.is-zero {
+    color: #777;
+}
+
+/* ===== ИТОГОВАЯ СТРОКА СНИЗУ ===== */
+.dm-avg-position-result {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 6px;
+    padding-top: 6px;
+    margin-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'F1Title', sans-serif;
+    font-size: 10px;
+}
+
+.dm-avg-result-left,
+.dm-avg-result-right {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.dm-avg-result-left,
+.dm-avg-result-right {
+    color: #999;
+}
+
+.dm-avg-result-sep {
+    color: #555;
+    font-size: 9px;
+}
+
+.dm-avg-result-value {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 13px;
+    margin-left: 2px;
+}
+
+.dm-avg-result-left .dm-avg-result-value {
+    color: #FFD700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.dm-avg-result-right .dm-avg-result-value {
+    color: var(--team-color);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--team-color) 40%, transparent);
+}
+
 /* ---------------------------------------------- */
 /* 2. КАРТОЧКА КОМАНДЫ                             */
 /* ---------------------------------------------- */

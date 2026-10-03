@@ -749,6 +749,11 @@ body {
     padding-top: 5%;
 }
 
+/* Панель позиции в топ-10 — мобильная версия */
+.dm-avg-position-panel {
+    display: none;
+}
+
 .compare-selectors {
     gap: 5px;
 }

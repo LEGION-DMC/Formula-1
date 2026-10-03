@@ -1,12 +1,12 @@
 const startingGridData = [ 
     { position: 1, driverId: 'verstappen', team: '' },
     { position: 2, driverId: 'hamilton', team: '' },
-    { position: 3, driverId: 'hadjar', team: '' },
-    { position: 4, driverId: 'antonelli', team: '' },
-    { position: 5, driverId: 'leclerc', team: '' },
-    { position: 6, driverId: 'norris', team: '' },
-    { position: 7, driverId: 'piastri', team: '' },
-    { position: 8, driverId: 'russell', team: '' },
+    { position: 3, driverId: 'antonelli', team: '' },
+    { position: 4, driverId: 'leclerc', team: '' },
+    { position: 5, driverId: 'norris', team: '' },
+    { position: 6, driverId: 'piastri', team: '' },
+    { position: 7, driverId: 'russell', team: '' },
+    { position: 8, driverId: 'hadjar', team: '' },
     { position: 9, driverId: 'gasly', team: '' },
     { position: 10, driverId: 'bortoleto', team: '' },
 	
@@ -14,16 +14,18 @@ const startingGridData = [
     { position: 12, driverId: 'alonso', team: '' },
     { position: 13, driverId: 'sainz', team: '' },
     { position: 14, driverId: 'stroll', team: '' },
-    { position: 15, driverId: 'colapinto', team: '' },
-    { position: 16, driverId: 'lindblad', team: '' },
+    { position: 15, driverId: 'hulkenberg', team: '' },
+    { position: 16, driverId: 'bearman', team: '' },
 	
-    { position: 17, driverId: 'hulkenberg', team: '' },
-    { position: 18, driverId: 'bearman', team: '' },
-    { position: 19, driverId: 'ocon', team: '' },
-    { position: 20, driverId: 'albon', team: '' },
-    { position: 21, driverId: 'bottas', pitLane: false, team: '' },
-    { position: 22, driverId: 'perez', pitLane: false, team: '' },
+    { position: 17, driverId: 'ocon', team: '' },
+    { position: 18, driverId: 'albon', team: '' },
+    { position: 19, driverId: 'bottas', team: '' },
+    { position: 20, driverId: 'perez', team: '' },
+    { position: 21, driverId: 'colapinto', pitLane: false, team: '' },
+    { position: 22, driverId: 'lindblad', pitLane: false, team: '' },
 ];
+
+const STARTING_GRID_WITH_PENALTIES = true;
 
 const weatherData = {
     type: "cloud",
@@ -353,11 +355,16 @@ function createStartingGridBlock() {
     // Проверяем, есть ли хоть один пилот в данных
     const hasAnyDriver = startingGridData && startingGridData.some(item => item.driverId && item.driverId !== '');
     
+    // 👇 Формируем текст заголовка в зависимости от флага
+    const gridTitleText = STARTING_GRID_WITH_PENALTIES
+        ? 'Стартовая решётка на предстоящую гонку (с учётом штрафов)'
+        : 'Стартовая решётка на предстоящую гонку';
+    
     // Заголовок блока
     block.innerHTML = `
         <div class="main-block-title starting-grid-title">
-            <span class="gp-full-text">Ст. решётка на предстоящую гонку</span>
-            <span class="gp-short-text">Стартовая решётка на предстоящую гонку</span>
+            <span class="gp-full-text">${gridTitleText}</span>
+            <span class="gp-short-text">${gridTitleText}</span>
         </div>
     `;
     
@@ -389,7 +396,7 @@ function createStartingGridBlock() {
         overlay.className = 'starting-grid-blur-overlay';
         overlay.innerHTML = `
             <div class="starting-grid-blur-content">
-                <span class="starting-grid-blur-text">Стартовая решётка на предстоящую гонку</span>
+                <span class="starting-grid-blur-text">${gridTitleText}</span>
                 <span class="starting-grid-blur-title">! ОСТОРОЖНО СПОЙЛЕРЫ !</span>
                 <span class="starting-grid-blur-title">Нажмите для показа</span>
             </div>

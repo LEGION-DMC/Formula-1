@@ -41,7 +41,7 @@ const driversData = [
         hattricks: 15,
         wins: 71,
         podiums: 134,
-        poles: 48,
+        poles: 49,
 		grandslam: 6,
 		
         note: "Самый молодой дебютант в истории F1 - 17 лет",
@@ -777,6 +777,71 @@ function initDriversPage(container) {
     container.appendChild(cardsArea);
     
     buildFilterPanel(filterPanel, cardsArea);
+}
+
+function calculateTop10PositionStats(driverId) {
+    const positions = [];
+    const allGPs = getAllGPs();
+    
+    allGPs.forEach(gpId => {
+        const results = detailedResults[gpId];
+        if (!results) return;
+        
+        const hasResults = Object.keys(results).some(key => 
+            key !== "000" && results[key] !== undefined
+        );
+        if (!hasResults) return;
+        
+        const value = getDriverResultValue(results, driverId);
+        
+        const pointsToPosition = {
+            25: 1, 18: 2, 15: 3, 12: 4, 10: 5,
+            8: 6, 6: 7, 4: 8, 2: 9, 1: 10
+        };
+        
+        if (typeof value === 'number' && pointsToPosition[value] !== undefined) {
+            positions.push(pointsToPosition[value]);
+        }
+    });
+    
+    if (positions.length === 0) return null;
+    
+    // Считаем частоту каждой позиции
+    const positionCounts = {};
+    for (let i = 1; i <= 10; i++) {
+        positionCounts[i] = 0;
+    }
+    positions.forEach(pos => {
+        if (positionCounts[pos] !== undefined) {
+            positionCounts[pos]++;
+        }
+    });
+    
+    // Мода — самая частая позиция (для подсветки строки)
+    let mostFrequent = 1;
+    let maxCount = 0;
+    for (let pos = 1; pos <= 10; pos++) {
+        if (positionCounts[pos] > maxCount) {
+            maxCount = positionCounts[pos];
+            mostFrequent = pos;
+        }
+    }
+    
+    // Лучшая — минимальная позиция
+    const best = Math.min(...positions);
+    
+    // Средняя — среднее арифметическое
+    const sum = positions.reduce((acc, pos) => acc + pos, 0);
+    const average = sum / positions.length;
+    
+    return {
+        best: best,
+        average: average,
+        mostFrequent: mostFrequent,
+        counts: positionCounts,
+        totalRaces: positions.length,
+        positions: positions
+    };
 }
 
 function buildFilterPanel(panel, cardsArea) {
@@ -1676,6 +1741,90 @@ function openDriverModal(driver) {
     rightColumn.appendChild(penaltiesPanel);
  
      // ====================
+    // ПАНЕЛЬ — Позиция в топ-10
+    // ====================
+    const avgPositionPanel = document.createElement('div');
+    avgPositionPanel.className = 'dm-avg-position-panel';
+    avgPositionPanel.style.setProperty('--team-color', getTeamColor(driver.team));
+    
+    const avgData = typeof calculateTop10PositionStats === 'function' 
+        ? calculateTop10PositionStats(driver.id) 
+        : null;
+    
+    if (avgData) {
+        const avgPattern = document.createElement('div');
+        avgPattern.className = 'dm-penalties-pattern';
+        avgPattern.innerHTML = DRIVER_PATTERN_SVG;
+        avgPositionPanel.appendChild(avgPattern);
+        
+        const avgOverlay = document.createElement('div');
+        avgOverlay.className = 'dm-penalties-overlay';
+        avgPositionPanel.appendChild(avgOverlay);
+        
+        const avgContent = document.createElement('div');
+        avgContent.className = 'dm-avg-position-content';
+        
+        // Заголовок сверху
+        const avgTitle = document.createElement('h3');
+        avgTitle.className = 'dm-avg-position-title';
+        avgTitle.textContent = 'Позиции в топ 10';
+        avgContent.appendChild(avgTitle);
+        
+        // Список строк 1-10
+        const list = document.createElement('div');
+        list.className = 'dm-avg-position-list';
+        
+        for (let pos = 1; pos <= 10; pos++) {
+            const row = document.createElement('div');
+            row.className = 'dm-avg-position-row';
+            
+            const posLabel = document.createElement('span');
+            posLabel.className = 'dm-avg-pos-label';
+            posLabel.textContent = pos;
+            row.appendChild(posLabel);
+            
+            const line = document.createElement('span');
+            line.className = 'dm-avg-pos-line';
+            row.appendChild(line);
+            
+            const count = document.createElement('span');
+            count.className = 'dm-avg-pos-count';
+            const cnt = avgData.counts[pos] || 0;
+            count.textContent = cnt;
+            if (cnt === 0) {
+                count.classList.add('is-zero');
+            }
+            row.appendChild(count);
+            
+            // Подсветка лучшей позиции
+            if (avgData.best === pos) {
+                row.classList.add('is-best');
+            }
+            // Подсветка моды
+            if (avgData.mostFrequent === pos) {
+                row.classList.add('is-most-frequent');
+            }
+            
+            list.appendChild(row);
+        }
+        
+        avgContent.appendChild(list);
+        
+        // Итоговая строка снизу: Лучшая | Средняя
+        const result = document.createElement('div');
+        result.className = 'dm-avg-position-result';
+        result.innerHTML = `
+            <span class="dm-avg-result-left">Лучшая <span class="dm-avg-result-value">${avgData.best}</span></span>
+            <span class="dm-avg-result-sep">|</span>
+            <span class="dm-avg-result-right">Средняя <span class="dm-avg-result-value">${avgData.average.toFixed(2)}</span></span>
+        `;
+        avgContent.appendChild(result);
+        
+        avgPositionPanel.appendChild(avgContent);
+        rightColumn.appendChild(avgPositionPanel);
+    }
+	
+     // ====================
     // НОВАЯ ПАНЕЛЬ — Рекорды круга
     // ====================
     const fastestLapsPanel = document.createElement('div');
@@ -1748,7 +1897,7 @@ function openDriverModal(driver) {
     
     fastestLapsPanel.appendChild(flContent);
     rightColumn.appendChild(fastestLapsPanel);
-    
+
     // ====================
     // ЦЕНТР — Основная плашка
     // ====================
@@ -2039,7 +2188,7 @@ function openDriverModal(driver) {
 
     // Анимация
     requestAnimationFrame(() => {
-        // Обе панели правой колонки — выезжают справа
+        // Начальное состояние — все панели справа за кадром
         penaltiesPanel.style.transition = 'none';
         penaltiesPanel.style.opacity = '0';
         penaltiesPanel.style.transform = 'translateX(40px)';
@@ -2048,16 +2197,30 @@ function openDriverModal(driver) {
         fastestLapsPanel.style.opacity = '0';
         fastestLapsPanel.style.transform = 'translateX(40px)';
 
+        if (avgData) {
+            avgPositionPanel.style.transition = 'none';
+            avgPositionPanel.style.opacity = '0';
+            avgPositionPanel.style.transform = 'translateX(40px)';
+        }
+
         requestAnimationFrame(() => {
-            // Панель штрафов
+            // 1. Панель штрафов
             penaltiesPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             penaltiesPanel.style.transitionDelay = '0.2s';
             penaltiesPanel.style.opacity = '1';
             penaltiesPanel.style.transform = 'translateX(0)';
 
-            // Панель рекордов круга — с небольшой задержкой после штрафов
+            // 2. Панель позиции в топ-10 — после штрафов
+            if (avgData) {
+                avgPositionPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                avgPositionPanel.style.transitionDelay = '0.35s';
+                avgPositionPanel.style.opacity = '1';
+                avgPositionPanel.style.transform = 'translateX(0)';
+            }
+
+            // 3. Панель рекордов круга — последней
             fastestLapsPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            fastestLapsPanel.style.transitionDelay = '0.35s';
+            fastestLapsPanel.style.transitionDelay = avgData ? '0.5s' : '0.35s';
             fastestLapsPanel.style.opacity = '1';
             fastestLapsPanel.style.transform = 'translateX(0)';
         });
