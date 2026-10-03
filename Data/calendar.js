@@ -260,16 +260,16 @@ const calendarData = [
 		
 		tires: "234",
 		
-		date: "2026-10-04 23:00",
-		quali: "2026-10-03 00:00",
+		date: "2026-10-04 15:00",
+		quali: "2026-10-03 16:00",
 		sprint: "",
 		
 		hasSprint: false,
 		canceled: false,
 		
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "https://rutube.ru/video/44e42c70a7b24c63acc6fea4cfef312c/",
+		recordingRace: "https://rutube.ru/video/308b2cb20efbb4859040d342b6f59070/"
 	},
 	{   id: "gp18", name: "Гран-при Сингапура",
 		track: "marina_bay",
