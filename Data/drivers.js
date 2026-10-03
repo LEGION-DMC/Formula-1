@@ -649,6 +649,30 @@ const driversData = [
         note: "",
         bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
     },
+    {   number: '--', id: "camara",
+        name: "Рафаэль Камара",
+        namem: "Р. Камара",
+        namef: "Рафаэль Чавес Камара",
+		
+        birthPlace:  "Ресифи, Бразилия", country: "br",
+        birthDate: "05.05.2005",
+		
+        team: "Резерв",
+		reserve: ["Haas"],
+        debut: "2027 - Haas",        
+		career: [
+            { team: "Haas", year: "2027-н.в." },
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+		
+        note: "",
+        bio: "",
+    },
     {   number: 99, id: "giovinazzi",    // Резерв
         name: "Антонио Джовинацци",
         namem: "А. Джовинацци",
@@ -674,31 +698,7 @@ const driversData = [
         note: "",
         bio: "Гонщик, чья карьера в F1 была недолгой, но он добился большого успеха в гонках WEC, став чемпионом мира в составе Ferrari.",
     },
-	/*  ~ Пилоты 2027
-    {   number: 88, id: "camara",
-        name: "Рафаэль Камара",
-        namem: "Р. Камара",
-        namef: "Рафаэль Чавес Камара",
-		
-        birthPlace:  "Ресифи, Бразилия", country: "br",
-        birthDate: "05.05.2005",
-		
-        team: "Резерв",
-		reserve: ["Haas"],
-        debut: "2027 - Haas",        
-		career: [
-            { team: "Haas", year: "2027-н.в." },
-        ],
-		
-        titles: 0,
-        hattricks: 0,
-        wins: 0,
-        podiums: 0,
-        poles: 0,
-		
-        note: "",
-        bio: "",
-    },
+		/*  ~ Пилоты 2027
     {   number: 9, id: "tsolov",
         name: "Никола Цолов",
         namem: "Н. Цолов",
