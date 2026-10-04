@@ -293,6 +293,7 @@ const detailedResults = {
         "000": 2,
         "000": 1,
         "bottas": "dnf",
+        "albon": "dnf",
         "tsunoda": "dnp",
     },
     "gp18": {
