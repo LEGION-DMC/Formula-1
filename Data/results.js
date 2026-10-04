@@ -292,6 +292,8 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
+        "bottas": "dnf",
+        "tsunoda": "dnp",
     },
     "gp18": {
         "000": 25,
