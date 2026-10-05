@@ -37,17 +37,19 @@ const weatherData = {
 };
 
 function mapWttrWeatherType(description) {
-    const desc = description.toLowerCase();
+    const desc = (description || '').toLowerCase().trim();
     
-    if (desc.includes('patchy rain nearby')) return { type: "cloud", typeName: "Облачно" };
-    if (desc.includes('sunny') || desc.includes('clear')) return { type: "sun", typeName: "Солнечно" };
-    if (desc.includes('partly cloudy')) return { type: "cloud", typeName: "Облачно" };
+    if (desc.includes('patchy rain')) return { type: "cloud", typeName: "Облачно" };
     if (desc.includes('cloudy') || desc.includes('overcast')) return { type: "cloud", typeName: "Облачно" };
-    if (desc.includes('mist') || desc.includes('fog')) return { type: "cloud", typeName: "Туман" };
+    if (desc.includes('partly cloudy')) return { type: "cloud", typeName: "Переменная облачность" };
+	
+    if (desc.includes('sunny') || desc.includes('clear')) return { type: "sun", typeName: "Солнечно" };
+    if (desc.includes('mist') || desc.includes('fog')) return { type: "fog", typeName: "Туман" };
+    if (desc.includes('haze') || desc.includes('smoke')) return { type: "fog", typeName: "Дымка" };
     if (desc.includes('drizzle') || desc.includes('light rain')) return { type: "rain", typeName: "Небольшой дождь" };
-    if (desc.includes('rain') || desc.includes('shower')) return { type: "rain", typeName: "Дождь" };
     if (desc.includes('thunder')) return { type: "rain", typeName: "Гроза" };
-    if (desc.includes('snow')) return { type: "rain", typeName: "Снег" };
+    if (desc.includes('snow') || desc.includes('blizzard')) return { type: "rain", typeName: "Снег" };
+    if (desc.includes('rain') || desc.includes('shower')) return { type: "rain", typeName: "Дождь" };
     
     return { type: "cloud", typeName: description };
 }
