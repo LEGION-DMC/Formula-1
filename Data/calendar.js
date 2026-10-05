@@ -1187,20 +1187,9 @@ function openTrackModal(track, gp) {
 
     const modal = document.createElement('div');
     modal.className = 'track-modal';
-    modal.style.position = 'relative';
-    modal.style.overflow = 'hidden';
-
-    const modalPattern = document.createElement('div');
-    modalPattern.className = 'track-modal-pattern';
-    modalPattern.innerHTML = CALENDAR_PATTERN_SVG;
-    modal.appendChild(modalPattern);
-    
-    const modalOverlayBg = document.createElement('div');
-    modalOverlayBg.className = 'track-modal-overlay-bg';
-    modal.appendChild(modalOverlayBg);
 
     const modalContent = document.createElement('div');
-    modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%;';
+    modalContent.className = 'track-modal-content';
 
     function close() {
         overlay.remove();
@@ -1212,88 +1201,128 @@ function openTrackModal(track, gp) {
         if (e.key === 'Escape') close();
     }
 
-    modalContent.innerHTML = `
-        <button class="track-modal-close">&times;</button>
-        <div class="track-modal-layout">
-            <div class="tm-track-image">
-                <img src="Images/Tracks/${track.id}.png" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
+    // ===== 1. Основной layout трассы (паттерн внутри своей обёртки) =====
+    const layoutWrapper = document.createElement('div');
+    layoutWrapper.className = 'track-modal-layout-wrapper';
+
+    const layoutPattern = document.createElement('div');
+    layoutPattern.className = 'track-modal-pattern';
+    layoutPattern.innerHTML = CALENDAR_PATTERN_SVG;
+    layoutWrapper.appendChild(layoutPattern);
+
+    const layoutOverlay = document.createElement('div');
+    layoutOverlay.className = 'track-modal-overlay-bg';
+    layoutWrapper.appendChild(layoutOverlay);
+
+    const layoutInner = document.createElement('div');
+    layoutInner.className = 'track-modal-layout';
+    layoutInner.innerHTML = `
+        <div class="tm-track-image">
+            <img src="Images/Tracks/${track.id}.png" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
+        </div>
+        <div class="tm-track-info">
+            <div class="tm-header">
+                <img src="Images/Flags/${track.country}.svg" class="calendar-flag" title="${getCountryName(track.country)}">
+                <h2>${track.trackName}</h2>
             </div>
-            <div class="tm-track-info">
-                <div class="tm-header">
-                    <img src="Images/Flags/${track.country}.svg" class="calendar-flag" title="${getCountryName(track.country)}">
-                    <h2>${track.trackName}</h2>
+            <hr class="tm-divider">
+            <div class="tm-detail-row-inline">
+                <div class="tm-detail-row">
+                    <img src="Images/Icon/location.webp" class="calendar-icon">
+                    <span>${track.location}</span>
                 </div>
-                <hr class="tm-divider">
-                <div class="tm-detail-row-inline">
-                    <div class="tm-detail-row">
-                        <img src="Images/Icon/location.webp" class="calendar-icon">
-                        <span>${track.location}</span>
-                    </div>
-                    <div class="tm-detail-row">
-                        <img src="Images/Icon/calendar.webp" class="calendar-icon">
-                        <span>${gp ? formatDateLong(gp.date) : ''}</span>
-                    </div>
+                <div class="tm-detail-row">
+                    <img src="Images/Icon/calendar.webp" class="calendar-icon">
+                    <span>${gp ? formatDateLong(gp.date) : ''}</span>
                 </div>
-                <hr class="tm-divider">
-                <div class="tm-stats-grid">
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-value">${track.length} км</span>
-                        <span class="tm-stat-label">Длина</span>
-                    </div>
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-value">${track.laps}</span>
-                        <span class="tm-stat-label">${pluralize(track.laps, 'круг', 'круга', 'кругов')}</span>
-                    </div>
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-value">${track.turns}</span>
-                        <span class="tm-stat-label">${pluralize(track.turns, 'поворот', 'поворота', 'поворотов')}</span>
-                    </div>
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-value">${track.elevation} м</span>
-                        <span class="tm-stat-label">Перепад высот</span>
-                    </div>
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-value">${track.speed} км/ч</span>
-                        <span class="tm-stat-label">Средняя скорость</span>
-                    </div>
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-value-direction">${track.direction === 'по часовой стрелке' ? '↻' : '↺'}</span>
-                        <span class="tm-stat-label">Направление</span>
-                    </div>
+            </div>
+            <hr class="tm-divider">
+            <div class="tm-stats-grid">
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-value">${track.length} км</span>
+                    <span class="tm-stat-label">Длина</span>
                 </div>
-                <hr class="tm-divider">
-                <div class="tm-stats-grid2">
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-label">Первая гонка</span>
-                        <span class="tm-stat-value">${track.firstrace}<span class="gp-year-suffix"> г.</span></span>
-                    </div>
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-value">${track.laps}</span>
+                    <span class="tm-stat-label">${pluralize(track.laps, 'круг', 'круга', 'кругов')}</span>
                 </div>
-                <hr class="tm-divider">
-                <div class="tm-stats-grid3">
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-label">Рекорд круга в гонке</span> ${(() => { const parts = track.lapRecord.split(', '); return `
-                            <span class="tm-stat-value2">${parts[0]}</span>
-                            <span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
-                    </div>
-                    <div class="tm-stat-cell">
-                        <span class="tm-stat-label">Рекорд круга в квалификации</span> ${(() => { const parts = track.qulRecord.split(', '); return `
-                            <span class="tm-stat-value2">${parts[0]}</span>
-                            <span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
-                    </div>
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-value">${track.turns}</span>
+                    <span class="tm-stat-label">${pluralize(track.turns, 'поворот', 'поворота', 'поворотов')}</span>
+                </div>
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-value">${track.elevation} м</span>
+                    <span class="tm-stat-label">Перепад высот</span>
+                </div>
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-value">${track.speed} км/ч</span>
+                    <span class="tm-stat-label">Средняя скорость</span>
+                </div>
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-value-direction">${track.direction === 'по часовой стрелке' ? '↻' : '↺'}</span>
+                    <span class="tm-stat-label">Направление</span>
+                </div>
+            </div>
+            <hr class="tm-divider">
+            <div class="tm-stats-grid2">
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-label">Первая гонка</span>
+                    <span class="tm-stat-value">${track.firstrace}<span class="gp-year-suffix"> г.</span></span>
+                </div>
+            </div>
+            <hr class="tm-divider">
+            <div class="tm-stats-grid3">
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-label">Рекорд круга в гонке</span> ${(() => { const parts = track.lapRecord.split(', '); return `
+                        <span class="tm-stat-value2">${parts[0]}</span>
+                        <span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
+                </div>
+                <div class="tm-stat-cell">
+                    <span class="tm-stat-label">Рекорд круга в квалификации</span> ${(() => { const parts = track.qulRecord.split(', '); return `
+                        <span class="tm-stat-value2">${parts[0]}</span>
+                        <span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>`;})()}
                 </div>
             </div>
         </div>
     `;
-    
+    layoutWrapper.appendChild(layoutInner);
+    modalContent.appendChild(layoutWrapper);
+
+    // ===== 2. Панель результатов гонки — отдельный блок под трассой =====
+    (function addRaceResultBlock() {
+        let targetGp = gp;
+        if (!targetGp || !targetGp.id) {
+            targetGp = getGPByTrackId(track.id);
+        }
+        if (!targetGp || !targetGp.id) return;
+        if (!isRaceFinishedForGP(targetGp.id)) return;
+
+        const panel = buildRaceResultPanel(targetGp.id);
+        if (!panel) return;
+
+        modalContent.appendChild(panel);
+
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                panel.classList.add('visible');
+            }, 250);
+        });
+    })();
+
+    // ===== 3. Кнопка закрытия (крестик) =====
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'track-modal-close';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', close);
+    modal.appendChild(closeBtn);
+
     modal.appendChild(modalContent);
-    setTimeout(autoShrinkHeaders, 10);
-    
-    modal.querySelector('.track-modal-close').addEventListener('click', close);
 
     overlay.appendChild(modal);
     overlay.addEventListener('click', e => {
         if (e.target === overlay) close();
     });
+
     document.addEventListener('keydown', esc);
     document.body.appendChild(overlay);
 
@@ -1301,6 +1330,9 @@ function openTrackModal(track, gp) {
         overlay.classList.add('active');
         modal.classList.add('active');
     });
+
+    // Автоуменьшение заголовка трассы
+    setTimeout(autoShrinkHeaders, 10);
 }
 
 function initCalendarPage(container) {
@@ -1337,6 +1369,254 @@ function initCalendarPage(container) {
             scrollToUpcomingGPWithGlow(cardsArea, upcomingGpId);
         }
     });
+}
+
+function getGPByTrackId(trackId) {
+    if (typeof calendarData === 'undefined') return null;
+    return calendarData.find(gp => gp.track === trackId && !gp.canceled) || null;
+}
+
+function isRaceFinishedForGP(gpId) {
+    if (typeof detailedResults === 'undefined') return false;
+    const results = detailedResults[gpId];
+    if (!results) return false;
+
+    // Есть ли хоть один реальный пилот (не "000")
+    const keys = Object.keys(results).filter(k => k !== '000');
+    if (keys.length === 0) return false;
+
+    // Есть ли у кого-то числовые очки (гонка состоялась)
+    const hasPoints = keys.some(k => {
+        const v = results[k];
+        const pts = (v && typeof v === 'object' && v.points !== undefined) ? v.points : v;
+        return typeof pts === 'number';
+    });
+
+    return hasPoints;
+}
+
+function buildRaceResultPanel(gpId) {
+    if (!gpId || typeof detailedResults === 'undefined') return null;
+
+    const results = detailedResults[gpId];
+    if (!results) return null;
+
+    // ===== Разбираем всех пилотов =====
+    const finished = [];    // с числовыми очками → в Топ-10
+    const nonFinished = []; // DNF / DSQ / DNS (без DNP)
+
+    Object.keys(results).forEach(driverId => {
+        if (driverId === '000') return;
+
+        const raw = results[driverId];
+        let value = raw;
+        let teamOverride = null;
+
+        if (raw && typeof raw === 'object') {
+            value = raw.points;
+            teamOverride = raw.team || null;
+        }
+
+        // DNP полностью игнорируем
+        if (value === 'dnp') return;
+
+        const driver = (typeof findDriverById === 'function')
+            ? findDriverById(driverId)
+            : null;
+        if (!driver) return;
+
+        const displayTeam = teamOverride || driver.team;
+
+        if (typeof value === 'number') {
+            finished.push({
+                driverId,
+                driver,
+                team: displayTeam,
+                points: value,
+                status: null
+            });
+            return;
+        }
+
+        if (value === 'dnf' || value === 'dsq' || value === 'dns') {
+            nonFinished.push({
+                driverId,
+                driver,
+                team: displayTeam,
+                points: null,
+                status: value
+            });
+        }
+    });
+
+    if (finished.length === 0 && nonFinished.length === 0) return null;
+
+    // Сортировка Топ-10 по очкам
+    finished.sort((a, b) => b.points - a.points);
+
+    // Сортировка не финишировавших: DNF → DSQ → DNS, затем по имени
+    const statusOrder = { dnf: 1, dsq: 2, dns: 3 };
+    nonFinished.sort((a, b) => {
+        const d = (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
+        if (d !== 0) return d;
+        return a.driver.name.localeCompare(b.driver.name, 'ru');
+    });
+
+    const top10 = finished.slice(0, 10);
+
+    // ===== Строим DOM =====
+    const panel = document.createElement('div');
+    panel.className = 'tm-race-result-panel';
+
+    const pattern = document.createElement('div');
+    pattern.className = 'tm-race-result-pattern';
+    pattern.innerHTML = (typeof CALENDAR_PATTERN_SVG !== 'undefined') ? CALENDAR_PATTERN_SVG : '';
+    panel.appendChild(pattern);
+
+    const overlay = document.createElement('div');
+    overlay.className = 'tm-race-result-overlay';
+    panel.appendChild(overlay);
+
+    const content = document.createElement('div');
+    content.className = 'tm-race-result-content';
+
+    // Заголовок
+    const header = document.createElement('div');
+    header.className = 'tm-race-result-header';
+    const title = document.createElement('h3');
+    title.className = 'tm-race-result-title';
+    title.textContent = 'Результат гонки';
+    header.appendChild(title);
+    content.appendChild(header);
+
+    // ===== Две колонки =====
+    const columns = document.createElement('div');
+    columns.className = 'tm-race-result-columns';
+
+    // ----- ЛЕВАЯ: Топ-10 -----
+    const leftCol = document.createElement('div');
+    leftCol.className = 'tm-race-result-col tm-race-result-col--top';
+
+    const leftTitle = document.createElement('div');
+    leftTitle.className = 'tm-race-result-col-title';
+    leftTitle.textContent = 'Топ-10';
+    leftCol.appendChild(leftTitle);
+
+    const leftList = document.createElement('div');
+    leftList.className = 'tm-race-result-list';
+
+    if (top10.length === 0) {
+        const emptyMsg = document.createElement('div');
+        emptyMsg.className = 'tm-race-result-empty';
+        emptyMsg.textContent = 'Нет финишировавших';
+        leftList.appendChild(emptyMsg);
+    } else {
+        top10.forEach((entry, index) => {
+            leftList.appendChild(createRaceResultRow(entry, index + 1));
+        });
+    }
+    leftCol.appendChild(leftList);
+
+    // ----- ПРАВАЯ: DNF / DSQ / DNS -----
+    const rightCol = document.createElement('div');
+    rightCol.className = 'tm-race-result-col tm-race-result-col--dnf';
+
+    const rightTitle = document.createElement('div');
+    rightTitle.className = 'tm-race-result-col-title';
+    rightTitle.textContent = 'Нефинишировавшие';
+    rightCol.appendChild(rightTitle);
+
+    const rightList = document.createElement('div');
+    rightList.className = 'tm-race-result-list';
+
+    if (nonFinished.length === 0) {
+        const emptyMsg = document.createElement('div');
+        emptyMsg.className = 'tm-race-result-empty';
+        emptyMsg.textContent = 'Все финишировали';
+        rightList.appendChild(emptyMsg);
+    } else {
+        nonFinished.forEach(entry => {
+            rightList.appendChild(createRaceResultRow(entry, null));
+        });
+    }
+    rightCol.appendChild(rightList);
+
+    columns.appendChild(leftCol);
+    columns.appendChild(rightCol);
+    content.appendChild(columns);
+
+    panel.appendChild(content);
+
+    return panel;
+}
+
+function createRaceResultRow(entry, pos) {
+    const row = document.createElement('div');
+    row.className = 'tm-race-result-row';
+
+    const teamColor = (typeof getTeamColor === 'function')
+        ? getTeamColor(entry.team)
+        : '#e10600';
+    row.style.setProperty('--team-color', teamColor);
+
+    // Позиция или статус
+    const posEl = document.createElement('span');
+    if (pos !== null) {
+        posEl.className = 'tm-race-result-pos' + (pos === 1 ? ' winner' : '');
+        posEl.textContent = pos;
+    } else {
+        posEl.className = 'tm-race-result-pos status ' + entry.status;
+        posEl.textContent = entry.status.toUpperCase();
+    }
+    row.appendChild(posEl);
+
+    // Логотип команды
+    const logo = document.createElement('img');
+    logo.className = 'tm-race-result-team-logo';
+    logo.src = (typeof getTeamLogo === 'function') ? getTeamLogo(entry.team) : '';
+    logo.alt = entry.team;
+    logo.onerror = () => { logo.style.display = 'none'; };
+    row.appendChild(logo);
+
+    // Флаг
+    const flag = document.createElement('img');
+    flag.className = 'tm-race-result-flag';
+    flag.src = `Images/Flags/${entry.driver.country}.svg`;
+    flag.title = (typeof getCountryName === 'function')
+        ? getCountryName(entry.driver.country)
+        : entry.driver.country;
+    flag.onerror = () => { flag.style.display = 'none'; };
+    row.appendChild(flag);
+
+    // Имя
+    const name = document.createElement('span');
+    name.className = 'tm-race-result-name';
+    name.textContent = entry.driver.name;
+    row.appendChild(name);
+
+    // Очки / статус
+    const points = document.createElement('span');
+    if (entry.points !== null && entry.points > 0) {
+        points.className = 'tm-race-result-points has-points';
+        points.textContent = entry.points;
+    } else if (entry.points !== null) {
+        points.className = 'tm-race-result-points';
+        points.textContent = '0';
+    } else {
+        points.className = 'tm-race-result-points';
+        points.textContent = '';
+    }
+    row.appendChild(points);
+
+    // Клик — открыть модалку пилота
+    row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof openDriverModal === 'function') {
+            openDriverModal(entry.driver);
+        }
+    });
+
+    return row;
 }
 
 function findUpcomingGP() {

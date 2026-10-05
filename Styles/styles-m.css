@@ -1341,6 +1341,37 @@ body {
     border-color: var(--red-accent);
 }
 
+.tm-race-result-columns {
+    grid-template-columns: 1fr;
+    gap: 5px;
+}
+
+.tm-race-result-col--dnf {
+    border-left: none;
+    border-top: 1px solid rgba(225, 6, 0, 0.25);
+    padding-left: 0;
+    padding-top: 5px;
+}
+
+.tm-race-result-name { font-size: 0.75rem; }
+.tm-race-result-pos { font-size: 0.75rem; min-width: 24px; }
+
+.track-modal-overlay {
+    align-items: flex-start;  
+    overflow-y: auto;             
+    -webkit-overflow-scrolling: touch;
+}
+
+.track-modal {
+    max-height: none;               
+    overflow: visible;  
+}
+
+.track-modal-content {
+    gap: 8px;
+}
+
+
 /* ============================================== */
 /* ВКЛАДКА: РЕЗУЛЬТАТЫ                           */
 /* ============================================== */

@@ -194,7 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	const initialTab = 'main';
+	const savedTab = localStorage.getItem('activeF1Tab');
+	const validTabs = menuItems.map(item => item.id);
+	const initialTab = (savedTab && validTabs.includes(savedTab)) ? savedTab : 'main';
+
 	setActiveButton(initialTab);
 	loadTabContent(initialTab);
 

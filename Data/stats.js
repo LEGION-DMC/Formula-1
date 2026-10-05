@@ -57,33 +57,47 @@ const replacementQualiData = [
 ];
 
 const penaltiesData = [
-    { driver: "Франко Колапинто", fines: 4 },
-    { driver: "Юки Цунода", fines: 3 },
-    { driver: "Лиам Лоусон", fines: 3 },
-    { driver: "Лэнс Стролл", fines: 2 },
-    { driver: "Карлос Сайнс", fines: 2 },
-    { driver: "Оливер Берман", fines: 2 },
-    { driver: "Оскар Пиастри", fines: 2 },
-    { driver: "Габриэл Бортолето", fines: 2 },
-    { driver: "Арвид Линдблад", fines: 2 },
-    { driver: "Льюис Хэмилтон", fines: 1 },
-    { driver: "Кими Антонелли", fines: 1 },
-    { driver: "Алекс Албон", fines:  1 },
-	
-    { driver: "Эстебан Окон", fines: 0 },
-    { driver: "Ландо Норрис", fines: 0 },
-    { driver: "Макс Ферстаппен", fines: 0 },
-    { driver: "Шарль Леклер", fines: 0 },
-    { driver: "Исак Хаджар", fines: 0 },
-    { driver: "Серхио Перес", fines: 0 },
-    { driver: "Пьер Гасли", fines: 0 },
-    { driver: "Фернандо Алонсо", fines: 0 },
-    { driver: "Нико Хюлькенберг", fines: 0 },
-    { driver: "Джордж Расселл", fines: 0 },
-    { driver: "Валттери Боттас", fines: 0 },
-
-    { driver: "Гуан Ю Чжоу", fines: 0 },
-    { driver: "Джек Дуэн", fines: 0 },
+    { driver: "Франко Колапинто", penalties: [
+            { date: "23/08/2026", count: 3 }, 
+            { date: "14/06/2026", count: 1 },
+        ]},
+    { driver: "Арвид Линдблад", penalties: [
+            { date: "23/08/2026", count: 2 },
+        ]},
+    { driver: "Лиам Лоусон", penalties: [
+            { date: "23/08/2026", count: 1 },
+            { date: "07/12/2025", count: 1 },
+            { date: "08/11/2025", count: 1 },
+        ]},
+    { driver: "Кими Антонелли", penalties: [
+            { date: "25/07/2026", count: 1 },
+        ]},
+    { driver: "Юки Цунода", penalties: [
+            { date: "07/12/2025", count: 1 },
+            { date: "09/11/2025", count: 2 },
+        ]},
+    { driver: "Оливер Берман", penalties: [
+            { date: "07/12/2025", count: 1 },
+            { date: "08/11/2025", count: 1 },
+        ]},
+    { driver: "Алекс Албон", penalties: [
+            { date: "23/11/2025", count: 1 },
+        ]},
+    { driver: "Габриэл Бортолето", penalties: [
+            { date: "23/11/2025", count: 2 },
+        ]},
+    { driver: "Оскар Пиастри", penalties: [
+            { date: "09/11/2025", count: 2 },
+        ]},
+    { driver: "Льюис Хэмилтон", penalties: [
+            { date: "09/11/2025", count: 1 },
+        ]},
+    { driver: "Карлос Сайнс", penalties: [
+            { date: "19/10/2025", count: 2 },
+        ]},
+    { driver: "Лэнс Стролл", penalties: [
+            { date: "18/10/2025", count: 2 },
+        ]},
 ];
 
 const pitstopData = [
@@ -474,6 +488,30 @@ function findDriverById(id) {
     return driversData.find(d => d.id === id);
 }
 
+function getActiveFines() {
+    const now = new Date();
+    const activeFines = {};
+
+    penaltiesData.forEach(entry => {
+        const driverName = entry.driver;
+        if (!entry.penalties || !Array.isArray(entry.penalties)) return;
+
+        entry.penalties.forEach(penalty => {
+            const [day, month, year] = penalty.date.split('/').map(Number);
+            const fineDate = new Date(year, month - 1, day);
+
+            const expiryDate = new Date(fineDate);
+            expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+
+            if (now < expiryDate) {
+                activeFines[driverName] = (activeFines[driverName] || 0) + penalty.count;
+            }
+        });
+    });
+
+    return activeFines;
+}
+
 function getGPById(id) {
     if (typeof calendarData !== 'undefined') {
         return calendarData.find(g => g.id === id);
@@ -499,10 +537,18 @@ function getGPCountry(gpId) {
 }
 
 function syncPenaltiesToDrivers() {
-    penaltiesData.forEach(penalty => {
-        const driver = findDriverByName(penalty.driver);
+    const activeFines = getActiveFines();
+    
+    // Сначала обнуляем у всех
+    driversData.forEach(driver => {
+        driver.fines = 0;
+    });
+
+    // Затем проставляем активные
+    Object.entries(activeFines).forEach(([driverName, count]) => {
+        const driver = findDriverByName(driverName);
         if (driver) {
-            driver.fines = penalty.fines;
+            driver.fines = count;
         }
     });
 }
@@ -1044,18 +1090,13 @@ function createPenaltiesTable() {
 
     // Функция для определения команды пилота
     function getPitstopTeam(driver) {
-        // Если пилот не резервный - возвращаем его команду
         if (driver.team.toLowerCase() !== 'резерв' && driver.team.toLowerCase() !== 'reserve') {
             return driver.team;
         }
-        
-        // Для резервных пилотов ищем команду, которую они заменяли
         if (typeof replacementQualiData !== 'undefined') {
             for (const replacement of replacementQualiData) {
-                // Проверяем, является ли пилот заменяющим (driver2)
                 const replacedDriver = findDriverByName(replacement.driver2);
                 if (replacedDriver && replacedDriver.id === driver.id) {
-                    // Нашли замену, возвращаем команду основного пилота (driver1)
                     const mainDriver = findDriverByName(replacement.driver1);
                     if (mainDriver) {
                         return mainDriver.team;
@@ -1063,17 +1104,17 @@ function createPenaltiesTable() {
                 }
             }
         }
-        
-        // Если не нашли в заменах, но у пилота есть резервные команды
         if (driver.reserve && Array.isArray(driver.reserve) && driver.reserve.length > 0) {
             return driver.reserve[0];
         }
-        
-        // Если ничего не нашли, возвращаем "Резерв"
         return driver.team;
     }
 
-    const sorted = [...penaltiesData]
+    // 👇 НОВАЯ логика: берём активные штрафы
+    const activeFines = getActiveFines();
+
+    const sorted = Object.entries(activeFines)
+        .map(([driverName, count]) => ({ driver: driverName, fines: count }))
         .filter(p => p.fines > 0)
         .sort((a, b) => b.fines - a.fines);
 
@@ -1081,11 +1122,9 @@ function createPenaltiesTable() {
         const driver = findDriverByName(row.driver);
         if (!driver) return;
 
-        // Определяем команду для отображения
         const displayTeam = getPitstopTeam(driver);
-        
+
         let teamLogo = getTeamLogo(displayTeam);
-        
         if (!teamLogo || teamLogo === '') {
             teamLogo = 'Images/logo.png';
         }
