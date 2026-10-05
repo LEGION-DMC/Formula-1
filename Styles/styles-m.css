@@ -815,7 +815,7 @@ body {
 .team-modal-close-btn {
     display: flex;
     position: absolute;
-    top: 5px; right: 6px;
+    top: -4px; right: -5px;
     width: 30px; height: 30px;
     border-radius: 20%;
     background-color: rgba(255, 255, 255, 0.08);
@@ -1256,7 +1256,7 @@ body {
 .track-modal-close {
     display: flex;
     position: absolute;
-    top: 5px; right: 6px;
+    top: 12px; right: 12px;
     width: 30px; height: 30px;
     border-radius: 20%;
     background-color: rgba(255, 255, 255, 0.08);
