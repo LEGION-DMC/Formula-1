@@ -5700,7 +5700,6 @@ h1, h2 {
 .tm-race-result-content {
     position: relative;
     z-index: 2;
-    padding: 10px 10px;
 }
 
 .tm-race-result-header {
@@ -5852,4 +5851,74 @@ h1, h2 {
 
 .tm-race-result-points.has-points {
     color: lightgray;
+}
+
+.tm-race-result-spoiler {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.tm-race-result-inner {
+    padding: 10px 10px;
+    transition: filter 0.4s ease, -webkit-filter 0.4s ease;
+}
+
+.tm-race-result-inner.blurred {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.tm-race-result-spoiler-overlay {
+    position: absolute;
+    inset: 0;                       /* накрывает ВСЮ обёртку */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+}
+
+.tm-race-result-spoiler-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tm-race-result-spoiler-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 15px 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.tm-race-result-spoiler-overlay:hover .tm-race-result-spoiler-content {
+    transform: scale(1.05);
+}
+
+.tm-race-result-spoiler-text {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1rem;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.tm-race-result-spoiler-title {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 6px;
+    margin-top: 2px;
+    width: 100%;
 }

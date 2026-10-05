@@ -1402,8 +1402,8 @@ function buildRaceResultPanel(gpId) {
     if (!results) return null;
 
     // ===== Разбираем всех пилотов =====
-    const finished = [];    // с числовыми очками → в Топ-10
-    const nonFinished = []; // DNF / DSQ / DNS (без DNP)
+    const finished = [];
+    const nonFinished = [];
 
     Object.keys(results).forEach(driverId => {
         if (driverId === '000') return;
@@ -1417,7 +1417,6 @@ function buildRaceResultPanel(gpId) {
             teamOverride = raw.team || null;
         }
 
-        // DNP полностью игнорируем
         if (value === 'dnp') return;
 
         const driver = (typeof findDriverById === 'function')
@@ -1428,33 +1427,19 @@ function buildRaceResultPanel(gpId) {
         const displayTeam = teamOverride || driver.team;
 
         if (typeof value === 'number') {
-            finished.push({
-                driverId,
-                driver,
-                team: displayTeam,
-                points: value,
-                status: null
-            });
+            finished.push({ driverId, driver, team: displayTeam, points: value, status: null });
             return;
         }
 
         if (value === 'dnf' || value === 'dsq' || value === 'dns') {
-            nonFinished.push({
-                driverId,
-                driver,
-                team: displayTeam,
-                points: null,
-                status: value
-            });
+            nonFinished.push({ driverId, driver, team: displayTeam, points: null, status: value });
         }
     });
 
     if (finished.length === 0 && nonFinished.length === 0) return null;
 
-    // Сортировка Топ-10 по очкам
     finished.sort((a, b) => b.points - a.points);
 
-    // Сортировка не финишировавших: DNF → DSQ → DNS, затем по имени
     const statusOrder = { dnf: 1, dsq: 2, dns: 3 };
     nonFinished.sort((a, b) => {
         const d = (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
@@ -1480,18 +1465,22 @@ function buildRaceResultPanel(gpId) {
     const content = document.createElement('div');
     content.className = 'tm-race-result-content';
 
-    // Заголовок
+    // ===== Обёртка для спойлера (накрывает ВЕСЬ контент) =====
+    const spoilerWrapper = document.createElement('div');
+    spoilerWrapper.className = 'tm-race-result-spoiler';
+
+    // ----- Внутренний контейнер (то, что скрывается) -----
+    const innerContent = document.createElement('div');
+    innerContent.className = 'tm-race-result-inner blurred';
+
+    // Заголовок — ВНУТРЬ innerContent, чтобы он тоже блюрился
     const header = document.createElement('div');
     header.className = 'tm-race-result-header';
     const title = document.createElement('h3');
     title.className = 'tm-race-result-title';
     title.textContent = 'Результат гонки';
     header.appendChild(title);
-    content.appendChild(header);
-
-    // ===== Две колонки =====
-    const columns = document.createElement('div');
-    columns.className = 'tm-race-result-columns';
+    innerContent.appendChild(header);
 
     // ----- ЛЕВАЯ: Топ-10 -----
     const leftCol = document.createElement('div');
@@ -1541,11 +1530,53 @@ function buildRaceResultPanel(gpId) {
     }
     rightCol.appendChild(rightList);
 
+    // ===== Обёртка для двух колонок =====
+    const columns = document.createElement('div');
+    columns.className = 'tm-race-result-columns';
+
     columns.appendChild(leftCol);
     columns.appendChild(rightCol);
-    content.appendChild(columns);
+    innerContent.appendChild(columns);
+
+    // ----- Оверлей спойлера (поверх заблюренного контента) -----
+    const spoilerOverlay = document.createElement('div');
+    spoilerOverlay.className = 'tm-race-result-spoiler-overlay';
+    spoilerOverlay.innerHTML = `
+        <div class="tm-race-result-spoiler-content">
+            <span class="tm-race-result-spoiler-text">Результат гонки</span>
+            <span class="tm-race-result-spoiler-title">! ОСТОРОЖНО СПОЙЛЕРЫ !</span>
+            <span class="tm-race-result-spoiler-title">Нажмите для показа</span>
+        </div>
+    `;
+
+    spoilerWrapper.appendChild(innerContent);
+    spoilerWrapper.appendChild(spoilerOverlay);
+    content.appendChild(spoilerWrapper);
 
     panel.appendChild(content);
+
+    // ===== Обработчик клика по спойлеру =====
+    function revealSpoiler() {
+        if (!innerContent.classList.contains('blurred')) return;
+        innerContent.classList.remove('blurred');
+        spoilerOverlay.classList.add('hidden');
+        setTimeout(() => {
+            spoilerOverlay.style.display = 'none';
+        }, 400);
+    }
+
+    spoilerOverlay.addEventListener('click', (e) => {
+        e.stopPropagation();
+        revealSpoiler();
+    });
+
+    panel.addEventListener('click', (e) => {
+        // Если клик по строке результата — не раскрываем спойлер
+        if (e.target.closest('.tm-race-result-row')) return;
+        if (innerContent.classList.contains('blurred')) {
+            revealSpoiler();
+        }
+    });
 
     return panel;
 }
