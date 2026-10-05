@@ -44,8 +44,10 @@ function mapWttrWeatherType(description) {
     if (desc.includes('partly cloudy')) return { type: "cloud", typeName: "Переменная облачность" };
 	
     if (desc.includes('sunny') || desc.includes('clear')) return { type: "sun", typeName: "Солнечно" };
+	
     if (desc.includes('mist') || desc.includes('fog')) return { type: "fog", typeName: "Туман" };
     if (desc.includes('haze') || desc.includes('smoke')) return { type: "fog", typeName: "Дымка" };
+	
     if (desc.includes('drizzle') || desc.includes('light rain')) return { type: "rain", typeName: "Небольшой дождь" };
     if (desc.includes('thunder')) return { type: "rain", typeName: "Гроза" };
     if (desc.includes('snow') || desc.includes('blizzard')) return { type: "rain", typeName: "Снег" };
