@@ -29,32 +29,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const divider = document.createElement('hr');
     divider.className = 'menu-divider';
 
-	const nav = document.createElement('nav');
-	nav.className = 'menu-nav';
+    const nav = document.createElement('nav');
+    nav.className = 'menu-nav';
 
-	// Логотип в выезжающем меню
-	const navLogo = document.createElement('img');
-	navLogo.src = 'Images/logo.png';
-	navLogo.alt = 'F1 Logo';
-	navLogo.className = 'menu-nav-logo';
-	navLogo.title = 'На главную';
-	navLogo.addEventListener('click', () => {
-		// Закрываем меню и переходим на главную
-		nav.classList.remove('open');
-		burgerBtn.classList.remove('open');
-		setActiveButton('main');
-		loadTabContent('main');
-	});
-	nav.appendChild(navLogo);
+    // Логотип в выезжающем меню
+    const navLogo = document.createElement('img');
+    navLogo.src = 'Images/logo.png';
+    navLogo.alt = 'F1 Logo';
+    navLogo.className = 'menu-nav-logo';
+    navLogo.title = 'На главную';
+    navLogo.addEventListener('click', () => {
+        nav.classList.remove('open');
+        burgerBtn.classList.remove('open');
+        document.body.style.overflow = '';
+        setActiveButton('main');
+        loadTabContent('main');
+    });
+    nav.appendChild(navLogo);
 
-	// Пункты меню
-	menuItems.filter(item => !item.isDefault).forEach(item => {
-		const btn = document.createElement('button');
-		btn.className = 'menu-item';
-		btn.dataset.tab = item.id;
-		btn.textContent = item.label;
-		nav.appendChild(btn);
-	});
+    // Пункты меню
+    menuItems.filter(item => !item.isDefault).forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'menu-item';
+        btn.dataset.tab = item.id;
+        btn.textContent = item.label;
+        nav.appendChild(btn);
+    });
 
     const burgerBtn = document.createElement('button');
     burgerBtn.className = 'burger-btn';
@@ -96,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             switch (tabId) {
                 case 'main':
                     title.textContent = '🏁 Добро пожаловать в мир Formula 1!';
-                     
                     if (typeof initMainPage === 'function') initMainPage(dataContainer);
                     break;
                 case 'calendar':
@@ -122,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             if (dataContainer.children.length === 0) {
-                 
                 dataContainer.appendChild(title);
                 const desc = document.createElement('p');
                 desc.style.color = '#b0b0b0';
@@ -131,8 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 100);  
 
-         
-        localStorage.setItem('activeF1Tab', tabId);
+        // Сохраняем активную вкладку в sessionStorage —
+        // она сохраняется при перезагрузке, но сбрасывается при новом запуске
+        sessionStorage.setItem('activeF1Tab', tabId);
     }
  
     function setActiveButton(tabId) {
@@ -145,61 +144,64 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
   
-	allMenuButtons.forEach(button => {
-		button.addEventListener('click', (e) => {
-			const tabId = e.target.dataset.tab;
-			setActiveButton(tabId);
-			loadTabContent(tabId);
+    allMenuButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const tabId = e.target.dataset.tab;
+            setActiveButton(tabId);
+            loadTabContent(tabId);
 
-			const nav = document.querySelector('.menu-nav');
-			const burger = document.querySelector('.burger-btn');
-			if (nav.classList.contains('open')) {
-				nav.classList.remove('open');
-				burger.classList.remove('open');
-				document.body.style.overflow = '';  
-			}
-		});
-	});
+            const nav = document.querySelector('.menu-nav');
+            const burger = document.querySelector('.burger-btn');
+            if (nav.classList.contains('open')) {
+                nav.classList.remove('open');
+                burger.classList.remove('open');
+                document.body.style.overflow = '';  
+            }
+        });
+    });
 
-	logo.addEventListener('click', () => {
-		setActiveButton('main');
-		loadTabContent('main');
-		
-		const nav = document.querySelector('.menu-nav');
-		const burger = document.querySelector('.burger-btn');
-		if (nav.classList.contains('open')) {
-			nav.classList.remove('open');
-			burger.classList.remove('open');
-			document.body.style.overflow = '';  
-		}
-	});
+    logo.addEventListener('click', () => {
+        setActiveButton('main');
+        loadTabContent('main');
+        
+        const nav = document.querySelector('.menu-nav');
+        const burger = document.querySelector('.burger-btn');
+        if (nav.classList.contains('open')) {
+            nav.classList.remove('open');
+            burger.classList.remove('open');
+            document.body.style.overflow = '';  
+        }
+    });
 
-	navLogo.addEventListener('click', () => {
-		nav.classList.remove('open');
-		burgerBtn.classList.remove('open');
-		document.body.style.overflow = '';  
-		setActiveButton('main');
-		loadTabContent('main');
-	});
+    navLogo.addEventListener('click', () => {
+        nav.classList.remove('open');
+        burgerBtn.classList.remove('open');
+        document.body.style.overflow = '';  
+        setActiveButton('main');
+        loadTabContent('main');
+    });
 
-	burgerBtn.addEventListener('click', () => {
-		const nav = document.querySelector('.menu-nav');
-		burgerBtn.classList.toggle('open');
-		nav.classList.toggle('open');
-		
-		if (nav.classList.contains('open')) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
-	});
+    burgerBtn.addEventListener('click', () => {
+        const nav = document.querySelector('.menu-nav');
+        burgerBtn.classList.toggle('open');
+        nav.classList.toggle('open');
+        
+        if (nav.classList.contains('open')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
 
-	const savedTab = localStorage.getItem('activeF1Tab');
-	const validTabs = menuItems.map(item => item.id);
-	const initialTab = (savedTab && validTabs.includes(savedTab)) ? savedTab : 'main';
+    // Определяем стартовую вкладку.
+    // sessionStorage пуст при новом запуске → открываем 'main'.
+    // При перезагрузке страницы значение сохраняется → открываем последнюю вкладку.
+    const savedTab = sessionStorage.getItem('activeF1Tab');
+    const validTabs = menuItems.map(item => item.id);
+    const initialTab = (savedTab && validTabs.includes(savedTab)) ? savedTab : 'main';
 
-	setActiveButton(initialTab);
-	loadTabContent(initialTab);
+    setActiveButton(initialTab);
+    loadTabContent(initialTab);
 
-	window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
 });
