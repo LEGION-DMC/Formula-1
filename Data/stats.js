@@ -466,8 +466,8 @@ const enginePartsData = [
     { driver: "Льюис Хэмилтон", ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 6 },
     { driver: "Алекс Албон", ice: 5, tc: 3, exh: 3, mguk: 2, es: 3, puce: 4, puanc: 5 },
     { driver: "Карлос Сайнс", ice: 4, tc: 4, exh: 3, mguk: 2, es: 3, puce: 4, puanc: 4 },
-    { driver: "Арвид Линдблад", ice: 5, tc: 5, exh: 5, mguk: 2, es: 2, puce: 2, puanc: 5 },
-    { driver: "Лиам Лоусон", ice: 3, tc: 3, exh: 3, mguk: 2, es: 2, puce: 2, puanc: 5 },
+    { driver: "Арвид Линдблад", ice: 5, tc: 5, exh: 5, mguk: 2, es: 2, puce: 2, puanc: 6 },
+    { driver: "Лиам Лоусон", ice: 4, tc: 4, exh: 4, mguk: 2, es: 2, puce: 2, puanc: 6 },
     { driver: "Лэнс Стролл", ice: 5, tc: 6, exh: 3, mguk: 5, es: 7, puce: 6, puanc: 8 },
     { driver: "Фернандо Алонсо", ice: 5, tc: 5, exh: 3, mguk: 5, es: 7, puce: 6, puanc: 9 },
     { driver: "Эстебан Окон", ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 5 },
@@ -477,7 +477,7 @@ const enginePartsData = [
     { driver: "Пьер Гасли", ice: 4, tc: 3, exh: 3, mguk: 2, es: 3, puce: 3, puanc: 5 },
     { driver: "Франко Колапинто", ice: 5, tc: 3, exh: 2, mguk: 2, es: 3, puce: 3, puanc: 4 },
     { driver: "Серхио Перес", ice: 4, tc: 4, exh: 3, mguk: 3, es: 3, puce: 3, puanc: 4 },
-    { driver: "Валттери Боттас", ice: 4, tc: 4, exh: 2, mguk: 3, es: 3, puce: 3, puanc: 3 },
+    { driver: "Валттери Боттас", ice: 4, tc: 4, exh: 3, mguk: 3, es: 3, puce: 3, puanc: 4 },
 ];
 
 function findDriverByName(fullName) {
