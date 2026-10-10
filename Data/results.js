@@ -456,6 +456,7 @@ const detailedSprintResults = {
         "000": 3,
         "000": 2,
         "000": 1,
+        "tsunoda": "dnp",
         "russell": "dnf",
     },
 };
