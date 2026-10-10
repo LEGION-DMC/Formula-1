@@ -462,6 +462,8 @@ const detailedSprintResults = {
         "hadjar": "dnf",
         "perez": "dnf",
         "stroll": "dnf",
+        "bortoleto": "dnf",
+        "bottas": "dnf",
     },
 };
 
@@ -733,6 +735,13 @@ const calculateRaceWinners = () => {
 };
 
 const initResultsPage = container => {
+    if (typeof calculateFastestLapsFromTracks === 'function') calculateFastestLapsFromTracks();
+    if (typeof applySeasonStatsToDrivers === 'function') applySeasonStatsToDrivers();
+    if (typeof applySeasonPolesToDrivers === 'function') applySeasonPolesToDrivers();
+    if (typeof applySeasonDNFsToDrivers === 'function') applySeasonDNFsToDrivers();
+    if (typeof applyDebutFromCareer === 'function') applyDebutFromCareer();
+    if (typeof applyShortNames === 'function') applyShortNames();
+	
     calculateDriverStandings();
     calculateSprintStandings();
     calculateCombinedStandings();
