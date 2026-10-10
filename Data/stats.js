@@ -1,3 +1,6 @@
+const STARTING_GRID_WITH_PENALTIES = false;
+const STARTING_GRID_WITH_SPRINT = false;
+
 const startingGridData = [
     { position: 1, driverId: '', team: '' },
     { position: 2, driverId: '', team: '' },
@@ -25,8 +28,12 @@ const startingGridData = [
     { position: 22, driverId: '', pitLane: false, team: '' },
 ];
 
-const STARTING_GRID_WITH_PENALTIES = false;
-const STARTING_GRID_WITH_SPRINT = false;
+const polesData = [
+    { driver: "russell", poles: 5 },
+    { driver: "antonelli", poles: 6 },
+    { driver: "norris", poles: 1 },
+    { driver: "verstappen", poles: 1 },
+];
 
 const qualiData = [
     { driver1: "Кими Антонелли", 
@@ -84,13 +91,6 @@ const replacementQualiData = [
 	score1: 3, 
 	score2: 0, 
 	driver2: "Юки Цунода" },
-];
-
-const polesData = [
-    { driver: "russell", poles: 5 },
-    { driver: "antonelli", poles: 6 },
-    { driver: "norris", poles: 1 },
-    { driver: "verstappen", poles: 1 },
 ];
 
 const penaltiesData = [
