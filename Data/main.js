@@ -760,8 +760,8 @@ const createNextGPBlock = () => {
             </div>
             <hr class="main-divider">
             <div class="nextgp-footer">
-                <div class="nextgp-links"></div>
                 <div class="nextgp-countdown"><span>Загрузка...</span></div>
+                <div class="nextgp-links"></div>
             </div>
         `;
 
@@ -1003,16 +1003,16 @@ const createTyreBlock = () => {
 
     const rainActive = weatherData.rain > 40;
 
-    const bottomHTML = `
-        <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Intermediate">
-            <span class="tyre-name">Intermediate</span>
-            <img src="${rainActive ? 'Images/Wheels/Intermediate.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
-        </div>
-        <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Wet">
-            <span class="tyre-name">Wet</span>
-            <img src="${rainActive ? 'Images/Wheels/Wet.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
-        </div>
-    `;
+	const bottomHTML = `
+		<div class="tyre-item tyre-item-no-label clickable ${rainActive ? '' : 'dimmed'}" data-compound="Intermediate">
+			<span class="tyre-name">Intermediate</span>
+			<img src="${rainActive ? 'Images/Wheels/Intermediate.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
+		</div>
+		<div class="tyre-item tyre-item-no-label clickable ${rainActive ? '' : 'dimmed'}" data-compound="Wet">
+			<span class="tyre-name">Wet</span>
+			<img src="${rainActive ? 'Images/Wheels/Wet.png' : 'Images/Wheels/Hard.png'}" class="tyre-img">
+		</div>
+	`;
 
     block.innerHTML = `
         <div class="main-block-title">Состав шин предстоящего <span class="gp-full-text">Гран-При</span><span class="gp-short-text">ГП</span></div>
@@ -1071,19 +1071,19 @@ const startMainTimer = () => {
         const footer = block.querySelector('.nextgp-footer');
         if (!footer) return;
 
-        let linksDiv = footer.querySelector('.nextgp-links');
-        if (!linksDiv) {
-            linksDiv = document.createElement('div');
-            linksDiv.className = 'nextgp-links';
-            footer.prepend(linksDiv);
-        }
+		let countdownDiv = footer.querySelector('.nextgp-countdown');
+		if (!countdownDiv) {
+			countdownDiv = document.createElement('div');
+			countdownDiv.className = 'nextgp-countdown';
+			footer.appendChild(countdownDiv);
+		}
 
-        let countdownDiv = footer.querySelector('.nextgp-countdown');
-        if (!countdownDiv) {
-            countdownDiv = document.createElement('div');
-            countdownDiv.className = 'nextgp-countdown';
-            footer.appendChild(countdownDiv);
-        }
+		let linksDiv = footer.querySelector('.nextgp-links');
+		if (!linksDiv) {
+			linksDiv = document.createElement('div');
+			linksDiv.className = 'nextgp-links';
+			footer.appendChild(linksDiv);
+		}
 
         const isEventNearOrPassed = eventDateStr => {
             if (!eventDateStr) return false;
@@ -1154,33 +1154,31 @@ const startMainTimer = () => {
             linksDiv.appendChild(qualiEl);
         }
 
-        if (isEventNearOrPassed(nextGP.date)) {
-            if (nextGP.recordingRace) {
-                const raceBtn = document.createElement('button');
-                raceBtn.className = 'main-gp-btn race';
-                raceBtn.textContent = 'Гонка';
-                raceBtn.dataset.video = nextGP.recordingRace;
-                raceBtn.dataset.title = `Гонка ${nextGP.name}`;
-                raceBtn.onclick = e => {
-                    e.stopPropagation();
-                    if (typeof openVideoModal === 'function') {
-                        openVideoModal(raceBtn.dataset.video, raceBtn.dataset.title);
-                    }
-                };
-                countdownDiv.innerHTML = '';
-                countdownDiv.appendChild(raceBtn);
-            } else {
-                countdownDiv.innerHTML = '<span class="calendar-status-text">Гонка началась</span>';
-            }
-        } else if (diff > 0) {
-            const d = Math.floor(diff / 86400000);
-            const h = Math.floor((diff % 86400000) / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
-            countdownDiv.innerHTML = `<span>До гонки:</span> <span class="countdown-timer"><strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.</span>`;
-        } else {
-            countdownDiv.innerHTML = '<span class="calendar-status-text">Гонка завершена</span>';
-        }
+		if (isEventNearOrPassed(nextGP.date)) {
+			if (nextGP.recordingRace) {
+				const raceBtn = document.createElement('button');
+				raceBtn.className = 'main-gp-btn race';
+				raceBtn.textContent = 'Гонка';
+				raceBtn.dataset.video = nextGP.recordingRace;
+				raceBtn.dataset.title = `Гонка ${nextGP.name}`;
+				raceBtn.onclick = e => {
+					e.stopPropagation();
+					if (typeof openVideoModal === 'function') {
+						openVideoModal(raceBtn.dataset.video, raceBtn.dataset.title);
+					}
+				};
+				linksDiv.appendChild(raceBtn);
+			}
+			countdownDiv.innerHTML = '';
+		} else if (diff > 0) {
+			const d = Math.floor(diff / 86400000);
+			const h = Math.floor((diff % 86400000) / 3600000);
+			const m = Math.floor((diff % 3600000) / 60000);
+			const s = Math.floor((diff % 60000) / 1000);
+			countdownDiv.innerHTML = `<span>До гонки:</span> <span class="countdown-timer"><strong>${d}</strong> дн. <strong>${h}</strong> ч. <strong>${m}</strong> м. <strong>${s}</strong> с.</span>`;
+		} else {
+			countdownDiv.innerHTML = '<span class="calendar-status-text">Гонка завершена</span>';
+		}
     };
 
     updateTimer();

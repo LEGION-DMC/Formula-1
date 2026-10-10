@@ -572,22 +572,21 @@ h1, h2 {
 }
 
 /* Контейнер для кнопок (Спринт, Квалификация) */
+.nextgp-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.nextgp-countdown {
+    width: 100%;
+}
+
 .nextgp-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    order: 1;
-}
-
-/* Контейнер для таймера/кнопки Гонки */
-.nextgp-countdown {
-    display: flex;
-    align-items: center;
-    margin-left: 1px;
-    order: 2;
-    gap: 8px;
-    margin-top: -5px;
-    margin-bottom: 2px;
+    gap: 5px;
 }
 
 .nextgp-countdown strong {
@@ -595,28 +594,9 @@ h1, h2 {
     margin-left: -5px;
 }
 
-.nextgp-footer {
-    display: grid; 
-}
-
 .nextgp-footer:has(.main-gp-btn.race) {
     display: flex;
-    gap: 5px;
-    margin-bottom: -4px;
-}
-
-.main-gp-btn.race {
-    border: 1px solid var(--red-accent);
-    color: var(--red-accent);
-    font-size: 0.75rem;
-    padding: 5px 5px 3px 5px;
-    background: transparent;
-    margin-bottom: 2px;
-}
-
-.main-gp-btn.race:hover {
-    background: var(--red-accent);
-    color: #fff;
+    gap: 0px;
 }
 
 .main-gp-btn {
@@ -630,7 +610,20 @@ h1, h2 {
     cursor: pointer;
     background: transparent;
     border: 1px solid transparent;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+}
+
+.main-gp-btn.race {
+    border: 1px solid var(--red-accent);
+    color: var(--red-accent);
+    font-size: 0.75rem;
+    padding: 5px 5px 3px 5px;
+    background: transparent;
+}
+
+.main-gp-btn.race:hover {
+    background: var(--red-accent);
+    color: #fff;
 }
 
 .main-gp-btn.sprint {
@@ -647,7 +640,6 @@ h1, h2 {
     border: 1px solid #4CAF50;
     color: #4CAF50;
     background: transparent;
-    margin-top: -3px;
 }
 .main-gp-btn.quali:hover {
     background: #4CAF50;
@@ -703,15 +695,14 @@ h1, h2 {
     grid-template-columns: repeat(5, 1fr);
     gap: 5px;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .tyres-bottom {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
-    margin-top: -3px;
+    gap: 6px;
     text-align: center;
 }
 
@@ -719,16 +710,21 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 5px;
     padding-top: 5px;
     padding-bottom: 4px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.1);
     transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
     transform: translateX(0);
-    min-height: 83px;
-    max-height: 84px;
+    min-height: 88px;
+    max-height: 88px;
     box-sizing: border-box;
+}
+
+.tyre-item-no-label {
+    min-height: 74px;
+    min-height: 74px;
 }
 
 .tyre-item:hover {
@@ -756,7 +752,7 @@ h1, h2 {
 }
 
 .tyre-item.clickable:hover .tyre-img {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
 .tyre-item.clickable:active {
