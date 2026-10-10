@@ -464,6 +464,7 @@ const detailedSprintResults = {
         "stroll": "dnf",
         "bortoleto": "dnf",
         "bottas": "dnf",
+        "albon": "dnf",
     },
 };
 
