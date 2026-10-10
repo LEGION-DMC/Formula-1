@@ -661,21 +661,6 @@ body {
     align-items: center !important;
 }
 
-/* Правая колонка (штрафы + рекорды) — в строку */
-.dm-right-column {
-    width: 90%;
-    flex-direction: row !important;
-    justify-content: center;
-    align-items: stretch;
-    gap: 8px;
-    flex-wrap: nowrap;
-}
-
-.dm-right-column .dm-penalties-panel,
-.dm-right-column .dm-fastest-laps-panel  {
-    flex: 1;
-}
-
 .dm-penalties-panel .msr-pp__seg {
     width: 11px;
     height: 11px;
@@ -709,6 +694,42 @@ body {
 
 .dm-fastest-laps-title + .dm-fastest-laps-counter {
     padding-top: 5%;
+}
+
+.dm-right-column {
+    width: 90%;
+    display: grid !important;              /* было flex — теперь grid */
+    grid-template-columns: 1fr 1fr;        /* 2 колонки */
+    grid-template-areas:
+        "penalties laps"
+        "dnf       laps";                  /* DNF под штрафами, рекорды справа на обе строки */
+    gap: 8px;
+    align-items: start;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.dm-right-column .dm-penalties-panel {
+    grid-area: penalties;
+    width: 100%;
+    flex: none;
+}
+
+.dm-right-column .dm-dnf-row {
+    grid-area: dnf;
+    width: 100%;
+    flex: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+/* 3. Рекорды круга — правая колонка, на всю высоту */
+.dm-right-column .dm-fastest-laps-panel {
+    grid-area: laps;
+    width: 100%;
+    flex: none;
+    height: 100%;
 }
 
 /* Панель позиции в топ-10 — мобильная версия */
