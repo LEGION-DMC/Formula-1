@@ -402,9 +402,9 @@ const fastestPitstopTeamData = [
 
 const enginePartsData = [
     { driver: "Оскар Пиастри", ice: 4, tc: 3, exh: 3, mguk: 2, es: 3, puce: 3, puanc: 4 },
-    { driver: "Ландо Норрис", ice: 4, tc: 3, exh: 3, mguk: 2, es: 3, puce: 4, puanc: 4 },
-    { driver: "Джордж Расселл", ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 5 },
-    { driver: "Кими Антонелли", ice: 5, tc: 3, exh: 3, mguk: 2, es: 4, puce: 4, puanc: 5 },
+    { driver: "Ландо Норрис", ice: 4, tc: 3, exh: 3, mguk: 2, es: 3, puce: 4, puanc: 5 },
+    { driver: "Джордж Расселл", ice: 5, tc: 4, exh: 4, mguk: 4, es: 4, puce: 4, puanc: 5 },
+    { driver: "Кими Антонелли", ice: 5, tc: 4, exh: 4, mguk: 2, es: 4, puce: 4, puanc: 5 },
     { driver: "Макс Ферстаппен", ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 5 },
     { driver: "Исак Хаджар", ice: 7, tc: 6, exh: 6, mguk: 4, es: 4, puce: 4, puanc: 7 },
     { driver: "Шарль Леклер", ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 6 },
@@ -420,7 +420,7 @@ const enginePartsData = [
     { driver: "Нико Хюлькенберг", ice: 4, tc: 4, exh: 4, mguk: 3, es: 2, puce: 2, puanc: 5 },
     { driver: "Габриэл Бортолето", ice: 3, tc: 3, exh: 3, mguk: 3, es: 3, puce: 3, puanc: 5 },
     { driver: "Пьер Гасли", ice: 4, tc: 3, exh: 3, mguk: 2, es: 3, puce: 3, puanc: 5 },
-    { driver: "Франко Колапинто", ice: 5, tc: 3, exh: 2, mguk: 2, es: 3, puce: 3, puanc: 4 },
+    { driver: "Франко Колапинто", ice: 5, tc: 3, exh: 2, mguk: 2, es: 3, puce: 3, puanc: 5 },
     { driver: "Серхио Перес", ice: 4, tc: 4, exh: 3, mguk: 3, es: 3, puce: 3, puanc: 4 },
     { driver: "Валттери Боттас", ice: 4, tc: 4, exh: 3, mguk: 3, es: 3, puce: 3, puanc: 4 },
 ];

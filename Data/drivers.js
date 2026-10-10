@@ -699,7 +699,6 @@ const driversData = [
 ];
 
 const driversIndex = new Map(driversData.map(d => [d.id, d]));
-
 const DRIVER_PATTERN_SVG = `<svg viewBox="0 0 928 800" preserveAspectRatio="xMidYMid slice" fill="none"><g><path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path><path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path><path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path><path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path><path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path><path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path><path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path><path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path><path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path><path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path><path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path><path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path></g></svg>`;
 
 const COMPARE_METRICS = [
@@ -761,9 +760,7 @@ const countrySynonyms = {
 };
 
 const getCountryName = code => countryNames[code] || code.toUpperCase();
-
 const findDriverById = id => driversIndex.get(id) || null;
-
 const getCurrentWorldChampion = () => driversData.find(d => d.number === 1) || null;
 
 const getDebutFromCareer = driver => {
@@ -2131,6 +2128,66 @@ const renderCompareTable = (container, driverA, driverB) => {
         </div>
     `;
 
+    const isSameTeam = a.team && b.team && a.team === b.team;
+
+    let qualiRow = '';
+    if (isSameTeam) {
+        const getQualiScore = driverId => {
+            if (typeof qualiData === 'undefined' || !Array.isArray(qualiData)) return 0;
+
+            let score = 0;
+
+            qualiData.forEach(row => {
+                const d1 = findDriverByName(row.driver1);
+                const d2 = findDriverByName(row.driver2);
+                if (d1?.id === driverId) score += row.score1 || 0;
+                if (d2?.id === driverId) score += row.score2 || 0;
+            });
+
+            if (typeof replacementQualiData !== 'undefined' && Array.isArray(replacementQualiData)) {
+                replacementQualiData.forEach(row => {
+                    const d1 = findDriverByName(row.driver1);
+                    const d2 = findDriverByName(row.driver2);
+                    if (d1?.id === driverId) score += row.score1 || 0;
+                    if (d2?.id === driverId) score += row.score2 || 0;
+                });
+            }
+
+            return score;
+        };
+
+        const qualiA = getQualiScore(a.id);
+        const qualiB = getQualiScore(b.id);
+        const qualiCls = cmpClass(qualiA, qualiB);
+
+        qualiRow = `
+            <div class="compare-row compare-row--stat">
+                <span class="compare-value ${qualiCls.a}">${qualiA}</span>
+                <span class="compare-label">Квалификационный зачёт</span>
+                <span class="compare-value ${qualiCls.b}">${qualiB}</span>
+            </div>
+        `;
+    }
+
+    const dnfMetrics = [
+        { key: 'seasonDNF', label: 'DNF' },
+        { key: 'seasonDNS', label: 'DNS' },
+        { key: 'seasonDSQ', label: 'DSQ' },
+    ];
+
+    const dnfRowsHtml = dnfMetrics.map(m => {
+        const valA = a[m.key] || 0;
+        const valB = b[m.key] || 0;
+        const cls = finesCls(valA, valB); // меньше — лучше
+        return `
+            <div class="compare-row compare-row--stat">
+                <span class="compare-value ${cls.a}">${valA}</span>
+                <span class="compare-label">${m.label}</span>
+                <span class="compare-value ${cls.b}">${valB}</span>
+            </div>
+        `;
+    }).join('');
+	
     container.innerHTML = `
         <div class="compare-table">
             <div class="compare-table-header">
@@ -2156,6 +2213,12 @@ const renderCompareTable = (container, driverA, driverB) => {
                         <span class="compare-value ${finesCmp.b}">${b.fines}</span>
                     </div>
                 </div>
+                ${isSameTeam ? `
+                    <div class="compare-divider"></div>
+                    <div class="compare-section">${qualiRow}</div>
+                ` : ''}
+                <div class="compare-divider"></div>
+                <div class="compare-section">${dnfRowsHtml}</div>
                 <div class="compare-divider"></div>
                 <div class="compare-section">${flRow}</div>
             </div>
