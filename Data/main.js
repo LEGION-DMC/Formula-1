@@ -20,7 +20,7 @@ const startingGridData = [
     { position: 19, driverId: 'alb', team: '' },
     { position: 20, driverId: 'per', team: '' },
     { position: 21, driverId: 'bot', pitLane: false, team: '' },
-    { position: 22, driverId: 'sai', pitLane: false, team: '' },
+    { position: 22, driverId: 'sai', pitLane: true, team: '' },
 ];
 
 const STARTING_GRID_WITH_PENALTIES = false;
