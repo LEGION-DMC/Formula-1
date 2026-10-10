@@ -1,17 +1,26 @@
 {
   "name": "Formula 1",
-  "short_name": "Formula 1",
+  "short_name": "F1 2026",
   "description": "Formula 1 2026",
-  "start_url": "https://legion-dmc.github.io/Formula-1",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#E10600",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "orientation": "portrait",
+  "lang": "ru",
   "icons": [
     {
       "src": "Images/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "Images/favicon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

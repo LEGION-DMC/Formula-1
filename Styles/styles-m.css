@@ -35,8 +35,6 @@ body {
 
 .season-title span {
     font-size: 1.3rem;
-    margin-bottom: 0;
-    margin-right: auto;
 }
 
 .menu-nav {
@@ -389,22 +387,6 @@ body {
     grid-template-columns: 1fr;
 }
 
-.starting-grid-block {
-    display: none;
-}
-
-    .news-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .main-third-row {
-        grid-template-columns: 1fr;
-    }
-    .news-block {
-        grid-column: span 1;
-    }
-    .news-grid {
-        grid-template-columns: 1fr;
-    }
 /* ============================================== */
 /* ВКЛАДКА: ПИЛОТЫ                               */
 /* ============================================== */
@@ -621,9 +603,7 @@ body {
 .driver-short-name { font-size: 0.75rem; width: 140px; }
 .driver-team img { width: 30px; height: 15px; }
 .driver-team span { display: none; }
-.reserve-driver span {
-    display: initial;
-}
+.driver-card.reserve-driver .driver-team span { display: inline; }
 
 .driver-card-bg-pattern {
     left: -50px;
@@ -632,25 +612,7 @@ body {
 }
 
 .driver-titles-overlay {
-    position: absolute;
-    top: -7px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'F1Title', sans-serif;
     font-size: 0.75rem;
-    color: #FFD700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.8);
-    z-index: 3;
-    letter-spacing: 1px;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.driver-titles-overlay .titles-row {
-    line-height: 0.7;
-    white-space: nowrap;
 }
 
 /* Модалка пилота */
@@ -799,13 +761,6 @@ body {
     flex: 0 0 calc(50% - 8px);
     min-width: 150px;
     max-width: none;
-}
-
-@media (max-width: 480px) {
-    .team-card { flex: 0 0 47%; 
-        max-width: 47%;
-        height: 100%;
-    }
 }
 
 .team-card-logo { width: 60px; height: 42px; }
@@ -1414,7 +1369,6 @@ body {
 
 .results-main-area { width: 100%; padding: 10px 15px; }
 .results-table-wrapper + .results-table-wrapper { margin-top: 10px; }
-.results-columns { grid-template-columns: 1fr; gap: 10px; }
 .results-table { font-size: 0.75rem; }
 .results-table thead th { font-size: 0.6rem; padding: 5px 4px; }
 .results-table tbody td { padding: 5px 4px; }

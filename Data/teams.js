@@ -1,4 +1,4 @@
-const teamsData = [  // Двигатели 3 V8 T
+const teamsData = [
     {  shortName: "Mercedes",
         fullName: "Mercedes-AMG PETRONAS F1 Team",
         color: "#75F1D3",
@@ -104,7 +104,7 @@ const teamsData = [  // Двигатели 3 V8 T
         
         info: "Итальянская команда, принадлежащая австрийскому конгломерату Red Bull GmbH. С сезона 2006 по 2019 года команда выступала под названием Toro Rosso. К сезону 2020 года была переименована в AlphaTauri. К сезону 2024 года команда была переименована в своё текущее название."
     },
-    {  shortName: "Alpine", // 2027 - Gucci Racing Alpine F1 Team
+    {  shortName: "Alpine",
         fullName: "BWT Alpine F1 Team",
         color: "#479FE2",
         
@@ -188,7 +188,7 @@ const teamsData = [  // Двигатели 3 V8 T
         
         info: "Британская команда, созданая Фрэнком Уильямсом и Патриком Хэдом под названием Williams Grand Prix Engineering. В сезоне 1980 года команда выиграла свой первый кубок конструкторов, опередив почти вдвое по очкам занявшую 2-е место Ligier. Все шасси команды содержат приставку FW - инициалы основателя команды."
     },
-    {  shortName: "Aston Martin", // 2027 - Aston Martin Aramco Honda
+    {  shortName: "Aston Martin",
         fullName: "Aston Martin Aramco F1 Team",
         color: "#4B9774",
         
@@ -232,80 +232,88 @@ const teamsData = [  // Двигатели 3 V8 T
     },
 ];
 
-function getSeasonsCount(debutYear) {
-    const currentYear = new Date().getFullYear();
-    const debut = parseInt(debutYear);
-    if (debut > currentYear) return 0;
-    return currentYear - debut + 1;
-}
+const TEAM_PATTERN_SVG = `<svg viewBox="0 0 928 634" preserveAspectRatio="xMidYMid slice" fill="none"><g><path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path><path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path><path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path><path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path><path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path><path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path><path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path><path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path><path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path><path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path><path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path><path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path></g></svg>`;
+const teamsIndex = new Map(teamsData.map(t => [t.shortName, t]));
+const currentYear = new Date().getFullYear();
 
 teamsData.forEach(team => {
     Object.defineProperty(team, 'seasons', {
-        get: function() {
-            const currentYear = new Date().getFullYear();
+        get() {
             const debut = parseInt(this.debut);
-            
-            if (debut > currentYear) return 0;
-            return currentYear - debut + 1;
+            return debut > currentYear ? 0 : currentYear - debut + 1;
         },
         enumerable: true,
         configurable: true
     });
 });
 
-function getTeamDrivers(teamShortName) {
-    return driversData.filter(driver => driver.team === teamShortName);
-}
+const teamSlug = shortName => shortName.toLowerCase().replace(/\s+/g, '-');
 
-function getTeamColor(teamShortName) {
-    const team = teamsData.find(t => t.shortName === teamShortName);
-    return team ? team.color : '#FFFFFF';
-}
+const archiveTeamColors = {
+    'toro-rosso': '#469BFF',
+    'sauber': '#3A3D40',
+    'alphatauri': '#022B4A',
+    'force-india': '#FF9933',
+    'racing-point': '#F596C8',
+    'minardi': '#FFD700',
+    'manor': '#FF4C00',
+    'renault': '#FFF500',
+    'alfa-romeo': '#9B0000',
+    'stake': '#01C00E'
+};
 
-function getTeamData(teamShortName) {
-    return teamsData.find(t => t.shortName === teamShortName);
-}
+const archiveTeams = new Set([
+    'toro-rosso', 'sauber', 'alphatauri', 'force-india', 'racing-point',
+    'minardi', 'manor', 'renault', 'alfa-romeo', 'stake'
+]);
 
-function animateTeamsAppearance(container) {
+const getTeamColor = teamName => {
+    const slug = teamSlug(teamName);
+    if (archiveTeamColors[slug]) return archiveTeamColors[slug];
+    return teamsIndex.get(teamName)?.color ?? '#FFFFFF';
+};
+
+const getTeamLogo = teamName => {
+    const slug = teamSlug(teamName);
+    return archiveTeams.has(slug)
+        ? `Images/Teams/Archive/${slug}.png`
+        : `Images/Teams/${slug}-m.png`;
+};
+
+const getTeamData = shortName => teamsIndex.get(shortName) || null;
+
+const getTeamDrivers = shortName => driversData.filter(d => d.team === shortName);
+
+const getSeasonsCount = debutYear => {
+    const debut = parseInt(debutYear);
+    return debut > currentYear ? 0 : currentYear - debut + 1;
+};
+
+const animateTeamsAppearance = container => {
     const cards = container.querySelectorAll('.team-card');
-    
-    if (cards.length === 0) return;
-    
-    // Определяем количество колонок в сетке
-    const containerWidth = container.offsetWidth || container.parentElement.offsetWidth || 1200;
-    const cardMinWidth = 250; // минимальная ширина карточки из grid
-    const gap = 20; // gap из grid-template-columns
-    const cols = Math.max(1, Math.floor((containerWidth + gap) / (cardMinWidth + gap)));
-    
-    // Группируем карточки по рядам
+    if (!cards.length) return;
+
+    const containerWidth = container.offsetWidth || container.parentElement?.offsetWidth || 1200;
+    const cols = Math.max(1, Math.floor((containerWidth + 20) / (250 + 20)));
+
     const rows = [];
-    cards.forEach((card, index) => {
-        const rowIndex = Math.floor(index / cols);
-        if (!rows[rowIndex]) rows[rowIndex] = [];
-        rows[rowIndex].push(card);
+    cards.forEach((card, i) => {
+        const rowIndex = Math.floor(i / cols);
+        (rows[rowIndex] ??= []).push(card);
     });
-    
-    // Сбрасываем начальное состояние для всех карточек
-    cards.forEach((card) => {
+
+    cards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'scale(0.92) translateY(15px)';
         card.style.transition = 'none';
     });
-    
-    // Показываем ряды с задержкой
+
     requestAnimationFrame(() => {
         rows.forEach((rowCards, rowIndex) => {
-            const delay = rowIndex * 80; // 80ms между рядами
-            
-            rowCards.forEach((card) => {
-                // Добавляем небольшую случайность внутри ряда для естественности
-                const randomOffset = (Math.random() - 0.5) * 20;
-                const cardDelay = delay + randomOffset;
-                
-                // Устанавливаем transition с задержкой
+            const baseDelay = rowIndex * 80;
+            rowCards.forEach(card => {
+                const cardDelay = baseDelay + (Math.random() - 0.5) * 20;
                 card.style.transition = `opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${cardDelay}ms, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${cardDelay}ms`;
-                
-                // Показываем карточку
                 requestAnimationFrame(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'scale(1) translateY(0)';
@@ -313,72 +321,54 @@ function animateTeamsAppearance(container) {
             });
         });
     });
-}
+};
 
-function initTeamsPage(container) {
-    'use strict';
-    
+const initTeamsPage = container => {
     container.innerHTML = '';
     container.style.padding = '20px 0px 2px 2px';
-    
-    // Сортируем команды по очкам в Кубке конструкторов
-    const constructorStandings = calculateConstructorStandings();
-    
-    // Создаём массив команд в правильном порядке
+
+    const standings = calculateConstructorStandings();
     const sortedTeams = [];
-    
-    // Сначала добавляем команды, у которых есть очки (отсортированные по убыванию)
-    constructorStandings.forEach(standing => {
-        const team = teamsData.find(t => t.shortName === standing.team);
-        if (team) {
+    const seen = new Set();
+
+    standings.forEach(s => {
+        const team = teamsIndex.get(s.team);
+        if (team && !seen.has(team.shortName)) {
             sortedTeams.push(team);
+            seen.add(team.shortName);
         }
     });
-    
-    // Добавляем команды, которых нет в standings (с 0 очками)
+
     teamsData.forEach(team => {
-        if (!sortedTeams.includes(team)) {
-            sortedTeams.push(team);
-        }
+        if (!seen.has(team.shortName)) sortedTeams.push(team);
     });
-    
-    // Создаём сетку
+
     const grid = document.createElement('div');
     grid.className = 'teams-grid';
-    
-    // Добавляем все команды
-    sortedTeams.forEach(team => {
-        const card = createTeamCard(team);
-        grid.appendChild(card);
-    });
-    
-    container.appendChild(grid);
-    
-    // Запускаем анимацию появления
-    requestAnimationFrame(() => {
-        animateTeamsAppearance(grid);
-    });
-}
 
-function createTeamCard(team) {
+    sortedTeams.forEach(team => grid.appendChild(createTeamCard(team)));
+
+    container.appendChild(grid);
+
+    requestAnimationFrame(() => animateTeamsAppearance(grid));
+};
+
+const createTeamCard = team => {
     const drivers = getTeamDrivers(team.shortName);
-    
+
     const card = document.createElement('div');
     card.className = 'team-card';
     card.style.setProperty('--team-color', team.color);
-    
-    // === КЛЕТЧАТЫЙ ФОН ===
+
     const patternDiv = document.createElement('div');
     patternDiv.className = 'team-card-bg-pattern';
-	patternDiv.innerHTML = TEAM_PATTERN_SVG;
+    patternDiv.innerHTML = TEAM_PATTERN_SVG;
     card.appendChild(patternDiv);
-    
-    // Затемняющий оверлей
+
     const overlay = document.createElement('div');
     overlay.className = 'team-card-bg-overlay';
     card.appendChild(overlay);
-    // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
-    
+
     const logoContainer = document.createElement('div');
     logoContainer.className = 'team-card-logo';
     const logo = document.createElement('img');
@@ -386,18 +376,18 @@ function createTeamCard(team) {
     logo.alt = team.shortName;
     logo.onerror = () => { logo.style.display = 'none'; };
     logoContainer.appendChild(logo);
-    
+
     const nameDiv = document.createElement('div');
     nameDiv.className = 'team-card-name';
     nameDiv.textContent = team.shortName;
-    
+
     const divider = document.createElement('div');
     divider.className = 'team-card-divider';
-    
+
     const driversList = document.createElement('div');
     driversList.className = 'team-card-drivers';
-    
-    if (drivers.length === 0) {
+
+    if (!drivers.length) {
         const emptyRow = document.createElement('div');
         emptyRow.className = 'team-driver-row empty';
         emptyRow.textContent = 'Пилоты не назначены';
@@ -406,93 +396,82 @@ function createTeamCard(team) {
         drivers.forEach(driver => {
             const driverRow = document.createElement('div');
             driverRow.className = 'team-driver-row';
-            driverRow.addEventListener('click', (e) => {
+            driverRow.addEventListener('click', e => {
                 e.stopPropagation();
                 openDriverModal(driver);
             });
-            
+
             const numberSpan = document.createElement('span');
             numberSpan.className = 'team-driver-number';
             numberSpan.textContent = driver.number;
-            
+
             const nameSpan = document.createElement('span');
             nameSpan.className = 'team-driver-name';
-            nameSpan.innerHTML = `
-                <span class="driver-fullname">${driver.name}</span>
-                <span class="driver-shortname">${driver.namem}</span>
-            `;
-            
+            nameSpan.innerHTML = `<span class="driver-fullname">${driver.name}</span><span class="driver-shortname">${driver.namem}</span>`;
+
             const flagImg = document.createElement('img');
             flagImg.src = `Images/Flags/${driver.country}.svg`;
             flagImg.title = getCountryName(driver.country);
             flagImg.alt = driver.country;
             flagImg.className = 'team-driver-flag';
             flagImg.onerror = () => { flagImg.style.display = 'none'; };
-            
-            driverRow.appendChild(numberSpan);
-            driverRow.appendChild(nameSpan);
-            driverRow.appendChild(flagImg);
+
+            driverRow.append(numberSpan, nameSpan, flagImg);
             driversList.appendChild(driverRow);
         });
     }
-    
-    card.appendChild(logoContainer);
-    card.appendChild(nameDiv);
-    card.appendChild(divider);
-    card.appendChild(driversList);
-    
-    card.addEventListener('click', () => openTeamModal(team));
-    
-    return card;
-}
 
-function openTeamModal(team) {
+    card.append(logoContainer, nameDiv, divider, driversList);
+    card.addEventListener('click', () => openTeamModal(team));
+
+    return card;
+};
+
+const openTeamModal = team => {
     const drivers = getTeamDrivers(team.shortName);
-    
-    const existingModal = document.querySelector('.team-modal-overlay');
-    if (existingModal) existingModal.remove();
-    
+
+    document.querySelector('.team-modal-overlay')?.remove();
+
     const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflowY = 'scroll';
-    
-    function unlockScroll() {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflowY = '';
+    Object.assign(document.body.style, {
+        position: 'fixed',
+        top: `-${scrollY}px`,
+        width: '100%',
+        overflowY: 'scroll'
+    });
+
+    const unlockScroll = () => {
+        Object.assign(document.body.style, {
+            position: '',
+            top: '',
+            width: '',
+            overflowY: ''
+        });
         window.scrollTo(0, scrollY);
-    }
-    
+    };
+
     const overlay = document.createElement('div');
     overlay.className = 'team-modal-overlay';
-    
-    // ====================
-    // ЛЕВАЯ КОЛОНКА — Статистика
-    // ====================
+
     const leftColumn = document.createElement('div');
     leftColumn.className = 'tm-left-column';
 
     const statsPanel = document.createElement('div');
     statsPanel.className = 'tm-stats-panel';
     statsPanel.style.setProperty('--team-color', team.color);
-    
-    // Клетчатый фон для statsPanel — ИСПРАВЛЕНО
+
     const statsPattern = document.createElement('div');
     statsPattern.className = 'tm-stats-pattern';
-    statsPattern.innerHTML = TEAM_PATTERN_SVG;  // было: patternDiv.innerHTML = TEAM_PATTERN_SVG;
+    statsPattern.innerHTML = TEAM_PATTERN_SVG;
     statsPanel.appendChild(statsPattern);
-    
+
     const statsOverlay = document.createElement('div');
     statsOverlay.className = 'tm-stats-overlay';
     statsPanel.appendChild(statsOverlay);
 
     const statsContent = document.createElement('div');
     statsContent.style.cssText = 'position: relative; z-index: 2; display: contents;';
-    
-    const statsHTML = `
+    statsContent.innerHTML = `
         <div class="tm-stat-cell">
             <span class="tm-stat-label">Дебют</span>
             <span class="tm-stat-value">${team.debut}<span class="gp-year-suffix"> г.</span></span>
@@ -514,104 +493,90 @@ function openTeamModal(team) {
             <span class="tm-stat-value">${team.champ_dri}</span>
         </div>
     `;
-    
-    statsContent.innerHTML = statsHTML;
     statsPanel.appendChild(statsContent);
     leftColumn.appendChild(statsPanel);
-    
-    // ====================
-    // ЦЕНТР — Основная плашка
-    // ====================
+
     const modal = document.createElement('div');
     modal.className = 'team-modal';
     modal.style.setProperty('--team-color', team.color);
-    
-    // Клетчатый фон для модального окна — ИСПРАВЛЕНО
+
     const modalPattern = document.createElement('div');
     modalPattern.className = 'tm-modal-pattern';
-    modalPattern.innerHTML = TEAM_PATTERN_SVG;  // было: patternDiv.innerHTML = TEAM_PATTERN_SVG;
+    modalPattern.innerHTML = TEAM_PATTERN_SVG;
     modal.appendChild(modalPattern);
-    
+
     const modalOverlayBg = document.createElement('div');
     modalOverlayBg.className = 'tm-modal-overlay-bg';
     modal.appendChild(modalOverlayBg);
-    
+
     const modalContent = document.createElement('div');
     modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center;';
-    
+
     const closeBtn = document.createElement('button');
     closeBtn.className = 'team-modal-close-btn';
     closeBtn.innerHTML = '&times;';
-    
-    function closeModal() {
+
+    const closeModal = () => {
         overlay.remove();
         unlockScroll();
         document.removeEventListener('keydown', escHandler);
-    }
-    
+    };
+
     closeBtn.addEventListener('click', closeModal);
-    
-    // Полный логотип
+
     const fullLogoContainer = document.createElement('div');
     fullLogoContainer.className = 'tm-logo-container';
     const fullLogo = document.createElement('img');
-    fullLogo.src = `Images/Teams/${team.shortName.toLowerCase().replace(/\s+/g, '-')}.png`;
+    fullLogo.src = `Images/Teams/${teamSlug(team.shortName)}.png`;
     fullLogo.alt = team.fullName;
     fullLogo.className = 'tm-full-logo';
-    fullLogo.onerror = () => { 
-        fullLogo.src = `Images/Teams/${team.shortName.toLowerCase().replace(/\s+/g, '-')}-m.png`;
+    fullLogo.onerror = () => {
+        fullLogo.src = `Images/Teams/${teamSlug(team.shortName)}-m.png`;
         fullLogo.style.maxHeight = '60px';
     };
     fullLogoContainer.appendChild(fullLogo);
-    
+
     const fullNameEl = document.createElement('h2');
     fullNameEl.className = 'tm-full-name';
     fullNameEl.textContent = team.fullName;
-    
-    // Разделитель 1
+
+    const flagImg = country => `<img src="Images/Flags/${country}.svg" alt="" class="tm-base-flag" title="${getCountryName(country)}">`;
+
     const divider1 = document.createElement('hr');
     divider1.className = 'tm-divider';
-    
-    // База и Руководитель
+
     const infoRow1 = document.createElement('div');
     infoRow1.className = 'tm-info-row';
     infoRow1.innerHTML = `
         <div class="tm-info-cell">
             <span class="tm-label">База</span>
-            <span class="tm-value">
-            <img src="Images/Flags/${team.country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.country)}">${team.base}</span>
+            <span class="tm-value">${flagImg(team.country)}${team.base}</span>
         </div>
         <div class="tm-info-cell">
             <span class="tm-label">Руководитель</span>
-            <span class="tm-value">
-            <img src="Images/Flags/${team.director_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.director_country)}">${team.director}</span>
+            <span class="tm-value">${flagImg(team.director_country)}${team.director}</span>
         </div>
     `;
-    
-    // Разделитель 2
+
     const divider2 = document.createElement('hr');
     divider2.className = 'tm-divider';
-    
-    // Лицензия и Основатель
+
     const infoRow2 = document.createElement('div');
     infoRow2.className = 'tm-info-row';
     infoRow2.innerHTML = `
         <div class="tm-info-cell">
             <span class="tm-label">Лицензия FIA</span>
-            <span class="tm-value"><img src="Images/Flags/${team.license_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.license_country)}">${team.license}</span>
+            <span class="tm-value">${flagImg(team.license_country)}${team.license}</span>
         </div>
         <div class="tm-info-cell">
             <span class="tm-label">Основатель</span>
-            <span class="tm-value">
-            <img src="Images/Flags/${team.founder_country}.svg" alt="" class="tm-base-flag" title="${getCountryName(team.founder_country)}">${team.founder}</span>
+            <span class="tm-value">${flagImg(team.founder_country)}${team.founder}</span>
         </div>
     `;
-    
-    // Разделитель 3
+
     const divider3 = document.createElement('hr');
     divider3.className = 'tm-divider';
-    
-    // О команде
+
     const infoRow3 = document.createElement('div');
     infoRow3.className = 'tm-info-row';
     infoRow3.innerHTML = `
@@ -620,24 +585,22 @@ function openTeamModal(team) {
             <span class="tm-value">${team.info}</span>
         </div>
     `;
-    
-    // Разделитель 4
+
     const divider4 = document.createElement('hr');
     divider4.className = 'tm-divider';
-    
-    // Пилоты
+
     const pilotsSection = document.createElement('div');
     pilotsSection.className = 'tm-pilots-section';
-    
+
     const pilotsTitle = document.createElement('h3');
     pilotsTitle.className = 'tm-pilots-title';
     pilotsTitle.textContent = 'Пилоты';
     pilotsSection.appendChild(pilotsTitle);
-    
+
     const pilotsList = document.createElement('div');
     pilotsList.className = 'tm-pilots-list';
-    
-    if (drivers.length === 0) {
+
+    if (!drivers.length) {
         const emptyPilot = document.createElement('div');
         emptyPilot.className = 'tm-pilot-row empty';
         emptyPilot.textContent = 'Нет данных';
@@ -647,74 +610,57 @@ function openTeamModal(team) {
             const pilotRow = document.createElement('div');
             pilotRow.className = 'tm-pilot-row';
             pilotRow.addEventListener('click', () => openDriverModal(driver));
-            
+
             const numberSpan = document.createElement('span');
             numberSpan.className = 'tm-pilot-number';
             numberSpan.textContent = driver.number;
-            
+
             const nameSpan = document.createElement('span');
             nameSpan.className = 'tm-pilot-name';
             nameSpan.textContent = driver.name;
-            
-            const flagImg = document.createElement('img');
-            flagImg.src = `Images/Flags/${driver.country}.svg`;
-            flagImg.title = getCountryName(driver.country);
-            flagImg.alt = driver.country;
-            flagImg.className = 'tm-pilot-flag';
-            
-            pilotRow.appendChild(numberSpan);
-            pilotRow.appendChild(nameSpan);
-            pilotRow.appendChild(flagImg);
+
+            const flagImgEl = document.createElement('img');
+            flagImgEl.src = `Images/Flags/${driver.country}.svg`;
+            flagImgEl.title = getCountryName(driver.country);
+            flagImgEl.alt = driver.country;
+            flagImgEl.className = 'tm-pilot-flag';
+
+            pilotRow.append(numberSpan, nameSpan, flagImgEl);
             pilotsList.appendChild(pilotRow);
         });
     }
-    
+
     pilotsSection.appendChild(pilotsList);
-    
-    modalContent.appendChild(closeBtn);
-    modalContent.appendChild(fullLogoContainer);
-    modalContent.appendChild(fullNameEl);
-    modalContent.appendChild(divider1);
-    modalContent.appendChild(infoRow1);     
-    modalContent.appendChild(divider2);
-    modalContent.appendChild(infoRow2);     
-    modalContent.appendChild(divider3);
-    modalContent.appendChild(infoRow3);     
-    modalContent.appendChild(divider4);
-    modalContent.appendChild(pilotsSection);
-    
+
+    modalContent.append(closeBtn, fullLogoContainer, fullNameEl, divider1, infoRow1, divider2, infoRow2, divider3, infoRow3, divider4, pilotsSection);
     modal.appendChild(modalContent);
-    
-    // ====================
-    // ПРАВАЯ КОЛОНКА — Болид
-    // ====================
+
     const rightColumn = document.createElement('div');
     rightColumn.className = 'tm-right-column';
-    
+
     const bolidPanel = document.createElement('div');
     bolidPanel.className = 'tm-bolid-panel';
     bolidPanel.style.setProperty('--team-color', team.color);
-    
-    // Клетчатый фон для bolidPanel — ИСПРАВЛЕНО
+
     const bolidPattern = document.createElement('div');
     bolidPattern.className = 'tm-bolid-pattern';
-    bolidPattern.innerHTML = TEAM_PATTERN_SVG;  // было: patternDiv.innerHTML = TEAM_PATTERN_SVG;
+    bolidPattern.innerHTML = TEAM_PATTERN_SVG;
     bolidPanel.appendChild(bolidPattern);
-    
+
     const bolidOverlay = document.createElement('div');
     bolidOverlay.className = 'tm-bolid-overlay';
     bolidPanel.appendChild(bolidOverlay);
-    
+
     const bolidContent = document.createElement('div');
     bolidContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center;';
-    
+
     const bolidImg = document.createElement('img');
-    bolidImg.src = `Images/Bolid/${team.shortName.toLowerCase().replace(/\s+/g, '-')}.webp`;
+    bolidImg.src = `Images/Bolid/${teamSlug(team.shortName)}.webp`;
     bolidImg.alt = team.car;
     bolidImg.className = 'tm-bolid-img';
     bolidImg.onerror = () => { bolidPanel.style.display = 'none'; };
     bolidContent.appendChild(bolidImg);
-    
+
     const bolidInfo = document.createElement('div');
     bolidInfo.className = 'tm-bolid-info';
     bolidInfo.innerHTML = `
@@ -737,74 +683,42 @@ function openTeamModal(team) {
     `;
     bolidContent.appendChild(bolidInfo);
     bolidPanel.appendChild(bolidContent);
-    
     rightColumn.appendChild(bolidPanel);
-    
-    // Собираем всё вместе
-    overlay.appendChild(leftColumn);
-    overlay.appendChild(modal);
-    overlay.appendChild(rightColumn);
-    
-    overlay.addEventListener('click', (e) => {
+
+    overlay.append(leftColumn, modal, rightColumn);
+
+    overlay.addEventListener('click', e => {
         if (e.target === overlay) closeModal();
     });
-    
+
     function escHandler(e) {
         if (e.key === 'Escape') closeModal();
     }
     document.addEventListener('keydown', escHandler);
-    
+
     document.body.appendChild(overlay);
-    
-    // Анимация
+
     requestAnimationFrame(() => {
-        // Левая колонка — выезжает слева
-        statsPanel.style.transition = 'none';
-        statsPanel.style.opacity = '0';
-        statsPanel.style.transform = 'translateX(-40px)';
-        
-        // Правая колонка — выезжает справа
-        bolidPanel.style.transition = 'none';
-        bolidPanel.style.opacity = '0';
-        bolidPanel.style.transform = 'translateX(40px)';
-        
+        Object.assign(statsPanel.style, { transition: 'none', opacity: '0', transform: 'translateX(-40px)' });
+        Object.assign(bolidPanel.style, { transition: 'none', opacity: '0', transform: 'translateX(40px)' });
+
         requestAnimationFrame(() => {
-            // Левая — выезжает слева
-            statsPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            statsPanel.style.transitionDelay = '0.2s';
-            statsPanel.style.opacity = '1';
-            statsPanel.style.transform = 'translateX(0)';
-            
-            // Правая — выезжает справа
-            bolidPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            bolidPanel.style.transitionDelay = '0.2s';
-            bolidPanel.style.opacity = '1';
-            bolidPanel.style.transform = 'translateX(0)';
+            const anim = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            Object.assign(statsPanel.style, {
+                transition: anim,
+                transitionDelay: '0.2s',
+                opacity: '1',
+                transform: 'translateX(0)'
+            });
+            Object.assign(bolidPanel.style, {
+                transition: anim,
+                transitionDelay: '0.2s',
+                opacity: '1',
+                transform: 'translateX(0)'
+            });
         });
-        
+
         overlay.classList.add('active');
         modal.classList.add('active');
     });
-}
-
-const TEAM_PATTERN_SVG = `
-<svg viewBox="0 0 928 634" preserveAspectRatio="xMidYMid slice" fill="none">
-    <g>
-        <!-- Ряд 1 -->
-        <path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path>
-        <path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path>
-        <path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path>
-        <!-- Ряд 2 -->
-        <path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path>
-        <path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path>
-        <path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path>
-        <!-- Ряд 3 -->
-        <path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path>
-        <path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path>
-        <path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path>
-        <!-- Ряд 4 -->
-        <path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path>
-        <path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path>
-        <path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path>
-</svg>
-`;
+};

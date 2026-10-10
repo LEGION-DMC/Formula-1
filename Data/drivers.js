@@ -1,22 +1,20 @@
 const driversData = [ 
     {   number: 1, id: "norris",  
         name: "Ландо Норрис",
-        namem: "Л. Норрис",
         namef: "Ландо Норрис",
 		
         birthPlace:  "Бристоль, Великобритания", country: "gb",
         birthDate: "13.11.1999",
 		
-        team: "McLaren",
-        debut: "2019 - McLaren",        
+        team: "McLaren",   
 		career: [
             { team: "McLaren", year: "2019-н.в." }
         ],
 		
         titles: 1,
         hattricks: 3,
-        wins: 13,
-        podiums: 49,
+        wins: 11,
+        podiums: 44,
         poles: 19,
 		
         note: "Выступает под #1 - в качестве действующего чемпиона мира. Собственный номер #4.",
@@ -24,14 +22,12 @@ const driversData = [
     },
     {   number: 3, id: "verstappen", 
         name: "Макс Ферстаппен",
-        namem: "М. Ферстаппен",
         namef: "Макс Эмилиан Ферстаппен",
 		
         birthPlace:  "Хасселт, Бельгия", country: "nl",
         birthDate: "30.09.1997",
 		
         team: "Red Bull",
-        debut: "2015 - Toro Rosso",        
 		career: [
             { team: "Toro Rosso", year: "2015" },
             { team: "Red Bull", year: "2016-н.в." }
@@ -39,8 +35,8 @@ const driversData = [
 		
         titles: 4,
         hattricks: 15,
-        wins: 72,
-        podiums: 135,
+        wins: 71,
+        podiums: 127,
         poles: 49,
 		grandslam: 6,
 		
@@ -49,14 +45,12 @@ const driversData = [
     },
     {   number: 5, id: "bortoleto", 
         name: "Габриэл Бортолето",
-        namem: "Г. Бортолето",
         namef: "Габриэль Лоренсо Бортолето Оливейра",
 		
         birthPlace:  "Бразилиа, Бразилия", country: "br",
         birthDate: "14.12.2004",
 		
-        team: "Audi",
-        debut: "2025 - Stake",        
+        team: "Audi",   
 		career: [
             { team: "Stake", year: "2025" },
             { team: "Audi", year: "2026-н.в." }
@@ -73,14 +67,12 @@ const driversData = [
     },
     {   number: 6, id: "hadjar",
         name: "Исак Хаджар",
-        namem: "И. Хаджар",
         namef: "Изак Александре Хаджар",
 		
         birthPlace:  "Париж, Франция", country: "fr",
         birthDate: "28.09.2004",
 		
-        team: "Red Bull",
-        debut: "2025 - Racing Bulls",        
+        team: "Red Bull",      
 		career: [
             { team: "Racing Bulls", year: "2025" },
             { team: "Red Bull", year: "2026-н.в." }
@@ -89,7 +81,7 @@ const driversData = [
         titles: 0,
         hattricks: 0,
         wins: 0,
-        podiums: 3,
+        podiums: 1,
         poles: 0,
 		
         note: "",
@@ -97,15 +89,13 @@ const driversData = [
     },
     {   number: 7, id: "doohan",	         // Резерв
         name: "Джек Дуэн",
-        namem: "Д. Дуэн",
         namef: "Джек Майкл Дуэн",
 		
         birthPlace:  "Брисбен, Австралия", country: "au",
         birthDate: "20.01.2003",
 		
         team: "Резерв",
-		reserve: ["Haas"],
-        debut: "2024 - Alpine",        
+		reserve: ["Haas"], 
 		career: [
             { team: "Alpine", year: "2024-2025", temporarily: true },
         ],
@@ -121,14 +111,12 @@ const driversData = [
     },
     {   number: 10, id: "gasly",
         name: "Пьер Гасли",
-        namem: "П. Гасли",
         namef: "Пьер Жан-Жак Гасли",
 		
         birthPlace:  "Руан, Франция", country: "fr",
         birthDate: "07.02.1996",
 		
-        team: "Alpine",
-        debut: "2017 - Toro Rosso",        
+        team: "Alpine",     
 		career: [
             { team: "Toro Rosso", year: "2017-2018" },
             { team: "Red Bull", year: "2019"},
@@ -148,14 +136,12 @@ const driversData = [
     },
     {   number: 11, id: "perez",
         name: "Серхио Перес",
-        namem: "С. Перес",
         namef: "Серхио Мишель Перес Мендоса",
 		
         birthPlace:  "Гвадалахара, Мексика", country: "mx",
         birthDate: "26.01.1990",
 		
         team: "Cadillac",
-        debut: "2011 - Sauber",        
 		career: [
             { team: "Sauber", year: "2011-2012" },
             { team: "McLaren", year: "2013" },
@@ -176,22 +162,20 @@ const driversData = [
     },
     {   number: 12, id: "antonelli", 
         name: "Кими Антонелли",
-        namem: "К. Антонелли",
         namef: "Андреа Кими Антонелли",
 		
         birthPlace: "Болонья, Италия", country: "it",
         birthDate: "25.08.2006",
 		
         team: "Mercedes",
-        debut: "2025 - Mercedes",        
 		career: [
             { team: "Mercedes", year: "2025-н.в." }
         ],
 		
         titles: 0,
         hattricks: 3,
-        wins: 8,
-        podiums: 15,
+        wins: 0,
+        podiums: 2,
         poles: 6,
 		grandslam: 1,
 		
@@ -200,14 +184,12 @@ const driversData = [
     },
     {   number: 14, id: "alonso",
         name: "Фернандо Алонсо",
-        namem: "Ф. Алонсо",
         namef: "Фернандо Алонсо Диас",
 		
         birthPlace:  "Овьедо, Испания", country: "es",
         birthDate: "29.07.1981",
 		
-        team: "Aston Martin",
-        debut: "2001 - Minardi",        
+        team: "Aston Martin",  
 		career: [
             { team: "Minardi", year: "2001" },
             { team: "Renault", year: "2003-2006" },
@@ -231,14 +213,12 @@ const driversData = [
     },
     {   number: 16, id: "leclerc",
         name: "Шарль Леклер",
-        namem: "Ш. Леклер",
         namef: "Шарль Марк Эрве Персеваль Леклер",
 		
         birthPlace:  "Монте-Карло, Монако", country: "mc",
         birthDate: "16.10.1997",
 		
         team: "Ferrari",
-        debut: "2018 - Sauber",        
 		career: [
             { team: "Sauber", year: "2018" },
             { team: "Ferrari", year: "2019-н.в." }
@@ -246,8 +226,8 @@ const driversData = [
 		
         titles: 0,
         hattricks: 2,
-        wins: 9,
-        podiums: 54,
+        wins: 8,
+        podiums: 50,
         poles: 27,
 		grandslam: 1,
 		
@@ -256,14 +236,12 @@ const driversData = [
     },
     {   number: 18, id: "stroll",
         name: "Лэнс Стролл",
-        namem: "Л. Стролл",
         namef: "Лэнс Якоб Струлович",
 		
         birthPlace:  "Монреаль, Канада", country: "ca",
         birthDate: "29.10.1998",
 		
         team: "Aston Martin",
-        debut: "2017 - Williams",        
 		career: [
             { team: "Williams", year: "2017-2018" },
             { team: "Racing Point", year: "2019-2020" },
@@ -281,7 +259,6 @@ const driversData = [
     },
     {   number: 22, id: "tsunoda",	     // Резерв
         name: "Юки Цунода",
-        namem: "Ю. Цунода",
         namef: "Юки Цунода",
 		
         birthPlace:  "Канагава, Япония", country: "jp",
@@ -289,7 +266,6 @@ const driversData = [
 		
         team: "Резерв",
 		reserve: ["Red Bull", "Racing Bulls"],
-        debut: "2021 - AlphaTauri",        
 		career: [
             { team: "AlphaTauri", year: "2021-2023" },
             { team: "Racing Bulls", year: "2024" },
@@ -309,14 +285,12 @@ const driversData = [
     },
     {   number: 23, id: "albon",
         name: "Алекс Албон",
-        namem: "А. Албон",
         namef: "Александр Филипп Албон Ансусинья",
 		
         birthPlace:  "Лондон, Великобритания", country: "th",
         birthDate: "23.03.1996",
 		
         team: "Williams",
-        debut: "2019 - Toro Rosso",        
 		career: [
             { team: "Toro Rosso", year: "2019" },
             { team: "Red Bull", year: "2019-2020" },
@@ -334,7 +308,6 @@ const driversData = [
     },
     {   number: 24, id: "zhou",	             // Резерв
         name: "Гуаньюй Чжоу",
-        namem: "Г. Чжоу",
         namef: "Гуаньюй Чжоу",
 		
         birthPlace:  "Шанхай, Китай", country: "cn",
@@ -342,7 +315,6 @@ const driversData = [
 		
         team: "Резерв",
 		reserve: ["Cadillac"],
-        debut: "2022 - Alfa Romeo",        
 		career: [
             { team: "Alfa Romeo", year: "2022-2023" },
             { team: "Stake", year: "2024" }
@@ -359,14 +331,12 @@ const driversData = [
     },
     {   number: 27, id: "hulkenberg",
         name: "Нико Хюлькенберг",
-        namem: "Н. Хюлькенберг",
         namef: "Николас Хюлькенберг",
 		
         birthPlace:  "Эммерих-на-Рейне, Германия", country: "de",
         birthDate: "19.08.1987",
 		
-        team: "Audi",
-        debut: "2010 - Williams",        
+        team: "Audi", 
 		career: [
             { team: "Williams", year: "2010" },
             { team: "Force India", year: "2011-2012" },
@@ -391,14 +361,12 @@ const driversData = [
     },
     {   number: 30, id: "lawson",
         name: "Лиам Лоусон",
-        namem: "Л. Лоусон",
         namef: "Лиам Джаред Лоусон",
 		
         birthPlace:  "Хастингс, Новая Зеландия", country: "nz",
         birthDate: "11.02.2002",
 		
-        team: "Racing Bulls",
-        debut: "2023 - AlphaTauri",        
+        team: "Racing Bulls",    
 		career: [
             { team: "AlphaTauri", year: "2023", temporarily: true },
             { team: "Racing Bulls", year: "2024", temporarily: true },
@@ -419,14 +387,12 @@ const driversData = [
     },
     {   number: 31, id: "ocon",
         name: "Эстебан Окон",
-        namem: "Э. Окон",
         namef: "Эстебан Хосе Жан-Пьер Окон-Кельфан",
 		
         birthPlace:  "Эвре, Франция", country: "fr",
         birthDate: "17.09.1996",
 		
         team: "Haas",
-        debut: "2016 - Manor",        
 		career: [
             { team: "Manor", year: "2016", temporarily: true },
             { team: "Force India", year: "2017-2018" },
@@ -447,14 +413,12 @@ const driversData = [
     },
     {   number: 41, id: "lindblad",
         name: "Арвид Линдблад",
-        namem: "А. Линдблад",
         namef: "Арвид Ананд Олоф Линдблад",
 		
         birthPlace:  "Лондон, Англия", country: "gb",
         birthDate: "08.08.2007",
 		
-        team: "Racing Bulls",
-        debut: "2026 - Racing Bulls",        
+        team: "Racing Bulls",   
 		career: [
             { team: "Racing Bulls", year: "2026-н.в." }
         ],
@@ -470,14 +434,12 @@ const driversData = [
     },
     {   number: 43, id: "colapinto",
         name: "Франко Колапинто",
-        namem: "Ф. Колапинто",
         namef: "Франко Алехандро Колапинто",
 		
         birthPlace:  "Буэнос-Айрес, Аргентина", country: "ar",
         birthDate: "27.05.2003",
 		
         team: "Alpine",
-        debut: "2024 - Williams",        
 		career: [
             { team: "Williams", year: "2024-2025", temporarily: true },
             { team: "Alpine", year: "2025-2026-н.в." },
@@ -494,14 +456,12 @@ const driversData = [
     },
     {   number: 44, id: "hamilton",
         name: "Льюис Хэмилтон",
-        namem: "Л. Хэмилтон",
         namef: "Сэр Льюис Карл Дэвидсон Хэмилтон",
 		
         birthPlace:  "Стивенидж, Великобритания", country: "gb",
         birthDate: "07.01.1985",
 		
         team: "Ferrari",
-        debut: "2007 - McLaren",        
 		career: [
             { team: "McLaren", year: "2007-2012" },
             { team: "Mercedes", year: "2013-2024" },
@@ -510,8 +470,8 @@ const driversData = [
 		
         titles: 7,
         hattricks: 19,
-        wins: 106,
-        podiums: 208,
+        wins: 105,
+        podiums: 202,
         poles: 105,
 		grandslam: 6,
 		
@@ -520,14 +480,12 @@ const driversData = [
     },
     {   number: 55, id: "sainz",
         name: "Карлос Сайнс",
-        namem: "К. Сайнс",
         namef: "Карлос Сайнс-Васкес де Кастро",
 		
         birthPlace:  "Мадрид, Испания", country: "es",
         birthDate: "01.09.1994",
 		
         team: "Williams",
-        debut: "2015 - Toro Rosso",        
 		career: [
             { team: "Toro Rosso", year: "2015-2017" },
             { team: "Renault", year: "2017", temporarily: true },
@@ -548,14 +506,12 @@ const driversData = [
     },
     {   number: 63, id: "russell",
         name: "Джордж Расселл",
-        namem: "Д. Расселл",
         namef: "Джордж Уильям Расселл",
 		
         birthPlace:  "Кингс-Линн, Великобритания", country: "gb",
         birthDate: "15.02.1998",
 		
         team: "Mercedes",
-        debut: "2019 - Williams",        
 		career: [
             { team: "Williams", year: "2019-2020" },
             { team: "Mercedes", year: "2020", temporarily: true },
@@ -565,8 +521,8 @@ const driversData = [
 		
         titles: 0,
         hattricks: 2,
-        wins: 8,
-        podiums: 32,
+        wins: 5,
+        podiums: 24,
         poles: 12,
 		grandslam: 1,
 		
@@ -575,14 +531,12 @@ const driversData = [
     },
     {   number: 77, id: "bottas",
         name: "Валттери Боттас",
-        namem: "В. Боттас",
         namef: "Валттери Виктор Боттас",
 		
         birthPlace:  "Настола, Финляндия", country: "fi",
         birthDate: "28.08.1989",
 		
-        team: "Cadillac",
-        debut: "2013 - Williams",        
+        team: "Cadillac",    
 		career: [
             { team: "Williams", year: "2013-2016" },
             { team: "Mercedes", year: "2017-2021" },
@@ -602,14 +556,12 @@ const driversData = [
     },
     {   number: 81, id: "piastri",
         name: "Оскар Пиастри",
-        namem: "О. Пиастри",
         namef: "Оскар Джек Пиастри",
 		
         birthPlace:  "Мельбурн, Австралия", country: "au",
         birthDate: "06.04.2001",
 		
-        team: "McLaren",
-        debut: "2023 - McLaren",        
+        team: "McLaren",    
 		career: [
             { team: "McLaren", year: "2023-н.в." }
         ],
@@ -617,7 +569,7 @@ const driversData = [
         titles: 0,
         hattricks: 3,
         wins: 9,
-        podiums: 28,
+        podiums: 26,
         poles: 6,
 		grandslam: 1,
 		
@@ -626,14 +578,12 @@ const driversData = [
     },
     {   number: 87, id: "bearman",
         name: "Оливер Берман",
-        namem: "О. Берман",
         namef: "Оливер Джеймс Берман",
 		
         birthPlace:  "Челмсфорд, Великобритания", country: "gb",
         birthDate: "08.05.2005",
 		
-        team: "Haas",
-        debut: "2024 - Ferrari",        
+        team: "Haas",  
 		career: [
             { team: "Ferrari", year: "2024", temporarily: true },
             { team: "Haas", year: "2024", temporarily: true },
@@ -651,15 +601,13 @@ const driversData = [
     },
     {   number: '--', id: "camara",
         name: "Рафаэль Камара",
-        namem: "Р. Камара",
         namef: "Рафаэль Чавес Камара",
 		
         birthPlace:  "Ресифи, Бразилия", country: "br",
         birthDate: "05.05.2005",
 		
         team: "Резерв",
-		reserve: ["Haas"],
-        debut: "2027 - Haas",        
+		reserve: ["Haas"], 
 		career: [
             { team: "Haas", year: "2027-н.в." },
         ],
@@ -675,15 +623,13 @@ const driversData = [
     },
     {   number: 99, id: "giovinazzi",    // Резерв
         name: "Антонио Джовинацци",
-        namem: "А. Джовинацци",
         namef: "Антонио Мария Джовинацци",
 		
         birthPlace:  "Мартина-Франка, Италия", country: "it",
         birthDate: "14.12.1993",
 		
         team: "Резерв",
-		reserve: ["Ferrari"],
-        debut: "2017 - Sauber",        
+		reserve: ["Ferrari"],   
 		career: [
             { team: "Sauber", year: "2017", temporarily: true },
             { team: "Alfa Romeo", year: "2019-2021" },
@@ -701,15 +647,13 @@ const driversData = [
 		/*  ~ Пилоты 2027
     {   number: 9, id: "tsolov",
         name: "Никола Цолов",
-        namem: "Н. Цолов",
         namef: "Никола Димитров Цолов",
 		
         birthPlace:  "София, Болгария", country: "bg",
         birthDate: "21.12.2006",
 		
         team: "Резерв",
-		reserve: ["Racing Bulls"],
-        debut: "2027 - Racing Bulls",        
+		reserve: ["Racing Bulls"], 
 		career: [
             { team: "Racing Bulls", year: "2027-н.в." },
         ],
@@ -725,7 +669,6 @@ const driversData = [
     },
     {   number: 26, id: "kvyat",
         name: "Даниил Квят",
-        namem: "Д. Квят",
         namef: "Даниил Вячеславович Квят",
 		
         birthPlace:  "Уфа, Россия", country: "ru",
@@ -733,7 +676,6 @@ const driversData = [
 		
         team: "Резерв",
 		reserve: ["Racing Bulls"],
-        debut: "2027 - Racing Bulls",        
 		career: [
             { team: "Toro Rosso", year: "2014" },
             { team: "Red Bull", year: "2015" },
@@ -756,635 +698,403 @@ const driversData = [
 	*/
 ];
 
-function initDriversPage(container) {
-	calculateFastestLapsFromTracks();
-	
-    'use strict';
-    
-    container.innerHTML = '';
-    container.style.display = 'flex';
-    container.style.gap = '0';
-    container.style.padding = '0';
-    
-    const filterPanel = document.createElement('div');
-    filterPanel.className = 'drivers-filter-panel';
-    
-    const cardsArea = document.createElement('div');
-    cardsArea.className = 'drivers-cards-area';
-    cardsArea.id = 'driversCardsContainer';
-    
-    container.appendChild(filterPanel);
-    container.appendChild(cardsArea);
-    
-    buildFilterPanel(filterPanel, cardsArea);
-}
+const driversIndex = new Map(driversData.map(d => [d.id, d]));
 
-function calculateTop10PositionStats(driverId) {
-    const positions = [];
+const DRIVER_PATTERN_SVG = `<svg viewBox="0 0 928 800" preserveAspectRatio="xMidYMid slice" fill="none"><g><path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path><path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path><path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path><path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path><path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path><path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path><path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path><path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path><path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path><path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path><path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path><path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path></g></svg>`;
+
+const COMPARE_METRICS = [
+    { key: 'titles',     label: 'Титул',           decl: ['Титул', 'Титула', 'Титулов'] },
+    { key: 'wins',       label: 'Победа',          decl: ['Победа', 'Победы', 'Побед'] },
+    { key: 'podiums',    label: 'Подиум',          decl: ['Подиум', 'Подиума', 'Подиумов'] },
+    { key: 'poles',      label: 'Поул',            decl: ['Поул', 'Поула', 'Поулов'] },
+    { key: 'hattricks',  label: 'Хэт-Трик',        decl: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'] },
+    { key: 'grandslam',  label: 'Большой шлем',    decl: ['Большой шлем', 'Больших шлема', 'Больших шлемов'] },
+];
+
+const countryNames = {
+    gb: 'Великобритания', nl: 'Нидерланды', mc: 'Монако', de: 'Германия',
+    es: 'Испания', fr: 'Франция', fi: 'Финляндия', au: 'Австралия',
+    mx: 'Мексика', ca: 'Канада', jp: 'Япония', cn: 'Китай',
+    th: 'Таиланд', dk: 'Дания', us: 'США', it: 'Италия',
+    br: 'Бразилия', ar: 'Аргентина', bh: 'Бахрейн', ru: 'Россия',
+    sa: 'Саудовская Аравия', at: 'Австрия', be: 'Бельгия', hu: 'Венгрия',
+    az: 'Азербайджан', sg: 'Сингапур', qa: 'Катар', ae: 'ОАЭ',
+    tr: 'Турция', pt: 'Португалия', co: 'Колумбия', my: 'Малайзия',
+    nz: 'Новая Зеландия', pl: 'Польша', ch: 'Швейцария'
+};
+
+const countrySynonyms = {
+    mc: ['Монегаск', 'Европеец'],
+    de: ['Немец', 'Европеец'],
+    es: ['Испанец', 'Европеец'],
+    fr: ['Француз', 'Европеец'],
+    it: ['Итальянец', 'Европеец'],
+    at: ['Австриец', 'Европеец'],
+    be: ['Бельгиец', 'Европеец'],
+    hu: ['Венгр', 'Европеец'],
+    pt: ['Португалец', 'Европеец'],
+    pl: ['Поляк', 'Европеец'],
+    ch: ['Швейцарец', 'Европеец'],
+    nl: ['Голландец', 'Нидерландец', 'Европеец'],
+    gb: ['Британец', 'Англичанин', 'Шотландец', 'Европеец'],
+    fi: ['Финн', 'Скандинав', 'Европеец'],
+    dk: ['Датчанин', 'Скандинав', 'Европеец'],
+    ru: ['Русский'],
+    az: ['Азербайджанец', 'Европеец', 'Азиат'],
+    jp: ['Японец', 'Азиат'],
+    cn: ['Китаец', 'Азиат'],
+    th: ['Таец', 'Азиат'],
+    sg: ['Сингапурец', 'Азиат'],
+    my: ['Малайзиец', 'Азиат'],
+    tr: ['Турок', 'Азиат', 'Европеец'],
+    bh: ['Бахрейнец', 'Азиат', 'Араб'],
+    sa: ['Саудовец', 'Саудиец', 'Азиат', 'Араб'],
+    qa: ['Катарец', 'Азиат', 'Араб'],
+    ae: ['Эмиратец', 'Азиат', 'Араб'],
+    us: ['Американец'],
+    ca: ['Канадец'],
+    mx: ['Мексиканец', 'Латиноамериканец'],
+    br: ['Бразилец', 'Латиноамериканец'],
+    co: ['Колумбиец', 'Латиноамериканец'],
+    au: ['Австралиец', 'Океаниец'],
+    nz: ['Новозеландец', 'Океаниец']
+};
+
+const getCountryName = code => countryNames[code] || code.toUpperCase();
+
+const findDriverById = id => driversIndex.get(id) || null;
+
+const getCurrentWorldChampion = () => driversData.find(d => d.number === 1) || null;
+
+const getDebutFromCareer = driver => {
+    if (!driver?.career?.length) return driver?.debut || '';
+
+    let bestStart = Infinity;
+    let bestTeam = null;
+
+    driver.career.forEach(item => {
+        const yearStr = String(item.year || '').trim();
+        if (!yearStr) return;
+
+        // берём первое 4-значное число из строки вида "2017", "2017-2018", "2017-н.в."
+        const match = yearStr.match(/\d{4}/);
+        if (!match) return;
+
+        const start = Number(match[0]);
+        if (start < bestStart) {
+            bestStart = start;
+            bestTeam = item.team;
+        }
+    });
+
+    if (!bestTeam || !isFinite(bestStart)) return driver?.debut || '';
+    return `${bestStart} - ${bestTeam}`;
+};
+
+const applyDebutFromCareer = () => {
+    driversData.forEach(driver => {
+        driver.debut = getDebutFromCareer(driver);
+    });
+};
+
+const buildShortName = fullName => {
+    if (!fullName) return '';
+    const parts = fullName.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0];
+
+    const first = parts[0];
+    const rest = parts.slice(1).join(' ');
+    return `${first.charAt(0)}. ${rest}`;
+};
+
+const applyShortNames = () => {
+    driversData.forEach(driver => {
+        driver.namem = buildShortName(driver.name);
+    });
+};
+
+const declension = (num, titles) => {
+    const n = Math.abs(num) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) return titles[2];
+    if (n1 > 1 && n1 < 5) return titles[1];
+    if (n1 === 1) return titles[0];
+    return titles[2];
+};
+
+const calculateAge = str => {
+    const [d, m, y] = str.split('.').map(Number);
+    const birth = new Date(y, m - 1, d);
+    const now = new Date();
+    let age = now.getFullYear() - birth.getFullYear();
+    const mo = now.getMonth() - birth.getMonth();
+    if (mo < 0 || (mo === 0 && now.getDate() < birth.getDate())) age--;
+    return age;
+};
+
+const calculateSeasonStatsFromResults = () => {
+    const wins = {};
+    const podiums = {};
+
     const allGPs = getAllGPs();
-    
+
     allGPs.forEach(gpId => {
         const results = detailedResults[gpId];
         if (!results) return;
-        
-        const hasResults = Object.keys(results).some(key => 
-            key !== "000" && results[key] !== undefined
-        );
-        if (!hasResults) return;
-        
-        const value = getDriverResultValue(results, driverId);
-        
-        const pointsToPosition = {
-            25: 1, 18: 2, 15: 3, 12: 4, 10: 5,
-            8: 6, 6: 7, 4: 8, 2: 9, 1: 10
-        };
-        
-        if (typeof value === 'number' && pointsToPosition[value] !== undefined) {
-            positions.push(pointsToPosition[value]);
-        }
-    });
-    
-    if (positions.length === 0) return null;
-    
-    // Считаем частоту каждой позиции
-    const positionCounts = {};
-    for (let i = 1; i <= 10; i++) {
-        positionCounts[i] = 0;
-    }
-    positions.forEach(pos => {
-        if (positionCounts[pos] !== undefined) {
-            positionCounts[pos]++;
-        }
-    });
-    
-    // Мода — самая частая позиция (для подсветки строки)
-    let mostFrequent = 1;
-    let maxCount = 0;
-    for (let pos = 1; pos <= 10; pos++) {
-        if (positionCounts[pos] > maxCount) {
-            maxCount = positionCounts[pos];
-            mostFrequent = pos;
-        }
-    }
-    
-    // Лучшая — минимальная позиция
-    const best = Math.min(...positions);
-    
-    // Средняя — среднее арифметическое
-    const sum = positions.reduce((acc, pos) => acc + pos, 0);
-    const average = sum / positions.length;
-    
-    return {
-        best: best,
-        average: average,
-        mostFrequent: mostFrequent,
-        counts: positionCounts,
-        totalRaces: positions.length,
-        positions: positions
-    };
-}
+        if (!hasRealResults(gpId, false)) return; // игнорируем заглушки "000"
 
-function buildFilterPanel(panel, cardsArea) {
-    // Поле поиска
-    const searchInput = document.createElement('input');
-    searchInput.type = 'text';
-    searchInput.className = 'driver-search-input';
-    searchInput.placeholder = 'Поиск...';
-    
-    // Кнопка фильтров (только для мобильной версии)
-    const filterToggleBtn = document.createElement('button');
-    filterToggleBtn.className = 'filter-toggle-btn';
-    filterToggleBtn.innerHTML = '⚙';
-    
-    // Кнопка сброса
-    const resetBtn = document.createElement('button');
-    resetBtn.className = 'filter-reset-btn';
-    resetBtn.textContent = 'Сбросить';
-    
-    // Разделитель
-    const divider1 = document.createElement('hr');
-    divider1.className = 'filter-divider';
-    
-    // Заголовок "Команды"
-    const filterTitle = document.createElement('div');
-    filterTitle.className = 'filter-section-title';
-    filterTitle.textContent = 'Команды';
-    
-    // Контейнер чекбоксов команд (скрыт на мобильной версии)
-    const checkboxesContainer = document.createElement('div');
-    checkboxesContainer.className = 'filter-checkboxes';
-    
-    // Получаем список команд (исключая резерв)
-    const teams = [...new Set(driversData.map(d => d.team))];
-    const regularTeams = teams
-        .filter(t => t.toLowerCase() !== 'резерв' && 
-                     t.toLowerCase() !== 'reserve')
-        .sort((a, b) => a.localeCompare(b, 'ru'));
-    
-    // Чекбокс ВСЕ
-    const allCheckbox = createCheckbox('all', 'ВСЕ', true, checkboxesContainer);
-    
-    // Чекбоксы команд
-    const teamCheckboxes = {};
-    regularTeams.forEach(team => {
-        const cb = createCheckbox(team, team, false, checkboxesContainer);
-        teamCheckboxes[team] = cb;
-    });
-    
-    // ===== РАЗДЕЛИТЕЛЬ ПЕРЕД РЕЗЕРВИСТАМИ =====
-    const dividerReserve = document.createElement('hr');
-    dividerReserve.className = 'filter-divider filter-divider-reserve';
-    
-    // Чекбокс "Резервисты"
-    const reserveContainer = document.createElement('div');
-    reserveContainer.className = 'filter-checkboxes filter-reserve-section';
-    const reserveCheckbox = createCheckbox('reserve', 'Резервисты', false, reserveContainer);
-    
-    // ===== РАЗДЕЛИТЕЛЬ ПЕРЕД ЧЕМПИОНАМИ =====
-    const divider2 = document.createElement('hr');
-    divider2.className = 'filter-divider filter-divider-champ';
-    
-    // Чекбокс "Чемпионы мира"
-    const champsContainer = document.createElement('div');
-    champsContainer.className = 'filter-checkboxes';
-    const champsCheckbox = createCheckbox('champs', 'Чемпионы мира', false, champsContainer);
-    
-    // ==============================================
-    // МОБИЛЬНАЯ ПОПАПКА С ЧЕКБОКСАМИ
-    // ==============================================
-    const popupOverlay = document.createElement('div');
-    popupOverlay.className = 'filter-checkboxes-popup';
-    
-    const popupInner = document.createElement('div');
-    popupInner.className = 'filter-checkboxes-popup-inner';
-    
-    // Заголовок попапки
-    const popupHeader = document.createElement('div');
-    popupHeader.className = 'filter-popup-header';
-    
-    const popupTitle = document.createElement('span');
-    popupTitle.className = 'filter-popup-title';
-    popupTitle.textContent = 'Фильтры';
-    
-    const popupClose = document.createElement('button');
-    popupClose.className = 'filter-popup-close';
-    popupClose.innerHTML = '&times;';
-    popupClose.setAttribute('aria-label', 'Закрыть фильтры');
-    
-    popupHeader.appendChild(popupTitle);
-    popupHeader.appendChild(popupClose);
-    popupInner.appendChild(popupHeader);
-    
-    // Секция "Команды"
-    const popupTeamsTitle = document.createElement('div');
-    popupTeamsTitle.className = 'filter-popup-section-title';
-    popupTeamsTitle.textContent = 'Команды';
-    popupInner.appendChild(popupTeamsTitle);
-    
-    const popupCheckboxesContainer = document.createElement('div');
-    popupCheckboxesContainer.className = 'filter-popup-checkboxes';
-    
-    // Клонируем чекбоксы для попапки
-    const popupAllCheckbox = createCheckbox('all', 'ВСЕ', true, popupCheckboxesContainer);
-    const popupTeamCheckboxes = {};
-    regularTeams.forEach(team => {
-        const cb = createCheckbox(team, team, false, popupCheckboxesContainer);
-        popupTeamCheckboxes[team] = cb;
-    });
-    
-    popupInner.appendChild(popupCheckboxesContainer);
-    
-    // ===== РАЗДЕЛИТЕЛЬ В ПОПАПКЕ =====
-    const popupDivider1 = document.createElement('hr');
-    popupDivider1.className = 'filter-popup-divider';
-    popupInner.appendChild(popupDivider1);
-    
-    // Секция "Резервисты" в попапке
-    const popupReserveContainer = document.createElement('div');
-    popupReserveContainer.className = 'filter-popup-section';
-    const popupReserveCheckbox = createCheckbox('reserve', 'Резервисты', false, popupReserveContainer);
-    popupInner.appendChild(popupReserveContainer);
-    
-    // ===== РАЗДЕЛИТЕЛЬ В ПОПАПКЕ =====
-    const popupDivider2 = document.createElement('hr');
-    popupDivider2.className = 'filter-popup-divider';
-    popupInner.appendChild(popupDivider2);
-    
-    // Секция "Чемпионы мира" в попапке
-    const popupChampsContainer = document.createElement('div');
-    popupChampsContainer.className = 'filter-popup-section';
-    const popupChampsCheckbox = createCheckbox('champs', 'Чемпионы мира', false, popupChampsContainer);
-    popupInner.appendChild(popupChampsContainer);
-    
-    popupOverlay.appendChild(popupInner);
-    
-	// ===== КНОПКА СРАВНЕНИЯ ПИЛОТОВ =====
-	const compareDivider = document.createElement('hr');
-	compareDivider.className = 'filter-divider filter-divider-compare';
+        Object.keys(results).forEach(driverId => {
+            if (driverId === '000') return;
+            const value = getDriverResultValue(results, driverId);
+            if (typeof value !== 'number') return;
 
-	const compareBtn = document.createElement('button');
-	compareBtn.className = 'drivers-compare-btn';
-	compareBtn.innerHTML = 'Сравнение пилотов';
-	compareBtn.addEventListener('click', () => {
-		openDriversCompareModal();
-	});
-
-	// Собираем панель
-	panel.appendChild(searchInput);
-	panel.appendChild(filterToggleBtn);
-	panel.appendChild(resetBtn);
-	panel.appendChild(divider1);
-	panel.appendChild(filterTitle);
-	panel.appendChild(checkboxesContainer);
-	panel.appendChild(dividerReserve);
-	panel.appendChild(reserveContainer);
-	panel.appendChild(divider2);
-	panel.appendChild(champsContainer);
-	panel.appendChild(compareDivider);
-	panel.appendChild(compareBtn);
-	panel.appendChild(popupOverlay);
-    
-    // Состояние фильтров
-    let activeTeamFilters = new Set(regularTeams);
-    let champsOnly = false;
-    let showReserve = false;
-    let isAllSelected = true;
-    
-    // Функция синхронизации чекбоксов
-    function syncCheckboxes(source, target, sourceAll, targetAll) {
-        Object.keys(source).forEach(team => {
-            if (target[team]) {
-                target[team].checked = source[team].checked;
-            }
-            if (source[team]) {
-                source[team].checked = target[team].checked;
+            // 25 = победа, 18/15 = подиум
+            if (value === 25) {
+                wins[driverId] = (wins[driverId] || 0) + 1;
+                podiums[driverId] = (podiums[driverId] || 0) + 1;
+            } else if (value === 18 || value === 15) {
+                podiums[driverId] = (podiums[driverId] || 0) + 1;
             }
         });
-        
-        if (sourceAll && targetAll) {
-            sourceAll.checked = targetAll.checked;
-        }
-    }
-    
-    function applyFilters() {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        
-        let filtered = driversData;
-        
-        // Фильтр по командам (основные команды)
-        if (!showReserve) {
-            // Исключаем резервистов
-            filtered = filtered.filter(driver => 
-                driver.team.toLowerCase() !== 'резерв' && 
-                driver.team.toLowerCase() !== 'reserve'
-            );
-            
-            // Фильтруем по выбранным командам
-            const isAllTeamsSelected = activeTeamFilters.size === regularTeams.length;
-            
-            if (!isAllTeamsSelected) {
-                filtered = filtered.filter(driver => activeTeamFilters.has(driver.team));
-            }
-            
-        } else {
-            // Если включены резервисты
-            const reserveDrivers = filtered.filter(driver => 
-                driver.team.toLowerCase() === 'резерв' || 
-                driver.team.toLowerCase() === 'reserve'
-            );
-            
-            // Основные пилоты с фильтром по командам
-            const isAllTeamsSelected = activeTeamFilters.size === regularTeams.length;
-            let mainDrivers;
-            
-            if (isAllTeamsSelected) {
-                mainDrivers = filtered.filter(driver => 
-                    driver.team.toLowerCase() !== 'резерв' && 
-                    driver.team.toLowerCase() !== 'reserve'
-                );
-            } else {
-                mainDrivers = filtered.filter(driver => 
-                    driver.team.toLowerCase() !== 'резерв' && 
-                    driver.team.toLowerCase() !== 'reserve' &&
-                    activeTeamFilters.has(driver.team)
-                );
-            }
-            
-            filtered = [...mainDrivers, ...reserveDrivers];
-        }
-        
-        // Фильтр «Чемпионы мира»
-        if (champsOnly) {
-            filtered = filtered.filter(driver => driver.titles > 0);
-        }
-        
-        // Поиск
-	if (searchTerm) {
-		filtered = filtered.filter(driver => {
-			const countryName = getCountryName(driver.country).toLowerCase();
-			const synonyms = (countrySynonyms[driver.country] || []).map(s => s.toLowerCase());
-			const allCountryNames = [countryName, ...synonyms];
+    });
 
-			const checkStartsWith = (text) => {
-				const words = text.toLowerCase().split(/\s+/);
-				return words.some(word => word.startsWith(searchTerm));
-			};
+    return { wins, podiums };
+};
 
-			return driver.number.toString().startsWith(searchTerm) ||
-				   checkStartsWith(driver.name) ||
-				   checkStartsWith(driver.namem) ||
-				   allCountryNames.some(name => checkStartsWith(name)) ||  // ← исправлено
-				   checkStartsWith(driver.team);
-		});
-	}
-        
-        renderDriverCards(filtered, cardsArea);
-    }
-    
-    function handleCheckboxChange(e, sourceCheckboxes, sourceAll, sourceTeamCheckboxes, isPopup) {
-        if (e.target.type === 'checkbox') {
-            const checkbox = e.target;
-            const value = checkbox.dataset.filterValue;
-            const targetCheckboxes = isPopup ? popupTeamCheckboxes : teamCheckboxes;
-            const targetAll = isPopup ? popupAllCheckbox : allCheckbox;
-            const targetChamps = isPopup ? popupChampsCheckbox : champsCheckbox;
-            const targetReserve = isPopup ? popupReserveCheckbox : reserveCheckbox;
-            const sourceChampsCheckbox = isPopup ? popupChampsCheckbox : champsCheckbox;
-            
-            // Обработка чекбокса "Резервисты"
-            if (value === 'reserve') {
-                showReserve = checkbox.checked;
-                if (targetReserve) targetReserve.checked = checkbox.checked;
-                applyFilters();
-                return;
-            }
-            
-            if (value === 'all') {
-                if (checkbox.checked) {
-                    // Сбрасываем выбор команд
-                    Object.values(sourceTeamCheckboxes).forEach(cb => cb.checked = false);
-                    Object.values(targetCheckboxes).forEach(cb => cb.checked = false);
-                    activeTeamFilters = new Set(regularTeams);
-                    isAllSelected = true;
-                    
-                    // Сбрасываем фильтр "Чемпионы мира"
-                    sourceChampsCheckbox.checked = false;
-                    targetChamps.checked = false;
-                    champsOnly = false;
-                } else {
-                    // Если "ВСЕ" выключен, проверяем есть ли выбранные команды
-                    const anyTeamChecked = Object.values(sourceTeamCheckboxes).some(cb => cb.checked);
-                    if (!anyTeamChecked) {
-                        // Если нет выбранных команд - включаем "ВСЕ" обратно
-                        checkbox.checked = true;
-                        if (targetAll) targetAll.checked = true;
-                        isAllSelected = true;
-                    } else {
-                        isAllSelected = false;
-                    }
-                }
-                
-                syncCheckboxes(sourceTeamCheckboxes, targetCheckboxes, sourceAll, targetAll);
-                applyFilters();
-                return;
-            }
-            
-            // ЛОГИКА ДЛЯ КОМАНДНЫХ ЧЕКБОКСОВ
-            // Собираем выбранные команды
-            const selectedTeams = new Set();
-            Object.entries(sourceTeamCheckboxes).forEach(([team, cb]) => {
-                if (cb.checked) {
-                    selectedTeams.add(team);
-                }
-            });
-            
-            // Обновляем состояние
-            if (selectedTeams.size === 0) {
-                // Если нет выбранных команд - включаем "ВСЕ"
-                sourceAll.checked = true;
-                if (targetAll) targetAll.checked = true;
-                activeTeamFilters = new Set(regularTeams);
-                isAllSelected = true;
-                
-                // Сбрасываем фильтр "Чемпионы мира"
-                sourceChampsCheckbox.checked = false;
-                if (targetChamps) targetChamps.checked = false;
-                champsOnly = false;
-            } else {
-                // Если есть выбранные команды - выключаем "ВСЕ"
-                sourceAll.checked = false;
-                if (targetAll) targetAll.checked = false;
-                activeTeamFilters = new Set(selectedTeams);
-                isAllSelected = false;
-            }
-            
-            syncCheckboxes(sourceTeamCheckboxes, targetCheckboxes, sourceAll, targetAll);
-            applyFilters();
-        }
-    }
-    
-    // Обработчик для "Чемпионы мира"
-    function handleChampsChange(sourceCheckbox, targetCheckbox) {
-        champsOnly = sourceCheckbox.checked;
-        if (targetCheckbox) targetCheckbox.checked = sourceCheckbox.checked;
-        applyFilters();
-    }
-    
-    // Назначаем обработчики для основной панели
-    checkboxesContainer.addEventListener('change', (e) => {
-        handleCheckboxChange(e, teamCheckboxes, allCheckbox, teamCheckboxes, false);
-    });
-    
-    champsCheckbox.addEventListener('change', () => {
-        handleChampsChange(champsCheckbox, popupChampsCheckbox);
-    });
-    
-    reserveCheckbox.addEventListener('change', () => {
-        showReserve = reserveCheckbox.checked;
-        popupReserveCheckbox.checked = reserveCheckbox.checked;
-        applyFilters();
-    });
-    
-    // Назначаем обработчики для попапки
-    popupCheckboxesContainer.addEventListener('change', (e) => {
-        handleCheckboxChange(e, popupTeamCheckboxes, popupAllCheckbox, popupTeamCheckboxes, true);
-    });
-    
-    popupChampsCheckbox.addEventListener('change', () => {
-        handleChampsChange(popupChampsCheckbox, champsCheckbox);
-    });
-    
-    popupReserveCheckbox.addEventListener('change', () => {
-        showReserve = popupReserveCheckbox.checked;
-        reserveCheckbox.checked = popupReserveCheckbox.checked;
-        applyFilters();
-    });
-    
-    // Поиск
-    searchInput.addEventListener('input', applyFilters);
-    
-    // Кнопка фильтров - открывает попапку
-    filterToggleBtn.addEventListener('click', () => {
-        popupOverlay.classList.toggle('active');
-        filterToggleBtn.classList.toggle('active');
-    });
-    
-    // Закрытие попапки
-    popupClose.addEventListener('click', () => {
-        popupOverlay.classList.remove('active');
-        filterToggleBtn.classList.remove('active');
-    });
-    
-    popupOverlay.addEventListener('click', (e) => {
-        if (e.target === popupOverlay) {
-            popupOverlay.classList.remove('active');
-            filterToggleBtn.classList.remove('active');
-        }
-    });
-    
-    // Сброс
-    resetBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        
-        // Сбрасываем основную панель
-        allCheckbox.checked = true;
-        Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
-        champsCheckbox.checked = false;
-        reserveCheckbox.checked = false;
-        
-        // Сбрасываем попапку
-        popupAllCheckbox.checked = true;
-        Object.values(popupTeamCheckboxes).forEach(cb => cb.checked = false);
-        popupChampsCheckbox.checked = false;
-        popupReserveCheckbox.checked = false;
-        
-        activeTeamFilters = new Set(regularTeams);
-        champsOnly = false;
-        showReserve = false;
-        isAllSelected = true;
-        
-        // Закрываем попапку
-        popupOverlay.classList.remove('active');
-        filterToggleBtn.classList.remove('active');
-        
-        applyFilters();
-    });
-    
-    // ПРИМЕНЯЕМ ФИЛЬТРЫ СРАЗУ ПРИ ЗАГРУЗКЕ
-    applyFilters();
-}
+const calculateSeasonDNFsFromResults = () => {
+    const counts = {};
+    const allGPs = getAllGPs();
 
-function createCheckbox(value, label, checked, container) {
+    allGPs.forEach(gpId => {
+        const results = detailedResults[gpId];
+        if (!results) return;
+        if (!hasRealResults(gpId, false)) return;
+
+        Object.keys(results).forEach(driverId => {
+            if (driverId === '000') return;
+            const value = getDriverResultValue(results, driverId);
+            if (value !== 'dnf' && value !== 'dns' && value !== 'dsq') return;
+
+            if (!counts[driverId]) counts[driverId] = { dnf: 0, dns: 0, dsq: 0 };
+            counts[driverId][value]++;
+        });
+    });
+
+    return counts;
+};
+
+const applySeasonDNFsToDrivers = () => {
+    const counts = calculateSeasonDNFsFromResults();
+    driversData.forEach(driver => {
+        const c = counts[driver.id] || { dnf: 0, dns: 0, dsq: 0 };
+        driver.seasonDNF = c.dnf;
+        driver.seasonDNS = c.dns;
+        driver.seasonDSQ = c.dsq;
+    });
+};
+
+const applySeasonStatsToDrivers = () => {
+    const { wins, podiums } = calculateSeasonStatsFromResults();
+
+    driversData.forEach(driver => {
+        if (driver._baseWins === undefined) driver._baseWins = driver.wins || 0;
+        if (driver._basePodiums === undefined) driver._basePodiums = driver.podiums || 0;
+
+        driver.wins = driver._baseWins + (wins[driver.id] || 0);
+        driver.podiums = driver._basePodiums + (podiums[driver.id] || 0);
+    });
+};
+
+const getDriverCareerSeasons = driver => {
+    if (!driver.career?.length) return 0;
+    const seasons = new Set();
+    const currentYear = new Date().getFullYear();
+
+    driver.career.forEach(item => {
+        const yearStr = String(item.year);
+        if (/н\.?\s*в\.?/i.test(yearStr)) {
+            const start = yearStr.match(/(\d{4})/);
+            if (start) for (let y = +start[1]; y <= currentYear; y++) seasons.add(y);
+            return;
+        }
+        const matches = yearStr.match(/\d{4}/g);
+        if (!matches) return;
+        const start = +matches[0];
+        const end = matches[1] ? +matches[1] : start;
+        for (let y = start; y <= end; y++) seasons.add(y);
+    });
+
+    return seasons.size;
+};
+
+const getDriverCompareData = driver => {
+    if (!driver) return null;
+    return {
+        ...driver,
+        careerSeasons: getDriverCareerSeasons(driver),
+        fines: driver.fines || 0,
+        fastestLaps: driver.fastestLaps || 0
+    };
+};
+
+const calculateFastestLapsFromTracks = () => {
+    driversData.forEach(d => {
+        d.fastestLaps = 0;
+        d.fastestLapsTracks = [];
+    });
+
+    const calendarTrackIds = new Set(
+        calendarData.filter(gp => !gp.canceled).map(gp => gp.track)
+    );
+
+    tracksData.forEach(track => {
+        if (!calendarTrackIds.has(track.id) || !track.lapRecord) return;
+        const parts = track.lapRecord.split(',');
+        if (parts.length < 2) return;
+        const pilotName = parts[1].split('-')[0].trim();
+        const driver = driversData.find(d => d.namem === pilotName);
+        if (!driver) return;
+        driver.fastestLaps++;
+        driver.fastestLapsTracks.push({
+            trackId: track.id,
+            trackNamem: track.trackNamem,
+            country: track.country,
+            time: parts[0].trim(),
+            year: parts[1].split('-').pop().trim()
+        });
+    });
+};
+
+const createCheckbox = (value, label, checked, container) => {
     const wrapper = document.createElement('label');
     wrapper.className = 'filter-checkbox-label';
-    
+
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.dataset.filterValue = value;
     input.checked = checked;
-    
+
     const checkmark = document.createElement('span');
     checkmark.className = 'checkmark';
-    
+
     const text = document.createElement('span');
     text.className = 'checkbox-text';
     text.textContent = label;
-    
-    wrapper.appendChild(input);
-    wrapper.appendChild(checkmark);
-    wrapper.appendChild(text);
-    container.appendChild(wrapper);
-    
-    return input;
-}
 
-function animateCardsAppearance(container) {
+    wrapper.append(input, checkmark, text);
+    container.appendChild(wrapper);
+    return input;
+};
+
+const animateCardsAppearance = container => {
     const cards = container.querySelectorAll('.driver-card');
-    
-    if (cards.length === 0) return;
-    
-    const containerWidth = container.offsetWidth || container.parentElement.offsetWidth || 1200;
-    const cardMinWidth = 190;
-    const gap = 10;
-    const cols = Math.max(1, Math.floor((containerWidth + gap) / (cardMinWidth + gap)));
-    
-    cards.forEach((card) => {
+    if (!cards.length) return;
+
+    const width = container.offsetWidth || container.parentElement?.offsetWidth || 1200;
+    const cols = Math.max(1, Math.floor((width + 10) / (190 + 10)));
+
+    cards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'scale(0.92) translateY(15px)';
         card.style.transition = 'none';
     });
-    
+
     requestAnimationFrame(() => {
-        cards.forEach((card, index) => {
-            const rowIndex = Math.floor(index / cols);
-            const delay = rowIndex * 80;
-            
+        cards.forEach((card, i) => {
+            const delay = Math.floor(i / cols) * 80;
             card.style.transition = `opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms`;
-            
             requestAnimationFrame(() => {
                 card.style.opacity = '1';
                 card.style.transform = 'scale(1) translateY(0)';
             });
         });
     });
-}
+};
 
-function getCurrentWorldChampion() {
-    return driversData.find(driver => driver.number === 1);
-}
+const calculateTop10PositionStats = driverId => {
+    const positions = [];
+    const allGPs = getAllGPs();
+    const pointsToPosition = { 25:1, 18:2, 15:3, 12:4, 10:5, 8:6, 6:7, 4:8, 2:9, 1:10 };
 
-function renderDriverCards(drivers, container) {
+    allGPs.forEach(gpId => {
+        const results = detailedResults[gpId];
+        if (!results) return;
+        const hasResults = Object.keys(results).some(k => k !== '000' && results[k] !== undefined);
+        if (!hasResults) return;
+
+        const value = getDriverResultValue(results, driverId);
+        if (typeof value === 'number' && pointsToPosition[value] !== undefined) {
+            positions.push(pointsToPosition[value]);
+        }
+    });
+
+    if (!positions.length) return null;
+
+    const counts = {};
+    for (let i = 1; i <= 10; i++) counts[i] = 0;
+    positions.forEach(p => { if (counts[p] !== undefined) counts[p]++; });
+
+    let mostFrequent = 1;
+    let maxCount = 0;
+    for (let pos = 1; pos <= 10; pos++) {
+        if (counts[pos] > maxCount) {
+            maxCount = counts[pos];
+            mostFrequent = pos;
+        }
+    }
+
+    return {
+        best: Math.min(...positions),
+        average: positions.reduce((s, p) => s + p, 0) / positions.length,
+        mostFrequent,
+        counts,
+        totalRaces: positions.length,
+        positions
+    };
+};
+
+const renderDriverCards = (drivers, container) => {
     container.innerHTML = '';
-    
-    if (drivers.length === 0) {
+
+    if (!drivers.length) {
         const empty = document.createElement('div');
         empty.className = 'no-results';
         empty.textContent = 'Пилоты не найдены';
         container.appendChild(empty);
         return;
     }
-    
-    const sortedDrivers = [...drivers].sort((a, b) => Number(a.number) - Number(b.number));
-    const currentChampion = getCurrentWorldChampion();
-    const championId = currentChampion ? currentChampion.id : null;
-    
-    sortedDrivers.forEach(driver => {
+
+    const sorted = [...drivers].sort((a, b) => Number(a.number) - Number(b.number));
+    const championId = getCurrentWorldChampion()?.id ?? null;
+
+    sorted.forEach(driver => {
         const card = document.createElement('div');
         card.className = 'driver-card';
-        const teamColor = getTeamColor(driver.team);
-        card.style.setProperty('--team-color', teamColor);
-        
-        // === КЛЕТЧАТЫЙ ФОН ДЛЯ КАРТОЧКИ ПИЛОТА ===
+        card.style.setProperty('--team-color', getTeamColor(driver.team));
+
         const patternDiv = document.createElement('div');
         patternDiv.className = 'driver-card-bg-pattern';
         patternDiv.innerHTML = DRIVER_PATTERN_SVG;
         card.appendChild(patternDiv);
-        
-        // Затемняющий оверлей для читаемости
+
         const overlay = document.createElement('div');
         overlay.className = 'driver-card-bg-overlay';
         card.appendChild(overlay);
-        // === КОНЕЦ КЛЕТЧАТОГО ФОНА ===
-        
-        // Добавляем класс для чемпиона
-        if (driver.id === championId) {
-            card.classList.add('world-champion');
-        }
-        
-        // Добавляем класс для резервиста
-        if (driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve') {
-            card.classList.add('reserve-driver');
-        }
-        
+
+        if (driver.id === championId) card.classList.add('world-champion');
+
+        const isReserve = /^(резерв|reserve)$/i.test(driver.team);
+        if (isReserve) card.classList.add('reserve-driver');
+
         const portraitWrapper = document.createElement('div');
         portraitWrapper.className = 'driver-portrait-wrapper';
-        
+
         const portraitImg = document.createElement('img');
         portraitImg.src = `Images/Drivers/${driver.id}.png`;
         portraitImg.alt = driver.name;
         portraitImg.className = 'driver-portrait-img';
         portraitImg.onerror = () => { portraitImg.src = 'Images/Drivers/default.png'; };
-        
+
         const flagOverlay = document.createElement('div');
         flagOverlay.className = 'driver-flag-overlay';
         const flagImg = document.createElement('img');
@@ -1393,68 +1103,41 @@ function renderDriverCards(drivers, container) {
         flagImg.alt = driver.country;
         flagImg.onerror = () => { flagImg.style.display = 'none'; };
         flagOverlay.appendChild(flagImg);
-        
+
         const titlesOverlay = document.createElement('div');
         titlesOverlay.className = 'driver-titles-overlay';
         if (driver.titles > 0) {
-            const starsCount = driver.titles;
-            const maxPerRow = 5;
-            
-            if (starsCount <= maxPerRow) {
-                let starsHtml = '';
-                for (let i = 0; i < starsCount; i++) {
-                    starsHtml += '☆';
-                }
-                titlesOverlay.textContent = starsHtml;
+            const stars = driver.titles;
+            if (stars <= 5) {
+                titlesOverlay.textContent = '☆'.repeat(stars);
             } else {
-                const firstRow = Math.ceil(starsCount / 2);
-                const secondRow = starsCount - firstRow;
-                
-                let firstRowHtml = '';
-                for (let i = 0; i < firstRow; i++) {
-                    firstRowHtml += '☆';
-                }
-                
-                let secondRowHtml = '';
-                for (let i = 0; i < secondRow; i++) {
-                    secondRowHtml += '☆';
-                }
-                
-                titlesOverlay.innerHTML = `
-                    <div class="titles-row">${firstRowHtml}</div>
-                    <div class="titles-row">${secondRowHtml}</div>
-                `;
+                const firstRow = Math.ceil(stars / 2);
+                const secondRow = stars - firstRow;
+                titlesOverlay.innerHTML = `<div class="titles-row">${'☆'.repeat(firstRow)}</div><div class="titles-row">${'☆'.repeat(secondRow)}</div>`;
                 titlesOverlay.classList.add('titles-multi-row');
             }
             titlesOverlay.title = `${driver.titles}× чемпион мира`;
         } else {
             titlesOverlay.style.display = 'none';
         }
-        
+
         const numberOverlay = document.createElement('div');
         numberOverlay.className = 'driver-number-overlay';
         numberOverlay.textContent = driver.number;
-        
-        portraitWrapper.appendChild(portraitImg);
-        portraitWrapper.appendChild(flagOverlay);
-        portraitWrapper.appendChild(titlesOverlay);
-        portraitWrapper.appendChild(numberOverlay);
-        
+
+        portraitWrapper.append(portraitImg, flagOverlay, titlesOverlay, numberOverlay);
+
         const nameDiv = document.createElement('div');
         nameDiv.className = 'driver-short-name';
         nameDiv.textContent = driver.namem;
-        
+
         const divider = document.createElement('div');
         divider.className = 'driver-card-divider';
-        
+
         const teamDiv = document.createElement('div');
         teamDiv.className = 'driver-team';
 
-        // Проверяем, является ли пилот резервистом
-        const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
-        
         if (isReserve) {
-            // Для резервистов показываем "Резерв" вместо логотипа команды
             const reserveLabel = document.createElement('span');
             reserveLabel.className = 'driver-reserve-label';
             reserveLabel.textContent = 'Резерв';
@@ -1468,122 +1151,375 @@ function renderDriverCards(drivers, container) {
             const teamName = document.createElement('span');
             teamName.textContent = driver.team;
 
-            teamDiv.appendChild(teamLogo);
-            teamDiv.appendChild(teamName);
+            teamDiv.append(teamLogo, teamName);
 
-            teamDiv.addEventListener('click', (e) => {
-                e.stopPropagation(); 
-                const teamData = getTeamData(driver.team);
-                if (teamData) {
-                    openTeamModal(teamData);
-                }
+            teamDiv.addEventListener('click', e => {
+                e.stopPropagation();
+                const data = getTeamData(driver.team);
+                if (data) openTeamModal(data);
             });
         }
-        
-        card.appendChild(portraitWrapper);
-        card.appendChild(nameDiv);
-        card.appendChild(divider);
-        card.appendChild(teamDiv);
-        
+
+        card.append(portraitWrapper, nameDiv, divider, teamDiv);
         card.addEventListener('click', () => openDriverModal(driver));
-        
         container.appendChild(card);
     });
-    
-    requestAnimationFrame(() => {
-        animateCardsAppearance(container);
+
+    requestAnimationFrame(() => animateCardsAppearance(container));
+};
+
+const buildFilterPanel = (panel, cardsArea) => {
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.className = 'driver-search-input';
+    searchInput.placeholder = 'Поиск...';
+
+    const filterToggleBtn = document.createElement('button');
+    filterToggleBtn.className = 'filter-toggle-btn';
+    filterToggleBtn.innerHTML = '⚙';
+
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'filter-reset-btn';
+    resetBtn.textContent = 'Сбросить';
+
+    const divider1 = document.createElement('hr');
+    divider1.className = 'filter-divider';
+
+    const filterTitle = document.createElement('div');
+    filterTitle.className = 'filter-section-title';
+    filterTitle.textContent = 'Команды';
+
+    const checkboxesContainer = document.createElement('div');
+    checkboxesContainer.className = 'filter-checkboxes';
+
+    const teams = [...new Set(driversData.map(d => d.team))];
+    const regularTeams = teams
+        .filter(t => !/^(резерв|reserve)$/i.test(t))
+        .sort((a, b) => a.localeCompare(b, 'ru'));
+
+    const allCheckbox = createCheckbox('all', 'ВСЕ', true, checkboxesContainer);
+    const teamCheckboxes = {};
+    regularTeams.forEach(t => { teamCheckboxes[t] = createCheckbox(t, t, false, checkboxesContainer); });
+
+    const dividerReserve = document.createElement('hr');
+    dividerReserve.className = 'filter-divider filter-divider-reserve';
+
+    const reserveContainer = document.createElement('div');
+    reserveContainer.className = 'filter-checkboxes filter-reserve-section';
+    const reserveCheckbox = createCheckbox('reserve', 'Резервисты', false, reserveContainer);
+
+    const divider2 = document.createElement('hr');
+    divider2.className = 'filter-divider filter-divider-champ';
+
+    const champsContainer = document.createElement('div');
+    champsContainer.className = 'filter-checkboxes';
+    const champsCheckbox = createCheckbox('champs', 'Чемпионы мира', false, champsContainer);
+
+    const popupOverlay = document.createElement('div');
+    popupOverlay.className = 'filter-checkboxes-popup';
+
+    const popupInner = document.createElement('div');
+    popupInner.className = 'filter-checkboxes-popup-inner';
+
+    const popupHeader = document.createElement('div');
+    popupHeader.className = 'filter-popup-header';
+
+    const popupTitle = document.createElement('span');
+    popupTitle.className = 'filter-popup-title';
+    popupTitle.textContent = 'Фильтры';
+
+    const popupClose = document.createElement('button');
+    popupClose.className = 'filter-popup-close';
+    popupClose.innerHTML = '&times;';
+    popupClose.setAttribute('aria-label', 'Закрыть фильтры');
+
+    popupHeader.append(popupTitle, popupClose);
+    popupInner.appendChild(popupHeader);
+
+    const popupTeamsTitle = document.createElement('div');
+    popupTeamsTitle.className = 'filter-popup-section-title';
+    popupTeamsTitle.textContent = 'Команды';
+    popupInner.appendChild(popupTeamsTitle);
+
+    const popupCheckboxesContainer = document.createElement('div');
+    popupCheckboxesContainer.className = 'filter-popup-checkboxes';
+
+    const popupAllCheckbox = createCheckbox('all', 'ВСЕ', true, popupCheckboxesContainer);
+    const popupTeamCheckboxes = {};
+    regularTeams.forEach(t => { popupTeamCheckboxes[t] = createCheckbox(t, t, false, popupCheckboxesContainer); });
+
+    popupInner.appendChild(popupCheckboxesContainer);
+
+    const popupDivider1 = document.createElement('hr');
+    popupDivider1.className = 'filter-popup-divider';
+    popupInner.appendChild(popupDivider1);
+
+    const popupReserveContainer = document.createElement('div');
+    popupReserveContainer.className = 'filter-popup-section';
+    const popupReserveCheckbox = createCheckbox('reserve', 'Резервисты', false, popupReserveContainer);
+    popupInner.appendChild(popupReserveContainer);
+
+    const popupDivider2 = document.createElement('hr');
+    popupDivider2.className = 'filter-popup-divider';
+    popupInner.appendChild(popupDivider2);
+
+    const popupChampsContainer = document.createElement('div');
+    popupChampsContainer.className = 'filter-popup-section';
+    const popupChampsCheckbox = createCheckbox('champs', 'Чемпионы мира', false, popupChampsContainer);
+    popupInner.appendChild(popupChampsContainer);
+
+    popupOverlay.appendChild(popupInner);
+
+    const compareDivider = document.createElement('hr');
+    compareDivider.className = 'filter-divider filter-divider-compare';
+
+    const compareBtn = document.createElement('button');
+    compareBtn.className = 'drivers-compare-btn';
+    compareBtn.textContent = 'Сравнение пилотов';
+    compareBtn.addEventListener('click', openDriversCompareModal);
+
+    panel.append(
+        searchInput, filterToggleBtn, resetBtn, divider1, filterTitle,
+        checkboxesContainer, dividerReserve, reserveContainer, divider2,
+        champsContainer, compareDivider, compareBtn, popupOverlay
+    );
+
+    let activeTeamFilters = new Set(regularTeams);
+    let champsOnly = false;
+    let showReserve = false;
+
+    const syncCheckboxes = (source, target, sourceAll, targetAll) => {
+        Object.keys(source).forEach(team => {
+            if (target[team]) target[team].checked = source[team].checked;
+            if (source[team]) source[team].checked = target[team].checked;
+        });
+        if (sourceAll && targetAll) sourceAll.checked = targetAll.checked;
+    };
+
+    const applyFilters = () => {
+        const term = searchInput.value.toLowerCase().trim();
+        let filtered = driversData;
+
+        const reserve = filtered.filter(d => /^(резерв|reserve)$/i.test(d.team));
+        const main = filtered.filter(d => !/^(резерв|reserve)$/i.test(d.team));
+
+        const isAllTeams = activeTeamFilters.size === regularTeams.length;
+        const mainFiltered = isAllTeams ? main : main.filter(d => activeTeamFilters.has(d.team));
+
+        filtered = showReserve ? [...mainFiltered, ...reserve] : mainFiltered;
+
+        if (champsOnly) filtered = filtered.filter(d => d.titles > 0);
+
+        if (term) {
+            filtered = filtered.filter(driver => {
+                const countryName = getCountryName(driver.country).toLowerCase();
+                const synonyms = (countrySynonyms[driver.country] || []).map(s => s.toLowerCase());
+                const allCountryNames = [countryName, ...synonyms];
+
+                const startsWith = text => text.toLowerCase().split(/\s+/).some(w => w.startsWith(term));
+
+                return String(driver.number).startsWith(term) ||
+                       startsWith(driver.name) ||
+                       startsWith(driver.namem) ||
+                       allCountryNames.some(startsWith) ||
+                       startsWith(driver.team);
+            });
+        }
+
+        renderDriverCards(filtered, cardsArea);
+    };
+
+    const handleCheckboxChange = (e, sourceTeamCheckboxes, sourceAll, targetTeamCheckboxes, isPopup) => {
+        if (e.target.type !== 'checkbox') return;
+        const checkbox = e.target;
+        const value = checkbox.dataset.filterValue;
+
+        const targetAll = isPopup ? allCheckbox : popupAllCheckbox;
+        const targetChamps = isPopup ? champsCheckbox : popupChampsCheckbox;
+        const targetReserve = isPopup ? reserveCheckbox : popupReserveCheckbox;
+
+        if (value === 'reserve') {
+            showReserve = checkbox.checked;
+            if (targetReserve) targetReserve.checked = checkbox.checked;
+            applyFilters();
+            return;
+        }
+
+        if (value === 'all') {
+            if (checkbox.checked) {
+                Object.values(sourceTeamCheckboxes).forEach(cb => cb.checked = false);
+                Object.values(targetTeamCheckboxes).forEach(cb => cb.checked = false);
+                activeTeamFilters = new Set(regularTeams);
+                targetChamps.checked = false;
+                champsOnly = false;
+            } else {
+                const anyChecked = Object.values(sourceTeamCheckboxes).some(cb => cb.checked);
+                if (!anyChecked) {
+                    checkbox.checked = true;
+                    if (targetAll) targetAll.checked = true;
+                }
+            }
+            syncCheckboxes(sourceTeamCheckboxes, targetTeamCheckboxes, sourceAll, targetAll);
+            applyFilters();
+            return;
+        }
+
+        const selected = new Set();
+        Object.entries(sourceTeamCheckboxes).forEach(([team, cb]) => {
+            if (cb.checked) selected.add(team);
+        });
+
+        if (selected.size === 0) {
+            sourceAll.checked = true;
+            if (targetAll) targetAll.checked = true;
+            activeTeamFilters = new Set(regularTeams);
+            targetChamps.checked = false;
+            champsOnly = false;
+        } else {
+            sourceAll.checked = false;
+            if (targetAll) targetAll.checked = false;
+            activeTeamFilters = new Set(selected);
+        }
+
+        syncCheckboxes(sourceTeamCheckboxes, targetTeamCheckboxes, sourceAll, targetAll);
+        applyFilters();
+    };
+
+    const handleChampsChange = (source, target) => {
+        champsOnly = source.checked;
+        if (target) target.checked = source.checked;
+        applyFilters();
+    };
+
+    checkboxesContainer.addEventListener('change', e => {
+        handleCheckboxChange(e, teamCheckboxes, allCheckbox, teamCheckboxes, false);
     });
-}
 
-function calculateAge(birthDateStr) {
-    const parts = birthDateStr.split('.');
-    const birth = new Date(parts[2], parts[1] - 1, parts[0]);
-    const now = new Date();
-    let age = now.getFullYear() - birth.getFullYear();
-    const m = now.getMonth() - birth.getMonth();
-    if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) {
-        age--;
-    }
-    return age;
-}
+    champsCheckbox.addEventListener('change', () => handleChampsChange(champsCheckbox, popupChampsCheckbox));
 
-function createCareerBlock(careerData) {
-    if (!careerData || careerData.length === 0) {
-        return null;
-    }
+    reserveCheckbox.addEventListener('change', () => {
+        showReserve = reserveCheckbox.checked;
+        popupReserveCheckbox.checked = reserveCheckbox.checked;
+        applyFilters();
+    });
+
+    popupCheckboxesContainer.addEventListener('change', e => {
+        handleCheckboxChange(e, popupTeamCheckboxes, popupAllCheckbox, popupTeamCheckboxes, true);
+    });
+
+    popupChampsCheckbox.addEventListener('change', () => handleChampsChange(popupChampsCheckbox, champsCheckbox));
+
+    popupReserveCheckbox.addEventListener('change', () => {
+        showReserve = popupReserveCheckbox.checked;
+        reserveCheckbox.checked = popupReserveCheckbox.checked;
+        applyFilters();
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+
+    const togglePopup = () => {
+        popupOverlay.classList.toggle('active');
+        filterToggleBtn.classList.toggle('active');
+    };
+
+    filterToggleBtn.addEventListener('click', togglePopup);
+    popupClose.addEventListener('click', togglePopup);
+
+    popupOverlay.addEventListener('click', e => {
+        if (e.target === popupOverlay) togglePopup();
+    });
+
+    resetBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        allCheckbox.checked = true;
+        Object.values(teamCheckboxes).forEach(cb => cb.checked = false);
+        champsCheckbox.checked = false;
+        reserveCheckbox.checked = false;
+
+        popupAllCheckbox.checked = true;
+        Object.values(popupTeamCheckboxes).forEach(cb => cb.checked = false);
+        popupChampsCheckbox.checked = false;
+        popupReserveCheckbox.checked = false;
+
+        activeTeamFilters = new Set(regularTeams);
+        champsOnly = false;
+        showReserve = false;
+
+        popupOverlay.classList.remove('active');
+        filterToggleBtn.classList.remove('active');
+
+        applyFilters();
+    });
+
+    applyFilters();
+};
+
+const initDriversPage = container => {
+    calculateFastestLapsFromTracks();
+	applySeasonStatsToDrivers();
+	applySeasonDNFsToDrivers();
+	applyDebutFromCareer();
+	applyShortNames();
+
+    container.innerHTML = '';
+    container.style.cssText = 'display: flex; gap: 0; padding: 0;';
+
+    const filterPanel = document.createElement('div');
+    filterPanel.className = 'drivers-filter-panel';
+
+    const cardsArea = document.createElement('div');
+    cardsArea.className = 'drivers-cards-area';
+    cardsArea.id = 'driversCardsContainer';
+
+    container.append(filterPanel, cardsArea);
+    buildFilterPanel(filterPanel, cardsArea);
+};
+
+const createCareerBlock = careerData => {
+    if (!careerData?.length) return null;
 
     const container = document.createElement('div');
     container.className = 'modal-career-container';
 
-    // Считаем количество уникальных сезонов по данным career
-    // Поддерживаем: "2019", "2017-2019", "2019-н.в."
-    const seasonsSet = new Set();
+    const seasons = new Set();
     const currentYear = new Date().getFullYear();
 
     careerData.forEach(item => {
         const yearStr = String(item.year);
-        
-        // Проверяем наличие маркера "н.в." (настоящее время)
-        const hasPresent = /н\.?\s*в\.?/i.test(yearStr);
-        
-        if (hasPresent) {
-            // Извлекаем год начала диапазона
-            const startMatch = yearStr.match(/(\d{4})/);
-            if (startMatch) {
-                const start = parseInt(startMatch[1], 10);
-                for (let y = start; y <= currentYear; y++) {
-                    seasonsSet.add(y);
-                }
-            }
+        if (/н\.?\s*в\.?/i.test(yearStr)) {
+            const start = yearStr.match(/(\d{4})/);
+            if (start) for (let y = +start[1]; y <= currentYear; y++) seasons.add(y);
             return;
         }
-        
-        // Обычные диапазоны и одиночные годы
         const matches = yearStr.match(/\d{4}/g);
         if (!matches) return;
-        
-        if (matches.length === 1) {
-            seasonsSet.add(parseInt(matches[0], 10));
-        } else {
-            const start = parseInt(matches[0], 10);
-            const end = parseInt(matches[1], 10);
-            for (let y = start; y <= end; y++) {
-                seasonsSet.add(y);
-            }
-        }
+        const start = +matches[0];
+        const end = matches[1] ? +matches[1] : start;
+        for (let y = start; y <= end; y++) seasons.add(y);
     });
 
-    let seasonsCount = '';
-    if (seasonsSet.size > 0) {
-        const seasons = seasonsSet.size;
-        seasonsCount = ` — ${seasons} ${declension(seasons, ['сезон', 'сезона', 'сезонов'])}`;
-    }
+    const seasonsCount = seasons.size > 0
+        ? ` — ${seasons.size} ${declension(seasons.size, ['сезон', 'сезона', 'сезонов'])}`
+        : '';
 
     const title = document.createElement('h3');
     title.className = 'modal-career-title';
     title.textContent = `Карьерный путь${seasonsCount}`;
     container.appendChild(title);
 
-    const careerList = document.createElement('div');
-    careerList.className = 'modal-career-list';
+    const list = document.createElement('div');
+    list.className = 'modal-career-list';
 
     careerData.forEach((item, index) => {
         const careerItem = document.createElement('div');
         careerItem.className = 'modal-career-item';
         careerItem.style.setProperty('--career-delay', `${index * 100}ms`);
-        
-        // 👇 Устанавливаем цвет команды для бордюра
-        const teamColor = getTeamColor(item.team);
-        careerItem.style.setProperty('--team-color', teamColor);
-        
-        // Добавляем data-атрибут для специальных стилей
-        const teamSlug = item.team.toLowerCase().replace(/\s+/g, '-');
-        careerItem.setAttribute('data-team', teamSlug);
+        careerItem.style.setProperty('--team-color', getTeamColor(item.team));
+        careerItem.setAttribute('data-team', teamSlug(item.team));
 
-        // Логотип команды
         const logoWrapper = document.createElement('div');
         logoWrapper.className = 'modal-career-logo-wrapper';
-        
+
         const logo = document.createElement('img');
         logo.src = getTeamLogo(item.team);
         logo.alt = item.team;
@@ -1595,222 +1531,165 @@ function createCareerBlock(careerData) {
             fallback.textContent = item.team.charAt(0).toUpperCase();
             logoWrapper.appendChild(fallback);
         };
-
         logoWrapper.appendChild(logo);
 
-        // Информация (название + год)
         const info = document.createElement('div');
         info.className = 'modal-career-info';
 
         const teamName = document.createElement('div');
         teamName.className = 'modal-career-team-name';
         teamName.textContent = item.team;
-        
-        // 👇 Если временный период - добавляем класс для жёлтого текста
-        if (item.temporarily) {
-            teamName.classList.add('career-temporary');
-        }
+        if (item.temporarily) teamName.classList.add('career-temporary');
 
         const year = document.createElement('div');
         year.className = 'modal-career-year';
         year.textContent = item.year;
 
-        info.appendChild(teamName);
-        info.appendChild(year);
+        info.append(teamName, year);
+        careerItem.append(logoWrapper, info);
 
-        careerItem.appendChild(logoWrapper);
-        careerItem.appendChild(info);
-
-        // Стрелка-разделитель (кроме последнего)
         if (index < careerData.length - 1) {
             const arrow = document.createElement('div');
             arrow.className = 'modal-career-arrow';
             arrow.innerHTML = '>';
-            careerList.appendChild(careerItem);
-            careerList.appendChild(arrow);
+            list.append(careerItem, arrow);
         } else {
-            careerList.appendChild(careerItem);
+            list.appendChild(careerItem);
         }
     });
 
-    container.appendChild(careerList);
+    container.appendChild(list);
     return container;
-}
+};
 
-function declension(num, titles) {
-    const n = Math.abs(num) % 100;
-    const n1 = n % 10;
-    if (n > 10 && n < 20) {
-        return titles[2];
-    }
-    if (n1 > 1 && n1 < 5) {
-        return titles[1];
-    }
-    if (n1 === 1) {
-        return titles[0];
-    }
-    return titles[2];
-}
+const openDriverModal = driver => {
+    if (typeof calculateFastestLapsFromTracks === 'function') calculateFastestLapsFromTracks();
+	if (typeof applySeasonStatsToDrivers === 'function') applySeasonStatsToDrivers();
+	if (typeof applySeasonDNFsToDrivers === 'function') applySeasonDNFsToDrivers();
+	if (typeof applyDebutFromCareer === 'function') applyDebutFromCareer();
+	if (typeof applyShortNames === 'function') applyShortNames();
 
-function openDriverModal(driver) {
-	if (typeof calculateFastestLapsFromTracks === 'function') {
-        calculateFastestLapsFromTracks();
-    }
-	
-    const existingModal = document.querySelector('.driver-modal-overlay');
-    if (existingModal) existingModal.remove();
-    
+    document.querySelector('.driver-modal-overlay')?.remove();
+
     const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflowY = 'scroll';
-    
-    function unlockScroll() {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflowY = '';
+    Object.assign(document.body.style, {
+        position: 'fixed',
+        top: `-${scrollY}px`,
+        width: '100%',
+        overflowY: 'scroll'
+    });
+
+    const unlockScroll = () => {
+        Object.assign(document.body.style, { position: '', top: '', width: '', overflowY: '' });
         window.scrollTo(0, scrollY);
-    }
-    
+    };
+
     const overlay = document.createElement('div');
     overlay.className = 'driver-modal-overlay';
-    
-     // ====================
-    // ПРАВАЯ КОЛОНКА — Штрафные баллы + Рекорды круга
-    // ====================
+
+    const teamColor = getTeamColor(driver.team);
+
     const rightColumn = document.createElement('div');
     rightColumn.className = 'dm-right-column';
-    
-    // --- Панель штрафов (существующая) ---
+
+    const buildPanelBg = panel => {
+        const pattern = document.createElement('div');
+        pattern.className = 'dm-penalties-pattern';
+        pattern.innerHTML = DRIVER_PATTERN_SVG;
+        panel.appendChild(pattern);
+
+        const ov = document.createElement('div');
+        ov.className = 'dm-penalties-overlay';
+        panel.appendChild(ov);
+    };
+
     const penaltiesPanel = document.createElement('div');
     penaltiesPanel.className = 'dm-penalties-panel';
-    penaltiesPanel.style.setProperty('--team-color', getTeamColor(driver.team));
-    
-    const penaltiesPattern = document.createElement('div');
-    penaltiesPattern.className = 'dm-penalties-pattern';
-    penaltiesPattern.innerHTML = DRIVER_PATTERN_SVG;
-    penaltiesPanel.appendChild(penaltiesPattern);
-    
-    const penaltiesOverlay = document.createElement('div');
-    penaltiesOverlay.className = 'dm-penalties-overlay';
-    penaltiesPanel.appendChild(penaltiesOverlay);
-    
+    penaltiesPanel.style.setProperty('--team-color', teamColor);
+    buildPanelBg(penaltiesPanel);
+
     const penaltiesContent = document.createElement('div');
     penaltiesContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px;';
-    
+
     const penaltiesTitle = document.createElement('h3');
     penaltiesTitle.className = 'dm-penalties-title';
     penaltiesTitle.textContent = 'Штрафные баллы';
     penaltiesContent.appendChild(penaltiesTitle);
-    
+
     const penaltyPoints = driver.fines || 0;
-    let penaltySegmentsHtml = '';
-    for (let i = 1; i <= 12; i++) {
-        let segmentClass = '';
-        if (i <= penaltyPoints) segmentClass = 'is-on';
-        if (i === 12) segmentClass += ' is-limit';
-        penaltySegmentsHtml += `<span class="msr-pp__seg ${segmentClass}"></span>`;
-    }
-    
+    const segments = Array.from({ length: 12 }, (_, i) => {
+        const n = i + 1;
+        let cls = n <= penaltyPoints ? 'is-on' : '';
+        if (n === 12) cls += ' is-limit';
+        return `<span class="msr-pp__seg ${cls}"></span>`;
+    }).join('');
+
     const meterWrapper = document.createElement('div');
     meterWrapper.className = 'dm-penalty-meter-wrapper';
-    meterWrapper.innerHTML = `
-        <div class="dm-penalty-meter">
-            <div class="msr-pp__meter msr-pp__meter--wide" role="img" aria-label="${penaltyPoints} of 12 penalty points">
-                ${penaltySegmentsHtml}
-            </div>
-        </div>
-    `;
+    meterWrapper.innerHTML = `<div class="dm-penalty-meter"><div class="msr-pp__meter msr-pp__meter--wide">${segments}</div></div>`;
     penaltiesContent.appendChild(meterWrapper);
-    
+
     const penaltyText = document.createElement('div');
     penaltyText.className = 'dm-penalty-text';
     penaltyText.innerHTML = `${penaltyPoints} <span style="padding-left: 2px;">из 12 Штрафов</span>`;
     penaltiesContent.appendChild(penaltyText);
-    
+
     if (penaltyPoints >= 12) {
-        const penaltyDsq = document.createElement('div');
-        penaltyDsq.className = 'dm-penalty-text-dsq';
-        penaltyDsq.textContent = 'DSQ на следующую гонку';
-        penaltiesContent.appendChild(penaltyDsq);
+        const dsq = document.createElement('div');
+        dsq.className = 'dm-penalty-text-dsq';
+        dsq.textContent = 'DSQ на следующую гонку';
+        penaltiesContent.appendChild(dsq);
     }
-    
+
     penaltiesPanel.appendChild(penaltiesContent);
     rightColumn.appendChild(penaltiesPanel);
- 
-     // ====================
-    // ПАНЕЛЬ — Позиция в топ-10
-    // ====================
+
+    const avgData = calculateTop10PositionStats(driver.id);
     const avgPositionPanel = document.createElement('div');
     avgPositionPanel.className = 'dm-avg-position-panel';
-    avgPositionPanel.style.setProperty('--team-color', getTeamColor(driver.team));
-    
-    const avgData = typeof calculateTop10PositionStats === 'function' 
-        ? calculateTop10PositionStats(driver.id) 
-        : null;
-    
+    avgPositionPanel.style.setProperty('--team-color', teamColor);
+
     if (avgData) {
-        const avgPattern = document.createElement('div');
-        avgPattern.className = 'dm-penalties-pattern';
-        avgPattern.innerHTML = DRIVER_PATTERN_SVG;
-        avgPositionPanel.appendChild(avgPattern);
-        
-        const avgOverlay = document.createElement('div');
-        avgOverlay.className = 'dm-penalties-overlay';
-        avgPositionPanel.appendChild(avgOverlay);
-        
+        buildPanelBg(avgPositionPanel);
+
         const avgContent = document.createElement('div');
         avgContent.className = 'dm-avg-position-content';
-        
-        // Заголовок сверху
+
         const avgTitle = document.createElement('h3');
         avgTitle.className = 'dm-avg-position-title';
         avgTitle.textContent = 'Позиции в топ 10';
         avgContent.appendChild(avgTitle);
-        
-        // Список строк 1-10
+
         const list = document.createElement('div');
         list.className = 'dm-avg-position-list';
-        
+
         for (let pos = 1; pos <= 10; pos++) {
             const row = document.createElement('div');
             row.className = 'dm-avg-position-row';
-            
+
             const posLabel = document.createElement('span');
             posLabel.className = 'dm-avg-pos-label';
             posLabel.textContent = pos;
-            row.appendChild(posLabel);
-            
+
             const line = document.createElement('span');
             line.className = 'dm-avg-pos-line';
-            row.appendChild(line);
-            
+
             const count = document.createElement('span');
             count.className = 'dm-avg-pos-count';
             const cnt = avgData.counts[pos] || 0;
             count.textContent = cnt;
-            if (cnt === 0) {
-                count.classList.add('is-zero');
-            }
-            row.appendChild(count);
-            
-            // Подсветка лучшей позиции
-            if (avgData.best === pos) {
-                row.classList.add('is-best');
-            }
-            // Подсветка моды
-            if (avgData.mostFrequent === pos) {
-                row.classList.add('is-most-frequent');
-            }
-            
+            if (cnt === 0) count.classList.add('is-zero');
+
+            row.append(posLabel, line, count);
+
+            if (avgData.best === pos) row.classList.add('is-best');
+            if (avgData.mostFrequent === pos) row.classList.add('is-most-frequent');
+
             list.appendChild(row);
         }
-        
+
         avgContent.appendChild(list);
-        
-        // Итоговая строка снизу: Лучшая | Средняя
+
         const result = document.createElement('div');
         result.className = 'dm-avg-position-result';
         result.innerHTML = `
@@ -1819,214 +1698,203 @@ function openDriverModal(driver) {
             <span class="dm-avg-result-right">Средняя <span class="dm-avg-result-value">${avgData.average.toFixed(2)}</span></span>
         `;
         avgContent.appendChild(result);
-        
         avgPositionPanel.appendChild(avgContent);
         rightColumn.appendChild(avgPositionPanel);
     }
 	
-     // ====================
-    // НОВАЯ ПАНЕЛЬ — Рекорды круга
-    // ====================
+    const dnfRow = document.createElement('div');
+    dnfRow.className = 'dm-dnf-row';
+
+    const dnfStats = [
+        { label: 'DNF', value: driver.seasonDNF || 0, cls: 'dnf' },
+        { label: 'DNS', value: driver.seasonDNS || 0, cls: 'dns' },
+        { label: 'DSQ', value: driver.seasonDSQ || 0, cls: 'dsq' },
+    ];
+
+    const dnfPanels = dnfStats.map(stat => {
+        const chip = document.createElement('div');
+        chip.className = `dm-dnf-chip dm-dnf-chip--${stat.cls}`;
+        chip.style.setProperty('--team-color', teamColor);
+        chip.innerHTML = `
+            <span class="dm-dnf-chip-label">${stat.label}</span>
+            <span class="dm-dnf-chip-count">${stat.value}</span>
+        `;
+        dnfRow.appendChild(chip);
+        return chip;
+    });
+
+    rightColumn.appendChild(dnfRow);
+	
     const fastestLapsPanel = document.createElement('div');
     fastestLapsPanel.className = 'dm-fastest-laps-panel';
-    fastestLapsPanel.style.setProperty('--team-color', getTeamColor(driver.team));
-    
-    const flPattern = document.createElement('div');
-    flPattern.className = 'dm-penalties-pattern';
-    flPattern.innerHTML = DRIVER_PATTERN_SVG;
-    fastestLapsPanel.appendChild(flPattern);
-    
-    const flOverlay = document.createElement('div');
-    flOverlay.className = 'dm-penalties-overlay';
-    fastestLapsPanel.appendChild(flOverlay);
-    
+    fastestLapsPanel.style.setProperty('--team-color', teamColor);
+    buildPanelBg(fastestLapsPanel);
+
     const flContent = document.createElement('div');
     flContent.className = 'dm-fastest-laps-content';
-    
+
     const flTitle = document.createElement('h3');
     flTitle.className = 'dm-fastest-laps-title';
     flTitle.textContent = 'Действующий рекорд круга на трассе текущего сезона';
     flContent.appendChild(flTitle);
-    
+
     const tracks = driver.fastestLapsTracks || [];
-    
+
     if (tracks.length > 0) {
-        const list = document.createElement('div');
-        list.className = 'dm-fastest-laps-list';
-        
-        // Сортируем: сначала свежие годы, потом по названию
-        // Сортируем по порядку трасс в календаре
         const calendarOrder = new Map();
-        calendarData.forEach((gp, index) => {
-            if (!calendarOrder.has(gp.track)) {
-                calendarOrder.set(gp.track, index);
-            }
+        calendarData.forEach((gp, i) => {
+            if (!calendarOrder.has(gp.track)) calendarOrder.set(gp.track, i);
         });
 
-        const sortedTracks = [...tracks].sort((a, b) => {
-            const orderA = calendarOrder.has(a.trackId) ? calendarOrder.get(a.trackId) : 9999;
-            const orderB = calendarOrder.has(b.trackId) ? calendarOrder.get(b.trackId) : 9999;
-            return orderA - orderB;
+        const sorted = [...tracks].sort((a, b) => {
+            const oa = calendarOrder.has(a.trackId) ? calendarOrder.get(a.trackId) : 9999;
+            const ob = calendarOrder.has(b.trackId) ? calendarOrder.get(b.trackId) : 9999;
+            return oa - ob;
         });
-        
-        sortedTracks.forEach(item => {
+
+        const list = document.createElement('div');
+        list.className = 'dm-fastest-laps-list';
+
+        sorted.forEach(item => {
             const row = document.createElement('div');
             row.className = 'dm-fastest-lap-row';
-            
             row.innerHTML = `
-                <img src="Images/Flags/${item.country}.svg" 
-                     alt="${item.country}" 
-                     class="dm-fl-flag" 
-                     title="${getCountryName(item.country)}"
-                     onerror="this.style.display='none'">
+                <img src="Images/Flags/${item.country}.svg" alt="${item.country}" class="dm-fl-flag" title="${getCountryName(item.country)}" onerror="this.style.display='none'">
                 <span class="dm-fl-track">${item.trackNamem}</span>
                 <span class="dm-fl-time">${item.time}</span>
                 <span class="dm-fl-year">${item.year}</span>
             `;
-            
             list.appendChild(row);
         });
-        
+
         flContent.appendChild(list);
     }
-    
+
     const flCounter = document.createElement('div');
     flCounter.className = 'dm-fastest-laps-counter';
     flCounter.innerHTML = `<span class="dm-fl-count">${tracks.length}</span> ${declension(tracks.length, ['рекорд', 'рекорда', 'рекордов'])}`;
     flContent.appendChild(flCounter);
-    
+
     fastestLapsPanel.appendChild(flContent);
     rightColumn.appendChild(fastestLapsPanel);
-
-    // ====================
-    // ЦЕНТР — Основная плашка
-    // ====================
+	
     const modal = document.createElement('div');
     modal.className = 'driver-modal';
-    const teamColor = getTeamColor(driver.team);
     modal.style.setProperty('--team-color', teamColor);
     modal.style.position = 'relative';
     modal.style.overflow = 'hidden';
-    
-    // Клетчатый фон для модального окна
+
     const modalPattern = document.createElement('div');
     modalPattern.className = 'driver-modal-pattern';
     modalPattern.innerHTML = DRIVER_PATTERN_SVG;
     modal.appendChild(modalPattern);
-    
+
     const modalOverlayBg = document.createElement('div');
     modalOverlayBg.className = 'driver-modal-overlay-bg';
     modal.appendChild(modalOverlayBg);
-    
+
     const modalContent = document.createElement('div');
     modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column;';
-    
+
     const closeBtn = document.createElement('button');
     closeBtn.className = 'modal-close-btn';
     closeBtn.innerHTML = '&times;';
-    
-    function closeModal() {
+
+    const closeModal = () => {
         overlay.remove();
         unlockScroll();
         document.removeEventListener('keydown', escHandler);
-    }
-    
+    };
+
     closeBtn.addEventListener('click', closeModal);
-    
+
     const topSection = document.createElement('div');
     topSection.className = 'modal-top';
-    
+
     const leftSide = document.createElement('div');
     leftSide.className = 'modal-left';
-    
+
     const modalPortrait = document.createElement('img');
     modalPortrait.src = `Images/Drivers/${driver.id}.png`;
     modalPortrait.alt = driver.name;
     modalPortrait.className = 'modal-portrait';
     modalPortrait.onerror = () => { modalPortrait.src = 'Images/Drivers/default.png'; };
-    
+
     leftSide.appendChild(modalPortrait);
-    
+
     const rightSide = document.createElement('div');
     rightSide.className = 'modal-right';
-    
+
     const block1 = document.createElement('div');
     block1.className = 'modal-block';
-    
+
     const modalNumber = document.createElement('div');
     modalNumber.className = 'modal-number';
     modalNumber.textContent = driver.number;
-    
+
     const nameTeamContainer = document.createElement('div');
     nameTeamContainer.className = 'modal-name-team';
-    
+
     const nameRow = document.createElement('div');
     nameRow.className = 'modal-name-row';
+
     const flagIcon = document.createElement('img');
     flagIcon.src = `Images/Flags/${driver.country}.svg`;
     flagIcon.title = getCountryName(driver.country);
     flagIcon.alt = driver.country;
     flagIcon.className = 'modal-flag';
+
     const fullName = document.createElement('span');
     fullName.className = 'modal-fullname';
     fullName.textContent = driver.name;
-    nameRow.appendChild(flagIcon);
-    nameRow.appendChild(fullName);
-    
+
+    nameRow.append(flagIcon, fullName);
+
     const teamRow = document.createElement('div');
     teamRow.className = 'modal-team-row';
 
-    const isReserve = driver.team.toLowerCase() === 'резерв' || driver.team.toLowerCase() === 'reserve';
+    const isReserve = /^(резерв|reserve)$/i.test(driver.team);
 
-    if (isReserve && driver.reserve && driver.reserve.length > 0) {
+    if (isReserve && driver.reserve?.length > 0) {
         const reserveContainer = document.createElement('div');
         reserveContainer.className = 'modal-reserve-teams';
-        
+
         const reserveLabel = document.createElement('span');
         reserveLabel.className = 'modal-reserve-label';
         reserveLabel.textContent = 'Резерв:';
         reserveContainer.appendChild(reserveLabel);
-        
+
         const teamsList = document.createElement('div');
         teamsList.className = 'modal-reserve-teams-list';
-        
+
         driver.reserve.forEach(teamName => {
             const teamItem = document.createElement('div');
             teamItem.className = 'modal-reserve-team-item';
-            
-            const teamColor = getTeamColor(teamName);
-            teamItem.style.setProperty('--team-color', teamColor);
-            
+            teamItem.style.setProperty('--team-color', getTeamColor(teamName));
+
             const teamLogo = document.createElement('img');
             teamLogo.src = getTeamLogo(teamName);
             teamLogo.alt = teamName;
             teamLogo.className = 'modal-team-logo';
             teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
-            
+
             const teamLabel = document.createElement('span');
             teamLabel.textContent = teamName;
-            
-            teamItem.appendChild(teamLogo);
-            teamItem.appendChild(teamLabel);
-            
-            teamItem.addEventListener('click', (e) => {
+
+            teamItem.append(teamLogo, teamLabel);
+
+            teamItem.addEventListener('click', e => {
                 e.stopPropagation();
-                const teamData = getTeamData(teamName);
-                if (teamData) {
-                    openTeamModal(teamData);
-                }
+                const data = getTeamData(teamName);
+                if (data) openTeamModal(data);
             });
-            
+
             teamsList.appendChild(teamItem);
         });
-        
+
         reserveContainer.appendChild(teamsList);
-        
         teamRow.style.display = 'none';
-        
-        nameTeamContainer.appendChild(nameRow);
-        nameTeamContainer.appendChild(teamRow);
-        nameTeamContainer.appendChild(reserveContainer);
+        nameTeamContainer.append(nameRow, teamRow, reserveContainer);
     } else {
         const teamIcon = document.createElement('img');
         teamIcon.src = getTeamLogo(driver.team);
@@ -2036,24 +1904,19 @@ function openDriverModal(driver) {
         const teamLabel = document.createElement('span');
         teamLabel.textContent = driver.team;
 
-        teamRow.appendChild(teamIcon);
-        teamRow.appendChild(teamLabel);
+        teamRow.append(teamIcon, teamLabel);
 
-        teamRow.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            const teamData = getTeamData(driver.team);
-            if (teamData) {
-                openTeamModal(teamData);
-            }
+        teamRow.addEventListener('click', e => {
+            e.stopPropagation();
+            const data = getTeamData(driver.team);
+            if (data) openTeamModal(data);
         });
-        
-        nameTeamContainer.appendChild(nameRow);
-        nameTeamContainer.appendChild(teamRow);
+
+        nameTeamContainer.append(nameRow, teamRow);
     }
-    
-    block1.appendChild(modalNumber);
-    block1.appendChild(nameTeamContainer);
-    
+
+    block1.append(modalNumber, nameTeamContainer);
+
     const block2 = document.createElement('div');
     block2.className = 'modal-block';
 
@@ -2083,10 +1946,8 @@ function openDriverModal(driver) {
         </div>
     `;
 
-    block2.appendChild(row1);
-    block2.appendChild(row2);
-    
-    // Блок статистики (без штрафов, добавляем Рекорды круга)
+    block2.append(row1, row2);
+
     const block3 = document.createElement('div');
     block3.className = 'modal-block';
 
@@ -2096,47 +1957,23 @@ function openDriverModal(driver) {
         hattricks: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'],
         podiums: ['Подиум', 'Подиума', 'Подиумов'],
         poles: ['Поул', 'Поула', 'Поулов'],
-        grandslam: ['Большой шлем', 'Больших шлема', 'Больших шлемов'],
+        grandslam: ['Большой шлем', 'Больших шлема', 'Больших шлемов']
     };
-
-    const fastestLaps = driver.fastestLaps || 0;
 
     const statsRow = document.createElement('div');
     statsRow.className = 'modal-stats-row';
     statsRow.innerHTML = `
-        <div class="stat-cell">
-            <span class="stat-number">${driver.titles || 0}</span>
-            <span class="stat-text">${declension(driver.titles, statsDeclensions.titles)}</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.wins || 0}</span>
-            <span class="stat-text">${declension(driver.wins, statsDeclensions.wins)}</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.podiums || 0}</span>
-            <span class="stat-text">${declension(driver.podiums, statsDeclensions.podiums)}</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.poles || 0}</span>
-            <span class="stat-text">${declension(driver.poles, statsDeclensions.poles)}</span>
-        </div>
-        <div class="stat-cell">
-            <span class="stat-number">${driver.hattricks || 0}</span>
-            <span class="stat-text">${declension(driver.hattricks, statsDeclensions.hattricks)}</span>
-        </div>
-        <div class="stat-cell">
-			<span class="stat-number">${driver.grandslam || 0}</span>
-			<span class="stat-text">${declension(driver.grandslam || 0, statsDeclensions.grandslam)}</span>
-        </div>
+        <div class="stat-cell"><span class="stat-number">${driver.titles || 0}</span><span class="stat-text">${declension(driver.titles, statsDeclensions.titles)}</span></div>
+        <div class="stat-cell"><span class="stat-number">${driver.wins || 0}</span><span class="stat-text">${declension(driver.wins, statsDeclensions.wins)}</span></div>
+        <div class="stat-cell"><span class="stat-number">${driver.podiums || 0}</span><span class="stat-text">${declension(driver.podiums, statsDeclensions.podiums)}</span></div>
+        <div class="stat-cell"><span class="stat-number">${driver.poles || 0}</span><span class="stat-text">${declension(driver.poles, statsDeclensions.poles)}</span></div>
+        <div class="stat-cell"><span class="stat-number">${driver.hattricks || 0}</span><span class="stat-text">${declension(driver.hattricks, statsDeclensions.hattricks)}</span></div>
+        <div class="stat-cell"><span class="stat-number">${driver.grandslam || 0}</span><span class="stat-text">${declension(driver.grandslam || 0, statsDeclensions.grandslam)}</span></div>
     `;
     block3.appendChild(statsRow);
-    
-    rightSide.appendChild(block1);
-    rightSide.appendChild(block2);
-    rightSide.appendChild(block3);
-    
-    topSection.appendChild(leftSide);
-    topSection.appendChild(rightSide);
+
+    rightSide.append(block1, block2, block3);
+    topSection.append(leftSide, rightSide);
 
     const bioSection = document.createElement('div');
     bioSection.className = 'modal-bottom';
@@ -2144,333 +1981,65 @@ function openDriverModal(driver) {
     const bioTitle = document.createElement('h3');
     bioTitle.className = 'modal-bio-title';
     bioTitle.textContent = 'Биография';
-    
+
     const bioText = document.createElement('p');
     bioText.className = 'modal-bio-text';
     bioText.textContent = driver.bio;
-    bioSection.appendChild(bioTitle);
-    bioSection.appendChild(bioText);
+
+    bioSection.append(bioTitle, bioText);
 
     if (driver.note) {
         const noteDiv = document.createElement('div');
         noteDiv.className = 'modal-note-compact';
-        noteDiv.innerHTML = `
-            <span class="note-compact-text">${driver.note}</span>
-        `;
+        noteDiv.innerHTML = `<span class="note-compact-text">${driver.note}</span>`;
         bioSection.appendChild(noteDiv);
     }
 
-    // Блок карьерного пути
     const careerBlock = createCareerBlock(driver.career);
-    if (careerBlock) {
-        bioSection.appendChild(careerBlock);
-    }
-    
-    modalContent.appendChild(closeBtn);
-    modalContent.appendChild(topSection);
-    modalContent.appendChild(bioSection);
+    if (careerBlock) bioSection.appendChild(careerBlock);
+
+    modalContent.append(closeBtn, topSection, bioSection);
     modal.appendChild(modalContent);
-    
-    // Собираем всё вместе
-    overlay.appendChild(modal);
-    overlay.appendChild(rightColumn);
-    
-    overlay.addEventListener('click', (e) => {
+
+    overlay.append(modal, rightColumn);
+
+    overlay.addEventListener('click', e => {
         if (e.target === overlay) closeModal();
     });
-    
+
     function escHandler(e) {
         if (e.key === 'Escape') closeModal();
     }
     document.addEventListener('keydown', escHandler);
-    
     document.body.appendChild(overlay);
 
-    // Анимация
     requestAnimationFrame(() => {
-        // Начальное состояние — все панели справа за кадром
-        penaltiesPanel.style.transition = 'none';
-        penaltiesPanel.style.opacity = '0';
-        penaltiesPanel.style.transform = 'translateX(40px)';
+        const panels = [penaltiesPanel, avgData ? avgPositionPanel : null, ...dnfPanels, fastestLapsPanel].filter(Boolean);
 
-        fastestLapsPanel.style.transition = 'none';
-        fastestLapsPanel.style.opacity = '0';
-        fastestLapsPanel.style.transform = 'translateX(40px)';
-
-        if (avgData) {
-            avgPositionPanel.style.transition = 'none';
-            avgPositionPanel.style.opacity = '0';
-            avgPositionPanel.style.transform = 'translateX(40px)';
-        }
+        panels.forEach(p => Object.assign(p.style, { transition: 'none', opacity: '0', transform: 'translateX(40px)' }));
 
         requestAnimationFrame(() => {
-            // 1. Панель штрафов
-            penaltiesPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            penaltiesPanel.style.transitionDelay = '0.2s';
-            penaltiesPanel.style.opacity = '1';
-            penaltiesPanel.style.transform = 'translateX(0)';
-
-            // 2. Панель позиции в топ-10 — после штрафов
-            if (avgData) {
-                avgPositionPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                avgPositionPanel.style.transitionDelay = '0.35s';
-                avgPositionPanel.style.opacity = '1';
-                avgPositionPanel.style.transform = 'translateX(0)';
-            }
-
-            // 3. Панель рекордов круга — последней
-            fastestLapsPanel.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            fastestLapsPanel.style.transitionDelay = avgData ? '0.5s' : '0.35s';
-            fastestLapsPanel.style.opacity = '1';
-            fastestLapsPanel.style.transform = 'translateX(0)';
+            panels.forEach((p, i) => {
+                p.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                p.style.transitionDelay = `${0.2 + i * 0.15}s`;
+                p.style.opacity = '1';
+                p.style.transform = 'translateX(0)';
+            });
         });
 
         overlay.classList.add('active');
         modal.classList.add('active');
     });
-}
-
-const archiveTeamColors = {
-    'toro-rosso': '#469BFF',
-    'sauber': '#3A3D40',
-    'alphatauri': '#022B4A',
-    'force-india': '#FF9933',
-    'racing-point': '#F596C8',
-    'minardi': '#FFD700',
-    'manor': '#FF4C00',
-    'renault': '#FFF500',
-    'alfa-romeo': '#9B0000',
-    'stake': '#01C00E'
 };
 
-function getTeamLogo(teamName) {
-    const slug = teamName.toLowerCase().replace(/\s+/g, '-');
-    
-    // Список архивных команд
-    const archiveTeams = [
-        'toro-rosso', 'sauber', 'alphatauri', 'force-india', 'racing-point', 
-        'minardi', 'manor', 'renault', 'alfa-romeo', 'stake'
-    ];
-    
-    if (archiveTeams.includes(slug)) {
-        return `Images/Teams/Archive/${slug}.png`;
-    }
-    
-    return `Images/Teams/${slug}-m.png`;
-}
-
-function getTeamColor(teamName) {
-    const slug = teamName.toLowerCase().replace(/\s+/g, '-');
-    
-    // Проверяем архивные команды
-    if (archiveTeamColors[slug]) {
-        return archiveTeamColors[slug];
-    }
-    
-    // Проверяем действующие команды
-    const team = teamsData.find(t => t.shortName === teamName);
-    return team ? team.color : '#FFFFFF';
-}
-
-function getCountryName(code) {
-    const countries = {
-        'gb': 'Великобритания',
-        'nl': 'Нидерланды',
-        'mc': 'Монако',
-        'de': 'Германия',
-        'es': 'Испания',
-        'fr': 'Франция',
-        'fi': 'Финляндия',
-        'au': 'Австралия',
-        'mx': 'Мексика',
-        'ca': 'Канада',
-        'jp': 'Япония',
-        'cn': 'Китай',
-        'th': 'Таиланд',
-        'dk': 'Дания',
-        'us': 'США',
-        'it': 'Италия',
-        'br': 'Бразилия',
-        'ar': 'Аргентина',
-        'bh': 'Бахрейн',
-        'ru': 'Россия',
-        'sa': 'Саудовская Аравия',
-        'at': 'Австрия',
-        'be': 'Бельгия',
-        'hu': 'Венгрия',
-        'az': 'Азербайджан',
-        'sg': 'Сингапур',
-        'qa': 'Катар',
-        'ae': 'ОАЭ',
-        'tr': 'Турция',
-        'pt': 'Португалия',
-        'co': 'Колумбия',
-        'my': 'Малайзия',
-        'nz': 'Новая Зеландия',
-        'pl': 'Польша',
-		'ch': 'Швейцария',
-    };
-    return countries[code] || code.toUpperCase();
-}
-
-const countrySynonyms = {
-    // Европа
-    'mc': ['Монегаск', 'Европеец'],
-    'de': ['Немец', 'Европеец'],
-    'es': ['Испанец', 'Европеец'],
-    'fr': ['Француз', 'Европеец'],
-    'it': ['Итальянец', 'Европеец'],
-    'at': ['Австриец', 'Европеец'],
-    'be': ['Бельгиец', 'Европеец'],
-    'hu': ['Венгр', 'Европеец'],    
-    'pt': ['Португалец', 'Европеец'],
-    'pl': ['Поляк', 'Европеец'],
-    'ch': ['Швейцарец', 'Европеец'],
-    'nl': ['Голландец', 'Нидерландец', 'Европеец'],
-	
-    'gb': ['Британец', 'Англичанин', 'Шотландец', 'Европеец'],
-	
-	// Северные страны
-    'fi': ['Финн', 'Скандинав', 'Европеец'],
-    'dk': ['Датчанин', 'Скандинав', 'Европеец'],
-    'ru': ['Русский'],
-
-    'az': ['Азербайджанец', 'Европеец', 'Азиат'],     
-	
-    // Азия и Ближний Восток
-    'jp': ['Японец', 'Азиат'],
-    'cn': ['Китаец', 'Азиат'],
-    'th': ['Таец', 'Азиат'],
-    'sg': ['Сингапурец', 'Азиат'],
-    'my': ['Малайзиец', 'Азиат'],
-    'tr': ['Турок', 'Азиат', 'Европеец'],         
-    'bh': ['Бахрейнец', 'Азиат', 'Араб'],
-    'sa': ['Саудовец', 'Саудиец', 'Азиат', 'Араб'],
-    'qa': ['Катарец', 'Азиат', 'Араб'],
-    'ae': ['Эмиратец', 'Азиат', 'Араб'],
-
-    // Америка
-    'us': ['Американец'],                         
-    'ca': ['Канадец'],
-    'mx': ['Мексиканец', 'Латиноамериканец'],
-    'br': ['Бразилец', 'Латиноамериканец'],
-    'co': ['Колумбиец', 'Латиноамериканец'],
-
-    // Океания
-	'au': ['Австралиец', 'Океаниец'],
-	'nz': ['Новозеландец', 'Океаниец'],
-};
-
-function calculateFastestLapsFromTracks() {
-    // Сбрасываем текущие значения
-    driversData.forEach(driver => {
-        driver.fastestLaps = 0;
-        driver.fastestLapsTracks = [];
-    });
-
-    // Собираем ID трасс, которые есть в текущем календаре,
-    // ИСКЛЮЧАЯ отменённые этапы
-    const calendarTrackIds = new Set(
-        calendarData
-            .filter(gp => !gp.canceled)
-            .map(gp => gp.track)
-    );
-
-    tracksData.forEach(track => {
-        if (!calendarTrackIds.has(track.id)) return;
-
-        const record = track.lapRecord;
-        if (!record) return;
-
-        // Формат: "1:19.813, Ш. Леклер - Ferrari - 2024"
-        const parts = record.split(',');
-        if (parts.length < 2) return;
-
-        const pilotPart = parts[1].split('-')[0].trim();
-        const driver = driversData.find(d => d.namem === pilotPart);
-
-        if (driver) {
-            driver.fastestLaps = (driver.fastestLaps || 0) + 1;
-            driver.fastestLapsTracks.push({
-                trackId: track.id,
-                trackNamem: track.trackNamem,
-                country: track.country,
-                time: parts[0].trim(),
-                year: parts[1].split('-').pop().trim()
-            });
-        }
-    });
-}
-
-const COMPARE_METRICS = [
-    { key: 'titles',     label: 'Титул',           decl: ['Титул', 'Титула', 'Титулов'] },
-    { key: 'wins',       label: 'Победа',          decl: ['Победа', 'Победы', 'Побед'] },
-    { key: 'podiums',    label: 'Подиум',          decl: ['Подиум', 'Подиума', 'Подиумов'] },
-    { key: 'poles',      label: 'Поул',            decl: ['Поул', 'Поула', 'Поулов'] },
-    { key: 'hattricks',  label: 'Хэт-Трик',        decl: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'] },
-    { key: 'grandslam',  label: 'Большой шлем',    decl: ['Большой шлем', 'Больших шлема', 'Больших шлемов'] },
-];
-
-function getDriverCareerSeasons(driver) {
-    if (!driver.career || driver.career.length === 0) return 0;
-    const seasonsSet = new Set();
-    const currentYear = new Date().getFullYear();
-
-    driver.career.forEach(item => {
-        const yearStr = String(item.year);
-        const hasPresent = /н\.?\s*в\.?/i.test(yearStr);
-
-        if (hasPresent) {
-            const startMatch = yearStr.match(/(\d{4})/);
-            if (startMatch) {
-                const start = parseInt(startMatch[1], 10);
-                for (let y = start; y <= currentYear; y++) seasonsSet.add(y);
-            }
-            return;
-        }
-
-        const matches = yearStr.match(/\d{4}/g);
-        if (!matches) return;
-
-        if (matches.length === 1) {
-            seasonsSet.add(parseInt(matches[0], 10));
-        } else {
-            const start = parseInt(matches[0], 10);
-            const end = parseInt(matches[1], 10);
-            for (let y = start; y <= end; y++) seasonsSet.add(y);
-        }
-    });
-
-    return seasonsSet.size;
-}
-
-function getDriverCompareData(driver) {
-    if (!driver) return null;
-    return {
-        ...driver,
-        careerSeasons: getDriverCareerSeasons(driver),
-        fines: driver.fines || 0,
-        fastestLaps: driver.fastestLaps || 0,
-    };
-}
-
-function buildDriverOptions(selectedId, excludeId) {
-    return driversData
+const buildDriverOptions = (selectedId, excludeId) =>
+    driversData
         .filter(d => d.id !== excludeId)
         .sort((a, b) => a.name.localeCompare(b.name, 'ru'))
-        .map(d => {
-            const selected = d.id === selectedId ? ' selected' : '';
-            const label = `${d.name} (${d.team})`;
-            return `<option value="${d.id}"${selected}>${label}</option>`;
-        })
+        .map(d => `<option value="${d.id}"${d.id === selectedId ? ' selected' : ''}>${d.name} (${d.team})</option>`)
         .join('');
-}
 
-function getDriverById(id) {
-    return driversData.find(d => d.id === id) || null;
-}
-
-function renderCompareTable(container, driverA, driverB) {
+const renderCompareTable = (container, driverA, driverB) => {
     if (!driverA || !driverB) {
         container.innerHTML = '<div class="compare-empty">Выберите пилотов для сравнения</div>';
         return;
@@ -2479,7 +2048,6 @@ function renderCompareTable(container, driverA, driverB) {
     const a = getDriverCompareData(driverA);
     const b = getDriverCompareData(driverB);
 
-    // Определяем "победителя" по метрике (больше = лучше)
     const cmpClass = (valA, valB) => {
         if (valA === valB) return { a: '', b: '' };
         return valA > valB
@@ -2487,7 +2055,6 @@ function renderCompareTable(container, driverA, driverB) {
             : { a: 'compare-loser', b: 'compare-winner' };
     };
 
-    // Блок основных метрик
     let statsHtml = '';
     COMPARE_METRICS.forEach(m => {
         const valA = a[m.key] || 0;
@@ -2502,7 +2069,6 @@ function renderCompareTable(container, driverA, driverB) {
         `;
     });
 
-    // Карьерные сезоны
     const seasonsCls = cmpClass(a.careerSeasons, b.careerSeasons);
     const seasonsRow = `
         <div class="compare-row compare-row--career">
@@ -2512,7 +2078,6 @@ function renderCompareTable(container, driverA, driverB) {
         </div>
     `;
 
-    // Штрафные очки (меньше = лучше)
     const finesCls = (valA, valB) => {
         if (valA === valB) return { a: '', b: '' };
         return valA < valB
@@ -2521,20 +2086,15 @@ function renderCompareTable(container, driverA, driverB) {
     };
     const finesCmp = finesCls(a.fines, b.fines);
 
-    // Рекорды круга
     const flCmp = cmpClass(a.fastestLaps, b.fastestLaps);
     const flRow = `
         <div class="compare-row compare-row--fl">
-            <div class="compare-fl-side">
-                <span class="compare-value ${flCmp.a}">${a.fastestLaps}</span>
-            </div>
+            <div class="compare-fl-side"><span class="compare-value ${flCmp.a}">${a.fastestLaps}</span></div>
             <div class="compare-fl-center">
                 <span class="compare-label">Действующий рекорд круга</span>
                 <span class="compare-sublabel">на трассе текущего сезона</span>
             </div>
-            <div class="compare-fl-side">
-                <span class="compare-value ${flCmp.b}">${b.fastestLaps}</span>
-            </div>
+            <div class="compare-fl-side"><span class="compare-value ${flCmp.b}">${b.fastestLaps}</span></div>
         </div>
     `;
 
@@ -2552,13 +2112,9 @@ function renderCompareTable(container, driverA, driverB) {
                 </div>
             </div>
             <div class="compare-table-body">
-                <div class="compare-section">
-                    ${statsHtml}
-                </div>
+                <div class="compare-section">${statsHtml}</div>
                 <div class="compare-divider"></div>
-                <div class="compare-section">
-                    ${seasonsRow}
-                </div>
+                <div class="compare-section">${seasonsRow}</div>
                 <div class="compare-divider"></div>
                 <div class="compare-section">
                     <div class="compare-row compare-row--stat">
@@ -2568,35 +2124,33 @@ function renderCompareTable(container, driverA, driverB) {
                     </div>
                 </div>
                 <div class="compare-divider"></div>
-                <div class="compare-section">
-                    ${flRow}
-                </div>
+                <div class="compare-section">${flRow}</div>
             </div>
         </div>
     `;
-}
+};
 
-function openDriversCompareModal() {
-    if (typeof calculateFastestLapsFromTracks === 'function') {
-        calculateFastestLapsFromTracks();
-    }
+const openDriversCompareModal = () => {
+    if (typeof calculateFastestLapsFromTracks === 'function') calculateFastestLapsFromTracks();
+	if (typeof applySeasonStatsToDrivers === 'function') applySeasonStatsToDrivers();
+	if (typeof applySeasonDNFsToDrivers === 'function') applySeasonDNFsToDrivers();
+	if (typeof applyDebutFromCareer === 'function') applyDebutFromCareer();
+	if (typeof applyShortNames === 'function') applyShortNames();
 
-    const existing = document.querySelector('.compare-modal-overlay');
-    if (existing) existing.remove();
+    document.querySelector('.compare-modal-overlay')?.remove();
 
     const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflowY = 'scroll';
+    Object.assign(document.body.style, {
+        position: 'fixed',
+        top: `-${scrollY}px`,
+        width: '100%',
+        overflowY: 'scroll'
+    });
 
-    function unlockScroll() {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflowY = '';
+    const unlockScroll = () => {
+        Object.assign(document.body.style, { position: '', top: '', width: '', overflowY: '' });
         window.scrollTo(0, scrollY);
-    }
+    };
 
     const overlay = document.createElement('div');
     overlay.className = 'compare-modal-overlay';
@@ -2614,17 +2168,12 @@ function openDriversCompareModal() {
     closeBtn.setAttribute('aria-label', 'Закрыть');
     header.appendChild(closeBtn);
 
-    // ===== Верхний ряд: 2 селекта пилотов =====
     const selectors = document.createElement('div');
     selectors.className = 'compare-selectors';
 
     const sortedDrivers = [...driversData].sort((x, y) => Number(x.number) - Number(y.number));
-
-    const driverOptionsHtml =
-        `<option value="" disabled selected>— Выберите пилота —</option>` +
-        sortedDrivers
-            .map(d => `<option value="${d.id}">#${d.number} ${d.name} (${d.team})</option>`)
-            .join('');
+    const driverOptionsHtml = `<option value="" disabled selected>— Выберите пилота —</option>` +
+        sortedDrivers.map(d => `<option value="${d.id}">#${d.number} ${d.name} (${d.team})</option>`).join('');
 
     const selectA = document.createElement('select');
     selectA.className = 'compare-select';
@@ -2634,72 +2183,58 @@ function openDriversCompareModal() {
     selectB.className = 'compare-select';
     selectB.innerHTML = driverOptionsHtml;
 
-    selectors.appendChild(selectA);
-    selectors.appendChild(selectB);
+    selectors.append(selectA, selectB);
 
-    // ===== Нижний ряд: селект команды =====
     const teamSelectorRow = document.createElement('div');
     teamSelectorRow.className = 'compare-team-selector-row';
 
     const teamSelect = document.createElement('select');
     teamSelect.className = 'compare-select compare-select--team';
 
-	const allTeams = [...new Set(driversData.map(d => d.team))]
-		.filter(team => team.toLowerCase() !== 'резерв' && team.toLowerCase() !== 'reserve')
-		.sort((a, b) => a.localeCompare(b, 'ru'));
+    const allTeams = [...new Set(driversData.map(d => d.team))]
+        .filter(t => !/^(резерв|reserve)$/i.test(t))
+        .sort((a, b) => a.localeCompare(b, 'ru'));
 
-    let teamOptionsHtml = `Пилоты по командам: <option value="" disabled selected>— Выберите команду —</option>`;
-    allTeams.forEach(team => {
-        teamOptionsHtml += `<option value="${team}">${team}</option>`;
-    });
-    teamSelect.innerHTML = teamOptionsHtml;
+    teamSelect.innerHTML = `Пилоты по командам: <option value="" disabled selected>— Выберите команду —</option>` +
+        allTeams.map(t => `<option value="${t}">${t}</option>`).join('');
 
     teamSelectorRow.appendChild(teamSelect);
 
-    // Контейнер таблицы
     const tableContainer = document.createElement('div');
     tableContainer.className = 'compare-table-container';
 
-    function updateCompare() {
-        const a = getDriverById(selectA.value);
-        const b = getDriverById(selectB.value);
-        renderCompareTable(tableContainer, a, b);
-    }
+    const updateCompare = () => {
+        renderCompareTable(tableContainer, findDriverById(selectA.value), findDriverById(selectB.value));
+    };
 
-    function syncSelects(source, target) {
-        const sourceVal = source.value;
+    const syncSelects = (source, target) => {
+        const srcVal = source.value;
         Array.from(target.options).forEach(opt => {
-            opt.disabled = (sourceVal !== '' && opt.value === sourceVal);
+            opt.disabled = srcVal !== '' && opt.value === srcVal;
         });
-        if (target.value === sourceVal && sourceVal !== '') {
-            target.value = '';
-        }
-    }
+        if (target.value === srcVal && srcVal !== '') target.value = '';
+    };
 
     selectA.addEventListener('change', () => {
         syncSelects(selectA, selectB);
-        teamSelect.value = ''; // сбрасываем выбор команды
+        teamSelect.value = '';
         updateCompare();
     });
 
     selectB.addEventListener('change', () => {
         syncSelects(selectB, selectA);
-        teamSelect.value = ''; // сбрасываем выбор команды
+        teamSelect.value = '';
         updateCompare();
     });
 
-    // ===== Обработка выбора команды =====
     teamSelect.addEventListener('change', () => {
         const team = teamSelect.value;
         if (!team) return;
 
-        const teamDrivers = driversData
-            .filter(d => d.team === team)
-            .sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+        const teamDrivers = driversData.filter(d => d.team === team).sort((a, b) => a.name.localeCompare(b.name, 'ru'));
 
-        // Снимаем блокировку опций
-        Array.from(selectA.options).forEach(opt => opt.disabled = false);
-        Array.from(selectB.options).forEach(opt => opt.disabled = false);
+        Array.from(selectA.options).forEach(o => o.disabled = false);
+        Array.from(selectB.options).forEach(o => o.disabled = false);
 
         if (teamDrivers.length >= 2) {
             selectA.value = teamDrivers[0].id;
@@ -2714,29 +2249,24 @@ function openDriversCompareModal() {
 
         syncSelects(selectA, selectB);
         syncSelects(selectB, selectA);
-
         updateCompare();
     });
 
-    // Первичная синхронизация
     syncSelects(selectA, selectB);
     syncSelects(selectB, selectA);
     updateCompare();
 
-    modal.appendChild(header);
-    modal.appendChild(selectors);
-    modal.appendChild(teamSelectorRow);
-    modal.appendChild(tableContainer);
+    modal.append(header, selectors, teamSelectorRow, tableContainer);
     overlay.appendChild(modal);
 
-    function closeModal() {
+    const closeModal = () => {
         overlay.remove();
         unlockScroll();
         document.removeEventListener('keydown', escHandler);
-    }
+    };
 
     closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', (e) => {
+    overlay.addEventListener('click', e => {
         if (e.target === overlay) closeModal();
     });
 
@@ -2744,44 +2274,10 @@ function openDriversCompareModal() {
         if (e.key === 'Escape') closeModal();
     }
     document.addEventListener('keydown', escHandler);
-
     document.body.appendChild(overlay);
 
     requestAnimationFrame(() => {
         overlay.classList.add('active');
         modal.classList.add('active');
     });
-}
-
-const DRIVER_PATTERN_SVG = `
-<svg viewBox="0 0 928 800" preserveAspectRatio="xMidYMid slice" fill="none">
-    <g>
-        <!-- Ряд 1: 3 клетки -->
-        <path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path>
-        <path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path>
-        <path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path>
-        <!-- Ряд 2: 4 клетки -->
-        <path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path>
-        <path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path>
-        <path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path>
-        <!-- Ряд 3: 5 клеток -->
-        <path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path>
-        <path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path>
-        <path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path>
-        <!-- Ряд 4: 6 клеток -->
-        <path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path>
-        <path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path>
-        <path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path>
-        <!-- Ряд 5: 7 клеток -->
-        <path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path>
-        <path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path>
-        <path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path>
-        <path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path>
-        <!-- Ряд 6: 8 клеток -->
-        <path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path>
-        <path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path>
-        <path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path>
-        <path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path>
-    </g>
-</svg>
-`;
+};

@@ -217,11 +217,11 @@ const tracksData = [
         laps: 63,
         turns: 22,
         elevation: '30',
-        speed: '324',
+        speed: '204',
         direction: "по часовой стрелке",
         firstrace: "2026",
-        lapRecord: "1:35.587,  Д. Расселл - Mercedes - 2026",
-        qulRecord: "1:31.824,  Л. Норрис - McLaren - 2026",
+        lapRecord: "1:35.587, Д. Расселл - Mercedes - 2026",
+        qulRecord: "1:31.824, Л. Норрис - McLaren - 2026",
     },
     {   trackName: "Городская трасса Баку",
 		trackNamem: "Баку",
@@ -272,7 +272,7 @@ const tracksData = [
         qulRecord: "1:32.029, В. Боттас - Mercedes - 2019",
     },
     {   trackName: "Автодром имени братьев Родригес",
-		trackNamem: "Мехико ",
+		trackNamem: "Мехико",
         id: "rodriguez",
         country: "mx",
         location: "Мехико, Мексика",
@@ -288,7 +288,7 @@ const tracksData = [
         qulRecord: "1:14.758, М. Ферстаппен - Red Bull - 2019",
     },
     {   trackName: "Автодром имени Жозе Карлуса Пасе (Интерлагос)",
-		trackNamem: "Интерлагос ",
+		trackNamem: "Интерлагос",
         id: "interlagos",
         country: "br",
         location: "Сан-Паулу, Бразилия",
@@ -452,21 +452,8 @@ const tracksData = [
     },
 ];
 
-function getTrackById(id) {
-    return tracksData.find(t => t.id === id);
-}
-
-function getTrackCountry(id) {
-    const track = getTrackById(id);
-    return track ? track.country : 'xx';
-}
-
-function getTrackName(id) {
-    const track = getTrackById(id);
-    return track ? track.trackName : id;
-}
-
-function getTrackWeatherLocation(id) {
-    const track = getTrackById(id);
-    return track ? track.weatherLocation : '51.507,-0.128'; // Лондон по умолчанию
-}
+const tracksIndex = new Map(tracksData.map(t => [t.id, t]));
+const getTrackById = id => tracksIndex.get(id) || null;
+const getTrackCountry = id => tracksIndex.get(id)?.country ?? 'xx';
+const getTrackName = id => tracksIndex.get(id)?.trackName ?? id;
+const getTrackWeatherLocation = id => tracksIndex.get(id)?.weatherLocation ?? '51.507,-0.128';

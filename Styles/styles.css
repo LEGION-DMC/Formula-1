@@ -356,7 +356,6 @@ h1, h2 {
 .statistics-row:nth-child(2) { animation-delay: 0.10s; }
 .statistics-row:nth-child(3) { animation-delay: 0.15s; }
 
-
 @keyframes statisticsFadeIn {
     from {
         opacity: 0;
@@ -2734,7 +2733,7 @@ h1, h2 {
     font-size: 14px;
     color: var(--text-light);
     text-align: center;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
     width: 100%;
     letter-spacing: 1px;
     margin-top: 3px;
@@ -2863,9 +2862,9 @@ h1, h2 {
     font-size: 9px;
     color: var(--text-light);
     text-align: center;
-    padding-bottom: 5px;
+    padding-bottom: 6px;
     width: 100%;
-    letter-spacing: 1px;
+    letter-spacing: 1.1px;
 }
 
 .dm-fastest-laps-list {
@@ -2874,7 +2873,7 @@ h1, h2 {
     flex-direction: column;
     gap: 3px;
     overflow-y: auto;
-    padding-bottom: 5px;
+    padding-bottom: 6px;
 }
 
 .dm-fastest-laps-list::-webkit-scrollbar {
@@ -2902,7 +2901,7 @@ h1, h2 {
 }
 
 .dm-fastest-lap-row:hover {
-    transform: translateX(1px);
+    transform: translateX(0.7px);
     background-color: rgba(255, 255, 255, 0.0);
     border: 1px solid var(--team-color);
 }
@@ -2945,8 +2944,8 @@ h1, h2 {
     color: #aaa;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 5px;
+    padding-bottom: 3px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -2956,19 +2955,43 @@ h1, h2 {
     font-size: 15px;
 }
 
+/* ==================== DNF / DNS / DSQ — три чипа в строку ==================== */
+.dm-dnf-row {
+    width: 210px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
 
+.dm-dnf-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px 0 4px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.0);
+}
 
+.dm-dnf-chip-label {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    line-height: 1;
+}
 
+.dm-dnf-chip-count {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1;
+    color: var(--team-color, #fff);
+}
 
-
-
-
-
-
-
-
-
-
+.dm-dnf-chip--dnf .dm-dnf-chip-label { color: #E10600; }
+.dm-dnf-chip--dns .dm-dnf-chip-label { color: #FFC107; }
+.dm-dnf-chip--dsq .dm-dnf-chip-label { color: #888888; }
 
 /* ==================== ПАНЕЛЬ ПОЗИЦИИ В ТОП-10 ==================== */
 .dm-avg-position-panel {
