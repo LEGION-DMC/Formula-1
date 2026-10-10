@@ -25,7 +25,7 @@ const startingGridData = [
     { position: 19, driverId: 'str', team: '' },
     { position: 20, driverId: 'per', team: '' },
     { position: 21, driverId: 'bot', pitLane: false, team: '' },
-    { position: 22, driverId: 'had', pitLane: false, team: '' },
+    { position: 22, driverId: 'had', pitLane: true, team: '' },
 ];
 
 const polesData = [
