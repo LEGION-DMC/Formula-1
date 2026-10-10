@@ -1,76 +1,3 @@
-const startingGridData = [
-    { position: 1, driverId: '', team: '' },
-    { position: 2, driverId: '', team: '' },
-    { position: 3, driverId: '', team: '' },
-    { position: 4, driverId: '', team: '' },
-    { position: 5, driverId: '', team: '' },
-    { position: 6, driverId: '', team: '' },
-    { position: 7, driverId: '', team: '' },
-    { position: 8, driverId: '', team: '' },
-    { position: 9, driverId: '', team: '' },
-    { position: 10, driverId: '', team: '' },
-    { position: 11, driverId: '', team: '' },
-    { position: 12, driverId: '', team: '' },
-    { position: 13, driverId: '', team: '' },
-    { position: 14, driverId: '', team: '' },
-    { position: 15, driverId: '', team: '' },
-    { position: 16, driverId: '', team: '' },
-    { position: 17, driverId: '', team: '' },
-    { position: 18, driverId: '', team: '' },
-    { position: 19, driverId: '', team: '' },
-    { position: 20, driverId: '', team: '' },
-    { position: 21, driverId: '', pitLane: false, team: '' },
-    { position: 22, driverId: '', pitLane: false, team: '' },
-];
-
-const STARTING_GRID_WITH_PENALTIES = false;
-const STARTING_GRID_WITH_SPRINT = false;
-
-const DRIVER_SHORT_NAMES = {
-    'норрис': 'NOR', 'ферстаппен': 'VER', 'бортолето': 'BOR', 'хаджар': 'HAD',
-    'дуэн': 'DOO', 'гасли': 'GAS', 'перес': 'PER', 'антонелли': 'ANT',
-    'алонсо': 'ALO', 'леклер': 'LEC', 'стролл': 'STR', 'цунода': 'TSU',
-    'албон': 'ALB', 'чжоу': 'ZHO', 'хюлькенберг': 'HUL', 'лоусон': 'LAW',
-    'окон': 'OCO', 'линдблад': 'LIN', 'колапинто': 'COL', 'хэмилтон': 'HAM',
-    'сайнс': 'SAI', 'расселл': 'RUS', 'боттас': 'BOT', 'пиастри': 'PIA',
-    'берман': 'BEA', 'джовинацци': 'GIO'
-};
-
-const DRIVER_ID_BY_SHORT = (() => {
-    const map = {};
-
-    if (typeof driversData !== 'undefined' && Array.isArray(driversData)) {
-        driversData.forEach(d => {
-            if (d.id) map[d.id.slice(0, 3).toLowerCase()] = d.id;
-        });
-    }
-
-    if (typeof driversData !== 'undefined' && Array.isArray(driversData)) {
-        driversData.forEach(d => {
-            const lastName = d.name.includes(' ') ? d.name.split(' ').pop() : d.name;
-            const code = DRIVER_SHORT_NAMES[lastName.toLowerCase()];
-            if (code) map[code.toLowerCase()] = d.id;
-        });
-    }
-
-    return map;
-})();
-
-const findDriverByShortId = shortId => {
-    if (!shortId) return null;
-
-    if (typeof findDriverById === 'function') {
-        const direct = findDriverById(shortId);
-        if (direct) return direct;
-    }
-
-    const key = String(shortId).toLowerCase();
-    const fullId = DRIVER_ID_BY_SHORT[key];
-    if (fullId && typeof findDriverById === 'function') return findDriverById(fullId);
-
-    return null;
-};
-
 const weatherData = {
     type: 'cloud',
     typeName: 'Загрузка...',
@@ -378,19 +305,17 @@ const createStartingGridBlock = () => {
         const team = item.team || driver.team;
         const teamColor = getTeamColor(team);
         const teamLogoPath = getTeamLogo(team);
-        const shortName = getDriverShortName(driver);
-        const poleLabel = pos === 1 ? `<span class="grid-pole-label">- Поул -</span>` : '';
+		const shortName = getDriverShortName(driver);
 
-        return `
-            <div class="grid-cell${poleClass}" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
-                ${poleLabel}
-                <span class="grid-pos">${pos}</span>
-                <div class="grid-driver-info">
-                    <span class="grid-name" style="color: ${teamColor}">${shortName}</span>
-                    <img src="${teamLogoPath}" class="grid-team-logo" onerror="this.style.display='none'" title="${team}">
-                </div>
-            </div>
-        `;
+		return `
+			<div class="grid-cell${poleClass}" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
+				<span class="grid-pos">${pos}</span>
+				<div class="grid-driver-info">
+					<span class="grid-name" style="color: ${teamColor}">${shortName}</span>
+					<img src="${teamLogoPath}" class="grid-team-logo" onerror="this.style.display='none'" title="${team}">
+				</div>
+			</div>
+		`;
     };
 
     const row1HTML = row1.map(renderDriverCell).join('');
@@ -1122,53 +1047,7 @@ const startMainTimer = () => {
         if (nextGP.quali) checkAndPlaySound(nextGP.quali, 'quali', nextGP.id);
         checkAndPlaySound(nextGP.date, 'race', nextGP.id);
 
-        linksDiv.innerHTML = '';
-
-        if (nextGP.sprint && nextGP.recordingSprint && isEventNearOrPassed(nextGP.sprint)) {
-            const sprintEl = document.createElement('button');
-            sprintEl.className = 'main-gp-btn sprint';
-            sprintEl.textContent = 'Спринт';
-            sprintEl.dataset.video = nextGP.recordingSprint;
-            sprintEl.dataset.title = `Спринт ${nextGP.name}`;
-            sprintEl.onclick = e => {
-                e.stopPropagation();
-                if (typeof openVideoModal === 'function') {
-                    openVideoModal(sprintEl.dataset.video, sprintEl.dataset.title);
-                }
-            };
-            linksDiv.appendChild(sprintEl);
-        }
-
-        if (nextGP.quali && nextGP.recordingQuali && isEventNearOrPassed(nextGP.quali)) {
-            const qualiEl = document.createElement('button');
-            qualiEl.className = 'main-gp-btn quali';
-            qualiEl.textContent = 'Квалификация';
-            qualiEl.dataset.video = nextGP.recordingQuali;
-            qualiEl.dataset.title = `Квалификация ${nextGP.name}`;
-            qualiEl.onclick = e => {
-                e.stopPropagation();
-                if (typeof openVideoModal === 'function') {
-                    openVideoModal(qualiEl.dataset.video, qualiEl.dataset.title);
-                }
-            };
-            linksDiv.appendChild(qualiEl);
-        }
-
 		if (isEventNearOrPassed(nextGP.date)) {
-			if (nextGP.recordingRace) {
-				const raceBtn = document.createElement('button');
-				raceBtn.className = 'main-gp-btn race';
-				raceBtn.textContent = 'Гонка';
-				raceBtn.dataset.video = nextGP.recordingRace;
-				raceBtn.dataset.title = `Гонка ${nextGP.name}`;
-				raceBtn.onclick = e => {
-					e.stopPropagation();
-					if (typeof openVideoModal === 'function') {
-						openVideoModal(raceBtn.dataset.video, raceBtn.dataset.title);
-					}
-				};
-				linksDiv.appendChild(raceBtn);
-			}
 			countdownDiv.innerHTML = '';
 		} else if (diff > 0) {
 			const d = Math.floor(diff / 86400000);
@@ -1179,6 +1058,46 @@ const startMainTimer = () => {
 		} else {
 			countdownDiv.innerHTML = '<span class="calendar-status-text">Гонка завершена</span>';
 		}
+		
+		if (!block._sessionButtons) {
+			block._sessionButtons = {};
+
+			const makeBtn = (key, cls, label, getData) => {
+				const btn = document.createElement('button');
+				btn.className = `main-gp-btn ${cls}`;
+				btn.textContent = label;
+				btn.style.display = 'none';
+				btn.addEventListener('click', e => {
+					e.stopPropagation();
+					const { video, title } = getData();
+					if (video && typeof openVideoModal === 'function') {
+						openVideoModal(video, title);
+					}
+				});
+				linksDiv.appendChild(btn);
+				block._sessionButtons[key] = btn;
+				return btn;
+			};
+
+			makeBtn('sprint', 'sprint', 'Спринт', () => ({
+				video: nextGP.recordingSprint,
+				title: `Спринт ${nextGP.name}`
+			}));
+			makeBtn('quali', 'quali', 'Квалификация', () => ({
+				video: nextGP.recordingQuali,
+				title: `Квалификация ${nextGP.name}`
+			}));
+			makeBtn('race', 'race', 'Гонка', () => ({
+				video: nextGP.recordingRace,
+				title: `Гонка ${nextGP.name}`
+			}));
+		}
+
+		const btns = block._sessionButtons;
+
+		btns.sprint.style.display = (nextGP.sprint && nextGP.recordingSprint && isEventNearOrPassed(nextGP.sprint)) ? '' : 'none';
+		btns.quali.style.display = (nextGP.quali && nextGP.recordingQuali && isEventNearOrPassed(nextGP.quali)) ? '' : 'none';
+		btns.race.style.display = (isEventNearOrPassed(nextGP.date) && nextGP.recordingRace) ? '' : 'none';
     };
 
     updateTimer();

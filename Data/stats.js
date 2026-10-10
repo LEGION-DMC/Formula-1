@@ -1,3 +1,33 @@
+const startingGridData = [
+    { position: 1, driverId: '', team: '' },
+    { position: 2, driverId: '', team: '' },
+    { position: 3, driverId: '', team: '' },
+    { position: 4, driverId: '', team: '' },
+    { position: 5, driverId: '', team: '' },
+    { position: 6, driverId: '', team: '' },
+    { position: 7, driverId: '', team: '' },
+    { position: 8, driverId: '', team: '' },
+    { position: 9, driverId: '', team: '' },
+    { position: 10, driverId: '', team: '' },
+	
+    { position: 11, driverId: '', team: '' },
+    { position: 12, driverId: '', team: '' },
+    { position: 13, driverId: '', team: '' },
+    { position: 14, driverId: '', team: '' },
+    { position: 15, driverId: '', team: '' },
+    { position: 16, driverId: '', team: '' },
+	
+    { position: 17, driverId: '', team: '' },
+    { position: 18, driverId: '', team: '' },
+    { position: 19, driverId: '', team: '' },
+    { position: 20, driverId: '', team: '' },
+    { position: 21, driverId: '', pitLane: false, team: '' },
+    { position: 22, driverId: '', pitLane: false, team: '' },
+];
+
+const STARTING_GRID_WITH_PENALTIES = false;
+const STARTING_GRID_WITH_SPRINT = false;
+
 const qualiData = [
     { driver1: "Кими Антонелли", 
 		score1: 9, 
@@ -404,10 +434,53 @@ const historicalDriversData = [
     { name: "Себастьян Феттель", country: "de" },
 ];
 
+const DRIVER_SHORT_NAMES = {
+    'норрис': 'NOR', 'ферстаппен': 'VER', 'бортолето': 'BOR', 'хаджар': 'HAD',
+    'дуэн': 'DOO', 'гасли': 'GAS', 'перес': 'PER', 'антонелли': 'ANT',
+    'алонсо': 'ALO', 'леклер': 'LEC', 'стролл': 'STR', 'цунода': 'TSU',
+    'албон': 'ALB', 'чжоу': 'ZHO', 'хюлькенберг': 'HUL', 'лоусон': 'LAW',
+    'окон': 'OCO', 'линдблад': 'LIN', 'колапинто': 'COL', 'хэмилтон': 'HAM',
+    'сайнс': 'SAI', 'расселл': 'RUS', 'боттас': 'BOT', 'пиастри': 'PIA',
+    'берман': 'BEA', 'джовинацци': 'GIO'
+};
+
+const DRIVER_ID_BY_SHORT = (() => {
+    const map = {};
+
+    if (typeof driversData !== 'undefined' && Array.isArray(driversData)) {
+        driversData.forEach(d => {
+            if (d.id) map[d.id.slice(0, 3).toLowerCase()] = d.id;
+        });
+    }
+
+    if (typeof driversData !== 'undefined' && Array.isArray(driversData)) {
+        driversData.forEach(d => {
+            const lastName = d.name.includes(' ') ? d.name.split(' ').pop() : d.name;
+            const code = DRIVER_SHORT_NAMES[lastName.toLowerCase()];
+            if (code) map[code.toLowerCase()] = d.id;
+        });
+    }
+
+    return map;
+})();
+
+const findDriverByShortId = shortId => {
+    if (!shortId) return null;
+
+    if (typeof findDriverById === 'function') {
+        const direct = findDriverById(shortId);
+        if (direct) return direct;
+    }
+
+    const key = String(shortId).toLowerCase();
+    const fullId = DRIVER_ID_BY_SHORT[key];
+    if (fullId && typeof findDriverById === 'function') return findDriverById(fullId);
+
+    return null;
+};
+
 const DHL_POINTS = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
-
 const ENGINE_LIMITS = { ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 6 };
-
 const findDriverByName = fullName => driversData.find(d => d.name === fullName) || null;
 
 const findHistoricalDriverByName = name => {

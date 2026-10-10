@@ -576,11 +576,15 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
 }
 
 .nextgp-countdown {
     width: 100%;
+    margin-bottom: 6px;
+}
+
+.nextgp-countdown:empty {
+    display: none;       
 }
 
 .nextgp-links {
@@ -610,7 +614,7 @@ h1, h2 {
     cursor: pointer;
     background: transparent;
     border: 1px solid transparent;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .main-gp-btn.race {
@@ -1238,7 +1242,7 @@ h1, h2 {
     gap: 5px;
     justify-content: flex-start;
     flex-wrap: nowrap;
-    margin-top: 11px;
+    margin-top: 8px;
 }
 
 /* 2-й ряд со смещением (шахматный порядок) */
@@ -1266,21 +1270,6 @@ h1, h2 {
     min-height: 22px;
     width: 85px;
     position: relative;
-}
-
-/* Надпись "Поул" над 1-й позицией */
-.grid-pole-label {
-    position: absolute;
-    top: -13px;
-    left: 51%;
-    transform: translateX(-50%);
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.5rem;
-    letter-spacing: 0.7px;
-    color: #FFD700;
-    text-transform: uppercase;
-    white-space: nowrap;
-    pointer-events: none;
 }
 
 .grid-cell:hover {
