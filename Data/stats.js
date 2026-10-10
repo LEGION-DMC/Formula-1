@@ -1,38 +1,38 @@
-const STARTING_GRID_WITH_PENALTIES = false;
+const STARTING_GRID_WITH_PENALTIES = true;
 const STARTING_GRID_WITH_SPRINT = false;
 
 const startingGridData = [
-    { position: 1, driverId: '', team: '' },
-    { position: 2, driverId: '', team: '' },
-    { position: 3, driverId: '', team: '' },
-    { position: 4, driverId: '', team: '' },
-    { position: 5, driverId: '', team: '' },
-    { position: 6, driverId: '', team: '' },
-    { position: 7, driverId: '', team: '' },
-    { position: 8, driverId: '', team: '' },
-    { position: 9, driverId: '', team: '' },
-    { position: 10, driverId: '', team: '' },
+    { position: 1, driverId: 'ver', team: '' },
+    { position: 2, driverId: 'lec', team: '' },
+    { position: 3, driverId: 'ham', team: '' },
+    { position: 4, driverId: 'ant', team: '' },
+    { position: 5, driverId: 'nor', team: '' },
+    { position: 6, driverId: 'pia', team: '' },
+    { position: 7, driverId: 'gas', team: '' },
+    { position: 8, driverId: 'law', team: '' },
+    { position: 9, driverId: 'lin', team: '' },
+    { position: 10, driverId: 'hul', team: '' },
 	
-    { position: 11, driverId: 'hul', team: '' },
-    { position: 12, driverId: 'bea', team: '' },
-    { position: 13, driverId: 'oco', team: '' },
-    { position: 14, driverId: 'sai', team: '' },
-    { position: 15, driverId: 'bor', team: '' },
-    { position: 16, driverId: 'col', team: '' },
+    { position: 11, driverId: 'bea', team: '' },
+    { position: 12, driverId: 'oco', team: '' },
+    { position: 13, driverId: 'sai', team: '' },
+    { position: 14, driverId: 'bor', team: '' },
+    { position: 15, driverId: 'col', team: '' },
+    { position: 16, driverId: 'alo', team: '' },
 	
-    { position: 17, driverId: 'alo', team: '' },
-    { position: 18, driverId: 'alb', team: '' },
-    { position: 19, driverId: 'str', team: '' },
-    { position: 20, driverId: 'per', team: '' },
-    { position: 21, driverId: 'bot', pitLane: false, team: '' },
-    { position: 22, driverId: 'had', pitLane: false, team: '' },
+    { position: 17, driverId: 'alb', team: '' },
+    { position: 18, driverId: 'str', team: '' },
+    { position: 19, driverId: 'per', team: '' },
+    { position: 20, driverId: 'bot', team: '' },
+    { position: 21, driverId: 'had', pitLane: false, team: '' },
+    { position: 22, driverId: 'rus', pitLane: false, team: '' },
 ];
 
 const polesData = [
     { driver: "russell", poles: 5 },
     { driver: "antonelli", poles: 6 },
     { driver: "norris", poles: 1 },
-    { driver: "verstappen", poles: 1 },
+    { driver: "verstappen", poles: 2 },
 ];
 
 const qualiData = [
