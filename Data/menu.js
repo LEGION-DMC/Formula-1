@@ -116,6 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+	if (typeof calculateFastestLapsFromTracks === 'function') calculateFastestLapsFromTracks();
+	if (typeof applySeasonStatsToDrivers === 'function') applySeasonStatsToDrivers();
+	if (typeof applySeasonPolesToDrivers === 'function') applySeasonPolesToDrivers();
+	if (typeof applySeasonDNFsToDrivers === 'function') applySeasonDNFsToDrivers();
+	if (typeof applyDebutFromCareer === 'function') applyDebutFromCareer();
+	if (typeof applyShortNames === 'function') applyShortNames();
+
     function closeNavIfOpen() {
         if (nav.classList.contains('open')) {
             nav.classList.remove('open');
