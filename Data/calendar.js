@@ -207,7 +207,7 @@ const calendarData = [
 		track: "marina_bay",
 		tires: "345",
 		date: "2026-10-11 20:00",
-		quali: "2026-10-10 21:00",
+		quali: "2026-10-10 21:30",
 		sprint: "2026-10-10 17:00",
 		hasSprint: true,
 		canceled: false,
