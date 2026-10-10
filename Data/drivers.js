@@ -15,7 +15,7 @@ const driversData = [
         hattricks: 3,
         wins: 11,
         podiums: 44,
-        poles: 19,
+        poles: 18,
 		
         note: "Выступает под #1 - в качестве действующего чемпиона мира. Собственный номер #4.",
         bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул.",
@@ -37,7 +37,7 @@ const driversData = [
         hattricks: 15,
         wins: 71,
         podiums: 127,
-        poles: 49,
+        poles: 48,
 		grandslam: 6,
 		
         note: "Самый молодой дебютант в истории F1 - 17 лет",
@@ -176,7 +176,7 @@ const driversData = [
         hattricks: 3,
         wins: 0,
         podiums: 2,
-        poles: 6,
+        poles: 0,
 		grandslam: 1,
 		
         note: "Выступает под #12 - номером легендарного Айртона Сенны",
@@ -523,7 +523,7 @@ const driversData = [
         hattricks: 2,
         wins: 5,
         podiums: 24,
-        poles: 12,
+        poles: 7,
 		grandslam: 1,
 		
         note: "Лидер гильдии пилотов.",
@@ -881,6 +881,37 @@ const calculateSeasonDNFsFromResults = () => {
     });
 
     return counts;
+};
+
+const calculateSeasonPolesFromResults = () => {
+    const poles = {};
+
+    if (typeof polesData === 'undefined' || !Array.isArray(polesData)) {
+        return poles;
+    }
+
+    polesData.forEach(entry => {
+        if (!entry?.driver) return;
+        if (entry.driver === '000') return; // игнорируем служебный id
+
+        const count = Number(entry.poles) || 0;
+        if (count <= 0) return;
+
+        poles[entry.driver] = (poles[entry.driver] || 0) + count;
+    });
+
+    return poles;
+};
+
+const applySeasonPolesToDrivers = () => {
+    const poles = calculateSeasonPolesFromResults();
+
+    driversData.forEach(driver => {
+        if (driver._basePoles === undefined) {
+            driver._basePoles = driver.poles || 0;
+        }
+        driver.poles = driver._basePoles + (poles[driver.id] || 0);
+    });
 };
 
 const applySeasonDNFsToDrivers = () => {
@@ -1457,6 +1488,7 @@ const buildFilterPanel = (panel, cardsArea) => {
 const initDriversPage = container => {
     calculateFastestLapsFromTracks();
 	applySeasonStatsToDrivers();
+	applySeasonPolesToDrivers();
 	applySeasonDNFsToDrivers();
 	applyDebutFromCareer();
 	applyShortNames();
@@ -1565,6 +1597,7 @@ const createCareerBlock = careerData => {
 const openDriverModal = driver => {
     if (typeof calculateFastestLapsFromTracks === 'function') calculateFastestLapsFromTracks();
 	if (typeof applySeasonStatsToDrivers === 'function') applySeasonStatsToDrivers();
+	if (typeof applySeasonPolesToDrivers === 'function') applySeasonPolesToDrivers();
 	if (typeof applySeasonDNFsToDrivers === 'function') applySeasonDNFsToDrivers();
 	if (typeof applyDebutFromCareer === 'function') applyDebutFromCareer();
 	if (typeof applyShortNames === 'function') applyShortNames();
@@ -2133,6 +2166,7 @@ const renderCompareTable = (container, driverA, driverB) => {
 const openDriversCompareModal = () => {
     if (typeof calculateFastestLapsFromTracks === 'function') calculateFastestLapsFromTracks();
 	if (typeof applySeasonStatsToDrivers === 'function') applySeasonStatsToDrivers();
+	if (typeof applySeasonPolesToDrivers === 'function') applySeasonPolesToDrivers();
 	if (typeof applySeasonDNFsToDrivers === 'function') applySeasonDNFsToDrivers();
 	if (typeof applyDebutFromCareer === 'function') applyDebutFromCareer();
 	if (typeof applyShortNames === 'function') applyShortNames();
