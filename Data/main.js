@@ -1,30 +1,30 @@
 const startingGridData = [
-    { position: 1, driverId: 'ver', team: '' },
-    { position: 2, driverId: 'rus', team: '' },
-    { position: 3, driverId: 'lec', team: '' },
-    { position: 4, driverId: 'pia', team: '' },
-    { position: 5, driverId: 'nor', team: '' },
-    { position: 6, driverId: 'ham', team: '' },
-    { position: 7, driverId: 'ant', team: '' },
-    { position: 8, driverId: 'law', team: '' },
-    { position: 9, driverId: 'had', team: '' },
-    { position: 10, driverId: 'gas', team: '' },
-    { position: 11, driverId: 'col', team: '' },
-    { position: 12, driverId: 'hul', team: '' },
-    { position: 13, driverId: 'bea', team: '' },
-    { position: 14, driverId: 'bor', team: '' },
-    { position: 15, driverId: 'alo', team: '' },
-    { position: 16, driverId: 'oco', team: '' },
-    { position: 17, driverId: 'lin', team: '' },
-    { position: 18, driverId: 'str', team: '' },
-    { position: 19, driverId: 'alb', team: '' },
-    { position: 20, driverId: 'per', team: '' },
-    { position: 21, driverId: 'bot', pitLane: false, team: '' },
-    { position: 22, driverId: 'sai', pitLane: true, team: '' },
+    { position: 1, driverId: '', team: '' },
+    { position: 2, driverId: '', team: '' },
+    { position: 3, driverId: '', team: '' },
+    { position: 4, driverId: '', team: '' },
+    { position: 5, driverId: '', team: '' },
+    { position: 6, driverId: '', team: '' },
+    { position: 7, driverId: '', team: '' },
+    { position: 8, driverId: '', team: '' },
+    { position: 9, driverId: '', team: '' },
+    { position: 10, driverId: '', team: '' },
+    { position: 11, driverId: '', team: '' },
+    { position: 12, driverId: '', team: '' },
+    { position: 13, driverId: '', team: '' },
+    { position: 14, driverId: '', team: '' },
+    { position: 15, driverId: '', team: '' },
+    { position: 16, driverId: '', team: '' },
+    { position: 17, driverId: '', team: '' },
+    { position: 18, driverId: '', team: '' },
+    { position: 19, driverId: '', team: '' },
+    { position: 20, driverId: '', team: '' },
+    { position: 21, driverId: '', pitLane: false, team: '' },
+    { position: 22, driverId: '', pitLane: false, team: '' },
 ];
 
 const STARTING_GRID_WITH_PENALTIES = false;
-const STARTING_GRID_WITH_SPRINT = true;
+const STARTING_GRID_WITH_SPRINT = false;
 
 const DRIVER_SHORT_NAMES = {
     'норрис': 'NOR', 'ферстаппен': 'VER', 'бортолето': 'BOR', 'хаджар': 'HAD',
@@ -1001,7 +1001,7 @@ const createTyreBlock = () => {
         `;
     }).join('');
 
-    const rainActive = weatherData.rain > 70;
+    const rainActive = weatherData.rain > 40;
 
     const bottomHTML = `
         <div class="tyre-item clickable ${rainActive ? '' : 'dimmed'}" data-compound="Intermediate">

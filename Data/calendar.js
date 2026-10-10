@@ -211,7 +211,7 @@ const calendarData = [
 		sprint: "2026-10-10 17:00",
 		hasSprint: true,
 		canceled: false,
-		recordingSprint: "a7cf4989c099f3c660fecbc2eb7777e7",
+		recordingSprint: "6b7983e6fd0a304b1beb758deff21e47",
 		recordingQuali: "2d9cff065e57c4b9a9ded4b77ae21fbf",
 		recordingRace: "a7cf4989c099f3c660fecbc2eb7777e7"
 	},
