@@ -457,7 +457,10 @@ const detailedSprintResults = {
         "000": 2,
         "000": 1,
         "tsunoda": "dnp",
-        "russell": "dnf",
+        "colapinto": "dnf",
+        "hadjar": "dnf",
+        "perez": "dnf",
+        "stroll": "dnf",
     },
 };
 
