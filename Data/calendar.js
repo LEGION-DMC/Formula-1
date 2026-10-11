@@ -8,8 +8,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "nQMAca7AQwY",
-		recordingRace: "CAPgpa-AQwY"
+		recordingQuali: "6960236e7f57887b2316a25dd9ad6129",
+		recordingRace: "e4b5c6dbf25fb77f19857c95f8f68fed"
 	},
 	{   id: "gp2",   name: "Гран-при Китая",
 		track: "shanghai",
@@ -19,9 +19,9 @@ const calendarData = [
 		sprint: "2026-03-15 15:00",
 		hasSprint: true,
 		canceled: false,
-		recordingSprint: "_wOAGcITRAY",
-		recordingQuali: "dgCgNcITRAY",
-		recordingRace: "qwGABcETRAY"
+		recordingSprint: "c97a245ec2075f547585ee46fb0b7947",
+		recordingQuali: "974ccb5f44c925a0f2b9c65b4193a451",
+		recordingRace: "1b2a3318f7b26bdba83e2dccace26581"
 	},
 	{   id: "gp3",   name: "Гран-при Японии",
 		track: "suzuka",
@@ -32,8 +32,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "gALAmvo8RAY",
-		recordingRace: "hgKggPo8RAY"
+		recordingQuali: "9484c998fdfa7a5aad001d2f4bdd186d",
+		recordingRace: "ff53fc2420988cd43f27da8934f12197"
 	},
 	{   id: "gp4",   name: "Гран-при Саудовской Аравии",
 		track: "jeddah",
@@ -55,9 +55,9 @@ const calendarData = [
 		sprint: "2026-05-04 01:00",
 		hasSprint: true,
 		canceled: false,
-		recordingSprint: "rgIAZ7tHRAY",
-		recordingQuali: "wQKgTrtHRAY",
-		recordingRace: "4QKASrtHRAY"
+		recordingSprint: "7405c5689ace1a1c15f0c58711c237da",
+		recordingQuali: "b6d8a3074dde43949e8c0b1b7271b7d6",
+		recordingRace: "50e6c76520bda41be8fa988abad179b7"
 	},
 	{   id: "gp6",   name: "Гран-при Канады",
 		track: "villeneuve",
@@ -67,9 +67,9 @@ const calendarData = [
 		sprint: "2026-05-25 04:00",
 		hasSprint: true,
 		canceled: false,
-		recordingSprint: "pQLA_C1XRAY",
-		recordingQuali: "OQNgtC5XRAY",
-		recordingRace: "OgHg1C1XRAY"
+		recordingSprint: "4bfd51210b2a70cf6c6c0b5a667febf9",
+		recordingQuali: "50242940e53dbf629deb894e11c1714f",
+		recordingRace: "3605445bf5253a55b0bb730ebdf15ed4"
 	},
 	{   id: "gp7",   name: "Гран-при Монако",
 		track: "monaco",
@@ -80,8 +80,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "IwGARvhfSQY",
-		recordingRace: "BgCAwrOLTwY"
+		recordingQuali: "900e9f871e92589072fb0eb4543350b1",
+		recordingRace: "570b668dd22c7852b71d75368135d6ad"
 	},
 	{   id: "gp8",   name: "Гран-при Барселоны-Каталунии",
 		track: "catalunya",
@@ -92,8 +92,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "5gKA2f_YdgY",
-		recordingRace: "wANgWyNueQY"
+		recordingQuali: "f9b02523c3c682f85bbf7d909d1d7de6",
+		recordingRace: "4673f9e72b68ef8625d247f7be56e03f"
 	},
 	{   id: "gp9",   name: "Гран-при Австрии",
 		track: "red_bull_ring",
@@ -104,8 +104,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "2QLgWtkR0QY",
-		recordingRace: "wQHgUnsH1wY"
+		recordingQuali: "8bafae8a922a70f144975afdb384a5ad",
+		recordingRace: "93872a6f003e17a18e5b3a2dfe5e30aa"
 	},
 	{   id: "gp10", name: "Гран-при Великобритании",
 		track: "silverstone",
@@ -115,9 +115,10 @@ const calendarData = [
 		sprint: "2026-07-05 22:00",
 		hasSprint: true,
 		canceled: false,
-		recordingSprint: "FQKAZt21_QY",
-		recordingQuali: "PAPAGIPO-QY",
-		recordingRace: "tQPAbRGEAwc"
+		recordingSpecRace: "ce35dcfe1eca3c8a3dbaf3f321341fa6",
+		recordingSprint: "53e7a054d3896eed535a9f0932aa3e1c",
+		recordingQuali: "a43d3aa32d5307ddefc25e34275e2256",
+		recordingRace: "2f3456c89d8d66fdd7df10fbf46a7348",
 	},
 	{   id: "gp11", name: "Гран-при Бельгии",
 		track: "spa",
@@ -128,8 +129,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "6gOg4PrsWgc",
-		recordingRace: "KwPAzW-yXQc"
+		recordingQuali: "",
+		recordingRace: ""
 	},
 	{   id: "gp12", name: "Гран-при Венгрии",
 		track: "hungaroring",
@@ -140,8 +141,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "xQKgjsHNigc",
-		recordingRace: "twFAj8HNigc"
+		recordingQuali: "55ded792e68ca0eae882078b50c05f7a",
+		recordingRace: "8d838029ed38ee3be92af7472ac078f4"
 	},
 	{   id: "gp13", name: "Гран-при Нидерландов",
 		track: "zandvoort",
@@ -151,9 +152,9 @@ const calendarData = [
 		sprint: "2026-08-22 18:00",
 		hasSprint: true,
 		canceled: false,
-		recordingSprint: "-ABgnWdaQAg",
-		recordingQuali: "LQKAG2daQAg",
-		recordingRace: "jwJgJ2daQAg"
+		recordingSprint: "8a82e700974cd7656e070a10d258f974",
+		recordingQuali: "",
+		recordingRace: "8ef214ecabac601412ba3dd39d092856"
 	},
 	{   id: "gp14", name: "Гран-при Италии",
 		track: "monza",
@@ -164,8 +165,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "vABADUG2nwg",
-		recordingRace: "GQNAdk6MmQg"
+		recordingQuali: "947e5f26a01dc1f74461bac2a76adff7",
+		recordingRace: "eb09dde2c447571644a5aee3cf658b01"
 	},
 	{   id: "gp15", name: "Гран-при Испании",
 		track: "madring",
@@ -176,8 +177,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "BQNguKPUyAg",
-		recordingRace: "VwPgraPUyAg"
+		recordingQuali: "2c73145b62f3d7a29e4dbff3b9b45536",
+		recordingRace: "dea968131e206c790ac31e00db97a853"
 	},
 	{   id: "gp16", name: "Гран-при Азербайджана",
 		track: "baku",
@@ -363,6 +364,17 @@ const getAvailableSessionsForGP = gpId => {
     if (!gp || gp.canceled) return [];
 
     const sessions = [];
+
+	if (gp.recordingSpecRace) {
+		const url = getVideoUrl(gp.recordingSpecRace);
+		if (url) sessions.push({
+			type: 'spec',
+			label: 'Спец-гонка',
+			videoId: gp.recordingSpecRace,
+			videoUrl: url,
+			available: true
+		});
+	}
 
     if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
         const url = getVideoUrl(gp.recordingSprint);
@@ -597,7 +609,8 @@ const renderCalendarCards = container => {
         header.innerHTML = `
             <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-flag" title="${getCountryName(track.country)}">
             <span class="calendar-gp-name">${gp.name}</span>
-            ${gp.hasSprint ? '<span class="calendar-sprint-badge-inline">c</span>' : ''}
+            ${gp.hasSprint ? '<span class="calendar-sprint-badge-inline">S</span>' : ''}
+			${gp.recordingSpecRace ? '<span class="calendar-spec-badge-inline">S</span>' : ''}
             <span class="calendar-gp-number">${displayNumber}</span>
         `;
 
@@ -618,55 +631,67 @@ const renderCalendarCards = container => {
             </div>
         `;
 
-        const footer = document.createElement('div');
-        footer.className = 'calendar-card-footer';
+		const footer = document.createElement('div');
+		footer.className = 'calendar-card-footer';
 
-        if (gp.canceled) {
-            footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
-        } else {
-            let btns = '';
-            let showTimer = false;
+		if (gp.canceled) {
+			footer.innerHTML = '<span class="calendar-status-text canceled">Гонка отменена</span>';
+		} else {
+			let btns = '';
+			let timerHtml = '';
+			let showTimer = false;
 
-            if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
-                if (getVideoUrl(gp.recordingSprint)) {
-                    btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${gp.name}">Спринт</button>`;
-                }
-            }
+			// Сначала собираем кнопки
+			if (gp.recordingSpecRace && getVideoUrl(gp.recordingSpecRace)) {
+				btns += `<button class="calendar-btn spec" data-video="${gp.recordingSpecRace}" data-title="Спец-гонка ${gp.name}">Спец-гонка</button>`;
+			}
 
-            if (gp.recordingQuali && gp.quali && isEventNearOrPassed(gp.quali)) {
-                if (getVideoUrl(gp.recordingQuali)) {
-                    btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${gp.name}">Квалификация</button>`;
-                }
-            }
+			if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
+				if (getVideoUrl(gp.recordingSprint)) {
+					btns += `<button class="calendar-btn sprint" data-video="${gp.recordingSprint}" data-title="Спринт ${gp.name}">Спринт</button>`;
+				}
+			}
 
-            if (isEventNearOrPassed(gp.date)) {
-                if (gp.recordingRace) {
-                    if (getVideoUrl(gp.recordingRace)) {
-                        btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${gp.name}">Гонка</button>`;
-                    }
-                } else if (isPast) {
-                    btns += '<span class="calendar-btn disabled">Нет записи</span>';
-                }
-            } else {
-                showTimer = true;
-            }
+			if (gp.recordingQuali && gp.quali && isEventNearOrPassed(gp.quali)) {
+				if (getVideoUrl(gp.recordingQuali)) {
+					btns += `<button class="calendar-btn quali" data-video="${gp.recordingQuali}" data-title="Квалификация ${gp.name}">Квалификация</button>`;
+				}
+			}
 
-            if (showTimer) {
-                btns += `
-                    <div class="calendar-countdown">
-                        <span>До гонки:</span>
-                        <div class="calendar-timer" data-date="${gp.date}">
-                            <span class="calendar-timer-days">00</span>дн.
-                            <span class="calendar-timer-hours">00</span>ч.
-                            <span class="calendar-timer-minutes">00</span>м.
-                            <span class="calendar-timer-seconds">00</span>с.
-                        </div>
-                    </div>
-                `;
-            }
+			if (isEventNearOrPassed(gp.date)) {
+				if (gp.recordingRace) {
+					if (getVideoUrl(gp.recordingRace)) {
+						btns += `<button class="calendar-btn race" data-video="${gp.recordingRace}" data-title="Гонка ${gp.name}">Гонка</button>`;
+					}
+				} else if (isPast) {
+					btns += '<span class="calendar-btn disabled">Нет записи</span>';
+				}
+			} else {
+				showTimer = true;
+			}
 
-            footer.innerHTML = btns;
-        }
+			// Таймер теперь идёт ПЕРЕД кнопками
+			if (showTimer) {
+				timerHtml = `
+					<div class="calendar-countdown">
+						<span>До гонки:</span>
+						<div class="calendar-timer" data-date="${gp.date}">
+							<span class="calendar-timer-days">00</span>дн.
+							<span class="calendar-timer-hours">00</span>ч.
+							<span class="calendar-timer-minutes">00</span>м.
+							<span class="calendar-timer-seconds">00</span>с.
+						</div>
+					</div>
+				`;
+			}
+
+			footer.innerHTML = timerHtml + btns;
+			
+			const countdownEl = footer.querySelector('.calendar-countdown');
+			if (countdownEl && !btns) {
+				countdownEl.classList.add('no-buttons');
+			}
+		}
 
         const divider1 = document.createElement('div');
         divider1.className = 'calendar-card-divider';
@@ -1205,12 +1230,17 @@ const openVideoModal = (videoId, title) => {
 
     let currentGp = null;
 
-    for (const gp of calendarData) {
-        if (gp.recordingSprint === videoId || gp.recordingQuali === videoId || gp.recordingRace === videoId) {
-            currentGp = gp;
-            break;
-        }
-    }
+	for (const gp of calendarData) {
+		if (
+			gp.recordingSpecRace === videoId ||
+			gp.recordingSprint === videoId ||
+			gp.recordingQuali === videoId ||
+			gp.recordingRace === videoId
+		) {
+			currentGp = gp;
+			break;
+		}
+	}
 
     if (!currentGp) {
         for (const gp of calendarData) {

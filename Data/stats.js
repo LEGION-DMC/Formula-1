@@ -24,7 +24,7 @@ const startingGridData = [
     { position: 18, driverId: 'str', team: '' },
     { position: 19, driverId: 'per', team: '' },
     { position: 20, driverId: 'bot', team: '' },
-    { position: 21, driverId: 'rus', team: '', pitLane: false, penalties: true },
+    { position: 21, driverId: 'rus', team: '', penalties: true },
     { position: 22, driverId: 'had', team: '', pitLane: false, penalties: true },
 ];
 

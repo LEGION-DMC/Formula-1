@@ -1236,14 +1236,16 @@ body {
 
 .calendar-card-image { display: none; }
 
-.calendar-card-info { padding: 10px 10px; }
+.calendar-card-info { padding: 10px 10px;}
 .calendar-gp-name { font-size: 0.85rem; }
 .calendar-detail-row { font-size: 0.75rem; }
 .calendar-icon { width: 13px; height: 13px; }
-
-.calendar-card-footer { gap: 4px; }
-.calendar-btn { font-size: 0.7rem; padding: 5px 5px 4px 5px; }
+.calendar-btn { font-size: 0.7rem; padding: 5px 5px 4px 5px; margin-bottom: -3px;}
 .calendar-countdown { font-size: 0.7rem; }
+
+.calendar-countdown.no-buttons {
+    margin-bottom: -9px;
+}
 .calendar-timer { font-size: 0.85rem; }
 
 /* Модалка трека */

@@ -1085,6 +1085,10 @@ const startMainTimer = () => {
 				return btn;
 			};
 
+			makeBtn('spec', 'spec', 'Спец-гонка', () => ({
+				video: nextGP.recordingSpecRace,
+				title: `Спец-гонка ${nextGP.name}`
+			}));
 			makeBtn('sprint', 'sprint', 'Спринт', () => ({
 				video: nextGP.recordingSprint,
 				title: `Спринт ${nextGP.name}`
@@ -1100,7 +1104,8 @@ const startMainTimer = () => {
 		}
 
 		const btns = block._sessionButtons;
-
+		
+		btns.spec.style.display = nextGP.recordingSpecRace ? '' : 'none';
 		btns.sprint.style.display = (nextGP.sprint && nextGP.recordingSprint && isEventNearOrPassed(nextGP.sprint)) ? '' : 'none';
 		btns.quali.style.display = (nextGP.quali && nextGP.recordingQuali && isEventNearOrPassed(nextGP.quali)) ? '' : 'none';
 		btns.race.style.display = (isEventNearOrPassed(nextGP.date) && nextGP.recordingRace) ? '' : 'none';

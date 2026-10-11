@@ -640,6 +640,16 @@ h1, h2 {
     color: #000;
 }
 
+.main-gp-btn.spec {
+    border: 1px solid #A855F7;
+    color: #A855F7;
+    background: transparent;
+}
+.main-gp-btn.spec:hover {
+    background: #A855F7;
+    color: #fff;
+}
+
 .main-gp-btn.quali {
     border: 1px solid #4CAF50;
     color: #4CAF50;
@@ -4997,6 +5007,17 @@ h1, h2 {
     animation: sprintPulse 1s ease infinite;  
 }
 
+.calendar-spec-badge-inline {
+    margin-top: -2px;
+    background: #A855F7;
+    color: black;
+    font-family: 'F1Title', sans-serif; 
+    font-size: 0.6rem;
+    padding: 3px 4px 1px 4px; 
+    border-radius: 50px;
+    animation: sprintPulse 1s ease infinite;  
+}
+
 .calendar-card-info { flex: 1; padding: 5px 5px; display: flex; flex-direction: column; gap: 5px; }
 
 .calendar-card-header { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
@@ -5037,10 +5058,6 @@ h1, h2 {
 .calendar-card-details { display: flex; flex-direction: 
     column; gap: 4px; }
 
-.calendar-card-footer {
-    padding-top: 0px;
-}
-
 /* Иконки в карточке */
 .calendar-icon {
     width: 14px;
@@ -5063,7 +5080,7 @@ h1, h2 {
 /* ===== КНОПКИ В КАРТОЧКАХ КАЛЕНДАРЯ ===== */
 .calendar-btn {
     display: inline-block;
-    padding: 1px 4px 0px 4px;
+    padding: 2px 3px 0px 3px;
     border-radius: 3px;
     font-family: 'F1Title', sans-serif;
     font-size: 0.7rem;
@@ -5110,6 +5127,18 @@ h1, h2 {
     color: #000;
 }
 
+/* Спец-гонка */
+.calendar-btn.spec {
+    border: 1px solid #A855F7;
+    color: #A855F7;
+    background: transparent;
+}
+
+.calendar-btn.spec:hover {
+    background: #A855F7;
+    color: #fff;
+}
+
 /* Отключенная кнопка */
 .calendar-btn.disabled {
     color: #999;
@@ -5122,24 +5151,22 @@ h1, h2 {
     color: #999;
 }
 
-/* Для мобильных устройств */
-@media (max-width: 768px) {
-    .calendar-btn {
-        padding: 6px 8px;
-        font-size: 0.65rem;
-        margin-right: 4px;
-        margin-bottom: 4px;
-    }
+/* Таймер */
+.calendar-countdown { 
+    font-size: 0.7rem; 
+    color: #aaa; 
+    padding-bottom: 5px;
 }
 
-/* Таймер */
-.calendar-countdown { font-size: 0.7rem; 
-    color: #aaa; 
-    
+.calendar-countdown.no-buttons {
+    margin-bottom: -4px;
 }
-.calendar-countdown > span { font-size: 0.9rem; 
+
+.calendar-countdown > span { 
+    font-size: 0.9rem; 
     color: #bbb; 
 }
+
 .calendar-timer { 
     display: inline-flex; 
     gap: 4px; 
@@ -5712,6 +5739,34 @@ h1, h2 {
 /* Активная кнопка гонки */
 .video-session-btn.race.active {
     background: #E10600;
+    color: #fff;
+}
+
+/* ===== СПЕЦ-ГОНКА - ФИОЛЕТОВЫЙ ===== */
+.video-session-btn.spec {
+    color: #A855F7;
+    border-left: 3px solid #A855F7;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 4px;
+}
+
+.video-session-btn.spec::before {
+    background: #A855F7;
+}
+
+.video-session-btn.spec:not(.active):hover {
+    color: #fff;
+}
+
+.video-session-btn.spec:not(.active):hover::before {
+    transform: translateX(0);
+}
+
+/* Активная кнопка спец-гонки */
+.video-session-btn.spec.active {
+    background: #A855F7;
     color: #fff;
 }
 
