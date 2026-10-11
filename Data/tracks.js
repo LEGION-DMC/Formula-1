@@ -252,7 +252,7 @@ const tracksData = [
         speed: '188',
         direction: "против часовой стрелки",
         firstrace: "2008",
-        lapRecord: "1:35.867, Л. Хэмилтон - Mercedes - 2023",
+        lapRecord: "1:35.202, Ш. Леклер - Ferrari - 2026",
         qulRecord: "1:30.984, Л. Хэмилтон - Mercedes - 2023",
     },
     {   trackName: "Трасса Америк",
