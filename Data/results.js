@@ -308,7 +308,6 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
-        "bortoleto": "dnf",
         "tsunoda": "dnp",
     },
     "gp19": {
