@@ -1209,7 +1209,60 @@ h1, h2 {
     margin-bottom: 4px;
     padding-bottom: 4px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: left;
+}
+
+/* Текстовая часть заголовка */
+.starting-grid-title .gp-full-text,
+.starting-grid-title .gp-short-text {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Легенда справа */
+.starting-grid-legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.7rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: -6px;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-sep {
+    font-size: 0.8rem;
+}
+
+/* Цветные маркеры */
+.legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.legend-dot.pole {
+    background: #FFD700;
+}
+
+.legend-dot.penalty {
+    background: #E10600;
 }
 
 .starting-grid-block:hover {
@@ -1303,6 +1356,16 @@ h1, h2 {
 /* Поул — золотой нижний бордюр */
 .grid-cell.pole {
     border-bottom: 1px solid #FFD700;
+}
+
+/* Красный нижний бордюр для пилотов со штрафами */
+.grid-cell.penalty {
+    border-bottom: 1px solid #E10600;
+}
+
+/* Для пит-лейна */
+.pit-driver-item.penalty {
+    border-bottom: 1px solid #E10600;
 }
 
 .grid-cell.pole .grid-pos{
@@ -2539,6 +2602,7 @@ h1, h2 {
     min-width: 50px;           /* чтобы цифры не «прыгали» */
     transition: color 0.25s ease, text-shadow 0.25s ease;
     line-height: 1;
+    color: #666;
 }
 
 .compare-label {
@@ -2560,7 +2624,7 @@ h1, h2 {
 }
 
 .compare-value.compare-loser {
-    color: #666;
+    color: #fff;
 }
 
 .compare-row--fl {

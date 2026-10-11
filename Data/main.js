@@ -232,18 +232,23 @@ const createStartingGridBlock = () => {
 
     const hasAnyDriver = startingGridData?.some(item => item.driverId && item.driverId !== '');
 
-    const gridTitleText = STARTING_GRID_WITH_SPRINT
-        ? 'Стартовая решётка на предстоящий спринт'
-        : STARTING_GRID_WITH_PENALTIES
-            ? 'Стартовая решётка на предстоящую гонку (с учётом штрафов)'
-            : 'Стартовая решётка на предстоящую гонку';
+	const gridTitleTextFull = STARTING_GRID_WITH_SPRINT
+		? 'Стартовая решётка на предстоящий спринт'
+		: STARTING_GRID_WITH_PENALTIES
+			? 'Стартовая решётка на предстоящую гонку <span class="grid-title-note">(с учётом штрафов)</span>'
+			: 'Стартовая решётка на предстоящую гонку';
 
-    block.innerHTML = `
-        <div class="main-block-title starting-grid-title">
-            <span class="gp-full-text">${gridTitleText}</span>
-            <span class="gp-short-text">${gridTitleText}</span>
-        </div>
-    `;
+	block.innerHTML = `
+		<div class="main-block-title starting-grid-title">
+			<span class="gp-full-text">${gridTitleTextFull}</span>
+			<span class="gp-short-text">${gridTitleTextFull}</span>
+			<span class="starting-grid-legend">
+				<span class="legend-item"><span class="legend-dot pole"></span> Поул</span>
+				<span class="legend-sep">|</span>
+				<span class="legend-item"><span class="legend-dot penalty"></span> Штраф</span>
+			</span>
+		</div>
+	`;
 
     const wrapper = document.createElement('div');
     wrapper.className = 'starting-grid-wrapper';
@@ -264,15 +269,15 @@ const createStartingGridBlock = () => {
         return block;
     }
 
-    const overlay = document.createElement('div');
-    overlay.className = 'starting-grid-blur-overlay';
-    overlay.innerHTML = `
-        <div class="starting-grid-blur-content">
-            <span class="starting-grid-blur-text">${gridTitleText}</span>
-            <span class="starting-grid-blur-title">! ОСТОРОЖНО СПОЙЛЕРЫ !</span>
-            <span class="starting-grid-blur-title">Нажмите для показа</span>
-        </div>
-    `;
+	const overlay = document.createElement('div');
+	overlay.className = 'starting-grid-blur-overlay';
+	overlay.innerHTML = `
+		<div class="starting-grid-blur-content">
+			<span class="starting-grid-blur-text">${gridTitleTextFull}</span>
+			<span class="starting-grid-blur-title">! ОСТОРОЖНО СПОЙЛЕРЫ !</span>
+			<span class="starting-grid-blur-title">Нажмите для показа</span>
+		</div>
+	`;
     block.appendChild(overlay);
     gridContainer.classList.add('blurred');
 
@@ -288,27 +293,28 @@ const createStartingGridBlock = () => {
         else row2.push(item);
     });
 
-    const renderDriverCell = item => {
-        const driver = findDriverByShortId(item.driverId);
-        const pos = item.position;
-        const poleClass = pos === 1 ? ' pole' : '';
+	const renderDriverCell = item => {
+		const driver = findDriverByShortId(item.driverId);
+		const pos = item.position;
+		const poleClass = pos === 1 ? ' pole' : '';
+		const penaltyClass = item.penalties ? ' penalty' : '';
 
-        if (!driver) {
-            return `
-                <div class="grid-cell empty${poleClass}" data-pos="${pos}">
-                    <span class="grid-pos">${pos}</span>
-                    <span class="grid-name">—</span>
-                </div>
-            `;
-        }
+		if (!driver) {
+			return `
+				<div class="grid-cell empty${poleClass}${penaltyClass}" data-pos="${pos}">
+					<span class="grid-pos">${pos}</span>
+					<span class="grid-name">—</span>
+				</div>
+			`;
+		}
 
-        const team = item.team || driver.team;
-        const teamColor = getTeamColor(team);
-        const teamLogoPath = getTeamLogo(team);
+		const team = item.team || driver.team;
+		const teamColor = getTeamColor(team);
+		const teamLogoPath = getTeamLogo(team);
 		const shortName = getDriverShortName(driver);
 
 		return `
-			<div class="grid-cell${poleClass}" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
+			<div class="grid-cell${poleClass}${penaltyClass}" data-driver-id="${driver.id}" data-pos="${pos}" style="--team-color: ${teamColor}">
 				<span class="grid-pos">${pos}</span>
 				<div class="grid-driver-info">
 					<span class="grid-name" style="color: ${teamColor}">${shortName}</span>
@@ -316,7 +322,7 @@ const createStartingGridBlock = () => {
 				</div>
 			</div>
 		`;
-    };
+	};
 
     const row1HTML = row1.map(renderDriverCell).join('');
     const row2HTML = row2.map(renderDriverCell).join('');
@@ -349,13 +355,13 @@ const createStartingGridBlock = () => {
             const teamLogoPath = getTeamLogo(team);
             const shortName = getDriverShortName(driver);
 
-            pitHTML += `
-                <div class="pit-driver-item" data-driver-id="${driver.id}" style="--team-color: ${teamColor}">
-                    <span class="pit-driver-pos">${item.position}</span>
-                    <span class="pit-driver-name" style="color: ${teamColor}">${shortName}</span>
-                    <img src="${teamLogoPath}" class="pit-driver-logo" onerror="this.style.display='none'" title="${team}">
-                </div>
-            `;
+			pitHTML += `
+				<div class="pit-driver-item${item.penalties ? ' penalty' : ''}" data-driver-id="${driver.id}" style="--team-color: ${teamColor}">
+					<span class="pit-driver-pos">${item.position}</span>
+					<span class="pit-driver-name" style="color: ${teamColor}">${shortName}</span>
+					<img src="${teamLogoPath}" class="pit-driver-logo" onerror="this.style.display='none'" title="${team}">
+				</div>
+			`;
         });
 
         pitHTML += `</div>`;

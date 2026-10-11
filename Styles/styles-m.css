@@ -232,6 +232,24 @@ body {
     display: inline;
 }
 
+.starting-grid-title .gp-full-text {
+    text-align: left; 
+}
+
+.starting-grid-title .grid-title-note {
+    display: inline-block;   
+    white-space: nowrap;     
+}
+
+.starting-grid-legend {
+    display: grid;
+    font-size: 0.55rem;
+}
+
+.legend-sep {
+    display: none;
+}
+
 .gp-short-text {
     display: none;
 }
