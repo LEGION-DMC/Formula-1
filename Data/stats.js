@@ -313,7 +313,7 @@ const pitstopData = [
       { team: "Red Bull", point: 2 },
       { team: "Racing Bulls", point: 1 },
   ]},
-  { gpId: "gp18", driver: "none", time: "0.00", teams: [
+  { gpId: "gp18", driver: "stroll", time: "2.10", teams: [
       { team: "none", point: 18 }, 
       { team: "none", point: 15 }, 
       { team: "none", point: 12 },
