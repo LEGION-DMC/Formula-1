@@ -1418,7 +1418,7 @@ h1, h2 {
 
 /* ===== КОНТЕЙНЕР ПИТ-ЛЕЙНА ===== */
 .starting-grid-pit-container {
-    width: 90px;
+    width: auto;
     border-left: 2px solid rgba(255, 107, 0, 0.4);
     border-radius: 4px;
     padding: 0px 3px;
