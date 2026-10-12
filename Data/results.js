@@ -1,6 +1,6 @@
 const detailedResults = { 
     "gp1": {
-        "russell": 20,
+        "russell": 25,
         "antonelli": 18,
         "leclerc": 15,
         "hamilton": 12,
