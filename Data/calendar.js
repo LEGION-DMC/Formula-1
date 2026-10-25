@@ -225,8 +225,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "04ade7a0eab10f8c19f861b9eb5f738c",
+		recordingRace: "3fd177d06252cb97e7ce2df0fcd2181a"
 	},
 	{   id: "gp20", name: "Гран-при Мехико",
 		track: "rodriguez",
