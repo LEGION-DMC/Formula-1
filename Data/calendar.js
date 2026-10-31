@@ -237,8 +237,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "0c93964169b0f38be8f4dfd24c09503b",
+		recordingRace: "6a57ccd733ee72e5ad7376248458f67f"
 	},
 	{   id: "gp21", name: "Гран-при Сан-Паулу",
 		track: "interlagos",
