@@ -645,6 +645,28 @@ const driversData = [
         bio: "Гонщик, чья карьера в F1 была недолгой, но он добился большого успеха в гонках WEC, став чемпионом мира в составе Ferrari.",
     },
 	/*  ~ Пилоты 2027
+    {   number: "//", id: "herta",
+        name: "Колтон Херта",
+        namef: "Колтон Томас Херта",
+		
+        birthPlace:  "Валенсия, США", country: "us",
+        birthDate: "30.03.2000",
+		
+        team: "Резерв",
+		reserve: ["Cadillac"], 
+		career: [
+            { team: "Cadillac", year: "2027-н.в." },
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+		
+        note: "",
+        bio: "",
+    },
     {   number: 9, id: "tsolov",
         name: "Никола Цолов",
         namef: "Никола Димитров Цолов",
