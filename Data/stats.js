@@ -20,12 +20,12 @@ const startingGridData = [
     { position: 15, driverId: '', team: '' },
     { position: 16, driverId: '', team: '' },
 	
-    { position: 17, driverId: '', team: '' },
-    { position: 18, driverId: '', team: '' },
-    { position: 19, driverId: '', team: '' },
-    { position: 20, driverId: '', team: '' },
-    { position: 21, driverId: '', team: '' },
-    { position: 22, driverId: '', team: '', pitLane: false, penalties: false },
+    { position: 17, driverId: 'alb', team: '' },
+    { position: 18, driverId: 'alo', team: '' },
+    { position: 19, driverId: 'hir', team: '' },
+    { position: 20, driverId: 'str', team: '' },
+    { position: 21, driverId: 'per', team: '' },
+    { position: 22, driverId: 'bot', team: '', pitLane: false, penalties: false },
 ];
 
 const polesData = [
@@ -61,7 +61,7 @@ const qualiData = [
 		score2: 9, 
 		driver2: "Габриэл Бортолето" },
     { driver1: "Карлос Сайнс", 
-		score1: 14, 
+		score1: 15, 
 		score2: 4, 
 		driver2: "Алекс Албон" },
     { driver1: "Эстебан Окон", 
@@ -73,11 +73,11 @@ const qualiData = [
 		score2: 4, 
 		driver2: "Франко Колапинто" },
     { driver1: "Фернандо Алонсо", 
-		score1: 16, 
+		score1: 17, 
 		score2: 2, 
 		driver2: "Лэнс Стролл" },
     { driver1: "Серхио Перес", 
-		score1: 10, 
+		score1: 11, 
 		score2: 8, 
 		driver2: "Валттери Боттас" },
 ];
@@ -91,6 +91,10 @@ const replacementQualiData = [
 	score1: 3, 
 	score2: 0, 
 	driver2: "Юки Цунода" },
+    { driver1: "Оливер Берман", 
+	score1: 1, 
+	score2: 0, 
+	driver2: "Рё Хиракава" },
 ];
 
 const penaltiesData = [
@@ -438,7 +442,7 @@ const DRIVER_SHORT_NAMES = {
     'албон': 'ALB', 'чжоу': 'ZHO', 'хюлькенберг': 'HUL', 'лоусон': 'LAW',
     'окон': 'OCO', 'линдблад': 'LIN', 'колапинто': 'COL', 'хэмилтон': 'HAM',
     'сайнс': 'SAI', 'расселл': 'RUS', 'боттас': 'BOT', 'пиастри': 'PIA',
-    'берман': 'BEA', 'джовинацци': 'GIO'
+    'берман': 'BEA', 'джовинацци': 'GIO', 'хиракава': 'HIR', 'камара': 'CAM'
 };
 
 const DRIVER_ID_BY_SHORT = (() => {

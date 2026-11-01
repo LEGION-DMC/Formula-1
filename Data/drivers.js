@@ -1,5 +1,5 @@
 const driversData = [ 
-    {   number: 1, id: "norris",  
+    {   number: 4, id: "norris",  
         name: "Ландо Норрис",
         namef: "Ландо Норрис",
 		
@@ -392,7 +392,8 @@ const driversData = [
         birthPlace:  "Эвре, Франция", country: "fr",
         birthDate: "17.09.1996",
 		
-        team: "Haas",
+        team: "Резерв",
+		reserve: ["Haas"], 
 		career: [
             { team: "Manor", year: "2016", temporarily: true },
             { team: "Force India", year: "2017-2018" },
@@ -478,17 +479,16 @@ const driversData = [
         note: "Рекордсмен по победам, поулам, подиумам.",
         bio: "7-кратный чемпион (2008, 2014, 2015, 2017, 2018, 2019, 2020). После драки с Ферстаппеном-2021 и провала нового болида Mercedes ушел в Ferrari на 2025 год. Легенда.",
     },
-    {   number: 50, id: "camara",
-        name: "Рафаэль Камара",
-        namef: "Рафаэль Чавес Камара",
+    {   number: 50, id: "hirakawa",
+        name: "Рё Хиракава",
+        namef: "Рё Хиракава",
 		
-        birthPlace:  "Ресифи, Бразилия", country: "br",
-        birthDate: "05.05.2005",
+        birthPlace:  "Куре, Япония", country: "jp",
+        birthDate: "07.09.1994",
 		
-        team: "Резерв",
-		reserve: ["Haas"], 
+        team: "Haas",
 		career: [
-            { team: "Haas", year: "2027-н.в." },
+            { team: "Haas", year: "2026", temporarily: true },
         ],
 		
         titles: 0,
@@ -498,7 +498,7 @@ const driversData = [
         poles: 0,
 		
         note: "",
-        bio: "Камара считается одним из самых многообещающих молодых талантов своего поколения, демонстрируя стабильный карьерный рост без форсирования этапов",
+        bio: "",
     },
     {   number: 55, id: "sainz",
         name: "Карлос Сайнс",
@@ -645,6 +645,28 @@ const driversData = [
         bio: "Гонщик, чья карьера в F1 была недолгой, но он добился большого успеха в гонках WEC, став чемпионом мира в составе Ferrari.",
     },
 	/*  ~ Пилоты 2027
+    {   number: 50, id: "camara",
+        name: "Рафаэль Камара",
+        namef: "Рафаэль Чавес Камара",
+		
+        birthPlace:  "Ресифи, Бразилия", country: "br",
+        birthDate: "05.05.2005",
+		
+        team: "Резерв",
+		reserve: ["Haas"], 
+		career: [
+            { team: "Haas", year: "2027-н.в." },
+        ],
+		
+        titles: 0,
+        hattricks: 0,
+        wins: 0,
+        podiums: 0,
+        poles: 0,
+		
+        note: "",
+        bio: "Камара считается одним из самых многообещающих молодых талантов своего поколения, демонстрируя стабильный карьерный рост без форсирования этапов",
+    },
     {   number: "//", id: "herta",
         name: "Колтон Херта",
         namef: "Колтон Томас Херта",
