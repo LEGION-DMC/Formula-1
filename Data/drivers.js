@@ -11,6 +11,7 @@ const driversData = [
             { team: "McLaren", year: "2019-н.в." }
         ],
 		
+		WC: true,
         titles: 1,
         hattricks: 3,
         wins: 11,
@@ -805,7 +806,8 @@ const countrySynonyms = {
 
 const getCountryName = code => countryNames[code] || code.toUpperCase();
 const findDriverById = id => driversIndex.get(id) || null;
-const getCurrentWorldChampion = () => driversData.find(d => d.number === 1) || null;
+const getCurrentWorldChampion = () =>
+    driversData.find(d => d.WC === true) || driversData.find(d => d.number === 1) || null;
 
 const getDebutFromCareer = driver => {
     if (!driver?.career?.length) return driver?.debut || '';
