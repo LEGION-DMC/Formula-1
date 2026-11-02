@@ -929,7 +929,7 @@ const createSimpleTable = (data, startIndex, filterTeam, isSprint = false) => {
                     pointsCell.textContent = racePoints;
                     pointsCell.style.color = '#e10600';
                     pointsCell.style.fontWeight = 'bold';
-                    pointsCell.title = `Только гонки: ${racePoints} (Спринты: ${sprintPoints})`;
+                    pointsCell.title = `Гонка: ${racePoints} / Спринт: ${sprintPoints})`;
                 });
                 tr.addEventListener('mouseleave', () => {
                     pointsCell.textContent = totalPoints;
@@ -1096,13 +1096,13 @@ const renderDetailedTable = (container, filterTeam, isSprint) => {
             }
         });
 
-        if (isSprint) {
-            scrollHTML += `<div class="detailed-cell sum-col" data-col="sum">${total}</div></div>`;
-        } else {
-            const sprintEntry = sprintStandings.find(s => s.driver === entry.driver);
-            const sprintPoints = sprintEntry ? sprintEntry.points : 0;
-            scrollHTML += `<div class="detailed-cell sum-col" title="Гонки: ${total} + Спринты: ${sprintPoints}" data-col="sum">${total + sprintPoints}</div></div>`;
-        }
+if (isSprint) {
+    scrollHTML += `<div class="detailed-cell sum-col" data-col="sum">${total}</div></div>`;
+} else {
+    const sprintEntry = sprintStandings.find(s => s.driver === entry.driver);
+    const sprintPoints = sprintEntry ? sprintEntry.points : 0;
+    scrollHTML += `<div class="detailed-cell sum-col">${total}</div></div>`;
+}
     });
     scrollPart.innerHTML = scrollHTML;
 

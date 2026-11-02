@@ -266,7 +266,7 @@ const driversData = [
         birthDate: "11.05.2000",
 		
         team: "Резерв",
-		reserve: ["Red Bull", "Racing Bulls"],
+		reserve: ["Racing Bulls", "Red Bull"],
 		career: [
             { team: "AlphaTauri", year: "2021-2023" },
             { team: "Racing Bulls", year: "2024" },
@@ -386,7 +386,7 @@ const driversData = [
         note: "",
         bio: "Агрессивный, бескомпромиссный. Считался основным претендентом на место Переса в Red Bull. В 2024-м провел несколько гонок и произвел впечатление (особенно борьба с Ферстаппеном в тренировках).",
     },
-    {   number: 31, id: "ocon",
+    {   number: 31, id: "ocon",	             // Свободен
         name: "Эстебан Окон",
         namef: "Эстебан Хосе Жан-Пьер Окон-Кельфан",
 		
@@ -1214,7 +1214,22 @@ const renderDriverCards = (drivers, container) => {
         if (isReserve) {
             const reserveLabel = document.createElement('span');
             reserveLabel.className = 'driver-reserve-label';
-            reserveLabel.textContent = 'Резерв';
+
+            const reserveTeam = Array.isArray(driver.reserve) ? driver.reserve[0] : null;
+            if (reserveTeam) {
+                const reserveLogo = document.createElement('img');
+                reserveLogo.src = getTeamLogo(reserveTeam);
+                reserveLogo.alt = reserveTeam;
+                reserveLogo.className = 'driver-reserve-logo';
+                reserveLogo.title = reserveTeam;
+                reserveLogo.onerror = () => { reserveLogo.style.display = 'none'; };
+                reserveLabel.appendChild(reserveLogo);
+            }
+
+            const reserveText = document.createElement('span');
+            reserveText.textContent = 'Резерв';
+            reserveLabel.appendChild(reserveText);
+
             teamDiv.appendChild(reserveLabel);
         } else {
             const teamLogo = document.createElement('img');
