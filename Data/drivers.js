@@ -173,7 +173,7 @@ const driversData = [
 		
 		WC: true,
 	 
-        titles: 0,
+        titles: 1,
         hattricks: 3,
         wins: 0,
         podiums: 2,
