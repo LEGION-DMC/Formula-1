@@ -10,8 +10,7 @@ const driversData = [
 		career: [
             { team: "McLaren", year: "2019-н.в." }
         ],
-		
-		WC: true,
+
         titles: 1,
         hattricks: 3,
         wins: 11,
@@ -172,6 +171,8 @@ const driversData = [
             { team: "Mercedes", year: "2025-н.в." }
         ],
 		
+		WC: true,
+	 
         titles: 0,
         hattricks: 3,
         wins: 0,
