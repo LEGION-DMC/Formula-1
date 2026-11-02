@@ -357,6 +357,7 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
+        "bottas": "dnf",
         "strol": "dnf",
         "alonso": "dnf",
         "tsunoda": "dnp",
