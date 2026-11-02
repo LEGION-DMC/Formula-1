@@ -99,43 +99,44 @@ const replacementQualiData = [
 ];
 
 const penaltiesData = [
-    { driver: "Франко Колапинто", penalties: [
-        { date: "23/08/2026", count: 3 },
-        { date: "14/06/2026", count: 1 },
+    { driver: "Ферстаппен", penalties: [
+        { date: "30/10/2026", count: 1 },
     ]},
-    { driver: "Арвид Линдблад", penalties: [
-        { date: "23/08/2026", count: 2 },
-    ]},
-    { driver: "Лиам Лоусон", penalties: [
+    { driver: "Лоусон", penalties: [
+        { date: "30/10/2026", count: 1 },
         { date: "23/08/2026", count: 1 },
         { date: "07/12/2025", count: 1 },
         { date: "08/11/2025", count: 1 },
     ]},
-    { driver: "Кими Антонелли", penalties: [
+    { driver: "Колапинто", penalties: [
+        { date: "23/08/2026", count: 3 }, // 2 + 1
+        { date: "14/06/2026", count: 1 },
+    ]},
+    { driver: "Линдблад", penalties: [
+        { date: "23/08/2026", count: 2 },
+    ]},
+    { driver: "Антонелли", penalties: [
         { date: "25/07/2026", count: 1 },
     ]},
-    { driver: "Юки Цунода", penalties: [
+    { driver: "Цунода", penalties: [
         { date: "07/12/2025", count: 1 },
         { date: "09/11/2025", count: 2 },
     ]},
-    { driver: "Оливер Берман", penalties: [
+    { driver: "Берман", penalties: [
         { date: "07/12/2025", count: 1 },
         { date: "08/11/2025", count: 1 },
     ]},
-    { driver: "Алекс Албон", penalties: [
+    { driver: "Албон", penalties: [
         { date: "23/11/2025", count: 1 },
     ]},
-    { driver: "Габриэл Бортолето", penalties: [
+    { driver: "Бортолето", penalties: [
         { date: "23/11/2025", count: 2 },
     ]},
-    { driver: "Оскар Пиастри", penalties: [
+    { driver: "Пиастри", penalties: [
         { date: "09/11/2025", count: 2 },
     ]},
-    { driver: "Льюис Хэмилтон", penalties: [
+    { driver: "Хэмилтон", penalties: [
         { date: "09/11/2025", count: 1 },
-    ]},
-    { driver: "Лэнс Стролл", penalties: [
-        { date: "18/10/2025", count: 2 },
     ]},
 ];
 
