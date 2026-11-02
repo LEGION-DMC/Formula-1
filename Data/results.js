@@ -357,6 +357,8 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
+        "strol": "dnf",
+        "alonso": "dnf",
         "tsunoda": "dnp",
         "ocon": { "points": "dnp", "team": "Haas" },
     },
