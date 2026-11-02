@@ -17,7 +17,6 @@ const detailedResults = {
         "hulkenberg": "dns",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
-        "hirakawa": "dnp",
     },
     "gp2": {
         "antonelli": 25,
@@ -225,7 +224,7 @@ const detailedResults = {
         "hamilton": 12,
         "leclerc": 10,
         "piastri": 8,
-        "lawson": 6,
+		"lawson": { "points": 6, "team": "Red Bull" },
         "hulkenberg": 4,
         "alonso": 2,
         "gasly": 1,
@@ -237,7 +236,6 @@ const detailedResults = {
         "albon": "dnf",
         "hadjar": "dnp",
         "hirakawa": "dnp",
-		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
     "gp14": {
         "antonelli": 25,
@@ -249,7 +247,7 @@ const detailedResults = {
         "gasly": 6,
         "lindblad": 4,
         "colapinto": 2,
-        "tsunoda": 1,
+		"tsunoda": { "points": 1, "team": "Racing Bulls" },
         "leclerc": "dnf",
         "alonso": "dnf",
         "stroll": "dnf",
@@ -262,7 +260,7 @@ const detailedResults = {
         "norris": 15,
         "leclerc": 12,
         "russell": 10,
-        "lawson": 8,
+		"lawson": { "points": 8, "team": "Red Bull" },
         "colapinto": 6,
         "piastri": 4,
         "lindblad": 2,
@@ -506,20 +504,6 @@ const detailedSprintResults = {
     },
 };
 
-const constructorPenalties = {
-    "Mercedes": 0,
-    "Ferrari": 0,
-    "McLaren": 0,
-    "Red Bull": 14,
-    "Racing Bulls": -14,
-    "Alpine": 0,
-    "Haas": 0,
-    "Audi": 0,
-    "Williams": 0,
-    "Aston Martin": 0,
-    "Cadillac": 0,
-};
-
 const driverStandings = [];
 const combinedStandings = [];
 const sprintStandings = [];
@@ -656,19 +640,16 @@ const calculateConstructorStandings = () => {
                     teamName = driver.team;
                 }
 
-                if (teamName && teams[teamName]) {
-                    teams[teamName].points += points;
-                }
+				if (teamName) {
+					if (!teams[teamName]) teams[teamName] = { team: teamName, points: 0, color: getTeamColor(teamName) };
+					teams[teamName].points += points;
+				}
             });
         });
     };
 
     addResults(detailedResults);
     addResults(detailedSprintResults);
-
-    Object.keys(constructorPenalties).forEach(teamName => {
-        if (teams[teamName]) teams[teamName].points += constructorPenalties[teamName];
-    });
 
     return Object.values(teams).sort((a, b) => b.points - a.points);
 };
