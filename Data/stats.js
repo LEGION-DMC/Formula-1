@@ -337,16 +337,16 @@ const pitstopData = [
       { team: "Audi", point: 2 }, 
       { team: "Racing Bulls", point: 1 },
   ]},
-  { gpId: "gp20", driver: "none", time: "0.00", teams: [
-      { team: "none", point: 18 }, 
-      { team: "none", point: 15 }, 
-      { team: "none", point: 12 },
-      { team: "none", point: 10 }, 
-      { team: "none", point: 8 }, 
-      { team: "none", point: 6 },
-      { team: "none", point: 4 }, 
-      { team: "none", point: 2 }, 
-      { team: "none", point: 1 },
+  { gpId: "gp20", driver: "albon", time: "2.11", teams: [
+      { team: "Red Bull", point: 18 }, 
+      { team: "Racing Bulls", point: 15 }, 
+      { team: "Audi", point: 12 },
+      { team: "Ferrari", point: 10 }, 
+      { team: "Red Bull", point: 8 }, 
+      { team: "Mercedes", point: 6 },
+      { team: "Racing Bulls", point: 4 }, 
+      { team: "Alpine", point: 2 }, 
+      { team: "McLaren", point: 1 },
   ]},
   { gpId: "gp21", driver: "none", time: "0.00", teams: [
       { team: "none", point: 18 }, 
@@ -395,7 +395,6 @@ const pitstopData = [
 ];
 
 const fastestPitstopTeamData = [
-    { team: "Williams", time: "2.28" },
     { team: "Aston Martin", time: "2.31" },
     { team: "Alpine", time: "2.30" },
     { team: "Haas", time: "2.67" },
