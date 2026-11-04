@@ -109,6 +109,7 @@ const penaltiesData = [
         { date: "08/11/2025", count: 1 },
     ]},
     { driver: "Франко Колапинто", penalties: [
+        { date: "14/06/2026", count: 1 },
         { date: "23/08/2026", count: 3 },
         { date: "14/06/2026", count: 1 },
     ]},
@@ -137,6 +138,12 @@ const penaltiesData = [
     ]},
     { driver: "Льюис Хэмилтон", penalties: [
         { date: "09/11/2025", count: 1 },
+    ]},
+    { driver: "Ленс Стролл", penalties: [
+        { date: "07/12/2025", count: 1 },
+    ]},
+    { driver: "Пьер Гасли", penalties: [
+        { date: "02/11/2026", count: 2 },
     ]},
 ];
 
