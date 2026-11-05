@@ -17,6 +17,7 @@ const detailedResults = {
         "hulkenberg": "dns",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp2": {
         "antonelli": 25,
@@ -38,6 +39,7 @@ const detailedResults = {
         "albon": "dns",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp3": {
         "antonelli": 25,
@@ -54,6 +56,7 @@ const detailedResults = {
         "bearman": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp4": {
         "000": 25,
@@ -66,6 +69,7 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
+        "camara": "dnp",
     },
     "gp5": {
         "antonelli": 25,
@@ -84,6 +88,7 @@ const detailedResults = {
         "hadjar": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp6": {
         "antonelli": 25,
@@ -104,6 +109,7 @@ const detailedResults = {
         "lindblad": "dns",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp7": {
         "antonelli": 25,
@@ -125,6 +131,7 @@ const detailedResults = {
         "verstappen": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp8": {
         "hamilton": 25,
@@ -147,6 +154,7 @@ const detailedResults = {
         "stroll": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp9": {
         "russell": 25,
@@ -165,6 +173,7 @@ const detailedResults = {
         "bottas": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp10": {
         "leclerc": 25,
@@ -182,6 +191,7 @@ const detailedResults = {
         "verstappen": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp11": {
         "antonelli": 25,
@@ -199,6 +209,7 @@ const detailedResults = {
         "russell": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp12": {
         "norris": 25,
@@ -216,6 +227,7 @@ const detailedResults = {
         "piastri": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp13": {
         "norris": 25,
@@ -236,6 +248,7 @@ const detailedResults = {
         "albon": "dnf",
         "hadjar": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp14": {
         "antonelli": 25,
@@ -253,6 +266,7 @@ const detailedResults = {
         "stroll": "dnf",
         "hadjar": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp15": {
         "antonelli": 25,
@@ -271,6 +285,7 @@ const detailedResults = {
         "sainz": "dnf",
         "hadjar": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp16": {
         "russell": 25,
@@ -292,6 +307,7 @@ const detailedResults = {
         "stroll": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp17": {
         "verstappen": 25,
@@ -309,6 +325,7 @@ const detailedResults = {
         "albon": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp18": {
         "verstappen": 25,
@@ -326,6 +343,7 @@ const detailedResults = {
         "bortoleto": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp19": {
         "antonelli": 25,
@@ -343,6 +361,7 @@ const detailedResults = {
         "bearman": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp20": {
         "verstappen": 25,
@@ -362,6 +381,7 @@ const detailedResults = {
         "alonso": "dnf",
         "tsunoda": "dnp",
         "ocon": { "points": "dnp", "team": "Haas" },
+        "camara": "dnp",
     },
     "gp21": {
         "000": 25,
@@ -428,6 +448,7 @@ const detailedSprintResults = {
         "lindblad": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
         "ocon": { "points": 0, "team": "Haas" },
     },
     "gp5": {
@@ -444,6 +465,7 @@ const detailedSprintResults = {
         "bortoleto": "dsq",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp6": {
         "russell": 8,
@@ -457,6 +479,7 @@ const detailedSprintResults = {
         "alonso": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp10": {
         "antonelli": 8,
@@ -469,6 +492,7 @@ const detailedSprintResults = {
         "lawson": 1,
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "camara": "dnp",
     },
     "gp13": {
         "russell": 8,
@@ -480,6 +504,8 @@ const detailedSprintResults = {
         "hamilton": 2,
         "gasly": 1,
         "hadjar": "dnp",
+        "camara": "dnp",
+        "hirakawa": "dnp",
 		"tsunoda": { "points": 0, "team": "Racing Bulls" },
     },
     "gp18": {
@@ -502,6 +528,7 @@ const detailedSprintResults = {
         "bottas": "dnf",
         "albon": "dnf",
         "piastri": "dnf",
+        "camara": "dnp",
     },
 };
 
