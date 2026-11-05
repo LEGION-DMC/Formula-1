@@ -509,7 +509,7 @@ const driversData = [
         birthPlace:  "Ресифи, Бразилия", country: "br",
         birthDate: "05.05.2005",
 		
-        team: "Haad",
+        team: "Haas",
 		career: [
             { team: "Haas", year: "2026-н.в." },
         ],
