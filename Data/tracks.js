@@ -14,6 +14,13 @@ const tracksData = [
         firstrace: "1996",
         lapRecord: "1:19.813, Ш. Леклер - Ferrari - 2024",
         qulRecord: "1:16.732, М. Ферстаппен - Red Bull - 2023",
+		trackWinsData: [
+			{ id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 4 },
+			{ id: "vettel", name: "Себастьян Феттель", country: "de", team: "Ferrari", wins: 3 },
+			{ id: "button", name: "Дженсон Баттон", country: "gb", team: "McLaren", wins: 3 },
+			{ id: "rosberg", name: "Нико Росберг", country: "de", team: "Mercedes", wins: 2 },
+			{ id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 2 },
+		],
     },
     {   trackName: "Шанхайский международный автодром",
 		trackNamem: "Шанхай",
@@ -30,6 +37,13 @@ const tracksData = [
         firstrace: "2004",
         lapRecord: "1:32.238, М. Шумахер - Ferrari - 2004",
         qulRecord: "1:30.641, О. Пиастри - McLaren - 2025",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 6 },
+            { id: "rosberg", name: "Нико Росберг", country: "de", team: "Mercedes", wins: 2 },
+            { id: "alonso", name: "Фернандо Алонсо", country: "es", team: "Ferrari", wins: 2 },
+            { id: "antonelli", name: "Андреа Кими Антонелли", country: "it", team: "Mercedes", wins: 1 },
+            { id: "piastri", name: "Оскар Пиастри", country: "au", team: "McLaren", wins: 1 },
+        ],
     },
     {   trackName: "Судзука",
 		trackNamem: "Судзука",
@@ -46,6 +60,13 @@ const tracksData = [
         firstrace: "1987",
         lapRecord: "1:30.965, К. Антонелли - Mercedes - 2025",
         qulRecord: "1:26.983, М. Ферстаппен - Red Bull - 2025",
+        trackWinsData: [
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 6 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 4 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 4 },
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Red Bull", wins: 4 },
+            { id: "hakkinen", name: "Мика Хаккинен", country: "fi", team: "McLaren", wins: 2 },
+        ],
     },
     {   trackName: "Международный автодром Майами",
 		trackNamem: "Майами",
@@ -62,6 +83,12 @@ const tracksData = [
         firstrace: "2022",
         lapRecord: "1:29.708, М. Ферстаппен - Red Bull - 2023",
         qulRecord: "1:26.841, С. Перес - Red Bull - 2023",
+        trackWinsData: [
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
+            { id: "antonelli", name: "Андреа Кими Антонелли", country: "it", team: "Mercedes", wins: 1 },
+            { id: "piastri", name: "Оскар Пиастри", country: "au", team: "McLaren", wins: 1 },
+            { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 1 },
+        ],
     },
     {   trackName: "Автодром имени Жиля Вильнёва",
 		trackNamem: "Монреаль",
@@ -78,6 +105,13 @@ const tracksData = [
         firstrace: "1978",
         lapRecord: "1:13.078, В. Боттас - Mercedes - 2019",
         qulRecord: "1:10.240, С. Феттель - Red Bull - 2019",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 7 },
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 7 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 3 },
+            { id: "piquet", name: "Нельсон Пике", country: "br", team: "Benetton", wins: 3 },
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Ferrari", wins: 2 },
+        ],
     },
     {   trackName: "Городская трасса Монте-Карло",
 		trackNamem: "Монте-Карло",
@@ -94,6 +128,13 @@ const tracksData = [
         firstrace: "1950",
         lapRecord: "1:12.909, Л. Хэмилтон - Mercedes - 2021",
         qulRecord: "1:09.954, Л. Норрис - McLaren - 2025",
+        trackWinsData: [
+            { id: "senna", name: "Айртон Сенна", country: "br", team: "McLaren", wins: 6 },
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 5 },
+            { id: "hill", name: "Грэм Хилл", country: "gb", team: "Lotus", wins: 5 },
+            { id: "prost", name: "Ален Прост", country: "fr", team: "McLaren", wins: 4 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 3 },
+        ],
     },
     {   trackName: "Автодром Барселона-Каталунья",
 		trackNamem: "Каталунья",
@@ -110,6 +151,13 @@ const tracksData = [
         firstrace: "1991",
         lapRecord: "1:15.743, О. Пиастри - McLaren - 2025",
         qulRecord: "1:12.272, М. Ферстаппен - Red Bull - 2023",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 6 },
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 6 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 4 },
+            { id: "hakkinen", name: "Мика Хаккинен", country: "fi", team: "McLaren", wins: 3 },
+            { id: "alonso", name: "Фернандо Алонсо", country: "es", team: "Ferrari", wins: 2 },
+        ],
     },
     {   trackName: "Ред Булл Ринг",
 		trackNamem: "Ред Булл Ринг",
@@ -126,6 +174,13 @@ const tracksData = [
         firstrace: "1997",
         lapRecord: "1:05.619, К. Сайнс - McLaren - 2020",
         qulRecord: "1:03.971, Л. Норрис - McLaren - 2025",
+        trackWinsData: [
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 5 },
+            { id: "prost", name: "Ален Прост", country: "fr", team: "Williams", wins: 3 },
+            { id: "russell", name: "Джордж Расселл", country: "gb", team: "Mercedes", wins: 2 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 2 },
+            { id: "bottas", name: "Валттери Боттас", country: "fi", team: "Mercedes", wins: 2 },
+        ],
     },
     {   trackName: "Сильверстоун",
 		trackNamem: "Сильверстоун",
@@ -142,6 +197,13 @@ const tracksData = [
         firstrace: "1950",
         lapRecord: "1:27.097, М. Ферстаппен - Red Bull - 2020",
         qulRecord: "1:24.303, Л. Хэмилтон - Mercedes - 2020",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 9 },
+            { id: "prost", name: "Ален Прост", country: "fr", team: "Williams", wins: 5 },
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 3 },
+            { id: "mansell", name: "Найджел Мэнселл", country: "gb", team: "Williams", wins: 3 },
+            { id: "clark", name: "Джим Кларк", country: "gb", team: "Lotus", wins: 3 },
+        ],
     },
     {   trackName: "Спа-Франкоршам",
 		trackNamem: "Спа",
@@ -158,6 +220,13 @@ const tracksData = [
         firstrace: "1950",
         lapRecord: "1:44.701, С. Перес - Red Bull - 2024",
         qulRecord: "1:40.562, О. Пиастри - McLaren - 2025",
+        trackWinsData: [
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 6 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 5 },
+            { id: "senna", name: "Айртон Сенна", country: "br", team: "McLaren", wins: 5 },
+            { id: "raikkonen", name: "Кими Райкконен", country: "fi", team: "Ferrari", wins: 4 },
+            { id: "clark", name: "Джим Кларк", country: "gb", team: "Lotus", wins: 4 },
+        ],
     },
     {   trackName: "Хунгароринг",
 		trackNamem: "Хунгароринг",
@@ -174,6 +243,13 @@ const tracksData = [
         firstrace: "1986",
         lapRecord: "1:16.627, Л. Хэмилтон - Mercedes - 2020",
         qulRecord: "1:13.447, Л. Хэмилтон - Mercedes - 2020",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 8 },
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 4 },
+            { id: "senna", name: "Айртон Сенна", country: "br", team: "McLaren", wins: 3 },
+            { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 2 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
+        ],
     },
     {   trackName: "Зандвоорт",
 		trackNamem: "Зандвоорт",
@@ -190,6 +266,13 @@ const tracksData = [
         firstrace: "1952",
         lapRecord: "1:11.097, Л. Хэмилтон - Mercedes - 2021",
         qulRecord: "1:09.662, О. Пиастри - McLaren - 2025",
+        trackWinsData: [
+            { id: "clark", name: "Джим Кларк", country: "gb", team: "Lotus", wins: 4 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 3 },
+            { id: "lauda", name: "Ники Лауда", country: "at", team: "McLaren", wins: 3 },
+            { id: "stewart", name: "Джеки Стюарт", country: "gb", team: "Tyrrell", wins: 3 },
+            { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 2 },
+        ],
     },
     {   trackName: "Национальный автодром Монцы",
 		trackNamem: "Монца",
@@ -206,6 +289,13 @@ const tracksData = [
         firstrace: "1950",
         lapRecord: "1:20.901, Л. Норрис - McLaren - 2025",
         qulRecord: "1:18.792, М. Ферстаппен - Red Bull - 2025",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 5 },
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 5 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 3 },
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Red Bull", wins: 3 },
+            { id: "barrichello", name: "Рубенс Баррикелло", country: "br", team: "Brawn", wins: 3 },
+        ],
     },
     {   trackName: "Мадринг",
 		trackNamem: "Мадринг",
@@ -222,6 +312,9 @@ const tracksData = [
         firstrace: "2026",
         lapRecord: "1:35.587, Д. Расселл - Mercedes - 2026",
         qulRecord: "1:31.824, Л. Норрис - McLaren - 2026",
+        trackWinsData: [
+            { id: "antonelli", name: "Андреа Кими Антонелли", country: "it", team: "Mercedes", wins: 1 },
+        ],
     },
     {   trackName: "Городская трасса Баку",
 		trackNamem: "Баку",
@@ -238,6 +331,13 @@ const tracksData = [
         firstrace: "2016",
         lapRecord: "1:43.009, Ш. Леклер - Ferrari - 2019",
         qulRecord: "1:40.203, Ш. Леклер - Ferrari - 2023",
+        trackWinsData: [
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
+            { id: "perez", name: "Серхио Перес", country: "mx", team: "Red Bull", wins: 2 },
+            { id: "russell", name: "Джордж Расселл", country: "gb", team: "Mercedes", wins: 1 },
+            { id: "piastri", name: "Оскар Пиастри", country: "au", team: "McLaren", wins: 1 },
+            { id: "bottas", name: "Валттери Боттас", country: "fi", team: "Mercedes", wins: 1 },
+        ],
     },
     {   trackName: "Городская трасса Марина-Бэй",
 		trackNamem: "Марина-Бэй",
@@ -254,6 +354,13 @@ const tracksData = [
         firstrace: "2008",
         lapRecord: "1:35.202, Ш. Леклер - Ferrari - 2026",
         qulRecord: "1:30.984, Л. Хэмилтон - Mercedes - 2023",
+        trackWinsData: [
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Ferrari", wins: 5 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 4 },
+            { id: "alonso", name: "Фернандо Алонсо", country: "es", team: "Ferrari", wins: 2 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 1 },
+            { id: "russell", name: "Джордж Расселл", country: "gb", team: "Mercedes", wins: 1 },
+        ],
     },
     {   trackName: "Трасса Америк",
 		trackNamem: "Остин",
@@ -270,6 +377,13 @@ const tracksData = [
         firstrace: "2012",
         lapRecord: "1:36.169, Ш. Леклер - Ferrari - 2019",
         qulRecord: "1:32.029, В. Боттас - Mercedes - 2019",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 5 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 4 },
+            { id: "antonelli", name: "Андреа Кими Антонелли", country: "it", team: "Mercedes", wins: 1 },
+            { id: "leclerc", name: "Шарль Леклер", country: "mc", team: "Ferrari", wins: 1 },
+            { id: "bottas", name: "Валттери Боттас", country: "fi", team: "Mercedes", wins: 1 },
+        ],
     },
     {   trackName: "Автодром имени братьев Родригес",
 		trackNamem: "Мехико",
@@ -286,6 +400,13 @@ const tracksData = [
         firstrace: "1963",
         lapRecord: "1:17.774, В. Боттас - Mercedes - 2021",
         qulRecord: "1:14.758, М. Ферстаппен - Red Bull - 2019",
+        trackWinsData: [
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 6 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 2 },
+            { id: "mansell", name: "Найджел Мэнселл", country: "gb", team: "Williams", wins: 2 },
+            { id: "prost", name: "Ален Прост", country: "fr", team: "Ferrari", wins: 2 },
+            { id: "clark", name: "Джим Кларк", country: "gb", team: "Lotus", wins: 2 },
+        ],
     },
     {   trackName: "Автодром имени Жозе Карлуса Пасе (Интерлагос)",
 		trackNamem: "Интерлагос",
@@ -302,6 +423,13 @@ const tracksData = [
         firstrace: "1973",
         lapRecord: "1:10.540, В. Боттас - Mercedes - 2018",
         qulRecord: "1:07.281, Л. Хэмилтон - Mercedes - 2018",
+        trackWinsData: [
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 4 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 3 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 3 },
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Ferrari", wins: 3 },
+            { id: "rosberg", name: "Нико Росберг", country: "de", team: "Mercedes", wins: 2 },
+        ],
     },
     {   trackName: "Лас-Вегас-Стрип",
 		trackNamem: "Лас-Вегас",
@@ -318,6 +446,10 @@ const tracksData = [
         firstrace: "2023",
         lapRecord: "1:34.876, Л. Норрис - McLaren - 2024",
         qulRecord: "1:32.312, Д. Расселл - Mercedes - 2024",
+        trackWinsData: [
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
+            { id: "russell", name: "Джордж Расселл", country: "gb", team: "Mercedes", wins: 1 },
+        ],
     },
     {   trackName: "Международный автодром Лусаил",
 		trackNamem: "Лусаил",
@@ -334,6 +466,10 @@ const tracksData = [
         firstrace: "2021",
         lapRecord: "1:22.384, Л. Норрис - McLaren - 2024",
         qulRecord: "1:19.387, О. Пиастри - McLaren - 2025",
+        trackWinsData: [
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 3 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 1 },
+        ],
     },
     {   trackName: "Яс-Марина",
 		trackNamem: "Яс-Марина",
@@ -350,6 +486,13 @@ const tracksData = [
         firstrace: "2009",
         lapRecord: "1:25.637, К. Магнуссен - Haas - 2024",
         qulRecord: "1:22.109, М. Ферстаппен - Red Bull - 2021",
+        trackWinsData: [
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 5 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 5 },
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Red Bull", wins: 3 },
+            { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 1 },
+            { id: "bottas", name: "Валттери Боттас", country: "fi", team: "Mercedes", wins: 1 },
+        ],
     },
 	
     {   trackName: "Международная трасса Бахрейна",
@@ -367,6 +510,13 @@ const tracksData = [
         firstrace: "2004",
         lapRecord: "1:31.447, П. де ла Роса - McLaren - 2005",
         qulRecord: "1:27.866, Ш. Леклер - Ferrari - 2019",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 5 },
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Ferrari", wins: 4 },
+            { id: "alonso", name: "Фернандо Алонсо", country: "es", team: "Ferrari", wins: 3 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
+            { id: "massa", name: "Фелипе Масса", country: "br", team: "Ferrari", wins: 2 },
+        ],
     },
     {   trackName: "Городская трасса Джидда",
 		trackNamem: "Джидда",
@@ -383,6 +533,12 @@ const tracksData = [
         firstrace: "2021",
         lapRecord: "1:30.734, Л. Хэмилтон - Mercedes - 2021",
         qulRecord: "1:27.294, М. Ферстаппен - Red Bull - 2025",
+        trackWinsData: [
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
+            { id: "piastri", name: "Оскар Пиастри", country: "au", team: "McLaren", wins: 1 },
+            { id: "perez", name: "Серхио Перес", country: "mx", team: "Red Bull", wins: 1 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 1 },
+        ],
     },
     {   trackName: "Автодром Энцо и Дино Феррари",
 		trackNamem: "Имола",
@@ -399,6 +555,13 @@ const tracksData = [
         firstrace: "1980",
         lapRecord: "1:15.484, Л. Хэмилтон - Mercedes - 2020",
         qulRecord: "1:13.609, В. Боттас - Mercedes - 2020",
+        trackWinsData: [
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 7 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 4 },
+            { id: "prost", name: "Ален Прост", country: "fr", team: "Williams", wins: 3 },
+            { id: "senna", name: "Айртон Сенна", country: "br", team: "McLaren", wins: 3 },
+            { id: "damon_hill", name: "Дэймон Хилл", country: "gb", team: "Williams", wins: 2 },
+        ],
     },
 	
     {   trackName: "Международный автодром Сепанг",
@@ -416,6 +579,13 @@ const tracksData = [
         firstrace: "1999",
         lapRecord: "1:34.080, С. Феттель - Ferrari - 2017",
         qulRecord: "1:30.076, Л. Хэмилтон - Mercedes - 2017",
+        trackWinsData: [
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Ferrari", wins: 4 },
+            { id: "alonso", name: "Фернандо Алонсо", country: "es", team: "Ferrari", wins: 3 },
+            { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 3 },
+            { id: "raikkonen", name: "Кими Райкконен", country: "fi", team: "Ferrari", wins: 2 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 1 },
+        ],
     },
 
     {   trackName: "Истанбул Парк",
@@ -433,6 +603,13 @@ const tracksData = [
         firstrace: "2005",
         lapRecord: "1:24.770, Х. Монтойя - McLaren - 2005",
         qulRecord: "1:22.868, Л. Хэмилтон - Mercedes - 2021",
+        trackWinsData: [
+            { id: "massa", name: "Фелипе Масса", country: "br", team: "Ferrari", wins: 3 },
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 2 },
+            { id: "bottas", name: "Валттери Боттас", country: "fi", team: "Mercedes", wins: 1 },
+            { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Red Bull", wins: 1 },
+            { id: "button", name: "Дженсон Баттон", country: "gb", team: "Brawn", wins: 1 },
+        ],
     },
     {   trackName: "Международный автодром Алгарве",
 		trackNamem: "Портимао",
@@ -449,6 +626,9 @@ const tracksData = [
         firstrace: "2020",
         lapRecord: "1:18.750, Л. Хэмилтон - Mercedes - 2020",
         qulRecord: "1:16.652, Л. Хэмилтон - Mercedes - 2020",
+        trackWinsData: [
+            { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 2 },
+        ],
     },
 ];
 
@@ -457,3 +637,46 @@ const getTrackById = id => tracksIndex.get(id) || null;
 const getTrackCountry = id => tracksIndex.get(id)?.country ?? 'xx';
 const getTrackName = id => tracksIndex.get(id)?.trackName ?? id;
 const getTrackWeatherLocation = id => tracksIndex.get(id)?.weatherLocation ?? '51.507,-0.128';
+
+const TRACK_WINNER_TEAM_COLORS = {
+    'benetton': '#00A19C',
+    'lotus': '#FFB800',
+    'tyrrell': '#0055A4',
+    'brawn': '#80C41C',
+    'matra-ford': '#0066CC',
+    'shadow': '#666666'
+};
+
+const TRACK_WINNER_DRIVER_ALIASES = {
+    max_verstappen: 'verstappen'
+};
+
+const getTrackWinnerColor = team => {
+    const slug = typeof teamSlug === 'function'
+        ? teamSlug(team)
+        : String(team || '').toLowerCase().replace(/\s+/g, '-');
+
+    if (TRACK_WINNER_TEAM_COLORS[slug]) return TRACK_WINNER_TEAM_COLORS[slug];
+    return typeof getTeamColor === 'function' ? getTeamColor(team) : '#FFFFFF';
+};
+
+const getTrackTopWinners = (trackId, limit = 5) => {
+    const track = tracksIndex.get(trackId);
+    const list = Array.isArray(track?.trackWinsData) ? [...track.trackWinsData] : [];
+
+    if (!list.length) return [];
+    list.sort((a, b) => b.wins - a.wins);
+    let count = Math.min(limit, list.length);
+    const topWins = list[0].wins;
+    while (count < list.length && list[count].wins === topWins) count++;
+
+    return list.slice(0, count).map(entry => {
+        const driverId = TRACK_WINNER_DRIVER_ALIASES[entry.id] || entry.id;
+
+        return {
+            ...entry,
+            color: getTrackWinnerColor(entry.team),
+            driver: typeof findDriverById === 'function' ? findDriverById(driverId) : null
+        };
+    });
+};

@@ -1790,8 +1790,7 @@ h1, h2 {
 
 .driver-flag-overlay {
     position: absolute;
-    top: -4px;
-    left: -10px;
+    top: -5px;
     width: 30px;
     height: 20px;
     border-radius: 3px;
@@ -1832,7 +1831,7 @@ h1, h2 {
 .driver-number-overlay {
     position: absolute;
     top: -5px;
-    right: -10px;
+    right: 0px;
     font-family: 'F1Numbers', 'F1Title', sans-serif;
     font-size: 1.75rem;
     color: transparent;
@@ -5223,7 +5222,7 @@ h1, h2 {
 
 .track-modal {
     width: 100%;
-    max-width: 870px;
+    max-width: 1210px;
     max-height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
@@ -5299,6 +5298,236 @@ h1, h2 {
     border-radius: 0;
     overflow: hidden;
     background: transparent;
+}
+
+/* ========================================== */
+/* ВЕРХНИЙ РЯД: ТРАССА + ТОП ПИЛОТОВ          */
+/* ========================================== */
+
+.track-modal-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 286px;
+    grid-template-areas:
+        "track winners"
+        "results .";
+    gap: 10px;
+    width: 100%;
+}
+
+.track-modal-body > .track-modal-layout-wrapper {
+    grid-area: track;
+}
+
+.track-modal-body > .tm-race-result-panel {
+    grid-area: results;
+}
+
+.track-modal-body > .tm-winners-panel {
+    grid-area: winners;
+}
+
+/* ========================================== */
+/* ПЛАШКА: ТОП-5 ПИЛОТОВ ПО ПОБЕДАМ НА ТРАССЕ */
+/* ========================================== */
+
+.tm-winners-panel {
+    position: relative;
+    height: 240px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    isolation: isolate;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    opacity: 0;
+    animation: tmWinnersSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+}
+
+@keyframes tmWinnersSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.tm-winners-pattern {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 150px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.2;
+}
+
+.tm-winners-pattern svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tm-winners-pattern svg g {
+    fill: var(--red-accent);
+}
+
+.tm-winners-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.6) 55%,
+        rgba(0, 0, 0, 0.2) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.tm-winners-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    padding: 10px 10px 10px;
+}
+
+.tm-winners-header {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tm-winners-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1.3rem;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: linear-gradient(135deg, #e10600, #ff4d4d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tm-winners-subtitle {
+    display: block;
+    margin-top: 2px;
+    font-family: 'F1Title', 'F1Text', sans-serif;
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.tm-winners-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 6px;
+}
+
+.tm-winners-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    border-left: 2px solid var(--team-color, #E10600);
+    cursor: default;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.tm-winners-row.clickable {
+    cursor: pointer;
+}
+
+.tm-winners-row:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.tm-winners-row:hover .tm-winners-name {
+    color: var(--team-color, #FFFFFF);
+}
+
+.tm-winners-pos {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.9rem;
+    color: #777;
+    min-width: 8px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.tm-winners-row.winner .tm-winners-pos {
+    color: #FFD700;
+}
+
+.tm-winners-flag {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.tm-winners-name {
+    font-family: 'F1Title', 'F1Text', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-light, #ddd);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+    padding-top: 2px;
+    transition: color 0.2s ease;
+    letter-spacing: 1px;
+}
+
+.tm-winners-count {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: #E10600;
+    flex-shrink: 0;
+    min-width: 15px;
+    text-align: right;
+}
+
+.tm-winners-empty {
+    font-family: 'F1Text', sans-serif;
+    font-size: 1.5rem;
+    color: #666;
+    text-align: center;
+    font-style: italic;
+    display: flex;
+    align-items: center;     
+    justify-content: center; 
+    min-height: 100%;       
+}
+
+@media (max-width: 1100px) {
+    .track-modal-body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "track"
+            "winners"
+            "results";
+    }
+
+    .tm-winners-panel {
+        min-height: 0;
+    }
 }
 
 /* ========================================== */

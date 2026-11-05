@@ -1062,6 +1062,89 @@ const buildRaceResultPanel = gpId => {
     return panel;
 };
 
+const buildTrackWinnersPanel = track => {
+    if (!track) return null;
+
+    const winners = typeof getTrackTopWinners === 'function' ? getTrackTopWinners(track.id, 5) : [];
+
+    const panel = document.createElement('div');
+    panel.className = 'tm-winners-panel';
+
+    const pattern = document.createElement('div');
+    pattern.className = 'tm-winners-pattern';
+    pattern.innerHTML = CALENDAR_PATTERN_SVG;
+    panel.appendChild(pattern);
+
+    const overlay = document.createElement('div');
+    overlay.className = 'tm-winners-overlay';
+    panel.appendChild(overlay);
+
+    const content = document.createElement('div');
+    content.className = 'tm-winners-content';
+
+    const header = document.createElement('div');
+    header.className = 'tm-winners-header';
+    header.innerHTML = `
+        <h3 class="tm-winners-title">Топ пилотов</h3>
+        <span class="tm-winners-subtitle">По количеству побед на трассе</span>
+    `;
+    content.appendChild(header);
+
+    const list = document.createElement('div');
+    list.className = 'tm-winners-list';
+
+    if (!winners.length) {
+        const empty = document.createElement('div');
+        empty.className = 'tm-winners-empty';
+        empty.textContent = 'Нет данных';
+        list.appendChild(empty);
+    } else {
+        winners.forEach((entry, index) => {
+            const row = document.createElement('div');
+            row.className = 'tm-winners-row' + (index === 0 ? ' winner' : '');
+            row.style.setProperty('--team-color', entry.color || '#E10600');
+            row.title = `${entry.name} — ${entry.wins} ${pluralize(entry.wins, 'победа', 'победы', 'побед')}`;
+
+            const pos = document.createElement('span');
+            pos.className = 'tm-winners-pos';
+            pos.textContent = index + 1;
+            row.appendChild(pos);
+
+            const flag = document.createElement('img');
+            flag.className = 'tm-winners-flag';
+            flag.src = `Images/Flags/${entry.country}.svg`;
+            flag.alt = entry.country;
+            flag.onerror = () => { flag.style.display = 'none'; };
+            row.appendChild(flag);
+
+            const name = document.createElement('span');
+            name.className = 'tm-winners-name';
+            name.textContent = entry.name;
+            row.appendChild(name);
+
+            const count = document.createElement('span');
+            count.className = 'tm-winners-count';
+            count.textContent = entry.wins;
+            row.appendChild(count);
+
+            if (entry.driver) {
+                row.classList.add('clickable');
+                row.addEventListener('click', e => {
+                    e.stopPropagation();
+                    if (typeof openDriverModal === 'function') openDriverModal(entry.driver);
+                });
+            }
+
+            list.appendChild(row);
+        });
+    }
+
+    content.appendChild(list);
+    panel.appendChild(content);
+
+    return panel;
+};
+
 const openTrackModal = (track, gp) => {
     document.querySelector('.track-modal-overlay')?.remove();
 
@@ -1187,14 +1270,22 @@ const openTrackModal = (track, gp) => {
         </div>
     `;
     layoutWrapper.appendChild(layoutInner);
-    modalContent.appendChild(layoutWrapper);
+
+    const modalBody = document.createElement('div');
+    modalBody.className = 'track-modal-body';
+    modalBody.appendChild(layoutWrapper);
+
+    const winnersPanel = buildTrackWinnersPanel(track);
+    if (winnersPanel) modalBody.appendChild(winnersPanel);
+
+    modalContent.appendChild(modalBody);
 
     let targetGp = gp;
     if (!targetGp?.id) targetGp = getGPByTrackId(track.id);
     if (targetGp?.id && isRaceFinishedForGP(targetGp.id)) {
         const panel = buildRaceResultPanel(targetGp.id);
         if (panel) {
-            modalContent.appendChild(panel);
+            modalBody.appendChild(panel);
             requestAnimationFrame(() => {
                 setTimeout(() => panel.classList.add('visible'), 250);
             });
