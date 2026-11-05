@@ -69,7 +69,6 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
-        "camara": "dnp",
     },
     "gp5": {
         "antonelli": 25,
