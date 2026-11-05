@@ -99,25 +99,16 @@ const replacementQualiData = [
 ];
 
 const penaltiesData = [
-    { driver: "Макс Ферстаппен", penalties: [
-        { date: "30/10/2026", count: 1 },
+    { driver: "Франко Колапинто", penalties: [
+        { date: "01/11/2026", count: 1 },
+        { date: "23/08/2026", count: 3 },
+        { date: "14/06/2026", count: 1 },
     ]},
     { driver: "Лиам Лоусон", penalties: [
         { date: "30/10/2026", count: 1 },
         { date: "23/08/2026", count: 1 },
         { date: "07/12/2025", count: 1 },
         { date: "08/11/2025", count: 1 },
-    ]},
-    { driver: "Франко Колапинто", penalties: [
-        { date: "14/06/2026", count: 1 },
-        { date: "23/08/2026", count: 3 },
-        { date: "14/06/2026", count: 1 },
-    ]},
-    { driver: "Арвид Линдблад", penalties: [
-        { date: "23/08/2026", count: 2 },
-    ]},
-    { driver: "Кими Антонелли", penalties: [
-        { date: "25/07/2026", count: 1 },
     ]},
     { driver: "Юки Цунода", penalties: [
         { date: "07/12/2025", count: 1 },
@@ -127,23 +118,32 @@ const penaltiesData = [
         { date: "07/12/2025", count: 1 },
         { date: "08/11/2025", count: 1 },
     ]},
-    { driver: "Алекс Албон", penalties: [
-        { date: "23/11/2025", count: 1 },
+    { driver: "Оскар Пиастри", penalties: [
+        { date: "09/11/2025", count: 2 },
     ]},
     { driver: "Габриэл Бортолето", penalties: [
         { date: "23/11/2025", count: 2 },
     ]},
-    { driver: "Оскар Пиастри", penalties: [
-        { date: "09/11/2025", count: 2 },
+    { driver: "Арвид Линдблад", penalties: [
+        { date: "23/08/2026", count: 2 },
+    ]},
+    { driver: "Пьер Гасли", penalties: [
+        { date: "01/11/2026", count: 2 },
+    ]},
+    { driver: "Карлос Сайнс", penalties: [
+        { date: "25/09/2026", count: 2 }, 
     ]},
     { driver: "Льюис Хэмилтон", penalties: [
         { date: "09/11/2025", count: 1 },
     ]},
-    { driver: "Ленс Стролл", penalties: [
-        { date: "07/12/2025", count: 1 },
+    { driver: "Алекс Албон", penalties: [
+        { date: "23/11/2025", count: 1 },
     ]},
-    { driver: "Пьер Гасли", penalties: [
-        { date: "02/11/2026", count: 2 },
+    { driver: "Кими Антонелли", penalties: [
+        { date: "25/07/2026", count: 1 },
+    ]},
+    { driver: "Макс Ферстаппен", penalties: [
+        { date: "30/10/2026", count: 1 },
     ]},
 ];
 
