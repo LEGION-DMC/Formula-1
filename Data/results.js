@@ -354,7 +354,7 @@ const detailedResults = {
         "lawson": 6,
         "bortoleto": 4,
         "hadjar": 2,
-        "hirakawa": 1,
+        "hirakawa": { "points": 1, "team": "Haas" },
         "lindblad": "dnf",
         "bearman": "dnf",
         "bottas": "dnf",
@@ -428,6 +428,7 @@ const detailedSprintResults = {
         "lindblad": "dnf",
         "tsunoda": "dnp",
         "hirakawa": "dnp",
+        "ocon": { "points": 0, "team": "Haas" },
     },
     "gp5": {
         "norris": 8,
