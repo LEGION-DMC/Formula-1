@@ -450,6 +450,7 @@ const detailedSprintResults = {
         "hirakawa": "dnp",
         "camara": "dnp",
         "ocon": { "points": 0, "team": "Haas" },
+        "hirakawa": { "points": "dnp", "team": "Haas" },
     },
     "gp5": {
         "norris": 8,
