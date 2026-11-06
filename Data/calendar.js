@@ -249,8 +249,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "45f6a103c643a1a8123c7c0c2bca8be9",
+		recordingRace: "95b3d5e5605a36007542e9cb5ed61fac"
 	},
 	{   id: "gp22", name: "Гран-при Лас-Вегаса",
 		track: "vegas",
