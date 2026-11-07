@@ -644,6 +644,7 @@ const driversData = [
         note: "",
         bio: "Самый молодой пилот Ferrari в истории (дебют в 18 лет в Джидде, сразу набрал очки). В 2025-м получил постоянное место в Haas. Быстр, умен, жёсток. Воспитанник Ferrari Driver Academy.",
     },
+	/*  ~ Пилоты 2027
     {   number: 99, id: "giovinazzi",    // Резерв
         name: "Антонио Джовинацци",
         namef: "Антонио Мария Джовинацци",
@@ -667,7 +668,6 @@ const driversData = [
         note: "",
         bio: "Гонщик, чья карьера в F1 была недолгой, но он добился большого успеха в гонках WEC, став чемпионом мира в составе Ferrari.",
     },
-	/*  ~ Пилоты 2027
     {   number: "//", id: "herta",
         name: "Колтон Херта",
         namef: "Колтон Томас Херта",
@@ -747,12 +747,12 @@ const driversIndex = new Map(driversData.map(d => [d.id, d]));
 const DRIVER_PATTERN_SVG = `<svg viewBox="0 0 928 800" preserveAspectRatio="xMidYMid slice" fill="none"><g><path d="M525.317 408.664H580.116C595.812 408.664 609.647 402.398 617.198 391.253L730.294 226.315H674.743C659.047 226.315 645.977 232.581 638.413 243.726L525.317 408.664Z"></path><path d="M209.91 406.694H264.709C280.405 406.694 293.99 400.427 301.105 389.282L407.732 224.344H352.181C336.485 224.344 323.653 230.611 316.537 241.756L209.91 406.694Z"></path><path d="M406.94 225.349H461.739C477.435 225.349 491.02 219.083 498.135 207.938L604.762 43H549.211C533.515 43 520.683 49.2665 513.567 60.4113L406.94 225.349Z"></path><path d="M730.665 226.314H785.463C801.16 226.314 814.744 220.047 821.86 208.903L928.5 43.9646H872.949C857.252 43.9646 844.421 50.2311 837.305 61.3759L730.678 226.314H730.665Z"></path><path d="M566.424 225.349H621.223C636.92 225.349 650.504 219.083 657.619 207.938L764.247 43H708.695C692.999 43 680.167 49.2665 673.052 60.4113L566.424 225.349Z"></path><path d="M369.341 407.118H424.14C439.836 407.118 453.42 400.851 460.536 389.706L567.163 224.768H511.612C495.915 224.768 483.084 231.035 475.968 242.18L369.341 407.118Z"></path><path d="M701.396 408.254H756.195C771.892 408.254 785.476 401.987 792.591 390.842L899.219 225.904H843.667C827.971 225.904 815.139 232.171 808.024 243.316L701.396 408.254Z"></path><path d="M175.004 588.528H229.803C245.499 588.528 259.084 582.261 266.199 571.116L372.826 406.178H317.275C301.579 406.178 288.747 412.445 281.632 423.59L175.004 588.528Z"></path><path d="M13.5 588.528H68.2988C83.9952 588.528 97.5794 582.261 104.695 571.116L211.322 406.178H155.771C140.075 406.178 127.243 412.445 120.127 423.59L13.5 588.528Z"></path><path d="M327.493 591H382.292C397.988 591 411.573 584.733 418.688 573.589L525.316 408.651H469.764C454.068 408.651 441.236 414.917 434.121 426.062L327.493 591Z"></path><path d="M668.222 588.528H723.021C738.717 588.528 752.301 582.261 759.417 571.116L866.044 406.178H810.493C794.796 406.178 781.965 412.445 774.849 423.59L668.222 588.528Z"></path><path d="M506.715 588.528H561.514C577.21 588.528 590.794 582.261 597.91 571.116L704.537 406.178H648.986C633.29 406.178 620.458 412.445 613.342 423.59L506.715 588.528Z"></path></g></svg>`;
 
 const COMPARE_METRICS = [
-    { key: 'titles',     label: 'Титул',           decl: ['Титул', 'Титула', 'Титулов'] },
-    { key: 'wins',       label: 'Победа',          decl: ['Победа', 'Победы', 'Побед'] },
-    { key: 'podiums',    label: 'Подиум',          decl: ['Подиум', 'Подиума', 'Подиумов'] },
-    { key: 'poles',      label: 'Поул',            decl: ['Поул', 'Поула', 'Поулов'] },
-    { key: 'hattricks',  label: 'Хэт-Трик',        decl: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'] },
-    { key: 'grandslam',  label: 'Большой шлем',    decl: ['Большой шлем', 'Больших шлема', 'Больших шлемов'] },
+    { key: 'titles',     label: 'Титулы',          decl: ['Титул', 'Титула', 'Титулов'] },
+    { key: 'wins',       label: 'Победы',          decl: ['Победа', 'Победы', 'Побед'] },
+    { key: 'podiums',    label: 'Подиумы',         decl: ['Подиум', 'Подиума', 'Подиумов'] },
+    { key: 'poles',      label: 'Поулы',           decl: ['Поул', 'Поула', 'Поулов'] },
+    { key: 'hattricks',  label: 'Хэт-трики',       decl: ['Хэт-Трик', 'Хэт-Трика', 'Хэт-Триков'] },
+    { key: 'grandslam',  label: 'Большие шлемы',   decl: ['Большой шлем', 'Больших шлема', 'Больших шлемов'] },
 ];
 
 const countryNames = {
@@ -1065,7 +1065,7 @@ const animateCardsAppearance = container => {
     if (!cards.length) return;
 
     const width = container.offsetWidth || container.parentElement?.offsetWidth || 1200;
-    const cols = Math.max(1, Math.floor((width + 10) / (190 + 10)));
+    const cols = Math.max(1, Math.floor((width + 12) / (300 + 12)));
 
     cards.forEach(card => {
         card.style.opacity = '0';
@@ -1146,37 +1146,98 @@ const renderDriverCards = (drivers, container) => {
         card.className = 'driver-card';
         card.style.setProperty('--team-color', getTeamColor(driver.team));
 
+        const isReserve = /^(резерв|reserve)$/i.test(driver.team);
+        const reserveTeam = Array.isArray(driver.reserve) ? driver.reserve[0] : null;
+        const watermarkTeam = isReserve ? reserveTeam : driver.team;
+
+        if (driver.id === championId) card.classList.add('world-champion');
+        if (isReserve) card.classList.add('reserve-driver');
+
         const patternDiv = document.createElement('div');
         patternDiv.className = 'driver-card-bg-pattern';
         patternDiv.innerHTML = DRIVER_PATTERN_SVG;
         card.appendChild(patternDiv);
 
+        if (watermarkTeam) {
+            const watermark = document.createElement('div');
+            watermark.className = 'driver-card-watermark';
+
+            const watermarkImg = document.createElement('img');
+            watermarkImg.src = getTeamLogo(watermarkTeam);
+            watermarkImg.alt = '';
+            watermarkImg.setAttribute('aria-hidden', 'true');
+            watermarkImg.onerror = () => { watermark.style.display = 'none'; };
+
+            watermark.appendChild(watermarkImg);
+            card.appendChild(watermark);
+        }
+
         const overlay = document.createElement('div');
         overlay.className = 'driver-card-bg-overlay';
         card.appendChild(overlay);
-
-        if (driver.id === championId) card.classList.add('world-champion');
-
-        const isReserve = /^(резерв|reserve)$/i.test(driver.team);
-        if (isReserve) card.classList.add('reserve-driver');
 
         const portraitWrapper = document.createElement('div');
         portraitWrapper.className = 'driver-portrait-wrapper';
 
         const portraitImg = document.createElement('img');
-        portraitImg.src = `Images/Drivers/${driver.id}.png`;
+        portraitImg.src = `Images/Drivers/${driver.id}.avif`;
         portraitImg.alt = driver.name;
         portraitImg.className = 'driver-portrait-img';
-        portraitImg.onerror = () => { portraitImg.src = 'Images/Drivers/default.png'; };
+        portraitImg.onerror = () => { portraitImg.src = 'Images/Drivers/default.avif'; };
 
-        const flagOverlay = document.createElement('div');
-        flagOverlay.className = 'driver-flag-overlay';
-        const flagImg = document.createElement('img');
-        flagImg.src = `Images/Flags/${driver.country}.svg`;
-        flagImg.title = getCountryName(driver.country);
-        flagImg.alt = driver.country;
-        flagImg.onerror = () => { flagImg.style.display = 'none'; };
-        flagOverlay.appendChild(flagImg);
+        portraitWrapper.appendChild(portraitImg);
+        card.appendChild(portraitWrapper);
+
+        const info = document.createElement('div');
+        info.className = 'driver-card-info';
+
+        const nameParts = String(driver.name || driver.namem || '').trim().split(/\s+/);
+        const firstName = nameParts.length > 1 ? nameParts[0] : '';
+        const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : nameParts[0] || '';
+
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'driver-card-name';
+
+        if (firstName) {
+            const firstDiv = document.createElement('span');
+            firstDiv.className = 'driver-first-name';
+            firstDiv.textContent = firstName;
+            nameDiv.appendChild(firstDiv);
+        }
+
+        const lastDiv = document.createElement('span');
+        lastDiv.className = 'driver-last-name';
+        lastDiv.textContent = lastName;
+        nameDiv.appendChild(lastDiv);
+
+        const teamDiv = document.createElement('div');
+        teamDiv.className = 'driver-team';
+
+        if (isReserve) {
+            const reserveLabel = document.createElement('span');
+            reserveLabel.className = 'driver-reserve-label';
+
+            const reserveText = document.createElement('span');
+            reserveText.textContent = 'Резерв';
+            reserveLabel.appendChild(reserveText);
+
+            teamDiv.appendChild(reserveLabel);
+        } else {
+            const teamName = document.createElement('span');
+            teamName.textContent = driver.team;
+
+            teamDiv.appendChild(teamName);
+
+            teamDiv.addEventListener('click', e => {
+                e.stopPropagation();
+                const data = getTeamData(driver.team);
+                if (data) openTeamModal(data);
+            });
+        }
+
+        const numberOverlay = document.createElement('div');
+        numberOverlay.className = 'driver-number-overlay';
+        numberOverlay.textContent = driver.number;
 
         const titlesOverlay = document.createElement('div');
         titlesOverlay.className = 'driver-titles-overlay';
@@ -1195,61 +1256,23 @@ const renderDriverCards = (drivers, container) => {
             titlesOverlay.style.display = 'none';
         }
 
-        const numberOverlay = document.createElement('div');
-        numberOverlay.className = 'driver-number-overlay';
-        numberOverlay.textContent = driver.number;
+        const numberBlock = document.createElement('div');
+        numberBlock.className = 'driver-number-block';
+        numberBlock.append(numberOverlay, titlesOverlay);
 
-        portraitWrapper.append(portraitImg, flagOverlay, titlesOverlay, numberOverlay);
+        info.append(nameDiv, teamDiv, numberBlock);
+        card.appendChild(info);
 
-        const nameDiv = document.createElement('div');
-        nameDiv.className = 'driver-short-name';
-        nameDiv.textContent = driver.namem;
+        const flagOverlay = document.createElement('div');
+        flagOverlay.className = 'driver-flag-overlay';
+        const flagImg = document.createElement('img');
+        flagImg.src = `Images/Flags/${driver.country}.svg`;
+        flagImg.title = getCountryName(driver.country);
+        flagImg.alt = driver.country;
+        flagImg.onerror = () => { flagOverlay.style.display = 'none'; };
+        flagOverlay.appendChild(flagImg);
+        card.appendChild(flagOverlay);
 
-        const divider = document.createElement('div');
-        divider.className = 'driver-card-divider';
-
-        const teamDiv = document.createElement('div');
-        teamDiv.className = 'driver-team';
-
-        if (isReserve) {
-            const reserveLabel = document.createElement('span');
-            reserveLabel.className = 'driver-reserve-label';
-
-            const reserveTeam = Array.isArray(driver.reserve) ? driver.reserve[0] : null;
-            if (reserveTeam) {
-                const reserveLogo = document.createElement('img');
-                reserveLogo.src = getTeamLogo(reserveTeam);
-                reserveLogo.alt = reserveTeam;
-                reserveLogo.className = 'driver-reserve-logo';
-                reserveLogo.title = reserveTeam;
-                reserveLogo.onerror = () => { reserveLogo.style.display = 'none'; };
-                reserveLabel.appendChild(reserveLogo);
-            }
-
-            const reserveText = document.createElement('span');
-            reserveText.textContent = 'Резерв';
-            reserveLabel.appendChild(reserveText);
-
-            teamDiv.appendChild(reserveLabel);
-        } else {
-            const teamLogo = document.createElement('img');
-            teamLogo.src = getTeamLogo(driver.team);
-            teamLogo.alt = driver.team;
-            teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
-
-            const teamName = document.createElement('span');
-            teamName.textContent = driver.team;
-
-            teamDiv.append(teamLogo, teamName);
-
-            teamDiv.addEventListener('click', e => {
-                e.stopPropagation();
-                const data = getTeamData(driver.team);
-                if (data) openTeamModal(data);
-            });
-        }
-
-        card.append(portraitWrapper, nameDiv, divider, teamDiv);
         card.addEventListener('click', () => openDriverModal(driver));
         container.appendChild(card);
     });
@@ -1913,10 +1936,10 @@ const openDriverModal = driver => {
     leftSide.className = 'modal-left';
 
     const modalPortrait = document.createElement('img');
-    modalPortrait.src = `Images/Drivers/${driver.id}.png`;
+    modalPortrait.src = `Images/Drivers/${driver.id}.avif`;
     modalPortrait.alt = driver.name;
     modalPortrait.className = 'modal-portrait';
-    modalPortrait.onerror = () => { modalPortrait.src = 'Images/Drivers/default.png'; };
+    modalPortrait.onerror = () => { modalPortrait.src = 'Images/Drivers/default.avif'; };
 
     leftSide.appendChild(modalPortrait);
 
@@ -2137,6 +2160,67 @@ const buildDriverOptions = (selectedId, excludeId) =>
         .map(d => `<option value="${d.id}"${d.id === selectedId ? ' selected' : ''}>${d.name} (${d.team})</option>`)
         .join('');
 
+const cmpShare = (valA, valB) => {
+    const total = valA + valB;
+    if (!total) return { a: 0, b: 0, labelA: '—', labelB: '—' };
+
+    const pctA = (valA / total) * 100;
+    return {
+        a: pctA,
+        b: 100 - pctA,
+        labelA: `${pctA.toFixed(1)}%`,
+        labelB: `${(100 - pctA).toFixed(1)}%`
+    };
+};
+
+const cmpBarHtml = (valA, valB) => {
+    const share = cmpShare(valA, valB);
+    const segA = valA > 0 ? `<span class="cmp-bar-a" style="width:${share.a}%"></span>` : '';
+    const segB = valB > 0 ? `<span class="cmp-bar-b" style="width:${share.b}%"></span>` : '';
+    return `<div class="cmp-bar">${segA}${segB}</div>`;
+};
+
+const cmpRowHtml = (label, valA, valB, hint = '') => {
+    const share = cmpShare(valA, valB);
+    return `
+        <div class="cmp-row">
+            <div class="cmp-label">
+                <span>${label}</span>
+                ${hint ? `<span class="cmp-help" title="${hint}">?</span>` : ''}
+            </div>
+            <div class="cmp-row-body">
+                <span class="cmp-pct cmp-pct--a">${share.labelA}</span>
+                <span class="cmp-value">${valA}</span>
+                ${cmpBarHtml(valA, valB)}
+                <span class="cmp-value">${valB}</span>
+                <span class="cmp-pct cmp-pct--b">${share.labelB}</span>
+            </div>
+        </div>
+    `;
+};
+
+const cmpDriverSideHtml = driver => {
+    const isReserve = /^(резерв|reserve)$/i.test(driver.team);
+    const badgeTeam = isReserve && Array.isArray(driver.reserve) ? driver.reserve[0] : driver.team;
+    const color = getTeamColor(driver.team);
+
+    const badge = badgeTeam
+        ? `<span class="cmp-team-badge" style="--cmp-badge:${getTeamColor(badgeTeam)}"><img src="${getTeamLogo(badgeTeam)}" alt="" onerror="this.parentElement.style.display='none'"></span>`
+        : '';
+
+    return `
+        <div class="cmp-side" style="--cmp-c:${color}">
+            <div class="cmp-avatar-wrap">
+                <img class="cmp-avatar" src="Images/Drivers/${driver.id}.avif" alt="${driver.name}" onerror="this.src='Images/Drivers/default.avif'">
+                ${badge}
+            </div>
+            <div class="cmp-name">${driver.name}</div>
+            <div class="cmp-team">${isReserve ? 'Резерв' : driver.team}</div>
+            <div class="cmp-chip"><span>Сезоны</span><b>${driver.careerSeasons}</b></div>
+        </div>
+    `;
+};
+
 const renderCompareTable = (container, driverA, driverB) => {
     if (!driverA || !driverB) {
         container.innerHTML = '<div class="compare-empty">Выберите пилотов для сравнения</div>';
@@ -2145,60 +2229,34 @@ const renderCompareTable = (container, driverA, driverB) => {
 
     const a = getDriverCompareData(driverA);
     const b = getDriverCompareData(driverB);
+    const colorA = getTeamColor(a.team);
 
-    const cmpClass = (valA, valB) => {
-        if (valA === valB) return { a: '', b: '' };
-        return valA > valB
-            ? { a: 'compare-winner', b: 'compare-loser' }
-            : { a: 'compare-loser', b: 'compare-winner' };
-    };
-
-    let statsHtml = '';
-    COMPARE_METRICS.forEach(m => {
-        const valA = a[m.key] || 0;
-        const valB = b[m.key] || 0;
-        const cls = cmpClass(valA, valB);
-        statsHtml += `
-            <div class="compare-row compare-row--stat">
-                <span class="compare-value ${cls.a}">${valA}</span>
-                <span class="compare-label">${m.label}</span>
-                <span class="compare-value ${cls.b}">${valB}</span>
+    let rowsHtml = `
+        <div class="cmp-row cmp-row--hero">
+            <div class="cmp-label">
+                <span>Титулы чемпиона мира</span>
+                <span class="cmp-help" title="Количество титулов чемпиона мира">?</span>
             </div>
-        `;
+            <div class="cmp-hero-body">
+                <span class="cmp-hero-value">${a.titles || 0}</span>
+                <div class="cmp-bar cmp-bar--hero"></div>
+                <span class="cmp-hero-value">${b.titles || 0}</span>
+            </div>
+        </div>
+    `;
+
+    COMPARE_METRICS.filter(m => m.key !== 'titles').forEach(m => {
+        rowsHtml += cmpRowHtml(m.label, a[m.key] || 0, b[m.key] || 0);
     });
 
-    const seasonsCls = cmpClass(a.careerSeasons, b.careerSeasons);
-    const seasonsRow = `
-        <div class="compare-row compare-row--career">
-            <span class="compare-value ${seasonsCls.a}">${a.careerSeasons}</span>
-            <span class="compare-label">Карьерные сезоны</span>
-            <span class="compare-value ${seasonsCls.b}">${b.careerSeasons}</span>
-        </div>
-    `;
-
-    const finesCls = (valA, valB) => {
-        if (valA === valB) return { a: '', b: '' };
-        return valA < valB
-            ? { a: 'compare-winner', b: 'compare-loser' }
-            : { a: 'compare-loser', b: 'compare-winner' };
-    };
-    const finesCmp = finesCls(a.fines, b.fines);
-
-    const flCmp = cmpClass(a.fastestLaps, b.fastestLaps);
-    const flRow = `
-        <div class="compare-row compare-row--fl">
-            <div class="compare-fl-side"><span class="compare-value ${flCmp.a}">${a.fastestLaps}</span></div>
-            <div class="compare-fl-center">
-                <span class="compare-label">Действующий рекорд круга</span>
-                <span class="compare-sublabel">на трассе текущего сезона</span>
-            </div>
-            <div class="compare-fl-side"><span class="compare-value ${flCmp.b}">${b.fastestLaps}</span></div>
-        </div>
-    `;
+    if ((a.fines || 0) || (b.fines || 0)) {
+        rowsHtml += cmpRowHtml(
+            'Штрафные очки', a.fines || 0, b.fines || 0, 'Меньше — лучше'
+        );
+    }
 
     const isSameTeam = a.team && b.team && a.team === b.team;
 
-    let qualiRow = '';
     if (isSameTeam) {
         const getQualiScore = driverId => {
             if (typeof qualiData === 'undefined' || !Array.isArray(qualiData)) return 0;
@@ -2224,72 +2282,34 @@ const renderCompareTable = (container, driverA, driverB) => {
             return score;
         };
 
-        const qualiA = getQualiScore(a.id);
-        const qualiB = getQualiScore(b.id);
-        const qualiCls = cmpClass(qualiA, qualiB);
-
-        qualiRow = `
-            <div class="compare-row compare-row--stat">
-                <span class="compare-value ${qualiCls.a}">${qualiA}</span>
-                <span class="compare-label">Квалификационный зачёт</span>
-                <span class="compare-value ${qualiCls.b}">${qualiB}</span>
-            </div>
-        `;
+        rowsHtml += cmpRowHtml(
+            'Квалификационный зачёт',
+            getQualiScore(a.id),
+            getQualiScore(b.id),
+            'Очки в квалификационных дуэлях внутри команды'
+        );
     }
 
-    const dnfMetrics = [
-        { key: 'seasonDNF', label: 'DNF' },
-        { key: 'seasonDNS', label: 'DNS' },
-        { key: 'seasonDSQ', label: 'DSQ' },
-    ];
+    rowsHtml += cmpRowHtml('Сходы (DNF)', a.seasonDNF || 0, b.seasonDNF || 0, 'Меньше — лучше');
+    if ((a.seasonDNS || 0) || (b.seasonDNS || 0)) {
+        rowsHtml += cmpRowHtml('Не стартовали (DNS)', a.seasonDNS || 0, b.seasonDNS || 0, 'Меньше — лучше');
+    }
+    if ((a.seasonDSQ || 0) || (b.seasonDSQ || 0)) {
+        rowsHtml += cmpRowHtml('Дисквалификации (DSQ)', a.seasonDSQ || 0, b.seasonDSQ || 0, 'Меньше — лучше');
+    }
+    rowsHtml += cmpRowHtml(
+        'Рекорды круга', a.fastestLaps || 0, b.fastestLaps || 0,
+        'Действующие рекорды на трассах текущего сезона'
+    );
 
-    const dnfRowsHtml = dnfMetrics.map(m => {
-        const valA = a[m.key] || 0;
-        const valB = b[m.key] || 0;
-        const cls = finesCls(valA, valB); // меньше — лучше
-        return `
-            <div class="compare-row compare-row--stat">
-                <span class="compare-value ${cls.a}">${valA}</span>
-                <span class="compare-label">${m.label}</span>
-                <span class="compare-value ${cls.b}">${valB}</span>
-            </div>
-        `;
-    }).join('');
-	
     container.innerHTML = `
-        <div class="compare-table">
-            <div class="compare-table-header">
-                <div class="compare-header-cell compare-header-cell--a">
-                    <img src="Images/Drivers/${a.id}.png" alt="${a.name}" class="compare-header-img" onerror="this.src='Images/Drivers/default.png'">
-                    <span class="compare-header-name">${a.name}</span>
-                </div>
-                <div class="compare-header-cell compare-header-cell--vs">VS</div>
-                <div class="compare-header-cell compare-header-cell--b">
-                    <img src="Images/Drivers/${b.id}.png" alt="${b.name}" class="compare-header-img" onerror="this.src='Images/Drivers/default.png'">
-                    <span class="compare-header-name">${b.name}</span>
-                </div>
+        <div class="cmp-table" style="--cmp-a:${colorA}">
+            <div class="cmp-hero">
+                ${cmpDriverSideHtml(a)}
+                <div class="cmp-vs"><img src="Images/Drivers/vs.svg" alt="VS"></div>
+                ${cmpDriverSideHtml(b)}
             </div>
-            <div class="compare-table-body">
-                <div class="compare-section">${statsHtml}</div>
-                <div class="compare-divider"></div>
-                <div class="compare-section">${seasonsRow}</div>
-                <div class="compare-divider"></div>
-                <div class="compare-section">
-                    <div class="compare-row compare-row--stat">
-                        <span class="compare-value ${finesCmp.a}">${a.fines}</span>
-                        <span class="compare-label">Штрафные очки</span>
-                        <span class="compare-value ${finesCmp.b}">${b.fines}</span>
-                    </div>
-                </div>
-                ${isSameTeam ? `
-                    <div class="compare-divider"></div>
-                    <div class="compare-section">${qualiRow}</div>
-                ` : ''}
-                <div class="compare-divider"></div>
-                <div class="compare-section">${dnfRowsHtml}</div>
-                <div class="compare-divider"></div>
-                <div class="compare-section">${flRow}</div>
-            </div>
+            ${rowsHtml}
         </div>
     `;
 };
@@ -2333,37 +2353,35 @@ const openDriversCompareModal = () => {
     closeBtn.setAttribute('aria-label', 'Закрыть');
     header.appendChild(closeBtn);
 
-    const selectors = document.createElement('div');
-    selectors.className = 'compare-selectors';
+    const toolbar = document.createElement('div');
+    toolbar.className = 'cmp-toolbar';
 
     const sortedDrivers = [...driversData].sort((x, y) => Number(x.number) - Number(y.number));
     const driverOptionsHtml = `<option value="" disabled selected>— Выберите пилота —</option>` +
         sortedDrivers.map(d => `<option value="${d.id}">#${d.number} ${d.name} (${d.team})</option>`).join('');
 
     const selectA = document.createElement('select');
-    selectA.className = 'compare-select';
+    selectA.className = 'cmp-toolbar-select';
+    selectA.setAttribute('aria-label', 'Первый пилот');
     selectA.innerHTML = driverOptionsHtml;
 
     const selectB = document.createElement('select');
-    selectB.className = 'compare-select';
+    selectB.className = 'cmp-toolbar-select';
+    selectB.setAttribute('aria-label', 'Второй пилот');
     selectB.innerHTML = driverOptionsHtml;
 
-    selectors.append(selectA, selectB);
-
-    const teamSelectorRow = document.createElement('div');
-    teamSelectorRow.className = 'compare-team-selector-row';
-
     const teamSelect = document.createElement('select');
-    teamSelect.className = 'compare-select compare-select--team';
+    teamSelect.className = 'cmp-toolbar-select cmp-toolbar-select--team';
+    teamSelect.setAttribute('aria-label', 'Пилоты по командам');
 
     const allTeams = [...new Set(driversData.map(d => d.team))]
         .filter(t => !/^(резерв|reserve)$/i.test(t))
         .sort((a, b) => a.localeCompare(b, 'ru'));
 
-    teamSelect.innerHTML = `Пилоты по командам: <option value="" disabled selected>— Выберите команду —</option>` +
+    teamSelect.innerHTML = `<option value="" disabled selected>Команда</option>` +
         allTeams.map(t => `<option value="${t}">${t}</option>`).join('');
 
-    teamSelectorRow.appendChild(teamSelect);
+    toolbar.append(selectA, teamSelect, selectB);
 
     const tableContainer = document.createElement('div');
     tableContainer.className = 'compare-table-container';
@@ -2421,7 +2439,7 @@ const openDriversCompareModal = () => {
     syncSelects(selectB, selectA);
     updateCompare();
 
-    modal.append(header, selectors, teamSelectorRow, tableContainer);
+    modal.append(header, toolbar, tableContainer);
     overlay.appendChild(modal);
 
     const closeModal = () => {

@@ -608,29 +608,38 @@ body {
 }
 
 .drivers-cards-area {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 10px;
     padding: 8px;
 }
 
-.driver-portrait-wrapper { width: 125px; height: 120px; }
-.driver-number-overlay { font-size: 1.5rem; 
-    right: -3px; top: -5px; 
-}
-.driver-flag-overlay { width: 24px; height: 16px; top: -2px; left: -2px; }
-.driver-short-name { font-size: 0.75rem; width: 140px; }
-.driver-team img { width: 30px; height: 15px; }
-.driver-team span { display: none; }
-.driver-card.reserve-driver .driver-team span { display: inline; }
-
-.driver-card-bg-pattern {
-    left: -50px;
-    width: 140%;
-    height: 105%;
+.driver-card {
+    border-radius: 12px;
 }
 
-.driver-titles-overlay {
-    font-size: 0.75rem;
+.driver-card-info {
+    top: 5cqw;
+    left: 5.5cqw;
+    max-width: 62%;
+}
+
+.driver-card-watermark {
+    width: 68%;
+    right: 3%;
+    opacity: 0.28;
+}
+
+.driver-portrait-wrapper {
+    width: 52%;
+    height: 95%;
+    right: 2%;
+}
+
+.driver-flag-overlay {
+    top: 9px;
+    right: 9px;
+    width: 22px;
+    height: 14px;
 }
 
 /* Модалка пилота */
@@ -755,37 +764,98 @@ body {
     display: none;
 }
 
-.compare-selectors {
-    gap: 5px;
+/* ===== Окно сравнения пилотов ===== */
+.cmp-toolbar {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 12px 12px;
 }
 
-.compare-select {
-    font-size: 11.5px;
+.cmp-toolbar-select {
+    padding: 7px 8px;
+    font-size: 11px;
 }
 
-.compare-row,
-.compare-row--fl {
-    grid-template-columns: 60px 185px 60px;
+.cmp-toolbar-select--team {
+    flex: 1 0 100%;
+    order: 3;
 }
 
-.compare-value {
-    font-size: 1rem;
+.cmp-hero {
+    grid-template-columns: 1fr 52px 1fr;
+    padding: 14px 12px 12px;
 }
 
-.compare-label {
-    font-size: 0.7rem;
+.cmp-avatar-wrap {
+    width: 68px;
+    height: 68px;
 }
 
-.compare-header-name {
+.cmp-name {
+    margin-top: 9px;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+}
+
+.cmp-team {
     font-size: 0.65rem;
 }
 
-.compare-fl-center .compare-label {
-    font-size: 0.7rem;
+.cmp-chip {
+    margin-top: 7px;
+    padding: 3px 7px;
+    font-size: 0.52rem;
 }
 
-.compare-sublabel {
-    font-size: 0.65rem;
+.cmp-vs img {
+    width: 32px;
+}
+
+.compare-table-container {
+    padding: 0 12px 14px;
+}
+
+.cmp-row {
+    padding: 9px 0 10px;
+}
+
+.cmp-label {
+    margin-bottom: 8px;
+}
+
+.cmp-label > span:first-child {
+    padding: 3px 8px;
+    font-size: 0.55rem;
+}
+
+.cmp-row-body {
+    grid-template-columns: 42px 42px minmax(0, 1fr) 42px 42px;
+    gap: 6px;
+}
+
+.cmp-value {
+    font-size: 0.95rem;
+}
+
+.cmp-pct {
+    font-size: 0.53rem;
+}
+
+.cmp-hero-body {
+    grid-template-columns: 56px minmax(0, 1fr) 56px;
+    gap: 8px;
+}
+
+.cmp-hero-value {
+    font-size: 1.1rem;
+}
+
+.cmp-bar {
+    height: 9px;
+}
+
+.cmp-bar--hero {
+    height: 11px;
 }
 
 /* ============================================== */
@@ -797,13 +867,12 @@ body {
 }
 
 .team-card {
-    flex: 0 0 calc(50% - 8px);
-    min-width: 150px;
-    max-width: none;
+    min-width: 0;
 }
 
-.team-card-logo { width: 60px; height: 42px; }
-.team-card-name { font-size: 1rem; }
+.team-card-drivers {
+    width: 56%;
+}
 
 /* Модалка команды */
 .team-modal-close-btn {

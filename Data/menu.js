@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dataContainer = document.getElementById('dataContainer');
 
     function loadTabContent(tabId) {
+        dataContainer.removeAttribute('style');
         dataContainer.innerHTML = '';
 
         const title = document.createElement('h2');

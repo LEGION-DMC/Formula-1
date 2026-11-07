@@ -294,7 +294,7 @@ const animateTeamsAppearance = container => {
     if (!cards.length) return;
 
     const containerWidth = container.offsetWidth || container.parentElement?.offsetWidth || 1200;
-    const cols = Math.max(1, Math.floor((containerWidth + 20) / (250 + 20)));
+    const cols = Math.max(1, Math.floor((containerWidth + 12) / (300 + 12)));
 
     const rows = [];
     cards.forEach((card, i) => {
@@ -325,7 +325,7 @@ const animateTeamsAppearance = container => {
 
 const initTeamsPage = container => {
     container.innerHTML = '';
-    container.style.padding = '20px 0px 2px 2px';
+    container.style.padding = '20px 12px 30px';
 
     const standings = calculateConstructorStandings();
     const sortedTeams = [];
@@ -365,24 +365,58 @@ const createTeamCard = team => {
     patternDiv.innerHTML = TEAM_PATTERN_SVG;
     card.appendChild(patternDiv);
 
+    const emblem = document.createElement('div');
+    emblem.className = 'team-card-emblem';
+
+    const emblemImg = document.createElement('img');
+    emblemImg.src = getTeamLogo(team.shortName);
+    emblemImg.alt = team.shortName;
+    emblemImg.onerror = () => { emblem.style.display = 'none'; };
+    emblem.appendChild(emblemImg);
+    card.appendChild(emblem);
+
     const overlay = document.createElement('div');
     overlay.className = 'team-card-bg-overlay';
     card.appendChild(overlay);
 
-    const logoContainer = document.createElement('div');
-    logoContainer.className = 'team-card-logo';
-    const logo = document.createElement('img');
-    logo.src = getTeamLogo(team.shortName);
-    logo.alt = team.shortName;
-    logo.onerror = () => { logo.style.display = 'none'; };
-    logoContainer.appendChild(logo);
+    const content = document.createElement('div');
+    content.className = 'team-card-content';
+
+    const info = document.createElement('div');
+    info.className = 'team-card-info';
+
+    const kicker = document.createElement('div');
+    kicker.className = 'team-card-kicker';
+    kicker.textContent = team.engine;
 
     const nameDiv = document.createElement('div');
     nameDiv.className = 'team-card-name';
     nameDiv.textContent = team.shortName;
 
-    const divider = document.createElement('div');
-    divider.className = 'team-card-divider';
+    const titlesDiv = document.createElement('div');
+    titlesDiv.className = 'team-card-titles';
+
+    if (team.titles) {
+        const titleCount = document.createElement('span');
+        titleCount.className = 'team-title-count';
+        titleCount.textContent = team.titles;
+
+        const starsWrap = document.createElement('span');
+        starsWrap.className = 'team-title-stars';
+
+        for (let i = 0; i < team.titles; i += 8) {
+            const row = document.createElement('span');
+            row.className = 'team-title-row';
+            row.textContent = '☆'.repeat(Math.min(8, team.titles - i));
+            starsWrap.appendChild(row);
+        }
+
+        titlesDiv.append(titleCount, starsWrap);
+    } else {
+        titlesDiv.style.display = 'none';
+    }
+
+    info.append(kicker, nameDiv, titlesDiv);
 
     const driversList = document.createElement('div');
     driversList.className = 'team-card-drivers';
@@ -407,7 +441,7 @@ const createTeamCard = team => {
 
             const nameSpan = document.createElement('span');
             nameSpan.className = 'team-driver-name';
-            nameSpan.innerHTML = `<span class="driver-fullname">${driver.name}</span><span class="driver-shortname">${driver.namem}</span>`;
+            nameSpan.textContent = driver.name;
 
             const flagImg = document.createElement('img');
             flagImg.src = `Images/Flags/${driver.country}.svg`;
@@ -421,7 +455,19 @@ const createTeamCard = team => {
         });
     }
 
-    card.append(logoContainer, nameDiv, divider, driversList);
+    const flagOverlay = document.createElement('div');
+    flagOverlay.className = 'team-card-flag';
+
+    const flagImg = document.createElement('img');
+    flagImg.src = `Images/Flags/${team.country}.svg`;
+    flagImg.alt = team.country;
+    flagImg.title = `Двигатель: ${team.engine}, ${getCountryName(team.country)}`;
+    flagImg.onerror = () => { flagOverlay.style.display = 'none'; };
+    flagOverlay.appendChild(flagImg);
+
+    content.append(info, driversList, flagOverlay);
+    card.appendChild(content);
+
     card.addEventListener('click', () => openTeamModal(team));
 
     return card;
@@ -655,7 +701,7 @@ const openTeamModal = team => {
     bolidContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center;';
 
     const bolidImg = document.createElement('img');
-    bolidImg.src = `Images/Bolid/${teamSlug(team.shortName)}.webp`;
+    bolidImg.src = `Images/Bolid/${teamSlug(team.shortName)}.avif`;
     bolidImg.alt = team.car;
     bolidImg.className = 'tm-bolid-img';
     bolidImg.onerror = () => { bolidPanel.style.display = 'none'; };
