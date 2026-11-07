@@ -29,11 +29,7 @@ const startingGridData = [
 ];
 
 const polesData = [
-    { driver: "russell", poles: 5 },
     { driver: "antonelli", poles: 7 },
-    { driver: "norris", poles: 1 },
-    { driver: "verstappen", poles: 2 },
-    { driver: "hamilton", poles: 1 },
 ];
 
 const qualiData = [
@@ -96,6 +92,10 @@ const replacementQualiData = [
 	score1: 1, 
 	score2: 0, 
 	driver2: "Рё Хиракава" },
+    { driver1: "Оливер Берман", 
+	score1: 0, 
+	score2: 0, 
+	driver2: "Рафаэль Камара" },
 ];
 
 const penaltiesData = [

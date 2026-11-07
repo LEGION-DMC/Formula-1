@@ -393,6 +393,9 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
+        "tsunoda": "dnp",
+        "hirakawa": "dnp",
+        "ocon": "dnp",
     },
     "gp22": {
         "000": 25,

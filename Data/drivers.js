@@ -15,7 +15,7 @@ const driversData = [
         hattricks: 3,
         wins: 11,
         podiums: 44,
-        poles: 18,
+        poles: 19,
 		
         bio: "Гонщик академии McLaren с детства. Первый подиум завоевал в 2020-м, первую победу — только в 2024-м (Майами). Считается одним из быстрейших пилотов на одном круге, но долго не мог победить из-за невезения и ошибок. В 2024 году стал главным соперником Ферстаппена в борьбе за титул.",
     },
@@ -36,7 +36,7 @@ const driversData = [
         hattricks: 15,
         wins: 71,
         podiums: 127,
-        poles: 48,
+        poles: 50,
 		grandslam: 6,
 		
         note: "Самый молодой дебютант в истории F1 - 17 лет",
@@ -474,7 +474,7 @@ const driversData = [
         hattricks: 19,
         wins: 105,
         podiums: 202,
-        poles: 105,
+        poles: 106,
 		grandslam: 6,
 		
         note: "Рекордсмен по победам, поулам, подиумам.",
@@ -568,7 +568,7 @@ const driversData = [
         hattricks: 2,
         wins: 5,
         podiums: 24,
-        poles: 7,
+        poles: 12,
 		grandslam: 1,
 		
         note: "Лидер гильдии пилотов.",
@@ -1385,38 +1385,45 @@ const buildFilterPanel = (panel, cardsArea) => {
         if (sourceAll && targetAll) sourceAll.checked = targetAll.checked;
     };
 
-    const applyFilters = () => {
-        const term = searchInput.value.toLowerCase().trim();
-        let filtered = driversData;
+	const applyFilters = () => {
+		const term = searchInput.value.toLowerCase().trim();
+		let filtered = driversData;
 
-        const reserve = filtered.filter(d => /^(резерв|reserve)$/i.test(d.team));
-        const main = filtered.filter(d => !/^(резерв|reserve)$/i.test(d.team));
+		const reserve = filtered.filter(d => /^(резерв|reserve)$/i.test(d.team));
+		const main = filtered.filter(d => !/^(резерв|reserve)$/i.test(d.team));
 
-        const isAllTeams = activeTeamFilters.size === regularTeams.length;
-        const mainFiltered = isAllTeams ? main : main.filter(d => activeTeamFilters.has(d.team));
+		const isAllTeams = activeTeamFilters.size === regularTeams.length;
+		const mainFiltered = isAllTeams ? main : main.filter(d => activeTeamFilters.has(d.team));
 
-        filtered = showReserve ? [...mainFiltered, ...reserve] : mainFiltered;
+		// Резервисты показываются, только если выбрана их команда (или выбраны все команды)
+		const reserveFiltered = isAllTeams
+			? reserve
+			: reserve.filter(d => 
+				Array.isArray(d.reserve) && d.reserve.some(team => activeTeamFilters.has(team))
+			  );
 
-        if (champsOnly) filtered = filtered.filter(d => d.titles > 0);
+		filtered = showReserve ? [...mainFiltered, ...reserveFiltered] : mainFiltered;
 
-        if (term) {
-            filtered = filtered.filter(driver => {
-                const countryName = getCountryName(driver.country).toLowerCase();
-                const synonyms = (countrySynonyms[driver.country] || []).map(s => s.toLowerCase());
-                const allCountryNames = [countryName, ...synonyms];
+		if (champsOnly) filtered = filtered.filter(d => d.titles > 0);
 
-                const startsWith = text => text.toLowerCase().split(/\s+/).some(w => w.startsWith(term));
+		if (term) {
+			filtered = filtered.filter(driver => {
+				const countryName = getCountryName(driver.country).toLowerCase();
+				const synonyms = (countrySynonyms[driver.country] || []).map(s => s.toLowerCase());
+				const allCountryNames = [countryName, ...synonyms];
 
-                return String(driver.number).startsWith(term) ||
-                       startsWith(driver.name) ||
-                       startsWith(driver.namem) ||
-                       allCountryNames.some(startsWith) ||
-                       startsWith(driver.team);
-            });
-        }
+				const startsWith = text => text.toLowerCase().split(/\s+/).some(w => w.startsWith(term));
 
-        renderDriverCards(filtered, cardsArea);
-    };
+				return String(driver.number).startsWith(term) ||
+					   startsWith(driver.name) ||
+					   startsWith(driver.namem) ||
+					   allCountryNames.some(startsWith) ||
+					   startsWith(driver.team);
+			});
+		}
+
+		renderDriverCards(filtered, cardsArea);
+	};
 
     const handleCheckboxChange = (e, sourceTeamCheckboxes, sourceAll, targetTeamCheckboxes, isPopup) => {
         if (e.target.type !== 'checkbox') return;
