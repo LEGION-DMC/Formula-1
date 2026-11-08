@@ -307,14 +307,14 @@ h1, h2 {
 
 /* Иконка команды (логотип) - увеличенная */
 .statistics-row-icon-img.team-logo {
-    width: 26px;
-    height: 24px;
+    width: 38px;
+    height: 25px;
 }
 
 /* Имя в строке статистики */
 .statistics-row-name {
     font-family: 'F1Title', 'F1Text', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--text-light, #ddd);
     white-space: nowrap;
     overflow: hidden;
@@ -325,7 +325,7 @@ h1, h2 {
 
 .statistics-row-flag {
     width: 17px;
-    height: 11px;
+    height: 12px;
     border-radius: 2px;
 }
 
