@@ -627,8 +627,8 @@ const renderCalendarCards = container => {
         patternDiv.innerHTML = CALENDAR_PATTERN_SVG;
 
         let badgesHtml = '';
-        if (gp.hasSprint) badgesHtml += '<span class="calendar-badge sprint">S</span>';
-        if (gp.recordingSpecRace) badgesHtml += '<span class="calendar-badge spec">S</span>';
+        if (gp.hasSprint) badgesHtml += '<span class="calendar-badge sprint">SP</span>';
+        if (gp.recordingSpecRace) badgesHtml += '<span class="calendar-badge spec">SC</span>';
 
         const stub = document.createElement('div');
         stub.className = 'calendar-card-stub';
@@ -658,13 +658,24 @@ const renderCalendarCards = container => {
             </span>
         `;
 
-        const circuitName = (track.trackName || '').length > 26
-            ? (track.trackNamem || track.trackName)
-            : track.trackName;
-        const cityName = getTrackCity(track);
-        const subLine = cityName && cityName.toLowerCase() !== circuitName.toLowerCase()
-            ? `${circuitName} · ${cityName}`
-            : circuitName;
+		const cityName = getTrackCity(track);
+		const fullName = (track.trackName || '').trim();
+		const shortName = (track.trackNamem || '').trim();
+
+		const shortIsCity = shortName && cityName &&
+			shortName.toLowerCase() === cityName.toLowerCase();
+
+		const displayName = shortIsCity
+			? fullName
+			: (fullName.length > 26 && shortName ? shortName : fullName);
+
+		const cityStem = cityName ? cityName.toLowerCase().replace(/(а|я|ы|и|у|ю|е|о|ь)$/u, '') : '';
+		const nameLower = displayName.toLowerCase();
+		const cityInName = cityStem.length >= 3 && nameLower.includes(cityStem);
+
+		const subLine = cityName && !cityInName
+			? `${displayName} · ${cityName}`
+			: displayName;
 
         const data = document.createElement('div');
         data.className = 'calendar-card-data';

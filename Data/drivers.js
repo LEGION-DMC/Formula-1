@@ -2187,7 +2187,6 @@ const cmpRowHtml = (label, valA, valB, hint = '') => {
         <div class="cmp-row">
             <div class="cmp-label">
                 <span>${label}</span>
-                ${hint ? `<span class="cmp-help" title="${hint}">?</span>` : ''}
             </div>
             <div class="cmp-row-body">
                 <span class="cmp-pct cmp-pct--a">${share.labelA}</span>
@@ -2237,7 +2236,6 @@ const renderCompareTable = (container, driverA, driverB) => {
         <div class="cmp-row cmp-row--hero">
             <div class="cmp-label">
                 <span>Титулы чемпиона мира</span>
-                <span class="cmp-help" title="Количество титулов чемпиона мира">?</span>
             </div>
             <div class="cmp-hero-body">
                 <span class="cmp-hero-value">${a.titles || 0}</span>
@@ -2360,7 +2358,7 @@ const openDriversCompareModal = () => {
 
     const sortedDrivers = [...driversData].sort((x, y) => Number(x.number) - Number(y.number));
     const driverOptionsHtml = `<option value="" disabled selected>— Выберите пилота —</option>` +
-        sortedDrivers.map(d => `<option value="${d.id}">#${d.number} ${d.name} (${d.team})</option>`).join('');
+        sortedDrivers.map(d => `<option value="${d.id}">#${d.number} ${d.name}</option>`).join('');
 
     const selectA = document.createElement('select');
     selectA.className = 'cmp-toolbar-select';

@@ -2500,10 +2500,11 @@ h1, h2 {
     max-height: 90vh;
     overflow-y: auto;
     border: 1px solid #1c2a3d;
-    border-radius: 16px;
-    background:
-        radial-gradient(120% 60% at 50% 0%, rgba(80, 110, 160, 0.14) 0%, transparent 70%),
-        linear-gradient(180deg, #0d1624 0%, #0a111c 100%);
+    border-radius: 14px;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 1) 0%, 
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
     box-shadow:
         0 30px 80px rgba(0, 0, 0, 0.65),
         inset 0 0 0 1px rgba(255, 255, 255, 0.02);
@@ -2519,12 +2520,10 @@ h1, h2 {
 
 /* ===== ЗАГОЛОВОК ===== */
 .compare-modal-header {
-    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 14px 18px 4px;
+    justify-content: center;
+    padding: 10px 0 0;
 }
 
 .compare-modal-title {
@@ -2536,26 +2535,14 @@ h1, h2 {
     background-clip: border-box;
     -webkit-text-fill-color: currentColor;
     font-family: 'F1Title', sans-serif;
-    font-size: 0.72rem;
+    font-size: 1.3rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #6f7f94;
 }
 
 .compare-modal-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    background: rgba(255, 255, 255, 0.04);
-    color: #93a3b6;
-    font-size: 1.15rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    display: none;
 }
 
 .compare-modal-close:hover {
@@ -2568,8 +2555,8 @@ h1, h2 {
 .cmp-toolbar {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 18px 14px;
+    gap: 5px;
+    padding: 8px 10px 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -2578,11 +2565,12 @@ h1, h2 {
     min-width: 0;
     padding: 8px 10px;
     border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 8px;
+    border-radius: 4px;
     background: rgba(255, 255, 255, 0.035);
+    color-scheme: dark;
     color: #c9d5e3;
     font-family: 'F1Text', sans-serif;
-    font-size: 0.78rem;
+    font-size: 1.1rem;
     text-overflow: ellipsis;
     cursor: pointer;
     appearance: none;
@@ -2605,15 +2593,15 @@ h1, h2 {
 .cmp-toolbar-select--team {
     flex: 0 0 142px;
     color: #8fa1b6;
+    text-align: center;
 }
 
 /* ===== ШАПКА-ДУЭЛЬ ===== */
 .cmp-hero {
     display: grid;
-    grid-template-columns: 1fr 74px 1fr;
+    grid-template-columns: 1fr 55px 1fr;
     align-items: start;
-    gap: 4px;
-    padding: 18px 18px 16px;
+    padding: 10px 10px 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -2626,8 +2614,8 @@ h1, h2 {
 
 .cmp-avatar-wrap {
     position: relative;
-    width: 86px;
-    height: 86px;
+    width: 90px;
+    height: 90px;
 }
 
 .cmp-avatar {
@@ -2637,7 +2625,7 @@ h1, h2 {
     object-fit: cover;
     object-position: top center;
     background: #141f2e;
-    border: 2px solid color-mix(in srgb, var(--cmp-c, #7c8ba0) 85%, #ffffff);
+    border: 1px solid color-mix(in srgb, var(--cmp-c, #7c8ba0) 85%, #ffffff);
     box-shadow:
         0 0 0 4px rgba(255, 255, 255, 0.02),
         0 8px 22px rgba(0, 0, 0, 0.45),
@@ -2651,26 +2639,25 @@ h1, h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: color-mix(in srgb, var(--cmp-badge, var(--cmp-c, #2a3a50)) 78%, #050a10);
-    border: 2px solid #0b1220;
+    border: 1px solid #0b1220;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
 
 .cmp-team-badge img {
-    width: 74%;
-    height: 74%;
+    height: 55%;
     object-fit: contain;
     filter: brightness(0) invert(1) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.45));
 }
 
 .cmp-name {
     max-width: 100%;
-    margin-top: 12px;
+    margin-top: 8px;
     font-family: 'F1Title', sans-serif;
-    font-size: 0.98rem;
+    font-size: 1rem;
     letter-spacing: 0.02em;
     text-align: center;
     color: color-mix(in srgb, var(--cmp-c, #ffffff) 82%, #ffffff);
@@ -2683,7 +2670,7 @@ h1, h2 {
 .cmp-team {
     margin-top: 3px;
     font-family: 'F1Text', sans-serif;
-    font-size: 0.72rem;
+    font-size: 1rem;
     text-align: center;
     color: #8b9aad;
 }
@@ -2692,13 +2679,13 @@ h1, h2 {
     display: flex;
     align-items: center;
     gap: 5px;
-    margin-top: 9px;
-    padding: 4px 9px;
-    border-radius: 999px;
+    margin-top: 5px;
+    padding: 3px 5px;
+    border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.09);
     background: rgba(255, 255, 255, 0.035);
     font-family: 'F1Text', sans-serif;
-    font-size: 0.6rem;
+    font-size: 0.9rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #8494a8;
@@ -2707,7 +2694,7 @@ h1, h2 {
 .cmp-chip b {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
     font-weight: normal;
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     letter-spacing: 0;
     color: #e9f1fa;
 }
@@ -2716,23 +2703,22 @@ h1, h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 16px;
+    padding-top: 18px;
 }
 
 .cmp-vs img {
-    width: 44px;
+    width: 48px;
     height: auto;
-    opacity: 0.92;
-    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.6));
+    opacity: 0.9;
 }
 
 /* ===== ТАБЛИЦА ===== */
 .compare-table-container {
-    padding: 0 18px 18px;
+    padding: 0 0 10px;
 }
 
 .cmp-row {
-    padding: 11px 0 13px;
+    padding: 8px 0 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -2744,35 +2730,17 @@ h1, h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
 }
 
 .cmp-label > span:first-child {
-    padding: 4px 11px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: #101a27;
+    padding: 3px;
     font-family: 'F1Text', sans-serif;
-    font-size: 0.62rem;
+    font-size: 0.9rem;
     letter-spacing: 0.09em;
     text-transform: uppercase;
     color: #a9bacd;
     line-height: 1;
-}
-
-.cmp-help {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.55rem;
-    color: #6f7f94;
-    cursor: help;
 }
 
 .cmp-row-body {
@@ -2784,7 +2752,7 @@ h1, h2 {
 
 .cmp-pct {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 0.68rem;
+    font-size: 0.9rem;
     letter-spacing: 0.01em;
     font-variant-numeric: tabular-nums;
     color: #8497ac;
@@ -2812,7 +2780,7 @@ h1, h2 {
 .cmp-bar {
     position: relative;
     height: 12px;
-    border-radius: 4px;
+    border-radius: 3px;
     background: #182230;
     box-shadow:
         inset 0 1px 2px rgba(0, 0, 0, 0.45),
@@ -2857,26 +2825,16 @@ h1, h2 {
 }
 
 /* ===== ГЛАВНАЯ СТРОКА — ТИТУЛЫ ===== */
-.cmp-row--hero {
-    padding-top: 6px;
-    border-top: none;
-    background: radial-gradient(90% 150% at 50% 0%, rgba(139, 92, 246, 0.12), transparent 72%);
-}
-
-.cmp-row--hero .cmp-label {
-    margin-bottom: 12px;
-}
-
 .cmp-hero-body {
     display: grid;
-    grid-template-columns: 76px minmax(0, 1fr) 76px;
+    grid-template-columns: 75px minmax(0, 1fr) 75px;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
 }
 
 .cmp-hero-value {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     line-height: 1;
     text-align: center;
     color: #f3f7ff;
@@ -5445,7 +5403,7 @@ h1, h2 {
     justify-content: flex-end;
     width: 50%;
     height: 90%;
-    opacity: 0.8;
+    opacity: 0.7;
     pointer-events: none;
 }
 
