@@ -5217,7 +5217,7 @@ h1, h2 {
 
 /* Панель навигации */
 .calendar-nav-panel {
-    width: 340px;
+    width: 280px;
     backdrop-filter: blur(8px);
     border-right: 1px solid var(--border-color);
     padding: 10px 5px 0 2px;
@@ -5277,10 +5277,22 @@ h1, h2 {
 .calendar-cards-area {
     flex: 1; padding: 15px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
     align-content: start;
     overflow-y: auto;
+}
+
+@media (max-width: 1540px) {
+    .calendar-cards-area {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1180px) {
+    .calendar-cards-area {
+        grid-template-columns: 1fr;
+    }
 }
 
 .calendar-nav-item.upcoming-highlight {
@@ -5288,150 +5300,467 @@ h1, h2 {
     background: rgba(255, 255, 255, 0.08);
 }
 
-/* Карточка */
+/* Карточка этапа — «Билет» */
 .calendar-card {
-    background: linear-gradient(145deg, rgba(20,20,20,0.7), rgba(30,30,30,0.5));
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    --card-accent: var(--red-accent);
+    position: relative;
+    display: grid;
+    grid-template-columns: 21% minmax(0, 1fr);
+    aspect-ratio: 2.45 / 1;
+    border: 1px solid color-mix(in srgb, var(--card-accent) 38%, #2a2f39);
+    border-radius: 14px;
     overflow: hidden;
+    isolation: isolate;
+    container-type: inline-size;
+    color: #fff;
     cursor: pointer;
-    display: flex;
+    background: linear-gradient(115deg,
+        #05080d 0%,
+        #0a0e15 50%,
+        color-mix(in srgb, var(--card-accent) 12%, #070b12) 100%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    outline: none;
 }
 
-.calendar-card {
-    transition: all 0.3s ease !important;
-}
-/* ============================================== */
-/* КЛЕТЧАТЫЙ ФОН ДЛЯ КАРТОЧЕК КАЛЕНДАРЯ          */
-/* ============================================== */
-
-.calendar-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.calendar-card-bg-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-}
-
-.calendar-card-bg-pattern svg {
-    width: 100%;
-    height: 100%;
-}
-
-.calendar-card-bg-pattern svg g {
-    fill: var(--red-accent);
-}
-
-.calendar-card-bg-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.8) 0%, 
-        rgba(0, 0, 0, 0.5) 50%,
-        rgba(0, 0, 0, 0.1) 100%);
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Контент поверх фона */
-.calendar-card > *:not(.calendar-card-bg-pattern):not(.calendar-card-bg-overlay) {
-    position: relative;
-    z-index: 2;
-}
-
-.calendar-card:hover {
+.calendar-card:hover,
+.calendar-card:focus-visible {
     transform: translateY(-4px) !important;
-    border-color: var(--red-accent) !important;
+    border-color: var(--card-accent) !important;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 32px color-mix(in srgb, var(--card-accent) 26%, transparent);
 }
 
-.calendar-card.highlight { border-color: var(--red-accent); 
-    box-shadow: 0 0 20px rgba(225,6,0,0.5); }
+.calendar-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+        rgba(4, 7, 12, 0.7) 21%,
+        rgba(4, 7, 12, 0.55) 50%,
+        rgba(4, 7, 12, 0.04) 88%);
+}
 
-.calendar-card.canceled div { 
-    opacity: 0.7; 
-    filter: grayscale(0.7);
+/* Паттерн «клетки» из утверждённого концепта */
+.calendar-card-pattern {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    z-index: 0;
+    width: 84%;
+    height: 100%;
+    opacity: 0.16;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 48%, transparent 88%);
+    mask-image: linear-gradient(90deg, #000 0%, #000 48%, transparent 88%);
+}
+
+.calendar-card-pattern svg { width: 100%; height: 100%; }
+.calendar-card-pattern svg g { fill: var(--card-accent); }
+
+/* Корешок с датой */
+.calendar-card-stub {
+    position: relative;
+    z-index: 3;
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8cqw;
+    border-right: 1px dashed rgba(255, 255, 255, 0.2);
+    background: linear-gradient(160deg,
+        color-mix(in srgb, var(--card-accent) 34%, #070b12),
+        color-mix(in srgb, var(--card-accent) 10%, #070b12));
+}
+
+.calendar-card-stub::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 42%);
+    pointer-events: none;
+}
+
+.calendar-card-month {
+    font-family: 'F1Title', sans-serif;
+    font-size: clamp(8px, 2.6cqw, 14px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--card-accent) 55%, #fff);
+}
+
+.calendar-card-day {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: clamp(20px, 9cqw, 60px);
+    line-height: 0.85;
+    color: #fff;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.calendar-card-weekday {
+    font-size: clamp(10px, 2cqw, 12px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Перфорация */
+.calendar-card-perf {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 21%;
+    z-index: 5;
+    width: 0;
+    pointer-events: none;
+}
+
+.calendar-card-perf::before,
+.calendar-card-perf::after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    background: #0a0c11;
+}
+
+.calendar-card-perf::before { top: -9px; }
+.calendar-card-perf::after { bottom: -9px; }
+
+/* Схема трассы */
+.calendar-card-map {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 50%;
+    height: 90%;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.calendar-card-map img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.6));
+    transform: rotate(-12deg) translate(8%, 0%);
+}
+
+/* Основная часть */
+.calendar-card-body {
+    position: relative;
+    z-index: 4;
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 3.5cqw 2cqw 3cqw 3cqw;
+}
+
+.calendar-card-topright {
+    position: absolute;
+    top: 3.6cqw;
+    right: 4.2cqw;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.calendar-card-flag {
+    flex: 0 0 auto;
+    width: clamp(25px, 3.5cqw, 30px);
+    aspect-ratio: 4 / 3;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.calendar-card-flag img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.calendar-card-data {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 78%;
+}
+
+.calendar-card-kicker {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'F1Title', sans-serif;
+    font-size: clamp(8px, 2cqw, 10px);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.72);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    padding-left: 1px;
+}
+
+.calendar-card-kicker::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 2px;
+    height: 11px;
+    border-radius: 1px;
+    background: var(--card-accent);
+    box-shadow: 0 0 9px color-mix(in srgb, var(--card-accent) 70%, transparent);
+}
+
+.calendar-card-title {
+    display: -webkit-box;
+    width: 120%;
+    overflow: hidden;
+    font-family: 'F1Title', sans-serif;
+    font-size: clamp(10px, 4.19cqw, 30px);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    color: #fff;
+    text-shadow: 0 3px 16px rgba(0, 0, 0, 0.6);
+    margin-top: 3px;
+}
+
+.calendar-card-sub {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    max-width: 100%;
+    margin-top: 0.5cqw;
+    overflow: hidden;
+    font-size: clamp(10px, 2.2cqw, 12px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #aeb8c6;
+}
+
+.calendar-card-badges {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 3.4cqw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    z-index: 4;
+}
+
+.calendar-badge {
+    display: inline-block;
+    padding: 2px 5px 1px;
+    border-radius: 3px;
+    font-family: 'F1Title', sans-serif;
+    font-size: clamp(8px, 1.4cqw, 10px);
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    animation: sprintPulse 1.4s ease infinite;
+}
+
+.calendar-badge.sprint { background: #ffd700; color: #000; }
+.calendar-badge.spec { background: #A855F7; color: #000; }
+
+@keyframes sprintPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Нижняя строка: таймер и кнопки */
+.calendar-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: auto;
+}
+
+.calendar-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.calendar-countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    margin-left: auto;
+    text-align: right;
+    padding-bottom: 0;
+}
+
+.calendar-countdown > span {
+    font-size: clamp(8px, 1.15cqw, 10px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8b95a3;
+}
+
+.calendar-countdown.no-buttons {
+    margin-bottom: 0;
+}
+
+.calendar-timer {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+    font-family: 'F1Text', sans-serif;
+    font-size: clamp(12px, 1.4cqw, 14px);
+    color: #8b95a3;
+}
+
+.calendar-timer-days,
+.calendar-timer-hours,
+.calendar-timer-minutes,
+.calendar-timer-seconds {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: clamp(14px, 2.8cqw, 20px);
+    color: #fff;
+}
+
+.calendar-race-started {
+    color: var(--card-accent);
+    font-family: 'F1Title', sans-serif;
+    font-size: clamp(10px, 1.5cqw, 13px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Кнопки */
+.calendar-btn {
+    display: inline-block;
+    margin: 0 0 2px;
+    padding: 3px 5px 2px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background: transparent;
+    font-family: 'F1Title', sans-serif;
+    font-size: clamp(9px, 1.6cqw, 11px);
+    line-height: 1.15;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.calendar-btn.race {
+    border-color: var(--red-accent);
+    color: var(--red-accent);
+}
+
+.calendar-btn.race:hover {
+    background: var(--red-accent);
+    color: #fff;
+}
+
+.calendar-btn.quali {
+    border-color: #4CAF50;
+    color: #4CAF50;
+}
+
+.calendar-btn.quali:hover {
+    background: #4CAF50;
+    color: #fff;
+}
+
+.calendar-btn.sprint {
+    border-color: #FFC107;
+    color: #FFC107;
+}
+
+.calendar-btn.sprint:hover {
+    background: #FFC107;
+    color: #000;
+}
+
+.calendar-btn.spec {
+    border-color: #A855F7;
+    color: #A855F7;
+}
+
+.calendar-btn.spec:hover {
+    background: #A855F7;
+    color: #fff;
+}
+
+.calendar-btn.disabled {
+    border-color: #999;
+    color: #999;
+    cursor: default;
+}
+
+.calendar-btn.disabled:hover {
+    background: transparent;
+    color: #999;
+}
+
+/* Отменённый этап */
+.calendar-card.canceled .calendar-card-map img {
+    filter: grayscale(1) opacity(0.3);
+}
+
+.calendar-card.canceled .calendar-card-kicker {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.calendar-card.canceled .calendar-card-title {
+    color: #dfe4ea;
+}
+
+.calendar-status-text.canceled {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'F1Title', sans-serif;
+    font-size: clamp(8px, 1.3cqw, 11px);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #aab3bf;
+}
+
+.calendar-status-text.canceled::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #7d8897;
 }
 
 .calendar-card.highlight {
-    border-color: var(--red-accent);
+    border-color: var(--card-accent);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--card-accent) 45%, transparent);
     animation: cardHighlight 0.5s ease 3;
 }
 
 @keyframes cardHighlight {
-    0%, 100% { box-shadow: 0 0 5px rgba(225, 6, 0, 0,3); }
+    0%, 100% { box-shadow: 0 0 5px rgba(225, 6, 0, 0.3); }
     50% { box-shadow: 0 0 30px rgba(225, 6, 0, 0.8); }
 }
-
-.calendar-card-image {
-    width: 130px; min-width: 130px;
-    position: relative;
-    display: flex; align-items: center; 
-    justify-content: center;
-}
-.calendar-card-image img { 
-    max-width: 115px; height: 95px; 
-    object-fit: contain; 
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
-}
-
-@keyframes sprintPulse {
-    0%,100% { opacity: 1; } 50% { opacity: 0.5; }
-}
-
-.calendar-sprint-badge-inline {
-    margin-top: -2px;
-    background: #ffd700;
-    color: black;
-    font-family: 'F1Title', sans-serif; 
-    font-size: 0.6rem;
-    padding: 3px 4px 1px 4px; 
-    border-radius: 50px;
-    animation: sprintPulse 1s ease infinite;  
-}
-
-.calendar-spec-badge-inline {
-    margin-top: -2px;
-    background: #A855F7;
-    color: black;
-    font-family: 'F1Title', sans-serif; 
-    font-size: 0.6rem;
-    padding: 3px 4px 1px 4px; 
-    border-radius: 50px;
-    animation: sprintPulse 1s ease infinite;  
-}
-
-.calendar-card-info { flex: 1; padding: 5px 5px; display: flex; flex-direction: column; gap: 5px; }
-
-.calendar-card-header { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-
-.calendar-gp-number {
-    position: absolute;
-    top: 6px;
-    right: 8px;
-    font-size: 15px;
-    font-family: 'F1Title', sans-serif;
-    color: var(--accent-color, #e10600);
-}
-
-.calendar-flag { width: 20px; height: 14px; border-radius: 2px; margin-top: -2px; }
-.calendar-gp-name { 
-    font-family: 'F1Title', sans-serif; 
-    font-size: 0.95rem; 
-    color: var(--text-light); }
-
-.nav-gp-full { display: inline; }
-.nav-gp-short { display: none; }
 
 .calendar-card.today {
     border-color: #FFC107;
@@ -5443,15 +5772,12 @@ h1, h2 {
     50% { box-shadow: 0 0 25px rgba(255, 193, 7, 0.5); }
 }
 
-.calendar-card-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(225,6,0,0.8) 10%, rgba(225,6,0,0.3) 90%, transparent);
-}
+.nav-gp-full { display: inline; }
+.nav-gp-short { display: none; }
 
-.calendar-card-details { display: flex; flex-direction: 
-    column; gap: 4px; }
+/* Иконки и флаг — используются в модалке трассы */
+.calendar-flag { width: 20px; height: 14px; border-radius: 2px; margin-top: -2px; }
 
-/* Иконки в карточке */
 .calendar-icon {
     width: 14px;
     height: 14px;
@@ -5467,118 +5793,6 @@ h1, h2 {
     font-size: 0.75rem;
     color: #bbb;
     word-spacing: -2px;
-}
-
-/* Кнопки */
-/* ===== КНОПКИ В КАРТОЧКАХ КАЛЕНДАРЯ ===== */
-.calendar-btn {
-    display: inline-block;
-    padding: 2px 3px 0px 3px;
-    border-radius: 3px;
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.7rem;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    margin-right: 5px;
-    margin-bottom: 3px;
-    border: 1px solid transparent;
-    background: transparent;
-    cursor: pointer;
-    line-height: 1.4;
-}
-
-/* Гонка */
-.calendar-btn.race {
-    border: 1px solid var(--red-accent);
-    color: var(--red-accent);
-    background: transparent;
-}
-.calendar-btn.race:hover {
-    background: var(--red-accent);
-    color: #fff;
-}
-
-/* Квалификация */
-.calendar-btn.quali {
-    border: 1px solid #4CAF50;
-    color: #4CAF50;
-    background: transparent;
-}
-.calendar-btn.quali:hover {
-    background: #4CAF50;
-    color: #fff;
-}
-
-/* Спринт */
-.calendar-btn.sprint {
-    border: 1px solid #FFC107;
-    color: #FFC107;
-    background: transparent;
-}
-.calendar-btn.sprint:hover {
-    background: #FFC107;
-    color: #000;
-}
-
-/* Спец-гонка */
-.calendar-btn.spec {
-    border: 1px solid #A855F7;
-    color: #A855F7;
-    background: transparent;
-}
-
-.calendar-btn.spec:hover {
-    background: #A855F7;
-    color: #fff;
-}
-
-/* Отключенная кнопка */
-.calendar-btn.disabled {
-    color: #999;
-    border: 1px solid #999;
-    cursor: default;
-    background: transparent;
-}
-.calendar-btn.disabled:hover {
-    background: transparent;
-    color: #999;
-}
-
-/* Таймер */
-.calendar-countdown { 
-    font-size: 0.7rem; 
-    color: #aaa; 
-    padding-bottom: 5px;
-}
-
-.calendar-countdown.no-buttons {
-    margin-bottom: -4px;
-}
-
-.calendar-countdown > span { 
-    font-size: 0.9rem; 
-    color: #bbb; 
-}
-
-.calendar-timer { 
-    display: inline-flex; 
-    gap: 4px; 
-    font-family: 'F1Text', sans-serif; 
-    color: #bbb;
-}
-
-.calendar-timer-days, .calendar-timer-hours, 
-.calendar-timer-minutes, .calendar-timer-seconds  {
-    color: red; 
-    font-family: 'F1Numbers', sans-serif; 
-    font-size: 0.85rem;
-}
-
-.calendar-race-started { color: var(--red-accent); 
-    font-weight: bold; }
-.calendar-status-text.canceled span { 
-    color: white; 
-    font-size: 0.9rem;
 }
 
 .track-modal-close {
@@ -6096,7 +6310,7 @@ h1, h2 {
 }
 
 .calendar-card.highlight {
-    border-color: var(--red-accent);
+    border-color: var(--card-accent);
     border-width: 1.8px;
     animation: cardHighlight 0.5s ease 4;
 }
@@ -6107,7 +6321,7 @@ h1, h2 {
 }
 
 .calendar-card.upcoming-highlight {
-    border-color: var(--red-accent);
+    border-color: var(--card-accent);
     border-width: 1.8px;
     box-shadow: none;
 }

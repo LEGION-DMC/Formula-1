@@ -1222,6 +1222,10 @@ body {
 /* ============================================== */
 /* ВКЛАДКА: КАЛЕНДАРЬ                            */
 /* ============================================== */
+.calendar-page {
+    flex-direction: column;
+}
+
 .calendar-nav-panel {
     width: 100%;
     min-width: 100%;
@@ -1269,21 +1273,37 @@ body {
     padding: 10px;
 }
 
-.calendar-card { flex-direction: column; }
+.calendar-card {
+    aspect-ratio: 2.8 / 1;
+    border-radius: 12px;
+}
 
-.calendar-card-image { display: none; }
+.calendar-card-body {
+    padding: 4.4cqw 4.6cqw 3.8cqw 5.2cqw;
+}
 
-.calendar-card-info { padding: 10px 10px;}
-.calendar-gp-name { font-size: 0.85rem; }
+.calendar-card-map { width: 50%; opacity: 0.6; }
+.calendar-card-data { max-width: 84%; }
+.calendar-card-title { font-size: clamp(20px, 6.4cqw, 34px); }
+.calendar-card-day { font-size: clamp(30px, 11.5cqw, 54px); }
+.calendar-card-month { font-size: clamp(8px, 2.6cqw, 13px); }
+.calendar-card-weekday { font-size: clamp(7px, 2.1cqw, 11px); }
+.calendar-card-kicker { font-size: clamp(8px, 2.3cqw, 11px); }
+.calendar-card-sub { font-size: clamp(9px, 2.5cqw, 12px); }
+.calendar-card-flag { width: clamp(20px, 5.4cqw, 28px); }
+
 .calendar-detail-row { font-size: 0.75rem; }
 .calendar-icon { width: 13px; height: 13px; }
-.calendar-btn { font-size: 0.7rem; padding: 5px 5px 4px 5px; margin-bottom: -3px;}
-.calendar-countdown { font-size: 0.7rem; }
-
-.calendar-countdown.no-buttons {
-    margin-bottom: -9px;
+.calendar-btn {
+    font-size: clamp(8px, 2.1cqw, 11px);
+    padding: 4px 6px 3px;
+    margin: 0 0 2px;
 }
-.calendar-timer { font-size: 0.85rem; }
+.calendar-countdown > span { font-size: clamp(7px, 1.9cqw, 10px); }
+.calendar-timer-days,
+.calendar-timer-hours,
+.calendar-timer-minutes,
+.calendar-timer-seconds { font-size: clamp(13px, 3.4cqw, 19px); }
 
 /* Модалка трека */
 .track-modal-close {

@@ -349,6 +349,36 @@ const formatDateMini = dateStr => new Date(dateStr).toLocaleDateString('ru-RU', 
         month: 'short'
     });
 
+// Акценты карточек календаря по стране этапа — по аналогии с цветом команды.
+const TRACK_ACCENTS = {
+    au: '#FFCD00', cn: '#E23A3A', jp: '#E6002D', sa: '#00A651',
+    us: '#4C6FFF', ca: '#FF3B3B', mc: '#E10600', es: '#F5B700',
+    at: '#ED2939', gb: '#4C6FFF', be: '#FDDA24', hu: '#6BBF59',
+    nl: '#FF7A00', it: '#00A86B', az: '#00B5E2', bh: '#CE1126',
+    sg: '#EF3340', mx: '#00A86B', br: '#FFD400', qa: '#8A1538',
+    ae: '#00A651'
+};
+
+const TRACK_ACCENT_FALLBACK = '#E10600';
+
+const getTrackAccent = country => TRACK_ACCENTS[country] || TRACK_ACCENT_FALLBACK;
+
+const GP_MONTHS_RU = ['ЯНВ', 'ФЕВ', 'МАР', 'АПР', 'МАЙ', 'ИЮН', 'ИЮЛ', 'АВГ', 'СЕН', 'ОКТ', 'НОЯ', 'ДЕК'];
+const GP_WEEKDAYS_RU = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+
+const getGPDateParts = dateStr => {
+    const date = new Date(String(dateStr).replace(' ', 'T'));
+    return {
+        day: String(date.getDate()).padStart(2, '0'),
+        month: GP_MONTHS_RU[date.getMonth()],
+        weekday: GP_WEEKDAYS_RU[date.getDay()],
+        time: `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+    };
+};
+
+const getGPShortTitle = name => String(name || '').replace(/^Гран-при\s+/i, '');
+const getTrackCity = track => (track.location || '').split(',')[0].trim();
+
 const getVideoUrl = videoId => {
     if (!videoId) return null;
     // Если вдруг попадётся полный URL — вытащим из него ID
@@ -584,53 +614,67 @@ const renderCalendarCards = container => {
         card.className = 'calendar-card';
         card.dataset.gpId = gp.id;
         card.dataset.date = gp.date;
+        card.setAttribute('tabindex', '0');
 
         if (gp.canceled) card.classList.add('canceled');
         if (isToday) card.classList.add('today');
 
+        const dateParts = getGPDateParts(gp.date);
+        card.style.setProperty('--card-accent', isCanceled ? '#7d8897' : getTrackAccent(track.country));
+
         const patternDiv = document.createElement('div');
-        patternDiv.className = 'calendar-card-bg-pattern';
+        patternDiv.className = 'calendar-card-pattern';
         patternDiv.innerHTML = CALENDAR_PATTERN_SVG;
-        card.appendChild(patternDiv);
 
-        const overlay = document.createElement('div');
-        overlay.className = 'calendar-card-bg-overlay';
-        card.appendChild(overlay);
+        let badgesHtml = '';
+        if (gp.hasSprint) badgesHtml += '<span class="calendar-badge sprint">S</span>';
+        if (gp.recordingSpecRace) badgesHtml += '<span class="calendar-badge spec">S</span>';
 
-        const imageDiv = document.createElement('div');
-        imageDiv.className = 'calendar-card-image';
-        imageDiv.innerHTML = `<img src="Images/Tracks/${track.id}.png" alt="${track.id}" onerror="this.src='Images/Tracks/default.png'">`;
-
-        const infoDiv = document.createElement('div');
-        infoDiv.className = 'calendar-card-info';
-
-        const header = document.createElement('div');
-        header.className = 'calendar-card-header';
-        header.innerHTML = `
-            <img src="Images/Flags/${track.country}.svg" alt="" class="calendar-flag" title="${getCountryName(track.country)}">
-            <span class="calendar-gp-name">${gp.name}</span>
-            ${gp.hasSprint ? '<span class="calendar-sprint-badge-inline">S</span>' : ''}
-			${gp.recordingSpecRace ? '<span class="calendar-spec-badge-inline">S</span>' : ''}
-            <span class="calendar-gp-number">${displayNumber}</span>
+        const stub = document.createElement('div');
+        stub.className = 'calendar-card-stub';
+        stub.innerHTML = `
+            <span class="calendar-card-month">${dateParts.month}</span>
+            <span class="calendar-card-day">${isCanceled ? '—' : dateParts.day}</span>
+            <span class="calendar-card-weekday">${dateParts.weekday} · ${dateParts.time}</span>
+            ${badgesHtml ? `<div class="calendar-card-badges">${badgesHtml}</div>` : ''}
         `;
 
-        const details = document.createElement('div');
-        details.className = 'calendar-card-details';
-        details.innerHTML = `
-            <div class="calendar-detail-row">
-                <img src="Images/Icon/location.webp" alt="" class="calendar-icon">
-                <span>${track.location}</span>
-            </div>
-            <div class="calendar-detail-row">
-                <img src="Images/Icon/track.webp" alt="" class="calendar-icon">
-                <span>${track.trackName}</span>
-            </div>
-            <div class="calendar-detail-row">
-                <img src="Images/Icon/calendar.webp" alt="" class="calendar-icon">
-                <span>${formatDateLong(gp.date)}</span>
-            </div>
+        const perf = document.createElement('div');
+        perf.className = 'calendar-card-perf';
+        perf.setAttribute('aria-hidden', 'true');
+
+        const mapDiv = document.createElement('div');
+        mapDiv.className = 'calendar-card-map';
+        mapDiv.innerHTML = `<img src="Images/Tracks/${track.id}.png" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">`;
+
+        const body = document.createElement('div');
+        body.className = 'calendar-card-body';
+
+        const topRight = document.createElement('div');
+        topRight.className = 'calendar-card-topright';
+        topRight.innerHTML = `
+            <span class="calendar-card-flag">
+                <img src="Images/Flags/${track.country}.svg" alt="" title="${getCountryName(track.country)}" onerror="this.parentNode.style.display='none'">
+            </span>
         `;
 
+        const circuitName = (track.trackName || '').length > 26
+            ? (track.trackNamem || track.trackName)
+            : track.trackName;
+        const cityName = getTrackCity(track);
+        const subLine = cityName && cityName.toLowerCase() !== circuitName.toLowerCase()
+            ? `${circuitName} · ${cityName}`
+            : circuitName;
+
+        const data = document.createElement('div');
+        data.className = 'calendar-card-data';
+        data.innerHTML = `
+            <div class="calendar-card-kicker">${isCanceled ? 'Гран-При · Отменён' : `Гран-При · Этап ${displayNumber}`}</div>
+            <h3 class="calendar-card-title">${getGPShortTitle(gp.name)}</h3>
+            <div class="calendar-card-sub">${subLine}</div>
+        `;
+
+        body.append(topRight, data);
 		const footer = document.createElement('div');
 		footer.className = 'calendar-card-footer';
 
@@ -641,9 +685,10 @@ const renderCalendarCards = container => {
 			let timerHtml = '';
 			let showTimer = false;
 
-			// Сначала собираем кнопки
+			// Спец-гонка — отдельной строкой над основными кнопками
+			let specBtn = '';
 			if (gp.recordingSpecRace && getVideoUrl(gp.recordingSpecRace)) {
-				btns += `<button class="calendar-btn spec" data-video="${gp.recordingSpecRace}" data-title="Спец-гонка ${gp.name}">Спец-гонка</button>`;
+				specBtn = `<button class="calendar-btn spec" data-video="${gp.recordingSpecRace}" data-title="Спец-гонка ${gp.name}">Спец-гонка</button>`;
 			}
 
 			if (gp.hasSprint && gp.recordingSprint && gp.sprint && isEventNearOrPassed(gp.sprint)) {
@@ -685,22 +730,25 @@ const renderCalendarCards = container => {
 				`;
 			}
 
-			footer.innerHTML = timerHtml + btns;
+			let actionsHtml = '';
+			if (specBtn || btns) {
+				// Инлайн-стили, чтобы раскладка не зависела от кэша CSS
+				actionsHtml = '<div class="calendar-card-actions" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;flex:0 0 auto;">';
+				if (specBtn) actionsHtml += `<div style="display:flex;flex:0 0 auto;">${specBtn}</div>`;
+				if (btns) actionsHtml += `<div class="calendar-card-actions-main" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:5px;">${btns}</div>`;
+				actionsHtml += '</div>';
+			}
+
+			footer.innerHTML = actionsHtml + timerHtml;
 			
 			const countdownEl = footer.querySelector('.calendar-countdown');
-			if (countdownEl && !btns) {
+			if (countdownEl && !btns && !specBtn) {
 				countdownEl.classList.add('no-buttons');
 			}
 		}
 
-        const divider1 = document.createElement('div');
-        divider1.className = 'calendar-card-divider';
-
-        const divider2 = document.createElement('div');
-        divider2.className = 'calendar-card-divider';
-
-        infoDiv.append(header, divider1, details, divider2, footer);
-        card.append(imageDiv, infoDiv);
+        body.appendChild(footer);
+        card.append(patternDiv, stub, perf, mapDiv, body);
 
         card.querySelectorAll('.calendar-btn[data-video]').forEach(btn => {
             btn.addEventListener('click', e => {
@@ -713,6 +761,13 @@ const renderCalendarCards = container => {
 
         card.addEventListener('click', e => {
             if (!e.target.closest('a')) openTrackModal(track, gp);
+        });
+
+        card.addEventListener('keydown', e => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            if (e.target.closest('button, a')) return;
+            e.preventDefault();
+            openTrackModal(track, gp);
         });
 
         container.appendChild(card);
@@ -1503,6 +1558,7 @@ const openVideoModal = (videoId, title) => {
 
 const initCalendarPage = container => {
     container.innerHTML = '';
+    container.classList.add('calendar-page');
     container.style.cssText = 'display: flex; gap: 0; padding: 0;';
 
     const navPanel = document.createElement('div');
