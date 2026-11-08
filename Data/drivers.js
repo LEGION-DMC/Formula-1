@@ -43,7 +43,7 @@ const driversData = [
         bio: "Чемпион мира (2021, 2022, 2023, 2024). Агрессивный, феноменально стабильный. В 2021-м в драматичной финальной гонке отобрал титул у Хэмилтона. В 2023-м установил рекорд — 19 побед за сезон. В 2024-м начал доминировать, но к концу года Red Bull сдал позиции.",
     },
     {   number: 5, id: "bortoleto", 
-        name: "Габриэл Бортолето",
+        name: "Габриэль Бортолето",
         namef: "Габриэль Лоренсо Бортолето Оливейра",
 		
         birthPlace:  "Бразилиа, Бразилия", country: "br",
@@ -2173,11 +2173,12 @@ const cmpShare = (valA, valB) => {
     };
 };
 
-const cmpBarHtml = (valA, valB) => {
+const cmpBarHtml = (valA, valB, extraClass = '') => {
     const share = cmpShare(valA, valB);
     const segA = valA > 0 ? `<span class="cmp-bar-a" style="width:${share.a}%"></span>` : '';
     const segB = valB > 0 ? `<span class="cmp-bar-b" style="width:${share.b}%"></span>` : '';
-    return `<div class="cmp-bar">${segA}${segB}</div>`;
+    const isEmpty = valA + valB === 0 ? ' cmp-bar--empty' : '';
+    return `<div class="cmp-bar${extraClass ? ` ${extraClass}` : ''}${isEmpty}" role="img" aria-label="${share.labelA} / ${share.labelB}">${segA}${segB}</div>`;
 };
 
 const cmpRowHtml = (label, valA, valB, hint = '') => {
@@ -2230,6 +2231,7 @@ const renderCompareTable = (container, driverA, driverB) => {
     const a = getDriverCompareData(driverA);
     const b = getDriverCompareData(driverB);
     const colorA = getTeamColor(a.team);
+    const colorB = getTeamColor(b.team);
 
     let rowsHtml = `
         <div class="cmp-row cmp-row--hero">
@@ -2239,7 +2241,7 @@ const renderCompareTable = (container, driverA, driverB) => {
             </div>
             <div class="cmp-hero-body">
                 <span class="cmp-hero-value">${a.titles || 0}</span>
-                <div class="cmp-bar cmp-bar--hero"></div>
+                ${cmpBarHtml(a.titles || 0, b.titles || 0, 'cmp-bar--hero')}
                 <span class="cmp-hero-value">${b.titles || 0}</span>
             </div>
         </div>
@@ -2303,7 +2305,7 @@ const renderCompareTable = (container, driverA, driverB) => {
     );
 
     container.innerHTML = `
-        <div class="cmp-table" style="--cmp-a:${colorA}">
+        <div class="cmp-table" style="--cmp-a:${colorA};--cmp-b:${colorB}">
             <div class="cmp-hero">
                 ${cmpDriverSideHtml(a)}
                 <div class="cmp-vs"><img src="Images/Drivers/vs.svg" alt="VS"></div>

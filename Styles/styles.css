@@ -307,8 +307,7 @@ h1, h2 {
 
 /* Иконка команды (логотип) - увеличенная */
 .statistics-row-icon-img.team-logo {
-    width: 24px;
-    height: 15px;
+    height: 19px;
 }
 
 /* Имя в строке статистики */
@@ -1687,19 +1686,19 @@ h1, h2 {
     position: relative;
     aspect-ratio: 1.8 / 1;
     border: 1px solid color-mix(in srgb, var(--team-color, #555) 40%, #2a2a2a);
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     container-type: inline-size;
     isolation: isolate;
     background:
-        radial-gradient(120% 130% at 92% 8%,
-            color-mix(in srgb, var(--team-color, #888) 32%, transparent) 0%,
-            transparent 62%),
-        linear-gradient(112deg,
+        radial-gradient(110% 110% at 90% 8%,
+            color-mix(in srgb, var(--team-color, #888) 30%, transparent) 0%,
+            transparent 60%),
+        linear-gradient(110deg,
             #060a10 0%,
-            color-mix(in srgb, var(--team-color, #888) 14%, #070b12) 55%,
-            color-mix(in srgb, var(--team-color, #888) 26%, #070b12) 100%);
+            color-mix(in srgb, var(--team-color, #888) 10%, #070b12) 65%,
+            color-mix(in srgb, var(--team-color, #888) 20%, #070b12) 1010%);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -1904,12 +1903,22 @@ h1, h2 {
 .driver-reserve-label {
     display: flex;
     align-items: center;
+    gap: 5px;
     margin-top: 0cqw;
     cursor: pointer;
     padding: 0px;
     border: none;
     pointer-events: auto;
     transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.driver-card:not(.reserve-driver) .driver-team::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 2px;
+    height: 11px;
+    border-radius: 1px;
+    background: var(--team-color, #b7c0ca);
 }
 
 .driver-team .reserve-team-name {
@@ -1936,7 +1945,7 @@ h1, h2 {
 }
 
 .reserve-driver .driver-card-watermark {
-    opacity: 0.45;
+    opacity: 0.35;
 }
 
 .reserve-driver .driver-last-name {
@@ -1946,6 +1955,10 @@ h1, h2 {
 @container (max-width: 320px) {
     .driver-team span,
     .driver-reserve-label span {
+        display: none;
+    }
+
+    .driver-team::before {
         display: none;
     }
 }
@@ -2762,18 +2775,21 @@ h1, h2 {
 }
 
 .cmp-pct {
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.62rem;
-    letter-spacing: 0.02em;
-    color: #718096;
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+    color: #8497ac;
 }
 
 .cmp-pct--a {
     text-align: right;
+    color: color-mix(in srgb, var(--cmp-a, #7c8ba0) 42%, #a8b8ca);
 }
 
 .cmp-pct--b {
     text-align: left;
+    color: color-mix(in srgb, var(--cmp-b, #7c8ba0) 42%, #a8b8ca);
 }
 
 .cmp-value {
@@ -2781,16 +2797,25 @@ h1, h2 {
     font-size: 1.12rem;
     line-height: 1;
     text-align: center;
+    font-variant-numeric: tabular-nums;
     color: #eef5fc;
 }
 
 .cmp-bar {
     position: relative;
-    height: 11px;
-    border-radius: 3px;
-    background: #1a2433;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+    height: 12px;
+    border-radius: 4px;
+    background: #182230;
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.45),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
     overflow: hidden;
+}
+
+.cmp-bar--empty {
+    background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 7px),
+        #141d2a;
 }
 
 .cmp-bar-a {
@@ -2799,11 +2824,13 @@ h1, h2 {
     top: 0;
     bottom: 0;
     min-width: 2px;
-    border-radius: 3px 0 0 3px;
+    border-radius: 4px 0 0 4px;
     background: linear-gradient(90deg,
         color-mix(in srgb, var(--cmp-a, #7c8ba0) 62%, #ffffff),
         var(--cmp-a, #7c8ba0));
-    box-shadow: 2px 0 0 #0a111c;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        2px 0 0 rgba(8, 14, 22, 0.85);
 }
 
 .cmp-bar-b {
@@ -2812,8 +2839,13 @@ h1, h2 {
     top: 0;
     bottom: 0;
     min-width: 2px;
-    border-radius: 0 3px 3px 0;
-    background: linear-gradient(270deg, #e7eef7, #b9c6d6);
+    border-radius: 0 4px 4px 0;
+    background: linear-gradient(270deg,
+        color-mix(in srgb, var(--cmp-b, #7c8ba0) 62%, #ffffff),
+        var(--cmp-b, #7c8ba0));
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        -2px 0 0 rgba(8, 14, 22, 0.85);
 }
 
 /* ===== ГЛАВНАЯ СТРОКА — ТИТУЛЫ ===== */
@@ -2844,10 +2876,21 @@ h1, h2 {
 }
 
 .cmp-bar--hero {
-    height: 13px;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #7c3aed 0%, #b06cf5 52%, #8b5cf6 100%);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.35);
+    height: 14px;
+    border-radius: 5px;
+    background: #182230;
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 0 18px rgba(126, 158, 204, 0.18);
+}
+
+.cmp-bar--hero .cmp-bar-a {
+    border-radius: 5px 0 0 5px;
+}
+
+.cmp-bar--hero .cmp-bar-b {
+    border-radius: 0 5px 5px 0;
 }
 
 /* Пустое состояние */
@@ -3422,19 +3465,19 @@ h1, h2 {
     position: relative;
     aspect-ratio: 1.8 / 1;
     border: 1px solid color-mix(in srgb, var(--tc) 40%, #2a2a2a);
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     container-type: inline-size;
     isolation: isolate;
     background:
-        radial-gradient(120% 130% at 92% 8%,
-            color-mix(in srgb, var(--tc) 32%, transparent) 0%,
-            transparent 62%),
-        linear-gradient(112deg,
+        radial-gradient(110% 110% at 90% 8%,
+            color-mix(in srgb, var(--tc) 30%, transparent) 0%,
+            transparent 60%),
+        linear-gradient(110deg,
             #060a10 0%,
-            color-mix(in srgb, var(--tc) 14%, #070b12) 55%,
-            color-mix(in srgb, var(--tc) 26%, #070b12) 100%);
+            color-mix(in srgb, var(--tc) 10%, #070b12) 65%,
+            color-mix(in srgb, var(--tc) 20%, #070b12) 110%);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     color: #ffffff;
 }
@@ -3496,7 +3539,7 @@ h1, h2 {
     z-index: 1;
     right: 0;
     top: 50%;
-    width: 50%;
+    height: 80%;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
@@ -3519,8 +3562,9 @@ h1, h2 {
 .team-card-emblem img {
     position: relative;
     max-width: 100%;
-    max-height: 35cqw;
+    max-height: 38cqw;
     object-fit: contain;
+    opacity: 0.80;
     filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.55));
 }
 
@@ -3547,6 +3591,7 @@ h1, h2 {
     font-family: 'F1Text', sans-serif;
     font-size: clamp(10px, 3cqw, 12px);
     letter-spacing: 0.1em;
+    word-spacing: -0.3em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.86);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
@@ -3554,6 +3599,7 @@ h1, h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+    padding-left: 1px;
 }
 
 .team-card-kicker::before {
@@ -3563,7 +3609,6 @@ h1, h2 {
     height: 11px;
     border-radius: 1px;
     background: var(--tc);
-    box-shadow: 0 0 8px color-mix(in srgb, var(--tc) 70%, transparent);
 }
 
 .team-card-name {
@@ -3613,7 +3658,7 @@ h1, h2 {
     z-index: 4;
     left: 5cqw;
     bottom: 4.2cqw;
-    width: 54%;
+    min-width: 60%;
     display: flex;
     flex-direction: column;
     gap: 0.9cqw;
@@ -3670,6 +3715,7 @@ h1, h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
+    word-spacing: -0.3em;
 }
 
 .team-driver-flag {
@@ -4282,10 +4328,10 @@ h1, h2 {
 }
 
 .stats-team-logo { 
-    height: 17px; object-fit: contain; vertical-align: middle; }
+    height: 18px; object-fit: contain; vertical-align: middle; }
 
 .pos-cell { font-family: 'F1Numbers', sans-serif; color: var(--text-gray); text-align: center; width: 10px; }
-.team-cell { text-align: center; width: 40px; }
+.team-cell { text-align: center; width: 10px; }
 .driver-cell { 
     color: var(--text-light); 
     white-space: nowrap;
@@ -4661,7 +4707,8 @@ h1, h2 {
 .constructor-row.filtered-out { opacity: 0.5; }
 
 .constructor-pos { font-family: 'F1Numbers', sans-serif; font-size: 0.9rem; color: #999; min-width: 20px; }
-.constructor-logo { width: 26px; height: 18px; object-fit: contain; }
+.constructor-logo { 
+    height: 21px; object-fit: contain; }
 .constructor-name { font-family: 'F1Text', sans-serif; font-size: 0.85rem; color: var(--text-light); flex: 1; }
 .constructor-points { 
     font-family: 'F1Numbers', sans-serif; 
@@ -4696,7 +4743,7 @@ h1, h2 {
     border-radius: 4px;
     transition: background 0.2s ease;
     font-family: 'F1Text', sans-serif;
-    font-size: 0.82rem;
+    font-size: 1rem;
     color: var(--text-light);
     transition: all 0.2s ease;
 }
@@ -4708,8 +4755,7 @@ h1, h2 {
 }
 
 .race-winner-row .race-winner-logo {
-    width: 22px;
-    height: 15px;
+    height: 18px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -4731,7 +4777,7 @@ h1, h2 {
 
 .race-winner-row .race-winner-wins {
     font-family: 'F1Numbers', sans-serif;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #ffd700;
     min-width: 22px;
     text-align: center;
@@ -4879,7 +4925,7 @@ h1, h2 {
 .results-table { width: 100%; 
     border-collapse: collapse; 
     font-family: 'F1Text', sans-serif; 
-    font-size: 0.85rem; 
+    font-size: 1rem; 
 }
 
 .results-table thead th {
@@ -4915,7 +4961,8 @@ h1, h2 {
     align-items: center; 
     gap: 8px; }
 
-.results-driver-clickable { cursor: pointer; transition: color 0.2s ease; }
+.results-driver-clickable { cursor: pointer; 
+    transition: color 0.2s ease; }
 
 .results-flag { width: 20px; height: 14px; border-radius: 2px; }
 .results-driver span { color: var(--text-light); }
@@ -4923,8 +4970,10 @@ h1, h2 {
 .results-team-cell { cursor: pointer; transition: opacity 0.2s ease; }
 .results-team-cell:hover { opacity: 0.7; }
 
-.results-team-logo { width: 22px; height: 15px; object-fit: contain; margin-right: 3px; vertical-align: middle; }
-.results-points { font-family: 'F1Numbers', sans-serif; font-weight: bold; color: var(--text-light); text-align: center; width: 45px; }
+.results-team-logo { height: 18px; object-fit: contain; margin-right: 3px; vertical-align: middle; }
+.results-points { font-family: 'F1Numbers', 
+    sans-serif; 
+    color: var(--text-light); text-align: center; width: 45px; }
 
 .detailed-table-container {
     display: flex;
@@ -5018,7 +5067,7 @@ h1, h2 {
     justify-content: center;
     box-sizing: border-box;
     font-family: 'F1Text', sans-serif;
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: var(--text-light);
     white-space: nowrap;
     line-height: 1;               

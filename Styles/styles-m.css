@@ -617,30 +617,7 @@ body {
     border-radius: 12px;
 }
 
-.driver-card-info {
-    top: 5cqw;
-    left: 5.5cqw;
-    max-width: 62%;
-}
 
-.driver-card-watermark {
-    width: 68%;
-    right: 3%;
-    opacity: 0.28;
-}
-
-.driver-portrait-wrapper {
-    width: 52%;
-    height: 95%;
-    right: 2%;
-}
-
-.driver-flag-overlay {
-    top: 9px;
-    right: 9px;
-    width: 22px;
-    height: 14px;
-}
 
 /* Модалка пилота */
 .driver-modal { max-width: 95%; max-height: 95vh; }
@@ -838,7 +815,7 @@ body {
 }
 
 .cmp-pct {
-    font-size: 0.53rem;
+    font-size: 0.58rem;
 }
 
 .cmp-hero-body {
@@ -851,27 +828,18 @@ body {
 }
 
 .cmp-bar {
-    height: 9px;
+    height: 10px;
 }
 
 .cmp-bar--hero {
-    height: 11px;
+    height: 12px;
 }
 
 /* ============================================== */
 /* ВКЛАДКА: КОМАНДЫ                              */
 /* ============================================== */
-.teams-grid { 
-    gap: 10px; 
-    padding-bottom: 20px; 
-}
-
 .team-card {
     min-width: 0;
-}
-
-.team-card-drivers {
-    width: 56%;
 }
 
 /* Модалка команды */

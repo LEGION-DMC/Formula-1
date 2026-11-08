@@ -56,7 +56,7 @@ const qualiData = [
     { driver1: "Нико Хюлькенберг", 
 		score1: 10, 
 		score2: 9, 
-		driver2: "Габриэл Бортолето" },
+		driver2: "Габриэль Бортолето" },
     { driver1: "Карлос Сайнс", 
 		score1: 15, 
 		score2: 4, 
@@ -121,7 +121,7 @@ const penaltiesData = [
     { driver: "Оскар Пиастри", penalties: [
         { date: "09/11/2025", count: 2 },
     ]},
-    { driver: "Габриэл Бортолето", penalties: [
+    { driver: "Габриэль Бортолето", penalties: [
         { date: "23/11/2025", count: 2 },
     ]},
     { driver: "Арвид Линдблад", penalties: [
@@ -424,7 +424,7 @@ const enginePartsData = [
     { driver: "Лиам Лоусон", ice: 4, tc: 4, exh: 4, mguk: 2, es: 3, puce: 3, puanc: 6 },
     { driver: "Лэнс Стролл", ice: 6, tc: 7, exh: 3, mguk: 5, es: 8, puce: 7, puanc: 9 },
     { driver: "Фернандо Алонсо", ice: 5, tc: 6, exh: 3, mguk: 5, es: 7, puce: 6, puanc: 9 },
-    { driver: "Эстебан Окон", ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 5 },
+    { driver: "Рафаэль Камара", ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 5 },
     { driver: "Оливер Берман", ice: 4, tc: 4, exh: 4, mguk: 4, es: 4, puce: 4, puanc: 4 },
     { driver: "Нико Хюлькенберг", ice: 4, tc: 4, exh: 4, mguk: 3, es: 3, puce: 3, puanc: 5 },
     { driver: "Габриэль Бортолето", ice: 5, tc: 5, exh: 5, mguk: 4, es: 5, puce: 5, puanc: 7 },
