@@ -1,4 +1,4 @@
-const STARTING_GRID_WITH_PENALTIES = false;
+const STARTING_GRID_WITH_PENALTIES = true;
 const STARTING_GRID_WITH_SPRINT = false;
 
 const startingGridData = [
