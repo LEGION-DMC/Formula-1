@@ -464,8 +464,8 @@ const createStatRow = type => {
     if (type === 'leader') {
         const leader = getChampionshipLeader();
         if (leader) {
-            iconHTML = `<img src="Images/Flags/${leader.country}.svg" class="statistics-row-icon-img" onerror="this.style.display='none'">`;
-            nameHTML = `<span class="statistics-row-name">${leader.name}</span>`;
+            iconHTML = `<img src="${getTeamLogo(leader.team)}" class="statistics-row-icon-img team-logo" onerror="this.style.display='none'">`;
+            nameHTML = `<span class="statistics-row-name">${leader.name}</span><img src="Images/Flags/${leader.country}.svg" class="statistics-row-icon-img statistics-row-flag" onerror="this.style.display='none'">`;
             valueHTML = `<span class="statistics-row-value">${leader.points}</span>`;
             teamColor = getTeamColor(leader.team);
         } else {
