@@ -1417,7 +1417,7 @@ h1, h2 {
 }
 
 .grid-team-logo {
-    width: 15px;
+    width: 25px;
     height: 15px;
     object-fit: contain;
     flex-shrink: 0;
