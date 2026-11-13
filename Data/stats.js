@@ -164,6 +164,7 @@ const penaltiesData = [
         { date: "09/11/2025", count: 1 },
     ]},
     { driver: "Алекс Албон", penalties: [
+        { date: "08/11/2026", count: 2 },
         { date: "23/11/2025", count: 1 },
     ]},
     { driver: "Кими Антонелли", penalties: [
@@ -383,16 +384,16 @@ const pitstopData = [
       { team: "Alpine", point: 2 }, 
       { team: "McLaren", point: 1 },
   ]},
-  { gpId: "gp21", driver: "none", time: "0.00", teams: [
-      { team: "none", point: 18 }, 
-      { team: "none", point: 15 }, 
-      { team: "none", point: 12 },
-      { team: "none", point: 10 }, 
-      { team: "none", point: 8 }, 
-      { team: "none", point: 6 },
-      { team: "none", point: 4 }, 
-      { team: "none", point: 2 }, 
-      { team: "none", point: 1 },
+  { gpId: "gp21", driver: "bortoleto", time: "2.13", teams: [
+      { team: "Racing Bulls", point: 18 }, 
+      { team: "Aston Martin", point: 15 }, 
+      { team: "McLaren", point: 12 },
+      { team: "Racing Bulls", point: 10 }, 
+      { team: "Red Bull", point: 8 }, 
+      { team: "McLaren", point: 6 },
+      { team: "Mercedes", point: 4 }, 
+      { team: "Red Bull", point: 2 }, 
+      { team: "Ferrari", point: 1 },
   ]},
   { gpId: "gp22", driver: "none", time: "0.00", teams: [
       { team: "none", point: 18 }, 

@@ -1214,14 +1214,19 @@ const renderDriverCards = (drivers, container) => {
         teamDiv.className = 'driver-team';
 
         if (isReserve) {
-            const reserveLabel = document.createElement('span');
-            reserveLabel.className = 'driver-reserve-label';
+            const reserveTeamName = document.createElement('span');
+            reserveTeamName.textContent = reserveTeam || 'Резервист';
 
-            const reserveText = document.createElement('span');
-            reserveText.textContent = 'Резерв';
-            reserveLabel.appendChild(reserveText);
+            teamDiv.style.setProperty('--team-color', getTeamColor(reserveTeam || driver.team));
+            teamDiv.appendChild(reserveTeamName);
 
-            teamDiv.appendChild(reserveLabel);
+            const reserveTeamData = reserveTeam ? getTeamData(reserveTeam) : null;
+            if (reserveTeamData) {
+                teamDiv.addEventListener('click', e => {
+                    e.stopPropagation();
+                    openTeamModal(reserveTeamData);
+                });
+            }
         } else {
             const teamName = document.createElement('span');
             teamName.textContent = driver.team;
@@ -1262,6 +1267,13 @@ const renderDriverCards = (drivers, container) => {
 
         info.append(nameDiv, teamDiv, numberBlock);
         card.appendChild(info);
+
+        if (isReserve) {
+            const reserveBadge = document.createElement('div');
+            reserveBadge.className = 'driver-reserve-badge';
+            reserveBadge.textContent = 'Резервист';
+            card.appendChild(reserveBadge);
+        }
 
         const flagOverlay = document.createElement('div');
         flagOverlay.className = 'driver-flag-overlay';
@@ -1671,7 +1683,7 @@ const createCareerBlock = careerData => {
         if (index < careerData.length - 1) {
             const arrow = document.createElement('div');
             arrow.className = 'modal-career-arrow';
-            arrow.innerHTML = '>';
+            arrow.innerHTML = '→';
             list.append(careerItem, arrow);
         } else {
             list.appendChild(careerItem);
@@ -1713,29 +1725,14 @@ const openDriverModal = driver => {
     const rightColumn = document.createElement('div');
     rightColumn.className = 'dm-right-column';
 
-    const buildPanelBg = panel => {
-        const pattern = document.createElement('div');
-        pattern.className = 'dm-penalties-pattern';
-        pattern.innerHTML = DRIVER_PATTERN_SVG;
-        panel.appendChild(pattern);
-
-        const ov = document.createElement('div');
-        ov.className = 'dm-penalties-overlay';
-        panel.appendChild(ov);
-    };
-
+    /* ---- Штрафные баллы ---- */
     const penaltiesPanel = document.createElement('div');
-    penaltiesPanel.className = 'dm-penalties-panel';
+    penaltiesPanel.className = 'dm-panel dm-penalties-panel';
     penaltiesPanel.style.setProperty('--team-color', teamColor);
-    buildPanelBg(penaltiesPanel);
-
-    const penaltiesContent = document.createElement('div');
-    penaltiesContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px;';
 
     const penaltiesTitle = document.createElement('h3');
-    penaltiesTitle.className = 'dm-penalties-title';
+    penaltiesTitle.className = 'dm-panel-title';
     penaltiesTitle.textContent = 'Штрафные баллы';
-    penaltiesContent.appendChild(penaltiesTitle);
 
     const penaltyPoints = driver.fines || 0;
     const segments = Array.from({ length: 12 }, (_, i) => {
@@ -1747,82 +1744,32 @@ const openDriverModal = driver => {
 
     const meterWrapper = document.createElement('div');
     meterWrapper.className = 'dm-penalty-meter-wrapper';
-    meterWrapper.innerHTML = `<div class="dm-penalty-meter"><div class="msr-pp__meter msr-pp__meter--wide">${segments}</div></div>`;
-    penaltiesContent.appendChild(meterWrapper);
+    meterWrapper.innerHTML = `<div class="msr-pp__meter">${segments}</div>`;
 
     const penaltyText = document.createElement('div');
-    penaltyText.className = 'dm-penalty-text';
-    penaltyText.innerHTML = `${penaltyPoints} <span style="padding-left: 2px;">из 12 Штрафов</span>`;
-    penaltiesContent.appendChild(penaltyText);
+    penaltyText.className = 'dm-penalty-foot';
+    penaltyText.innerHTML = `<span><b>${penaltyPoints}</b> из 12</span><span>лимит 12</span>`;
+
+    penaltiesPanel.append(penaltiesTitle, meterWrapper, penaltyText);
 
     if (penaltyPoints >= 12) {
         const dsq = document.createElement('div');
         dsq.className = 'dm-penalty-text-dsq';
         dsq.textContent = 'DSQ на следующую гонку';
-        penaltiesContent.appendChild(dsq);
+        penaltiesPanel.appendChild(dsq);
     }
 
-    penaltiesPanel.appendChild(penaltiesContent);
     rightColumn.appendChild(penaltiesPanel);
 
-    const avgData = calculateTop10PositionStats(driver.id);
-    const avgPositionPanel = document.createElement('div');
-    avgPositionPanel.className = 'dm-avg-position-panel';
-    avgPositionPanel.style.setProperty('--team-color', teamColor);
+    /* ---- Сходы ---- */
+    const dnfPanel = document.createElement('div');
+    dnfPanel.className = 'dm-panel dm-dnf-panel';
+    dnfPanel.style.setProperty('--team-color', teamColor);
 
-    if (avgData) {
-        buildPanelBg(avgPositionPanel);
+    const dnfTitle = document.createElement('h3');
+    dnfTitle.className = 'dm-panel-title';
+    dnfTitle.textContent = 'Сходы';
 
-        const avgContent = document.createElement('div');
-        avgContent.className = 'dm-avg-position-content';
-
-        const avgTitle = document.createElement('h3');
-        avgTitle.className = 'dm-avg-position-title';
-        avgTitle.textContent = 'Позиции в топ 10';
-        avgContent.appendChild(avgTitle);
-
-        const list = document.createElement('div');
-        list.className = 'dm-avg-position-list';
-
-        for (let pos = 1; pos <= 10; pos++) {
-            const row = document.createElement('div');
-            row.className = 'dm-avg-position-row';
-
-            const posLabel = document.createElement('span');
-            posLabel.className = 'dm-avg-pos-label';
-            posLabel.textContent = pos;
-
-            const line = document.createElement('span');
-            line.className = 'dm-avg-pos-line';
-
-            const count = document.createElement('span');
-            count.className = 'dm-avg-pos-count';
-            const cnt = avgData.counts[pos] || 0;
-            count.textContent = cnt;
-            if (cnt === 0) count.classList.add('is-zero');
-
-            row.append(posLabel, line, count);
-
-            if (avgData.best === pos) row.classList.add('is-best');
-            if (avgData.mostFrequent === pos) row.classList.add('is-most-frequent');
-
-            list.appendChild(row);
-        }
-
-        avgContent.appendChild(list);
-
-        const result = document.createElement('div');
-        result.className = 'dm-avg-position-result';
-        result.innerHTML = `
-            <span class="dm-avg-result-left">Лучшая <span class="dm-avg-result-value">${avgData.best}</span></span>
-            <span class="dm-avg-result-sep">|</span>
-            <span class="dm-avg-result-right">Средняя <span class="dm-avg-result-value">${avgData.average.toFixed(2)}</span></span>
-        `;
-        avgContent.appendChild(result);
-        avgPositionPanel.appendChild(avgContent);
-        rightColumn.appendChild(avgPositionPanel);
-    }
-	
     const dnfRow = document.createElement('div');
     dnfRow.className = 'dm-dnf-row';
 
@@ -1832,36 +1779,77 @@ const openDriverModal = driver => {
         { label: 'DSQ', value: driver.seasonDSQ || 0, cls: 'dsq' },
     ];
 
-    const dnfPanels = dnfStats.map(stat => {
+    dnfStats.forEach(stat => {
         const chip = document.createElement('div');
         chip.className = `dm-dnf-chip dm-dnf-chip--${stat.cls}`;
-        chip.style.setProperty('--team-color', teamColor);
         chip.innerHTML = `
             <span class="dm-dnf-chip-label">${stat.label}</span>
             <span class="dm-dnf-chip-count">${stat.value}</span>
         `;
         dnfRow.appendChild(chip);
-        return chip;
     });
 
-    rightColumn.appendChild(dnfRow);
-	
-    const fastestLapsPanel = document.createElement('div');
-    fastestLapsPanel.className = 'dm-fastest-laps-panel';
-    fastestLapsPanel.style.setProperty('--team-color', teamColor);
-    buildPanelBg(fastestLapsPanel);
+    dnfPanel.append(dnfTitle, dnfRow);
+    rightColumn.appendChild(dnfPanel);
 
-    const flContent = document.createElement('div');
-    flContent.className = 'dm-fastest-laps-content';
+    /* ---- Позиции в топ-10 ---- */
+    const avgData = calculateTop10PositionStats(driver.id);
+    let avgPositionPanel = null;
 
-    const flTitle = document.createElement('h3');
-    flTitle.className = 'dm-fastest-laps-title';
-    flTitle.textContent = 'Действующий рекорд круга на трассе текущего сезона';
-    flContent.appendChild(flTitle);
+    if (avgData) {
+        avgPositionPanel = document.createElement('div');
+        avgPositionPanel.className = 'dm-panel dm-top10-panel';
+        avgPositionPanel.style.setProperty('--team-color', teamColor);
 
+        const avgTitle = document.createElement('h3');
+        avgTitle.className = 'dm-panel-title';
+        avgTitle.textContent = 'Позиции в топ-10';
+
+        const maxCount = Math.max(1, ...Object.values(avgData.counts));
+        const bars = document.createElement('div');
+        bars.className = 'dm-top10-bars';
+
+        const axis = document.createElement('div');
+        axis.className = 'dm-top10-axis';
+
+        for (let pos = 1; pos <= 10; pos++) {
+            const cnt = avgData.counts[pos] || 0;
+
+            const bar = document.createElement('i');
+            bar.className = 'dm-top10-bar';
+            if (avgData.best === pos) bar.classList.add('is-best');
+            bar.style.height = cnt > 0 ? `${Math.max(8, (cnt / maxCount) * 100)}%` : '2px';
+            bars.appendChild(bar);
+
+            const tick = document.createElement('span');
+            tick.textContent = pos;
+            axis.appendChild(tick);
+        }
+
+        const foot = document.createElement('div');
+        foot.className = 'dm-top10-foot';
+        foot.innerHTML = `
+            <span>Лучшая <b>${avgData.best}</b></span>
+            <span>Средняя <b>${avgData.average.toFixed(2)}</b></span>
+        `;
+
+        avgPositionPanel.append(avgTitle, bars, axis, foot);
+        rightColumn.appendChild(avgPositionPanel);
+    }
+
+    /* ---- Рекорды круга ---- */
     const tracks = driver.fastestLapsTracks || [];
+    let recordsPanel = null;
 
     if (tracks.length > 0) {
+        recordsPanel = document.createElement('div');
+        recordsPanel.className = 'dm-panel dm-records-panel';
+        recordsPanel.style.setProperty('--team-color', teamColor);
+
+        const recordsTitle = document.createElement('h3');
+        recordsTitle.className = 'dm-panel-title';
+        recordsTitle.textContent = `Рекорды круга · ${tracks.length}`;
+
         const calendarOrder = new Map();
         calendarData.forEach((gp, i) => {
             if (!calendarOrder.has(gp.track)) calendarOrder.set(gp.track, i);
@@ -1874,7 +1862,7 @@ const openDriverModal = driver => {
         });
 
         const list = document.createElement('div');
-        list.className = 'dm-fastest-laps-list';
+        list.className = 'dm-records-list';
 
         sorted.forEach(item => {
             const row = document.createElement('div');
@@ -1888,22 +1876,17 @@ const openDriverModal = driver => {
             list.appendChild(row);
         });
 
-        flContent.appendChild(list);
+        recordsPanel.append(recordsTitle, list);
+        rightColumn.appendChild(recordsPanel);
     }
 
-    const flCounter = document.createElement('div');
-    flCounter.className = 'dm-fastest-laps-counter';
-    flCounter.innerHTML = `<span class="dm-fl-count">${tracks.length}</span> ${declension(tracks.length, ['рекорд', 'рекорда', 'рекордов'])}`;
-    flContent.appendChild(flCounter);
+    /* ---- Главный блок ---- */
+    const modalWrap = document.createElement('div');
+    modalWrap.className = 'dm-modal-wrap';
 
-    fastestLapsPanel.appendChild(flContent);
-    rightColumn.appendChild(fastestLapsPanel);
-	
     const modal = document.createElement('div');
     modal.className = 'driver-modal';
     modal.style.setProperty('--team-color', teamColor);
-    modal.style.position = 'relative';
-    modal.style.overflow = 'hidden';
 
     const modalPattern = document.createElement('div');
     modalPattern.className = 'driver-modal-pattern';
@@ -1914,12 +1897,22 @@ const openDriverModal = driver => {
     modalOverlayBg.className = 'driver-modal-overlay-bg';
     modal.appendChild(modalOverlayBg);
 
-    const modalContent = document.createElement('div');
-    modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column;';
+    const ghostNumber = document.createElement('div');
+    ghostNumber.className = 'dm-ghost-number';
+    ghostNumber.textContent = driver.number;
+    modal.appendChild(ghostNumber);
+
+    const modalPortrait = document.createElement('img');
+    modalPortrait.src = `Images/Drivers/${driver.id}.avif`;
+    modalPortrait.alt = driver.name;
+    modalPortrait.className = 'modal-portrait';
+    modalPortrait.onerror = () => { modalPortrait.src = 'Images/Drivers/default.avif'; };
+    modal.appendChild(modalPortrait);
 
     const closeBtn = document.createElement('button');
     closeBtn.className = 'modal-close-btn';
     closeBtn.innerHTML = '&times;';
+    modal.appendChild(closeBtn);
 
     const closeModal = () => {
         overlay.remove();
@@ -1929,69 +1922,66 @@ const openDriverModal = driver => {
 
     closeBtn.addEventListener('click', closeModal);
 
-    const topSection = document.createElement('div');
-    topSection.className = 'modal-top';
+    const dmContent = document.createElement('div');
+    dmContent.className = 'dm-content';
 
-    const leftSide = document.createElement('div');
-    leftSide.className = 'modal-left';
+    /* Имя и фамилия */
+    const nameParts = String(driver.name).trim().split(/\s+/);
+    const firstName = nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : '';
+    const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : driver.name;
 
-    const modalPortrait = document.createElement('img');
-    modalPortrait.src = `Images/Drivers/${driver.id}.avif`;
-    modalPortrait.alt = driver.name;
-    modalPortrait.className = 'modal-portrait';
-    modalPortrait.onerror = () => { modalPortrait.src = 'Images/Drivers/default.avif'; };
+    const identity = document.createElement('div');
+    identity.className = 'dm-identity';
 
-    leftSide.appendChild(modalPortrait);
-
-    const rightSide = document.createElement('div');
-    rightSide.className = 'modal-right';
-
-    const block1 = document.createElement('div');
-    block1.className = 'modal-block';
+    const numWrap = document.createElement('div');
+    numWrap.className = 'dm-num-wrap';
 
     const modalNumber = document.createElement('div');
-    modalNumber.className = 'modal-number';
+    modalNumber.className = 'dm-number';
     modalNumber.textContent = driver.number;
+    numWrap.appendChild(modalNumber);
 
-    const nameTeamContainer = document.createElement('div');
-    nameTeamContainer.className = 'modal-name-team';
+    const names = document.createElement('div');
+    names.className = 'dm-names';
 
-    const nameRow = document.createElement('div');
-    nameRow.className = 'modal-name-row';
+    if (firstName) {
+        const first = document.createElement('div');
+        first.className = 'dm-first';
+        first.textContent = firstName;
+        names.appendChild(first);
+    }
 
-    const flagIcon = document.createElement('img');
-    flagIcon.src = `Images/Flags/${driver.country}.svg`;
-    flagIcon.title = getCountryName(driver.country);
-    flagIcon.alt = driver.country;
-    flagIcon.className = 'modal-flag';
-
-    const fullName = document.createElement('span');
-    fullName.className = 'modal-fullname';
-    fullName.textContent = driver.name;
-
-    nameRow.append(flagIcon, fullName);
-
-    const teamRow = document.createElement('div');
-    teamRow.className = 'modal-team-row';
+    const last = document.createElement('div');
+    last.className = 'dm-last';
+    last.textContent = lastName;
+    names.appendChild(last);
 
     const isReserve = /^(резерв|reserve)$/i.test(driver.team);
 
     if (isReserve && driver.reserve?.length > 0) {
         const reserveContainer = document.createElement('div');
-        reserveContainer.className = 'modal-reserve-teams';
+        reserveContainer.className = 'dm-reserve';
 
-        const reserveLabel = document.createElement('span');
-        reserveLabel.className = 'modal-reserve-label';
-        reserveLabel.textContent = 'Резерв:';
-        reserveContainer.appendChild(reserveLabel);
+        if (driver.country) {
+            const flag = document.createElement('img');
+            flag.src = `Images/Flags/${driver.country}.svg`;
+            flag.alt = driver.country;
+            flag.title = getCountryName(driver.country);
+            flag.className = 'dm-flag';
+            flag.onerror = () => { flag.style.display = 'none'; };
+            reserveContainer.appendChild(flag);
+        }
 
         const teamsList = document.createElement('div');
-        teamsList.className = 'modal-reserve-teams-list';
+        teamsList.className = 'dm-reserve-list';
 
         driver.reserve.forEach(teamName => {
             const teamItem = document.createElement('div');
-            teamItem.className = 'modal-reserve-team-item';
+            teamItem.className = 'dm-team-link';
             teamItem.style.setProperty('--team-color', getTeamColor(teamName));
+
+            const teamAccent = document.createElement('span');
+            teamAccent.className = 'dm-team-accent';
 
             const teamLogo = document.createElement('img');
             teamLogo.src = getTeamLogo(teamName);
@@ -2000,9 +1990,10 @@ const openDriverModal = driver => {
             teamLogo.onerror = () => { teamLogo.style.display = 'none'; };
 
             const teamLabel = document.createElement('span');
+            teamLabel.className = 'dm-team-name';
             teamLabel.textContent = teamName;
 
-            teamItem.append(teamLogo, teamLabel);
+            teamItem.append(teamAccent, teamLogo, teamLabel);
 
             teamItem.addEventListener('click', e => {
                 e.stopPropagation();
@@ -2013,65 +2004,54 @@ const openDriverModal = driver => {
             teamsList.appendChild(teamItem);
         });
 
-        reserveContainer.appendChild(teamsList);
-        teamRow.style.display = 'none';
-        nameTeamContainer.append(nameRow, teamRow, reserveContainer);
+        reserveContainer.append(teamsList);
+        names.appendChild(reserveContainer);
     } else {
+        const teamLine = document.createElement('div');
+        teamLine.className = 'dm-team-line';
+
+        const teamAccent = document.createElement('span');
+        teamAccent.className = 'dm-team-accent';
+
         const teamIcon = document.createElement('img');
         teamIcon.src = getTeamLogo(driver.team);
         teamIcon.alt = driver.team;
         teamIcon.className = 'modal-team-logo';
+        teamIcon.onerror = () => { teamIcon.style.display = 'none'; };
 
         const teamLabel = document.createElement('span');
+        teamLabel.className = 'dm-team-name';
         teamLabel.textContent = driver.team;
 
-        teamRow.append(teamIcon, teamLabel);
+        if (driver.country) {
+            const teamFlag = document.createElement('img');
+            teamFlag.src = `Images/Flags/${driver.country}.svg`;
+            teamFlag.alt = driver.country;
+            teamFlag.title = getCountryName(driver.country);
+            teamFlag.className = 'dm-flag';
+            teamFlag.onerror = () => { teamFlag.style.display = 'none'; };
+            teamLine.appendChild(teamFlag);
+        }
 
-        teamRow.addEventListener('click', e => {
+        const teamLink = document.createElement('div');
+        teamLink.className = 'dm-team-link';
+        teamLink.append(teamAccent, teamIcon, teamLabel);
+
+        teamLink.addEventListener('click', e => {
             e.stopPropagation();
             const data = getTeamData(driver.team);
             if (data) openTeamModal(data);
         });
 
-        nameTeamContainer.append(nameRow, teamRow);
+        teamLine.appendChild(teamLink);
+
+        names.appendChild(teamLine);
     }
 
-    block1.append(modalNumber, nameTeamContainer);
+    identity.append(numWrap, names);
+    dmContent.appendChild(identity);
 
-    const block2 = document.createElement('div');
-    block2.className = 'modal-block';
-
-    const row1 = document.createElement('div');
-    row1.className = 'modal-details-row';
-    row1.innerHTML = `
-        <div class="detail-cell">
-            <span class="detail-label">Дата рождения</span>
-            <span class="detail-value">${driver.birthDate} (${calculateAge(driver.birthDate)})</span>
-        </div>
-        <div class="detail-cell">
-            <span class="detail-label">Полное имя</span>
-            <span class="detail-value">${driver.namef}</span>
-        </div>
-    `;
-
-    const row2 = document.createElement('div');
-    row2.className = 'modal-details-row';
-    row2.innerHTML = `
-        <div class="detail-cell">
-            <span class="detail-label">Дебют</span>
-            <span class="detail-value">${driver.debut}</span>
-        </div>
-        <div class="detail-cell">
-            <span class="detail-label">Место рождения</span>
-            <span class="detail-value">${driver.birthPlace}</span>
-        </div>
-    `;
-
-    block2.append(row1, row2);
-
-    const block3 = document.createElement('div');
-    block3.className = 'modal-block';
-
+    /* Статистика */
     const statsDeclensions = {
         titles: ['Титул', 'Титула', 'Титулов'],
         wins: ['Победа', 'Победы', 'Побед'],
@@ -2081,30 +2061,52 @@ const openDriverModal = driver => {
         grandslam: ['Большой шлем', 'Больших шлема', 'Больших шлемов']
     };
 
+    const statCell = (value, key, gold) => `
+        <div class="dm-stat">
+            <span class="dm-stat-value${gold ? ' is-gold' : ''}">${value || 0}</span>
+            <span class="dm-stat-label">${declension(value || 0, statsDeclensions[key])}</span>
+        </div>`;
+
     const statsRow = document.createElement('div');
-    statsRow.className = 'modal-stats-row';
-    statsRow.innerHTML = `
-        <div class="stat-cell"><span class="stat-number">${driver.titles || 0}</span><span class="stat-text">${declension(driver.titles, statsDeclensions.titles)}</span></div>
-        <div class="stat-cell"><span class="stat-number">${driver.wins || 0}</span><span class="stat-text">${declension(driver.wins, statsDeclensions.wins)}</span></div>
-        <div class="stat-cell"><span class="stat-number">${driver.podiums || 0}</span><span class="stat-text">${declension(driver.podiums, statsDeclensions.podiums)}</span></div>
-        <div class="stat-cell"><span class="stat-number">${driver.poles || 0}</span><span class="stat-text">${declension(driver.poles, statsDeclensions.poles)}</span></div>
-        <div class="stat-cell"><span class="stat-number">${driver.hattricks || 0}</span><span class="stat-text">${declension(driver.hattricks, statsDeclensions.hattricks)}</span></div>
-        <div class="stat-cell"><span class="stat-number">${driver.grandslam || 0}</span><span class="stat-text">${declension(driver.grandslam || 0, statsDeclensions.grandslam)}</span></div>
-    `;
-    block3.appendChild(statsRow);
+    statsRow.className = 'dm-stats';
+    statsRow.innerHTML =
+        statCell(driver.titles, 'titles', driver.titles > 0) +
+        statCell(driver.wins, 'wins') +
+        statCell(driver.podiums, 'podiums') +
+        statCell(driver.poles, 'poles') +
+        statCell(driver.hattricks, 'hattricks') +
+        statCell(driver.grandslam, 'grandslam');
 
-    rightSide.append(block1, block2, block3);
-    topSection.append(leftSide, rightSide);
+    dmContent.appendChild(statsRow);
 
+    /* Данные */
+    const metaItems = [
+        ['Дата рождения', `${driver.birthDate} (${calculateAge(driver.birthDate)})`],
+        ['Полное имя', driver.namef],
+        ['Дебют', driver.debut],
+        ['Место рождения', driver.birthPlace]
+    ];
+
+    const meta = document.createElement('div');
+    meta.className = 'dm-meta';
+    meta.innerHTML = metaItems.map(([label, value]) => `
+        <div class="dm-meta-cell">
+            <span class="dm-meta-label">${label}</span>
+            <span class="dm-meta-value">${value}</span>
+        </div>`).join('');
+
+    dmContent.appendChild(meta);
+
+    /* Биография */
     const bioSection = document.createElement('div');
-    bioSection.className = 'modal-bottom';
+    bioSection.className = 'dm-bio';
 
-    const bioTitle = document.createElement('h3');
-    bioTitle.className = 'modal-bio-title';
+    const bioTitle = document.createElement('h4');
+    bioTitle.className = 'dm-bio-title';
     bioTitle.textContent = 'Биография';
 
     const bioText = document.createElement('p');
-    bioText.className = 'modal-bio-text';
+    bioText.className = 'dm-bio-text';
     bioText.textContent = driver.bio;
 
     bioSection.append(bioTitle, bioText);
@@ -2116,13 +2118,19 @@ const openDriverModal = driver => {
         bioSection.appendChild(noteDiv);
     }
 
+    dmContent.appendChild(bioSection);
+    modal.appendChild(dmContent);
+
+    modalWrap.appendChild(modal);
+
+    /* Карьера — отдельный блок под основным */
     const careerBlock = createCareerBlock(driver.career);
-    if (careerBlock) bioSection.appendChild(careerBlock);
+    if (careerBlock) {
+        careerBlock.style.setProperty('--team-color', teamColor);
+        modalWrap.appendChild(careerBlock);
+    }
 
-    modalContent.append(closeBtn, topSection, bioSection);
-    modal.appendChild(modalContent);
-
-    overlay.append(modal, rightColumn);
+    overlay.append(modalWrap, rightColumn);
 
     overlay.addEventListener('click', e => {
         if (e.target === overlay) closeModal();
@@ -2135,22 +2143,10 @@ const openDriverModal = driver => {
     document.body.appendChild(overlay);
 
     requestAnimationFrame(() => {
-        const panels = [penaltiesPanel, avgData ? avgPositionPanel : null, ...dnfPanels, fastestLapsPanel].filter(Boolean);
-
-        panels.forEach(p => Object.assign(p.style, { transition: 'none', opacity: '0', transform: 'translateX(40px)' }));
-
-        requestAnimationFrame(() => {
-            panels.forEach((p, i) => {
-                p.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                p.style.transitionDelay = `${0.2 + i * 0.15}s`;
-                p.style.opacity = '1';
-                p.style.transform = 'translateX(0)';
-            });
-        });
-
         overlay.classList.add('active');
         modal.classList.add('active');
     });
+
 };
 
 const buildDriverOptions = (selectedId, excludeId) =>

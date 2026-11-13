@@ -620,126 +620,100 @@ body {
 
 
 /* Модалка пилота */
-.driver-modal { max-width: 95%; max-height: 95vh; }
+.driver-modal-overlay {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 10px 32px;
+}
+
+.dm-modal-wrap { width: 100%; gap: 8px; }
+
+.driver-modal { width: 100%; min-height: 360px; }
 
 .modal-close-btn {
-    display: flex;
+    display: none;
     position: absolute;
-    top: 5px; right: 6px;
-    width: 30px; height: 30px;
-    border-radius: 20%;
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--border-color);
-    color: var(--text-gray);
-    font-size: 1.5rem;
+    top: 8px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #cfd8e4;
+    font-size: 1.2rem;
     cursor: pointer;
-    z-index: 10;
+    z-index: 20;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
-.modal-top { flex-direction: column; }
-.modal-left { width: 100%; min-width: auto; 
-    padding: 15px 0px 5px; }
-.modal-portrait { width: 150px; height: 150px; }
-.modal-right { width: 100%; padding: 10px 10px 0px; }
-.modal-right .modal-block:first-child { gap: 15px; }
-.modal-number { font-size: 3rem; min-width: 60px; }
-.modal-fullname { font-size: 1.3rem; }
-.modal-details-row { gap: 15px; }
-.modal-stats-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.modal-bottom { padding: 0 10px 10px; }
-.modal-career-item { width: 100px; }
-.modal-career-item[data-team="aston-martin"] .modal-career-team-name {
-    font-size: 7.9px;
+.modal-portrait { width: 247px; right: -22px; }
+.dm-ghost-number { font-size: 200px; top: 16px; right: 2px; }
+
+.dm-content {
+    width: 64%;
+    min-height: 360px;
+    padding: 12px 0 12px 12px;
+    gap: 7px;
 }
 
-.modal-reserve-team-item {
-    font-size: 12px;
+.dm-identity { gap: 7px; }
+.dm-num-wrap { width: 44px; }
+.dm-number { font-size: 58px; -webkit-text-stroke-width: 1.5px; }
+.dm-first { font-size: 9px; letter-spacing: 0.12em; }
+.dm-last { font-size: 22px; }
+.dm-team-line { margin-top: -3px; }
+.dm-team-link { gap: 1px; margin-top: 3px; }
+.dm-team-accent { height: 11px; }
+.dm-team-name { font-size: 9.5px; }
+.modal-team-logo { height: 13px; }
+.dm-flag { width: 12px; 
+    height: 9px; 
+    margin-left: 2px; 
+    margin-right: -2px; 
 }
 
-/* Перестраиваем модалку пилота для мобильных */
-.driver-modal-overlay {
-    flex-direction: column !important;
-    align-items: center !important;
-}
+.dm-stats { gap: 5px; }
+.dm-stat { padding: 6px 7px; border-radius: 6px; }
+.dm-stat-value { font-size: 21px; }
+.dm-stat-label { margin-top: 3px; font-size: 6.2px; letter-spacing: 0.08em; }
 
-.dm-penalties-panel .msr-pp__seg {
-    width: 11px;
-    height: 11px;
-}
+.dm-meta { gap: 5px 8px; }
+.dm-meta-label { font-size: 6.4px; letter-spacing: 0.06em; }
+.dm-meta-value { font-size: 9px; }
 
-.dm-fastest-laps-title {
-    line-height: 1.5;
-}
+.dm-bio-title { font-size: 7px; margin-bottom: 3px; }
+.dm-bio-text { font-size: 9.4px; line-height: 1.45; }
+.modal-note-compact { display: none; }
 
-.dm-fl-flag {
-    width: 15px;
-    height: 11px;
-}
-
-.dm-fl-track {
-    font-size: 0.65rem;
-}
-
-.dm-fl-time {
-    font-size: 0.6rem;
-}
-
-.dm-fl-year {
-    font-size: 0.6rem;
-    min-width: 24px;
-}
-
-.dm-fastest-laps-counter {
-    font-size: 0.9rem;
-}
-
-.dm-fastest-laps-title + .dm-fastest-laps-counter {
-    padding-top: 5%;
-}
+.modal-career-container { gap: 6px; padding: 6px 8px; }
+.modal-career-title { font-size: 6.4px; margin-right: 2px; }
+.modal-career-list { gap: 3px 2px; }
+.modal-career-item { width: 104px; padding: 3px 5px; }
+.modal-career-logo-wrapper { width: 15px; height: 15px; }
+.modal-career-logo { max-width: 15px; max-height: 15px; }
+.modal-career-team-name { font-size: 7.6px; }
+.modal-career-year { font-size: 6.2px; }
+.modal-career-arrow { font-size: 7px; }
 
 .dm-right-column {
-    width: 90%;
-    display: grid !important;              /* было flex — теперь grid */
-    grid-template-columns: 1fr 1fr;        /* 2 колонки */
-    grid-template-areas:
-        "penalties laps"
-        "dnf       laps";                  /* DNF под штрафами, рекорды справа на обе строки */
-    gap: 8px;
-    align-items: start;
-    justify-content: center;
-    flex-wrap: nowrap;
-}
-
-.dm-right-column .dm-penalties-panel {
-    grid-area: penalties;
     width: 100%;
-    flex: none;
-}
-
-.dm-right-column .dm-dnf-row {
-    grid-area: dnf;
-    width: 100%;
-    flex: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 6px;
+    align-items: start;
 }
 
-/* 3. Рекорды круга — правая колонка, на всю высоту */
-.dm-right-column .dm-fastest-laps-panel {
-    grid-area: laps;
-    width: 100%;
-    flex: none;
-    height: 100%;
-}
+.dm-panel { padding: 7px 8px; }
+.dm-panel-title { font-size: 6.2px; }
+.dm-penalties-panel .msr-pp__seg { height: 7px; }
+.dm-top10-bars { height: 40px; }
+.dm-top10-axis span { font-size: 5px; }
+.dm-records-list { max-height: 66px; }
 
-/* Панель позиции в топ-10 — мобильная версия */
-.dm-avg-position-panel {
-    display: none;
-}
 
 /* ===== Окно сравнения пилотов ===== */
 .cmp-toolbar {
@@ -843,11 +817,14 @@ body {
 }
 
 /* Модалка команды */
+/* Модалка команды */
 .team-modal-close-btn {
     display: flex;
     position: absolute;
-    top: -4px; right: -5px;
-    width: 30px; height: 30px;
+    top: 6px;
+    right: 6px;
+    width: 30px;
+    height: 30px;
     border-radius: 20%;
     background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--border-color);
@@ -861,68 +838,73 @@ body {
 }
 
 .team-modal-overlay {
-    align-items: center;
-    padding-top: 5%;
-    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 10px 30px;
     overflow-y: auto;
 }
 
-.team-modal { 
-    max-width: 95%; 
-    padding: 10px; 
-    order: 1;
-}
-.tm-full-logo { max-height: 50px; }
-.tm-full-name { font-size: 1.1rem; }
-.tm-divider { 
-    margin: 8px 0px 5px 0px;
-}
-.tm-divider:nth-of-type(4) {
-    display: none;
-}
-.tm-info-row .tm-info-cell:only-child {
-    display: none;
-}
-.tm-pilots-section { 
-    margin-top: 5px;
-}
-.tm-pilots-list { 
-    display: flex; 
+.tm-shell {
     flex-direction: column;
-    gap: 6px; 
-}
-
-.tm-right-column {
-    margin-left: 0;
-    width: 90%;
-    order: 2;
-}
-.tm-right-column img {
-    margin-top: -15px;
-    margin-bottom: 10px;
-}
-.tm-bolid-panel {
-    margin-top: 10px;
-    padding: 10px;
     width: 100%;
-    opacity: 1;
-    transform: none;
-}
-.tm-bolid-info {
-    margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    padding: 16px 14px 14px;
+    border-radius: 12px;
 }
 
 .tm-left-column {
-    margin-right: 0;
-    width: 90%;
     order: 3;
-}
-.tm-stats-panel {
-    margin-top: 10px;
+    flex: none;
     width: 100%;
-    opacity: 1;
-    transform: none;
+    margin-top: 16px;
+    padding: 14px 0 0;
+    border-right: none;
+    border-top: 1px solid color-mix(in srgb, var(--team-color) 55%, transparent);
 }
+
+.tm-main {
+    order: 1;
+    flex: none;
+    width: 100%;
+    padding: 0;
+}
+
+.tm-right-column {
+    order: 2;
+    flex: none;
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px 0 0;
+    border-left: none;
+    border-top: 1px solid color-mix(in srgb, var(--team-color) 55%, transparent);
+}
+
+.tm-team-logo { height: 56px; }
+.tm-ghost { display: none; }
+.tm-kicker { margin-top: 14px; font-size: 8px; letter-spacing: 0.22em; }
+.tm-team-name { font-size: 26px; }
+.tm-team-suffix { font-size: 8px; margin-top: 5px; }
+.tm-meta { margin-top: 16px; padding-top: 12px; gap: 10px 14px; }
+.tm-meta-value { font-size: 10.5px; }
+.tm-about-text { font-size: 10.5px; max-width: 100%; }
+
+.tm-panel-cap { font-size: 8px; }
+.tm-stats-list { margin-top: 8px; }
+.tm-stat-line { padding: 10px 0 9px; }
+.tm-stat-num { font-size: 30px; }
+.tm-stat-line--wide .tm-stat-num { font-size: 13px; }
+
+.tm-bolid-shot { margin-top: -10px; margin-bottom: 10px; }
+.tm-bolid-img { width: 90%; }
+.tm-spec { padding: 7px 8px; }
+.tm-spec-value { font-size: 10px; }
+
+.tm-pilot-row { padding: 7px 8px; }
+.tm-pilot-number { font-size: 22px; min-width: 30px; }
+.tm-pilot-name { font-size: 11px; }
+.tm-pilot-row.reserve .tm-pilot-number { font-size: 18px; }
+.tm-pilot-row.reserve .tm-pilot-name { font-size: 10px; }
+.tm-pilots-sub { margin-top: 10px; }
 
 /* ============================================== */
 /* СТАРТОВАЯ РЕШЁТКА — МОБИЛЬНАЯ ВЕРСИЯ          */

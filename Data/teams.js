@@ -1,6 +1,6 @@
 const teamsData = [
     {  shortName: "Mercedes",
-        fullName: "Mercedes-AMG PETRONAS F1 Team",
+        fullName: "Mercedes-AMG PETRONAS Formula 1 Team",
         color: "#75F1D3",
         
         base: "Брэкли", country: "gb",
@@ -14,8 +14,8 @@ const teamsData = [
         fuel: "Petronas",
 
         debut: "2010",
-        firstWin: "Гран-при Китая 2012",
-        titles: 8,
+        firstWin: "ГП Китая 2012",
+        titles: 9,
 		champ_dri: 4,
         
         info: "В 1994 году компания Mercedes-Benz участвовала в F1, в качестве поставщика двигателей для гоночной команды Sauber. В 2009 году Mercedes-Benz приобрела 75% контрольного пакета в команде Brawn GP, выигравшей чемпионат 2009 года. Позднее Brawn GP, переименованная в Mercedes GP, дебютировала в 2010 году. За неё выступали немецкие пилоты Нико Росберг и Михаэль Шумахер."
@@ -35,14 +35,14 @@ const teamsData = [
         fuel: "Shell",
 
         debut: "1950",
-        firstWin: "Гран-при Великобритании 1951",
+        firstWin: "ГП Великобритании 1951",
         titles: 16,
 		champ_dri: 9,
         
         info: "Итальянская команда, представляющая собой подразделение автомобильной компании Ferrari Gestione Sportiva, занимающееся гонками. Команда принимает участие в гонках F1 с 1950 года по сей день и является самой старой и успешной командой в чемпионате."
     },
     {  shortName: "McLaren",
-        fullName: "McLaren Mastercard F1 Team",
+        fullName: "McLaren Mastercard Formula 1 Team",
         color: "#ef8733",
         
         base: "Уокинг", country: "gb",
@@ -56,7 +56,7 @@ const teamsData = [
         fuel: "Petronas",
 
         debut: "1966",
-        firstWin: "Гран-при Бельгии 1968",
+        firstWin: "ГП Бельгии 1968",
         titles: 10,
 		champ_dri: 8,
         
@@ -77,14 +77,14 @@ const teamsData = [
         fuel: "ExxonMobil",
 
         debut: "2005",
-        firstWin: "Гран-при Китая 2009",
+        firstWin: "ГП Китая 2009",
         titles: 6,
 		champ_dri: 2,
         
         info: "Австрийская команда, основана руководителем концерна по производству энергетических напитков Red Bull - Дитрихом Матешицем. Хотя база команды и расположена в Великобритания, но команда выступает под австрийской лицензией. Компания Ford Motor заявила о выходе принадлежащей ей команды Jaguar Racing из чемпионата F1 в сентябре 2004 года и уже ноябре Red Bull, подтвердил покупку Jaguar Racing в последний день подачи заявок на участие в сезоне 2005 года."
     },
     {  shortName: "Racing Bulls",
-        fullName: "Visa Cash App Racing Bulls F1 Team",
+        fullName: "Visa Cash App Racing Bulls Formula 1 Team",
         color: "#7091f8",
         
         base: "Фаэнца", country: "it",
@@ -98,14 +98,14 @@ const teamsData = [
         fuel: "ExxonMobil",
 
         debut: "2006",
-        firstWin: "Гран-при Италии 2008",
+        firstWin: "ГП Италии 2008",
         titles: 0,
 		champ_dri: 0,
         
         info: "Итальянская команда, принадлежащая австрийскому конгломерату Red Bull GmbH. С сезона 2006 по 2019 года команда выступала под названием Toro Rosso. К сезону 2020 года была переименована в AlphaTauri. К сезону 2024 года команда была переименована в своё текущее название."
     },
     {  shortName: "Alpine",
-        fullName: "BWT Alpine F1 Team",
+        fullName: "BWT Alpine Formula 1 Team",
         color: "#479FE2",
         
         base: "Энстоун", country: "gb",
@@ -119,14 +119,14 @@ const teamsData = [
         fuel: "Petronas",
 
         debut: "2021",
-        firstWin: "Гран-при Венгрии 2021",
+        firstWin: "ГП Венгрии 2021",
         titles: 0,
 		champ_dri: 0,
         
         info: "Французская команда, созданная на базе команды Renault. В дебютном сезоне за Альпин выступали, двукратный чемпион мира - Фернандо Алонсо и выступавший за команду Renault в 2020 году Эстебан Окон. Коллектив использовал силовые установки Renault. Резервным пилотом команды в сезоне 2021 года стал российский гонщик Даниил Квят."
     },
     {  shortName: "Haas",
-        fullName: "TGR Haas F1 Team",
+        fullName: "TGR Haas Formula 1 Team",
         color: "#DFE1E2",
         
         base: "Каннаполис", country: "us",
@@ -147,7 +147,7 @@ const teamsData = [
         info: "Американская команда, является первой американской командой, принявшей решение об участии в F1, со времён неудавшегося проекта US F1 Team, старт которого планировался в 2010 году."
     },
     {  shortName: "Audi",
-        fullName: "Audi Revolut F1 Team",
+        fullName: "Audi Revolut Formula 1 Team",
         color: "#EB4526",
         
         base: "Хинвил", country: "ch",
@@ -182,14 +182,14 @@ const teamsData = [
         fuel: "Petronas",
 
         debut: "1975",
-        firstWin: "Гран-при Великобритании 1979",
+        firstWin: "ГП Великобритании 1979",
         titles: 9,
 		champ_dri: 7,
         
         info: "Британская команда, созданая Фрэнком Уильямсом и Патриком Хэдом под названием Williams Grand Prix Engineering. В сезоне 1980 года команда выиграла свой первый кубок конструкторов, опередив почти вдвое по очкам занявшую 2-е место Ligier. Все шасси команды содержат приставку FW - инициалы основателя команды."
     },
     {  shortName: "Aston Martin",
-        fullName: "Aston Martin Aramco F1 Team",
+        fullName: "Aston Martin Aramco Formula 1 Team",
         color: "#4B9774",
         
         base: "Сильверстоун", country: "gb",
@@ -210,7 +210,7 @@ const teamsData = [
         info: "Британская команда, созданная на базе команды Racing Point, после покупки бизнесменом Лоуренсом Строллом 20% процентов в компании Aston Martin. Пилотами команды на дебютный сезон стали - Лэнс Стролл, сын Лоуренса, и четырёхкратный чемпион мира - Себастьян Феттель."
     },
     {  shortName: "Cadillac",
-        fullName: "Cadillac F1 Team",
+        fullName: "Cadillac Formula 1 Team",
         color: "#AAAADD",
         
         base: "Фишерс", country: "us",
@@ -473,8 +473,35 @@ const createTeamCard = team => {
     return card;
 };
 
+const getReserveDrivers = shortName => driversData.filter(driver =>
+    driver.team === 'Резерв' &&
+    Array.isArray(driver.reserve) &&
+    driver.reserve.includes(shortName)
+);
+
+const splitTeamName = (fullName, shortName) => {
+    const index = fullName.toLowerCase().indexOf(shortName.toLowerCase());
+    if (index < 0) return { kicker: '', name: fullName, suffix: '' };
+
+    const before = fullName.slice(0, index).replace(/[-\s]+$/, '').trim();
+    const after = fullName.slice(index + shortName.length).replace(/^[-\s]+/, '').trim();
+    const suffixMatch = after.match(/^(.*?)\s*(F1 Team|Formula 1 Team|Team|Racing)$/i);
+
+    if (suffixMatch) {
+        return {
+            kicker: [before, suffixMatch[1]].filter(Boolean).join(' '),
+            name: shortName,
+            suffix: suffixMatch[2]
+        };
+    }
+
+    return { kicker: before, name: shortName, suffix: after };
+};
+
 const openTeamModal = team => {
     const drivers = getTeamDrivers(team.shortName);
+    const reserveDrivers = getReserveDrivers(team.shortName);
+    const slug = teamSlug(team.shortName);
 
     document.querySelector('.team-modal-overlay')?.remove();
 
@@ -499,239 +526,170 @@ const openTeamModal = team => {
     const overlay = document.createElement('div');
     overlay.className = 'team-modal-overlay';
 
-    const leftColumn = document.createElement('div');
-    leftColumn.className = 'tm-left-column';
-
-    const statsPanel = document.createElement('div');
-    statsPanel.className = 'tm-stats-panel';
-    statsPanel.style.setProperty('--team-color', team.color);
-
-    const statsPattern = document.createElement('div');
-    statsPattern.className = 'tm-stats-pattern';
-    statsPattern.innerHTML = TEAM_PATTERN_SVG;
-    statsPanel.appendChild(statsPattern);
-
-    const statsOverlay = document.createElement('div');
-    statsOverlay.className = 'tm-stats-overlay';
-    statsPanel.appendChild(statsOverlay);
-
-    const statsContent = document.createElement('div');
-    statsContent.style.cssText = 'position: relative; z-index: 2; display: contents;';
-    statsContent.innerHTML = `
-        <div class="tm-stat-cell">
-            <span class="tm-stat-label">Дебют</span>
-            <span class="tm-stat-value">${team.debut}<span class="gp-year-suffix"> г.</span></span>
-        </div>
-        <div class="tm-stat-cell">
-            <span class="tm-stat-label">Гоночные сезоны</span>
-            <span class="tm-stat-value">${team.seasons}</span>
-        </div>
-        <div class="tm-stat-cell tm-stat-full">
-            <span class="tm-stat-label">Первая победа</span>
-            <span class="tm-stat-value">${team.firstWin || '---'}</span>
-        </div>
-        <div class="tm-stat-cell">
-            <span class="tm-stat-label">Кубки конструкторов</span>
-            <span class="tm-stat-value">${team.titles || 0}</span>
-        </div>
-        <div class="tm-stat-cell">
-            <span class="tm-stat-label">Пилоты - Чемпионы</span>
-            <span class="tm-stat-value">${team.champ_dri}</span>
-        </div>
-    `;
-    statsPanel.appendChild(statsContent);
-    leftColumn.appendChild(statsPanel);
-
-    const modal = document.createElement('div');
-    modal.className = 'team-modal';
-    modal.style.setProperty('--team-color', team.color);
-
-    const modalPattern = document.createElement('div');
-    modalPattern.className = 'tm-modal-pattern';
-    modalPattern.innerHTML = TEAM_PATTERN_SVG;
-    modal.appendChild(modalPattern);
-
-    const modalOverlayBg = document.createElement('div');
-    modalOverlayBg.className = 'tm-modal-overlay-bg';
-    modal.appendChild(modalOverlayBg);
-
-    const modalContent = document.createElement('div');
-    modalContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center;';
-
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'team-modal-close-btn';
-    closeBtn.innerHTML = '&times;';
-
     const closeModal = () => {
         overlay.remove();
         unlockScroll();
         document.removeEventListener('keydown', escHandler);
     };
 
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'team-modal-close-btn';
+    closeBtn.innerHTML = '&times;';
     closeBtn.addEventListener('click', closeModal);
 
-    const fullLogoContainer = document.createElement('div');
-    fullLogoContainer.className = 'tm-logo-container';
-    const fullLogo = document.createElement('img');
-    fullLogo.src = `Images/Teams/${teamSlug(team.shortName)}.png`;
-    fullLogo.alt = team.fullName;
-    fullLogo.className = 'tm-full-logo';
-    fullLogo.onerror = () => {
-        fullLogo.src = `Images/Teams/${teamSlug(team.shortName)}-m.png`;
-        fullLogo.style.maxHeight = '60px';
+    const shell = document.createElement('div');
+    shell.className = 'tm-shell';
+    shell.style.setProperty('--team-color', team.color);
+
+    const pattern = document.createElement('div');
+    pattern.className = 'tm-shell-pattern';
+    pattern.innerHTML = TEAM_PATTERN_SVG;
+    shell.appendChild(pattern);
+
+    /* -------- статистика -------- */
+    const leftColumn = document.createElement('div');
+    leftColumn.className = 'tm-left-column';
+
+    const statLine = (label, value, wide) => `
+        <div class="tm-stat-line${wide ? ' tm-stat-line--wide' : ''}">
+            <span class="tm-stat-num">${value}</span>
+            <span class="tm-stat-cap">${label}</span>
+        </div>`;
+
+    leftColumn.innerHTML = `
+        <div class="tm-panel-cap">Статистика</div>
+        <div class="tm-stats-list">
+            ${statLine('Дебют', team.debut)}
+            ${statLine('Гоночные сезоны', team.seasons)}
+            ${statLine('Первая победа', team.firstWin || '---', true)}
+            ${statLine('Кубки конструкторов', team.titles || 0)}
+            ${statLine('Пилоты - чемпионы', team.champ_dri || 0)}
+        </div>`;
+
+    /* -------- центральный блок -------- */
+    const nameWords = team.shortName.split(' ');
+    const ghostWords = nameWords.map(word => word.toUpperCase());
+    const ghostLongest = Math.max(...ghostWords.map(word => word.length));
+    const ghostMultiline = ghostWords.length > 1 && ghostLongest >= 5;
+    const ghostText = ghostMultiline ? ghostWords.join('<br>') : ghostWords.join(' ');
+    const ghostLength = ghostMultiline ? ghostLongest : ghostText.length;
+    const ghostSize = Math.max(42, Math.min(82, Math.round(530 / ghostLength)));
+
+    const nameParts = splitTeamName(team.fullName, team.shortName);
+    const accentWord = nameWords[nameWords.length - 1];
+    const leadWords = nameWords.slice(0, -1).join(' ');
+
+    const metaCell = (label, country, value) => `
+        <div class="tm-meta-cell">
+            <span class="tm-meta-label">${label}</span>
+            <span class="tm-meta-value"><img class="tm-meta-flag" src="Images/Flags/${country}.svg" alt="" title="${getCountryName(country)}">${value}</span>
+        </div>`;
+
+    const mainColumn = document.createElement('div');
+    mainColumn.className = 'tm-main';
+    mainColumn.innerHTML = `
+        <div class="tm-main-inner">
+            <div class="tm-ghost" style="font-size:${ghostSize}px">${ghostText}</div>
+            <img class="tm-team-logo" src="Images/Teams/${slug}.png" alt="${team.fullName}">
+            ${nameParts.kicker ? `<div class="tm-kicker">${nameParts.kicker}</div>` : ''}
+            <h2 class="tm-team-name">${leadWords ? `${leadWords} ` : ''}<span>${accentWord}</span></h2>
+            ${nameParts.suffix ? `<div class="tm-team-suffix">${nameParts.suffix}</div>` : ''}
+            <div class="tm-meta">
+                ${metaCell('База', team.country, team.base)}
+                ${metaCell('Руководитель', team.director_country, team.director)}
+                ${metaCell('Лицензия FIA', team.license_country, team.license)}
+                ${metaCell('Основатель', team.founder_country, team.founder)}
+            </div>
+            <div class="tm-about">
+                <span class="tm-about-label">О команде</span>
+                <p class="tm-about-text">${team.info}</p>
+            </div>
+        </div>`;
+
+    const logo = mainColumn.querySelector('.tm-team-logo');
+    logo.onerror = () => {
+        logo.src = `Images/Teams/${slug}-m.png`;
+        logo.style.height = '54px';
     };
-    fullLogoContainer.appendChild(fullLogo);
 
-    const fullNameEl = document.createElement('h2');
-    fullNameEl.className = 'tm-full-name';
-    fullNameEl.textContent = team.fullName;
-
-    const flagImg = country => `<img src="Images/Flags/${country}.svg" alt="" class="tm-base-flag" title="${getCountryName(country)}">`;
-
-    const divider1 = document.createElement('hr');
-    divider1.className = 'tm-divider';
-
-    const infoRow1 = document.createElement('div');
-    infoRow1.className = 'tm-info-row';
-    infoRow1.innerHTML = `
-        <div class="tm-info-cell">
-            <span class="tm-label">База</span>
-            <span class="tm-value">${flagImg(team.country)}${team.base}</span>
-        </div>
-        <div class="tm-info-cell">
-            <span class="tm-label">Руководитель</span>
-            <span class="tm-value">${flagImg(team.director_country)}${team.director}</span>
-        </div>
-    `;
-
-    const divider2 = document.createElement('hr');
-    divider2.className = 'tm-divider';
-
-    const infoRow2 = document.createElement('div');
-    infoRow2.className = 'tm-info-row';
-    infoRow2.innerHTML = `
-        <div class="tm-info-cell">
-            <span class="tm-label">Лицензия FIA</span>
-            <span class="tm-value">${flagImg(team.license_country)}${team.license}</span>
-        </div>
-        <div class="tm-info-cell">
-            <span class="tm-label">Основатель</span>
-            <span class="tm-value">${flagImg(team.founder_country)}${team.founder}</span>
-        </div>
-    `;
-
-    const divider3 = document.createElement('hr');
-    divider3.className = 'tm-divider';
-
-    const infoRow3 = document.createElement('div');
-    infoRow3.className = 'tm-info-row';
-    infoRow3.innerHTML = `
-        <div class="tm-info-cell">
-            <span class="tm-label">О команде</span>
-            <span class="tm-value">${team.info}</span>
-        </div>
-    `;
-
-    const divider4 = document.createElement('hr');
-    divider4.className = 'tm-divider';
-
-    const pilotsSection = document.createElement('div');
-    pilotsSection.className = 'tm-pilots-section';
-
-    const pilotsTitle = document.createElement('h3');
-    pilotsTitle.className = 'tm-pilots-title';
-    pilotsTitle.textContent = 'Пилоты';
-    pilotsSection.appendChild(pilotsTitle);
-
-    const pilotsList = document.createElement('div');
-    pilotsList.className = 'tm-pilots-list';
-
-    if (!drivers.length) {
-        const emptyPilot = document.createElement('div');
-        emptyPilot.className = 'tm-pilot-row empty';
-        emptyPilot.textContent = 'Нет данных';
-        pilotsList.appendChild(emptyPilot);
-    } else {
-        drivers.forEach(driver => {
-            const pilotRow = document.createElement('div');
-            pilotRow.className = 'tm-pilot-row';
-            pilotRow.addEventListener('click', () => openDriverModal(driver));
-
-            const numberSpan = document.createElement('span');
-            numberSpan.className = 'tm-pilot-number';
-            numberSpan.textContent = driver.number;
-
-            const nameSpan = document.createElement('span');
-            nameSpan.className = 'tm-pilot-name';
-            nameSpan.textContent = driver.name;
-
-            const flagImgEl = document.createElement('img');
-            flagImgEl.src = `Images/Flags/${driver.country}.svg`;
-            flagImgEl.title = getCountryName(driver.country);
-            flagImgEl.alt = driver.country;
-            flagImgEl.className = 'tm-pilot-flag';
-
-            pilotRow.append(numberSpan, nameSpan, flagImgEl);
-            pilotsList.appendChild(pilotRow);
-        });
-    }
-
-    pilotsSection.appendChild(pilotsList);
-
-    modalContent.append(closeBtn, fullLogoContainer, fullNameEl, divider1, infoRow1, divider2, infoRow2, divider3, infoRow3, divider4, pilotsSection);
-    modal.appendChild(modalContent);
-
+    /* -------- правая колонка -------- */
     const rightColumn = document.createElement('div');
     rightColumn.className = 'tm-right-column';
 
     const bolidPanel = document.createElement('div');
     bolidPanel.className = 'tm-bolid-panel';
-    bolidPanel.style.setProperty('--team-color', team.color);
+    bolidPanel.innerHTML = `
+        <div class="tm-bolid-shot"><img class="tm-bolid-img" src="Images/Bolid/${slug}.avif" alt="${team.car}"></div>
+        <div class="tm-specs">
+            <div class="tm-spec"><span class="tm-spec-label">Шасси</span><span class="tm-spec-value">${team.car}</span></div>
+            <div class="tm-spec"><span class="tm-spec-label">Двигатель</span><span class="tm-spec-value">${team.engine}</span></div>
+            <div class="tm-spec"><span class="tm-spec-label">Топливо</span><span class="tm-spec-value">${team.fuel}</span></div>
+            <div class="tm-spec"><span class="tm-spec-label">Силовая установка</span><span class="tm-spec-value">${team.power}</span></div>
+        </div>`;
 
-    const bolidPattern = document.createElement('div');
-    bolidPattern.className = 'tm-bolid-pattern';
-    bolidPattern.innerHTML = TEAM_PATTERN_SVG;
-    bolidPanel.appendChild(bolidPattern);
-
-    const bolidOverlay = document.createElement('div');
-    bolidOverlay.className = 'tm-bolid-overlay';
-    bolidPanel.appendChild(bolidOverlay);
-
-    const bolidContent = document.createElement('div');
-    bolidContent.style.cssText = 'position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center;';
-
-    const bolidImg = document.createElement('img');
-    bolidImg.src = `Images/Bolid/${teamSlug(team.shortName)}.avif`;
-    bolidImg.alt = team.car;
-    bolidImg.className = 'tm-bolid-img';
+    const bolidImg = bolidPanel.querySelector('.tm-bolid-img');
     bolidImg.onerror = () => { bolidPanel.style.display = 'none'; };
-    bolidContent.appendChild(bolidImg);
 
-    const bolidInfo = document.createElement('div');
-    bolidInfo.className = 'tm-bolid-info';
-    bolidInfo.innerHTML = `
-        <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Шасси</span>
-            <span class="tm-bolid-info-value">${team.car}</span>
-        </div>
-        <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Двигатель</span>
-            <span class="tm-bolid-info-value">${team.engine}</span>
-        </div>
-        <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Топливо</span>
-            <span class="tm-bolid-info-value">${team.fuel}</span>
-        </div>
-        <div class="tm-bolid-info-cell">
-            <span class="tm-bolid-info-label">Силовая установка</span>
-            <span class="tm-bolid-info-value">${team.power}</span>
-        </div>
-    `;
-    bolidContent.appendChild(bolidInfo);
-    bolidPanel.appendChild(bolidContent);
-    rightColumn.appendChild(bolidPanel);
+    const createPilotRow = (driver, reserve = false) => {
+        const row = document.createElement('div');
+        row.className = 'tm-pilot-row' + (reserve ? ' reserve' : '');
+        row.addEventListener('click', () => openDriverModal(driver));
 
-    overlay.append(leftColumn, modal, rightColumn);
+        const number = document.createElement('span');
+        number.className = 'tm-pilot-number';
+        number.textContent = driver.number;
+
+        const name = document.createElement('span');
+        name.className = 'tm-pilot-name';
+        name.textContent = driver.name;
+
+        const flag = document.createElement('img');
+        flag.className = 'tm-pilot-flag';
+        flag.src = `Images/Flags/${driver.country}.svg`;
+        flag.alt = driver.country;
+        flag.title = getCountryName(driver.country);
+        flag.onerror = () => { flag.style.display = 'none'; };
+
+        row.append(number, name, flag);
+        return row;
+    };
+
+    const pilotsPanel = document.createElement('div');
+    pilotsPanel.className = 'tm-pilots-panel';
+
+    const pilotsCap = document.createElement('div');
+    pilotsCap.className = 'tm-panel-cap';
+    pilotsCap.textContent = 'Пилоты';
+    pilotsPanel.appendChild(pilotsCap);
+
+    const pilotsList = document.createElement('div');
+    pilotsList.className = 'tm-pilots-list';
+
+    if (!drivers.length) {
+        const empty = document.createElement('div');
+        empty.className = 'tm-pilot-row empty';
+        empty.textContent = 'Нет данных';
+        pilotsList.appendChild(empty);
+    } else {
+        drivers.forEach(driver => pilotsList.appendChild(createPilotRow(driver)));
+    }
+    pilotsPanel.appendChild(pilotsList);
+
+    if (reserveDrivers.length) {
+        const reserveTitle = document.createElement('div');
+        reserveTitle.className = 'tm-pilots-sub';
+        reserveTitle.textContent = 'Резервные пилоты';
+
+        const reserveList = document.createElement('div');
+        reserveList.className = 'tm-pilots-list tm-pilots-list--res';
+        reserveDrivers.forEach(driver => reserveList.appendChild(createPilotRow(driver, true)));
+
+        pilotsPanel.append(reserveTitle, reserveList);
+    }
+
+    rightColumn.append(bolidPanel, pilotsPanel);
+    shell.append(leftColumn, mainColumn, rightColumn, closeBtn);
+    overlay.appendChild(shell);
 
     overlay.addEventListener('click', e => {
         if (e.target === overlay) closeModal();
@@ -744,27 +702,5 @@ const openTeamModal = team => {
 
     document.body.appendChild(overlay);
 
-    requestAnimationFrame(() => {
-        Object.assign(statsPanel.style, { transition: 'none', opacity: '0', transform: 'translateX(-40px)' });
-        Object.assign(bolidPanel.style, { transition: 'none', opacity: '0', transform: 'translateX(40px)' });
-
-        requestAnimationFrame(() => {
-            const anim = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            Object.assign(statsPanel.style, {
-                transition: anim,
-                transitionDelay: '0.2s',
-                opacity: '1',
-                transform: 'translateX(0)'
-            });
-            Object.assign(bolidPanel.style, {
-                transition: anim,
-                transitionDelay: '0.2s',
-                opacity: '1',
-                transform: 'translateX(0)'
-            });
-        });
-
-        overlay.classList.add('active');
-        modal.classList.add('active');
-    });
+    requestAnimationFrame(() => overlay.classList.add('active'));
 };
