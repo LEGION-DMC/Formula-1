@@ -1962,15 +1962,15 @@ h1, h2 {
 
 .driver-reserve-badge {
     position: absolute;
-    left: 5cqw;
-    bottom: 4.5cqw;
+    left: 4.5cqw;
+    bottom: 3cqw;
     z-index: 4;
-    padding: 1.5px 7px;
+    padding: 2px 6px;
     border-radius: 3px;
     border: 1px solid rgba(255, 255, 255, 0.22);
     background: rgba(0, 0, 0, 0.42);
     font-family: 'F1Title', sans-serif;
-    font-size: clamp(7px, 2.5cqw, 10px);
+    font-size: clamp(8px, 2.9cqw, 12px);
     letter-spacing: 0.13em;
     text-transform: uppercase;
     color: #d6dde8;
@@ -5355,7 +5355,7 @@ h1, h2 {
     position: relative;
     display: grid;
     grid-template-columns: 21% minmax(0, 1fr);
-    aspect-ratio: 2.45 / 1;
+    aspect-ratio: 2.8 / 1;
     border: 1px solid color-mix(in srgb, var(--card-accent) 38%, #2a2f39);
     border-radius: 14px;
     overflow: hidden;
