@@ -1305,91 +1305,95 @@ body {
     transition: all 0.3s ease;
 }
 
-.track-modal { max-width: 100%; max-height: 70vh; }
+.track-modal { max-width: 100%; max-height: none; overflow: visible; }
 
-.track-modal-layout {
-    flex-direction: column; 
+.track-modal-content { width: 100%; }
+
+.track-shell {
+    padding: 16px 14px;
+    border-radius: 14px;
 }
 
-.tm-track-image {
+.track-shell-pattern { width: 100%; }
+
+.track-shell-grid { flex-direction: column; }
+
+.track-main-col { order: -1; padding: 0; }
+
+.track-title { font-size: 26px; }
+
+.track-loc { font-size: 10px; gap: 4px 9px; }
+
+.track-map { min-height: 0; margin-top: 10px; }
+
+.track-map img { max-height: 185px; }
+
+.track-ghost { top: -2px; }
+
+.track-stats-col {
+    flex: none;
     width: 100%;
-    min-width: auto;
-    height: 260px;
-    padding: 15px;
+    padding: 14px 0 0;
+    margin-top: 14px;
+    border-right: none;
+    border-top: 1px solid rgba(225, 6, 0, 0.35);
 }
 
-.tm-track-info {
+.track-stats-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.track-stats-list .track-stat { border-top: none; padding: 7px 0; }
+
+.track-stat-pair { gap: 0 14px; }
+
+.track-stat-pair > .track-stat + .track-stat::before { top: 3px; height: 21px; }
+
+.track-stat-num { font-size: 21px; }
+
+.track-stat--text .track-stat-num { font-size: 13px; }
+
+.track-stat-lbl { font-size: 7.5px; }
+
+.track-winners-col {
+    flex: none;
     width: 100%;
-    padding: 10px 15px 15px;
-}
-
-.tm-track-info .tm-header {
-    padding-top: 0px;
-}
-
-.tm-detail-row-inline .tm-detail-row {
-    flex: 1;
-    min-width: 0;
-    font-size: 0.8rem;
-}
-    
-.tm-stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-}
-
-.tm-stat-value { font-size: 1.2rem; }
-
-.tm-track-info .tm-divider {
-    display: block !important;    
-}
-
-.video-modal {
-    width: 90%;
-}
- 
-.video-modal-title {
-    font-size: 15px;
-}
-    
-.video-modal-close {
-    display: flex;
-    position: absolute;
-    top: 4px; right: 5px;
-    padding-bottom: 4px;
-    width: 22px; height: 22px;
-    border-radius: 20%;
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--border-color);
-    color: var(--text-gray);
-    font-size: 1rem;
-    cursor: pointer;
-    z-index: 10;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.video-modal-close:hover {
-    background: var(--red-accent);
-    color: #fff;
-    border-color: var(--red-accent);
-}
-
-.tm-race-result-columns {
-    grid-template-columns: 1fr;
-    gap: 5px;
-}
-
-.tm-race-result-col--dnf {
+    padding: 14px 0 0;
+    margin-top: 14px;
     border-left: none;
-    border-top: 1px solid rgba(225, 6, 0, 0.25);
-    padding-left: 0;
-    padding-top: 5px;
+    border-top: 1px solid rgba(225, 6, 0, 0.35);
 }
 
-.tm-race-result-name { font-size: 0.75rem; }
-.tm-race-result-pos { font-size: 0.75rem; min-width: 24px; }
+.track-winners-list { margin-top: 9px; }
+
+.track-records { grid-template-columns: 1fr 1fr; }
+
+.track-rec-time { font-size: 16px; }
+
+.track-result { margin-top: 16px; padding-top: 12px; }
+
+.track-result-grid { grid-template-columns: 1fr; gap: 12px; }
+
+.track-result-col--out {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: 0;
+    padding-top: 10px;
+}
+
+.track-result-list--two {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+    gap: 3px;
+}
+
+.track-result-name { font-size: 9.5px; }
+
+.track-result-row { padding: 5px 6px; gap: 5px; }
 
 .track-modal-overlay {
     align-items: flex-start;  

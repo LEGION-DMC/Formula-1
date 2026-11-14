@@ -5856,6 +5856,10 @@ h1, h2 {
 /* МОДАЛЬНОЕ ОКНО ТРАССЫ                      */
 /* ========================================== */
 
+/* ========================================== */
+/* МОДАЛЬНОЕ ОКНО ТРАССЫ                      */
+/* ========================================== */
+
 .track-modal-overlay {
     position: fixed;
     top: 0;
@@ -5864,6 +5868,7 @@ h1, h2 {
     height: 100%;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -5884,480 +5889,745 @@ h1, h2 {
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;                    /* отступ между трассой и результатами */
+    margin-top: -5%;
+    padding: 6px;
     transform: scale(0.9) translateY(20px);
     transition: transform 0.4s ease;
-    padding: 6px;                 /* немного воздуха по краям */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(225, 6, 0, 0.5) transparent;
 }
 
 .track-modal.active {
     transform: scale(1) translateY(0);
 }
 
+.track-modal ::-webkit-scrollbar,
+.track-modal::-webkit-scrollbar { width: 8px; }
+
+.track-modal::-webkit-scrollbar-thumb {
+    background: rgba(225, 6, 0, 0.45);
+    border-radius: 4px;
+}
+
 .track-modal-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     width: 100%;
 }
 
-/* Обёртка трассы — изолирует паттерн */
-.track-modal-layout-wrapper {
+/* ---------------------------------------------- */
+/* ПЛАШКА                                          */
+/* ---------------------------------------------- */
+.track-shell {
+    --tc: #E10600;
     position: relative;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    overflow: hidden;
-    isolation: isolate;          /* создаёт stacking context */
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.track-modal-layout-wrapper .track-modal-pattern {
-    position: absolute;
-    top: -30px;
-    left: 0;
-    width: 100%;
-    height: calc(100% + 50px);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.2;
-}
-
-.track-modal-layout-wrapper .track-modal-pattern svg {
-    width: 100%;
-    height: 100%;
-}
-
-.track-modal-layout-wrapper .track-modal-pattern svg g {
-    fill: var(--red-accent);
-}
-
-.track-modal-layout-wrapper .track-modal-overlay-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg,
-        rgba(0, 0, 0, 0.8) 0%,
-        rgba(0, 0, 0, 0.6) 50%,
-        rgba(0, 0, 0, 0.1) 100%);
-    pointer-events: none;
-    z-index: 1;
-}
-
-.track-modal-layout-wrapper .track-modal-layout {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    border: none;
-    border-radius: 0;
-    overflow: hidden;
-    background: transparent;
-}
-
-/* ========================================== */
-/* ВЕРХНИЙ РЯД: ТРАССА + ТОП ПИЛОТОВ          */
-/* ========================================== */
-
-.track-modal-body {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 286px;
-    grid-template-areas:
-        "track winners"
-        "results .";
-    gap: 10px;
-    width: 100%;
-}
-
-.track-modal-body > .track-modal-layout-wrapper {
-    grid-area: track;
-}
-
-.track-modal-body > .tm-race-result-panel {
-    grid-area: results;
-}
-
-.track-modal-body > .tm-winners-panel {
-    grid-area: winners;
-}
-
-/* ========================================== */
-/* ПЛАШКА: ТОП-5 ПИЛОТОВ ПО ПОБЕДАМ НА ТРАССЕ */
-/* ========================================== */
-
-.tm-winners-panel {
-    position: relative;
-    height: 240px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
+    border-radius: 16px;
     overflow: hidden;
     isolation: isolate;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    opacity: 0;
-    animation: tmWinnersSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background:
+        radial-gradient(70% 80% at 4% 100%,
+            color-mix(in srgb, var(--tc) 15%, transparent) 0%,
+            transparent 65%),
+        radial-gradient(80% 90% at 100% 0%,
+            color-mix(in srgb, var(--tc) 12%, transparent) 0%,
+            transparent 60%),
+        #07080b;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+    padding: 20px 20px;
 }
 
-@keyframes tmWinnersSlideIn {
-    from {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.tm-winners-pattern {
+.track-shell::before {
+    content: '';
     position: absolute;
-    top: -30px;
-    left: 0;
-    width: 100%;
-    height: calc(100% + 150px);
+    left: -18%;
+    top: -40%;
+    width: 72%;
+    height: 190%;
+    background: linear-gradient(100deg, rgba(225, 6, 0, 0.1), transparent 62%);
+    transform: rotate(12deg);
     pointer-events: none;
     z-index: 0;
-    opacity: 0.2;
 }
 
-.tm-winners-pattern svg {
-    width: 100%;
-    height: 100%;
-}
-
-.tm-winners-pattern svg g {
-    fill: var(--red-accent);
-}
-
-.tm-winners-overlay {
+/* паттерн клетки */
+.track-shell-pattern {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    width: 84%;
+    height: 108%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.05;
+    mask-image: linear-gradient(165deg, #000 0%, rgba(0, 0, 0, 0.3) 45%, transparent 72%);
+    -webkit-mask-image: linear-gradient(165deg, #000 0%, rgba(0, 0, 0, 0.3) 45%, transparent 72%);
+}
+
+.track-shell-pattern svg {
+    display: block;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg,
-        rgba(0, 0, 0, 0.85) 0%,
-        rgba(0, 0, 0, 0.6) 55%,
-        rgba(0, 0, 0, 0.2) 100%);
-    pointer-events: none;
-    z-index: 1;
 }
 
-.tm-winners-content {
+.track-shell-pattern svg g {
+    fill: var(--tc);
+}
+
+.track-shell-grid {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    flex: 1;
-    padding: 10px 10px 10px;
+    align-items: stretch;
 }
 
-.tm-winners-header {
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.tm-winners-title {
+/* ---------------------------------------------- */
+/* КАПСЫ                                           */
+/* ---------------------------------------------- */
+.track-cap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     font-family: 'F1Title', sans-serif;
-    font-size: 1.3rem;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: linear-gradient(135deg, #e10600, #ff4d4d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.tm-winners-subtitle {
-    display: block;
-    margin-top: 2px;
-    font-family: 'F1Title', 'F1Text', sans-serif;
-    font-size: 0.8rem;
-    color: #888;
+    font-size: 10px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    color: #8b96a8;
 }
 
-.tm-winners-list {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: 6px;
-}
-
-.tm-winners-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 8px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid transparent;
-    border-left: 2px solid var(--team-color, #E10600);
-    cursor: default;
-    transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.tm-winners-row.clickable {
-    cursor: pointer;
-}
-
-.tm-winners-row:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(4px);
-}
-
-.tm-winners-row:hover .tm-winners-name {
-    color: var(--team-color, #FFFFFF);
-}
-
-.tm-winners-pos {
-    font-family: 'F1Numbers', sans-serif;
-    font-size: 0.9rem;
-    color: #777;
-    min-width: 8px;
-    text-align: center;
+.track-cap::before {
+    content: '';
+    width: 2px;
+    height: 9px;
+    margin-top: -1px;
+    border-radius: 1px;
     flex-shrink: 0;
+    background: var(--tc, #E10600);
 }
 
-.tm-winners-row.winner .tm-winners-pos {
-    color: #FFD700;
-}
-
-.tm-winners-flag {
-    width: 20px;
-    height: 15px;
-    object-fit: cover;
-    border-radius: 2px;
-    flex-shrink: 0;
-}
-
-.tm-winners-name {
-    font-family: 'F1Title', 'F1Text', sans-serif;
-    font-size: 0.8rem;
-    color: var(--text-light, #ddd);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex: 1;
-    min-width: 0;
-    padding-top: 2px;
-    transition: color 0.2s ease;
-    letter-spacing: 1px;
-}
-
-.tm-winners-count {
-    font-family: 'F1Numbers', sans-serif;
-    font-size: 1.08rem;
-    font-weight: 600;
-    color: #E10600;
-    flex-shrink: 0;
-    min-width: 15px;
-    text-align: right;
-}
-
-.tm-winners-empty {
+.track-cap-hint {
+    margin-left: auto;
     font-family: 'F1Text', sans-serif;
-    font-size: 1.5rem;
-    color: #666;
-    text-align: center;
-    font-style: italic;
-    display: flex;
-    align-items: center;     
-    justify-content: center; 
-    min-height: 100%;       
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: #5d6878;
+    white-space: nowrap;
 }
 
-@media (max-width: 1100px) {
-    .track-modal-body {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "track"
-            "winners"
-            "results";
-    }
-
-    .tm-winners-panel {
-        min-height: 0;
-    }
-}
-
-/* ========================================== */
-/* ПЛАШКА ТРАССЫ                             */
-/* ========================================== */
-
-.tm-track-image {
-    width: 350px;
-    min-height: 320px;
-    max-height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    flex-shrink: 0;
-    overflow: hidden;
-}
-
-.tm-track-image img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    object-position: center;
-    display: block;filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
-}
-
-.tm-track-info {
-    width: 100%;
-    padding: 10px 15px 10px 10px;
+/* ---------------------------------------------- */
+/* ЛЕВАЯ КОЛОНКА — ХАРАКТЕРИСТИКИ                  */
+/* ---------------------------------------------- */
+.track-stats-col {
+    flex: 0 0 232px;
+    width: 232px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(225, 6, 0, 0.45);
 }
 
-.tm-track-info .tm-header {
+.track-stats-list {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-top: 3px;
-}
-
-.tm-track-info .tm-header img {
-    width: 25px;
-    height: 20px;
-    border-radius: 4px;
-    margin-top: -5px;
-}
-
-.tm-track-info .tm-header h2 {
-    font-family: 'F1Title', sans-serif;
-    font-size: 1.3rem;
-    color: var(--text-light);
-    margin: 0;
-    padding: 0;
-    border-bottom: none;
-}
-
-.tm-track-info .tm-divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(225,6,0,0.4) 10%, rgba(225,6,0,0.4) 90%, transparent);
-    margin: 2px 0;
-}
-
-.tm-track-info .tm-detail-row-inline {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.tm-detail-row-inline .tm-detail-row {
+    flex-direction: column;
     flex: 1;
-    min-width: 0;
-    font-size: 0.8rem;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
-.tm-track-info .tm-detail-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    color: var(--text-light);
-    word-spacing: -3px;
-}
-
-.tm-track-info .tm-detail-row .calendar-icon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    opacity: 0.7;
-}
-
-.tm-track-info .tm-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    text-align: center;
-}
-
-.tm-track-info .tm-stats-grid2 {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 6px;
-    text-align: center;
-}
-
-.tm-track-info .tm-stats-grid3 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    text-align: center;
-}
-
-.tm-track-info .tm-stat-cell {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    padding: 6px 0px 6px 0px;
+.track-stat {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    transition: all 0.25s ease;
-    border: 1px solid transparent;
+    padding: 9px 0 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.tm-track-info .tm-stat-cell:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.0);
-    border: 1px solid var(--red-accent);
+.track-stat:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.tm-track-info .tm-stat-value {
+.track-stat-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.track-stat-pair > .track-stat {
+    border-top: none;
+    border-bottom: none;
+}
+
+.track-stat-pair > .track-stat + .track-stat {
+    position: relative;
+}
+
+.track-stat-pair > .track-stat + .track-stat::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 5px;
+    width: 1px;
+    height: 48px;
+    border-radius: 1px;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(225, 6, 0, 0.45) 18%,
+        rgba(225, 6, 0, 0.45) 82%,
+        transparent 100%);
+}
+
+.track-stat-num {
     font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--team-color, #E10600);
+    font-size: 28px;
+    line-height: 0.95;
+    color: color-mix(in srgb, var(--tc) 68%, #fff);
+    white-space: nowrap;
 }
 
-.tm-track-info .tm-stat-value2 {
-    font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--team-color, #E10600);
+.track-stat--text .track-stat-num {
+    font-size: 18px;
+    line-height: 1.2;
+    white-space: normal;
 }
 
-.tm-track-info .tm-stat-value-sub {
-    font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 0.63rem;
-    color: #999;
+.track-stat-unit {
+    font-size: 0.55em;
+    letter-spacing: 0.02em;
+    margin-left: 2px;
 }
 
-.tm-track-info .tm-stat-value-direction {
-    font-family: 'F1Numbers', 'F1Title', sans-serif;
-    color: var(--team-color, #E10600);
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: -15px 0 -3px 0;
-}
-
-.tm-track-info .tm-stat-label {
+.track-stat-lbl {
     font-family: 'F1Text', sans-serif;
-    font-size: 0.65rem;
-    word-spacing: -2px;
-    color: #888;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
+    color: #6b7789;
 }
 
-.tm-track-info .gp-year-suffix {
-    font-size: 0.7rem;
+/* ---------------------------------------------- */
+/* ЦЕНТРАЛЬНАЯ КОЛОНКА — ТРАССА                    */
+/* ---------------------------------------------- */
+.track-main-col {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 15px;
+    display: flex;
 }
 
+.track-main-inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.track-kicker {
+    display: flex;
+    align-items: center;
+    font-family: 'F1Title', sans-serif;
+    font-size: 10px;
+    padding-left: 1px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--tc) 58%, #fff);
+}
+
+.track-head {
+    position: relative;
+}
+
+
+.track-title {
+    margin: 0;
+    padding: 0;
+    font-family: 'F1Title', sans-serif;
+    font-weight: 400;
+    font-size: 33px;
+    line-height: 1.02;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 10px 38px rgba(0, 0, 0, 0.6);
+    border: none;
+}
+
+.track-loc {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+    margin-top: 0px;
+    padding-left: 2px;
+    font-family: 'F1Text', sans-serif;
+    font-size: 12.5px;
+    color: #9fabbc;
+}
+
+.track-loc-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+}
+
+.track-loc-item .track-loc-flag {
+    width: 18px;
+    height: 14px;
+    border-radius: 2px;
+    object-fit: cover;
+    opacity: 1;
+}
+
+.track-loc-sep {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #4a5566;
+    flex-shrink: 0;
+}
+
+.track-map {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    min-height: 170px;
+}
+
+.track-map img {
+    display: block;
+    width: 100%;
+    max-height: 320px;
+    object-fit: contain;
+    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.65));
+}
+
+.track-ghost {
+    position: absolute;
+    right: 0;
+    top: -28px;
+    font-family: 'F1Title', sans-serif;
+    letter-spacing: -0.03em;
+    color: transparent;
+    -webkit-text-stroke: 0.8px color-mix(in srgb, var(--tc) 32%, transparent);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 0;
+}
+
+/* ---------------------------------------------- */
+/* ПРАВАЯ КОЛОНКА — ПОБЕДИТЕЛИ + РЕКОРДЫ           */
+/* ---------------------------------------------- */
+.track-winners-col {
+    flex: 0 0 260px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    border-left: 1px solid rgba(225, 6, 0, 0.45);
+}
+
+.track-winners-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 5px;
+    margin-top: 11px;
+}
+
+.track-winner-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 9px;
+    border-radius: 7px;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012));
+    border: 1px solid transparent;
+    cursor: default;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.track-winner-row.clickable {
+    cursor: pointer;
+}
+
+.track-winner-row:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: color-mix(in srgb, var(--team-color, #E10600) 45%, transparent);
+    transform: translateX(3px);
+}
+
+.track-winner-pos {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 12px;
+    color: #6b7789;
+    min-width: 10px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.track-winner-row.winner .track-winner-pos {
+    color: #ffd700;
+}
+
+.track-winner-flag {
+    width: 18px;
+    height: 13px;
+    border-radius: 2px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.track-winner-name {
+    flex: 1;
+    min-width: 0;
+    font-family: 'F1Text', sans-serif;
+    font-size: 12,5px;
+    color: #e7eefb;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-winner-logo {
+    width: 30px;
+    height: 16px;
+    object-fit: contain;
+    opacity: 0.85;
+    flex-shrink: 0;
+}
+
+.track-winner-logo--dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.track-winner-logo--dot::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--team-color) 80%, #fff);
+}
+
+.track-winner-count {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 15px;
+    color: color-mix(in srgb, var(--tc) 72%, #fff);
+    flex-shrink: 0;
+}
+
+.track-winners-empty {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+    padding: 10px 0;
+}
+
+.track-records-block {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.track-records {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 9px;
+}
+
+.track-rec {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.track-rec-lbl {
+    font-family: 'F1Text', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #6b7789;
+}
+
+.track-rec-time {
+    font-family: 'F1Numbers', 'F1Title', sans-serif;
+    font-size: 20px;
+    color: color-mix(in srgb, var(--tc) 66%, #fff);
+}
+
+.track-rec-sub {
+    font-family: 'F1Text', sans-serif;
+    font-size: 11px;
+    color: #7d8899;
+    white-space: nowrap;
+    overflow: hidden;
+    word-spacing: -0.5em;
+    letter-spacing: 0.05em;
+    text-overflow: ellipsis;
+}
+
+/* ---------------------------------------------- */
+/* РЕЗУЛЬТАТ ГОНКИ                                 */
+/* ---------------------------------------------- */
+.track-result {
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.track-result.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.track-result-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.track-result-toggle {
+    margin-left: auto;
+    font-family: 'F1Text', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #cfd8e6;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.track-result-toggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: translateY(-1px);
+}
+
+.track-result-body {
+    margin-top: 10px;
+    transition: filter 0.4s ease, -webkit-filter 0.4s ease;
+}
+
+.track-result-body.blurred {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.track-result-grid {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 5px;
+}
+
+.track-result-col {
+    min-width: 0;
+}
+
+.track-result-col--out {
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: 16px;
+}
+
+.track-result-col-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7d8899;
+    margin-bottom: 6px;
+}
+
+.track-result-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.track-result-list--two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, auto);
+    grid-auto-flow: column;
+    gap: 3px 10px;
+}
+
+.track-result-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 5px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid transparent;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.track-result-row:hover {
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateX(3px);
+}
+
+.track-result-row.is-out {
+    background: rgba(225, 6, 0, 0.05);
+}
+
+.track-result-pos {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 11.5px;
+    color: #6b7789;
+    min-width: 12px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.track-result-pos.winner {
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.45);
+}
+
+.track-result-logo {
+    width: 25px;
+    height: 15px;
+    object-fit: contain;
+    opacity: 0.8;
+    flex-shrink: 0;
+}
+
+.track-result-flag {
+    width: 18px;
+    height: 13px;
+    border-radius: 2px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.track-result-name {
+    flex: 1;
+    min-width: 0;
+    font-family: 'F1Text', sans-serif;
+    color: #e2e9f4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-result-points {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 12.5px;
+    color: #6b7789;
+    flex-shrink: 0;
+}
+
+.track-result-points.has-points {
+    color: #cfd8e6;
+}
+
+.track-result-status {
+    font-family: 'F1Title', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+}
+
+.track-result-status.dnf { color: #ff5a4f; }
+.track-result-status.dns { color: #ffc107; }
+.track-result-status.dsq { color: #9aa3b2; }
+
+.track-result-empty {
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.75rem;
+    color: #666;
+    font-style: italic;
+    padding: 6px 0;
+}
+
+/* ---------------------------------------------- */
+/* АНИМАЦИИ ПОЯВЛЕНИЯ                              */
+/* ---------------------------------------------- */
+@keyframes trackRise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes trackPop {
+    from { opacity: 0; transform: translateY(14px) scale(0.97); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes trackFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes trackPatternIn {
+    from { opacity: 0; }
+    to { opacity: 0.05; }
+}
+
+.track-modal-overlay.active .track-shell-pattern {
+    animation: trackPatternIn 1s ease 0.05s both;
+}
+
+.track-modal-overlay.active .track-stat {
+    animation: trackRise 0.4s cubic-bezier(0.22, 0.7, 0.3, 1) both;
+}
+
+.track-modal-overlay.active .track-stat:nth-child(1) { animation-delay: 0.10s; }
+.track-modal-overlay.active .track-stat:nth-child(2) { animation-delay: 0.145s; }
+.track-modal-overlay.active .track-stat:nth-child(3) { animation-delay: 0.19s; }
+.track-modal-overlay.active .track-stat:nth-child(4) { animation-delay: 0.235s; }
+.track-modal-overlay.active .track-stat:nth-child(5) { animation-delay: 0.28s; }
+.track-modal-overlay.active .track-stat:nth-child(6) { animation-delay: 0.325s; }
+.track-modal-overlay.active .track-stat:nth-child(7) { animation-delay: 0.37s; }
+
+.track-modal-overlay.active .track-kicker { animation: trackRise 0.4s cubic-bezier(0.22, 0.7, 0.3, 1) 0.12s both; }
+.track-modal-overlay.active .track-head { animation: trackRise 0.42s cubic-bezier(0.22, 0.7, 0.3, 1) 0.16s both; }
+.track-modal-overlay.active .track-loc { animation: trackRise 0.4s cubic-bezier(0.22, 0.7, 0.3, 1) 0.2s both; }
+.track-modal-overlay.active .track-ghost { animation: trackFade 0.9s ease 0.18s both; }
+.track-modal-overlay.active .track-map img { animation: trackPop 0.6s cubic-bezier(0.22, 0.7, 0.3, 1) 0.24s both; }
+
+.track-modal-overlay.active .track-winners-col > .track-cap { animation: trackRise 0.4s cubic-bezier(0.22, 0.7, 0.3, 1) 0.26s both; }
+
+.track-modal-overlay.active .track-winner-row {
+    animation: trackRise 0.38s cubic-bezier(0.22, 0.7, 0.3, 1) both;
+}
+
+.track-modal-overlay.active .track-winner-row:nth-child(1) { animation-delay: 0.30s; }
+.track-modal-overlay.active .track-winner-row:nth-child(2) { animation-delay: 0.35s; }
+.track-modal-overlay.active .track-winner-row:nth-child(3) { animation-delay: 0.40s; }
+.track-modal-overlay.active .track-winner-row:nth-child(4) { animation-delay: 0.45s; }
+.track-modal-overlay.active .track-winner-row:nth-child(5) { animation-delay: 0.50s; }
+
+.track-modal-overlay.active .track-records-block { animation: trackRise 0.42s cubic-bezier(0.22, 0.7, 0.3, 1) 0.14s both; }
+
+.track-modal-overlay.active .track-result.visible .track-result-body { animation: trackFade 0.5s ease both; }
 .calendar-card.highlight {
     border-color: var(--card-accent);
     border-width: 1.8px;
@@ -6656,282 +6926,3 @@ h1, h2 {
     color: #fff;
 }
 
-.tm-race-result-panel {
-    margin-top: 0;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;      
-    background: rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.tm-race-result-panel.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Клетчатый фон */
-.tm-race-result-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 140%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-}
-
-.tm-race-result-pattern svg {
-    width: 100%;
-    height: 100%;
-}
-
-.tm-race-result-pattern svg g {
-    fill: var(--red-accent);
-}
-
-.tm-race-result-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg,
-        rgba(0, 0, 0, 0.85) 0%,
-        rgba(0, 0, 0, 0.55) 50%,
-        rgba(0, 0, 0, 0.15) 100%);
-    pointer-events: none;
-    z-index: 1;
-}
-
-.tm-race-result-content {
-    position: relative;
-    z-index: 2;
-}
-
-.tm-race-result-header {
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.tm-race-result-title {
-    font-family: 'F1Title', sans-serif;
-    font-size: 1rem;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: linear-gradient(135deg, #e10600, #ff4d4d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-align: left;
-}
-
-/* ===== Две колонки ===== */
-.tm-race-result-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 11px;
-}
-
-.tm-race-result-col {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    min-width: 0;
-}
-
-.tm-race-result-col--dnf {
-    border-left: 1px solid rgba(225, 6, 0, 0.25);
-    padding-left: 10px;
-}
-
-.tm-race-result-col-title {
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.6rem;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: left;
-    padding-bottom: 3px;
-    margin-bottom: 1px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Список — одна вертикальная колонка */
-.tm-race-result-list {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.tm-race-result-empty {
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.75rem;
-    color: #666;
-    text-align: center;
-    padding: 10px 0;
-    font-style: italic;
-}
-
-/* ===== Строка ===== */
-.tm-race-result-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 8px 3px 8px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.tm-race-result-row:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--team-color, var(--red-accent));
-    transform: translateX(3px);
-}
-
-.tm-race-result-row:active {
-    transform: scale(0.98);
-}
-
-.tm-race-result-pos {
-    font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 0.7rem;
-    color: #888;
-    min-width: 15px;
-    text-align: center;
-    flex-shrink: 0;
-}
-
-.tm-race-result-pos.winner {
-    color: #FFD700;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-}
-
-.tm-race-result-pos.status {
-    font-family: 'F1Title', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.5px;
-    padding-top: 2px;
-}
-
-.tm-race-result-pos.status.dnf { color: #E10600; }
-.tm-race-result-pos.status.dns { color: #FFC107; }
-.tm-race-result-pos.status.dsq { color: #888888; }
-
-.tm-race-result-team-logo {
-    width: 20px;
-    height: 14px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.tm-race-result-flag {
-    width: 18px;
-    height: 13px;
-    border-radius: 2px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.tm-race-result-name {
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.8rem;
-    color: var(--text-light);
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.tm-race-result-points {
-    font-family: 'F1Numbers', 'F1Title', sans-serif;
-    font-size: 0.8rem;
-    color: #666;
-    text-align: right;
-    flex-shrink: 0;
-}
-
-.tm-race-result-points.has-points {
-    color: lightgray;
-}
-
-.tm-race-result-spoiler {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-}
-
-.tm-race-result-inner {
-    padding: 10px 10px;
-    transition: filter 0.4s ease, -webkit-filter 0.4s ease;
-}
-
-.tm-race-result-inner.blurred {
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    pointer-events: none;
-    user-select: none;
-}
-
-.tm-race-result-spoiler-overlay {
-    position: absolute;
-    inset: 0;                       /* накрывает ВСЮ обёртку */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 10;
-    cursor: pointer;
-    transition: opacity 0.4s ease;
-}
-
-.tm-race-result-spoiler-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.tm-race-result-spoiler-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    padding: 15px 20px;
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.tm-race-result-spoiler-overlay:hover .tm-race-result-spoiler-content {
-    transform: scale(1.05);
-}
-
-.tm-race-result-spoiler-text {
-    font-family: 'F1Title', sans-serif;
-    font-size: 1rem;
-    color: #fff;
-    letter-spacing: 0.5px;
-}
-
-.tm-race-result-spoiler-title {
-    font-family: 'F1Text', sans-serif;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.6);
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 6px;
-    margin-top: 2px;
-    width: 100%;
-}

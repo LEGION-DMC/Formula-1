@@ -259,12 +259,16 @@ const archiveTeamColors = {
     'manor': '#FF4C00',
     'renault': '#FFF500',
     'alfa-romeo': '#9B0000',
-    'stake': '#01C00E'
+    'stake': '#01C00E',
+    'lotus': '#FFB800',
+    'benetton': '#00A551',
+    'brawn': '#B7FF3C',
+    'tyrrell': '#1B4FA0'
 };
 
 const archiveTeams = new Set([
     'toro-rosso', 'sauber', 'alphatauri', 'force-india', 'racing-point',
-    'minardi', 'manor', 'renault', 'alfa-romeo', 'stake'
+    'minardi', 'manor', 'renault', 'alfa-romeo', 'stake', 'lotus'
 ]);
 
 const getTeamColor = teamName => {

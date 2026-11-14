@@ -254,7 +254,7 @@ const calendarData = [
 	},
 	{   id: "gp22", name: "Гран-при Лас-Вегаса",
 		track: "vegas",
-		tires: "",
+		tires: "345",
 		date: "2026-11-22 12:00",
 		quali: "2026-11-21 13:00",
 		sprint: "",
@@ -266,7 +266,7 @@ const calendarData = [
 	},
 	{   id: "gp23", name: "Гран-при Катара",
 		track: "lusail",
-		tires: "",
+		tires: "123",
 		date: "2026-11-30 00:00",
 		quali: "2026-11-29 01:00",
 		sprint: "",
@@ -278,7 +278,7 @@ const calendarData = [
 	},
 	{   id: "gp24", name: "Гран-при Абу-Даби",
 		track: "yas_marina",
-		tires: "",
+		tires: "345",
 		date: "2026-12-06 21:00",
 		quali: "2026-12-05 22:00",
 		sprint: "",
@@ -340,6 +340,14 @@ const isEventNearOrPassed = eventDateStr => {
 const formatDateLong = dateStr => new Date(dateStr).toLocaleDateString('ru-RU', {
         day: 'numeric',
         month: 'long',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+const formatDateFull = dateStr => new Date(dateStr).toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
         hour: '2-digit',
         minute: '2-digit'
     });
@@ -916,49 +924,49 @@ const autoShrinkHeaders = () => {
 
 const createRaceResultRow = (entry, pos) => {
     const row = document.createElement('div');
-    row.className = 'tm-race-result-row';
+    row.className = 'track-result-row' + (pos === null ? ' is-out' : '');
 
     const teamColor = typeof getTeamColor === 'function' ? getTeamColor(entry.team) : '#e10600';
     row.style.setProperty('--team-color', teamColor);
+    row.title = entry.driver.name;
 
-    const posEl = document.createElement('span');
     if (pos !== null) {
-        posEl.className = 'tm-race-result-pos' + (pos === 1 ? ' winner' : '');
+        const posEl = document.createElement('span');
+        posEl.className = 'track-result-pos' + (pos === 1 ? ' winner' : '');
         posEl.textContent = pos;
-    } else {
-        posEl.className = `tm-race-result-pos status ${entry.status}`;
-        posEl.textContent = entry.status.toUpperCase();
+        row.appendChild(posEl);
     }
-    row.appendChild(posEl);
 
     const logo = document.createElement('img');
-    logo.className = 'tm-race-result-team-logo';
+    logo.className = 'track-result-logo';
     logo.src = typeof getTeamLogo === 'function' ? getTeamLogo(entry.team) : '';
     logo.alt = entry.team;
     logo.onerror = () => { logo.style.display = 'none'; };
     row.appendChild(logo);
 
     const flag = document.createElement('img');
-    flag.className = 'tm-race-result-flag';
+    flag.className = 'track-result-flag';
     flag.src = `Images/Flags/${entry.driver.country}.svg`;
     flag.title = typeof getCountryName === 'function' ? getCountryName(entry.driver.country) : entry.driver.country;
     flag.onerror = () => { flag.style.display = 'none'; };
     row.appendChild(flag);
 
     const name = document.createElement('span');
-    name.className = 'tm-race-result-name';
+    name.className = 'track-result-name';
     name.textContent = entry.driver.name;
     row.appendChild(name);
 
-    const points = document.createElement('span');
-    if (entry.points !== null && entry.points > 0) {
-        points.className = 'tm-race-result-points has-points';
+    if (pos !== null) {
+        const points = document.createElement('span');
+        points.className = 'track-result-points' + (entry.points > 0 ? ' has-points' : '');
         points.textContent = entry.points;
+        row.appendChild(points);
     } else {
-        points.className = 'tm-race-result-points';
-        points.textContent = entry.points !== null ? '0' : '';
+        const tag = document.createElement('span');
+        tag.className = `track-result-status ${entry.status}`;
+        tag.textContent = entry.status.toUpperCase();
+        row.appendChild(tag);
     }
-    row.appendChild(points);
 
     row.addEventListener('click', e => {
         e.stopPropagation();
@@ -968,7 +976,7 @@ const createRaceResultRow = (entry, pos) => {
     return row;
 };
 
-const buildRaceResultPanel = gpId => {
+const buildRaceResultPanel = (gpId, gp) => {
     if (!gpId || typeof detailedResults === 'undefined') return null;
 
     const results = detailedResults[gpId];
@@ -1019,110 +1027,80 @@ const buildRaceResultPanel = gpId => {
     const top10 = finished.slice(0, 10);
 
     const panel = document.createElement('div');
-    panel.className = 'tm-race-result-panel';
+    panel.className = 'track-result';
 
-    const pattern = document.createElement('div');
-    pattern.className = 'tm-race-result-pattern';
-    pattern.innerHTML = CALENDAR_PATTERN_SVG;
-    panel.appendChild(pattern);
+    const head = document.createElement('div');
+    head.className = 'track-result-head';
 
-    const overlay = document.createElement('div');
-    overlay.className = 'tm-race-result-overlay';
-    panel.appendChild(overlay);
+    const cap = document.createElement('div');
+    cap.className = 'track-cap';
+    cap.innerHTML = `Результат гонки <span class="track-cap-hint">${gp?.date ? formatDateFull(gp.date) : ''}</span>`;
+    head.appendChild(cap);
 
-    const content = document.createElement('div');
-    content.className = 'tm-race-result-content';
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'track-result-toggle';
+    toggle.textContent = 'Показать';
+    head.appendChild(toggle);
 
-    const spoilerWrapper = document.createElement('div');
-    spoilerWrapper.className = 'tm-race-result-spoiler';
+    panel.appendChild(head);
 
-    const innerContent = document.createElement('div');
-    innerContent.className = 'tm-race-result-inner blurred';
+    const body = document.createElement('div');
+    body.className = 'track-result-body blurred';
 
-    const header = document.createElement('div');
-    header.className = 'tm-race-result-header';
-    const title = document.createElement('h3');
-    title.className = 'tm-race-result-title';
-    title.textContent = 'Результат гонки';
-    header.appendChild(title);
-    innerContent.appendChild(header);
+    const grid = document.createElement('div');
+    grid.className = 'track-result-grid';
 
-    const leftCol = document.createElement('div');
-    leftCol.className = 'tm-race-result-col tm-race-result-col--top';
+    const topCol = document.createElement('div');
+    topCol.className = 'track-result-col track-result-col--top';
 
-    const leftTitle = document.createElement('div');
-    leftTitle.className = 'tm-race-result-col-title';
-    leftTitle.textContent = 'Топ-10';
-    leftCol.appendChild(leftTitle);
+    const topTitle = document.createElement('div');
+    topTitle.className = 'track-result-col-title';
+    topTitle.textContent = 'Топ-10';
+    topCol.appendChild(topTitle);
 
-    const leftList = document.createElement('div');
-    leftList.className = 'tm-race-result-list';
+    const topList = document.createElement('div');
+    topList.className = 'track-result-list track-result-list--two';
 
     if (!top10.length) {
-        const emptyMsg = document.createElement('div');
-        emptyMsg.className = 'tm-race-result-empty';
-        emptyMsg.textContent = 'Нет финишировавших';
-        leftList.appendChild(emptyMsg);
+        const empty = document.createElement('div');
+        empty.className = 'track-result-empty';
+        empty.textContent = 'Нет финишировавших';
+        topList.appendChild(empty);
     } else {
-        top10.forEach((entry, index) => leftList.appendChild(createRaceResultRow(entry, index + 1)));
+        top10.forEach((entry, index) => topList.appendChild(createRaceResultRow(entry, index + 1)));
     }
-    leftCol.appendChild(leftList);
+    topCol.appendChild(topList);
 
-    const rightCol = document.createElement('div');
-    rightCol.className = 'tm-race-result-col tm-race-result-col--dnf';
+    const outCol = document.createElement('div');
+    outCol.className = 'track-result-col track-result-col--out';
 
-    const rightTitle = document.createElement('div');
-    rightTitle.className = 'tm-race-result-col-title';
-    rightTitle.textContent = 'Нефинишировавшие';
-    rightCol.appendChild(rightTitle);
+    const outTitle = document.createElement('div');
+    outTitle.className = 'track-result-col-title';
+    outTitle.textContent = 'Сошли';
+    outCol.appendChild(outTitle);
 
-    const rightList = document.createElement('div');
-    rightList.className = 'tm-race-result-list';
+    const outList = document.createElement('div');
+    outList.className = 'track-result-list';
 
     if (!nonFinished.length) {
-        const emptyMsg = document.createElement('div');
-        emptyMsg.className = 'tm-race-result-empty';
-        emptyMsg.textContent = 'Все финишировали';
-        rightList.appendChild(emptyMsg);
+        const empty = document.createElement('div');
+        empty.className = 'track-result-empty';
+        empty.textContent = 'Все финишировали';
+        outList.appendChild(empty);
     } else {
-        nonFinished.forEach(entry => rightList.appendChild(createRaceResultRow(entry, null)));
+        nonFinished.forEach(entry => outList.appendChild(createRaceResultRow(entry, null)));
     }
-    rightCol.appendChild(rightList);
+    outCol.appendChild(outList);
 
-    const columns = document.createElement('div');
-    columns.className = 'tm-race-result-columns';
-    columns.append(leftCol, rightCol);
-    innerContent.appendChild(columns);
+    grid.append(topCol, outCol);
+    body.appendChild(grid);
+    panel.appendChild(body);
 
-    const spoilerOverlay = document.createElement('div');
-    spoilerOverlay.className = 'tm-race-result-spoiler-overlay';
-    spoilerOverlay.innerHTML = `
-        <div class="tm-race-result-spoiler-content">
-            <span class="tm-race-result-spoiler-text">Результат гонки</span>
-            <span class="tm-race-result-spoiler-title">! ОСТОРОЖНО СПОЙЛЕРЫ !</span>
-            <span class="tm-race-result-spoiler-title">Нажмите для показа</span>
-        </div>
-    `;
-
-    spoilerWrapper.append(innerContent, spoilerOverlay);
-    content.appendChild(spoilerWrapper);
-    panel.appendChild(content);
-
-    const revealSpoiler = () => {
-        if (!innerContent.classList.contains('blurred')) return;
-        innerContent.classList.remove('blurred');
-        spoilerOverlay.classList.add('hidden');
-        setTimeout(() => { spoilerOverlay.style.display = 'none'; }, 400);
-    };
-
-    spoilerOverlay.addEventListener('click', e => {
+    toggle.addEventListener('click', e => {
         e.stopPropagation();
-        revealSpoiler();
-    });
-
-    panel.addEventListener('click', e => {
-        if (e.target.closest('.tm-race-result-row')) return;
-        if (innerContent.classList.contains('blurred')) revealSpoiler();
+        const hidden = body.classList.toggle('blurred');
+        toggle.textContent = hidden ? 'Показать' : 'Скрыть';
     });
 
     return panel;
@@ -1133,63 +1111,49 @@ const buildTrackWinnersPanel = track => {
 
     const winners = typeof getTrackTopWinners === 'function' ? getTrackTopWinners(track.id, 5) : [];
 
-    const panel = document.createElement('div');
-    panel.className = 'tm-winners-panel';
+    const panel = document.createElement('aside');
+    panel.className = 'track-winners-col';
 
-    const pattern = document.createElement('div');
-    pattern.className = 'tm-winners-pattern';
-    pattern.innerHTML = CALENDAR_PATTERN_SVG;
-    panel.appendChild(pattern);
-
-    const overlay = document.createElement('div');
-    overlay.className = 'tm-winners-overlay';
-    panel.appendChild(overlay);
-
-    const content = document.createElement('div');
-    content.className = 'tm-winners-content';
-
-    const header = document.createElement('div');
-    header.className = 'tm-winners-header';
-    header.innerHTML = `
-        <h3 class="tm-winners-title">Топ пилотов</h3>
-        <span class="tm-winners-subtitle">По количеству побед на трассе</span>
-    `;
-    content.appendChild(header);
+    const head = document.createElement('div');
+    head.className = 'track-cap';
+    head.innerHTML = winners.length
+        ? `Пилоты по кол-ву побед`: 'Победители';
+    panel.appendChild(head);
 
     const list = document.createElement('div');
-    list.className = 'tm-winners-list';
+    list.className = 'track-winners-list';
 
     if (!winners.length) {
         const empty = document.createElement('div');
-        empty.className = 'tm-winners-empty';
+        empty.className = 'track-winners-empty';
         empty.textContent = 'Нет данных';
         list.appendChild(empty);
     } else {
         winners.forEach((entry, index) => {
             const row = document.createElement('div');
-            row.className = 'tm-winners-row' + (index === 0 ? ' winner' : '');
-            row.style.setProperty('--team-color', entry.color || '#E10600');
+            row.className = 'track-winner-row' + (index === 0 ? ' winner' : '');
+            row.style.setProperty('--team-color', entry.color || (typeof getTeamColor === 'function' ? getTeamColor(entry.team) : '#E10600'));
             row.title = `${entry.name} — ${entry.wins} ${pluralize(entry.wins, 'победа', 'победы', 'побед')}`;
 
             const pos = document.createElement('span');
-            pos.className = 'tm-winners-pos';
+            pos.className = 'track-winner-pos';
             pos.textContent = index + 1;
             row.appendChild(pos);
 
             const flag = document.createElement('img');
-            flag.className = 'tm-winners-flag';
+            flag.className = 'track-winner-flag';
             flag.src = `Images/Flags/${entry.country}.svg`;
             flag.alt = entry.country;
             flag.onerror = () => { flag.style.display = 'none'; };
             row.appendChild(flag);
 
             const name = document.createElement('span');
-            name.className = 'tm-winners-name';
+            name.className = 'track-winner-name';
             name.textContent = entry.name;
             row.appendChild(name);
 
             const count = document.createElement('span');
-            count.className = 'tm-winners-count';
+            count.className = 'track-winner-count';
             count.textContent = entry.wins;
             row.appendChild(count);
 
@@ -1205,10 +1169,62 @@ const buildTrackWinnersPanel = track => {
         });
     }
 
-    content.appendChild(list);
-    panel.appendChild(content);
-
+    panel.appendChild(list);
     return panel;
+};
+
+const buildTrackStatsColumn = track => {
+    const stat = (value, label, isText, unit) => `
+        <div class="track-stat${isText ? ' track-stat--text' : ''}">
+            <span class="track-stat-num">${value}${unit ? `<span class="track-stat-unit">${unit}</span>` : ''}</span>
+            <span class="track-stat-lbl">${label}</span>
+        </div>`;
+
+    const col = document.createElement('aside');
+    col.className = 'track-stats-col';
+    col.innerHTML = `
+        <div class="track-cap">Характеристики</div>
+        <div class="track-stats-list">
+            ${stat(track.length, 'Длина', false, 'км')}
+            <div class="track-stat-pair">
+                ${stat(track.laps, pluralize(track.laps, 'круг', 'круга', 'кругов'))}
+                ${stat(track.turns, pluralize(track.turns, 'поворот', 'поворота', 'поворотов'))}
+            </div>
+            ${stat(track.elevation, 'Перепад высот', false, 'м')}
+            ${stat(track.speed, 'Средняя скорость', false, 'км/ч')}
+            ${stat(track.firstrace, 'Первая гонка')}
+            ${stat(track.direction === 'по часовой стрелке' ? 'По часовой' : 'Против часовой', 'Направление', true)}
+        </div>`;
+
+    return col;
+};
+
+const buildTrackRecordsBlock = track => {
+    const parseRecord = record => {
+        const parts = String(record || '').split(', ');
+        return { time: parts[0], sub: parts.slice(1).join(', ') };
+    };
+
+    const card = (label, record) => {
+        const { time, sub } = parseRecord(record);
+        return `
+            <div class="track-rec">
+                <span class="track-rec-lbl">${label}</span>
+                <span class="track-rec-time">${time}</span>
+                <span class="track-rec-sub">${sub}</span>
+            </div>`;
+    };
+
+    const block = document.createElement('div');
+    block.className = 'track-records-block';
+    block.innerHTML = `
+        <div class="track-cap">Рекорды круга</div>
+        <div class="track-records">
+            ${card('Круг в гонке', track.lapRecord)}
+            ${card('Круг в квалификации', track.qulRecord)}
+        </div>`;
+
+    return block;
 };
 
 const openTrackModal = (track, gp) => {
@@ -1246,117 +1262,71 @@ const openTrackModal = (track, gp) => {
         if (e.key === 'Escape') close();
     }
 
-    const layoutWrapper = document.createElement('div');
-    layoutWrapper.className = 'track-modal-layout-wrapper';
+    const shell = document.createElement('div');
+    shell.className = 'track-shell';
 
-    const layoutPattern = document.createElement('div');
-    layoutPattern.className = 'track-modal-pattern';
-    layoutPattern.innerHTML = CALENDAR_PATTERN_SVG;
-    layoutWrapper.appendChild(layoutPattern);
+    const pattern = document.createElement('div');
+    pattern.className = 'track-shell-pattern';
+    pattern.innerHTML = CALENDAR_PATTERN_SVG;
+    shell.appendChild(pattern);
 
-    const layoutOverlay = document.createElement('div');
-    layoutOverlay.className = 'track-modal-overlay-bg';
-    layoutWrapper.appendChild(layoutOverlay);
+    const grid = document.createElement('div');
+    grid.className = 'track-shell-grid';
 
-    const renderRecord = record => {
-        const parts = record.split(', ');
-        return `
-            <span class="tm-stat-value2">${parts[0]}</span>
-            <span class="tm-stat-value-sub">${parts.slice(1).join(', ')}</span>
-        `;
-    };
+    grid.appendChild(buildTrackStatsColumn(track));
 
-    const layoutInner = document.createElement('div');
-    layoutInner.className = 'track-modal-layout';
-    layoutInner.innerHTML = `
-        <div class="tm-track-image">
-            <img src="Images/Tracks/${track.id}.png" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
-        </div>
-        <div class="tm-track-info">
-            <div class="tm-header">
-                <img src="Images/Flags/${track.country}.svg" class="calendar-flag" title="${getCountryName(track.country)}">
-                <h2>${track.trackName}</h2>
+    const ghostText = String(track.trackNamem || track.trackName || '').toUpperCase();
+    const ghostSize = Math.max(24, Math.min(44, Math.round(560 / Math.max(ghostText.length, 6))));
+
+    const displayTitle = track.title || track.trackNamem || track.trackName;
+    const displayKicker = track.kicker || track.type || getCountryName(track.country);
+
+    const mainCol = document.createElement('main');
+    mainCol.className = 'track-main-col';
+    mainCol.innerHTML = `
+        <div class="track-main-inner">
+            <div class="track-kicker">
+                <span>${displayKicker}</span>
             </div>
-            <hr class="tm-divider">
-            <div class="tm-detail-row-inline">
-                <div class="tm-detail-row">
-                    <img src="Images/Icon/location.webp" class="calendar-icon">
+            <div class="track-head">
+                <h2 class="track-title" title="${track.trackName}">${displayTitle}</h2>
+            </div>
+            <div class="track-loc">
+                <span class="track-loc-item">
+                    <img class="track-loc-flag" src="Images/Flags/${track.country}.svg" alt="">
                     <span>${track.location}</span>
-                </div>
-                <div class="tm-detail-row">
-                    <img src="Images/Icon/calendar.webp" class="calendar-icon">
-                    <span>${gp ? formatDateLong(gp.date) : ''}</span>
-                </div>
+                </span>
             </div>
-            <hr class="tm-divider">
-            <div class="tm-stats-grid">
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-value">${track.length} км</span>
-                    <span class="tm-stat-label">Длина</span>
-                </div>
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-value">${track.laps}</span>
-                    <span class="tm-stat-label">${pluralize(track.laps, 'круг', 'круга', 'кругов')}</span>
-                </div>
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-value">${track.turns}</span>
-                    <span class="tm-stat-label">${pluralize(track.turns, 'поворот', 'поворота', 'поворотов')}</span>
-                </div>
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-value">${track.elevation} м</span>
-                    <span class="tm-stat-label">Перепад высот</span>
-                </div>
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-value">${track.speed} км/ч</span>
-                    <span class="tm-stat-label">Средняя скорость</span>
-                </div>
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-value-direction">${track.direction === 'по часовой стрелке' ? '↻' : '↺'}</span>
-                    <span class="tm-stat-label">Направление</span>
-                </div>
-            </div>
-            <hr class="tm-divider">
-            <div class="tm-stats-grid2">
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-label">Первая гонка</span>
-                    <span class="tm-stat-value">${track.firstrace}<span class="gp-year-suffix"> г.</span></span>
-                </div>
-            </div>
-            <hr class="tm-divider">
-            <div class="tm-stats-grid3">
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-label">Рекорд круга в гонке</span>
-                    ${renderRecord(track.lapRecord)}
-                </div>
-                <div class="tm-stat-cell">
-                    <span class="tm-stat-label">Рекорд круга в квалификации</span>
-                    ${renderRecord(track.qulRecord)}
-                </div>
+            <div class="track-map">
+                <div class="track-ghost" style="font-size: 70px">${ghostText}</div>
+                <img src="Images/Tracks/${track.id}.png" alt="${track.trackName}" onerror="this.src='Images/Tracks/default.webp'">
             </div>
         </div>
     `;
-    layoutWrapper.appendChild(layoutInner);
-
-    const modalBody = document.createElement('div');
-    modalBody.className = 'track-modal-body';
-    modalBody.appendChild(layoutWrapper);
+    grid.appendChild(mainCol);
 
     const winnersPanel = buildTrackWinnersPanel(track);
-    if (winnersPanel) modalBody.appendChild(winnersPanel);
+    if (winnersPanel) {
+        const recordsBlock = buildTrackRecordsBlock(track);
+        if (recordsBlock) winnersPanel.insertBefore(recordsBlock, winnersPanel.firstChild);
+        grid.appendChild(winnersPanel);
+    }
 
-    modalContent.appendChild(modalBody);
+    shell.appendChild(grid);
 
     let targetGp = gp;
     if (!targetGp?.id) targetGp = getGPByTrackId(track.id);
     if (targetGp?.id && isRaceFinishedForGP(targetGp.id)) {
-        const panel = buildRaceResultPanel(targetGp.id);
+        const panel = buildRaceResultPanel(targetGp.id, targetGp);
         if (panel) {
-            modalBody.appendChild(panel);
+            shell.appendChild(panel);
             requestAnimationFrame(() => {
                 setTimeout(() => panel.classList.add('visible'), 250);
             });
         }
     }
+
+    modalContent.appendChild(shell);
 
     const closeBtn = document.createElement('button');
     closeBtn.className = 'track-modal-close';
@@ -1374,12 +1344,29 @@ const openTrackModal = (track, gp) => {
     document.addEventListener('keydown', esc);
     document.body.appendChild(overlay);
 
+    const fitTrackTitle = () => {
+        const title = mainCol.querySelector('.track-title');
+        if (!title) return;
+
+        const lineHeight = () => parseFloat(getComputedStyle(title).lineHeight) || 1;
+        let size = parseFloat(getComputedStyle(title).fontSize) || 24;
+        title.style.fontSize = size + 'px';
+
+        while (size > 13 && title.getBoundingClientRect().height > lineHeight() * 2 + 1) {
+            size -= 1;
+            title.style.fontSize = size + 'px';
+        }
+    };
+
     requestAnimationFrame(() => {
         overlay.classList.add('active');
         modal.classList.add('active');
+        fitTrackTitle();
     });
 
-    setTimeout(autoShrinkHeaders, 10);
+    if (document.fonts?.ready) {
+        document.fonts.ready.then(fitTrackTitle).catch(() => {});
+    }
 };
 
 const openVideoModal = (videoId, title) => {

@@ -242,7 +242,7 @@ const detailedResults = {
         "verstappen": "dnf",
         "bearman": "dnf",
         "stroll": "dnf",
-        "ocon": "dnf",
+        "ocon": { "points": "dnf", "team": "Haas" },
         "bottas": "dnf",
         "albon": "dnf",
         "hadjar": "dnp",
