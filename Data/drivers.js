@@ -1248,7 +1248,7 @@ const renderDriverCards = (drivers, container) => {
         titlesOverlay.className = 'driver-titles-overlay';
         if (driver.titles > 0) {
             const stars = driver.titles;
-            if (stars <= 5) {
+            if (stars <= 10) {
                 titlesOverlay.textContent = '☆'.repeat(stars);
             } else {
                 const firstRow = Math.ceil(stars / 2);
@@ -1257,16 +1257,22 @@ const renderDriverCards = (drivers, container) => {
                 titlesOverlay.classList.add('titles-multi-row');
             }
             titlesOverlay.title = `${driver.titles}× чемпион мира`;
-        } else {
-            titlesOverlay.style.display = 'none';
         }
 
         const numberBlock = document.createElement('div');
         numberBlock.className = 'driver-number-block';
-        numberBlock.append(numberOverlay, titlesOverlay);
+        numberBlock.append(numberOverlay);
 
         info.append(nameDiv, teamDiv, numberBlock);
         card.appendChild(info);
+
+        /* Полоса с титулами внизу карточки, поверх фото пилота */
+        if (driver.titles > 0) {
+            const titlesBar = document.createElement('div');
+            titlesBar.className = 'driver-titles-bar';
+            titlesBar.appendChild(titlesOverlay);
+            card.appendChild(titlesBar);
+        }
 
         if (isReserve) {
             const reserveBadge = document.createElement('div');

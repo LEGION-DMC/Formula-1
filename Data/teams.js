@@ -565,9 +565,9 @@ const openTeamModal = team => {
         <div class="tm-stats-list">
             ${statLine('Дебют', team.debut)}
             ${statLine('Гоночные сезоны', team.seasons)}
-            ${statLine('Первая победа', team.firstWin || '---', true)}
             ${statLine('Кубки конструкторов', team.titles || 0)}
             ${statLine('Пилоты - чемпионы', team.champ_dri || 0)}
+            ${statLine('Первая победа', team.firstWin || '---', true)}
         </div>`;
 
     /* -------- центральный блок -------- */

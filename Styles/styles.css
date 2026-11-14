@@ -1883,21 +1883,37 @@ h1, h2 {
     z-index: 2;
 }
 
-.driver-titles-overlay {
+.driver-titles-bar {
     position: absolute;
-    top: 100%;
-    left: 55%;
-    transform: translateX(-50%);
-    margin-top: 0.8cqw;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 13%;
+    padding: 1cqw 5cqw;
+    background: rgba(5, 8, 13, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(5px);
+    pointer-events: none;
+}
+
+.driver-titles-overlay {
+    position: relative;
+    z-index: 1;
     font-family: 'F1Title', sans-serif;
-    font-size: clamp(11px, 3.5cqw, 15px);
+    font-size: clamp(12px, 3.5cqw, 16px);
     color: #FFD700;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.8);
-    line-height: 1;
+    line-height: 0;
     letter-spacing: 1.5px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     white-space: nowrap;
     pointer-events: none;
 }
@@ -3780,8 +3796,8 @@ h1, h2 {
 
 .tm-stat-cap {
     font-family: 'F1Text', sans-serif;
-    font-size: 9.5px;
-    letter-spacing: 0.16em;
+    font-size: 10px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #6b7789;
 }
@@ -3869,28 +3885,40 @@ h1, h2 {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px 0px;
+    gap: 5px;
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.11);
 }
 
+.tm-meta-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+}
+
 .tm-meta-label {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 0;
     font-family: 'F1Title', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.14em;
+    font-size: 9px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #728097;
+    color: #6d7a8c;
 }
 
 .tm-meta-value {
     display: flex;
     align-items: center;
     gap: 5px;
+    min-width: 0;
     font-family: 'F1Text', sans-serif;
-    font-size: 15px;
+    font-size: 12px;
     color: #d6dee9;
     white-space: nowrap;
     overflow: hidden;
@@ -4189,6 +4217,11 @@ h1, h2 {
     .tm-team-logo { height: 64px; }
     .tm-ghost { display: none; }
     .tm-shell { padding: 20px; }
+}
+
+/* Мета-данные команды: 4 ячейки в одну строку */
+@media (min-width: 1300px) {
+    .tm-meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 /* ============================================== */

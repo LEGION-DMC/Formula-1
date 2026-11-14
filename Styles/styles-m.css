@@ -668,35 +668,35 @@ body {
 .dm-team-line { margin-top: -3px; }
 .dm-team-link { gap: 1px; margin-top: 3px; }
 .dm-team-accent { height: 11px; }
-.dm-team-name { font-size: 9.5px; }
+.dm-team-name { font-size: 11px; }
 .modal-team-logo { height: 13px; }
-.dm-flag { width: 12px; 
-    height: 9px; 
+.dm-flag { width: 13px; 
+    height: 10px; 
     margin-left: 2px; 
     margin-right: -2px; 
 }
 
 .dm-stats { gap: 5px; }
-.dm-stat { padding: 6px 7px; border-radius: 6px; }
-.dm-stat-value { font-size: 21px; }
-.dm-stat-label { margin-top: 3px; font-size: 6.2px; letter-spacing: 0.08em; }
+.dm-stat { padding: 5px 7px; border-radius: 5px; }
+.dm-stat-value { font-size: 20px; }
+.dm-stat-label { margin-top: 3px; font-size: 8.5px; letter-spacing: 0.08em; }
 
 .dm-meta { gap: 5px 8px; }
-.dm-meta-label { font-size: 6.4px; letter-spacing: 0.06em; }
-.dm-meta-value { font-size: 9px; }
+.dm-meta-label { font-size: 8.5px; letter-spacing: 0.06em; }
+.dm-meta-value { font-size: 11px; }
 
-.dm-bio-title { font-size: 7px; margin-bottom: 3px; }
-.dm-bio-text { font-size: 9.4px; line-height: 1.45; }
+.dm-bio-title { font-size: 8.5px; }
+.dm-bio-text { font-size: 11px; line-height: 1.45; }
 .modal-note-compact { display: none; }
 
 .modal-career-container { gap: 6px; padding: 6px 8px; }
-.modal-career-title { font-size: 6.4px; margin-right: 2px; }
+.modal-career-title { font-size: 8px; margin-right: 2px; }
 .modal-career-list { gap: 3px 2px; }
 .modal-career-item { width: 104px; padding: 3px 5px; }
 .modal-career-logo-wrapper { width: 15px; height: 15px; }
 .modal-career-logo { max-width: 15px; max-height: 15px; }
-.modal-career-team-name { font-size: 7.6px; }
-.modal-career-year { font-size: 6.2px; }
+.modal-career-team-name { font-size: 7.7px; }
+.modal-career-year { font-size: 8px; }
 .modal-career-arrow { font-size: 7px; }
 
 .dm-right-column {
@@ -708,7 +708,7 @@ body {
 }
 
 .dm-panel { padding: 7px 8px; }
-.dm-panel-title { font-size: 6.2px; }
+.dm-panel-title { font-size: 8px; }
 .dm-penalties-panel .msr-pp__seg { height: 7px; }
 .dm-top10-bars { height: 40px; }
 .dm-top10-axis span { font-size: 5px; }
@@ -881,16 +881,70 @@ body {
 
 .tm-team-logo { height: 56px; }
 .tm-ghost { display: none; }
-.tm-kicker { margin-top: 14px; font-size: 8px; letter-spacing: 0.22em; }
-.tm-team-name { font-size: 26px; }
-.tm-team-suffix { font-size: 8px; margin-top: 5px; }
-.tm-meta { margin-top: 16px; padding-top: 12px; gap: 10px 14px; }
-.tm-meta-value { font-size: 10.5px; }
-.tm-about-text { font-size: 10.5px; max-width: 100%; }
+
+/* Логотип слева, название справа */
+.tm-main-inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 14px;
+    row-gap: 0;
+    align-items: center;
+}
+
+.tm-team-logo {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: center;
+    height: auto;
+    max-width: 100%;
+    max-height: 60px;
+}
+
+.tm-kicker,
+.tm-team-name,
+.tm-team-suffix {
+    grid-column: 2;
+    padding-left: 0;
+}
+
+.tm-kicker { margin-top: 0; font-size: 8px; letter-spacing: 0.22em; }
+.tm-team-name { margin-top: 0; font-size: 26px; }
+.tm-team-suffix { font-size: 8px; }
+
+.tm-meta {
+    grid-column: 1 / -1;
+    margin-top: 16px;
+    padding-top: 12px;
+    gap: 5px;
+}
+.tm-meta-cell { padding: 6px 8px; }
+.tm-meta-label { font-size: 8px; }
+.tm-meta-value { font-size: 11px; }
+
+.tm-about { grid-column: 1 / -1; }
+.tm-about-text { font-size: 11.5px; max-width: 100%; }
 
 .tm-panel-cap { font-size: 8px; }
-.tm-stats-list { margin-top: 8px; }
-.tm-stat-line { padding: 10px 0 9px; }
+
+/* Статистика команды - 2 колонки, "Первая победа" на всю ширину */
+.tm-stats-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 12px;
+    margin-top: 8px;
+}
+
+.tm-stat-line { padding: 9px 0 8px; }
+
+.tm-stat-line:first-child,
+.tm-stat-line:nth-child(2) {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tm-stat-line--wide {
+    grid-column: 1 / -1;
+}
+
 .tm-stat-num { font-size: 30px; }
 .tm-stat-line--wide .tm-stat-num { font-size: 13px; }
 
@@ -899,11 +953,26 @@ body {
 .tm-spec { padding: 7px 8px; }
 .tm-spec-value { font-size: 10px; }
 
-.tm-pilot-row { padding: 7px 8px; }
-.tm-pilot-number { font-size: 22px; min-width: 30px; }
-.tm-pilot-name { font-size: 11px; }
-.tm-pilot-row.reserve .tm-pilot-number { font-size: 18px; }
-.tm-pilot-row.reserve .tm-pilot-name { font-size: 10px; }
+/* Пилоты - 2 колонки */
+.tm-pilots-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.tm-pilot-row {
+    padding: 6px 7px;
+    gap: 6px;
+    min-width: 0;
+}
+
+.tm-pilot-row.empty { grid-column: 1 / -1; }
+
+.tm-pilot-number { font-size: 18px; min-width: 24px; }
+.tm-pilot-name { font-size: 13px; line-height: 1.15; min-width: 0; }
+.tm-pilot-flag { width: 17px; height: 12px; }
+.tm-pilot-row.reserve .tm-pilot-number { font-size: 17px; }
+.tm-pilot-row.reserve .tm-pilot-name { font-size: 13px; }
 .tm-pilots-sub { margin-top: 10px; }
 
 /* ============================================== */
