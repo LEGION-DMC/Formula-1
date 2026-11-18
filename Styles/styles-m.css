@@ -1029,6 +1029,10 @@ body {
     transition: all 0.3s ease;
 }
 
+.mg-toolbar-center {
+    font-size: 1.5rem;
+}
+
 .starting-grid-blur-text {
     font-family: 'F1Title', sans-serif;
     font-size: 0.9rem;

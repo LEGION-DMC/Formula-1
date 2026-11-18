@@ -1350,7 +1350,7 @@ const mgWeatherCell = data => {
     return `
         <section class="mg-data-sec">
             <div class="mg-data-head">
-                <span class="mg-data-title">Погода</span>
+                <span class="mg-data-title">Погода на Этап</span>
             </div>
             <div class="mg-weather">
                 <img class="mg-weather-icon" data-w="icon" src="Images/Weather/${weatherData.type}.png" alt="${weatherData.typeName}" onerror="this.style.display='none'">
@@ -1370,7 +1370,7 @@ const mgWeatherCell = data => {
 
 const mgRainActive = () => {
     const chance = parseFloat(String(weatherData.rain).replace(',', '.'));
-    return Number.isFinite(chance) && chance > 40;
+    return Number.isFinite(chance) && chance >= 40;
 };
 
 const mgTyreInfo = data => {
@@ -1390,14 +1390,16 @@ const mgTyreInfo = data => {
 const mgTyresCell = data => {
     const info = mgTyreInfo(data);
     const set = [
-        { code: info.hard, type: 'Hard' },
-        { code: info.medium, type: 'Medium' },
-        { code: info.soft, type: 'Soft' }
+        { code: info.hard,   type: 'Hard',         letter: 'H',     color: '#ffffff' },
+        { code: info.medium, type: 'Medium',       letter: 'M',     color: '#f5c842' },
+        { code: info.soft,   type: 'Soft',         letter: 'S',     color: '#e10600' },
     ];
 
-    /* Дождевые составы — только при высокой вероятности осадков, в общем ряду */
     if (info.rainActive) {
-        set.push({ code: '', type: 'Intermediate', short: 'Inter' }, { code: '', type: 'Wet', short: 'Wet' });
+        set.push(
+            { code: '', type: 'Intermediate', letter: 'Inter', color: '#3cb043' },
+            { code: '', type: 'Wet',          letter: 'Wet',   color: '#4169e1' }
+        );
     }
 
     return `
@@ -1406,11 +1408,21 @@ const mgTyresCell = data => {
                 <span class="mg-data-title">Шины на этап</span>
             </div>
             <div class="mg-tyres${info.rainActive ? ' has-rain' : ''}">
-                ${set.map(item => `
-                    <button type="button" class="mg-tyre" data-mg-tyres title="${item.type}${item.code ? ` · ${item.code}` : ''}">
+                ${set.map(item => {
+                    const isSlick = Boolean(item.code);
+                    const letter  = item.letter;                 // ← всегда из letter
+                    const code    = isSlick ? item.code : '';
+
+                    return `
+                    <button type="button" class="mg-tyre" data-mg-tyres
+                        title="${item.type}${item.code ? ` · ${item.code}` : ''}"
+                        style="--tyre-color: ${item.color}">
                         <img src="Images/Wheels/${item.type}.png" alt="${item.type}">
-                        <span>${item.code ? `<b>${item.code}</b>` : ''}<span class="mg-tyre-type">${item.short || item.type}</span></span>
-                    </button>`).join('')}
+                        <span class="mg-tyre-label">
+                            <b>${letter}</b>${code ? `<span class="mg-tyre-code">- ${code}</span>` : ''}
+                        </span>
+                    </button>`;
+                }).join('')}
             </div>
         </section>`;
 };
@@ -1535,18 +1547,29 @@ const mgGridSection = data => {
     const grid = all.filter(item => !item.pitLane);
     const pit = all.filter(item => item.pitLane);
 
+    // Решётки нет — квалификация ещё не состоялась
     if (!all.length) {
         const quali = data.nextGP?.quali ? formatDateLong(data.nextGP.quali) : '';
         return `
             <article class="mg-card mg-grid-sec">
                 <div class="mg-grid-head">
                     <span class="mg-data-title">Стартовая решётка</span>
-                    <span class="mg-grid-note">Квалификация ещё не состоялась${quali ? ` · ${quali}` : ''}</span>
-                    <button type="button" class="mg-link" data-mg-tab="calendar">календарь</button>
+                </div>
+                <div class="mg-grid-stage mg-grid-stage--empty">
+                    <div class="mg-grid-container is-blurred">
+                        <div class="mg-grid-board">
+                            <div class="mg-grid-inner is-compact"></div>
+                        </div>
+                    </div>
+                    <div class="mg-grid-blur">
+                        <span class="mg-grid-blur-text">Квалификация ещё не состоялась</span>
+                        <span class="mg-grid-blur-title">${quali}</span>
+                    </div>
                 </div>
             </article>`;
     }
 
+    // Решётка есть — spoiler-оверлей
     return `
         <article class="mg-card mg-grid-sec">
             <div class="mg-grid-head">
@@ -1608,7 +1631,7 @@ const mgRaceBlock = data => {
         <div class="mg-weekend">
             <article class="mg-card mg-race" data-gp-id="${gp.id}">
                 <div class="mg-race-head">
-                    ${mgTitle('Следующий этап')}
+                    ${mgTitle('Предстоящий этап')}
                 </div>
 
                 <div class="mg-race-top">
@@ -1981,7 +2004,6 @@ const mgOpenTyres = () => {
                 <div class="mg-tyre-card-head">
                     <img src="Images/Wheels/${type}.png" alt="${type}" onerror="this.style.display='none'">
                     <div><strong>${type}</strong><span>${code}</span></div>
-                    <small>${active ? 'на этапе' : 'резерв'}</small>
                 </div>
                 <div class="mg-tyre-card-section">
                     <span>Передние</span>
@@ -2005,8 +2027,7 @@ const mgOpenTyres = () => {
         <div class="mg-tyre-modal" role="dialog" aria-modal="true" aria-label="Состав шин">
             <button type="button" class="mg-modal-close" aria-label="Закрыть">×</button>
             <div class="mg-tyre-modal-head">
-                <h2>Состав шин</h2>
-                <p>На этом этапе: <b>${info.hard}</b> Hard, <b>${info.medium}</b> Medium, <b>${info.soft}</b> Soft. Дождевые составы активируются при вероятности осадков выше 40%.</p>
+                <h2>Шины</h2>
             </div>
             <div class="mg-tyre-modal-grid">${cards}</div>
         </div>`;
