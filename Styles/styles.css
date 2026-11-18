@@ -6959,3 +6959,1749 @@ h1, h2 {
     color: #fff;
 }
 
+
+
+/* ============================================================
+   MAIN PAGE - NEW DESIGN (v6)
+   ============================================================ */
+
+/* ============================================================
+   ГЛАВНАЯ — PRODUCTION-СТИЛЬ (v5)
+   Плоские карточки, тонкие линии, без декора.
+   ============================================================ */
+
+.mg-page {
+    --mg-line: #2c2f36;
+    --mg-line-soft: rgba(255, 255, 255, 0.08);
+    --mg-text: #f2f3f5;
+    --mg-gray: #aab2bf;
+    --mg-dim: #8a94a3;
+    --mg-panel:
+        radial-gradient(130% 110% at 0% 100%, rgba(225, 6, 0, 0.10), transparent 56%),
+        radial-gradient(90% 85% at 100% 0%, rgba(225, 6, 0, 0.06), transparent 52%),
+        #08090c;
+}
+
+.mg-page::before {
+    filter: brightness(0.3);
+}
+
+.mg-content {
+    padding: 18px 22px 60px;
+    min-width: 0;
+}
+
+.mg-menu-note {
+    margin-top: auto;
+    padding-top: 10px;
+    width: 100%;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6a6a6a;
+    text-align: center;
+}
+
+.mg-menu-note span {
+    display: block;
+    margin-top: 3px;
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: #555;
+}
+
+/* ---------- Верхняя панель ---------- */
+
+.mg-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1500px;
+    margin: 0 auto 12px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--mg-line);
+}
+
+.mg-toolbar-center {
+    font-family: 'F1Title', sans-serif;
+    font-size: 3rem;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #e10600, #ff5a5a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mg-page .mg-toolbar-title {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'F1Title', sans-serif;
+    font-size: 1.25rem;
+    font-weight: normal;
+    letter-spacing: 0.02em;
+    color: var(--mg-text);
+}
+
+.mg-toolbar-sub {
+    margin-top: 3px;
+    font-size: 0.78rem;
+    color: #9a9a9a;
+}
+
+.mg-toolbar-side {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 0 0 auto;
+}
+
+.mg-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.78rem;
+    color: var(--mg-gray);
+    cursor: pointer;
+    user-select: none;
+}
+
+.mg-switch input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mg-switch-box {
+    display: grid;
+    place-items: center;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #565656;
+    border-radius: 3px;
+    background: #151515;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.mg-switch input:checked + .mg-switch-box {
+    background: var(--red-accent);
+    border-color: var(--red-accent);
+}
+
+.mg-switch input:checked + .mg-switch-box::after {
+    content: '✓';
+    font-size: 11px;
+    line-height: 1;
+    color: #fff;
+}
+
+.mg-switch input:focus-visible + .mg-switch-box {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.mg-note {
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #666;
+    white-space: nowrap;
+}
+
+/* ---------- Карточки ---------- */
+
+.mg-root {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.mg-card {
+    background: var(--mg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    padding: 10px 12px;
+    min-width: 0;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+}
+
+.mg-page h1,
+.mg-page h2,
+.mg-page h3 {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.mg-block-title {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #e10600, #ff5a5a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 1px solid var(--mg-line-soft);
+    padding-bottom: 5px;
+}
+
+/* ---------- Три блока: этап, данные, решётка ---------- */
+
+.mg-weekend {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.mg-weekend > .mg-grid-sec {
+    grid-column: 1 / -1;
+}
+
+.mg-race {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 14px;
+}
+
+.mg-race::before {
+    content: '';
+    position: absolute;
+    left: -20%;
+    top: -40%;
+    width: 70%;
+    height: 190%;
+    transform: rotate(12deg);
+    background: linear-gradient(100deg, rgba(225, 6, 0, 0.1), transparent 62%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.mg-race > * {
+    position: relative;
+    z-index: 1;
+}
+
+.mg-around-sec {
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.mg-race-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 2px;
+}
+
+.mg-race-head .mg-block-title {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.mg-race-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px;
+    gap: 15px;
+    padding: 12px 0 10px;
+}
+
+.mg-race-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.mg-page .mg-gp-name {
+    font-family: 'F1Title', sans-serif;
+    font-size: clamp(1.25rem, 1.85vw, 2rem);
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 10px 38px rgba(0, 0, 0, 0.6);
+}
+
+.mg-gp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-top: 7px;
+    font-size: 0.9rem;
+    color: var(--mg-gray);
+}
+
+.mg-gp-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.mg-gp-meta i {
+    width: 3px;
+    height: 3px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #4a5566;
+}
+
+.mg-flag {
+    display: inline-block;
+    width: 20px;
+    height: 14px;
+    flex: 0 0 auto;
+    object-fit: cover;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    vertical-align: -2px;
+}
+
+.mg-flag-sm {
+    width: 20px;
+    height: 14px;
+}
+
+.mg-logo {
+    display: inline-block;
+    height: 15px;
+    width: auto;
+    max-width: 34px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.mg-nowrap {
+    white-space: nowrap;
+}
+
+.mg-race-timing {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 30px;
+}
+
+.mg-timing-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+    min-width: 0;
+}
+
+/* ---------- Отсчёт ---------- */
+
+.mg-race-countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    min-width: 0;
+}
+
+.mg-countdown {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.mg-cd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    width: 46px;
+    min-width: 46px;
+    box-sizing: border-box;
+    padding: 3px 3px 3px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.015));
+}
+
+.mg-cd b {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 0.9;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
+.mg-cd span {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a94a3;
+    white-space: nowrap;
+}
+
+.mg-countdown i {
+    display: none;
+}
+
+.mg-countdown.is-done {
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 4px;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffd700;
+}
+
+/* ---------- Сессии и видео ---------- */
+
+.mg-timing-side {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.mg-sched {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.mg-sched-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: #9a9a9a;
+    white-space: nowrap;
+}
+
+.mg-sched-dot {
+    width: 5px;
+    height: 5px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #5a5a5a;
+}
+
+.mg-sched-dot.is-race { background: #e10600; }
+.mg-sched-dot.is-quali { background: #ffd700; }
+.mg-sched-dot.is-sprint { background: #a855f7; }
+
+.mg-sched-name {
+    color: var(--mg-gray);
+}
+
+.mg-sched-date {
+    margin-left: auto;
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.7rem;
+    color: #8a8a8a;
+}
+
+.mg-sched-row.is-past {
+    opacity: 0.45;
+}
+
+.mg-sched-row.is-next .mg-sched-name,
+.mg-sched-row.is-next .mg-sched-date {
+    color: #fff;
+}
+
+.mg-media {
+    display: grid;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.mg-media .mg-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 9px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015));
+    color: #c3c9d2;
+    font-size: 0.7rem;
+    font-family: 'F1Title', sans-serif;
+    line-height: 1;
+    letter-spacing: 0.02em;
+}
+
+.mg-media .mg-link::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--red-accent);
+}
+
+.mg-media .mg-link:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035));
+    color: #fff;
+}
+
+.mg-media .mg-link.is-locked,
+.mg-media .mg-link:disabled {
+    opacity: 0.45;
+}
+
+.mg-media .mg-link.is-locked::before,
+.mg-media .mg-link:disabled::before {
+    background: #6b7280;
+}
+
+.mg-media-note {
+    font-size: 0.7rem;
+    color: #7a7a7a;
+}
+
+.mg-link {
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid #4a4a4a;
+    border-radius: 0;
+    background: transparent;
+    color: var(--mg-gray);
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.72rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.mg-link:hover {
+    color: #fff;
+    border-color: #fff;
+}
+
+.mg-link.is-locked,
+.mg-link:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/* ---------- Карта трассы ---------- */
+
+.mg-race-map {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+}
+
+.mg-race-round-mark {
+    position: absolute;
+    left: 29%;
+    top: 53%;
+    transform: translate(-50%, -50%);
+    font-family: 'F1Numbers', sans-serif;
+    font-size: clamp(85px, 15vw, 250px);
+    font-weight: normal;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+.mg-race-map img {
+    position: relative;
+    z-index: 1;
+    right: 40%;
+    max-width: 263px;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+/* ---------- Погода · шины · рекорды ---------- */
+
+.mg-data-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 14px;
+}
+
+.mg-data-sec {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.mg-data-sec + .mg-data-sec {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--mg-line-soft);
+}
+
+/* ---------- Рекорды круга ---------- */
+
+.mg-rec-row {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+}
+
+.mg-rec-row + .mg-rec-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.mg-rec-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    white-space: nowrap;
+}
+
+.mg-rec-line {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+.mg-rec-time {
+    flex: 0 0 auto;
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.9rem;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    color: color-mix(in srgb, var(--red-accent) 45%, #fff);
+    line-height: 1.1;
+}
+
+.mg-rec-sub {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: #8a8a8a;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mg-data-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+    margin-bottom: 7px;
+}
+
+.mg-data-head .mg-link {
+    margin-left: auto;
+}
+
+.mg-data-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #8792a3;
+    white-space: nowrap;
+}
+
+.mg-data-title::before {
+    content: '';
+    width: 2px;
+    height: 12px;
+    flex: 0 0 auto;
+    border-radius: 1px;
+    background: var(--red-accent);
+}
+
+.mg-data-head .mg-link {
+    font-size: 0.62rem;
+}
+
+.mg-weather {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+}
+
+.mg-weather-icon {
+    width: 35px;
+    height: 35px;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+
+.mg-weather-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.mg-weather-copy b {
+    font-family: 'F1Text', sans-serif;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--mg-text);
+    line-height: 1.2;
+}
+
+.mg-weather-copy span {
+    font-size: 0.9rem;
+    line-height: 1.25;
+    color: var(--mg-dim);
+    overflow-wrap: anywhere;
+}
+
+.mg-wmetrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px 8px;
+    margin-top: 9px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    align-items: center;
+}
+
+.mg-wmetrics div {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+    align-items: center;
+    text-align: center;
+}
+
+.mg-wmetrics b {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 1.1rem;
+    font-weight: normal;
+    color: var(--mg-text);
+    white-space: nowrap;
+}
+
+.mg-wmetrics span {
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    white-space: nowrap;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mg-tyres {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+}
+
+.mg-tyres.has-rain {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+}
+
+.mg-tyres.has-rain .mg-tyre {
+    padding: 5px 2px 4px;
+    gap: 2px;
+}
+
+.mg-tyres.has-rain .mg-tyre img {
+    width: 18px;
+    height: 18px;
+}
+
+.mg-tyres.has-rain .mg-tyre span {
+    font-size: 0.5rem;
+}
+
+.mg-tyres.has-rain .mg-tyre b {
+    font-size: 0.62rem;
+}
+
+.mg-tyre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-width: 0;
+    padding: 3px 0px 3px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.012));
+    color: var(--mg-text);
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.mg-tyre:hover {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03));
+    border-color: rgba(255, 255, 255, 0.26);
+}
+
+.mg-tyre img {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+
+.mg-tyre span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    min-width: 0;
+    font-size: 0.85rem;
+    font-family: 'F1Text', sans-serif;
+    line-height: 1.1;
+    color: #9a9a9a;
+    white-space: nowrap;
+}
+
+.mg-tyre b {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #fff;
+}
+
+.mg-tyre-type {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ---------- Решётка ---------- */
+
+.mg-grid-sec {
+    padding: 8px 10px 5px;
+}
+
+.mg-grid-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+}
+
+.mg-grid-note {
+    font-size: 0.85rem;
+    color: #8a8a8a;
+}
+
+.mg-legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    font-family: 'F1Title', sans-serif;
+    color: #8a8a8a;
+}
+
+.mg-legend i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.mg-legend i.is-pole {
+    background: #ffd700;
+}
+
+.mg-legend i.is-penalty {
+    margin-left: 6px;
+    background: #e10600;
+}
+
+.mg-grid-head .mg-legend {
+    margin-left: auto;
+}
+
+.mg-grid-head .mg-link {
+    margin-left: auto;
+}
+
+.mg-grid-board {
+    margin-top: 9px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+}
+
+.mg-grid-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+/* компактный режим — плоская сетка без шахматного смещения */
+.mg-grid-inner.is-compact {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+    gap: 5px;
+}
+
+.mg-grid-line {
+    display: flex;
+    gap: 5px;
+}
+
+/* смещение второго ряда на полклетки — шахматный порядок */
+.mg-grid-line.is-offset {
+    margin-left: 4.55%;
+}
+
+.mg-grid-cell {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 5px 7px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-bottom-color: rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    color: var(--mg-text);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.mg-grid-cell:hover {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+    border-color: rgba(255, 255, 255, 0.24);
+}
+
+.mg-grid-cell.is-pole {
+    border-bottom-color: #ffd700;
+}
+
+.mg-grid-cell.is-penalty {
+    border-bottom-color: #e10600;
+}
+
+.mg-grid-pos {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.8rem;
+    color: #7a7a7a;
+    flex: 0 0 auto;
+    min-width: 13px;
+    text-align: center;
+}
+
+.mg-grid-cell.is-pole .mg-grid-pos {
+    color: #ffd700;
+}
+
+.mg-grid-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--tc);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mg-grid-logo {
+    height: 11px;
+    max-width: 20px;
+    flex: 0 0 auto;
+    object-fit: contain;
+    opacity: 0.85;
+}
+
+/* ---------- Соседние этапы (в стиле модальных карточек) ---------- */
+
+.mg-around {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: auto;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.012));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.mg-around-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    padding: 8px 12px 9px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.mg-around-cell + .mg-around-cell {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mg-around.is-single {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.mg-around-cell:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mg-around-label {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8a8b8b;
+    white-space: nowrap;
+}
+
+.mg-around-name {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: var(--mg-text);
+    overflow-wrap: anywhere;
+}
+
+.mg-around-date {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.72rem;
+    color: #9a9a9a;
+    white-space: nowrap;
+}
+
+.mg-around-cell:hover .mg-around-name {
+    color: #fff;
+}
+
+.mg-around-cell:hover .mg-around-label {
+    color: var(--red-accent);
+}
+
+/* ---------- Раскладка: этап слева, карточки справа ---------- */
+
+.mg-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 292px;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.mg-main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+.mg-side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+.mg-side .mg-card {
+    flex: 1 1 0;
+    justify-content: center;
+    gap: 6px;
+    min-height: 90px;
+}
+
+.mg-side .mg-block-title {
+    flex: 0 0 auto;
+}
+
+.mg-stat-main {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 6px;
+    min-width: 0;
+}
+
+.mg-stat-name {
+    display: flex;
+    align-items: center;
+    font-family: 'F1Title', sans-serif;
+    gap: 5px;
+    min-width: 0;
+    font-size: 0.9rem;
+    color: var(--mg-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mg-stat-logo {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.mg-stat-logo .mg-logo {
+    height: 18px;
+    max-width: 38px;
+}
+
+.mg-stat-value {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    flex: 0 0 auto;
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 1.55rem;
+    line-height: 1;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+}
+
+.mg-stat-value small {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+.mg-stat-sub {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: var(--mg-gray);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ---------- День рождения ---------- */
+
+.mg-bday-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.mg-bday-date {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.mg-bday-when {
+    font-size: 0.9rem;
+    color: var(--mg-gray);
+    white-space: nowrap;
+}
+
+.mg-bday-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6px;
+}
+
+.mg-bday-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    width: 100%;
+    padding: 5px 4px;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: transparent;
+    color: var(--mg-text);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.mg-bday-row:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.mg-bday-num {
+    flex: 0 0 auto;
+    min-width: 22px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+    text-align: center;
+}
+
+.mg-bday-name {
+    display: flex;
+    align-items: center;
+    font-family: 'F1Title', sans-serif;
+    gap: 6px;
+    min-width: 0;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mg-bday-age {
+    margin-left: auto;
+    font-size: 0.8rem;
+    font-family: 'F1Numbers', sans-serif;
+    color: var(--mg-gray);
+    white-space: nowrap;
+}
+
+.mg-empty {
+    padding: 10px 0 2px;
+    font-size: 0.8rem;
+    color: #7a7a7a;
+}
+
+/* ---------- Сезон завершён ---------- */
+
+.mg-season p {
+    margin: 8px 0 10px;
+    font-size: 0.78rem;
+    color: var(--mg-gray);
+}
+
+.mg-season-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mg-btn {
+    padding: 6px 12px;
+    border: 1px solid #4a4a4a;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--mg-text);
+    font-family: 'F1Text', sans-serif;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.mg-btn:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: #666;
+}
+
+/* ============================================================
+   МОДАЛКА ШИН
+   ============================================================ */
+
+.mg-tyre-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.78);
+    opacity: 0;
+    transition: opacity 0.18s ease;
+    overflow-y: auto;
+}
+
+.mg-tyre-overlay.is-open {
+    opacity: 1;
+}
+
+.mg-tyre-modal {
+    position: relative;
+    width: min(1000px, 100%);
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 16px 18px 18px;
+    border: 1px solid var(--mg-line);
+    border-radius: 8px;
+    background: #121212;
+    transform: translateY(8px);
+    transition: transform 0.18s ease;
+}
+
+.mg-tyre-overlay.is-open .mg-tyre-modal {
+    transform: translateY(0);
+}
+
+.mg-modal-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--mg-gray);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.mg-modal-close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.mg-tyre-modal-head {
+    padding-right: 30px;
+}
+
+.mg-page .mg-tyre-modal-head h2 {
+    display: block;
+    margin: 0 0 6px;
+    padding: 0;
+    border: 0;
+    font-family: 'F1Title', sans-serif;
+    font-size: 1.1rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.mg-tyre-modal-head p {
+    max-width: 90ch;
+    font-size: 0.76rem;
+    line-height: 1.5;
+    color: var(--mg-gray);
+}
+
+.mg-tyre-modal-head b {
+    font-weight: normal;
+    color: #fff;
+}
+
+.mg-tyre-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.mg-tyre-card {
+    display: flex;
+    flex-direction: column;
+    padding: 9px 10px;
+    border: 1px solid #2e2e2e;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    opacity: 0.55;
+}
+
+.mg-tyre-card.is-active {
+    opacity: 1;
+    border-color: #444;
+    background: rgba(255, 255, 255, 0.045);
+}
+
+.mg-tyre-card-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mg-tyre-card-head img {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+
+.mg-tyre-card-head div {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.2;
+}
+
+.mg-tyre-card-head strong {
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.72rem;
+    font-weight: normal;
+    color: #fff;
+}
+
+.mg-tyre-card-head span {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.66rem;
+    color: #9a9a9a;
+}
+
+.mg-tyre-card-head small {
+    margin-left: auto;
+    font-size: 0.56rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #7a7a7a;
+    white-space: nowrap;
+}
+
+.mg-tyre-card.is-active .mg-tyre-card-head small {
+    color: #ffd700;
+}
+
+.mg-tyre-card-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 7px;
+}
+
+.mg-tyre-card-section > span {
+    margin-bottom: 1px;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #7a7a7a;
+}
+
+.mg-tyre-card-section div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.mg-tyre-card-section i {
+    font-style: normal;
+    font-size: 0.68rem;
+    color: #9a9a9a;
+}
+
+.mg-tyre-card-section b {
+    font-family: 'F1Numbers', sans-serif;
+    font-size: 0.68rem;
+    font-weight: normal;
+    color: var(--mg-text);
+    white-space: nowrap;
+}
+
+.mg-tyre-card-section.is-common {
+    margin-top: auto;
+    padding-top: 7px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- Фокус ---------- */
+
+.mg-link:focus-visible,
+.mg-tyre:focus-visible,
+.mg-grid-cell:focus-visible,
+.mg-bday-row:focus-visible,
+.mg-btn:focus-visible,
+.mg-modal-close:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.75);
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   АДАПТИВНОСТЬ
+   ============================================================ */
+
+@media (max-width: 1400px) {
+    /* в узкой колонке логотипы не помещаются — оставляем только номер и код */
+    .mg-grid-logo {
+        display: none;
+    }
+
+    .mg-grid-cell {
+        gap: 3px;
+        padding: 5px 5px;
+    }
+
+    .mg-grid-pos {
+        min-width: 12px;
+    }
+
+    .mg-grid-name {
+        font-size: 0.55rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .mg-grid-inner.is-compact .mg-grid-logo {
+        display: inline-block;
+    }
+
+    .mg-grid-inner.is-compact .mg-grid-cell {
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .mg-race-top {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mg-race-map {
+        display: none;
+    }
+}
+
+@media (max-width: 1250px) {
+    .mg-layout {
+        grid-template-columns: minmax(0, 1fr) 250px;
+    }
+
+    .mg-side .mg-block-title {
+        font-size: 0.86rem;
+    }
+
+    .mg-weekend {
+        grid-template-columns: minmax(0, 1fr) 270px;
+    }
+
+    .mg-around-name {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .mg-content {
+        padding: 16px 16px 50px;
+    }
+
+    .mg-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mg-side {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mg-stat-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .mg-stat-name {
+        font-size: 0.9rem;
+    }
+
+    .mg-stat-value {
+        font-size: 1.45rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .mg-weekend {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 760px) {
+    .mg-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .mg-toolbar-side {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .mg-race-timing {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .mg-tyre-modal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .mg-side {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .mg-toolbar-side {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .mg-cd {
+        min-width: 38px;
+        padding: 4px 5px 3px;
+    }
+
+    .mg-cd b {
+        font-size: 22px;
+    }
+
+    .mg-gp-meta {
+        font-size: 0.72rem;
+    }
+
+    .mg-tyre-modal-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mg-tyre-card {
+        opacity: 1;
+    }
+
+    .mg-around {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mg-around-cell + .mg-around-cell {
+        border-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mg-tyre-overlay,
+    .mg-tyre-modal {
+        transition: none !important;
+    }
+}
+
+/* ============================================================
+   ГЛАВНАЯ — СПОЙЛЕР И ПИТ-ЛЕЙН
+   ============================================================ */
+
+.mg-grid-stage {
+    position: relative;
+}
+
+.mg-grid-container.is-blurred {
+    filter: blur(7px);
+    -webkit-filter: blur(7px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.mg-grid-blur {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(8, 9, 12, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    cursor: pointer;
+    text-align: center;
+    z-index: 2;
+}
+
+.mg-grid-blur-text {
+    font-family: 'F1Title', sans-serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #fff;
+}
+
+.mg-grid-blur-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.mg-grid-blur:hover .mg-grid-blur-text {
+    color: var(--red-accent);
+}
+
+.mg-grid-blur:hover .mg-grid-blur-title {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.mg-grid-pit {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.mg-grid-pit-label {
+    margin-right: 2px;
+    font-family: 'F1Title', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    color: #ff8a3d;
+}
+
+.mg-grid-pit .mg-grid-cell {
+    flex: 0 0 auto;
+    min-width: 75px;
+    border-left: 2px solid rgba(255, 107, 0, 0.55);
+}
+
+@media (max-width: 1400px) {
+    .mg-grid-pit .mg-grid-cell {
+        min-width: 66px;
+    }
+}

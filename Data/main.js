@@ -275,7 +275,6 @@ const createStartingGridBlock = () => {
 		<div class="starting-grid-blur-content">
 			<span class="starting-grid-blur-text">${gridTitleTextFull}</span>
 			<span class="starting-grid-blur-title">! ОСТОРОЖНО СПОЙЛЕРЫ !</span>
-			<span class="starting-grid-blur-title">Нажмите для показа</span>
 		</div>
 	`;
     block.appendChild(overlay);
@@ -340,7 +339,7 @@ const createStartingGridBlock = () => {
 
         let pitHTML = `
             <div class="pit-label">
-                <span class="pit-label-text">PIT</span>
+                <span class="pit-label-text">Pit lane</span>
                 <span class="pit-label-line"></span>
             </div>
             <div class="pit-drivers-grid">
@@ -553,7 +552,7 @@ const getBestPitstop = () => {
 
         bestTimeNum = t;
         const team = teamOverride || (typeof getPitstopTeam === 'function' ? getPitstopTeam(driver) : driver.team);
-        best = { team, time: timeStr };
+        best = { team, time: timeStr, driver: driver.name };
     });
 
     return best;
@@ -1162,49 +1161,904 @@ const tryPlayBeepSound = () => {
     } catch {}
 };
 
+/* ============================================================
+   ГЛАВНАЯ — НОВЫЙ ДИЗАЙН (v6)
+   Три блока: этап + соседние гонки, данные этапа, решётка.
+   ============================================================ */
+
+let mgGridRevealed = false;
+let mgMainTimer = null;
+let mgWeatherRequested = false;
+let mgMQBound = false;
+
+/* ---------- Мелочи ---------- */
+
+const mgPad = value => String(value).padStart(2, '0');
+
+const mgNum = value => {
+    const number = Number(value);
+    return Number.isFinite(number) ? new Intl.NumberFormat('ru-RU').format(number) : value;
+};
+
+const mgFlag = (country, cls = '') =>
+    `<img class="mg-flag ${cls}" src="Images/Flags/${country}.svg" alt="" title="${getCountryName(country)}" onerror="this.style.display='none'">`;
+
+const mgLogo = (team, cls = '') =>
+    `<img class="mg-logo ${cls}" src="${getTeamLogo(team)}" alt="" title="${team}" onerror="this.style.display='none'">`;
+
+const mgKeep = name => {
+    const parts = String(name || '').trim().split(/\s+/);
+    if (parts.length < 2) return `<span class="mg-nowrap">${parts[0] || ''}</span>`;
+    const last = parts.pop();
+    return `${parts.join(' ')} <span class="mg-nowrap">${last}</span>`;
+};
+
+const mgTitle = text => `<div class="mg-block-title">${text}</div>`;
+
+const mgToDate = value => new Date(String(value).replace(' ', 'T'));
+
+/* ---------- Данные ---------- */
+
+const mgData = () => {
+    const upcoming = getUpcomingGPs();
+    const [nextGP = null, afterGP = null] = getNextGPs(2);
+    const track = nextGP ? getTrackById(nextGP.track) : null;
+
+    const round = nextGP ? upcoming.findIndex(gp => gp.id === nextGP.id) + 1 : 0;
+
+    const leaderEntry = combinedStandings.length ? combinedStandings[0] : null;
+    const secondEntry = combinedStandings.length > 1 ? combinedStandings[1] : null;
+    const leaderBase = leaderEntry ? findDriverById(leaderEntry.driver) : null;
+    const leader = leaderBase ? { ...leaderBase, points: leaderEntry.points } : null;
+    const leaderGap = leaderEntry && secondEntry ? Math.max(0, leaderEntry.points - secondEntry.points) : 0;
+
+    const constructors = typeof calculateConstructorStandings === 'function'
+        ? calculateConstructorStandings()
+        : [];
+    const constructor = constructors[0] || null;
+    const constructorSecond = constructors[1] || null;
+    const constructorGap = constructor && constructorSecond ? Math.max(0, constructor.points - constructorSecond.points) : 0;
+    const constructorEngine = constructor ? (getTeamData(constructor.team)?.engine || '—') : '—';
+
+    const pitstop = typeof getBestPitstop === 'function' ? getBestPitstop() : null;
+
+    const birthdayRaw = typeof getNextDriverBirthdays === 'function' ? getNextDriverBirthdays() : [];
+    let birthday = { dateStr: '', daysText: '', daysUntil: 0, list: [] };
+
+    if (birthdayRaw.length) {
+        const firstDate = birthdayRaw[0].date;
+        const now = new Date();
+        const dateStr = `${mgPad(firstDate.getDate())}.${mgPad(firstDate.getMonth() + 1)}.${firstDate.getFullYear()}`;
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const target = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+        const diffDays = Math.ceil((target - today) / 86400000);
+
+        let daysText = `через ${diffDays} ${declension(diffDays, ['день', 'дня', 'дней'])}`;
+        if (diffDays === 0) daysText = 'сегодня';
+        else if (diffDays === 1) daysText = 'завтра';
+        else if (diffDays < 0) daysText = `${Math.abs(diffDays)} дн. назад`;
+
+        birthday = {
+            dateStr,
+            daysText,
+            daysUntil: diffDays,
+            list: birthdayRaw.map(item => ({
+                driver: item.driver,
+                age: calculateAgeOnDate(item.driver.birthDate, item.date)
+            }))
+        };
+    }
+
+    return {
+        upcoming, nextGP, afterGP, track,
+        total: upcoming.length,
+        round,
+        leader, leaderGap,
+        constructor, constructorGap, constructorEngine,
+        pitstop, birthday
+    };
+};
+
+/* ---------- Отсчёт, сессии, видео ---------- */
+
+const mgCountdown = gp => {
+    const target = mgToDate(gp.date).getTime();
+    const diff = target - Date.now();
+
+    if (diff <= 0) {
+        return `<div class="mg-countdown is-done" data-countdown="${gp.date}"><span>Гонка завершена</span></div>`;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    return `
+        <div class="mg-countdown" data-countdown="${gp.date}">
+            <div class="mg-cd"><b data-cd="d">${mgPad(d)}</b><span>дней</span></div>
+            <i>:</i>
+            <div class="mg-cd"><b data-cd="h">${mgPad(h)}</b><span>часов</span></div>
+            <i>:</i>
+            <div class="mg-cd"><b data-cd="m">${mgPad(m)}</b><span>минут</span></div>
+            <i>:</i>
+            <div class="mg-cd"><b data-cd="s">${mgPad(s)}</b><span>секунд</span></div>
+        </div>`;
+};
+
+const mgSchedule = gp => {
+    const events = [];
+    const sprintDate = String(gp.sprint || '').trim();
+    if (sprintDate) events.push({ type: 'sprint', label: 'Спринт', date: sprintDate });
+    if (gp.quali) events.push({ type: 'quali', label: 'Квалификация', date: gp.quali });
+    events.push({ type: 'race', label: 'Гонка', date: gp.date });
+
+    const now = Date.now();
+    let nextMarked = false;
+
+    return `<div class="mg-sched">${events.map(event => {
+        const stamp = mgToDate(event.date).getTime();
+        const isPast = stamp < now;
+        const isNext = !isPast && !nextMarked;
+        if (isNext) nextMarked = true;
+        const time = getGPDateParts(event.date).time;
+
+        return `
+            <div class="mg-sched-row ${isPast ? 'is-past' : ''} ${isNext ? 'is-next' : ''}">
+                <span class="mg-sched-dot is-${event.type}"></span>
+                <span class="mg-sched-name">${event.label}</span>
+                <span class="mg-sched-date">${formatDateMini(event.date)} · ${time}</span>
+            </div>`;
+    }).join('')}</div>`;
+};
+
+const mgMedia = gp => {
+    const items = [
+        { label: 'Спец-гонка', video: gp.recordingSpecRace, date: null },
+        { label: 'Спринт', video: gp.recordingSprint, date: gp.sprint, hidden: !gp.hasSprint },
+        { label: 'Квалификация', video: gp.recordingQuali, date: gp.quali },
+        { label: 'Гонка', video: gp.recordingRace, date: gp.date }
+    ].filter(item => item.video && !item.hidden);
+
+    if (!items.length) {
+        return '';
+    }
+
+    return `<div class="mg-media">${items.map(item => {
+        const open = !item.date || isEventNearOrPassed(item.date);
+        return `
+            <button type="button" class="mg-link ${open ? '' : 'is-locked'}"
+                ${open ? `data-video="${item.video}" data-title="${item.label} · ${gp.name}"` : 'disabled'}>
+                ${item.label}${open ? '' : ' · скоро'}
+            </button>`;
+    }).join('')}</div>`;
+};
+
+/* ---------- Погода и шины ---------- */
+
+const mgWeatherValue = (key, value) => {
+    if (value === '--' || value === undefined || value === null) return '—';
+    if (key === 'temp') return `${value} °C`;
+    if (key === 'wind') return `${value} м/с`;
+    if (key === 'humidity') return `${value} %`;
+    if (key === 'rain') return `${value} %`;
+    return value;
+};
+
+const mgWeatherCell = data => {
+    const track = data.track;
+    return `
+        <section class="mg-data-sec">
+            <div class="mg-data-head">
+                <span class="mg-data-title">Погода</span>
+            </div>
+            <div class="mg-weather">
+                <img class="mg-weather-icon" data-w="icon" src="Images/Weather/${weatherData.type}.png" alt="${weatherData.typeName}" onerror="this.style.display='none'">
+                <div class="mg-weather-copy">
+                    <b data-w="type">${weatherData.typeName}</b>
+                    <span>${track ? `${track.location}` : '—'}</span>
+                </div>
+            </div>
+            <div class="mg-wmetrics">
+                <div><b data-w="temp">—</b><span>температура</span></div>
+                <div><b data-w="wind">—</b><span>ветер</span></div>
+                <div><b data-w="humidity">—</b><span>влажность</span></div>
+                <div><b data-w="rain">—</b><span>осадки</span></div>
+            </div>
+        </section>`;
+};
+
+const mgRainActive = () => {
+    const chance = parseFloat(String(weatherData.rain).replace(',', '.'));
+    return Number.isFinite(chance) && chance > 40;
+};
+
+const mgTyreInfo = data => {
+    const raw = String(data.nextGP?.tires || '').trim();
+    const compounds = /^[1-5]{2,}$/.test(raw)
+        ? raw.split('').map(code => `C${code}`)
+        : raw.split(',').map(item => item.trim()).filter(Boolean);
+
+    return {
+        hard: compounds[0] || 'C2',
+        medium: compounds[1] || 'C3',
+        soft: compounds[2] || 'C4',
+        rainActive: mgRainActive()
+    };
+};
+
+const mgTyresCell = data => {
+    const info = mgTyreInfo(data);
+    const set = [
+        { code: info.hard, type: 'Hard' },
+        { code: info.medium, type: 'Medium' },
+        { code: info.soft, type: 'Soft' }
+    ];
+
+    /* Дождевые составы — только при высокой вероятности осадков, в общем ряду */
+    if (info.rainActive) {
+        set.push({ code: '', type: 'Intermediate', short: 'Inter' }, { code: '', type: 'Wet', short: 'Wet' });
+    }
+
+    return `
+        <section class="mg-data-sec">
+            <div class="mg-data-head">
+                <span class="mg-data-title">Шины на этап</span>
+            </div>
+            <div class="mg-tyres${info.rainActive ? ' has-rain' : ''}">
+                ${set.map(item => `
+                    <button type="button" class="mg-tyre" data-mg-tyres title="${item.type}${item.code ? ` · ${item.code}` : ''}">
+                        <img src="Images/Wheels/${item.type}.png" alt="${item.type}">
+                        <span>${item.code ? `<b>${item.code}</b>` : ''}<span class="mg-tyre-type">${item.short || item.type}</span></span>
+                    </button>`).join('')}
+            </div>
+        </section>`;
+};
+
+const mgUpdateTyres = () => {
+    const wrap = document.querySelector('.mg-tyres');
+    if (!wrap) return;
+
+    const active = mgRainActive();
+    if (wrap.classList.contains('has-rain') === active) return;
+
+    const data = mgData();
+    if (!data.nextGP) return;
+
+    const section = wrap.closest('.mg-data-sec');
+    if (section) section.outerHTML = mgTyresCell(data);
+};
+
+const mgParseRecord = value => {
+    const raw = String(value || '').trim();
+    if (!raw) return null;
+    const [time, rest = ''] = raw.split(/,\s*/);
+    const parts = rest.split(/\s+-\s+/);
+    return {
+        time: time || '—',
+        driver: parts[0] || '',
+        team: parts[1] || '',
+        year: parts[2] || ''
+    };
+};
+
+const mgRecordsCell = data => {
+    const race = mgParseRecord(data.track?.lapRecord);
+    const quali = mgParseRecord(data.track?.qulRecord);
+
+    const row = (label, record) => `
+        <div class="mg-rec-row">
+            <span class="mg-rec-label">${label}</span>
+            <span class="mg-rec-line">
+                <b class="mg-rec-time">${record ? record.time : '—'}</b>
+                <span class="mg-rec-sub">${record ? [record.driver, record.year].filter(Boolean).join(' · ') : 'нет данных'}</span>
+            </span>
+        </div>`;
+
+    return `
+        <section class="mg-data-sec mg-records">
+            <div class="mg-data-head">
+                <span class="mg-data-title">Рекорды круга</span>
+            </div>
+            ${row('в гонке', race)}
+            ${row('в квале', quali)}
+        </section>`;
+};
+
+/* ---------- Стартовая решётка ---------- */
+
+const mgRealGridData = () => {
+    if (typeof startingGridData === 'undefined') return [];
+    return startingGridData
+        .filter(item => item.driverId)
+        .map(item => {
+            const driver = findDriverByShortId(item.driverId);
+            if (!driver) return null;
+            return {
+                position: item.position,
+                driver,
+                team: item.team || driver.team,
+                pole: item.position === 1,
+                penalty: Boolean(item.penalties),
+                pitLane: Boolean(item.pitLane)
+            };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.position - b.position);
+};
+
+const mgGridCell = (item, extra = '') => `
+    <button type="button" class="mg-grid-cell ${extra} ${item.pole ? 'is-pole' : ''} ${item.penalty ? 'is-penalty' : ''}"
+        style="--tc:${getTeamColor(item.team)};order:${item.position}"
+        data-driver-id="${item.driver.id}"
+        aria-label="${item.driver.name} · ${item.team}"
+        title="${item.driver.name} · ${item.team}">
+        <span class="mg-grid-pos">${item.position}</span>
+        <span class="mg-grid-name">${getDriverShortName(item.driver).slice(0, 3).toUpperCase()}</span>
+        ${mgLogo(item.team, 'mg-grid-logo')}
+    </button>`;
+
+const mgGridCompactMQ = window.matchMedia('(max-width: 900px)');
+
+const mgGridBoard = grid => {
+    /* На узких экранах — плоская сетка в естественном порядке */
+    if (mgGridCompactMQ.matches) {
+        return `
+            <div class="mg-grid-board">
+                <div class="mg-grid-inner is-compact">
+                    ${grid.map(item => mgGridCell(item)).join('')}
+                </div>
+            </div>`;
+    }
+
+    /* Шахматный порядок: нечётные места — первый ряд, чётные — второй со смещением */
+    const rowOne = grid.filter((_, index) => index % 2 === 0);
+    const rowTwo = grid.filter((_, index) => index % 2 === 1);
+
+    return `
+        <div class="mg-grid-board">
+            <div class="mg-grid-inner">
+                <div class="mg-grid-line">${rowOne.map(item => mgGridCell(item)).join('')}</div>
+                <div class="mg-grid-line is-offset">${rowTwo.map(item => mgGridCell(item)).join('')}</div>
+            </div>
+        </div>`;
+};
+
+const mgPitRow = pit => `
+    <div class="mg-grid-pit">
+        <span class="mg-grid-pit-label">PIT</span>
+        ${pit.map(item => mgGridCell(item, 'is-pit')).join('')}
+    </div>`;
+
+const mgGridSection = data => {
+    const all = mgRealGridData();
+    const grid = all.filter(item => !item.pitLane);
+    const pit = all.filter(item => item.pitLane);
+
+    if (!all.length) {
+        const quali = data.nextGP?.quali ? formatDateLong(data.nextGP.quali) : '';
+        return `
+            <article class="mg-card mg-grid-sec">
+                <div class="mg-grid-head">
+                    <span class="mg-data-title">Стартовая решётка</span>
+                    <span class="mg-grid-note">Квалификация ещё не состоялась${quali ? ` · ${quali}` : ''}</span>
+                    <button type="button" class="mg-link" data-mg-tab="calendar">календарь</button>
+                </div>
+            </article>`;
+    }
+
+    return `
+        <article class="mg-card mg-grid-sec">
+            <div class="mg-grid-head">
+                <span class="mg-data-title">Стартовая решётка</span>
+                <span class="mg-legend"><i class="is-pole"></i> поул <i class="is-penalty"></i> штраф</span>
+            </div>
+            <div class="mg-grid-stage">
+                <div class="mg-grid-container${mgGridRevealed ? '' : ' is-blurred'}">
+                    ${mgGridBoard(grid)}
+                    ${pit.length ? mgPitRow(pit) : ''}
+                </div>
+                ${mgGridRevealed ? '' : `
+                    <div class="mg-grid-blur" data-mg-reveal>
+                        <span class="mg-grid-blur-text">Стартовая решётка на предстоящую гонку</span>
+                        <span class="mg-grid-blur-title">! осторожно, спойлеры !</span>
+                    </div>`}
+            </div>
+        </article>`;
+};
+
+/* ---------- Блок этапа ---------- */
+
+const mgPrevGP = () => {
+    const now = Date.now();
+    const past = calendarData
+        .filter(gp => mgToDate(gp.date).getTime() + 3 * 3600000 < now)
+        .sort((a, b) => mgToDate(a.date) - mgToDate(b.date));
+    return past[past.length - 1] || null;
+};
+
+const mgAround = data => {
+    const prev = mgPrevGP();
+    if (!prev && !data.afterGP) return '';
+
+    const cell = (label, gp, round) => gp ? `
+        <button type="button" class="mg-around-cell" data-gp-id="${gp.id}">
+            <span class="mg-around-label">${label} · этап ${round}</span>
+            <span class="mg-around-name">${mgKeep(gp.name)}</span>
+            <span class="mg-around-date">${formatDateLong(gp.date)}</span>
+        </button>` : '';
+
+    const cells = [
+        cell('Предыдущий', prev, Math.max(1, data.round - 1)),
+        cell('Следующий', data.afterGP, data.round + 1)
+    ].filter(Boolean);
+
+    return `
+        <div class="mg-around${cells.length === 1 ? ' is-single' : ''}">
+            ${cells.join('')}
+        </div>`;
+};
+
+const mgRaceBlock = data => {
+    const gp = data.nextGP;
+    const track = data.track;
+    const around = mgAround(data);
+
+    return `
+        <div class="mg-weekend">
+            <article class="mg-card mg-race" data-gp-id="${gp.id}">
+                <div class="mg-race-head">
+                    ${mgTitle('Следующий этап')}
+                </div>
+
+                <div class="mg-race-top">
+                    <div class="mg-race-copy">
+                        <h1 class="mg-gp-name">${mgKeep(gp.name)}</h1>
+                        <div class="mg-gp-meta">
+                            <span>${mgFlag(track.country)} ${track.location}</span>
+                            <i></i>
+                            <span>${track.trackName}</span>
+                            <i></i>
+                            <span>${formatDateLong(gp.date)}</span>
+                        </div>
+
+                        <div class="mg-race-timing">
+                            <div class="mg-race-countdown">
+                                ${mgCountdown(gp)}
+                                ${mgMedia(gp)}
+                            </div>
+                            <div class="mg-timing-side">
+                                ${mgSchedule(gp)}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mg-race-map">
+                        <span class="mg-race-round-mark" aria-hidden="true">${data.round}</span>
+                        <img src="Images/Tracks/${track.id}.png" alt="${track.trackName}" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+                ${around ? `<div class="mg-around-sec">${around}</div>` : ''}
+            </article>
+
+            <article class="mg-card mg-data-col">
+                ${mgWeatherCell(data)}
+                ${mgTyresCell(data)}
+                ${mgRecordsCell(data)}
+            </article>
+
+            ${mgGridSection(data)}
+        </div>`;
+};
+
+/* ---------- Карточки правой колонки ---------- */
+
+const mgStatCard = ({ title, name, logo, value, suffix, sub }) => `
+    <article class="mg-card mg-stat">
+        ${mgTitle(title)}
+        <div class="mg-stat-main">
+            <div class="mg-stat-name">${name || 'Нет данных'}${logo ? `<span class="mg-stat-logo">${logo}</span>` : ''}</div>
+            <div class="mg-stat-value">${value || '—'}${suffix ? `<small>${suffix}</small>` : ''}</div>
+        </div>
+        <div class="mg-stat-sub">${sub || ''}</div>
+    </article>`;
+
+const mgStatCards = data => {
+    const leader = data.leader;
+    const constructor = data.constructor;
+    const pitstop = data.pitstop;
+
+    return `
+        ${mgStatCard({
+            title: 'Лидер чемпионата',
+            name: leader ? `${leader.name} ${mgFlag(leader.country, 'mg-flag-sm')}` : 'Нет данных',
+            logo: leader ? mgLogo(leader.team) : '',
+            value: leader ? mgNum(leader.points) : '—',
+            sub: leader ? `${data.leaderGap ? ` Отрыв +${mgNum(data.leaderGap)}` : ''}` : ''
+        })}
+        ${mgStatCard({
+            title: 'Кубок конструкторов',
+            name: constructor ? constructor.team : 'Нет данных',
+            logo: constructor ? mgLogo(constructor.team) : '',
+            value: constructor ? mgNum(constructor.points) : '—',
+            sub: constructor ? `${data.constructorGap ? ` Отрыв +${mgNum(data.constructorGap)}` : ''}` : ''
+        })}
+        ${mgStatCard({
+            title: 'Лучший пит-стоп',
+            name: pitstop ? pitstop.team : 'Нет данных',
+            logo: pitstop ? mgLogo(pitstop.team) : '',
+            value: pitstop ? pitstop.time : '—',
+            suffix: 'с',
+            sub: pitstop ? `${pitstop.driver}` : 'Нет данных',
+        })}`;
+};
+
+const mgBirthdayCard = data => {
+    const b = data.birthday;
+
+    return `
+        <article class="mg-card mg-bday">
+            ${mgTitle('День рождения')}
+            ${!b.list.length ? '<div class="mg-empty">Нет данных</div>' : `
+                <div class="mg-bday-top">
+                    <span class="mg-bday-date">${b.dateStr}</span>
+                    <span class="mg-bday-when">${b.daysText}</span>
+                </div>
+                <div class="mg-bday-list">
+                    ${b.list.map(item => `
+                        <button type="button" class="mg-bday-row" data-driver-id="${item.driver.id}" style="--tc:${getTeamColor(item.driver.team)}">
+                            <span class="mg-bday-num">${item.driver.number}</span>
+                            <span class="mg-bday-name">${mgFlag(item.driver.country, 'mg-flag-sm')}<span>${item.driver.name}</span></span>
+                            <span class="mg-bday-age">${item.age} ${declension(item.age, ['год', 'года', 'лет'])}</span>
+                        </button>`).join('')}
+                </div>`}
+        </article>`;
+};
+
+const mgSeasonEnd = () => `
+    <article class="mg-card mg-season">
+        ${mgTitle('Сезон завершён')}
+        <p>Все этапы календаря пройдены. Итоги доступны в разделах «Результаты» и «Статистика».</p>
+        <div class="mg-season-actions">
+            <button type="button" class="mg-btn" data-mg-tab="results">Результаты</button>
+            <button type="button" class="mg-btn" data-mg-tab="calendar">Календарь</button>
+        </div>
+    </article>`;
+
+/* ---------- Рендер ---------- */
+
+const mgToolbar = () => `
+    <header class="mg-toolbar">
+        <span class="mg-toolbar-center">77 чемпионат мира Formula 1</span>
+    </header>`;
+
+const mgRender = (root = document.getElementById('mgRoot')) => {
+    if (!root) return;
+
+    const data = mgData();
+
+    root.innerHTML = `${mgToolbar()}${!data.nextGP
+        ? `<div class="mg-layout">
+               <div class="mg-main">${mgSeasonEnd()}</div>
+               <aside class="mg-side">
+                   ${mgStatCards(data)}
+                   ${mgBirthdayCard(data)}
+               </aside>
+           </div>`
+        : `<div class="mg-layout">
+               <div class="mg-main">
+                   ${mgRaceBlock(data)}
+               </div>
+               <aside class="mg-side">
+                   ${mgStatCards(data)}
+                   ${mgBirthdayCard(data)}
+               </aside>
+           </div>`}`;
+
+    mgApplyWeather();
+    mgTick();
+};
+
+/* ---------- События ---------- */
+
+const mgGoTo = (tab, gpId = '') => {
+    if (!tab) return;
+    if (tab === 'calendar' && gpId) {
+        navigateToCalendarWithScroll(gpId);
+        return;
+    }
+    const button = document.querySelector(`.menu-item[data-tab="${tab}"]`);
+    if (button) button.click();
+};
+
+const mgBind = root => {
+    root.addEventListener('click', event => {
+        const video = event.target.closest('[data-video]');
+        if (video) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (typeof openVideoModal === 'function') {
+                openVideoModal(video.dataset.video, video.dataset.title || 'Видео');
+            }
+            return;
+        }
+
+        const tyre = event.target.closest('[data-mg-tyres]');
+        if (tyre) {
+            event.preventDefault();
+            mgOpenTyres();
+            return;
+        }
+
+        const reveal = event.target.closest('[data-mg-reveal]');
+        if (reveal) {
+            event.preventDefault();
+            mgGridRevealed = true;
+            mgRender();
+            return;
+        }
+
+        const driverEl = event.target.closest('[data-driver-id]');
+        if (driverEl) {
+            event.preventDefault();
+            event.stopPropagation();
+            const driver = findDriverById(driverEl.dataset.driverId);
+            if (driver && typeof openDriverModal === 'function') openDriverModal(driver);
+            return;
+        }
+
+        const tab = event.target.closest('[data-mg-tab]');
+        if (tab) {
+            event.preventDefault();
+            mgGoTo(tab.dataset.mgTab);
+            return;
+        }
+
+        const gpEl = event.target.closest('[data-gp-id]');
+        if (gpEl) mgGoTo('calendar', gpEl.dataset.gpId);
+    });
+
+    root.addEventListener('contextmenu', event => {
+        const gpEl = event.target.closest('[data-gp-id]');
+        if (!gpEl) return;
+        event.preventDefault();
+        const gp = getGPById(gpEl.dataset.gpId);
+        if (!gp) return;
+        const track = getTrackById(gp.track);
+        if (track && typeof openTrackModal === 'function') openTrackModal(track, gp);
+    });
+};
+
+/* ---------- Погода ---------- */
+
+const mgApplyWeather = () => {
+    document.querySelectorAll('[data-w="icon"]').forEach(image => {
+        image.src = `Images/Weather/${weatherData.type}.png`;
+        image.alt = weatherData.typeName;
+    });
+    document.querySelectorAll('[data-w="type"]').forEach(el => { el.textContent = weatherData.typeName; });
+    document.querySelectorAll('[data-w="temp"]').forEach(el => { el.textContent = mgWeatherValue('temp', weatherData.temperature); });
+    document.querySelectorAll('[data-w="wind"]').forEach(el => { el.textContent = mgWeatherValue('wind', weatherData.wind); });
+    document.querySelectorAll('[data-w="humidity"]').forEach(el => { el.textContent = mgWeatherValue('humidity', weatherData.humidity); });
+    document.querySelectorAll('[data-w="rain"]').forEach(el => { el.textContent = mgWeatherValue('rain', weatherData.rain); });
+    mgUpdateTyres();
+};
+
+const mgLoadWeather = async () => {
+    if (mgWeatherRequested) return;
+    mgWeatherRequested = true;
+
+    const data = mgData();
+    if (!data.nextGP || !data.track) return;
+
+    const location = getWeatherLocation(data.nextGP, data.track);
+    const weather = await Promise.race([
+        fetchWeatherWttr(location),
+        new Promise(resolve => setTimeout(() => resolve(null), 8000))
+    ]);
+
+    if (weather) {
+        Object.assign(weatherData, weather);
+    } else if (weatherData.typeName === 'Загрузка...') {
+        Object.assign(weatherData, {
+            type: 'cloud', typeName: 'Нет данных',
+            temperature: '--', wind: '--', humidity: '--', rain: '--'
+        });
+    }
+
+    mgApplyWeather();
+};
+
+/* ---------- Таймер и звуковые уведомления ---------- */
+
+const mgCheckSounds = () => {
+    const [gp] = getNextGPs(1);
+    if (!gp) return;
+
+    const now = Date.now();
+
+    const check = (dateStr, type) => {
+        if (!dateStr) return;
+        const timeToEvent = mgToDate(dateStr).getTime() - now;
+        const soundKey = `${gp.id}_${type}`;
+
+        if (soundPlayed5min[soundKey] === undefined) soundPlayed5min[soundKey] = false;
+        if (soundPlayed0min[soundKey] === undefined) soundPlayed0min[soundKey] = false;
+
+        if (timeToEvent > 0 && Math.abs(timeToEvent - 5 * 60 * 1000) < 1000 && !soundPlayed5min[soundKey]) {
+            playF1Sound();
+            soundPlayed5min[soundKey] = true;
+        }
+
+        if (timeToEvent > 0 && timeToEvent < 1000 && !soundPlayed0min[soundKey]) {
+            playF1Sound();
+            soundPlayed0min[soundKey] = true;
+        }
+
+        if (timeToEvent < -1000) {
+            delete soundPlayed5min[soundKey];
+            delete soundPlayed0min[soundKey];
+        }
+    };
+
+    check(gp.sprint, 'sprint');
+    check(gp.quali, 'quali');
+    check(gp.date, 'race');
+};
+
+const mgTick = () => {
+    if (!document.getElementById('mgRoot')) {
+        if (mgMainTimer) clearInterval(mgMainTimer);
+        mgMainTimer = null;
+        return;
+    }
+
+    document.querySelectorAll('[data-countdown]').forEach(element => {
+        const target = mgToDate(element.dataset.countdown).getTime();
+        if (!Number.isFinite(target)) return;
+
+        const diff = target - Date.now();
+        if (diff <= 0) {
+            if (!element.dataset.done) {
+                element.dataset.done = '1';
+                element.classList.add('is-done');
+                element.innerHTML = '<span>Гонка завершена</span>';
+            }
+            return;
+        }
+
+        if (element.dataset.done) {
+            delete element.dataset.done;
+            element.classList.remove('is-done');
+        }
+
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+
+        const set = (key, value) => {
+            const cell = element.querySelector(`[data-cd="${key}"]`);
+            if (cell) cell.textContent = mgPad(value);
+        };
+
+        set('d', d);
+        set('h', h);
+        set('m', m);
+        set('s', s);
+    });
+
+    mgCheckSounds();
+};
+
+/* ---------- Модалка шин ---------- */
+
+const mgOpenTyres = () => {
+    document.querySelector('.mg-tyre-overlay')?.remove();
+
+    const data = mgData();
+    const info = mgTyreInfo(data);
+
+    const specs = {
+        Hard: { front: ['280/705', '10.4 кг'], rear: ['375/710', '12.8 кг'], common: [['Прогрев', '70 °C'], ['Диаметр', '18"']] },
+        Medium: { front: ['280/705', '10.4 кг'], rear: ['375/710', '12.8 кг'], common: [['Прогрев', '90 °C'], ['Диаметр', '18"']] },
+        Soft: { front: ['280/705', '10.4 кг'], rear: ['375/710', '12.8 кг'], common: [['Прогрев', '110 °C'], ['Диаметр', '18"']] },
+        Intermediate: { front: ['280/710', '10.3 кг'], rear: ['375/715', '13.2 кг'], common: [['Прогрев', '60 °C'], ['Водоотведение', '31 л/с']] },
+        Wet: { front: ['280/715', '11.3 кг'], rear: ['375/720', '13.4 кг'], common: [['Прогрев', '—'], ['Водоотведение', '76 л/с']] }
+    };
+
+    const codeFor = type => type === 'Hard' ? info.hard : type === 'Medium' ? info.medium : type === 'Soft' ? info.soft : '—';
+    const activeCodes = [info.hard, info.medium, info.soft];
+
+    const cards = Object.keys(specs).map(type => {
+        const spec = specs[type];
+        const code = codeFor(type);
+        const active = activeCodes.includes(code);
+
+        return `
+            <article class="mg-tyre-card ${active ? 'is-active' : ''}">
+                <div class="mg-tyre-card-head">
+                    <img src="Images/Wheels/${type}.png" alt="${type}" onerror="this.style.display='none'">
+                    <div><strong>${type}</strong><span>${code}</span></div>
+                    <small>${active ? 'на этапе' : 'резерв'}</small>
+                </div>
+                <div class="mg-tyre-card-section">
+                    <span>Передние</span>
+                    <div><i>Размер</i><b>${spec.front[0]}</b></div>
+                    <div><i>Вес</i><b>${spec.front[1]}</b></div>
+                </div>
+                <div class="mg-tyre-card-section">
+                    <span>Задние</span>
+                    <div><i>Размер</i><b>${spec.rear[0]}</b></div>
+                    <div><i>Вес</i><b>${spec.rear[1]}</b></div>
+                </div>
+                <div class="mg-tyre-card-section is-common">
+                    ${spec.common.map(([label, value]) => `<div><i>${label}</i><b>${value}</b></div>`).join('')}
+                </div>
+            </article>`;
+    }).join('');
+
+    const overlay = document.createElement('div');
+    overlay.className = 'mg-tyre-overlay';
+    overlay.innerHTML = `
+        <div class="mg-tyre-modal" role="dialog" aria-modal="true" aria-label="Состав шин">
+            <button type="button" class="mg-modal-close" aria-label="Закрыть">×</button>
+            <div class="mg-tyre-modal-head">
+                <h2>Состав шин</h2>
+                <p>На этом этапе: <b>${info.hard}</b> Hard, <b>${info.medium}</b> Medium, <b>${info.soft}</b> Soft. Дождевые составы активируются при вероятности осадков выше 40%.</p>
+            </div>
+            <div class="mg-tyre-modal-grid">${cards}</div>
+        </div>`;
+
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    const close = () => {
+        overlay.remove();
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', esc);
+    };
+
+    function esc(event) {
+        if (event.key === 'Escape') close();
+    }
+
+    overlay.querySelector('.mg-modal-close').addEventListener('click', close);
+    overlay.addEventListener('click', event => {
+        if (event.target === overlay) close();
+    });
+    document.addEventListener('keydown', esc);
+
+    requestAnimationFrame(() => overlay.classList.add('is-open'));
+};
+
+/* ---------- Инициализация главной ---------- */
+
 const initMainPage = async container => {
-    container.style.display = 'block';
-    container.style.flexDirection = '';
-    container.style.gap = '';
-    container.style.padding = '30px 20px';
     container.innerHTML = '';
+    container.style.display = 'block';
+    container.style.padding = '0';
 
-    const header = document.createElement('div');
-    header.className = 'main-header';
-    header.innerHTML = `
-        <h1 class="main-title">77 чемпионат мира Formula 1</h1>
-        <hr class="main-title-divider">
-    `;
-    container.appendChild(header);
+    mgGridRevealed = false;
 
-    const blocks = document.createElement('div');
-    blocks.className = 'main-blocks';
+    const root = document.createElement('div');
+    root.className = 'mg-page mg-content mg-root';
+    root.id = 'mgRoot';
+    container.appendChild(root);
 
-    blocks.appendChild(createStatsBlock());
+    mgRender(root);
+    mgBind(root);
 
-    const centerColumn = document.createElement('div');
-    centerColumn.className = 'main-center-column';
-    centerColumn.appendChild(createNextGPBlock());
-    centerColumn.appendChild(createAfterNextGPBlock());
-    blocks.appendChild(centerColumn);
+    if (mgMainTimer) clearInterval(mgMainTimer);
+    mgMainTimer = setInterval(mgTick, 1000);
 
-    blocks.appendChild(createWeatherBlock());
-    blocks.appendChild(createTyreBlock());
+    if (!mgMQBound) {
+        mgMQBound = true;
+        mgGridCompactMQ.addEventListener('change', () => {
+            mgRender();
+        });
+    }
 
-    container.appendChild(blocks);
-
-    const divider = document.createElement('hr');
-    divider.className = 'main-row-divider';
-    container.appendChild(divider);
-
-    const secondRow = document.createElement('div');
-    secondRow.className = 'main-second-row';
-    secondRow.appendChild(createBirthdayBlock());
-    secondRow.appendChild(createStartingGridBlock());
-
-    container.appendChild(secondRow);
-
-    await loadWeatherForNextGP();
-
-    startMainTimer();
+    mgLoadWeather();
 };
