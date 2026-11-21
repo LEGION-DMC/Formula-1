@@ -56,36 +56,36 @@ const startingGridData = [
 ];
 */
 const polesData = [
-    { driver: "antonelli", poles: 7 },
+    { driver: "antonelli", poles: 8 },
 ];
 
 const qualiData = [
     { driver1: "Кими Антонелли", 
-		score1: 11, 
+		score1: 12, 
 		score2: 9, 
 		driver2: "Джордж Расселл" },
     { driver1: "Шарль Леклер", 
-		score1: 11, 
+		score1: 12, 
 		score2: 9, 
 		driver2: "Льюис Хэмилтон" },
     { driver1: "Ландо Норрис", 
-		score1: 13, 
+		score1: 17, 
 		score2: 7, 
 		driver2: "Оскар Пиастри" },
     { driver1: "Макс Ферстаппен", 
-		score1: 12, 
+		score1: 13, 
 		score2: 5, 
 		driver2: "Исак Хаджар" },
     { driver1: "Лиам Лоусон", 
 		score1: 11, 
-		score2: 6, 
+		score2: 7, 
 		driver2: "Арвид Линдблад" },
     { driver1: "Нико Хюлькенберг", 
-		score1: 11, 
+		score1: 12, 
 		score2: 9, 
 		driver2: "Габриэль Бортолето" },
     { driver1: "Карлос Сайнс", 
-		score1: 15, 
+		score1: 16, 
 		score2: 5, 
 		driver2: "Алекс Албон" },
     { driver1: "Оливер Берман", 
@@ -93,15 +93,15 @@ const qualiData = [
 		score2: 5, 
 		driver2: "Эстебан Окон" },
     { driver1: "Пьер Гасли", 
-		score1: 15, 
+		score1: 16, 
 		score2: 5, 
 		driver2: "Франко Колапинто" },
     { driver1: "Фернандо Алонсо", 
-		score1: 18, 
+		score1: 19, 
 		score2: 2, 
 		driver2: "Лэнс Стролл" },
     { driver1: "Серхио Перес", 
-		score1: 11, 
+		score1: 12, 
 		score2: 9, 
 		driver2: "Валттери Боттас" },
 ];
@@ -121,7 +121,7 @@ const replacementQualiData = [
 	driver2: "Рё Хиракава" },
     { driver1: "Оливер Берман", 
 	score1: 1, 
-	score2: 0, 
+	score2: 1, 
 	driver2: "Рафаэль Камара" },
 ];
 
@@ -135,18 +135,12 @@ const penaltiesData = [
         { date: "30/10/2026", count: 1 },
         { date: "23/08/2026", count: 1 },
         { date: "07/12/2025", count: 1 },
-        { date: "08/11/2025", count: 1 },
     ]},
     { driver: "Юки Цунода", penalties: [
         { date: "07/12/2025", count: 1 },
-        { date: "09/11/2025", count: 2 },
     ]},
     { driver: "Оливер Берман", penalties: [
         { date: "07/12/2025", count: 1 },
-        { date: "08/11/2025", count: 1 },
-    ]},
-    { driver: "Оскар Пиастри", penalties: [
-        { date: "09/11/2025", count: 2 },
     ]},
     { driver: "Габриэль Бортолето", penalties: [
         { date: "23/11/2025", count: 2 },
@@ -159,9 +153,6 @@ const penaltiesData = [
     ]},
     { driver: "Карлос Сайнс", penalties: [
         { date: "25/09/2026", count: 2 }, 
-    ]},
-    { driver: "Льюис Хэмилтон", penalties: [
-        { date: "09/11/2025", count: 1 },
     ]},
     { driver: "Алекс Албон", penalties: [
         { date: "08/11/2026", count: 2 },
