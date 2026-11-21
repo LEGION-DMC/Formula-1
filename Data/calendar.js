@@ -261,8 +261,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "6048037528f0c71cbb40e4d119d0f153",
+		recordingRace: "c2606c9ab500e2366ab31511c6ca5dfa"
 	},
 	{   id: "gp23", name: "Гран-при Катара",
 		track: "lusail",
