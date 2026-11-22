@@ -410,6 +410,12 @@ const detailedResults = {
         "000": 4,
         "000": 2,
         "000": 1,
+        "lindblad": "dnf",
+        "perez": "dnf",
+        "albon": "dnf",
+        "ocon": "dnp",
+        "tsunoda": "dnp",
+        "hirakawa": "dnp",
     },
     "gp23": {
         "000": 25,
