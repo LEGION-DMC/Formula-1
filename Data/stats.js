@@ -7,7 +7,7 @@ const startingGridData = [
     { position: 3, driverId: 'nor', team: '' },
     { position: 4, driverId: 'had', team: '' },
     { position: 5, driverId: 'lin', team: '' },
-    { position: 6, driverId: 'ant', team: '', pitLane: true },
+    { position: 6, driverId: 'ant', team: '', penalties: true },
     { position: 7, driverId: 'law', team: '' },
     { position: 8, driverId: 'gas', team: '' },
     { position: 9, driverId: 'col', team: '' },
@@ -20,12 +20,12 @@ const startingGridData = [
     { position: 15, driverId: 'cam', team: '' },
     { position: 16, driverId: 'per', team: '' },
 	
-    { position: 17, driverId: 'pia', team: '', pitLane: true},
+    { position: 17, driverId: 'pia', team: '', penalties: true},
     { position: 18, driverId: 'alo', team: '' },
     { position: 19, driverId: 'bot', team: '' },
-    { position: 20, driverId: 'sai', team: '', pitLane: true },
-    { position: 21, driverId: 'str', team: '', pitLane: true },
-    { position: 22, driverId: 'bea', team: '', pitLane: true, penalties: false },
+    { position: 20, driverId: 'sai', team: '', penalties: true },
+    { position: 21, driverId: 'str', team: '', penalties: true },
+    { position: 22, driverId: 'bea', team: '', pitLane: false, penalties: true },
 ];
 /*
 const startingGridData = [
