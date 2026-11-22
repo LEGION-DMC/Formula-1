@@ -410,6 +410,7 @@ const detailedResults = {
         "sainz": 4,
         "russell": 2,
         "leclerc": 1,
+        "alonso": "dnf",
         "lindblad": "dnf",
         "perez": "dnf",
         "albon": "dnf",
