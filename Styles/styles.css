@@ -7516,7 +7516,7 @@ h1, h2 {
 
 .mg-race-round-mark {
     position: absolute;
-    left: 29%;
+    left: 13%;
     top: 53%;
     transform: translate(-50%, -50%);
     font-family: 'F1Numbers', sans-serif;
@@ -8092,6 +8092,7 @@ h1, h2 {
     line-height: 1;
     color: #fff;
     font-variant-numeric: tabular-nums;
+    margin-bottom: -6%;
 }
 
 .mg-stat-value small {
@@ -8475,7 +8476,7 @@ h1, h2 {
 
 @media (max-width: 1000px) {
     .mg-content {
-        padding: 16px 16px 50px;
+        padding: 15px 15px 40px;
     }
 
     .mg-layout {
@@ -8488,7 +8489,6 @@ h1, h2 {
     }
 
     .mg-stat-main {
-        flex-direction: column;
         align-items: flex-start;
         gap: 2px;
     }
@@ -8499,6 +8499,7 @@ h1, h2 {
 
     .mg-stat-value {
         font-size: 1.45rem;
+        margin-top: 4%;
     }
 }
 

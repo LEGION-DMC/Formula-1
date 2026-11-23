@@ -1133,7 +1133,10 @@ const buildTrackWinnersPanel = track => {
             const row = document.createElement('div');
             row.className = 'track-winner-row' + (index === 0 ? ' winner' : '');
             row.style.setProperty('--team-color', entry.color || (typeof getTeamColor === 'function' ? getTeamColor(entry.team) : '#E10600'));
-            row.title = `${entry.name} — ${entry.wins} ${pluralize(entry.wins, 'победа', 'победы', 'побед')}`;
+            const seasonNote = entry.seasonWins > 0
+                ? `, из них ${entry.seasonWins} в текущем сезоне`
+                : '';
+            row.title = `${entry.name} — ${entry.wins} ${pluralize(entry.wins, 'победа', 'победы', 'побед')}${seasonNote}`;
 
             const pos = document.createElement('span');
             pos.className = 'track-winner-pos';
@@ -1155,6 +1158,7 @@ const buildTrackWinnersPanel = track => {
             const count = document.createElement('span');
             count.className = 'track-winner-count';
             count.textContent = entry.wins;
+
             row.appendChild(count);
 
             if (entry.driver) {

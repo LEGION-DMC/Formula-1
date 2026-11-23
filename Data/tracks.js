@@ -45,7 +45,6 @@ const tracksData = [
             { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 6 },
             { id: "rosberg", name: "Нико Росберг", country: "de", team: "Mercedes", wins: 2 },
             { id: "alonso", name: "Фернандо Алонсо", country: "es", team: "Ferrari", wins: 2 },
-            { id: "antonelli", name: "Андреа Кими Антонелли", country: "it", team: "Mercedes", wins: 1 },
             { id: "piastri", name: "Оскар Пиастри", country: "au", team: "McLaren", wins: 1 },
         ],
     },
@@ -92,7 +91,6 @@ const tracksData = [
         qulRecord: "1:26.841, С. Перес - Red Bull - 2023",
         trackWinsData: [
             { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
-            { id: "antonelli", name: "Андреа Кими Антонелли", country: "it", team: "Mercedes", wins: 1 },
             { id: "piastri", name: "Оскар Пиастри", country: "au", team: "McLaren", wins: 1 },
             { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 1 },
         ],
@@ -192,7 +190,7 @@ const tracksData = [
         trackWinsData: [
             { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 5 },
             { id: "prost", name: "Ален Прост", country: "fr", team: "Williams", wins: 3 },
-            { id: "russell", name: "Джордж Расселл", country: "gb", team: "Mercedes", wins: 2 },
+            { id: "russell", name: "Джордж Расселл", country: "gb", team: "Mercedes", wins: 1 },
             { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 2 },
             { id: "bottas", name: "Валттери Боттас", country: "fi", team: "Mercedes", wins: 2 },
         ],
@@ -266,7 +264,7 @@ const tracksData = [
             { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 8 },
             { id: "michael_schumacher", name: "Михаэль Шумахер", country: "de", team: "Ferrari", wins: 4 },
             { id: "senna", name: "Айртон Сенна", country: "br", team: "McLaren", wins: 3 },
-            { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 2 },
+            { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 1 },
             { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
         ],
     },
@@ -291,7 +289,7 @@ const tracksData = [
             { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 3 },
             { id: "lauda", name: "Ники Лауда", country: "at", team: "McLaren", wins: 3 },
             { id: "stewart", name: "Джеки Стюарт", country: "gb", team: "Tyrrell", wins: 3 },
-            { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 2 },
+            { id: "norris", name: "Ландо Норрис", country: "gb", team: "McLaren", wins: 1 },
         ],
     },
     {   trackName: "Национальный автодром Монцы",
@@ -336,9 +334,7 @@ const tracksData = [
         firstrace: "2026",
         lapRecord: "1:35.587, Д. Расселл - Mercedes - 2026",
         qulRecord: "1:31.824, Л. Норрис - McLaren - 2026",
-        trackWinsData: [
-            { id: "antonelli", name: "Андреа Кими Антонелли", country: "it", team: "Mercedes", wins: 1 },
-        ],
+        trackWinsData: [],
     },
     {   trackName: "Городская трасса Баку",
 		trackNamem: "Баку",
@@ -359,7 +355,6 @@ const tracksData = [
         trackWinsData: [
             { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 2 },
             { id: "perez", name: "Серхио Перес", country: "mx", team: "Red Bull", wins: 2 },
-            { id: "russell", name: "Джордж Расселл", country: "gb", team: "Mercedes", wins: 1 },
             { id: "piastri", name: "Оскар Пиастри", country: "au", team: "McLaren", wins: 1 },
             { id: "bottas", name: "Валттери Боттас", country: "fi", team: "Mercedes", wins: 1 },
         ],
@@ -384,7 +379,6 @@ const tracksData = [
             { id: "vettel", name: "Себастьян Феттель", country: "de", team: "Ferrari", wins: 5 },
             { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 4 },
             { id: "alonso", name: "Фернандо Алонсо", country: "es", team: "Ferrari", wins: 2 },
-            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 1 },
             { id: "russell", name: "Джордж Расселл", country: "gb", team: "Mercedes", wins: 1 },
         ],
     },
@@ -408,7 +402,6 @@ const tracksData = [
         trackWinsData: [
             { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 5 },
             { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 4 },
-            { id: "antonelli", name: "Андреа Кими Антонелли", country: "it", team: "Mercedes", wins: 1 },
             { id: "leclerc", name: "Шарль Леклер", country: "mc", team: "Ferrari", wins: 1 },
             { id: "bottas", name: "Валттери Боттас", country: "fi", team: "Mercedes", wins: 1 },
         ],
@@ -431,7 +424,7 @@ const tracksData = [
         lapRecord: "1:17.774, В. Боттас - Mercedes - 2021",
         qulRecord: "1:14.758, М. Ферстаппен - Red Bull - 2019",
         trackWinsData: [
-            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 6 },
+            { id: "max_verstappen", name: "Макс Ферстаппен", country: "nl", team: "Red Bull", wins: 5 },
             { id: "hamilton", name: "Льюис Хэмилтон", country: "gb", team: "Mercedes", wins: 2 },
             { id: "mansell", name: "Найджел Мэнселл", country: "gb", team: "Williams", wins: 2 },
             { id: "prost", name: "Ален Прост", country: "fr", team: "Ferrari", wins: 2 },
@@ -699,6 +692,8 @@ const TRACK_WINNER_DRIVER_ALIASES = {
     max_verstappen: 'verstappen'
 };
 
+const normalizeTrackWinnerId = id => TRACK_WINNER_DRIVER_ALIASES[id] || id;
+
 const getTrackWinnerColor = team => {
     const slug = typeof teamSlug === 'function'
         ? teamSlug(team)
@@ -708,22 +703,89 @@ const getTrackWinnerColor = team => {
     return typeof getTeamColor === 'function' ? getTeamColor(team) : '#FFFFFF';
 };
 
+const getTrackSeasonWinners = trackId => {
+    if (typeof calendarData === 'undefined' || typeof detailedResults === 'undefined') return [];
+
+    const winners = [];
+
+    calendarData.forEach((gp, index) => {
+        if (!gp || gp.track !== trackId || gp.canceled) return;
+
+        const results = detailedResults[gp.id];
+        if (!results) return;
+
+        for (const [driverId, value] of Object.entries(results)) {
+            if (driverId === '000') continue;
+
+            const points = value && typeof value === 'object' ? value.points : value;
+            if (points !== 25) continue;
+
+            const date = new Date(String(gp.date || '').replace(' ', 'T')).getTime();
+            winners.push({
+                driverId,
+                recency: Number.isFinite(date) ? date : index
+            });
+            break;
+        }
+    });
+
+    return winners;
+};
+
 const getTrackTopWinners = (trackId, limit = 5) => {
     const track = tracksIndex.get(trackId);
-    const list = Array.isArray(track?.trackWinsData) ? [...track.trackWinsData] : [];
+    const baseList = Array.isArray(track?.trackWinsData) ? track.trackWinsData : [];
+    const seasonWinners = getTrackSeasonWinners(trackId);
 
-    if (!list.length) return [];
-    list.sort((a, b) => b.wins - a.wins);
-    let count = Math.min(limit, list.length);
-    const topWins = list[0].wins;
-    while (count < list.length && list[count].wins === topWins) count++;
+    if (!baseList.length && !seasonWinners.length) return [];
 
-    return list.slice(0, count).map(entry => {
-        const driverId = TRACK_WINNER_DRIVER_ALIASES[entry.id] || entry.id;
+    const list = baseList.map((entry, index) => ({
+        ...entry,
+        wins: Number(entry.wins) || 0,
+        seasonWins: 0,
+        _recency: 0,
+        _order: index
+    }));
+
+    seasonWinners.forEach(winner => {
+        const winnerId = normalizeTrackWinnerId(winner.driverId);
+        const existing = list.find(entry => normalizeTrackWinnerId(entry.id) === winnerId);
+
+        if (existing) {
+            existing.wins += 1;
+            existing.seasonWins += 1;
+            existing._recency = Math.max(existing._recency, winner.recency);
+            return;
+        }
+
+        const driver = typeof findDriverById === 'function' ? findDriverById(winner.driverId) : null;
+        if (!driver) return;
+
+        list.push({
+            id: winnerId,
+            name: driver.name,
+            country: driver.country,
+            team: driver.team,
+            wins: 1,
+            seasonWins: 1,
+            _recency: winner.recency,
+            _order: list.length
+        });
+    });
+
+    list.sort((a, b) =>
+        (b.wins - a.wins) ||
+        (b._recency - a._recency) ||
+        (a._order - b._order)
+    );
+
+    return list.slice(0, limit).map(entry => {
+        const { _recency, _order, ...winner } = entry;
+        const driverId = normalizeTrackWinnerId(winner.id);
 
         return {
-            ...entry,
-            color: getTrackWinnerColor(entry.team),
+            ...winner,
+            color: getTrackWinnerColor(winner.team),
             driver: typeof findDriverById === 'function' ? findDriverById(driverId) : null
         };
     });
