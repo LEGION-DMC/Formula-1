@@ -273,8 +273,8 @@ const calendarData = [
 		hasSprint: false,
 		canceled: false,
 		recordingSprint: "",
-		recordingQuali: "",
-		recordingRace: ""
+		recordingQuali: "8cf13dafbf6df98c1ab4e066fc817cf3",
+		recordingRace: "a6be1950beb2b6eda7f8e107c95accf7"
 	},
 	{   id: "gp24", name: "Гран-при Абу-Даби",
 		track: "yas_marina",
